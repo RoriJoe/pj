@@ -1,0 +1,2070 @@
+@charset "utf-8";
+.logp{
+	width:70px;
+	height:auto;
+}
+.sukses{
+	color:green;
+}
+.gagal{
+	color:red;
+}
+
+/* CSS Document */
+
+#element_to_pop_up {
+    background-color:#fff;
+    border-radius:0px;
+    color:#000;
+    display:none;
+    padding:20px;
+    min-width:400px;
+    min-height: 180px;
+	/*box-shadow: 0px 0px 10px #fff;*/
+}
+.bClose{
+    cursor:pointer;
+    position:auto;
+
+}
+
+
+
+/* --------------------------- ini utk keseluruhan body html yang berwarna abu2 sof[]t -------------------------------------*/
+
+
+
+
+/* --------------------------- ini pembatas konten paling awal di atas body html -----------------------------------------*/
+
+#wrapper{
+
+	margin:auto;
+
+	/*width:1200px;*/
+	
+	background-color:transparent /*#eee*/;
+
+	height:100%;
+
+}
+
+
+
+/* ----------------- ini pembatas konten kedua terletak di atas WRAPPER (mempengaruhi maincol dan footer) ----------------*/
+
+#inner-wrap{
+
+	margin:auto;
+
+	/*background-color:#f6f6f6;*/
+
+    height:100%;
+
+	/*border:1px #000000 solid;*/
+
+}
+
+
+
+/* --------------------------- ini untuk header paling atas (bisa diisi banner atau logo application) --------------------*/
+
+#headerImg{
+    background-color: rgba(189, 30, 30, 0.94) /*143c5a*/;
+    /*background:#294e69 /*143c5a*/
+    height:85px;
+    background-size:100% 100%;
+    text-align: center;
+    /*border-bottom: 1px solid #001C37;*/
+}
+
+#headerImg img{
+	width:100px;
+	height:100%;
+	background-size:100% 100%;
+}
+
+
+
+/* --------------------------- ini untuk menubar di atas (termasuk logout dan nama user)----------------------------------*/
+
+#opt{
+
+	height:40px;
+	width:100%;
+	background-color: rgba(0, 0, 0, 0.82);/*#143c5a;*/
+    /*border-top: 1px solid rgb(53, 94, 131);
+    border-bottom: 1px solid rgb(11, 36, 63);*/
+    z-index: 100;
+    padding-right: 3px;;
+    /*box-shadow: 0 2px 4px #A0A0A0;*/
+
+}
+#opt2{
+    padding:5px 10px 0px 10px;
+    float:right;
+}
+#opt2 a{
+	color: #fff;
+}
+#opt a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#setting-wrapper{
+    cursor: pointer;
+}
+#hidden1
+{
+    margin-left: -11px;
+    position: absolute;
+    border-bottom: 2px solid #FFC624;
+    border-left: 3px solid #FFC624;
+    border-right: 3px solid #FFC624;
+    background: white;
+
+}
+.stay
+{
+    background-color: white!important;
+}
+
+#hidden1 ul
+{
+    width: 171px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+#hidden1 li
+{
+    text-align: center;
+    width: 171px;
+    float: left;
+    list-style: none;
+    border-top: 1px solid #FFC624;
+    padding: 5px 0 5px 0px;
+    border-top: 1px solid orange;
+}
+#hidden1 a
+{
+    color: #363636;
+    text-decoration: none;
+}
+
+#hidden1 a:hover{
+    color: #FFC624;
+}
+#hidden1 li:hover{
+    background: black;
+}
+
+/* --------------------------- ini utk menubar atas bagian nama user ---------------------------------------------------- */
+
+#nama{
+
+	color:#FFF;
+
+	font-family:Calibri;
+
+	font-size:14px;
+
+	font-weight:bold;
+
+	padding-top:4px;
+
+	padding-right:10px;
+
+	/*border-left:2px #000000 groove;*/
+
+	float:right;
+
+	height:21.5px;
+
+}
+
+#tgl{
+
+	color:#FFF;
+
+	font-weight:bold;
+
+	padding-top:12px;
+
+	padding-right:10px;
+
+	/*border-left:2px #000000 groove;*/
+
+	float:right;
+}
+
+#status{
+	width:170px;height:30px;color:white;text-align:center;padding:15px;
+	padding-top:5px;
+	background:-webkit-linear-gradient(top, #0e71bc 0%,#004891 100%);
+	background:-moz-linear-gradient(top, #0e71bc 0%,#004891 100%);
+	background:-o-linear-gradient(top, #0e71bc 0%,#004891 100%);
+	margin-bottom: 8px;
+}
+
+
+
+#status span{
+	font-size:20pt;font-family:Calibri;text-shadow: 0 -1px 0 #00a4ff;}
+
+#content{
+         margin-top: 35px;
+}
+
+
+
+/* --------------------------------- left bar meliputi jabatan user, foto, dan menu utama --------------------------------*/
+
+#leftBar{
+
+	width:200px;
+
+	float:left;
+
+	/*border-right:1px solid black;*/
+
+	/*background-color:#f6f6f6;*/
+
+	position:relative;
+    height:100%;
+}
+
+
+
+/* --------------------------------- right bar meliputi ----*/
+
+#rightBar{
+
+	width:auto;
+
+	margin-left:200px;
+
+	height:auto;
+    margin-right: 10px;
+    margin-top: 50px;
+	/*border-left:1px solid black;*/
+
+}
+
+
+
+/* ----------------------------- ini area untuk foto user -------------------------------------------------------------------*/
+
+#pictureImage{
+
+	margin-left:20px;
+
+	margin-right:20px;
+
+	/*border:1px solid #000;
+
+    border-radius:4px;-moz-border-radius:4px;
+
+    */
+
+
+
+	height:160px;
+
+	padding-left:2px;
+
+	padding-top:10px;
+
+
+
+}
+
+
+
+/* ------------------------------ ini untuk mengatur lebar dan panjang foto user -----------------------------------------*/
+
+#pp{
+
+	width:155px;
+
+	height:158px;
+
+}
+
+
+
+/* ----------------------------- top bar digunakan untuk menulis BINUS application dan last login ------------------------*/
+
+#topBar{
+        height:50px;
+    /*border-bottom:1px solid #000000;*/
+}
+
+
+#download {
+	background-image:url('1.png');
+	background-repeat:no-repeat;
+}
+#download a:hover {
+    font-size:20px;
+}
+/* ------------------------------------------ ini syntax untuk bagian footer ----------------------------------------*/
+
+#footer{
+	height:100%;
+}
+
+
+
+/* ----------------------------------------- ini untuk bagian content footer ----------------------------------------*/
+
+#footerContent{
+    height:20px;
+    background-color:#DFDFDF;/*#143c5a;*/
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+	z-index:100;
+}
+
+
+/*--- Mengatur Bagian Tulisan Application List*/
+
+.sidebar{
+    height:auto;
+    padding:2px;
+    margin:auto;
+    position:relative;
+}
+
+
+/*------------------ Untuk Mengatur bagian UL seperti Class Finance dan Grade--------------------*/
+.sidebar ul{
+    list-style: none;
+    margin:4px auto auto auto;
+    padding:0;
+    width:193px;
+}
+
+.sidebar ul li{
+    margin:0;
+    padding:0;
+}
+
+/* ---------------------- Ini untuk bagian navigation kanan Seperti Class Finance Grade-------------------------------------*/
+.sidebar ul li a{
+
+    background:#fff;
+
+    /*border:1px solid gray;*/
+    box-shadow: 0px 0px 2px #636363;-moz-box-shadow:0px 0px 2px #636363;-webkit-box-shadow:0px 0px 2px #636363;
+
+    padding:8px 10px;
+
+    display:block;
+
+    text-decoration: none;
+
+    color:black;
+    font-weight: 400;
+
+}
+
+/* ---------------------- Ini untuk bagian isi dari navigation kriri -------------------------------------*/
+.sidebar ul li ul a{
+    background:#3C3C3C;
+    border:1px #c6c6c6;
+    padding-left: 15px;
+    color:#fff;
+    display:block;
+
+    text-decoration: none;
+    font-weight: normal;
+}
+
+
+/*--------Untuk mengatur Hover pada Bagian UL sepert Class Finance dan Grade-------*/
+.sidebar ul li a:hover{
+    background-color: #143c5a/*CEE1FF*/;
+    background-color: #E6E6E6/*CEE1FF*/;
+}
+
+/*----Untuk Mengatur Hover Ketika Sudah di Klik-----*/
+.sidebar ul li a:active {
+
+}
+
+
+/*-- Untuk Mengatur Hover pada Bagian LI dalam seperti Class Schedulle dan Absent---*/
+.sidebar ul li ul a:hover{
+    background-color: #505050/*CEE1FF*/;
+    color: white;
+}
+
+/*-- Untuk Mengatur Hover pada Bagian LI dalam seperti Class Schedulle dan Absent ketika sedang di klik---*/
+.sidebar ul li ul a:active {
+}
+
+.sidebar ul li ul{
+
+    display:none;
+
+}
+
+
+/*-------------------------------------Untuk Mengatur tulisan APPLICATION LIST----------------------------------------------------*/
+#titleA{
+
+    text-indent:1.5em;border:1px silver solid;
+
+    padding-top:10px;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    padding-bottom:10px;
+
+    display:block;
+
+    background-color:1px rgb(218, 218, 218) solid;
+
+    box-shadow:0px 3px 0px #333333;-moz-box-shadow:0px 3px 0px #333333;-webkit-box-shadow:0px 3px 0px #979797;
+    background-color: #fff;
+}
+
+
+
+
+
+#aboutMe{
+
+    padding-top:18px;
+
+    padding-left:20px;
+
+    padding-bottom:13px;
+
+
+    /*border-bottom:1px solid black;*/
+
+}
+
+
+#text{
+
+    padding-top:35px;
+    font-family:Calibri;
+    color:#939698;
+
+    font-size:13px;
+
+}
+
+/*----------------Mengatur Content pada Nama----------*/
+#nameMe{
+
+	font-size:24px;
+
+	display:block;
+
+	margin-bottom:-7px;
+
+	color:#0f3b5b;
+
+	text-transform:capitalize;
+    font-weight:800;
+    font-family:Calibri;
+}
+
+
+
+#aboutMeContent{
+
+	/*border-bottom:1px solid black;*/
+
+	height:100px;
+
+}
+
+
+
+#submenuBar{
+
+	/*border-bottom:1px solid black;*/
+    font-family:Calibri;
+	padding:5px 0px 5px 15px;
+
+}
+
+
+
+#quote{
+
+	font-size:25px;
+    color:#0f3b5b;
+    margin-left:5px;
+}
+
+
+
+#quote:hover{
+
+	text-shadow:0px 0px 8px #ffb31c;
+
+	cursor: default;
+
+}
+
+#judul{
+
+	font-size:55px;
+	text-align:left;
+    color:#fff;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+
+
+#judul:hover{
+
+	/*text-shadow:0px 0px 5px #8b4513;
+
+	cursor: default;       */
+
+}
+
+
+
+#contentFull{
+
+	padding-left:25px;
+
+	margin-top:10px;
+
+	padding-bottom:20px;
+
+	height:auto;
+}
+
+
+
+.opt2 a{
+
+	text-decoration:none;
+
+	font-family:Calibri;
+
+	text-align:center;
+
+	color:#000;
+
+}
+
+
+#logout{
+	display:block;
+	width:auto;
+	text-align:center;
+	margin-top:-2px;
+	padding-bottom:3px;
+}
+
+#logout a{
+	color:white;
+}
+
+#logout a:hover{
+	color:black;
+}
+
+
+
+
+
+.CSStabel {
+
+	margin:0px;padding:0px;
+
+	width:100%;
+
+	box-shadow: 10px 10px 5px #888888;
+
+	/*border:1px solid #000000;*/
+
+
+
+	-moz-border-radius-bottomleft:0px;
+
+	-webkit-border-bottom-left-radius:0px;
+
+	border-bottom-left-radius:0px;
+
+
+
+	-moz-border-radius-bottomright:0px;
+
+	-webkit-border-bottom-right-radius:0px;
+
+	border-bottom-right-radius:0px;
+
+
+
+	-moz-border-radius-topright:0px;
+
+	-webkit-border-top-right-radius:0px;
+
+	border-top-right-radius:0px;
+
+
+
+	-moz-border-radius-topleft:0px;
+
+	-webkit-border-top-left-radius:0px;
+
+	border-top-left-radius:0px;
+
+
+
+}.CSSTabel table{
+
+    width: 100%;
+	height:100%;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+
+    border:1px silver solid;
+	margin:0px auto;
+    padding:0px;
+}
+.CSSTabel tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+
+
+
+.CSSTabel table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+
+
+
+.CSSTabel table tr:first-child td:last-child {
+
+	-moz-border-radius-topright:0px;
+
+	-webkit-border-top-right-radius:0px;
+
+	border-top-right-radius:0px;
+}
+
+
+
+.CSSTabel tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+
+	-webkit-border-bottom-left-radius:0px;
+
+	border-bottom-left-radius:0px;
+}
+
+
+
+.CSSTabel tr:hover td{
+}
+
+/*--Untuk Mengtur Warna BG table Atas--*/
+
+.CSSTabel tr:nth-child(odd){ background-color:#f1f1f1; }
+
+/*--Untuk Mengtur Warna BG table--*/
+.CSSTabel tr:nth-child(even)    { background-color:#fff; }
+
+.CCSSTabel td{
+	/*vertical-align:middle;
+	border:1px solid #000000;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:7px;
+	font-size:6px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;*/
+}
+
+
+
+.CSSTabel tr:last-child td{
+
+	border-width:0px 1px 0px 0px;
+
+}
+
+
+
+.CSSTabel tr td:last-child{
+
+	border-width:0px 0px 1px 0px;
+
+}
+
+
+
+.CSSTabel tr:last-child td:last-child{
+
+	border-width:0px 0px 0px 0px;
+
+}
+.CSSTabel th{background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+
+	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,#003f7f);
+
+    color:white;
+
+}
+
+.CSSTabel th:hover{cursor:pointer;}
+
+
+
+.CSSTabel tr:first-child td{
+
+	/*background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
+
+
+
+
+
+	background-color:#005fbf;
+	border:0px solid #000000;
+	text-align:center;
+
+	border-width:0px 0px 1px 1px;
+
+	font-size:9px;
+
+	font-family:Arial;
+
+	font-weight:bold;
+
+	color:#ffffff;*/
+
+
+
+}
+
+
+
+.CSSTabel tr:first-child:hover td{
+
+	/*background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+
+	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
+
+
+
+	background-color:#005fbf;*/
+}
+
+
+
+.CSSTabel tr:first-child td:first-child{
+
+	border-width:0px 0px 1px 0px;
+
+}
+
+
+
+.CSSTabel tr:first-child td:last-child{
+
+	border-width:0px 0px 1px 1px;
+
+}
+
+input[type="text"]{margin-left:-2px;}
+
+input[type=date] {
+    font-size:12pt;
+    padding: 0px;
+    border: 1px solid #e2e2e2;
+
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+}
+
+input[type=date]:focus,
+input.pickadate__input--focused {
+    outline: none;
+    border-color: #0089ec;
+}
+
+
+.button-temp{
+    height:35px;text-transform:uppercase;font-size:10pt;width:70px;font-family:Calibri;font-weight:580;border-color:rgb(255,255,255);
+    color:#5c5c5c;
+    background:-o-linear-gradient(bottom, white 5%, silver 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d8d8d8), color-stop(1,#f6f6f6) );
+
+	background:-moz-linear-gradient( center top, white 5%, silver 100% );
+
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="white", endColorstr="silver");	background: -o-linear-gradient(top,white,silver);
+    cursor:pointer;
+
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+.button-temp:hover{
+    height:35px;text-transform:uppercase;font-size:10pt;width:70px;font-family:Calibri;
+    color:#5c5c5c;
+    background:-o-linear-gradient(bottom, silver 5%, white 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1,#d8d8d8) );
+
+	background:-moz-linear-gradient( center top, silver 5%, white 100% );
+
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="silver", endColorstr="white");	background: -o-linear-gradient(top,silver,white);
+    cursor:pointer;
+}
+
+
+/*----------------------------------header content-----------------------*/
+.content-h1{ /*inside the content box*/
+    font-family: Calibri;
+    font-size: 22px;
+    font-weight: bold;
+    color: #0F3B5B;
+    margin-bottom: 3px;
+
+}
+.content-header-desc{
+    color: #666;
+    margin-bottom: 20px;
+    font-family: Calibri;
+    font-size: 13pt;
+    margin: 0px;
+}
+.content-header-desc select{
+    margin-left:20px;
+    width: 200px;
+    text-align: center;
+    padding: 3px 2px;
+    color: #555;
+}
+.content-header-desc label{ /*label on the content header*/
+    margin-left: 40px;
+    margin-right: 40px;
+    font-weight: bold;
+    width: 200px;
+}
+
+.content-header-desc td{
+    padding: 0 3px 3px;
+}
+.content-header-left{
+    float: left;
+    width: 60%;
+}
+.content-header-left p
+{
+    font-family: Calibri;
+    margin: 0px;
+
+}
+.content-header-left ul
+{
+    list-style: none;
+    margin: 5px 0px!important;
+    padding: 0px!important;
+    width: 100%;
+    float: left;
+}
+.content-header-left li
+{
+    float: left;
+    margin-right: 10px;
+}
+.content-header-left li select
+{
+   width: 150px;
+}
+.content-header-left li label
+{
+   font-family: Calibri;
+   color: #0F3B5B;
+   font-size: 13pt;
+   text-align: center;
+}
+.content-header-right{
+    float: right;
+
+}
+#header-1{ /*share material student - headerline*/
+    height:100px;
+}
+#header-2{/*share material detail student - headerline*/
+    height: 55px;
+}
+#header-3{/*share material add teacher - headerline*/
+    height: 95px;
+}
+#header-4{/*share material detail teacher - headerline*/
+    height: 125px;
+}
+#header-5{/*admin setting - headerline*/
+    height: 35px;
+}
+#header-6{/*exercise material - headerline*/
+    height: 140px;
+}
+#header-7{/*thread detail - headerline*/
+    height: 170px;
+}
+#content-sub{
+    padding-right: 25px;
+    margin:0;
+    color: #555;
+    font-family: Calibri;
+    min-height:300px;
+}
+#content-sub a{
+    text-decoration: none;
+    color: #555;
+}
+#content-sub a:hover{
+    color: #999;
+}
+
+#subject-desc, #subject-topic, .topic-desc{/*for myclass styling*/
+    margin-bottom: 30px;
+}
+#subject-desc h3, #subject-topic h3, .topic-desc h3{
+    margin-left: 35px;
+    margin-bottom: 20px;
+    color: #1b5173;
+}
+#subject-desc p, #subject-topic p , .topic-desc>p{
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 90%;
+    text-align: justify;
+}
+
+.course-topic li{
+    background: url("../images/arrow.png") left center no-repeat;
+    list-style: none;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.course-topic li ul li{
+    margin-bottom: 5px;
+    background: url("../images/arrow.png") left center no-repeat;
+}
+
+.course-topic img{
+    margin-left: 20px;
+}
+.label
+{
+    width: 130px;
+}
+.add-button
+{
+    margin-bottom: 10px;
+}
+.back-button
+{
+
+    width: 100%;
+    height: auto;
+}
+.back-button1
+{
+    margin-bottom: 8px!important;
+    width: 100%;
+    height: auto;
+}
+#navi{
+    width: 100%;
+    height: auto;
+    margin: 10px 0 0!important;
+    padding: 0px!important;
+    border-top: 1px solid #EAEAEA;
+}
+#navi p
+{
+    padding: 5px 0!important;
+}
+.content-nav{
+    width: 100%;
+    height: auto;
+    margin: 0px!important;
+    padding: 0px!important;
+}
+.tab-up
+{
+    margin-top: 20px!important;
+}
+.input-comp{
+    width: 200px;
+    margin-left: 10px;
+    height: 25px;
+}
+.input-comp.url{
+    width: 200px;
+    margin-left: 10px;
+    height: 25px;
+}
+.input-comp input[type="file"]{
+    width: 200px;
+    margin-left: 10px;
+    height: 25px!important;
+}
+.input-area{
+    width: 280px!important;
+    margin-left: 10px;
+    height: 100px!important;
+}
+.table-content td, .table-content th{/*for table design*/
+    border: #FFF 1px solid;
+    padding: 10px;
+    margin: 0;
+    vertical-align: top;
+}
+.table-content th{ font-size: 18px;}
+.table-content{
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+
+/* ------------------for myclass tab style------------------------ */
+.tabs, .tabs2, .tabs3, .tabs4{
+    margin-top: 30px;
+}
+ul.tabNavigation, ul.tabNavigation2, ul.tabNavigation3, ul.tabNavigation4 {
+    list-style: none outside none;
+    margin: 0 0 0 5px;
+    padding: 0;
+    width: 100%;
+
+}
+ul.tabNavigation li, ul.tabNavigation2 li, ul.tabNavigation3 li, ul.tabNavigation4 li {
+    display: inline;
+    margin-right: -2px;
+}
+div.tabs > div,div.tabs2 > div, div.tabs3 > div,div.tabs4 > div {
+    border: 5px solid #ffa500;
+    background-color: #F6F6F6;
+    margin-top: 10px;
+    padding: 5px 20px 5px 20px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+ul.tabNavigation li a, ul.tabNavigation2 li a, ul.tabNavigation3 li a, ul.tabNavigation4 li a {
+    background-color: #DDD;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #0F3B5B;
+
+}
+ul.tabNavigation li a.selected, ul.tabNavigation li a:hover, ul.tabNavigation2 li a.selected, ul.tabNavigation2 li a:hover, ul.tabNavigation3 li a.selected, ul.tabNavigation3 li a:hover, ul.tabNavigation4 li a.selected, ul.tabNavigation4 li a:hover {
+    background-color: #ffa500;
+    color: #FFFFFF!important;
+    padding-top: 10px;
+}
+
+
+
+/* ------------------end myclass tab style------------------------ */
+
+
+
+.inputs td{ /*for input area*/
+    padding: 0 40px 0 0;
+}
+.inputs input, .inputs textarea, .inputs select{
+    margin-left: 10px;
+    color: #555;
+    padding: 3px;
+}
+.input-comp, input[type="file"]{
+    width: 200px;
+    margin-left: 10px;
+}
+textarea{
+    height: 200px;
+}
+.question-form input[type="text"]{
+    width: 75%;
+}
+
+#smallinput{
+    width: 500px;
+    margin: 0 0 30px 0;
+}
+#smallinput td, .period td{
+    padding: 5px;
+}
+.hide{
+    display: none;
+}
+
+
+#filter{
+    width: 150px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.buttons-bottom{
+    margin: 20px auto;
+    width: 420px;
+}
+.buttons-bottom input, .buttons-bottom a{
+    margin: 10px 20px 0;
+}
+
+.filtering{/*for filter area*/
+    width: 100%;
+}
+.filtering li{
+    list-style: none;
+}
+
+.back-button, .add-button, .bottom-row, .bottom-nav{ /*buat div button-button*/
+    width: 100%;
+    text-align: right;
+    margin: 20px 0 20px;
+}
+.bottom-row input, .bottom-row a, .bottom-nav input, .bottom-nav a, .bottom-nav select{
+    margin-left: 20px;
+}
+
+.bottom-nav{
+    text-align: center;
+}
+
+
+/*-------------------------------------exercise material*/
+.but-up
+{
+    margin-top: 25px;
+}
+/*-------------------------------------Forum*/
+
+#thread-pic img{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+#thread-top
+{
+    width: 100%;
+    border-top: 1px solid #EAEAEA ;
+    padding-top: 10px;
+}
+#thread-user-detail{
+    width: 300px;
+    height: 100px;
+    background-color: #ffa500;
+    border: 1px solid #137;
+    margin-left: 120px;
+    border-radius:4px;
+}
+#thread-user-detail ul{
+
+    list-style: none;
+    margin: 0!important;
+    padding: 0!important;
+}
+#thread-user-detail p
+{
+    font: Calibri;
+    font-size: 12pt;
+    color: white;
+    margin: 10px 10px;
+}
+#thread-desc
+{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+#thread-desc-title
+{
+    width: 100%;
+    height: auto;
+}
+#thread-desc-title h1
+{
+    padding: 10px 0 0 0!important;
+    font-size: 18pt;
+    color: #666;
+    margin: 0!important;
+}
+#thread-content
+{
+    width: 100%;
+    height: auto;
+}
+#thread-content p
+{
+    font-family: Calibri;
+    font-size: 12pt;
+    text-align: justify;
+    margin-top: 10px!important;
+}
+#thread-content-atch
+{
+    width: 100%;
+}
+#thread-content-atch ul
+{
+    list-style: none;
+    margin: 0!important;
+    padding: 0!important;
+}
+#thread-content-atch p
+{
+    margin: 0!important;
+    padding: 0!important;
+    font-weight: bold;
+}
+#thread-content-atch a
+{
+    margin: 0!important;
+    padding: 0!important;
+    color: #0000B7;
+    text-decoration: underline;
+}
+#thread-right
+{
+    width: 100%;
+    margin-top: 15px;
+}
+#thread-right ul
+{
+    margin: 0!important;
+    padding: 0!important;
+    list-style: none;
+    display: inline;
+}
+#thread-right li
+{
+    display: inline;
+}
+#pagging-navigation
+{
+    width: 100%;
+}
+#pagging-navigation ul
+{
+    list-style: none;
+    text-align: right;
+
+}
+#pagging-navigation li
+{
+    display: inline;
+    padding: 0 5px;
+}
+.page
+{
+    border-radius:4px;
+    border: 1px solid #143C5A ;
+}
+/*post wrapper*/
+#post-wrapper
+{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+.post-content
+{
+    border-radius:10px;
+    width: 100%;
+    background: rgb(20,60,90); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(20,60,90,1) 0%, rgba(20,60,90,1) 13%, rgba(41,78,105,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(20,60,90,1)), color-stop(13%,rgba(20,60,90,1)), color-stop(100%,rgba(41,78,105,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(20,60,90,1) 0%,rgba(20,60,90,1) 13%,rgba(41,78,105,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(20,60,90,1) 0%,rgba(20,60,90,1) 13%,rgba(41,78,105,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(20,60,90,1) 0%,rgba(20,60,90,1) 13%,rgba(41,78,105,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(20,60,90,1) 0%,rgba(20,60,90,1) 13%,rgba(41,78,105,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#143c5a', endColorstr='#ffa500',GradientType=0 ); /* IE6-9 */
+    margin-bottom: 20px;
+}
+.post-content-left
+{
+    width: 15%;
+    height: auto;
+}
+.post-content-right
+{
+    width: 84%;
+    height: auto;
+    margin-left: 10px;
+}
+.post-pic img{
+    width: 100px;
+    height: 100px;
+    margin: 12px;
+    float: left;
+}
+.post-user-detail{
+    width: 300px;
+    height: 124px;
+}
+.post-user-detail ul{
+
+    list-style: none;
+    margin: 0!important;
+    padding: 1px 0 0 0!important;
+}
+.post-user-detail p
+{
+    font: Calibri;
+    font-size: 12pt;
+    color: white;
+    margin: 10px 10px;
+}
+.post-content-main-wrapper
+{
+     padding: 0px 15px 15px 15px;
+    width: 800px;
+}
+.post
+{
+    width: 93%;
+    background: rgb(252,254,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(252,254,255,1) 0%, rgba(248,252,244,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,254,255,1)), color-stop(100%,rgba(248,252,244,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(252,254,255,1) 0%,rgba(248,252,244,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(252,254,255,1) 0%,rgba(248,252,244,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(252,254,255,1) 0%,rgba(248,252,244,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(252,254,255,1) 0%,rgba(248,252,244,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfeff', endColorstr='#f8fcf4',GradientType=0 ); /* IE6-9 */
+    border-radius:8px ;
+}
+.post p
+{
+    padding: 10px;
+    margin: 0!important;
+}
+
+.post-right
+{
+    width: 100%;
+    padding-bottom: 15px;
+    padding-left: 20px;
+}
+.post-right ul
+{
+    margin: 0!important;
+    padding: 0!important;
+    list-style: none;
+    display: inline;
+}
+.post-right li
+{
+    display: inline;
+}
+
+/*add thread*/
+.add-thread-header-left {
+    width: 100%;
+}
+.add-thread-header-left p
+{
+    font-family: Calibri;
+    margin: 0px;
+
+}
+.add-thread-header-left ul
+{
+    list-style: none;
+    margin: 5px 0px!important;
+    padding: 0px!important;
+    width: 100%;
+    float: left;
+}
+.add-thread-header-left li
+{
+    float: left;
+    margin-right: 10px;
+}
+.add-thread-header-left li select
+{
+   width: 150px;
+}
+.add-thread-header-left li label
+{
+   font-family: Calibri;
+   color: #0F3B5B;
+   font-size: 13pt;
+   text-align: center;
+}
+.add-thread-title
+{
+    width: 100%;
+    padding-top: 20px;
+}
+#thread-content
+{
+    width: 100%;
+    height: auto;
+    float: left;
+}
+.checkbox-title
+{
+    padding: 0px 10px 0px 5px;
+    float: left;
+}
+.content-title
+{
+    float: left;
+    height: 30px;
+    margin: 10px 0;
+    width: 100%;
+}
+.input-th
+{
+    color: #555555;
+    margin-left: 5px;
+    padding: 3px 2px;
+    text-align: center;
+    width: 194px;
+}
+/*file upload*/
+#file-up
+{
+    float: left;
+    height: auto;
+    width: 100%;
+    margin: 10px 0;
+}
+#file-up input
+{
+    float: left;
+    margin-top: 10px;
+}
+#file-up p
+{
+    float: left;
+    margin: 0 5px;
+}
+#note-up
+{
+    float: left;
+    height: auto;
+    width: 100%;
+    margin: 10px 0;
+}
+#note-up p
+{
+  color: red;
+}
+
+.pad-left
+{
+    padding: 5px 0px 5px 10px!important;
+}
+.sub-title a
+{
+    text-decoration: underline!important;
+    margin-top: 8px!important;
+}
+#forumcontent p
+{
+    margin: 0!important;
+}
+
+.error, #error-div{
+    color:red;
+    font-size: 12px;
+}
+
+
+/*tambahan*/
+#overlay{
+   width:9999px;
+   height:9999px;
+   background-color: rgba(0,0,0,0.6);
+   position: fixed;
+   display:none;
+   z-index: 99998;
+}
+#waiting{
+   width:9999px;
+   height:9999px;
+   background-color: rgba(0,0,0,0.6);
+   position: fixed;
+   display:none;
+   z-index: 99997;
+}
+#image{
+	display:none;
+	position: fixed;
+}
+
+#popup-wrapper{
+	height:auto;
+   width:auto;
+   background:white;
+   position:fixed;
+   z-index: 99999;
+   border-radius:10px;
+   display:none;
+   	padding-left:25px;
+	padding-right:25px;
+	padding-top:10px;
+	padding-bottom:20px;
+}
+
+#popup-wrapper2{
+   height:auto;
+   width:auto;
+   background:white;
+   position:fixed;
+   z-index: 99999;
+   border-radius:10px;
+   display:none;
+   	padding-left:25px;
+	padding-right:25px;
+	padding-top:10px;
+	padding-bottom:20px;
+}
+
+#popup-wrapper3{
+   height:auto;
+   width:auto;
+   background:white;
+   position:fixed;
+   z-index: 99999;
+   border-radius:10px;
+   display:none;
+   	padding-left:25px;
+	padding-right:25px;
+	padding-top:10px;
+	padding-bottom:20px;
+}
+#popup-wrapper5{
+   height:auto;
+   width:auto;
+   background:white;
+   position:fixed;
+   z-index: 99999;
+   border-radius:10px;
+   display:none;
+   	padding-left:25px;
+	padding-right:25px;
+	padding-top:10px;
+	padding-bottom:20px;
+}
+
+#popup-wrapper4{
+   height:auto;
+   width:auto;
+   background:white;
+   position:fixed;
+   z-index: 99999;
+   border-radius:10px;
+   display:none;
+   	padding-left:25px;
+	padding-right:25px;
+	padding-top:10px;
+	padding-bottom:20px;
+}
+
+
+/*CSS TABLE paging*/
+.dataTables_paginate{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.dataTables_paginate a{
+	margin-right: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: thin solid;
+	border-radius: 5px;
+	color: blue;
+	cursor: pointer;
+	width:auto;
+	height:auto;
+}
+#table_length{
+	display: none;
+}
+
+/*CSS confirmation*/
+.errors {
+    background: #FFEBE8;
+    border: 1px solid #DD3C10;
+    width: 95%;
+    display: block;
+    margin: 20px 10px 10px 10px;
+    padding: 10px;
+    color: #FF0000;
+}
+
+.errors,.Editsuccess ul li ,.Insertsuccess ul li{
+    padding-left: 20px;
+}
+
+.Insertsuccess,.Editsuccess {
+    background: #CFFFD5;
+    border: 1px solid #00DF1E;
+    width: 95%;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    color: #35B726;
+}
+
+/*-----------------------------BreadCrumb----------------------*/
+.breadcrumb {
+    /*centering*/
+    display: inline-block;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    border-radius: 3px;
+    margin-left:20px;
+    /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+    counter-reset: flag;
+    font-family:Verdana, Geneva, sans-serif;
+    text-align:center;
+    float:left;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    outline: none;
+    display: block;
+    float: left;
+    font-size: 12px;
+    line-height: 36px;
+    color: white;
+    /*need more margin on the left of links to accomodate the numbers*/
+    padding: 0 10px 0 60px;
+    background: #666;
+    background: linear-gradient(#666, #333);
+    position: relative;
+}
+/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+.breadcrumb a:first-child {
+    padding-left: 46px;
+    border-radius: 3px 0 0 3px; /*to match with the parent's radius*/
+}
+.breadcrumb a:first-child:before {
+    left: 14px;
+}
+.breadcrumb a:last-child {
+    border-radius: 0 3px 3px 0; /*this was to prevent glitches on hover*/
+    padding-right: 20px;
+}
+
+/*hover/active styles*/
+.breadcrumb a.active, .breadcrumb a:hover{
+    background: #333;
+    background: linear-gradient(#333, #000);
+}
+.breadcrumb a.active:after, .breadcrumb a:hover:after {
+    background: #333;
+    background: linear-gradient(135deg, #333, #000);
+}
+
+/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+.breadcrumb a:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -18px; /*half of square's length*/
+    /*same dimension as the line-height of .breadcrumb a */
+    width: 36px;
+    height: 36px;
+    /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+    length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+    if diagonal required = 1; length = 1/1.414 = 0.707*/
+    transform: scale(0.707) rotate(45deg);
+    /*we need to prevent the arrows from getting buried under the next link*/
+    z-index: 1;
+    /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+    background: #666;
+    background: linear-gradient(135deg, #666, #333);
+    /*stylish arrow design using box shadow*/
+    box-shadow:
+        2px -2px 0 2px rgba(0, 0, 0, 0.4),
+        3px -3px 0 2px rgba(255, 255, 255, 0.1);
+    /*
+        5px - for rounded arrows and
+        50px - to prevent hover glitches on the border created using shadows*/
+    border-radius: 0 5px 0 50px;
+}
+/*we dont need an arrow after the last link*/
+.breadcrumb a:last-child:after {
+    content: none;
+}
+/*we will use the :before element to show numbers*/
+.breadcrumb a:before {
+    content: counter(flag);
+    counter-increment: flag;
+    /*some styles now*/
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 8px 0;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    background: #444;
+    background: linear-gradient(#444, #222);
+    font-weight: bold;
+}
+
+
+.flat a, .flat a:after {
+    background: white;
+    color: black;
+    transition: all 0.5s;
+}
+.flat a:before {
+    background: white;
+    box-shadow: 0 0 0 1px #ccc;
+}
+.flat a:hover, .flat a.active,
+.flat a:hover:after, .flat a.active:after{
+    background: #9EEB62;
+}
+.breadcrumb-margin-top{
+    margin-top: 2px;
+}
+
+/*--------------------------------*/
+
+/*Login Style*/
+.login-box{
+    width: 700px;
+    height: 300px;
+    margin: 0px auto;
+    margin-top: 118px;
+    margin-bottom: 105px;
+}
+.login-image{
+    position: relative;
+    right: 214px;
+    width: 400px;
+    height: 420px;
+    float: left;
+    -webkit-transition: right .3s ease-in-out;
+    -moz-transition: right .3s ease-in-out;
+    -o-transition: right .3s ease-in-out;
+    -ms-transition: right .3s ease-in-out;
+    transition: right .3s ease-in-out;
+}
+.login-form-wrap{
+position: relative;
+margin: 0 0 0 -230px;
+left: 88px;
+float: right;
+border-style: solid;
+border-color: #0099FF;
+font-family: verdana;
+border-width: 0px;
+box-shadow: 1px 0px 4px #ccc;
+background-color: #F5F5F5;
+    -webkit-transition: left 1s ease-in-out;
+    -moz-transition: left 1s ease-in-out;
+    -o-transition: left 1s ease-in-out;
+    -ms-transition: left 1s ease-in-out;
+    transition: left 1s ease-in-out;
+}
+.front-login label{
+    font-size: 20px;
+}
+.front-login{
+    padding-bottom: 1px;
+    margin: 15px;
+}
+.front-login input{
+    min-height: 30px;
+    min-width: 80px;
+}
+.front-login p{
+    margin-bottom: 5px;
+}
+.login-front{
+    padding-left: 35px;
+padding-right: 35px;
+margin-bottom: 35px;
+}
+.register-front{
+margin-left: 10px;
+}
+
+.login-left{
+    float: left;
+    margin-right: 30px;
+}
+.login-right{
+    float: right;
+}
+
+.login-box .loginbtn{
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: verdana;
+    color: #fff;
+    background: #0e71bc;
+    box-shadow: 0px 0px;
+    width: 151px;
+    padding: 10px;
+}
+.login-box .loginbtn:hover{
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: verdana;
+    color: #fff;
+    background: #143c5a;
+    box-shadow: 0px 0px;
+    width: 151px;
+    padding: 10px;
+}
+
+.div-judul{
+    float: left;
+    top: -280px;
+    left: 0px;
+    position: relative;
+    z-index: 2;
+    width: 367px;
+    background-color: #0e71bc;
+}
+.div-judul p{
+    font-size: 28px;
+    padding-left: 20px;
+    font-family: verdana;
+    color: white;
+}
+
+.div-judul-login{
+    float: left;
+    left: 1px;
+    position: relative;
+    z-index: 2;
+    width: 367px;
+    background-color: #0e71bc;
+}
+.div-judul-login p{
+    font-size: 28px;
+    padding-left: 20px;
+    font-family: verdana;
+    color: white;
+	margin: 30px;
+}
+
+.CSSTabel .paginate_button{
+    color: #fff;
+    background: rgb(156, 204, 240);
+    border-radius: 0px;
+    border:0px;
+}
+
+.CSSTabel thead{
+	text-align:left;
+}
+
+.CSSTabel table{
+    border: 0px;
+}
+.CSSTabel th{
+   background: #C24F4F;
+}
+
+.CSSTabel .dataTables_length{
+    float: left;
+    margin-right: 40px;
+}
+/*
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]{
+    border-radius: 0px;
+    font-family: sans-serif;
+    color: #fff;
+    background: #0e71bc;
+    box-shadow:none;
+    text-shadow:none;
+    border: 0px;
+}
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="file"]:hover{
+    border-radius: 0px;
+    font-family: sans-serif;
+    color: white;
+        box-shadow:none;
+    text-shadow:none;
+    background: -webkit-linear-gradient(top, #0e71bc 0%,#004891 100%);
+    border: 0px;
+}
+*/
+.bar{
+    background: #C24F4F;
+    width: 73%;
+    height: 22px;
+    padding: 2px;
+
+}
+.bar2{
+    width: 64%;
+}
+.bar p{
+    margin-left: 5px;
+    margin-top: 0px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.hide-con{
+    width: 71%;
+    float: left;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px #B8B8B8;
+}
+
+.content-login{
+    border-top:0px;
+}
+
+#popup-wrapper{
+    border-radius:0px;
+    margin-bottom: 2px;
+}
+#popup-wrapper2{
+    border-radius:0px;
+    margin-bottom: 2px;
+}
+#popup-wrapper3{
+    border-radius:0px;
+    margin-bottom: 2px;
+}
+
+.tb-barang{
+    width: 28%;
+    float: right;
+    z-index: 2;
+    top: -25px;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px #9C9C9C;
+    padding: 5px;
+}
+.table-list{
+    width: 23%;
+    float: right;
+    top: -22px;
+    position: relative;
+    margin-right: 13px;
+    /*border: 1px solid #C4C4C4;*/
+    padding: 6px;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px #9C9C9C;
+}
+
+.table-list2{
+    position: relative;
+}
+
+.master-border{
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: rgb(202, 202, 202);
+	padding-right: 13px
+}
+
+select,textarea, input[type="text"],
+input[type="password"], input[type="datetime"],
+input[type="datetime-local"], input[type="date"],
+input[type="month"], input[type="time"], input[type="week"],
+input[type="number"], input[type="email"], input[type="url"],
+input[type="search"], input[type="tel"], input[type="color"],
+.uneditable-input {
+    padding: 1px 1px 1px;
+    margin-bottom: 3px;
+    padding: 2px 8px;
+}
+
+select, input[type="file"] {
+    height: 24px;
+}
+
+form {
+    margin: 0;
+}
+
+tr{
+    height: 30px;
+}
+
+.table th, .table td {
+    padding: 5px;
+}
+
+.btn-tbl{
+    padding: 2px;
+}
+.btn-tbl:hover{
+    box-shadow:0;
+}
+
+#form-ms{
+    width: 170px; margin-left: 10px; margin-right: 20px;
+}
+
+#ct{
+	color: #A8A8A8;
+}
+
+.bar-span{
+	background-color: #696969;
+	width: 100%;
+	padding: 5px;
+	color: #F1F1F1;
+	font-weight: bold;
+}
+.bar-info{
+	margin-bottom: 17px;
+	color: #FFFF3F;
+	font-weight: normal;
+	padding: 6px;
+	border: 3px solid #B3B3B3;
+	background-color: #424242;
+}
+.content-span{
+	background-color: #FFF;
+	width: 100%;
+	padding: 5px;
+	box-shadow: 0px 1px 1px #9C9C9C;
+}
+
