@@ -8,3 +8,5 @@ Sebuah web based apps yang menggunakan PHP dan Framework CodeIgniter dalam penge
 
 
 Silahkan Hubungi echristiandy@gmail.com untuk Info Lain.
+
+Regards Eddy Christian
