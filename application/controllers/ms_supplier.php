@@ -17,7 +17,7 @@
             //request data table
             $data['hasil']=$this->ms_supplier_model->get_paged_list(
                 $this->limit,$offset,$order_column,$order_type)->result();
-            $this->load->view('content/ms_supplier_Detail',$data);
+            $this->load->view('content/master_supplier/ms_supplier_Detail',$data);
         }
 		
 		#Show All u/ table List
@@ -27,7 +27,7 @@
                 $this->limit,$offset,$order_column,$order_type)->result();
                 
             //load view
-            $this->load->view('content/list_supplier',$data);
+            $this->load->view('content/list/list_supplier',$data);
         }
 
         //SAVE ADD NEW TRIGGER

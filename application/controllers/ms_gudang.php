@@ -19,7 +19,7 @@
                 $this->limit,$offset,$order_column,$order_type)->result();
                 
             //load view
-            $this->load->view('content/ms_gudang_Detail',$data);
+            $this->load->view('content/master_gudang/ms_gudang_Detail',$data);
         }
 		
 		#Show All 
@@ -29,7 +29,7 @@
                 $this->limit,$offset,$order_column,$order_type)->result();
                 
             //load view
-            $this->load->view('content/list_gudang',$data);
+            $this->load->view('content/list/list_gudang',$data);
         }
 
         //SAVE ADD NEW TRIGGER
@@ -72,14 +72,14 @@
                 echo "gagal";
             }
         }
-        
+        /*
         //Lihat Data sebelum update
         function viewupdate()
         {
             $id=$this->input->post('id');
             $data['hasil']=$this->ms_gudang_model->getUpdate($id);
             $this->load->view("content/update_gudang",$data);
-        }
+        }*/
         //save update
         function update()
         {

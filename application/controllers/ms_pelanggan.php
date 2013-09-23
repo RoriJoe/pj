@@ -19,7 +19,7 @@
                 $this->limit,$offset,$order_column,$order_type)->result();
                 
             //load view
-            $this->load->view('content/ms_pelanggan_Detail',$data);
+            $this->load->view('content/master_pelanggan/ms_pelanggan_Detail',$data);
         }
         
         #Show All 
@@ -29,7 +29,7 @@
                 $this->limit,$offset,$order_column,$order_type)->result();
                 
             //load view
-            $this->load->view('content/list_pelanggan',$data);
+            $this->load->view('content/list/list_pelanggan',$data);
         }
         
 
@@ -81,14 +81,14 @@
                 echo "gagal";
             }
         }
-        
+        /*
         function viewupdate()
         {
             $id=$this->input->post('id');
             $data['hasil']=$this->ms_pelanggan_model->getUpdate($id);
             $this->load->view("content/update_pelanggan",$data);
         }
-        
+        */
         function update()
         {
             $id=$this->input->post('kd');            
