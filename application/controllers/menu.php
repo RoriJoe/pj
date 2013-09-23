@@ -21,7 +21,7 @@
 		function home()
 		{
 			$this->load->library('id_chart/id_chart');
-			$data['c1'] = $this->id_chart->chart_embed('test',770,200,site_url('menu/example1'),base_url());
+			$data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
 			$data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
 			
             $username = $this->session->userdata('username');
@@ -69,19 +69,19 @@
         //Master Pelanggan
         function ms_pelanggan(){
             $data['judul']="Master Pelanggan";
-            $this->template->display('content/ms_pelanggan', $data);
+            $this->template->display('content/master_pelanggan/ms_pelanggan', $data);
         }
 
         //Master Supplier
         function ms_supplier(){
             $data['judul']="Master Supplier";
-            $this->template->display('content/ms_supplier', $data);
+            $this->template->display('content/master_supplier/ms_supplier', $data);
         }
 
         //Master Gudang
         function ms_gudang(){
             $data['judul']="Master Gudang";
-            $this->template->display('content/ms_gudang', $data);
+            $this->template->display('content/master_gudang/ms_gudang', $data);
         }
 
         //Transaksi Pemesanan Barang

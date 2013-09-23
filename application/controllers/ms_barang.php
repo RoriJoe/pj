@@ -28,7 +28,7 @@
             $nama = $this->input->post('k');
             $data['hasil'] = $this->ms_barang_model->get_barang();
             $data['nama']=$nama;
-            $this->load->view("content/master_barang/detail_Barang",$data);
+            $this->load->view("content/list/list_Barang",$data);
         }
         
         //SAVE ADD NEW TRIGGER

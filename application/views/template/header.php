@@ -52,7 +52,11 @@ $date = date("d F Y, H:i");
         <div class="text-logo" style="margin-top: 12px;margin-left: 120px;">
             <div style="text-align: left; font-size: 25px; font-weight: bold;">PD PELITA JAYA</div>
             <div style="text-align: left; font-size: 10px; color: #CACACA;">Pangeran Jaya Karta No.30, Jakarta Pusat</div>
-        </div>
+        </div>    
+    </div>
+    
+    <div style="float: right;">
+            <img src="<?php echo base_url();?>assets/img/header.png" style=" width: 669px; height: 85px;"/>
     </div>
 </div>
 
