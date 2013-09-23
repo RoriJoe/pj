@@ -63,7 +63,7 @@
         function ms_barang(){
 			$data['list_satuan']=$this->combo_model->list_satuan();
             $data['judul']="Master Barang";
-            $this->template->display('content/ms_barang', $data);
+            $this->template->display('content/master_barang/ms_barang', $data);
         }
 
         //Master Pelanggan
