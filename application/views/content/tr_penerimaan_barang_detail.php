@@ -14,9 +14,9 @@
              _tgl = '$row->Tgl_Bpb'
              _no_reff = '$row->No_Reff'
              _kd_sp = '$row->Kode_Supp'
-             _nm_sp = '$row->Nama'
+             _nm_sp = '$row->Perusahaan'
              _kd_gd = '$row->Kode_Gudang'
-             _nm_gd = '$row->Perusahaan'>
+             _nm_gd = '$row->Nama'>
        
             <td>$row->No_Bpb</a></td>
             <td>$row->Kode_Gudang</td>
