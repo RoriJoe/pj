@@ -18,7 +18,7 @@
             $data['hasil']=$this->tr_penerimaan_barang_model->get_paged_list();
 			
             //load view
-            $this->load->view('content/tr_penerimaan_barang_Detail',$data);
+            $this->load->view('content/tr_penerimaan_barang_detail',$data);
         }
 
 

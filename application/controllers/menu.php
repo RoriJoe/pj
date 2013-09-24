@@ -97,14 +97,14 @@
         function tr_pemesanan()
         {
             $data['judul']="Pemesanan / PO";
-            $this->template->display('content/tr_penerimaan_barang', $data);
+            $this->template->display('content/welcome_message', $data);
         }
 
         //Transaksi Pemesanan Barang
         function tr_penerimaan_barang()
         {
             $data['judul']="Penerimaan Barang";
-            $this->template->display('content/tr_pemesanan/tr_penerimaan_barang', $data);
+            $this->template->display('content/tr_penerimaan_barang', $data);
         }
 
         //Transaksi Surat Jalan
