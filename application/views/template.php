@@ -4,7 +4,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title><?php echo $judul; ?></title>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
+    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+    
+        <!--Drop Menu-->
+    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
+    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.cookie.js'></script>
+    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.hoverIntent.minified.js'></script>
 
+    
+    <!--Initialize Drop Menu-->
+    <script type="text/javascript">
+    $(document).ready(function($){
+        $('#accordion').dcAccordion({
+            eventType: 'click',
+            autoClose: true,
+            saveState: false,
+            disableLink: true,
+            showCount: false,
+            speed: 'fast'
+        });
+    });
+    </script>
+    
+    <script>
+    $(document).ready(function(){
+        $('.ajax').click(function(e){
+            e.preventDefault();
+            $.get($(this).attr('href'),function(Res){
+            $('#contentFull').html(Res);
+            });
+        })
+    })
+    </script>
     <!--Popup-->
 <!--    <script type="text/javascript" src="<?php echo base_url();?>assets/js/popup.js"></script>   -->
 <!--    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.2.min.js" ></script>   -->
@@ -52,39 +84,7 @@
 </div>
 <div class="container">
     <!--JS AREA-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    
-        <!--Drop Menu-->
-    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
-    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.cookie.js'></script>
-    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.hoverIntent.minified.js'></script>
 
-    
-    <!--Initialize Drop Menu-->
-    <script type="text/javascript">
-    $(document).ready(function($){
-        $('#accordion').dcAccordion({
-            eventType: 'click',
-            autoClose: true,
-            saveState: false,
-            disableLink: true,
-            showCount: false,
-            speed: 'fast'
-        });
-    });
-    </script>
-    
-    <script>
-    $(document).ready(function(){
-        $('.ajax').click(function(e){
-            e.preventDefault();
-            $.get($(this).attr('href'),function(Res){
-            $('#contentFull').html(Res);
-            });
-        })
-    })
-    </script>
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
          bootstrap_alert = function() {}
