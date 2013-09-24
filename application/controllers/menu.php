@@ -6,10 +6,12 @@
 			parent :: __construct();
 			$this->is_logged_in();
             $this->load->library('template');
+            $this->load->library('user_agent');
             $this->load->helper('url');
             $this->load->model('combo_model');
 		}
-		function is_logged_in()
+		
+        function is_logged_in()
 		{
 		  $is_logged_in = $this->session->userdata('is_logged_in');
 		  if(!isset($is_logged_in) || $is_logged_in != true)
@@ -24,6 +26,13 @@
 			$data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
 			$data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
 			
+			$data['uagent'] = "";
+            if ($this->agent->browser() == 'Internet Explorer' OR $this->agent->browser() == 'Firefox'){
+                $data['uagent'] = "0";
+            }else{
+                $data['uagent'] = "1";
+            }
+            
             $username = $this->session->userdata('username');
             $data['judul']="Welcome";
             $data['user']=$username;
@@ -83,12 +92,19 @@
             $data['judul']="Master Gudang";
             $this->template->display('content/master_gudang/ms_gudang', $data);
         }
+        
+        //Transaksi Pemesanan /PO
+        function tr_pemesanan()
+        {
+            $data['judul']="Pemesanan / PO";
+            $this->template->display('content/tr_penerimaan_barang', $data);
+        }
 
         //Transaksi Pemesanan Barang
         function tr_penerimaan_barang()
         {
-            $data['judul']="Pemesanan Barang";
-            $this->template->display('content/tr_penerimaan_barang', $data);
+            $data['judul']="Penerimaan Barang";
+            $this->template->display('content/tr_pemesanan/tr_penerimaan_barang', $data);
         }
 
         //Transaksi Surat Jalan

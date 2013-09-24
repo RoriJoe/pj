@@ -13,7 +13,9 @@
             $data['error'] = ""; 
 			$data['uagent'] = "";
 			if ($this->agent->browser() == 'Internet Explorer' OR $this->agent->browser() == 'Firefox'){
-				$data['uagent'] = "Browser yang anda gunakan tidak didukung penuh oleh Web ini, Silahkan gunakan Google Chrome untuk kompabilitas yang lebih baik. :D";
+				$data['uagent'] = "0";
+			}else{
+			    $data['uagent'] = "1";
 			}
 			
             $this->load->view('form_login',$data);

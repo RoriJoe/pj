@@ -232,6 +232,7 @@
 
 	position:relative;
     height:100%;
+    top:-10px;
 }
 
 
@@ -285,10 +286,8 @@
 
 #pp{
 
-	width:155px;
-
-	height:158px;
-
+	width:117px;
+    margin-left: 40px;
 }
 
 
@@ -415,15 +414,15 @@
 /*-------------------------------------Untuk Mengatur tulisan APPLICATION LIST----------------------------------------------------*/
 #titleA{
 
-    text-indent:1.5em;border:1px silver solid;
+    text-indent:2.5em;border:1px silver solid;
 
-    padding-top:10px;
+    padding-top:5px;
 
-    font-size:16px;
+    font-size:14px;
 
     font-weight:900;
 
-    padding-bottom:10px;
+    padding-bottom:5px;
 
     display:block;
 
@@ -1766,15 +1765,15 @@ textarea{
     width: 700px;
     height: 300px;
     margin: 0px auto;
-    margin-top: 118px;
+    margin-top: 65px;
     margin-bottom: 105px;
 }
 .login-image{
     position: relative;
-    right: 214px;
-    width: 400px;
-    height: 420px;
-    float: left;
+right: 175px;
+width: 590px;
+height: 240px;
+float: left;
     -webkit-transition: right .3s ease-in-out;
     -moz-transition: right .3s ease-in-out;
     -o-transition: right .3s ease-in-out;
@@ -1786,11 +1785,7 @@ position: relative;
 margin: 0 0 0 -230px;
 left: 88px;
 float: right;
-border-style: solid;
-border-color: #0099FF;
-font-family: verdana;
-border-width: 0px;
-box-shadow: 1px 0px 4px #ccc;
+
 background-color: #F5F5F5;
     -webkit-transition: left 1s ease-in-out;
     -moz-transition: left 1s ease-in-out;
@@ -1849,15 +1844,50 @@ margin-left: 10px;
     width: 151px;
     padding: 10px;
 }
+.signin {
+width: 335px;
+/*margin: 0 auto;*/
+}
+.signin-box {
+padding: 20px 25px 15px;
+background: #f1f1f1;
+border: 1px solid #e5e5e5;
+}
+
+.signin-box h2 {
+font-size: 20px;
+line-height: 17px;
+height: 16px;
+margin: 0 0 19px;
+}
+
+.signin-box ul {
+list-style: none;
+line-height: 17px;
+margin: 0;
+padding: 0;
+}
+
+.signin-box input[type=text], .signin-box input[type=password] {
+width: 100%;
+font-size: 15px;
+color: black;
+line-height: normal;
+height: 32px;
+margin: 0 0 20px;
+box-sizing: border-box;
+}
+
 
 .div-judul{
     float: left;
-    top: -280px;
-    left: 0px;
-    position: relative;
-    z-index: 2;
-    width: 367px;
-    background-color: #0e71bc;
+top: -230px;
+left: 0px;
+position: relative;
+z-index: 2;
+width: 367px;
+background-color: rgba(172, 0, 0, 0.74);
+padding: 10px;
 }
 .div-judul p{
     font-size: 28px;

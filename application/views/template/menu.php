@@ -1,9 +1,12 @@
 <div class="scroller_anchor"></div>
 <div class="side-scroll">
-<div id="pictureImage">
-    <img src="<?php echo base_url();?>assets/img/user.gif" id="pp" />
-</div>
+    <div style="width: 100%; margin-bottom: 5px; margin-top: 10px">
+        <img src="<?php echo base_url();?>assets/img/user.png" id="pp" class="img-polaroid"/>
+    </div>
 <div class="sidebar">
+    <div style="background-color: #B4B4B4;height: 20px;width: 15px;">
+        <a href="#" id="red"><i class="icon-resize-vertical"></i></a>
+    </div>
     <span id="titleA">APPLICATION LIST</span>
     <ul id="accordion">
         <li><a class = "ajax" href="home"><i class="icon-home"></i>&nbsp;Home</a>
@@ -20,7 +23,7 @@
             <ul>
                 <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Pembelian</a>
                     <ul>
-                        <li><a class = "ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemesanan / PO</a></li>
+                        <li><a class = "ajax" href="tr_pemesanan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemesanan / PO</a></li>
                         <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
                     </ul>
                 </li>
@@ -57,14 +60,33 @@
 
 
 <script>
+
 function loadPhp(){
     //set a variable for the php function
-    //var func = '<?php set_breadcrumb(); ?>'
+    //var func = '<?php set_breadcrumb();?>'
     //append the php function results to a div using jquery
     //$('#breadcrumb').html("testing");
     //var div = document.getElementById('breadcrumb');
     //div.innerHTML = div.innerHTML + func;
 }
+
+var toggle = true;
+$("div.sidebar").css("top", "0px");
+$('#red').click(function() {
+    if (toggle === true) {
+        $("div.sidebar").css("z-index", "3");
+        $("div.sidebar").animate({
+            "top": "-=162px"
+        }, "slow");
+        toggle = false;
+    }
+    else {
+        $("div.sidebar").animate({
+            "top": "+=162px"
+        }, "slow");
+        toggle = true;
+    }
+});
 </script>
 <!--End Of Side Menu-->
 

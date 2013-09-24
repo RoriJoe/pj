@@ -9,73 +9,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Login</title>
+    <title>Login Pelita Jaya</title>
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />
    	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
+   	
+
 </head>
 
-<body style="margin: 0;">
-<div id="wrapper">
-    <div id="wrapper2">
-        <!-- header -->
-        <div id="opt"><p class="uagent" style="margin: 0; color: #fff;"><?php echo $uagent;?></p></div>
-        <div style="clear:both;"></div>
-        <!-- content -->
-
-        <div id="content content-login">
-        <div id="login_box">
-            <div id="contentlogin" ></div>
+<body>    
+    <div id="konfirmasi" class="sukses"></div>
+    <div class="login-box">
+       <div class="login-image">
+        <img src="http://sisfoprima.com/pj/assets/img/login.png">
+        <div class="div-judul">
+            <p>PD.PELITA JAYA</p>
         </div>
-		
-        <div class="login-box">
-            <div class="login-image">
-                <img src="<?php echo base_url();?>assets/img/login.png"/>
-                <div class="div-judul">
-                    <p>PD PELITA JAYA</p>
-                </div>
-            </div>
-            <div class="login-form-wrap">
-            <div class="ua-login-form front-login">
-               <div id="formlogin" class="animate form">
-                <?php echo form_open('login/validatelogin'); ?>
-                <h2>Log In</h2>
-                
-                <div style="margin-bottom: 75px;margin-top: 22px;">
-                    <div class="login-left">
-                        <label data-icon="u" > User Name </label>
-                    </div>
-                    <div class="login-right">
-                        <input class="textbox" id="username" name="username" required="required" type="text" placeholder="User Name"/>
-                    </div>
-                </div>
-                <div style="display: block; clear: both;"></div>
-                <div>
-                    <div class="login-left">
-                        <label data-icon="p"> Password </label>
-                    </div>
-                    <div class="login-right">
-                        <input class="textbox" id="password" name="password" required="required" type="password" placeholder="Password" />
-                    </div>
-                </div>
-                <div style="display: block; clear: both;"></div>
-                <p class="error"><?php echo $error;?></p>
+       </div>
+            
+        <div class="login-form-wrap signin-box">
+          <h2 class="form-signin-heading">Sign in</h2>
 
-                <p class="login button" style="text-align: center;">
-                    <input class="loginbtn" type="submit" value="Login" />
-                </p>
-                <?php echo form_close(); ?>
-            </div>
+          <?php echo form_open('login/validatelogin'); ?>
+            <fieldset>
+              <label for="username">Username</label>
+              <input type="text" class="input-block-level" name="username" id="username" required="required">
+              <label for="passwd">Password</label>
+              <input type="password" class="input-block-level" name="password" id="password" required="required">
 
-            </div>
-        </div>
-        </div>
-        <!-- end of div -->
-        <div style="clear:both;"></div>
-        <!-- footer -->
+              <button class="btn btn-large btn-primary" type="submit" data-loading-text="Signing in...">Sign in</button>
+              <p class="error"><?php echo $error;?></p>
+            </fieldset>
+          <?php echo form_close(); ?>
+        </div>              
     </div>
-</div>
+    <div id="footer">
+            <div id="footerContent">
+            <p style="text-align: center; font-family:verdana;font-size: 14px;color: #999999;">Copyright © Pelita Jaya 2013</p>
+        </div>
+    </div>
 
+<script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
 <script type="text/javascript">
     <!--var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});-->
+//ALERT
+    bootstrap_alert = function() {}
+
+    bootstrap_alert.info = function(message) {
+        $('#konfirmasi').html('<div class="alert" ><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    }
+    
+        var agent = <?php echo $uagent;?> ;
+        if(agent != 1){
+            bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a>');
+        }
 </script>
+
 </body>
 </html>
