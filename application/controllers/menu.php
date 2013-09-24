@@ -6,6 +6,7 @@
 			parent :: __construct();
 			$this->is_logged_in();
             $this->load->library('template');
+            $this->load->library('user_agent');
             $this->load->helper('url');
             $this->load->model('combo_model');
 		}
@@ -25,6 +26,13 @@
 			$data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
 			$data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
 			
+			$data['uagent'] = "";
+            if ($this->agent->browser() == 'Internet Explorer' OR $this->agent->browser() == 'Firefox'){
+                $data['uagent'] = "0";
+            }else{
+                $data['uagent'] = "1";
+            }
+            
             $username = $this->session->userdata('username');
             $data['judul']="Welcome";
             $data['user']=$username;

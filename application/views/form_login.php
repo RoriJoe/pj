@@ -59,12 +59,12 @@
     bootstrap_alert = function() {}
 
     bootstrap_alert.info = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-info" ><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+        $('#konfirmasi').html('<div class="alert" ><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
     }
     
         var agent = <?php echo $uagent;?> ;
         if(agent != 1){
-            bootstrap_alert.info('<strong>Tips!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a>');
+            bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a>');
         }
 </script>
 
