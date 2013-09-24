@@ -9,7 +9,8 @@
             $this->load->helper('url');
             $this->load->model('combo_model');
 		}
-		function is_logged_in()
+		
+        function is_logged_in()
 		{
 		  $is_logged_in = $this->session->userdata('is_logged_in');
 		  if(!isset($is_logged_in) || $is_logged_in != true)
@@ -83,12 +84,19 @@
             $data['judul']="Master Gudang";
             $this->template->display('content/master_gudang/ms_gudang', $data);
         }
+        
+        //Transaksi Pemesanan /PO
+        function tr_pemesanan()
+        {
+            $data['judul']="Pemesanan / PO";
+            $this->template->display('content/tr_penerimaan_barang', $data);
+        }
 
         //Transaksi Pemesanan Barang
         function tr_penerimaan_barang()
         {
-            $data['judul']="Pemesanan Barang";
-            $this->template->display('content/tr_penerimaan_barang', $data);
+            $data['judul']="Penerimaan Barang";
+            $this->template->display('content/tr_pemesanan/tr_penerimaan_barang', $data);
         }
 
         //Transaksi Surat Jalan
