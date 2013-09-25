@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-<div class="table CSSTabel table-list table-hover" style="top: -45px; width: 25%">
-    <table id="listPemesanan">
-        <thead>
-            <th>Kode PO</th>
-            <th>Tanggal</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            <?php foreach($hasil as $row)
-            {
-                
-            } ?>
-        </tbody>
-    </table>
-</div>
-=======
 <div class="table CSSTabel table-list table-hover" style="height: 395px;">
     <table id="tbLsPO">
         <thead>
@@ -115,4 +97,3 @@ var oTable = $('#tbLsPO').dataTable( {
 } );
 
 </script>
->>>>>>> 5b157d4c2def79fddaf1aeb020df420b65eaa098

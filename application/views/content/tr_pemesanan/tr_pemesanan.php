@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<?php
-    phpinfo();
-?>
-=======
 <!--for date, suggestion-->
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
 <!--
@@ -632,4 +627,3 @@ function tampilDetailPO(){
         }
 
 </script>
->>>>>>> 5b157d4c2def79fddaf1aeb020df420b65eaa098

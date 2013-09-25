@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<?php
-    phpinfo();
-?>
-=======
 <div class="table  CSSTabel" style="overflow: auto; height: 228px">
 <table id="tb3">
     <thead>
@@ -176,4 +171,3 @@ function validAct(row){
     });
 }
 </script>
->>>>>>> 5b157d4c2def79fddaf1aeb020df420b65eaa098
