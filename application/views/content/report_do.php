@@ -31,7 +31,7 @@ $(function() {
 </script>
 
 <!--//***MAIN FORM-->
-<form action="../report/print_report_do" method="post">
+<form action="../report/print_report_do" target="_new" method="post">
 <div class="bar bar2" style="width: 50%">
     <p>Report Delivery Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
@@ -52,7 +52,7 @@ $(function() {
 		<input type="text" id="_tgl" style="width: 150px;"/> s/d <input type="text" id="_tgl2" style="width: 150px;"/>
 	</div>
 	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="submit" class="btn btn-primary"  value="Print">
+		<input role="button" type="submit" class="btn btn-primary" target="_blank" value="Print">
 	</div>
 </div>
 </form>
