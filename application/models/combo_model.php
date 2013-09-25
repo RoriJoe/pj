@@ -10,7 +10,12 @@
             $query = $this->db->get('satuan');
             return $query->result();
         }
-		
+        
+        function list_currency(){
+            $query = $this->db->get('currency');
+            return $query->result();
+        }
+        
         function getang()//ambil no sj akhir
         {
             $q=$this->db->query("select * from sj_h order by no_sj desc limit 1");
@@ -50,6 +55,12 @@
 		function getbpb()//ambil no bpb akhir
         {
             $q=$this->db->query("select * from bpb_h order by no_bpb desc limit 1");
+            return $q->result();
+        }
+        
+        function getpo()//ambil no po akhir
+        {
+            $q=$this->db->query("select Kode from po_h order by Kode desc limit 1");
             return $q->result();
         }
 	}

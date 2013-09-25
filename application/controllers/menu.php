@@ -96,8 +96,9 @@
         //Transaksi Pemesanan /PO
         function tr_pemesanan()
         {
+            $data['list_currency']=$this->combo_model->list_currency();
             $data['judul']="Pemesanan / PO";
-            $this->template->display('content/welcome_message', $data);
+            $this->template->display('content/tr_pemesanan/tr_pemesanan', $data);
         }
 
         //Transaksi Pemesanan Barang
