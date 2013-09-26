@@ -12,7 +12,11 @@
 </head>
 <body>
 <!--Just testing for git, response by windows wkwk-->
+<<<<<<< HEAD
 <!--multi sync-->    
+=======
+<!--multi sync-->    
+>>>>>>> 57a51398be9d8c8b694d41224cf9be4c2128e838
     <div id="konfirmasi" class="sukses"></div>
     <div class="login-box">
        <div class="login-image">
