@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<!--Just testing for git-->    
+<!--Just testing for git, response by windows-->    
     <div id="konfirmasi" class="sukses"></div>
     <div class="login-box">
        <div class="login-image">
