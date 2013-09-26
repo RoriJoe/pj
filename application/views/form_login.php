@@ -1,11 +1,4 @@
-<?php
-    if($this->session->userdata('is_logged_in') == 2){
-        redirect('menu/home');
-?>
-
-<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login Pelita Jaya</title>
@@ -49,7 +42,8 @@
             <p style="text-align: center; font-family:verdana;font-size: 14px;color: #999999;">Copyright © Pelita Jaya 2013</p>
         </div>
     </div>
-
+</body>
+</html>
 <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
 <script type="text/javascript">
@@ -66,6 +60,3 @@
             bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a>');
         }
 </script>
-
-</body>
-</html>
