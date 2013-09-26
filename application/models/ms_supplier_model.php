@@ -9,14 +9,13 @@
         }
         
         //Get Table Detail Data
-        function get_paged_list($limit=10,$offset=0,$order_column='',$order_type='asc')
+        function get_paged_list()
         {
-            if (empty($order_column)||empty($order_type))
-                $this->db->order_by($this->primary_key, 'asc');
-            else
-                $this->db->order_by($order_column, $order_type);
-            return
-                $this->db->get($this->table_name,$limit,$offset);
+            $q = $this->db->query("
+            SELECT Kode,Nama, Perusahaan, Alamat1, Kota, Telp, Telp1, Telp2, Fax1, Fax2, Limit_Kredit
+            FROM supplier
+            ");
+            return $q->result();
         }
         
         //model untuk save add data

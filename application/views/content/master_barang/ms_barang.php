@@ -77,7 +77,7 @@ loadListBarang();
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
             </td>
             <td>Nama</td>
             <td>

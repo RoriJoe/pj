@@ -25,11 +25,11 @@ $.ajax({
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]]" maxlength="20" id='kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]]" maxlength="20" id='kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
             </td>
             <td>Perusahaan</td>
             <td>
-                <input type='text' class="validate[required,maxSize[30], minSize[2]]]" maxlength="30" id='pr' name='pr' style="width: 170px; margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[30], minSize[2]]]" maxlength="30" id='pr' name='pr' style="width: 170px; margin-left: 10px; margin-right: 20px; ">
             </td>
         </tr>
         <tr>

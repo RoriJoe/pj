@@ -9,6 +9,7 @@
     <tbody>
     <?php foreach($hasil as $row)
     {
+        $limit = number_format($row->Limit_Kredit,0,",",".");
         echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Perusahaan</td>
@@ -25,7 +26,7 @@
                     telp2='$row->Telp2'
                     fax='$row->Fax1'
                     fax1='$row->Fax2'
-                    limit='$row->Limit'
+                    limit='$limit'
              ><i class='icon-pencil'></i></a>
              <a class='btn delete' name='$row->Kode' style='padding: 2px 6px;'><i class='icon-trash'></i></a></div>
             </div>
@@ -36,10 +37,10 @@
 </table>
 </div>
 
-<div id="popup-wrapper" style="width:380px;height:480px; top:140px; overflow-y: scroll;"></div>
-
 <script>
+
    //Edit TRIGGER 
+   
     $('.popup').click(function(){ 
         $("#kd").attr('disabled',true);
            
@@ -82,9 +83,9 @@
             data :{id:id},
             success: function(msg){
                 if(msg=="gagal"){
-                    bootstrap_alert.warning('<b>Gagal Menghapus</b> terjadi kesalahan');
+                    bootstrap_alert.warning('<b>Gagal!</b> Terjadi kesalahan');
                 }else{
-                    bootstrap_alert.success('<b>Sukses</b> Data berhasil dihapus');
+                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil dihapus');
                     autogen();
                     $('#formID').each(function(){
                         this.reset();
