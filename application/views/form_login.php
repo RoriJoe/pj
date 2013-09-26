@@ -1,6 +1,7 @@
 <?php
     if($this->session->userdata('is_logged_in') == 2){
         redirect('menu/home');
+        //tes github
     }
 ?>
 
