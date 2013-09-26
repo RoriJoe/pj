@@ -29,14 +29,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach($hasil2 as $row)
+		<?php $i=1;
+		foreach($hasil2 as $row)
         {
             echo
             "<tr>
-                <td>$row->No_Sj</td>
-                <td>$row->No_Do</td>
+				<td>$i</td>
+                <td>$row->Kode</td>
                 <td>$row->Nama</td>
+                <td>$row->Ukuran</td>
             </tr>";
-        } ?>
+			$i++;
+		} ?>
 	</tbody>
 </table>

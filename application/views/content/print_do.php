@@ -3,7 +3,7 @@
 		<td width="80%">
 			<h1 style="margin: 0">PD. PELITA JAYA</h1>
 			<h4 >LAPORAN DELIVERY ORDER</h4><br/>
-			<div>PERIODE : </div> <!--ambil berdasarkan input radio dari user -->
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="20%">
 			<div>Tanggal : <?php echo $tanggal ?></div>
@@ -30,9 +30,13 @@
         {
             echo
             "<tr>
-                <td>$row->No_Sj</td>
                 <td>$row->No_Do</td>
-                <td>$row->Nama</td>
+                <td>$row->No_Po</td>
+                <td>$row->NP</td>
+				<td>$row->Nama</td>
+				<td>$row->Ukuran</td>
+				<td>$row->Qty</td>
+				<td>$row->Satuan1</td>
             </tr>";
         } ?>
 	</tbody>

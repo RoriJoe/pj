@@ -44,7 +44,7 @@ function listBarang(){
 </script>
 
 <!--//***MAIN FORM-->
-<form action="../report/print_report_ks" method="post">
+<form action="<?php echo base_url();?>report/print_report_ks" method="post" target="_blank">
 <div class="bar bar2" style="width: 50%">
     <p>Laporan Kartu Stock<i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>

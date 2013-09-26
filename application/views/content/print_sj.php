@@ -3,7 +3,7 @@
 		<td width="80%">
 			<h1 style="margin: 0">PD. PELITA JAYA</h1>
 			<h4 >LAPORAN SURAT JALAN</h4><br/>
-			<div>PERIODE : </div>
+			<div>PERIODE : <?php echo $periode ?></div>
 		</td>
 		<td width="20%">
 			<div>Tanggal : <?php echo $tanggal ?></div>
@@ -33,7 +33,12 @@
             "<tr>
                 <td>$row->No_Sj</td>
                 <td>$row->No_Do</td>
-                <td>$row->Nama</td>
+                <td>$row->NP</td>
+				<td>$row->No_Mobil</td>
+				<td>$row->Nama</td>
+				<td>$row->Ukuran</td>
+				<td>$row->Qty1</td>
+				<td>$row->Satuan1</td>
             </tr>";
         } ?>
 	</tbody>

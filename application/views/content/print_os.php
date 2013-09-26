@@ -29,9 +29,12 @@
         {
             echo
             "<tr>
-                <td>$row->No_Sj</td>
                 <td>$row->No_Do</td>
+                <td>$row->NP</td>
                 <td>$row->Nama</td>
+				<td>$row->Ukuran</td>
+				<td>$row->Qty</td>
+				<td>$row->Satuan1</td>
             </tr>";
         } ?>
 	</tbody>

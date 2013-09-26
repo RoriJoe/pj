@@ -44,7 +44,7 @@ function listBarang(){
 </script>
 
 <!--//***MAIN FORM-->
-<form action="../report/print_report_mutasi" method="post">
+<form action="<?php echo base_url();?>report/print_report_mutasi" method="post" target="_blank">
 <div class="bar bar2" style="width: 50%">
     <p>Laporan Mutasi<i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
@@ -57,14 +57,14 @@ function listBarang(){
 				</td>
 				<td style="text-align: center">
 					<div class='input-append' style="margin-bottom: 0">
-                		<input type='text' id="barang1" id='appendedInputButton'  style='width:170px' />
+                		<input type='text' id="barang1" name="barang1" id='appendedInputButton'  style='width:170px' />
                 		<a href='#myModal' onclick='getDetail(1)' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px;'><i class='icon-filter'></i></a>
             		</div>
 					<br/>
 					sampai
 					<br/>
 					<div class='input-append'>
-                		<input type='text' id="barang2" id='appendedInputButton'  style='width:170px' />
+                		<input type='text' id="barang2" name="barang2" id='appendedInputButton'  style='width:170px' />
                 		<a href='#myModal' onclick='getDetail(2)' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px;'><i class='icon-filter'></i></a>
             		</div>
 				</td>

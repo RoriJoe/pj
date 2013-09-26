@@ -31,7 +31,7 @@ $(function() {
 </script>
 
 <!--//***MAIN FORM-->
-<form action="../report/print_report_os" method="post">
+<form action="<?php echo base_url();?>report/print_report_os" method="post" target="_blank">
 <div class="bar bar2" style="width: 50%">
     <p>Laporan Outstanding Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
