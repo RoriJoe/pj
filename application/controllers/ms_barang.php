@@ -7,24 +7,17 @@
             parent::__construct();
 
             #load library dan helper yang dibutuhkan
-            $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
             $this->load->model('ms_barang_model');
         }
 
         //Get Data untuk table Detail
-        function index($offset=0,$order_column='Kode',$order_type='asc'){
-            //request data table
-            $data['hasil']=$this->ms_barang_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
-
-            //load view
+        function index(){
+            $data['hasil']=$this->ms_barang_model->get_paged_list();
             $this->load->view('content/master_barang/ms_barang_Detail',$data);
         }
         
         #POPUP Show Product
         function viewBarang(){
-            //$this->load->model("tr_surat_jalan_model");
             $nama = $this->input->post('k');
             $data['hasil'] = $this->ms_barang_model->get_barang();
             $data['nama']=$nama;
@@ -37,7 +30,7 @@
             //GET VARIABLE FROM MODEL //kd:kd, nama1:nama1, nama2:nama2, uk:uk, ps:ps, st:st
             $id=$this->input->post('_kd');
             $nama1=$this->input->post('_nama1');
-            $nama2=$this->input->post('_nama2');
+            $nama2=$this->input->post('_ket');
             $uk=$this->input->post('_uk');
             $ps=$this->input->post('_ps');
             $st=$this->input->post('_st');
@@ -74,7 +67,7 @@
         {
             $id=$this->input->post('_kd');
             $nama1=$this->input->post('_nama1');
-            $nama2=$this->input->post('_nama2');
+            $nama2=$this->input->post('_ket');
             $uk=$this->input->post('_uk');
             $ps=$this->input->post('_ps');
             $st=$this->input->post('_st');

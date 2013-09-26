@@ -14,14 +14,13 @@
         }
         
         //Get Table Detail Data
-        function get_paged_list($limit=10,$offset=0,$order_column='',$order_type='asc')
+        function get_paged_list()
         {
-            if (empty($order_column)||empty($order_type))
-                $this->db->order_by($this->primary_key, 'asc');
-            else
-                $this->db->order_by($order_column, $order_type);
-            return
-                $this->db->get($this->table_name,$limit,$offset);
+            $q = $this->db->query("
+            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1
+            FROM barang
+            ");
+            return $q->result();
         }
 
         //model untuk save add data
