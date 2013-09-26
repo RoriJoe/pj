@@ -70,6 +70,7 @@
         
         
         $('#save').attr('mode','edit');
+        key();
     });
 
     $(".delete").click(function(){

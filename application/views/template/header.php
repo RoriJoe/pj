@@ -77,12 +77,13 @@ $date = date("d F Y, H:i");
         tt=display_c();
  }
 </script>
+
 <script>
     window.onload = display_ct;
 </script>
 
 
-    <div class="scroller_anchor"></div>
+<div class="scroller_anchor"></div>
     <div id="opt" align="right" style="float:right">
   <!--      <div class="breadcrumb flat breadcrumb-margin-top">
             <a href="#">Home</a>
