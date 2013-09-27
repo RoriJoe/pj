@@ -15,6 +15,31 @@
 			$this->load->view("content/print_sj", $data);
 		}
 		
+		function print_transaksi_sj(){
+			$this->load->helper('pdfexport_helper.php');
+			
+			$data['sj']=$this->input->post('sj');
+            $data['_tgl']=date('Y-m-d', strtotime($this->input->post('_tgl')));
+            $data['_do']=$this->input->post('_do');
+            $data['gg']=$this->input->post('gg');
+            $data['pn']=$this->input->post('pn');
+            $data['po']=$this->input->post('po');
+            $data['mbl']=$this->input->post('mbl');
+            $data['ket']=$this->input->post('ket');
+			
+			$data['kd_brg']=$this->input->post('kd_brg');
+            $data['nama']=$this->input->post('nama');
+            $data['nbu']=$this->input->post('nbu');
+            $data['qty']=$this->input->post('qty');
+            $data['ktr']=$this->input->post('ktr');
+            $data['totaltx']=$this->input->post('totaltx');
+			
+			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
+			$this->load->view('content/print_transaksi_sj',$data);
+			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
+			//exportMeAsMPDF($templateView,$data['filename']);
+		}
+		
 		function print_report_sj(){
 			#Export Function goes here#
 			 /*This Function is used for Exporting Pdf

@@ -289,7 +289,7 @@ function listBarang(){
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
     <button id="delete" class="btn" type="submit">Delete</button>
     <button id="cancel" class="btn" type="submit">Cancel</button>
-    <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print SJ"><i class="icon-print"></i></button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print SJ"><i class="icon-print"></i></button>
 </div>
 </div>
 
@@ -348,6 +348,53 @@ $("#cancel").click(function(){
     autogen();
     $('#hasil2').html('');
 });
+
+//BUAT PRINT
+ $("#print").click(function(){
+	var sj = $('#sj').val();
+    var _tgl = $('#_tgl').val();
+    var _do = $('#_do').val();
+    var gg = $('#gg').val();
+    var pn = $('#kode_p').val();
+    var po = $('#po').val();
+    var ot = $('#ot').val();
+    var mbl = $('#mbl').val();
+	
+	var kd_brg = new Array();
+    var nama = new Array();
+    var nbu = new Array();
+    var qty = new Array();
+    var ktr = new Array();
+
+    var totaltx = $('#jmltx').text()
+    for(var i=1;i<=totaltx;i++){
+        kd_brg[i-1] = $('#kode_brg'+i).val();
+        nama[i-1] = $('#brg_ukur'+i).val();
+        nbu[i-1] = $('#nbu'+i).text();
+        qty[i-1] = $('#qty'+i).val();
+        ktr[i-1] = $('#ket'+i).val();
+    }
+	
+	$.ajax({
+	        type:'POST',
+	        url: "<?php echo base_url();?>index.php/report/print_transaksi_sj",
+	        data :{sj:sj,_tgl:_tgl,_do:_do,gg:gg,pn:pn,po:po,ot:ot,mbl:mbl,
+	                kd_brg:kd_brg, nama:nama, nbu:nbu, qty:qty, ktr:ktr, totaltx:totaltx
+	        },
+	
+	        success:
+	        function(msg)
+	        {	
+				var win=window.open('about:blank');
+				with(win.document)
+				{
+				  open();
+				  write(msg);
+				  close();
+				}
+	        }
+	     });
+}); 
 
 $("#save").click(function(){
 	var mode = $('#save').attr("mode");

@@ -35,14 +35,14 @@ class report_model extends CI_Model{
 	
 	function print_sj($radio,$tgl,$tgl2){
 		if($radio=="Semua"){
-		$q = $this->db->query("SELECT sj_h.No_Sj, sj_h.No_Do, pelanggan.Nama as NP,sj_h.No_Mobil ,barang.Nama, Ukuran, sj_d.Qty1, Satuan1
+		$q = $this->db->query("SELECT sj_h.No_Sj, sj_h.No_Do, pelanggan.Perusahaan as NP,sj_h.No_Mobil ,barang.Nama, Ukuran, sj_d.Qty1, Satuan1
 				FROM sj_h
 				LEFT OUTER JOIN sj_d ON sj_h.No_Sj = sj_d.No_Sj
 				LEFT OUTER JOIN pelanggan ON sj_h.Kode_Plg = pelanggan.Kode
 				LEFT OUTER JOIN barang ON sj_d.Kode_Brg = barang.Kode");
 				return $q->result();
 		}else{
-		$q = $this->db->query("SELECT sj_h.No_Sj, sj_h.No_Do, pelanggan.Nama as NP,sj_h.No_Mobil ,barang.Nama, Ukuran, sj_d.Qty1, Satuan1
+		$q = $this->db->query("SELECT sj_h.No_Sj, sj_h.No_Do, pelanggan.Perusahaan as NP,sj_h.No_Mobil ,barang.Nama, Ukuran, sj_d.Qty1, Satuan1
 			FROM sj_h
 			LEFT OUTER JOIN sj_d ON sj_h.No_Sj = sj_d.No_Sj
 			LEFT OUTER JOIN pelanggan ON sj_h.Kode_Plg = pelanggan.Kode

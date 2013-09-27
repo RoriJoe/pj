@@ -20,6 +20,8 @@
             $this->load->view('content/tr_surat_jalan_Detail',$data);
         }
 
+		
+		
         #Fungsi saat table samping di klik
         function passSJ()
         {
