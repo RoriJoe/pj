@@ -4,8 +4,8 @@
             parent::__construct();
             
             #load library dan helper yang dibutuhkan
-            $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
+            #$this->load->library(array('table','form_validation'));
+            #$this->load->helper(array('form','url'));
             $this->load->model('ms_supplier_model');
         }
 
@@ -16,10 +16,9 @@
         }
 		
 		#Show All u/ table List
-        function viewSupplier($offset=0,$order_column='Kode',$order_type='asc'){
+        function viewSupplier(){
             //request data table
-            $data['hasil']=$this->ms_supplier_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
+            $data['hasil']=$this->ms_supplier_model->get_paged_list();
                 
             //load view
             $this->load->view('content/list/list_supplier',$data);

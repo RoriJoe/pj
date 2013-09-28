@@ -62,9 +62,9 @@
         <tr>
             <td>Telp</td>
             <td colspan="3">
-                <input type='text' placeholder="Telp 1" class="validate[required, maxSize[13], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' style="width: 150px;margin-left: 10px" onclick="disableAlpha('tl1')">
-                <input type='text' placeholder="Telp 2" class="validate[maxSize[13], minSize[5]],custom[phone]]" maxlength="13" id='tl2' name='tl2' value="" style="width: 150px; margin-left: 10px" onclick="disableAlpha('tl2')">
-                <input type='text' placeholder="Telp 3" class="validate[maxSize[13], minSize[5]],custom[phone]]" maxlength="13" id='tl3' name='tl3' value="" style="width: 150px; margin-left: 10px" onclick="disableAlpha('tl3')">
+                <input type='text' placeholder="Telp 1" class="validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' style="width: 150px;margin-left: 10px" onclick="disableAlpha('tl1')">
+                <input type='text' placeholder="Telp 2" class="validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl2' name='tl2' value="" style="width: 150px; margin-left: 10px" onclick="disableAlpha('tl2')">
+                <input type='text' placeholder="Telp 3" class="validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl3' name='tl3' value="" style="width: 150px; margin-left: 10px" onclick="disableAlpha('tl3')">
             </td>
         </tr>
         <tr>

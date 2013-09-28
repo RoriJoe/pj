@@ -8,18 +8,17 @@
             parent::__construct();
         }
         
-        //Get Table Detail Data
-        function get_paged_list($limit=10,$offset=0,$order_column='',$order_type='asc')
+        //Get List Table
+        function get_paged_list()
         {
-            if (empty($order_column)||empty($order_type))
-                $this->db->order_by($this->primary_key, 'asc');
-            else
-                $this->db->order_by($order_column, $order_type);
-            return
-                $this->db->get($this->table_name,$limit,$offset);
+            $q = $this->db->query("
+                SELECT Kode,Nama,Alamat,Kota,Telp,Telp1,Fax,Fax1
+                FROM gudang
+            ");
+            return $q->result();
         }
 
-        //model untuk save add data
+        //Save New Data
         function insert($data, $id)
         {
             $rr=$this->db->query("select * from gudang where Kode = '$id'");
@@ -32,35 +31,30 @@
                 return "gagal";
             }
         }
-        
-        //model untuk get data update     
-        function getUpdate($id)
-        {
-            $this->db->where($this->primary_key,$id);
-            $q=$this->db->get($this->table_name);
-            return $q->result();
-        }
-        
-        //model untuk save update
+        //Update Data
         function update($data, $id)
         {
             $this->db->where($this->primary_key,$id);
             $this->db->update($this->table_name, $data);
             return "ok";
         }
-        //model untuk delete
+        //Delete Data
         function delete($id)
         {
             $this->db->where($this->primary_key,$id);
             $this->db->delete($this->table_name);
             return "ok";
         }
-        //model untuk view detail data
-        function view($id){
-            $this->db->where($this->primary_key,$id);
-            return $this->db->get($this->table_name);
+        //View List Gudang
+        function view()
+        {
+            $q = $this->db->query("
+                SELECT Kode,Nama,Alamat,Kota,Telp
+                FROM gudang
+            ");
+            return $q->result();
         }
-		
+        //Suggestion
 		function find($keyword){
             $this->db->like('Nama',$keyword);
             $query=$this->db->get('gudang');

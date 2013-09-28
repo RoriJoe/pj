@@ -1,35 +1,55 @@
 <?php
     class Ms_gudang extends CI_Controller{
-        
-        private $limit=10;
-        
         function __construct(){
             parent::__construct();
-            
+
             #load library dan helper yang dibutuhkan
-            $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
+            #$this->load->library(array('table','form_validation'));
+            #$this->load->helper(array('form','url'));
             $this->load->model('ms_gudang_model');
         }
-
-        //Get Data untuk table Detail 
-        function index($offset=0,$order_column='Kode',$order_type='asc'){
+        function index(){
             //request data table
-            $data['hasil']=$this->ms_gudang_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
-                
+            $data['hasil']=$this->ms_gudang_model->get_paged_list();
             //load view
             $this->load->view('content/master_gudang/ms_gudang_Detail',$data);
         }
 		
-		#Show All 
-        function viewGudang($offset=0,$order_column='Kode',$order_type='asc'){
+		//Show All 
+        function viewGudang(){
             //request data table
-            $data['hasil']=$this->ms_gudang_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
-                
+            $data['hasil']=$this->ms_gudang_model->view();
             //load view
             $this->load->view('content/list/list_gudang',$data);
+        }
+
+        //Untuk auto generate
+        function auto_gen()
+        {
+            $tb=date('ym');
+            $ang="";
+            $temp = "";
+            $this->load->model("combo_model");
+            $ag=$this->combo_model->getgd();
+                foreach ($ag as $rr)
+                {
+                    $temp=$rr->Kode;
+                }
+                $skr=substr($temp,1,4);
+                    if($skr==$tb){
+                        $ang=intval(substr($temp,-3))+1;
+                        if(strlen($ang) == 3){
+                            $no = "G".$tb.$ang;
+                        }
+                        else if(strlen($ang) == 2){
+                            $no = "G".$tb."0".$ang;}
+                        else{
+                            $no = "G".$tb."00".$ang;
+                        }
+                    }else {
+                        $no = "G".$tb."001";
+                    }
+            echo $no;
         }
 
         //SAVE ADD NEW TRIGGER
@@ -72,14 +92,7 @@
                 echo "gagal";
             }
         }
-        /*
-        //Lihat Data sebelum update
-        function viewupdate()
-        {
-            $id=$this->input->post('id');
-            $data['hasil']=$this->ms_gudang_model->getUpdate($id);
-            $this->load->view("content/update_gudang",$data);
-        }*/
+
         //save update
         function update()
         {
@@ -111,40 +124,12 @@
             $q = $this->ms_gudang_model->update($data,$id);
             echo $q;
         }
-        //save delete
+
+        //Delete Data
         function delete()
         {
             $id=$this->input->post('id');
             $r = $this->ms_gudang_model->delete($id);
             echo $r;
-        }
-        
-        #Untuk auto generate
-        function auto_gen()
-        {
-            $tb=date('ym');
-            $ang="";
-            $temp = "";
-            $this->load->model("combo_model");
-            $ag=$this->combo_model->getgd();
-                foreach ($ag as $rr)
-                {
-                    $temp=$rr->Kode;
-                }
-                $skr=substr($temp,1,4);
-                    if($skr==$tb){
-                        $ang=intval(substr($temp,-3))+1;
-                        if(strlen($ang) == 3){
-                            $no = "G".$tb.$ang;
-                        }
-                        else if(strlen($ang) == 2){
-                            $no = "G".$tb."0".$ang;}
-                        else{
-                            $no = "G".$tb."00".$ang;
-                        }
-                    }else {
-                        $no = "G".$tb."001";
-                    }
-            echo $no;
         }
     }

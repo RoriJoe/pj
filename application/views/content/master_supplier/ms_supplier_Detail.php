@@ -74,7 +74,7 @@
 
     $(".delete").click(function(){
         var id = $(this).attr("name");            
-        var r=confirm("Anda yakin ingin menghapus data ???");
+        var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
         if (r==true)
           {
             $.ajax({
@@ -85,7 +85,7 @@
                 if(msg=="gagal"){
                     bootstrap_alert.warning('<b>Gagal!</b> Terjadi kesalahan');
                 }else{
-                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil dihapus');
+                    bootstrap_alert.success('<b>Sukses!</b> Data '+id+' berhasil dihapus');
                     autogen();
                     $('#formID').each(function(){
                         this.reset();

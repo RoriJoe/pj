@@ -1,7 +1,7 @@
 <div class="CSSTabel" style="height: 245px;">
 <table id="tb6">
     <thead>
-        <th>Kode</th><th>Nama</th><th>Perusahaan</th><th>Alamat</th><th>Telp</th><th>Select</th>
+        <th>Kode</th><th>Nama</th><th>Perusahaan</th><th>Alamat</th><th>Select</th>
     </thead>
     <tbody>
     <?php
@@ -12,7 +12,6 @@
         <td>$row->Nama</td>
         <td>$row->Perusahaan</td>
         <td>$row->Alamat1</td>
-        <td>$row->Telp</td>
         <td><input type='radio' name='optionsRadios' id='optionsPelanggan' kd='$row->Kode' nama='$row->Nama' value='$row->Perusahaan'></td>
         </tr>
         ";
