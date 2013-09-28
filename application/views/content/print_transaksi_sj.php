@@ -3,11 +3,11 @@
 		<td width="80%">
 			<h1 style="margin: 0">PD. PELITA JAYA</h1>
 			<h4 >LAPORAN SURAT JALAN</h4><br/>
-			<!--<div>PERIODE : <?php echo $periode ?></div>-->
+			
 		</td>
 		<td width="20%">
 			<div>Tanggal Kirim : <?php echo $_tgl ?></div>
-			<!--<div>Jam : <?php echo $jam ?></div>-->
+			
 		</td>
 	</tr>
 </table>
