@@ -2,6 +2,8 @@
 //Auto Generate
 function autogen(){
     $("#_kd").attr('disabled',false);
+    $('#save').attr('mode','add');
+    $('button[type="submit"]').attr('disabled','disabled');
     
     $.ajax({
     type:'POST',
@@ -14,7 +16,7 @@ function autogen(){
     });
 }
 //Form Validation
-jQuery(document).ready(function() {
+function validationEngine(){
     jQuery("#formID").validationEngine(
     {
         showOneMessage: true,
@@ -24,10 +26,11 @@ jQuery(document).ready(function() {
         autoHideDelay: 2500, 
         fadeDuration: 0.3
     });
-});
+}
 
 //load Side Table
-$.ajax({
+function loadListBarang(){
+    $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/ms_barang/index",
     data :{},
@@ -35,9 +38,11 @@ $.ajax({
     function(hh){
         $('#hasil').html(hh);
     }
-});
+    });
+}
 
-//Icon Animation
+function animation(){
+    //Icon Animation
 jQuery(document).ready(function() {
   jQuery(".hide-con").hide();
   var i = document.getElementById('konten');
@@ -53,9 +58,9 @@ jQuery(document).ready(function() {
         });
   });
 });
+}
 
-autogen();
-
+loadListBarang();
 </script>
 
 <!--**NOTIFICATION AREA**-->
@@ -72,28 +77,28 @@ autogen();
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
             </td>
             <td>Nama</td>
             <td>
-                <input type='text' class="validate[required]" id='_nama1' name='nama1' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[25], minSize[2]],custom[onlyLetterSp]]" maxlength="25" id='_nama1' name='nama1' style="width: 170px;margin-left: 10px; margin-right: 20px;">
             </td>
         </tr>
         <tr>
             <td>Ukuran</td>
             <td>
-                <input type='text' class="validate[required]" id='_uk' name='uk' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[25], minSize[4]]" id='_uk' name='uk' style="width: 170px;margin-left: 10px; margin-right: 20px;">
             </td>
             <td>Keterangan</td>
             <td>
-                <input type='text' class="validate[required]" id='_nama2' name='nama2' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[20]]" id='_ket' name='ket' style="width: 170px;margin-left: 10px; margin-right: 20px;">
             </td>
        </tr>
        <tr>
             <td>Persediaan</td>
             <td>
             	<div class="input-append">
-                    <input class="span2 validate[required,custom[number]]" id='_ps' name='ps' style="width: 80px;margin-left: 10px; margin-right: 20px;" type="text">
+                    <input class="span2 validate[required,custom[number]]" readonly="true" id='_ps' name='ps' style="width: 80px;margin-left: 10px; margin-right: 20px;" type="text" value="0">
                 </div>
             </td>
 
@@ -120,21 +125,57 @@ autogen();
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
+            <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
             </td>
         </tr>
     </table>
 </form>
 </div>
-<!--//***END MAIN FORM-->
+<div id="hasil" style="z-index:10"></div>
 
 <script>
+$(document).ready(function() {
+ /*
+ * Load Common Function
+ */
+    autogen();
+    validationEngine();
+    animation();
+    key();
+});
+/*----------------------*/
+
+/*
+ * Click Respon
+ */
 $("#cac").click(function(){
    autogen();
    $('#formID').each(function(){
 		this.reset();
 	});
-	
-	$('#save').attr('mode','add');
+    autogen();
+});
+
+function key(){
+    $('button[type="submit"]').attr('disabled','disabled');
+     $('input[type="text"]').keyup(function() {
+        if($(this).val() != '') {
+           $('button[type="submit"]').removeAttr('disabled');
+        }
+     });
+}
+
+$("#_kd").keypress(function(e){
+   var userVal = $("#_kd").val();
+   if(userVal.length == 20){
+       bootstrap_alert.info('Maksimum Kode 20');
+   } 
+});
+$("#_nama1").keypress(function(e){
+   var userVal = $("#_nama1").val();
+   if(userVal.length == 20){
+       bootstrap_alert.warning('Maksimum Nama 25 Karakter');
+   } 
 });
 
 $("#save").click(function(){
@@ -144,7 +185,7 @@ $("#save").click(function(){
 		//DECLARE VARIABLE
 		var _kd = $('#_kd').val();
 		var _nama1 = $('#_nama1').val();
-		var _nama2 = $('#_nama2').val();
+		var _ket = $('#_ket').val();
 		var _uk = $('#_uk').val();
 		var _ps = $('#_ps').val();
 		var _st = $('#_st').val();
@@ -154,7 +195,7 @@ $("#save").click(function(){
 			$.ajax({
 			type:'POST',
 			url: "<?php echo base_url();?>index.php/ms_barang/insert", //SEND TO CONTROLLER
-			data :{_kd:_kd,_nama1:_nama1,_nama2:_nama2,_uk:_uk,_ps:_ps,_st:_st},
+			data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st},
 
 			success:
 			function(msg)
@@ -189,7 +230,7 @@ $("#save").click(function(){
 	{
         var _kd = $('#_kd').val();
         var _nama1 = $('#_nama1').val();
-        var _nama2 = $('#_nama2').val();
+        var _ket = $('#_ket').val();
         var _uk = $('#_uk').val();
         var _ps = $('#_ps').val();
         var _st = $('#_st').val();
@@ -199,7 +240,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/ms_barang/update",
-            data :{_kd:_kd,_nama1:_nama1,_nama2:_nama2,_uk:_uk,_ps:_ps,_st:_st},
+            data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st},
             success:
             function(msg){
                 if(msg=="ok")
@@ -258,10 +299,10 @@ function addCombo() {
 			if(msg == "ok")
 			{
 				textb.value = "";
-				bootstrap_alert.success('<b>Sukses</b> Satuan sudah ditambahkan');
+				bootstrap_alert.success('<b>Sukses!</b> Satuan sudah ditambahkan');
 			}
 			else{
-				bootstrap_alert.warning('<b>Gagal Menambahkan</b> Satuan sudah ada');
+				bootstrap_alert.warning('<b>Gagal!</b> Satuan sudah ada');
 			}
 		}
 		});
@@ -278,12 +319,4 @@ bootstrap_alert.success = function(message) {
 	$(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
 
-$("#_kd").keypress(function(e){
-   var userVal = $("#_kd").val();
-   if(userVal.length == 20){
-       alert("Maximum Kode 20 Karakter");
-   } 
-});
 </script>
-
-<div id="hasil" style="z-index:10"></div>

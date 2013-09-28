@@ -47,7 +47,7 @@
 		$('#_kd').val(id);
 		$('#_nama1').val(nama);
 		$('#_uk').val(ukuran);
-		$('#_nama2').val(keterangan);
+		$('#_ket').val(keterangan);
 		$('#_ps').val(prs);
 		
 		$('#save').attr('mode','edit');
@@ -71,7 +71,7 @@
 
     $(".delete").click(function(){
         var id = $(this).attr("kode");
-        var r=confirm("Anda yakin ingin menghapus data ???");
+        var r=confirm("Anda yakin ingin menghapus barang "+$(this).attr("kode")+" ?");
         if (r==true)
           {
             $.ajax({
@@ -80,9 +80,9 @@
             data :{id:id},
             success: function(msg){
                 if(msg=="gagal"){
-					bootstrap_alert.warning('<b>Gagal Menghapus</b> terjadi kesalahan');
+					bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
                 }else{
-                    bootstrap_alert.success('<b>Sukses</b> Data berhasil dihapus');
+                    bootstrap_alert.success('<b>Sukses!</b> Data '+ id +' telah dihapus');
 					autogen();
                     $.ajax({
                     type:'POST',

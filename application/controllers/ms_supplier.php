@@ -1,30 +1,24 @@
 <?php
     class Ms_supplier extends CI_Controller{
-        
-        private $limit=10;
-        
         function __construct(){
             parent::__construct();
             
             #load library dan helper yang dibutuhkan
-            $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
+            #$this->load->library(array('table','form_validation'));
+            #$this->load->helper(array('form','url'));
             $this->load->model('ms_supplier_model');
         }
 
         //Get Data untuk table Detail 
-        function index($offset=0,$order_column='Kode',$order_type='asc'){
-            //request data table
-            $data['hasil']=$this->ms_supplier_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
+        function index(){
+            $data['hasil']=$this->ms_supplier_model->get_paged_list();
             $this->load->view('content/master_supplier/ms_supplier_Detail',$data);
         }
 		
 		#Show All u/ table List
-        function viewSupplier($offset=0,$order_column='Kode',$order_type='asc'){
+        function viewSupplier(){
             //request data table
-            $data['hasil']=$this->ms_supplier_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
+            $data['hasil']=$this->ms_supplier_model->get_paged_list();
                 
             //load view
             $this->load->view('content/list/list_supplier',$data);
@@ -63,7 +57,7 @@
                     'Telp2'=>$tl3,  
                     'Fax1'=>$fx1,
                     'fax2'=>$fx2,
-                    'Limit'=>$lk,
+                    'Limit_Kredit'=>$lk,
             );
             
             $in = $this->ms_supplier_model->insert($data,$id);
@@ -112,7 +106,7 @@
                     'Telp2'=>$tl3,  
                     'Fax1'=>$fx1,
                     'fax2'=>$fx2,
-                    'Limit'=>$lk,
+                    'Limit_Kredit'=>$lk,
             );
             $q = $this->ms_supplier_model->update($data,$id);
             echo $q;
