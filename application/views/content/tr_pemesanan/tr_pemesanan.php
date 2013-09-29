@@ -1,5 +1,22 @@
 <!--for date, suggestion-->
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+ * Tampilkan Table yg disamping Via AJAX
+ */
+function listPO(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_po/index",
+    data :{},
+    success:
+    function(hh){
+        $('#listPO').html(hh);
+    }
+    });
+}
+listPO();
+</script>
 <!--
 *
 *Notification Area
@@ -19,7 +36,10 @@
         <tr>
             <td style="width: 120px;">Nomor PO</td>
             <td>
-                <input type='text' class="validate[requiredmaxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='po' name='po' style="width: 170px;">
+                <input  type='text' 
+                        class="validate[requiredmaxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
+                        id='po' name='po' 
+                        style="width: 170px;">
             </td>
 
             <td>Permintaan</td>
@@ -34,8 +54,9 @@
        <tr>
             <td>Tanggal PO</td>
             <td>
-                <input type='text' class="validate[required]" id='_tgl1' name='_tgl1' 
-                style="width: 80px; margin-right: 20px;">
+                <input  type='text' 
+                        class="validate[required]" id='_tgl1' name='_tgl1' 
+                        style="width: 80px; margin-right: 20px;">
             </td>
             <td>Currency</td>
             <td>
@@ -50,16 +71,23 @@
                 </select>
 
                 <div class="input-append" style="margin-bottom: 0;" >
-                    <input class="span2" id="txtCombo" id="appendedInput"  name="txtCombo" type="text" style="width: 90px;margin-left: 10px;" placeholder="Tambah"/>
-                    <span class="add-on" style="padding: 2px 3px;" onclick="addCombo()"><i class='icon-plus'></i></span>
+                    <input  type="text" 
+                            class="span2" id="txtCombo" id="appendedInput" name="txtCombo" 
+                            style="width: 90px;margin-left: 10px;" placeholder="Tambah"
+                    />
+                    <span   class="add-on" 
+                            style="padding: 2px 3px;" 
+                            onclick="addCombo()"><i class='icon-plus'></i>
+                    </span>
                 </div>
             </td>
        </tr>
        <tr>
             <td>Tanggal Kirim</td>
             <td>
-                <input type='text' class="validate[required]" id='_tgl2' name='_tgl2' 
-                style="width: 80px; margin-right: 20px;">
+                <input  type='text' 
+                        class="validate[required]" id='_tgl2' name='_tgl2' 
+                        style="width: 80px; margin-right: 20px;">
             </td>
             <td>Urgent</td>
             <td>
@@ -76,20 +104,35 @@
                     <tr>
                         <td rowspan="2" width="90px;">Kirim Ke</td>
                         <td>
-                            <input type="radio" name="kirim" id="optionsRadios1" value="option1" onclick="radioRespons()" checked>
-                            
-                            <input type="hidden" id="kd_gud" />
-                            <div class="input-append" style="margin-left: 10px;margin-bottom: 0;">
-                            <input type='text' placeholder="Gudang" class="validate[required,maxSize[20], minSize[2]] span2" 
-                                maxlength="20" id="gud" id='appendedInputButton' name='gud' style="width: 148px;" onclick="lookup_gudang()">
-                            <a href="#modalGud" id="filterGud" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
+                            <input  type="radio" 
+                                    name="kirim" id="optionsRadios1" value="option1" 
+                                    onclick="radioRespons()" checked>
+
+                            <input  type="hidden" id="kd_gud" />
+
+                            <div    class="input-append" 
+                                    style="margin-left: 10px;margin-bottom: 0;">
+
+                            <input  type='text' placeholder="Gudang" 
+                                    class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
+                                    id="gud" id='appendedInputButton' name='gud' 
+                                    style="width: 148px;" 
+                                    onclick="lookup_gudang()">
+
+                            <a  href="#modalGud" id="filterGud" role="button" class="btn" 
+                                data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" 
+                                style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
                             </div>
+
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" name="kirim" id="optionsRadios2" value="option2" onclick="radioRespons()">
-                            <input type='text' disabled="disabled" placeholder="Proyek" class="validate[required,maxSize[20], minSize[2]] span2"maxlength="20" id="proy" id='appendedInputButton' name='proy' style="width: 148px; margin-left: 10px;">              
+                            <input  type="radio" name="kirim" id="optionsRadios2" value="option2" onclick="radioRespons()">
+                            <input  type='text' disabled="disabled" placeholder="Proyek" 
+                                    class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
+                                    id="proy" id='appendedInputButton' name='proy' 
+                                    style="width: 148px; margin-left: 10px;">              
                         </td>
                     </tr>
                 </table>
@@ -98,8 +141,16 @@
             <td>
                 <input type="hidden" id="kd_sup" />
                 <div class="input-append" style="margin-bottom: 0;">
-                 <input type='text' class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" id="sup" id='appendedInputButton' name='sup' style="width: 148px;" onclick="lookup_supplier()">
-                <a href="#modalSup" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Supplier" style="padding: 2px 3px;" onclick="listSupplier()"><i class="icon-filter"></i></a>
+                    <input  type='text' class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
+                            id="sup" id='appendedInputButton' name='sup' 
+                            style="width: 148px;" 
+                            onclick="lookup_supplier()">
+
+                <a  href="#modalSup" role="button" 
+                    class="btn" data-toggle="modal" data-toggle="tooltip" 
+                    title="Filter Supplier" 
+                    style="padding: 2px 3px;" 
+                    onclick="listSupplier()"><i class="icon-filter"></i></a>
                   
                 </div>
             </td>
@@ -148,7 +199,9 @@
 </div>
 
 
-<!-- Modal -->
+<!-- 
+    Modal 
+-->
 <div id="modalSup" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -198,7 +251,6 @@
 
 <script>
 //Call Function
-listPO();
 autogen();
 animation();
 validation_engine();
@@ -257,20 +309,7 @@ function animation(){
         });
   });
 }
-/*
- * Tampilkan Table yg disamping Via AJAX
- */
-function listPO(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_po/index",
-    data :{},
-    success:
-    function(hh){
-        $('#listPO').html(hh);
-    }
-    });
-}
+
 /*
  * Tampilkan jQuery Tanggal
  */
