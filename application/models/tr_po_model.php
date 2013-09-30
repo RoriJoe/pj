@@ -17,15 +17,8 @@
                 ON po_h.Kode_supplier = supplier.Kode
                 LEFT OUTER JOIN gudang
                 ON po_h.Kode_gudang = gudang.Kode");
+
             return $q->result();
-            
-            //$this->db->select('po_h.*, supplier.Perusahaan, gudang.Nama');
-            //$this->db->from('po_h');
-            //$this->db->join('supplier','supplier.Kode = po_h.Kode_supplier');
-            //$this->db->join('gudang','gudang.Kode = po_h.Kode_gudang');
-            
-            //$query = $this->db->get();
-            //return $query->result();
         }
         
         function add_cur($data,$id){
@@ -48,6 +41,45 @@
                 ON po_d.Kode_barang = barang.Kode
                 WHERE Kode_po = '$id'");
             return $q->result();
+        }
+
+        function insertPo($data,$po)
+        {
+            $rr=$this->db->query("select Kode from po_h where Kode = '$po'");
+            if($rr->num_rows() ==  0)
+            {
+                $q=$this->db->insert($this->table_name, $data);
+                return "ok";
+            }else
+            {
+                return "gagal";
+            }
+        }
+        
+        function insertPo_det($datadet,$po)
+        {
+            $this->db->insert('po_d', $datadet);
+        }
+        
+        
+        function updatePo($data, $po)
+        {
+            $this->db->where('Kode',$po);
+            $this->db->update('po_h', $data);
+            return "ok";
+        }
+                
+        function delete($po)
+        {
+            $this->db->where('Kode',$po);
+            $this->db->delete('po_h');
+            return "ok";
+        }
+        function delete_det($po)
+        {
+            $this->db->where('Kode_po',$po);
+            $this->db->delete('po_d');
+            //return "ok";
         }
     }
 /*

@@ -17,7 +17,7 @@
         echo "<tr>
         <td>
             <div class='input-append'>
-                <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:70px' value='$row->Kode_barang' disabled='true'/>
+                <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:70px; text-transform: uppercase;' value='$row->Kode_barang' disabled='true'/>
                 <a href='#myModal2' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>    
         </td>
@@ -37,8 +37,8 @@
             <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:70px' value='$row->Nilai' disabled='true'/>
         </td>
         <td>
-            <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-            <a class='btn' href='#' onclick='deleteRowSO(this)'><i class='icon-trash'></i></a>
+            <a class='btn' href='#' onclick='editRow($i)' style='display:none'><i id='icon$i' class='icon-pencil' ></i></a>
+            <a class='btn' href='#' onclick='deleteRowSO(this)' style='display:none'><i class='icon-trash'></i></a>
         </td>
         </tr>
         ";
@@ -118,14 +118,60 @@ function getDetail(row){
     filter = row;
 }
 
+temp=0;
+temp2=0;
 function getTotal(){
     var arr = document.getElementsByName('jumlah');
+
     var total = 0;
     for(i=0; i < arr.length; i++){
-        if(parseInt(arr[i].value))
+        if(parseInt(arr[i].value.replace(/\./g, "")))
             total += parseInt(arr[i].value);
     }
-    $('#total').val(total+",00");
+    temp=total;
+    $("#ppnT").val().replace(/\./g, "");
+
+    $('#dpp').val(accounting.formatMoney(total, "Rp ",2,".",","));
+    $("#total").val(accounting.formatMoney(total+temp2, "Rp ",2,".",","));
+    $("#dpp2").val(total);
+    $("#total2").val(total+temp2);
+}
+
+function hitung(){
+    $('#ppn').bind('textchange', function (event){    
+        disableAlpha('ppn');
+        var h = $(this).val();
+        var q = temp;
+        hasil = q*h/100;
+
+        var dpp = q;
+        var ppnT = hasil;
+        temp2=hasil;
+        $("#ppnT").val(accounting.formatMoney(hasil, "Rp ",2,".",","));
+        $("#total").val(accounting.formatMoney(q+hasil, "Rp ",2,".",","));
+        $("#dpp2").val(q);
+        $("#total2").val(q+hasil);
+
+    });     
+}
+
+
+
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
 }
 
 function validAct(row){
@@ -134,12 +180,7 @@ function validAct(row){
     if(userVal.length == 20){
         alert("Maximum Kode Barang 20 Karakter");
     } 
-    
-    //max qty 5
-    var qty = $("#qty_brg"+row).val();
-    if(qty.length == 5){
-        alert("Maximum Qty 5 Angka");
-    }   
+
     
     //disable alfabet di qty
     var foo = document.getElementById('qty_brg'+row);
@@ -166,8 +207,10 @@ function validAct(row){
         var h = $(this).val();
         var q = document.getElementById('qty_brg'+row).value;
         hasil = q*h;
+        
        $('#jumlah_brg'+row).val(hasil);
-       getTotal();
-    });
+       //var lk =  $('#lk').val().replace(/\./g, "");
+       getTotal();      
+    });     
 }
 </script>

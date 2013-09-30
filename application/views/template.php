@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title><?php echo $judul; ?></title>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui.min.js" ></script>
     <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     
         <!--Drop Menu-->
     <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
-    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.cookie.js'></script>
-    <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.hoverIntent.minified.js'></script>
+    <!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.cookie.js'></script>-->
+    <!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.hoverIntent.minified.js'></script>-->
 
-    
     <!--Initialize Drop Menu-->
     <script type="text/javascript">
     $(document).ready(function($){
@@ -26,7 +26,8 @@
         });
     });
     </script>
-    
+
+
     <script>
     $(document).ready(function(){
         $('.ajax').click(function(e){

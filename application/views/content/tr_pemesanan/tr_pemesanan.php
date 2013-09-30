@@ -1,9 +1,6 @@
-<!--for date, suggestion-->
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-/*
- * Tampilkan Table yg disamping Via AJAX
- */
 function listPO(){
     $.ajax({
     type:'POST',
@@ -15,6 +12,7 @@ function listPO(){
     }
     });
 }
+
 listPO();
 </script>
 <!--
@@ -39,7 +37,7 @@ listPO();
                 <input  type='text' 
                         class="validate[requiredmaxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
                         id='po' name='po' 
-                        style="width: 170px;">
+                        style="width: 170px;text-transform: uppercase;">
             </td>
 
             <td>Permintaan</td>
@@ -55,7 +53,7 @@ listPO();
             <td>Tanggal PO</td>
             <td>
                 <input  type='text' 
-                        class="validate[required]" id='_tgl1' name='_tgl1' 
+                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' 
                         style="width: 80px; margin-right: 20px;">
             </td>
             <td>Currency</td>
@@ -70,23 +68,29 @@ listPO();
                     ?>
                 </select>
 
-                <div class="input-append" style="margin-bottom: 0;" >
-                    <input  type="text" 
-                            class="span2" id="txtCombo" id="appendedInput" name="txtCombo" 
-                            style="width: 90px;margin-left: 10px;" placeholder="Tambah"
-                    />
-                    <span   class="add-on" 
-                            style="padding: 2px 3px;" 
-                            onclick="addCombo()"><i class='icon-plus'></i>
-                    </span>
-                </div>
+                <button type="button" id="tes" class="btn btn-mini" 
+                        data-toggle="button"
+                        data-html="true" data-placement="bottom"
+                        rel="popover"
+                        style="margin-bottom:3px;"
+                        data-content="
+                        <div>
+                         <input  type='text' 
+                            class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
+                            style='width: 90px;margin-left: 10px;'
+                            />
+                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
+                        </div>
+                        
+                        "
+                        ><i class='icon-plus'></i></button>
             </td>
        </tr>
        <tr>
             <td>Tanggal Kirim</td>
             <td>
                 <input  type='text' 
-                        class="validate[required]" id='_tgl2' name='_tgl2' 
+                        class="validate[required,custom[date]]" id='_tgl2' name='_tgl2' 
                         style="width: 80px; margin-right: 20px;">
             </td>
             <td>Urgent</td>
@@ -115,8 +119,8 @@ listPO();
 
                             <input  type='text' placeholder="Gudang" 
                                     class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
-                                    id="gud" id='appendedInputButton' name='gud' 
-                                    style="width: 148px;" 
+                                    id="gud" id='appendedInputButton' name='gud'
+                                    style="width: 148px;"
                                     onclick="lookup_gudang()">
 
                             <a  href="#modalGud" id="filterGud" role="button" class="btn" 
@@ -141,7 +145,7 @@ listPO();
             <td>
                 <input type="hidden" id="kd_sup" />
                 <div class="input-append" style="margin-bottom: 0;">
-                    <input  type='text' class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
+                    <input  type='text' class="validate[required,maxSize[30], minSize[2]] span2" maxlength="30" 
                             id="sup" id='appendedInputButton' name='sup' 
                             style="width: 148px;" 
                             onclick="lookup_supplier()">
@@ -167,7 +171,8 @@ listPO();
                 DPP
             </td>
             <td>
-                <input style="width:145px;" id="dpp" name="dpp" type="text" readonly="true">
+                <input  type="hidden" id="dpp2" />
+                <input style="width:200px;" id="dpp" name="dpp" type="text" readonly="true">
             </td>
         </tr>
         <tr>
@@ -175,7 +180,7 @@ listPO();
                 PPN
             </td>
             <td>
-                <input style="width:30px;" id="dpp" name="dpp" type="text"> % <input style="width:80px;" id="dpp" name="dpp" type="text" readonly="true">
+                <input style="width:30px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onclick="hitung()"> % <input style="width:135px;" id="ppnT" name="ppnT" type="text" readonly="true">
             </td>
         </tr>
         <tr>
@@ -183,7 +188,8 @@ listPO();
                 Total
             </td>
             <td>
-                <input style="width:145px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
+                <input  type="hidden" id="total2" />
+                <input style="width:200px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
             </td>
         </tr>
     </table>
@@ -248,52 +254,41 @@ listPO();
 <!--@Load table List via AJAX-->
 <div id="listPO"></div>
 
+<script>  
+    $("#tes").popover({ title: 'Tambah Currency'});
+</script>  
 
-<script>
-//Call Function
-autogen();
-animation();
-validation_engine();
-tampilDetailPO();
-listBarang();
-
-    //ALERT
-    bootstrap_alert = function() {}
-    bootstrap_alert.warning = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-        $(".alert").delay(5000).addClass("in").fadeOut(3000);
-    }
-    bootstrap_alert.success = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-        $(".alert").delay(1500).addClass("in").fadeOut(5000);
-    }
-    bootstrap_alert.info = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    }
+<script type="text/javascript">
+$(document).ready(function() {
+    autogen();
+    animation();
+    validation_engine();
+    tampilDetailPO();
+    key();
+    listBarang();
+});
 
 /*
- * Auto Generate
- */
-function autogen(){
-    $('#add').attr('mode','new');
-    $('#delete').attr('disabled', true);
-    $("#po").attr('disabled',false);
-    $("#total").val("");
-    
-    
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_po/auto_gen",
-    data :{},
-    success:
-        function(hh){
-            $('#po').val(hh);
-        }
-    });
+template:
+-Alert
+-Animation
+-Validation Engin
+-Auto Generate Code
+-Date Picker
+*/
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(5000).addClass("in").fadeOut(3000);
 }
-/*
- * Bar Icon Animation
- */
+bootstrap_alert.success = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+}
+
 function animation(){
   jQuery(".hide-con").hide();
   var i = document.getElementById('konten');
@@ -310,9 +305,43 @@ function animation(){
   });
 }
 
-/*
- * Tampilkan jQuery Tanggal
- */
+function validation_engine() {
+    jQuery("#formID").validationEngine(
+    {
+        showOneMessage: true,
+        ajaxFormValidation: true,
+        ajaxFormValidationMethod: 'post',
+        autoHidePrompt: true,
+        autoHideDelay: 2500, 
+        fadeDuration: 0.3
+    });
+}
+
+function autogen(){
+    $('#add').attr('mode','new');
+    $('#save').attr('disabled',true);
+    $('#cancel').attr('disabled',true);
+    $('#add').attr('disabled',true);
+
+    $('#delete').attr('disabled', true);
+    $("#po").attr('disabled',false);
+    $("#total").val("");
+    $("#dpp").val("");
+    $("#ppn").val("");
+    $("#ppnT").val("");
+    
+    
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_po/auto_gen",
+    data :{},
+    success:
+        function(hh){
+            $('#po').val(hh);
+        }
+    });
+}
+
 $(function() {
     $( "#_tgl1").datepicker({
         changeMonth: true,
@@ -327,20 +356,7 @@ $(function() {
         showAnim: "blind"
     });
 });
-/*
- * //Validation engine
- */
-function validation_engine() {
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
-    });
-}
+
 //Suggestion Supplier
 function lookup_supplier(){
     $("#sup").autocomplete({
@@ -356,6 +372,9 @@ function lookup_supplier(){
                 function(data){
                     if(data.response =="true"){
                         add(data.message);
+                        $("#sup").validationEngine('showPrompt', 'Data Supplier Tersedia', 'pass');
+                    }else{
+                        $("#sup").validationEngine('showPrompt', 'Data Supplier Tidak Tersedia', 'show');
                     }
                 },
             });
@@ -363,10 +382,12 @@ function lookup_supplier(){
     select:
         function(event, ui) {
             $('#sup').val(ui.item.value);
-             $('#kd_sup').val(ui.item.id);
+            $('#kd_sup').val(ui.item.id);
+            $("#sup").validationEngine('showPrompt', 'Data Supplier Tersedia', 'pass');
         },
     });
 }
+
 //Suggestion Gudang
 function lookup_gudang(){
     $("#gud").autocomplete({
@@ -382,6 +403,9 @@ function lookup_gudang(){
                 function(data){
                     if(data.response =="true"){
                         add(data.message);
+                        $("#gud").validationEngine('showPrompt', 'Data Gudang Tersedia', 'pass');
+                    }else{
+                        $("#gud").validationEngine('showPrompt', 'Data Gudang Tidak Tersedia', 'show');
                     }
                 },
             });
@@ -389,10 +413,26 @@ function lookup_gudang(){
     select:
         function(event, ui) {
             $('#gud').val(ui.item.value);
-             $('#kd_gud').val(ui.item.id);
+            $('#kd_gud').val(ui.item.id);
+            $("#gud").validationEngine('showPrompt', 'Data Gudang Tersedia', 'pass');
         },
     });
 }
+
+function disableAlpha($id){
+    var foo = document.getElementById($id);
+    foo.addEventListener('input', function (prev) {
+    return function (evt) {
+        if (!/^[0-9]*$/.test(this.value)) {
+          this.value = prev;
+        }
+        else {
+          prev = this.value;
+        }
+    };
+    }(foo.value), false);
+};
+
 //Table Supplier
 function listSupplier(){
     $.ajax({
@@ -418,6 +458,7 @@ function listGudang(){
     }
     });   
 }
+
 //Table Barang
 function listBarang(){
     $.ajax({
@@ -431,38 +472,49 @@ function listBarang(){
     });   
 }
 
-//GET POPUP Supplier
-    function getSupplier(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
-        $('#sup').val(x);
-        $('#kd_sup').val(k);
-        
-    }
-    //GET POPUP Gudang
-    function getGudang(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var y = $('input:radio[name=optionsRadios]:checked').attr('kd');
+function tampilDetailPO(){
+    var po = $('#po').val();
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_po/tableDetail",
+        data :{po:po},
+        success:
+        function(hh){
+           $('#hasil2').html(hh);
+        }
+    });
+}
 
-        $('#gud').val(x);
-        $('#kd_gud').val(y);    
-    }
-    //GET POPUP Barang
-    function getBarang(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
-        var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
-        
-        var row = filter;
-        
-        $('#kode_brg'+row).val(x);
-        $('#keterangan_brg'+row).val(z);
-        $('#satuan_brg'+row).val(y);    
-    }
+//GET POPUP Supplier
+function getSupplier(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    $('#sup').val(x);
+    $('#kd_sup').val(k);
     
-/*
- * Radio respons
- */
+}
+//GET POPUP Gudang
+function getGudang(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var y = $('input:radio[name=optionsRadios]:checked').attr('kd');
+
+    $('#gud').val(x);
+    $('#kd_gud').val(y);    
+}
+//GET POPUP Barang
+function getBarang(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
+    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
+    
+    var row = filter;
+    
+    $('#kode_brg'+row).val(x);
+    $('#keterangan_brg'+row).val(z);
+    $('#satuan_brg'+row).val(y);    
+}
+    
+//Radion Button response
 function radioRespons(){
     if(document.getElementById('optionsRadios1').checked){
         $('#gud').attr('disabled', false);
@@ -521,148 +573,271 @@ function addCombo() {
     }
 }
 
-function tampilDetailPO(){
-    var po = $('#po').val();
-    $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_po/tableDetail",
-        data :{po:po},
-        success:
-        function(hh){
-           $('#hasil2').html(hh);
-        }
-    });
+function key(){
+ $('input[type="text"]').keyup(function() {
+    if($(this).val() != '') {
+        $('#save').removeAttr('disabled');
+        $('#cancel').removeAttr('disabled');
+        $('#add').removeAttr('disabled');
+    }
+ });
+ $("#al").keyup(function() {
+    if($(this).val() != '') {
+       $('button[type="submit"]').removeAttr('disabled');
+    }
+ });
 }
 
+var filter="";
+
+//Tambah Row Barang
+function addRow(tableID) {
+    var mode = $('#add').attr("mode");
+
+    if (mode == "new"){
+        $('#tb3 tbody').empty();
+    }    
+    var table = document.getElementById(tableID);
+    var rowCount = table.rows.length;
+    var last = rowCount;
+
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        
+        //KOLOM 1
+        var cell1 = row.insertCell(0);
+        var iDiv2 = document.createElement("div");
+        iDiv2.className = "input-append";
+        iDiv2.id="kode_brg[]";
+        
+        var element0 = document.createElement("input");
+        element0.type = "text";
+        element0.name="kode_brgd"+last;
+        element0.className="validate[required]";
+        element0.className="span2"; 
+        element0.id="kode_brg"+last;
+        element0.setAttribute("onkeypress", "validAct("+last+")");
+        element0.setAttribute("disable", false);
+        element0.style.width = "70px";
+        
+        var filter = document.createElement("a");
+        filter.className="btn btn-tbl";
+        filter.id="f_brg"+last;
+        filter.href="#myModal2";
+        filter.setAttribute("onclick", "getDetail("+last+")");
+        filter.setAttribute("role", "button");
+        filter.setAttribute("data-toggle", "modal");
+        var iIcon3 = document.createElement("i");
+        iIcon3.className = "icon-filter";
+        
+        filter.appendChild(iIcon3);
+        iDiv2.appendChild(element0);
+        iDiv2.appendChild(filter);
+        cell1.appendChild(iDiv2);
+        //KOLOM 
+        var cell1 = row.insertCell(1);
+        var element1 = document.createElement("input");
+        element1.type = "text";
+        element1.name = "keterangan[]";
+        element1.id="keterangan_brg"+last;
+        element1.style.width = "80px";
+        element1.disabled = "true";
+        cell1.appendChild(element1);
+        //KOLOM 2
+        var cell1 = row.insertCell(2);
+        var element1 = document.createElement("input");
+        element1.type = "text";
+        element1.name = "qty_brg";
+        element1.id="qty_brg"+last;
+        element1.setAttribute("onkeypress", "validAct("+last+")");
+        element1.style.width = "30px";
+        cell1.appendChild(element1);
+        
+        //KOLOM 3
+        var cell2 = row.insertCell(3);
+        var element2 = document.createElement("input");
+        element2.type = "text";
+        element2.name = "satuan_brg[]";
+        element2.disabled = "true";
+        element2.id="satuan_brg"+last;
+        element2.style.width = "70px";
+        cell2.appendChild(element2);
+        
+        //KOLOM 4
+        var cell3 = row.insertCell(4);
+        var element3 = document.createElement("input");
+        element3.type = "text";
+        element3.name = "harga[]";
+        element3.id="harga_brg"+last;
+        element0.setAttribute("onkeypress", "validAct("+last+")");
+        element3.style.width = "70px";
+        cell3.appendChild(element3);
+        //KOLOM 5
+        var cell4 = row.insertCell(5);
+        var element4 = document.createElement("input");
+        element4.type = "text";
+        element4.name = "jumlah";
+        element4.id="jumlah_brg"+last;
+        element4.style.width = "70px";
+        element4.disabled = "true";
+        cell4.appendChild(element4);
+
+        //KOLOM 7
+        var cell6 = row.insertCell(6);
+                    
+        var iIcon1 = document.createElement("i");
+        iIcon1.className = "icon-ok";
+        iIcon1.id="icon"+last;
+        var iIcon2 = document.createElement("i");
+        iIcon2.className = "icon-trash";
+        
+        var iAnchor1 = document.createElement("a");
+        iAnchor1.className = "btn";
+        iAnchor1.href = "#";
+        iAnchor1.setAttribute('onclick', 'editRow('+last+')')
+        iAnchor1.appendChild(iIcon1);
+        var iAnchor2 = document.createElement("a");
+        iAnchor2.className = "btn";
+        iAnchor2.setAttribute('onclick', 'deleteRowSO(this)')
+        iAnchor2.href = "#";
+        iAnchor2.appendChild(iIcon2);
+        
+        cell6.appendChild(iAnchor1);
+        cell6.appendChild(iAnchor2);
+}
 
 //Cancel
-    $("#cancel").click(function(){
-        $('#formID').each(function(){
-            this.reset();
-        });
-        autogen();
-        tampilDetailPO();
-        $('#save').attr('mode','add');
+$("#cancel").click(function(){
+    $('#formID').each(function(){
+        this.reset();
     });
-    
-    var filter="";
-    
-    //Tambah Row Barang
-    function addRow(tableID) {
-        var mode = $('#add').attr("mode");
+    autogen();
+    tampilDetailPO();
+    $('#save').attr('mode','add');
+});
 
-        if (mode == "new"){
-            $('#tb3 tbody').empty();
-        }    
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        var last = rowCount;
-       
-            var table = document.getElementById(tableID);
- 
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-            
-            //KOLOM 1
-            var cell1 = row.insertCell(0);
-            var iDiv2 = document.createElement("div");
-            iDiv2.className = "input-append";
-            iDiv2.id="kode_brg[]";
-            
-            var element0 = document.createElement("input");
-            element0.type = "text";
-            element0.name="kode_brgd"+last;
-            element0.className="validate[required]";
-            element0.className="span2"; 
-            element0.id="kode_brg"+last;
-            element0.setAttribute("onkeypress", "validAct("+last+")");
-            element0.setAttribute("disable", false);
-            element0.style.width = "70px";
-            
-            var filter = document.createElement("a");
-            filter.className="btn btn-tbl";
-            filter.id="f_brg"+last;
-            filter.href="#myModal2";
-            filter.setAttribute("onclick", "getDetail("+last+")");
-            filter.setAttribute("role", "button");
-            filter.setAttribute("data-toggle", "modal");
-            var iIcon3 = document.createElement("i");
-            iIcon3.className = "icon-filter";
-            
-            filter.appendChild(iIcon3);
-            iDiv2.appendChild(element0);
-            iDiv2.appendChild(filter);
-            cell1.appendChild(iDiv2);
-            //KOLOM 
-            var cell1 = row.insertCell(1);
-            var element1 = document.createElement("input");
-            element1.type = "text";
-            element1.name = "keterangan[]";
-            element1.id="keterangan_brg"+last;
-            element1.style.width = "80px";
-            element1.disabled = "true";
-            cell1.appendChild(element1);
-            //KOLOM 2
-            var cell1 = row.insertCell(2);
-            var element1 = document.createElement("input");
-            element1.type = "text";
-            element1.name = "qty_brg";
-            element1.id="qty_brg"+last;
-            element1.setAttribute("onkeypress", "validAct("+last+")");
-            element1.style.width = "30px";
-            cell1.appendChild(element1);
-            
-            //KOLOM 3
-            var cell2 = row.insertCell(3);
-            var element2 = document.createElement("input");
-            element2.type = "text";
-            element2.name = "satuan_brg[]";
-            element2.disabled = "true";
-            element2.id="satuan_brg"+last;
-            element2.style.width = "70px";
-            cell2.appendChild(element2);
-            
-            //KOLOM 4
-            var cell3 = row.insertCell(4);
-            var element3 = document.createElement("input");
-            element3.type = "text";
-            element3.name = "harga[]";
-            element3.id="harga_brg"+last;
-            element0.setAttribute("onkeypress", "validAct("+last+")");
-            element3.style.width = "70px";
-            cell3.appendChild(element3);
-            //KOLOM 5
-            var cell4 = row.insertCell(5);
-            var element4 = document.createElement("input");
-            element4.type = "text";
-            element4.name = "jumlah";
-            element4.id="jumlah_brg"+last;
-            element4.style.width = "70px";
-            element4.disabled = "true";
-            cell4.appendChild(element4);
+//Save Click
+$("#save").click(function(){
+    
+    var mode = $('#save').attr("mode");
+    
+    //deklarasi variable
+    var po = $('#po').val();
+    var _tgl1 = $('#_tgl1').val();
+    var _tgl2 = $('#_tgl2').val();
+    var kd_gud = $('#kd_gud').val();
+    var proy = $('#proy').val();
+    var permintaan = $('#permintaan').val();
+    var cur = $('#cur').val();
+    var urg = $('#urg').val();
+    var kd_sup = $('#kd_sup').val();
+    var dpp = $('#dpp2').val();
+    var ppn = $('#ppn').val().replace(/\./g, "");
+    var to = $('#total2').val();
+    
+    var arrKode = new Array();
+    var arrHarga = new Array();
+    var arrJumlah = new Array();
+    var arrNilai = new Array();
+    
+    var table = document.getElementById('tb3');
+    var totalRow = table.rows.length-1;
+    for(var i=1;i<=totalRow;i++){
+        arrKode[i-1] = $('#kode_brg'+i).val();
+        arrHarga[i-1] = $('#harga_brg'+i).val();
+        arrJumlah[i-1] = $('#qty_brg'+i).val();
+        arrNilai[i-1] = $('#jumlah_brg'+i).val(); 
+    }
 
-            //KOLOM 7
-            var cell6 = row.insertCell(6);
-                        
-            var iIcon1 = document.createElement("i");
-            iIcon1.className = "icon-ok";
-            iIcon1.id="icon"+last;
-            var iIcon2 = document.createElement("i");
-            iIcon2.className = "icon-trash";
-            
-            var iAnchor1 = document.createElement("a");
-            iAnchor1.className = "btn";
-            iAnchor1.href = "#";
-            iAnchor1.setAttribute('onclick', 'editRow('+last+')')
-            iAnchor1.appendChild(iIcon1);
-            var iAnchor2 = document.createElement("a");
-            iAnchor2.className = "btn";
-            iAnchor2.setAttribute('onclick', 'deleteRowSO(this)')
-            iAnchor2.href = "#";
-            iAnchor2.appendChild(iIcon2);
-            
-            cell6.appendChild(iAnchor1);
-            cell6.appendChild(iAnchor2);
+    if(mode == "add"){ //add mode
+        if($("#formID").validationEngine('validate'))
+        {
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_po/save/add",
+            data :{po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,dpp:dpp,ppn:ppn,to:to,
+                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow
+            },
+
+            success:
+            function(msg)
+            {
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil ditambahkan');
+                    $('#formID').each(function(){
+                        this.reset();
+                    });
+                    listPO();
+                    tampilDetailPO();
+                    autogen();
+                    $('#save').attr('mode','add');
+                }
+                else{
+                    bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
+                }
+            }
+            });
+        }             
+    }else if(mode == "edit"){ //Edit mode
+        if($("#formID").validationEngine('validate'))
+        {
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_po/save/edit",
+            data :{po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,dpp:dpp,ppn:ppn,to:to,
+                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow
+            },
+
+            success:
+            function(msg)
+            {
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses!</b> Update berhasil dilakukan');
+                    $('#formID').each(function(){
+                            this.reset();
+                    });
+                    listPO();
+                    tampilDetailPO();
+                    autogen();
+                    $('#save').attr('mode','add');
+                }
+                else{
+                    bootstrap_alert.warning('<b>Gagal!</b> Terjadi Kesalahan');
+                }
+            }
+            });
         }
+    }
+});
+
+$("#delete").click(function(){
+    var po = $('#po').val();
+
+     $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_po/delete",
+        data :{po:po
+        },
+        success:
+        function(msg)
+        {
+            if(msg == "ok")
+            {
+                bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
+                $('#formID').each(function(){
+                    this.reset();
+                });
+               listPO();
+               tampilDetailPO();
+               autogen();
+               $('#save').attr('mode','add');
+            }
+        }
+        });
+});
 
 </script>
