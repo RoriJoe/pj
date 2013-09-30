@@ -2,9 +2,40 @@
     <p>Welcome <?php echo $user;?></p>
 </div>-->
 <script type="text/javascript" src="<?php echo base_url();?>assets/swfobject.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/justgage.1.0.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  var g = new JustGage({
+    id: "gauge", 
+    value: 67, 
+    min: 0,
+    max: 100,
+    title: "Visitors"
+  }); 
+
+  var h = new JustGage({
+    id: "gauge2", 
+    value: getRandomInt(10, 90), 
+    min: 0,
+    max: 100,
+    title: "Sample"
+  }); 
+
+  var i = new JustGage({
+    id: "gauge3", 
+    value: getRandomInt(40, 80), 
+    min: 0,
+    max: 100,
+    title: "Sample"
+  }); 
+});
+
+</script>
+
 <div class="" style="width: 98%">
 	<div class="bar-span bar-info" style="margin-left: 0;">
-		<marquee scrollamount="3" onmouseout="this.start();" onmouseover="this.stop();" behavior="scroll">
+		<marquee scrollamount="3" behavior="scroll">
 		    Info Here : Lorem ipsum dolor sit amet, 50% 
 		    consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 		    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
@@ -24,11 +55,17 @@
 <div class="content-span" style="height: 190px;">
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Web Progress</a></li>
+    <li class="active"><a href="#tab3" data-toggle="tab">Sample</a></li>
+    <li><a href="#tab1" data-toggle="tab">Web Progress</a></li>
     <li><a href="#tab2" data-toggle="tab">Bug Tracking</a></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="tab1">
+    <div class="tab-pane active" id="tab3">
+      <div id="gauge" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
+      <div id="gauge2" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
+      <div id="gauge3" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
+    </div>
+    <div class="tab-pane" id="tab1">
         <div id="stat" class="pull-left">
             <p>Status : Beta Development</p>
             <p>Current Version : 0.9.24-Beta</p>

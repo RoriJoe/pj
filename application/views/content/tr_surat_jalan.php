@@ -1,4 +1,3 @@
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
 <script>
 var flag=0;
 //Auto Generate

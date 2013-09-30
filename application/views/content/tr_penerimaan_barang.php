@@ -1,6 +1,3 @@
-<!--for date, suggestion-->
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
-
 <script>
 //Auto Generate
 function autogen(){

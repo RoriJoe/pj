@@ -187,7 +187,6 @@ function disableNum($id){
 
 <script type="text/javascript">
 $("#cac").click(function(){
-   autogen();
    $('#formID').each(function(){
         this.reset();
     });

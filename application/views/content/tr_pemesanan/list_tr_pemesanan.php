@@ -13,6 +13,7 @@
                         kode = '$row->Kode'
                         tgl1 = '$row->Tgl_po'
                         tgl2 = '$row->Tgl_kirim'
+                        permintaan = '$row->Permintaan'
                         cur = '$row->Currency'
                         urg = '$row->Urgent'
                         kd_sup = '$row->Kode_supplier'
@@ -30,6 +31,7 @@
         </tbody>
     </table>
 </div>
+
 <script>
 $('#tbLsPO tr').click(function (e) {
         $('#delete').attr('disabled', false);
@@ -53,17 +55,27 @@ $('#tbLsPO tr').click(function (e) {
         $('#po').val($(this).attr("kode"));
         $('#_tgl1').val($(this).attr("tgl1"));
         $('#_tgl2').val($(this).attr("tgl2"));
+        $('#permintaan').val($(this).attr("permintaan"));
         $('#kd_sup').val($(this).attr("kd_sup"));
         $('#sup').val($(this).attr("sup"));
         $('#kd_gud').val($(this).attr("kd_gud"));
         $('#gud').val($(this).attr("gud"));
         $('#proy').val($(this).attr("proy"));
-        $('#dpp').val($(this).attr("DPP"));
+        $('#dpp').val(accounting.formatMoney($(this).attr("DPP"), "Rp ",2,".",","));
         $('#ppn').val($(this).attr("PPN"));
-        $('#total').val($(this).attr("total"));
+        var total_PPN = $(this).attr("DPP")*$(this).attr("PPN")/100;
+        $('#ppnT').val(accounting.formatMoney(total_PPN, "Rp ",2,".",","));
+        $('#total').val(accounting.formatMoney($(this).attr("total"), "Rp ",2,".",","));
+
+        $('#dpp2').val($(this).attr("DPP"));
+        $('#total2').val($(this).attr("total"));
 
         //$('#add').attr('mode','edit');
         $('#save').attr('mode','edit');
+        $('#save').attr('disabled',true);
+        $('#cancel').attr('disabled',false);
+        $('#add').attr('disabled',true);
+        document.getElementById('add').style.visibility = 'hidden';
         
         function setSelectedIndex(s, valsearch)
         {
