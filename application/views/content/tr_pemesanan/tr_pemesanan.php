@@ -716,6 +716,7 @@ $("#cancel").click(function(){
     autogen();
     tampilDetailPO();
     $('#save').attr('mode','add');
+    document.getElementById('add').style.visibility = 'visible';
 });
 
 //Save Click

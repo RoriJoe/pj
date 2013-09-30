@@ -140,8 +140,15 @@ function getTotal(){
 function hitung(){
     $('#ppn').bind('textchange', function (event){    
         disableAlpha('ppn');
+        var dpp_2 = $("#dpp2").val();
+
         var h = $(this).val();
-        var q = temp;
+        if(temp != 0){
+            var q = temp;
+        } else if(dpp_2 != 0){
+            var q = dpp_2;
+        }
+        
         hasil = q*h/100;
 
         var dpp = q;
