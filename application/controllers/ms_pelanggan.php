@@ -23,8 +23,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             $data['hasil']=$this->ms_pelanggan_model->get_paged_list();
                 
+=======
+            //$data['hasil']=$this->ms_pelanggan_model->get_paged_list( 1
+            //$this->limit,$offset,$order_column,$order_type)->result(); 2
+            $data['hasil']=$this->ms_pelanggan_model->get_paged_list();
+>>>>>>> bc5f7597b2598924438ce99f0a458ab271d8700a
 =======
             //$data['hasil']=$this->ms_pelanggan_model->get_paged_list( 1
             //$this->limit,$offset,$order_column,$order_type)->result(); 2
