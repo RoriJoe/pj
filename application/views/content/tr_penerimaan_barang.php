@@ -260,7 +260,7 @@ listBPB();
     <button id="delete" class="btn" type="submit">Delete</button>
     <button id="cancel" class="btn" type="submit">Cancel</button>
     <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
     
 </div>
 </div>
@@ -533,6 +533,52 @@ $("#cancel").click(function(){
             cell6.appendChild(iAnchor2);
         }
         
+		
+	//BUAT PRINT
+ $("#print").click(function(){
+		var _bpb = $('#_bpb').val();
+        var _tgl = $('#_tgl').val();
+        var _gd = $('#kd_gd').val();
+        var _sp = $('#kd_sp').val();
+        var _ref = $('#_ref').val();
+		var table = document.getElementById('tb3');
+		var totalRow = table.rows.length-1;
+        //detail bpb
+        var _arrKd_brg = new Array();
+        var _arrQty = new Array();
+        var _arrKet = new Array();
+		var _arrNm_brg = new Array();
+        var _arrUkur = new Array();
+        
+        for(var i=1;i<=totalRow;i++){
+            _arrKd_brg[i-1] = $('#kode_brg'+i).val();
+			_arrNm_brg[i-1] = $('#nama_brg'+i).val();
+			_arrUkur[i-1] = $('#ukuran_brg'+i).val();
+            _arrQty[i-1] = $('#qty_brg'+i).val();
+            _arrKet[i-1] = $('#keterangan_brg'+i).val();
+        }
+	
+	$.ajax({
+	        type:'POST',
+	        url: "<?php echo base_url();?>index.php/report/print_transaksi_penerimaan",
+	        data :{ _bpb:_bpb,_tgl:_tgl,_gd:_gd,_sp:_sp,_ref:_ref,
+	                    _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, _arrKet:_arrKet,_arrNm_brg:_arrNm_brg,_arrUkur:_arrUkur, totalRow:totalRow
+	        },
+	
+	        success:
+	        function(msg)
+	        {	
+				var win=window.open('about:blank');
+				with(win.document)
+				{
+				  open();
+				  write(msg);
+				  close();
+				}
+	        }
+	     });
+}); 	
+		
 	//Save Click
     $("#save").click(function(){
     	var table = document.getElementById('tb3');

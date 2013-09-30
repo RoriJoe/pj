@@ -9,11 +9,15 @@
         <tbody>
             <?php foreach($hasil as $row)
             {
+			$originalDate1 = $row->Tgl;
+			$dmy1 = date("d-m-Y", strtotime($originalDate1));
+			$originalDate2 = $row->Tgl_Po;
+			$dmy2 = date("d-m-Y", strtotime($originalDate2));
                 echo
                 "<tr    _no_do = '$row->No_Do'
-                        _tgl = '$row->Tgl'
+                        _tgl = '$dmy1'
                         _no_po = '$row->No_Po'
-                        _tgl_po = '$row->Tgl_Po'
+                        _tgl_po = '$dmy2'
                         _kd_pl = '$row->Kode_Plg'
                         _nm_pl = '$row->Perusahaan'
                         _kd_gd = '$row->Kode_Gudang'

@@ -54,6 +54,33 @@ function lookup_pelanggan(){
     });
 }
 
+//Auto Complete & Suggestion Search
+$("#_po").autocomplete({
+    minLength: 1,
+    source:
+    function(req, add){
+        $.ajax({
+            url: "<?php echo base_url(); ?>index.php/autocomplete/lookup_po",
+            dataType: 'json',
+            type: 'POST',
+            data: req,
+            success:
+            function(data){
+                if(data.response =="true"){
+                    add(data.message);
+                }
+            },
+        });
+    },
+
+    //tampilkan table detail
+    select:
+    function(event, ui) {
+        $('#_po').val(ui.item.value);
+        
+    },
+});
+
 //Validation engine
 function validation_engine() {
     jQuery("#formID").validationEngine(
@@ -225,7 +252,7 @@ listSO();
     <button id="delete" class="btn">Delete</button>
     <button id="cancel" class="btn">Cancel</button>
     <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
 </div>
 
 <div id="popup-wrapper3" style="width:750px;height:400px;"></div>
@@ -363,11 +390,70 @@ function addRow(tableID) {
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
         
+<<<<<<< HEAD
         //KOLOM 1
         var cell1 = row.insertCell(0);
         var iDiv2 = document.createElement("div");
         iDiv2.className = "input-append";
         iDiv2.id="kode_brg[]";
+=======
+		//BUAT PRINT
+ $("#print").click(function(){
+	//deklarasi variable
+        var so = $('#_so').val();
+        var tglSo = $('#_tgl').val();
+        var po = $('#_po').val();
+        var tglPo = $('#_tgl2').val();
+        var pl = $('#kd_plg').val();
+        var sl = $('#_sl').val();
+        var to = $('#total').val();
+        
+        var arrKode = new Array();
+        var arrQty = new Array();
+		var arrSatuan = new Array();
+        var arrHarga = new Array();
+        var arrJumlah = new Array();
+        var arrKet = new Array();
+        
+        var table = document.getElementById('tb3');
+        var totalRow = table.rows.length-1;
+        for(var i=1;i<=totalRow;i++){
+			arrKode[i-1] = $('#kode_brg'+i).val();
+			arrQty[i-1] = $('#qty_brg'+i).val();
+			arrSatuan[i-1] = $('#satuan_brg'+i).val();
+			arrHarga[i-1] = $('#harga_brg'+i).val();
+			arrJumlah[i-1] = $('#jumlah_brg'+i).val();
+			arrKet[i-1] = $('#keterangan_brg'+i).val();	
+		}	
+        
+        
+	$.ajax({
+	        type:'POST',
+	        url: "<?php echo base_url();?>index.php/report/print_transaksi_so",
+	        data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,
+	                    arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
+	        },
+	
+	        success:
+	        function(msg)
+	        {	
+				var win=window.open('about:blank');
+				with(win.document)
+				{
+				  open();
+				  write(msg);
+				  close();
+				}
+	        }
+	     });
+});
+		
+		
+    //Save Click
+    $("#save").click(function(){
+    	
+        var mode = $('#save').attr("mode");
+>>>>>>> bc5f7597b2598924438ce99f0a458ab271d8700a
         
         var element0 = document.createElement("input");
         element0.type = "text";
