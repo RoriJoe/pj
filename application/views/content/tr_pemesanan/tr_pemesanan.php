@@ -885,12 +885,12 @@ $("#save").click(function(){
       var sDate = new Date(StartDate);
 
     if(mode == "add"){ //add mode
-        if($('#gud').val() != ""){
+        /*if($('#gud').val() != ""){
             if(kd_sup == 0){
                 bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
             }
         }
-        else if(kd_sup == 0){
+        else */if(kd_sup == 0){
             bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else if(StartDate!= '' && StartDate!= '' && sDate> eDate)
@@ -929,12 +929,7 @@ $("#save").click(function(){
             bootstrap_alert.warning('<b>Gagal!</b> Masukkan Detail Barang & Pastikan Semua Field Terisi');
         }             
     }else if(mode == "edit"){ //Edit mode
-        if($('#gud').val() != ""){
-            if(kd_sup == 0){
-                bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-        }
-        else if(kd_sup == 0){
+        if(kd_sup == 0){
             bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else if(StartDate!= '' && StartDate!= '' && sDate> eDate)

@@ -37,8 +37,8 @@
     <div class="tab-pane" id="tab1">
         <div id="stat" class="pull-left">
             <p>Status : Beta Development</p>
-            <p>Current Version : 0.9.24-Beta</p>
-            <p>Date Update : 24/09/2013</p>
+            <p>Current Version : 0.10.01-Beta</p>
+            <p>Date Update : 30/09/2013</p>
         </div>
         <div id="prog" class="pull-right">
             <table width="460px">
@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         <div class="progress progress-warning" style="margin: 0">
-                            <div class="bar" style="width: 60%"></div>
+                            <div class="bar" style="width: 75%"></div>
                         </div>
                     </td>
                 </tr>
@@ -59,7 +59,7 @@
                     </td>
                     <td>
                         <div class="progress progress-success" style="margin: 0">
-                            <div class="bar" style="width: 80%"></div>
+                            <div class="bar" style="width: 90%"></div>
                         </div>
                     </td>
                 </tr>
@@ -69,7 +69,7 @@
                     </td>
                     <td>
                         <div class="progress progress-danger" style="margin: 0">
-                            <div class="bar" style="width: 50%"></div>
+                            <div class="bar" style="width: 70%"></div>
                         </div>
                     </td>
                 </tr>
