@@ -103,7 +103,7 @@
 
         function get_do($_do){//ambil data do
             $q = $this->db->query("SELECT do_h.*,
-                pelanggan.Nama
+                pelanggan.Perusahaan
                 FROM do_h
                 LEFT OUTER JOIN pelanggan
                 ON do_h.Kode_Plg = pelanggan.Kode
