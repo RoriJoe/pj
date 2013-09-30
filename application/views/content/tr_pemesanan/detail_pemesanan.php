@@ -1,4 +1,4 @@
-<div class="table  CSSTabel" style="overflow: auto; height: 228px">
+<div class="table  CSSTabel" style="overflow: auto; height: 195px">
 <table id="tb3">
     <thead>
         <th>Kode Barang</th>

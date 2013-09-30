@@ -163,7 +163,7 @@ listPO();
     <p style="visibility: hidden;" id="kode_p" name="kode_p"/>
     <hr style="margin: 0;"/>
 </form>
-<div id="hasil2" style="height: 238px;"></div>
+<div id="hasil2" style="height: 200px;"></div>
 <div style="float: right;">
     <table>
         <tr>
