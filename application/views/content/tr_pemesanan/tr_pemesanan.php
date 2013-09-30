@@ -200,7 +200,7 @@ listPO();
     <button id="delete" class="btn">Delete</button>
     <button id="cancel" class="btn">Cancel</button>
     <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
 </div>
 </div>
 
@@ -316,6 +316,64 @@ function validation_engine() {
         fadeDuration: 0.3
     });
 }
+
+
+//BUAT PRINT
+ $("#print").click(function(){
+	var po = $('#po').val();
+    var _tgl1 = $('#_tgl1').val();
+    var _tgl2 = $('#_tgl2').val();
+    var kd_gud = $('#kd_gud').val();
+    var proy = $('#proy').val();
+    var permintaan = $('#permintaan').val();
+    var cur = $('#cur').val();
+    var urg = $('#urg').val();
+    var kd_sup = $('#kd_sup').val();
+	
+	var dpp = $('#dpp2').val();
+    var ppn = $('#ppn').val().replace(/\./g, "");
+    var to = $('#total2').val();
+    
+    var arrKode = new Array();
+    var arrHarga = new Array();
+    var arrJumlah = new Array();
+    var arrNilai = new Array();
+	var arrNamabrg = new Array();
+    var arrSatuan = new Array();
+    
+    var table = document.getElementById('tb3');
+    var totalRow = table.rows.length-1;
+    for(var i=1;i<=totalRow;i++){
+        arrKode[i-1] = $('#kode_brg'+i).val();
+        arrHarga[i-1] = $('#harga_brg'+i).val();
+        arrJumlah[i-1] = $('#qty_brg'+i).val();
+        arrNilai[i-1] = $('#jumlah_brg'+i).val(); 
+		arrNamabrg[i-1] = $('#keterangan_brg'+i).val(); 
+		arrSatuan[i-1] = $('#satuan_brg'+i).val(); 
+    }
+	
+	$.ajax({
+	        type:'POST',
+	        url: "<?php echo base_url();?>index.php/report/print_transaksi_po",
+	        data :{ po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup, 
+	                dpp:dpp,ppn:ppn,to:to,
+                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,arrNamabrg:arrNamabrg,
+					arrSatuan:arrSatuan
+	        },
+	
+	        success:
+	        function(msg)
+	        {	
+				var win=window.open('about:blank');
+				with(win.document)
+				{
+				  open();
+				  write(msg);
+				  close();
+				}
+	        }
+	     });
+}); 
 
 function autogen(){
     $('#add').attr('mode','new');

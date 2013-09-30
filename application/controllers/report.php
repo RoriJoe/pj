@@ -15,11 +15,58 @@
 			$this->load->view("content/print_sj", $data);
 		}
 		
+		function print_transaksi_po(){
+	
+			$data['po']=$this->input->post('po');
+			$data['_tgl1']=date('d-m-Y', strtotime($this->input->post('_tgl1')));
+			$data['_tgl2']=date('d-m-Y', strtotime($this->input->post('_tgl2')));
+			$data['kd_gud']=$this->input->post('kd_gud');
+			$data['proy']=$this->input->post('proy');
+			$data['permintaan']=$this->input->post('permintaan');
+			$data['cur']=$this->input->post('cur');
+			$data['urg']=$this->input->post('urg');
+			$data['kd_sup']=$this->input->post('kd_sup');
+			
+			$data['dpp']=$this->input->post('dpp');
+			$data['ppn']=$this->input->post('ppn');
+			$data['to']=$this->input->post('to');
+			$data['totalRow']=$this->input->post('totalRow');
+			
+			$data['arrKode']=$this->input->post('arrKode');
+			$data['arrHarga']=$this->input->post('arrHarga');
+			$data['arrJumlah']=$this->input->post('arrJumlah');
+			$data['arrNilai']=$this->input->post('arrNilai');
+			$data['arrNamabrg']=$this->input->post('arrNamabrg');
+			$data['arrSatuan']=$this->input->post('arrSatuan');
+			
+			$this->load->view('content/print_transaksi_po',$data);
+		}
+		
+		function print_transaksi_penerimaan(){
+	
+			$data['_bpb']=$this->input->post('_bpb');
+			$data['_tgl']=date('d-m-Y', strtotime($this->input->post('_tgl')));
+			$data['_gd']=$this->input->post('_gd');
+			$data['_sp']=$this->input->post('_sp');
+			$data['_ref']=$this->input->post('_ref');
+			
+			$data['totalRow']=$this->input->post('totalRow');
+			
+			$data['_arrKd_brg']=$this->input->post('_arrKd_brg');
+			$data['_arrNm_brg']=$this->input->post('_arrNm_brg');
+			$data['_arrUkur']=$this->input->post('_arrUkur');
+			$data['_arrQty']=$this->input->post('_arrQty');
+			$data['_arrKet']=$this->input->post('_arrKet');
+			
+			
+			$this->load->view('content/print_transaksi_penerimaan',$data);
+		}
+		
 		function print_transaksi_sj(){
 			$this->load->helper('pdfexport_helper.php');
 			
 			$data['sj']=$this->input->post('sj');
-            $data['_tgl']=date('Y-m-d', strtotime($this->input->post('_tgl')));
+            $data['_tgl']=date('d-m-Y', strtotime($this->input->post('_tgl')));
             $data['_do']=$this->input->post('_do');
             $data['gg']=$this->input->post('gg');
             $data['pn']=$this->input->post('pn');
@@ -36,6 +83,31 @@
 			
 			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
 			$this->load->view('content/print_transaksi_sj',$data);
+			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
+			//exportMeAsMPDF($templateView,$data['filename']);
+		}
+		
+		function print_transaksi_so(){
+			$this->load->helper('pdfexport_helper.php');
+			
+			$data['so']=$this->input->post('so');
+            $data['tglSo']=date('d-m-Y', strtotime($this->input->post('tglSo')));
+			$data['tglPo']=date('d-m-Y', strtotime($this->input->post('tglPo')));
+            $data['po']=$this->input->post('po');
+            $data['pl']=$this->input->post('pl');
+            $data['sl']=$this->input->post('sl');
+            $data['to']=$this->input->post('to');
+            
+			$data['totalRow']=$this->input->post('totalRow');
+			$data['arrKode']=$this->input->post('arrKode');
+            $data['arrQty']=$this->input->post('arrQty');
+            $data['arrSatuan']=$this->input->post('arrSatuan');
+            $data['arrHarga']=$this->input->post('arrHarga');
+            $data['arrJumlah']=$this->input->post('arrJumlah');
+            $data['arrKet']=$this->input->post('arrKet');
+			
+			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
+			$this->load->view('content/print_transaksi_so',$data);
 			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);
 		}

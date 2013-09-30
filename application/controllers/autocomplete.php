@@ -32,6 +32,25 @@ class Autocomplete extends CI_Controller{
         echo json_encode($data);
     }
     
+	function lookup_po(){
+        $this->load->model('tr_po_model');
+        $keyword=$this->input->post('term');
+        $data['response']='false';
+        $query=$this->tr_po_model->find($keyword);
+        
+        if(!empty($query)){
+            $data['response']='true';
+            $data['message']=array();
+            foreach($query as $row){
+                $data['message'][]=array(
+                'id'=>$row['Kode'],
+                'value'=>$row['Kode']
+                );
+            }
+        }
+        echo json_encode($data);
+    }
+	
     function lookpn(){
         $this->load->model('ms_pelanggan_model');
         $keyword=$this->input->post('term');

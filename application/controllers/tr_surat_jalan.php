@@ -29,7 +29,9 @@
             $qq=$this->tr_surat_jalan_model->get_h_sj($sj);
             foreach ($qq as $rr)
             {
-                $temp=$rr->No_Sj."|".$rr->Perusahaan."|".$rr->No_Do."|".$rr->No_Po."|".$rr->Kode_Gudang."|".$rr->No_Mobil."|".$rr->Tgl."|".$rr->Keterangan."|".$rr->Kode_Plg;
+			$originalDate = $rr->Tgl;
+			$dmy = date("d-m-Y", strtotime($originalDate));
+                $temp=$rr->No_Sj."|".$rr->Perusahaan."|".$rr->No_Do."|".$rr->No_Po."|".$rr->Kode_Gudang."|".$rr->No_Mobil."|".$dmy."|".$rr->Keterangan."|".$rr->Kode_Plg;
             }
             echo $temp;
         }
@@ -193,7 +195,7 @@
 
             foreach ($tm as $rr)
             {
-                $temp=$rr->Nama."|".$rr->Otorisasi."|".$rr->Kode_Gudang."|".$rr->No_Po."|".$rr->Kode_Plg;
+                $temp=$rr->Perusahaan."|".$rr->Otorisasi."|".$rr->Kode_Gudang."|".$rr->No_Po."|".$rr->Kode_Plg;
             }
             echo $temp;
         }

@@ -7,12 +7,15 @@
 
         <tbody>
         <?php foreach($hasil as $row)
-        {
+        {	$originalDate1 = $row->Tgl_po;
+			$dmy1 = date("d-m-Y", strtotime($originalDate1));
+			$originalDate2 = $row->Tgl_kirim;
+			$dmy2 = date("d-m-Y", strtotime($originalDate2));
             echo
             "<tr
                         kode = '$row->Kode'
-                        tgl1 = '$row->Tgl_po'
-                        tgl2 = '$row->Tgl_kirim'
+                        tgl1 = '$dmy1'
+                        tgl2 = '$dmy2'
                         permintaan = '$row->Permintaan'
                         cur = '$row->Currency'
                         urg = '$row->Urgent'

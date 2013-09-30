@@ -9,9 +9,11 @@
     <tbody>
     <?php foreach($hasil as $row)
     {
+		$originalDate1 = $row->Tgl_Bpb;
+			$dmy1 = date("d-m-Y", strtotime($originalDate1));
         echo
         "<tr _no_bpb = '$row->No_Bpb'
-             _tgl = '$row->Tgl_Bpb'
+             _tgl = '$dmy1'
              _no_reff = '$row->No_Reff'
              _kd_sp = '$row->Kode_Supp'
              _nm_sp = '$row->Perusahaan'
@@ -20,7 +22,7 @@
        
             <td>$row->No_Bpb</a></td>
             <td>$row->Kode_Gudang</td>
-            <td>$row->Tgl_Bpb</td>
+            <td>$dmy1</td>
         </tr>";
     } ?>
     </tbody>

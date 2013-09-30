@@ -21,6 +21,12 @@
             return $q->result();
         }
         
+		function find($keyword){
+            $this->db->like('Kode',$keyword,'after');
+            $query=$this->db->get('po_h');
+            return $query->result_array();
+        }
+		
         function add_cur($data,$id){
             $rr=$this->db->query("select * from currency where value = '$id'");
             if($rr->num_rows() ==  0)
