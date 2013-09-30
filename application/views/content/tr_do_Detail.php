@@ -59,11 +59,12 @@
     });
     
     var oTable = $('#tb2').dataTable( {
-        "sScrollY": "315px", //heighnya
-        "sScrollX": "100%", //panjang width
+        "sScrollY": "295px",
         "sScrollYInner": "110%",
+        "sScrollX": "100%", //panjang width
         "sScrollXInner": "100%", //overflow dalem
-        "bPaginate": false,
+        "bPaginate": true,
+        "bLengthChange": false,
         "aaSorting": [[ 4, "desc" ]],
         "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
     } );
