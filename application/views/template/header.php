@@ -1,6 +1,6 @@
     <!--JS Sorting-->
 <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/complete.min.js"></script>-->
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/jquery.dataTables.min.js"></script>
 <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/FixedColumns.js"></script>-->
 <!--JS VALIDATION-->
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine-id.js"></script>
