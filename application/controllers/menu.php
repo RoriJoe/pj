@@ -155,6 +155,11 @@
 			$data['judul']="Report ks";
 			$this->template->display('content/report_ks', $data);
 		}
+
+		function saw(){
+			$data['judul']="Report ks";
+			$this->template->display('content/saw/saw_h', $data);
+		}
         
         function logout()
         {

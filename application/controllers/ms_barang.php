@@ -23,6 +23,22 @@
             //$data['nama']=$nama;
             $this->load->view("content/list/list_barang",$data);
         }
+
+        function checkBarang(){
+            //$nama = $this->input->post('k');
+            $totalRow=$this->input->post('totalRow');
+            $id=$this->input->post('arrKode');
+            for($i=0;$i<$totalRow;$i++){
+                $datadet= array(
+                    'Kode'   =>$id[$i],
+                );
+                $data['hasil'] = $this->ms_barang_model->check($datadet);
+                $this->load->view("content/list/list_barang",$data);
+            }
+            
+            //$data['nama']=$nama;
+            
+        }
         
         //SAVE ADD NEW TRIGGER
         function insert()

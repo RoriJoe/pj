@@ -48,8 +48,12 @@
         $('#kd_gd').val(kd_gd);
         $('#_gd').val(nm_gd);
 
-        $('#add').attr('mode','edit');
+        
         $('#save').attr('mode','edit');
+        $('#save').attr('disabled',true);
+        $('#cancel').attr('disabled',false);
+        $('#add').attr('disabled',true);
+        document.getElementById('add').style.visibility = 'hidden';
 
         tampilDetailBPB();
     });

@@ -54,8 +54,7 @@
     var i = document.getElementById('kode_brg'+row);
     var j = document.getElementById('qty_brg'+row);
     var k = document.getElementById('harga_brg'+row);
-    if (i.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
+    if (j.disabled == true){
         document.getElementById('f_brg'+row).style.visibility = 'visible';
         document.getElementById('qty_brg'+row).disabled=false;
         document.getElementById('icon'+row).className='icon-ok';
@@ -115,6 +114,7 @@ function countJumlah(row){
 }
 
 function getDetail(row){
+    listBarang();
     filter = row;
 }
 

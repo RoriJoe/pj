@@ -2,8 +2,13 @@
 //Auto Generate
 function autogen(){
     $('#add').attr('mode','new');
+    $('#add').attr('mode','new');
+    $('#save').attr('disabled',true);
+    $('#cancel').attr('disabled',true);
+    $('#add').attr('disabled',true);
+
     $('#delete').attr('disabled', true);
-    $("#_so").attr('disabled',false);
+    $("#_bpb").attr('disabled',false);
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/auto_gen",
@@ -30,6 +35,11 @@ function lookup_gudang(){
                 function(data){
                     if(data.response =="true"){
                         add(data.message);
+                        $("#_gd").validationEngine('showPrompt', 'Data Gudang Tersedia', 'pass');
+                    }
+                    else
+                    {
+                        $("#_gd").validationEngine('showPrompt', 'Data Gudang Tidak Tersedia', 'show');
                     }
                 },
             });
@@ -37,6 +47,8 @@ function lookup_gudang(){
     select:
         function(event, ui) {
             $('#_gd').val(ui.item.value);
+            $('#kd_gd').val(ui.item.id);
+            $("#_gd").validationEngine('showPrompt', 'Data Supplier Tersedia', 'pass');
         },
     });
 }
@@ -56,6 +68,11 @@ function lookup_supplier(){
                 function(data){
                     if(data.response =="true"){
                         add(data.message);
+                        $("#_sp").validationEngine('showPrompt', 'Data Supplier Tersedia', 'pass');
+                    }
+                    else
+                    {
+                        $("#_sp").validationEngine('showPrompt', 'Data Supplier Tidak Tersedia', 'show');
                     }
                 },
             });
@@ -63,6 +80,8 @@ function lookup_supplier(){
     select:
         function(event, ui) {
             $('#_sp').val(ui.item.value);
+            $('#kd_sp').val(ui.item.id);
+            $("#_sp").validationEngine('showPrompt', 'Data Supplier Tersedia', 'pass');
         },
     });
 }
@@ -174,15 +193,7 @@ function tampilDetailBPB(){
 }
 
 //Load Function
-jQuery(document).ready(function(){
-    listBPB();
-    autogen();
-    validation_engine()
-    animation();
-    lookup_supplier();
-    lookup_gudang();
-    tampilDetailBPB();
-});
+listBPB();
 </script>
 
 
@@ -201,22 +212,23 @@ jQuery(document).ready(function(){
             <td>Nomor BPB</td>
             <td>
                 <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_bpb' name='_bpb' style="width: 170px; margin-left: 10px; margin-right: 20px;"/>
+                maxlength="20" id='_bpb' name='_bpb' style="width: 170px; margin-left: 10px; margin-right: 20px;text-transform: uppercase;"/>
             </td>
 
             <td>Tgl BPB</td>
             <td>
-                <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;">
             </td>
        </tr>
        <tr>
             <td>Gudang</td>
             <td>
-                <input type="hidden" id="kd_gd" />
+                <input type="hidden" class="validate[required]" id="kd_gd" />
                 <div class="input-append">
-                 <input type='text' class="validate[required,maxSize[20], minSize[2]] span2" 
-                maxlength="20" id="_gd" id='appendedInputButton' name='_gd' style="width: 148px; margin-left: 10px;">
-                <a href="#myModal" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" style="padding: 2px 3px;"><i class="icon-filter"></i></a>
+                 <input type='text' class="validate[required,maxSize[25], minSize[5]] span2" 
+                    maxlength="30" id="_gd" id='appendedInputButton' name='_gd' 
+                    style="width: 148px; margin-left: 10px;" onclick="lookup_gudang()"/>
+                <a href="#myModal" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
                   
                 </div>
             </td>
@@ -225,18 +237,17 @@ jQuery(document).ready(function(){
        <tr>
             <td>Supplier</td>
             <td>
-                <input type="hidden" id="kd_sp" />
+                <input type="hidden" class="validate[required]" id="kd_sp" />
                 <div class="input-append">
-                 <input type='text' class="validate[required,maxSize[20], minSize[2]] span2" 
-                maxlength="20" id="_sp" id='appendedInputButton' name='_sp' style="width: 148px; margin-left: 10px;">
-                <a href="#myModal2" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Supplier" style="padding: 2px 3px;"><i class="icon-filter"></i></a>
-                  
+                 <input type='text' class="validate[required,maxSize[30], minSize[5]] span2" 
+                maxlength="30" id="_sp" id='appendedInputButton' name='_sp' style="width: 148px; margin-left: 10px;" onclick="lookup_supplier()">
+                <a href="#myModal2" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Supplier" style="padding: 2px 3px;" onclick="listSupplier()"><i class="icon-filter"></i></a>
                 </div>
             </td>
             <td>Nomor Reff</td>
             <td>
             	<input type='text' class="validate[required,maxSize[25], minSize[7]],custom[onlyNumberSp]" 
-                maxlength="25" id='_ref' name='_ref' style="width: 170px; margin-left: 10px; margin-right: 20px;"/>
+                maxlength="25" id='_ref' name='_ref' style="width: 170px; margin-left: 10px; margin-right: 20px;" onclick="disableAlpha('_ref')" />
             </td>
         </tr>
     </table>
@@ -301,64 +312,116 @@ jQuery(document).ready(function(){
 <div id="hasil"></div>
 
 <script>
-    listGudang();
-    listSupplier();
-    listBarang();
+$(document).ready(function(){
+    autogen();
+    validation_engine()
+    animation();
+    tampilDetailBPB();
+    key();
+});
     
-    //GET POPUP PELANGGAN
-    function getGudang(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
-        $('#_gd').val(x);
-        $('#kd_gd').val(k);
-        
+    
+function key(){
+$('input[type="text"]').keyup(function() {
+    if($(this).val() != '') {
+        $('#save').removeAttr('disabled');
+        $('#cancel').removeAttr('disabled');
+        $('#add').removeAttr('disabled');
     }
-    
-    //GET POPUP SUPPLIER
-    function getSupplier(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
-        $('#_sp').val(x);
-        $('#kd_sp').val(k);
+ });
+ $("#al").keyup(function() {
+    if($(this).val() != '') {
+       $('button[type="submit"]').removeAttr('disabled');
     }
+ });
+}
+
+function disableAlpha($id){
+    var foo = document.getElementById($id);
+    foo.addEventListener('input', function (prev) {
+    return function (evt) {
+        if (!/^[0-9]*$/.test(this.value)) {
+          this.value = prev;
+        }
+        else {
+          prev = this.value;
+        }
+    };
+    }(foo.value), false);
+};
+
+
+
+//GET POPUP PELANGGAN
+function getGudang(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    $('#_gd').val(x);
+    $('#kd_gd').val(k);
     
-    //GET POPUP Barang
-    function getBarang(){
-        var x = $('input:radio[name=optionsRadios]:checked').val();
-        var y = $('input:radio[name=optionsRadios]:checked').attr('nama');
-        var z = $('input:radio[name=optionsRadios]:checked').attr('ukuran');
-        
-        var row = filter;
-        
+}
+
+//GET POPUP SUPPLIER
+function getSupplier(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    $('#_sp').val(x);
+    $('#kd_sp').val(k);
+}
+
+//GET POPUP Barang
+function getBarang(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var y = $('input:radio[name=optionsRadios]:checked').attr('nama');
+    var z = $('input:radio[name=optionsRadios]:checked').attr('ukuran');
+    
+    var row = filter;
+
+    var arrs = document.getElementsByName('kode_brgd');
+
+    found_flag = false;
+    for (i = 0; i < arrs.length; i++) {
+        if (arrs[i].value === x) {
+            found_flag = true;
+            break;
+        }
+    }
+
+    if (found_flag === true)
+    {
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang!</b> Barang sudah ada dalam List');
+    } else {
         $('#kode_brg'+row).val(x);
-        $('#nama_brg'+row).val(y);    
-        $('#ukuran_brg'+row).val(z);    
+        $('#nama_brg'+row).val(z);
+        $('#ukuran_brg'+row).val(y);
     }
+}
     
     
-    //ALERT
-    bootstrap_alert = function() {}
-    bootstrap_alert.warning = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-        $(".alert").delay(5000).addClass("in").fadeOut(3000);
-    }
-    bootstrap_alert.success = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-        $(".alert").delay(1500).addClass("in").fadeOut(5000);
-    }
-    bootstrap_alert.info = function(message) {
-        $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    }
-    
-    //Cancel
-    $("#cancel").click(function(){
-        $('#formID').each(function(){
-            this.reset();
-        });
-        autogen();
-        tampilDetailBPB();
-        $('#save').attr('mode','add');
+//ALERT
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(5000).addClass("in").fadeOut(3000);
+}
+bootstrap_alert.success = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+}
+
+//Cancel
+$("#cancel").click(function(){
+    $('#formID').each(function(){
+        this.reset();
     });
+    autogen();
+    tampilDetailBPB();
+    $('#save').attr('mode','add');
+    document.getElementById('add').style.visibility = 'visible';
+});
 
 	//Tambah Row Barang
     function addRow(tableID) {
@@ -384,12 +447,12 @@ jQuery(document).ready(function(){
             
             var element0 = document.createElement("input");
             element0.type = "text";
-            element0.name="kode_brgd"+last;
+            element0.name="kode_brgd";
             element0.className="validate[required]";
             element0.className="span2"; 
             element0.id="kode_brg"+last;
+            element0.disabled = "true";
             element0.setAttribute("onkeypress", "validAct("+last+")");
-            element0.setAttribute("disable", false);
             element0.style.width = "70px";
             
             var filter = document.createElement("a");
@@ -498,7 +561,13 @@ jQuery(document).ready(function(){
 		
         if(_mode == "add") //add mode
         {
-        	if($("#formID").validationEngine('validate'))
+            if(_gd == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+            else if(_sp == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+        	else if($("#formID").validationEngine('validate'))
 	        {
 	            $.ajax({
 	            type:'POST',
@@ -532,6 +601,13 @@ jQuery(document).ready(function(){
         //Edit mode
         else if(_mode == "edit")
         { 
+            if(_gd == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+            else if(_sp == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+            else 
         	if($("#formID").validationEngine('validate'))
         	{
         		$.ajax({

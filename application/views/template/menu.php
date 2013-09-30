@@ -48,7 +48,7 @@
         </li>
         <li><a href="#"><i class="icon-wrench"></i>&nbsp;Maintenance</a>
             <ul>
-              <li><a href="#">Create Saldo Awal</a></li>
+              <li><a class="ajax" href="saw">Create Saldo Awal</a></li>
               <li><a href="#">Create Password</a></li>
               <li><a href="#">Stock</a></li>
             </ul>

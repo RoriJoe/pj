@@ -3,6 +3,9 @@ var flag=0;
 //Auto Generate
 function autogen(){
 	$('#save').attr('mode','add');
+    $('#save').attr('disabled',true);
+    $('#cancel').attr('disabled',true);
+
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_surat_jalan/ang",
@@ -29,6 +32,7 @@ jQuery(document).ready(function() {
 	$("#pn").attr('disabled',true);
 	$("#po").attr('disabled',true);
 	disable("no");
+    key();
 
 //Auto Complete & Suggestion Search
 $("#_do").autocomplete({
@@ -97,6 +101,8 @@ function tampilSJ(){
 
                         var sj=$('#sj').val();
                         $('#save').attr('mode','edit');
+                        $('#cancel').attr('disabled',false);
+                        
                         $.ajax({ //utk tabel detail
                         type:'POST',
                         url: "<?php echo base_url();?>index.php/tr_surat_jalan/viewSJ",
@@ -153,6 +159,21 @@ function get_do() {
     });
 }
 
+function key(){
+ $('input[type="text"]').keyup(function() {
+    if($(this).val() != '') {
+        $('#save').removeAttr('disabled');
+        $('#cancel').removeAttr('disabled');
+        $('#add').removeAttr('disabled');
+    }
+ });
+ $("#al").keyup(function() {
+    if($(this).val() != '') {
+       $('button[type="submit"]').removeAttr('disabled');
+    }
+ });
+}
+
 //Custom Validasi Plat Mobil
 function checkMbl(field, rules, i, options){
     var mbl = field.val();
@@ -207,8 +228,6 @@ function listBarang(){
     }
     });   
 }
-
-
 </script>
 
 
@@ -239,7 +258,7 @@ function listBarang(){
             <td>
                 <div class="input-append" style="margin-bottom: 0;">
 				  <input type='text' class="validate[required] span2" id='_do' id="appendedInput" name='_do' style="width: 150px;">
-				  <a href="tr_do" role="button" class="btn" type="button" data-toggle="tooltip" title="Tambah Sales Order Baru" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+				  <a href="tr_do" role="button" id="tes" class="btn" type="button" data-toggle="button" data-placement="right" rel="popover" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
 				</div>
             </td>
 
@@ -309,6 +328,9 @@ function listBarang(){
 
 <div id="hasil"></div>
 
+<script>  
+    $("#tes").popover({ content: 'Tambah Sales Order Baru?', trigger: 'hover'});
+</script>
 
 <script>
 listBarang();
@@ -320,9 +342,24 @@ function getBarang(){
     var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
     
     var row = filter;
-    
-    $('#kode_brg'+row).val(x);
-    $('#brg_ukur'+row).val(z+" "+y);    
+
+    var arrs = document.getElementsByName('kode_brgd');
+
+    found_flag = false;
+    for (i = 0; i < arrs.length; i++) {
+        if (arrs[i].value === x) {
+            found_flag = true;
+            break;
+        }
+    }
+
+    if (found_flag === true)
+    {
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
+    } else {
+        $('#kode_brg'+row).val(x);
+        $('#brg_ukur'+row).val(z+" "+y);  
+    }
 }
 
 //ALERT

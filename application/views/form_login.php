@@ -1,10 +1,14 @@
+<?php
+    if($this->session->userdata('is_logged_in') == 2){
+        redirect('menu/home');
+    }
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login Pelita Jaya</title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />
    	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
    	
@@ -36,15 +40,16 @@
           <?php echo form_close(); ?>
         </div>              
     </div>
-    <div id="footer">
+    <div id="footer" style="height:0;">
             <div id="footerContent">
             <p style="text-align: center; font-family:verdana;font-size: 14px;color: #999999;">Copyright © Pelita Jaya 2013</p>
         </div>
     </div>
 </body>
 </html>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
 <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js" ></script>
+
 <script type="text/javascript">
     <!--var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});-->
 //ALERT

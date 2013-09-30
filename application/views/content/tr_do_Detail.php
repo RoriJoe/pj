@@ -53,7 +53,12 @@
 
         $('#add').attr('mode','edit');
         $('#save').attr('mode','edit');
-         $('#total').val(to);
+
+        $('#save').attr('disabled',true);
+        $('#cancel').attr('disabled',false);
+
+        document.getElementById('add').style.visibility = 'hidden';
+        $('#total').val(accounting.formatMoney(to, "Rp ",2,".",","));
         tampilDetailSO();
        
     });

@@ -51,8 +51,8 @@
             <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:80px' value='$row->Keterangan' disabled='true'/>
         </td>
         <td>
-            <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-            <a class='btn' href='#' onclick='deleteRowSO(this)'><i class='icon-trash'></i></a>
+            <a class='btn' href='#' onclick='editRow($i)' style='display:none'><i id='icon$i' class='icon-pencil'></i></a>
+            <a class='btn' href='#' onclick='deleteRowSO(this)' style='display:none'><i class='icon-trash'></i></a>
         </td>
         </tr>
         ";
@@ -65,11 +65,9 @@
 <script>
 function editRow(row){
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
-    var i = document.getElementById('kode_brg'+row);
     var j = document.getElementById('qty_brg'+row);
     var k = document.getElementById('harga_brg'+row);
-    if (i.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
+    if (j.disabled == true){
         document.getElementById('f_brg'+row).style.visibility = 'visible';
         document.getElementById('qty_brg'+row).disabled=false;
         document.getElementById('icon'+row).className='icon-ok';
@@ -86,7 +84,6 @@ function editRow(row){
             bootstrap_alert.warning('<b>Kesalahan!</b> Field Kode, Qty, Harga Harus diisi.');
         }
         else{
-            document.getElementById('kode_brg'+row).disabled=true;
             document.getElementById('f_brg'+row).style.visibility = 'hidden';
             document.getElementById('qty_brg'+row).disabled=true;
             document.getElementById('icon'+row).className='icon-pencil';
@@ -131,6 +128,7 @@ function countJumlah(row){
 }
 
 function getDetail(row){
+    listBarang();
     filter = row;
 }
 
@@ -141,7 +139,8 @@ function getTotal(){
         if(parseInt(arr[i].value))
             total += parseInt(arr[i].value);
     }
-    $('#total').val(total+",00");
+    $('#total').val(accounting.formatMoney(total, "Rp ",2,".",","));
+    $('#total2').val(total);
 }
 
 function validAct(row){
@@ -159,6 +158,19 @@ function validAct(row){
     
     //disable alfabet di qty
     var foo = document.getElementById('qty_brg'+row);
+    foo.addEventListener('input', function (prev) {
+        return function (evt) {
+            if (!/^\d{0,6}(?:\.\d{0,2})?$/.test(this.value)) {
+              this.value = prev;
+            }
+            else {
+              prev = this.value;
+            }
+        };
+    }(foo.value), false);
+
+    //disable alfabet di harga
+    var foo = document.getElementById('harga_brg'+row);
     foo.addEventListener('input', function (prev) {
         return function (evt) {
             if (!/^\d{0,6}(?:\.\d{0,2})?$/.test(this.value)) {

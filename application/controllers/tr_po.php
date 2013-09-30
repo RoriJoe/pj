@@ -116,7 +116,7 @@
             );
 
             if($modes=="add"){
-                 $in = $this->tr_po_model->insertPo($data,$po);
+                 $in = $this->tr_po_model->insertPo($data1,$po);
 
                 //DETAIL po
                 $arrKode    =$this->input->post('arrKode');

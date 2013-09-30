@@ -45,7 +45,7 @@ $.ajax({
         <tr>
             <td>NPWP</td>
             <td>
-                <input type='text' class="validate[required, custom[onlyNumberSp]]" id='np' name='np' style="width: 170px; margin-left: 10px; margin-right: 20px;" onclick="disableAlpha('np')">
+                <input type='text' class="validate[required]" id='np' name='np' style="width: 170px; margin-left: 10px; margin-right: 20px;" onclick="disableAlpha('np')">
             </td>
             <td>Kota</td>
             <td>
@@ -190,7 +190,7 @@ function disableAlpha($id){
     var foo = document.getElementById($id);
     foo.addEventListener('input', function (prev) {
     return function (evt) {
-        if (!/^\d{0,20}(?:\.\d{0,2})?$/.test(this.value)) {
+        if (!/^[0-9\.\+\ ]*$/.test(this.value)) {
           this.value = prev;
         }
         else {

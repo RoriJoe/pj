@@ -96,7 +96,7 @@
     
         var agent = <?php echo $uagent;?> ;
         if(agent != 1){
-            bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a>');
+            bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href=https://www.google.com/intl/en/chrome/browser/>Google Chrome</a>');
         }
     </script>
     <!--breadcrumb--><!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/prefixfree-1.0.7.js'></script>-->

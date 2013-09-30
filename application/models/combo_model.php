@@ -63,4 +63,9 @@
             $q=$this->db->query("select Kode from po_h order by Kode desc limit 1");
             return $q->result();
         }
+        function getSaw()//ambil no po akhir
+        {
+            $q=$this->db->query("select No_Saw from saw_h order by No_Saw desc limit 1");
+            return $q->result();
+        }
 	}

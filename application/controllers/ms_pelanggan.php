@@ -18,10 +18,9 @@
         }
         
         #Show All 
-        function viewPelanggan($offset=0,$order_column='Kode',$order_type='asc'){
+        function viewPelanggan(){
             //request data table
-            $data['hasil']=$this->ms_pelanggan_model->get_paged_list(
-                $this->limit,$offset,$order_column,$order_type)->result();
+            $data['hasil']=$this->ms_pelanggan_model->get_paged_list();
                 
             //load view
             $this->load->view('content/list/list_pelanggan',$data);

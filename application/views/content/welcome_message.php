@@ -2,28 +2,6 @@
     <p>Welcome <?php echo $user;?></p>
 </div>-->
 <script type="text/javascript" src="<?php echo base_url();?>assets/swfobject.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/raphael.2.1.0.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/justgage.1.0.1.min.js"></script>
-<script>
-$(document).ready(function(){
-  var g = new JustGage({
-    id: "gauge", 
-    value: 67, 
-    min: 0,
-    max: 100,
-    title: "Visitors"
-  }); 
-
-  var h = new JustGage({
-    id: "gauge2", 
-    value: getRandomInt(10, 90), 
-    min: 0,
-    max: 100,
-    title: "Sample"
-  }); 
-});
-
-</script>
 
 <div class="" style="width: 98%">
 	<div class="bar-span bar-info" style="margin-left: 0;">
@@ -253,6 +231,29 @@ $("#save").click(function(){
         }else{
             window.alert("Form tidak boleh kosong");
         }
+});
+
+</script>
+
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/justgage.1.0.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  var g = new JustGage({
+    id: "gauge", 
+    value: 67, 
+    min: 0,
+    max: 100,
+    title: "Visitors"
+  }); 
+
+  var h = new JustGage({
+    id: "gauge2", 
+    value: getRandomInt(10, 90), 
+    min: 0,
+    max: 100,
+    title: "Sample"
+  }); 
 });
 
 </script>

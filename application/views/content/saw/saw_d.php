@@ -5,7 +5,7 @@
         <th>Nama Brg</th>
         <th>Ukuran</th>
         <th>Qty</th>
-        <th>Keterangan</th>
+        <th>Satuan</th>
         <th>Action</th>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
         <td>
             <div class='input-append'>
                 <input type='text' class='span2' 
-                id='kode_brg$i' id='appendedInputButton' name='kode_brgd' value='$row->Kode_brg' 
+                id='kode_brg$i' id='appendedInputButton' name='kode_brgd' value='$row->Kd_Brg' 
                 onkeypress='validAct($i)' 
                 maxlength='20' 
                 style='width:70px' disabled='true'/>
@@ -43,13 +43,13 @@
             style='width:70px' readonly='true'/>
         </td>
         <td>
-            <input type='text' name='Nama' id='qty_brg$i' value='$row->Qty1' 
+            <input type='text' name='Nama' id='qty_brg$i' value='$row->QtySaw1' 
             onkeypress='validAct($i)' maxlength='5' 
             class='validate[required]' 
             style='width:45px' disabled='true'/>
         </td>
         <td>
-            <input type='text' name='keterangan' id='keterangan_brg$i' value='$row->Keterangan'  
+            <input type='text' name='satuan' id='satuan_brg$i' value='$row->Satuan1'  
             class='validate[required]' maxlength='22' 
             style='width:80px' disabled='true'/>
         </td>
@@ -64,65 +64,37 @@
     </tbody>
 </table>
 </div>
-</div>
-<br/>
 
-<script>
-function editRow(row){
-    //$(this).parent().next().find('input[type="text"]').attr('disabled');
-    //var i = document.getElementById('kode_brg'+row);
-    var j = document.getElementById('qty_brg'+row);
-    
-    if (j.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
-        document.getElementById('f_brg'+row).style.visibility = 'visible';
-        document.getElementById('qty_brg'+row).disabled=false;
-        document.getElementById('icon'+row).className='icon-ok';
-        document.getElementById('keterangan_brg'+row).disabled=false;
-        return false;
-    }
-    else{
-        var arr = document.getElementsByName('kode_brgd');
-
-        if(i.value == "" || j.value == ""){
-            bootstrap_alert.warning('<b>Kesalahan!</b> Field Kode, Qty, Harga Harus diisi.');
-        }
-        else if($.inArray(i.value, arr) != -1){
-            bootstrap_alert.warning('<b>Kesalahan!</b> Barang sudah ada dalam daftar.');
-        }
-        else{
-            document.getElementById('kode_brg'+row).disabled=true;            
-            document.getElementById('f_brg'+row).style.visibility = 'hidden';
-            document.getElementById('qty_brg'+row).disabled=true;
-            document.getElementById('icon'+row).className='icon-pencil';
-            document.getElementById('keterangan_brg'+row).disabled=true;
-            return true;
-        }
-    }
-}
-
-function deleteRow(row) {
-    try {
-        var i = row.parentNode.parentNode.rowIndex;
-        var table = document.getElementById('tb3');
-        var rowCount = table.rows.length-1;
-        if(rowCount <= 1) {
-            alert("Detail SO Tidak Boleh Kosong");
-        }else{
-           table.deleteRow(i);
-           rowCount--;
-           i--;
-        }
-    }catch(e) {
-        alert(e);
-    }
-}
-
+<script type="text/javascript">
 function getDetail(row){
     listBarang();
     filter = row;
 }
 
+function editRow(row){
+    //$(this).parent().next().find('input[type="text"]').attr('disabled');
+    var i = document.getElementById('kode_brg'+row);
+    var j = document.getElementById('qty_brg'+row);
+    
+    if (j.disabled == true){
+        document.getElementById('f_brg'+row).style.visibility = 'visible';
+        document.getElementById('qty_brg'+row).disabled=false;
+        document.getElementById('icon'+row).className='icon-ok';
+        return false;
+    }
+    else{
+
+        if(j.value == "" || i.value == ""){
+            bootstrap_alert.warning('<b>Kesalahan!</b> Kode & Qty Harus diisi.');
+        }
+        else{         
+            document.getElementById('f_brg'+row).style.visibility = 'hidden';
+            document.getElementById('qty_brg'+row).disabled=true;
+            document.getElementById('icon'+row).className='icon-pencil';
+            return true;
+        }
+    }
+}
 
 function validAct(row){
     //max kode 20
@@ -150,5 +122,4 @@ function validAct(row){
         };
     }(foo.value), false);
 }
-
 </script>

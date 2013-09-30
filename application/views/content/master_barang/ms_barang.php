@@ -113,11 +113,19 @@ loadListBarang();
                     }
                     ?>
                 </select>
-
-                <div class="input-append" style="margin-bottom: 0;" >
-                    <input class="span2" id="txtCombo" id="appendedInput"  name="txtCombo" type="text" style="width: 90px;margin-left: 10px;" placeholder="Tambah Satuan"/>
-                    <span class="add-on" style="padding: 2px 3px;" onclick="addCombo()"><i class='icon-plus'></i></span>
-                </div>
+                <button type="button" id="tes" class="btn btn-mini" 
+                        data-toggle="button"
+                        data-html="true" data-placement="bottom"
+                        rel="popover"
+                        style="margin-bottom:3px;"
+                        data-content="
+                        <div>
+                         <input  type='text' 
+                            class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
+                            style='width: 90px;margin-left: 10px;'
+                            />
+                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
+                        </div>"><i class='icon-plus'></i></button>
             </td>
        </tr>
 
@@ -132,7 +140,9 @@ loadListBarang();
 </form>
 </div>
 <div id="hasil" style="z-index:10"></div>
-
+<script>  
+    $("#tes").popover({ title: 'Tambah Satuan'});
+</script>  
 <script>
 $(document).ready(function() {
  /*
@@ -306,7 +316,9 @@ function addCombo() {
 			}
 		}
 		});
-	}
+	}else{
+        bootstrap_alert.warning('<b>Kesalahan!</b> Field Tidak Boleh Kosong');
+    }
 }
 
 bootstrap_alert = function() {}

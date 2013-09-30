@@ -2,7 +2,7 @@
     <table id="tbLsPO">
         <thead>
             <th>Kode PO</th>
-            <th>DPP</th>
+            <th>Supplier</th>
         </thead>
 
         <tbody>
@@ -25,7 +25,7 @@
                         PPN = '$row->PPN'
                         total = '$row->Total'>
                 <td>$row->Kode</td>
-                <td>$row->DPP</td>
+                <td>$row->Perusahaan</td>
             </tr>";
         } ?>
         </tbody>

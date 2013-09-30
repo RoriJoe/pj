@@ -26,8 +26,8 @@
         <td style='width:120px';><input type='text' class='validate[required]' id='ket$i' name='ket$i' value='$row->Keterangan' style='width:120px'; disabled='true'></td>
         <td style='width:50px';>
            <div class='btn-group'>
-                <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-                <a class='btn' href='#' onclick='deleteRow(this)'><i class='icon-trash'></i></a>
+                <a class='btn' href='#' onclick='editRow($i)' style='display:none;'><i id='icon$i' class='icon-pencil'></i></a>
+                <a class='btn' href='#' onclick='deleteRow(this)' style='display:none;'><i class='icon-trash'></i></a>
             </div>
         </td>
         </tr>

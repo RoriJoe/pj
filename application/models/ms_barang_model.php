@@ -23,6 +23,19 @@
             return $q->result();
         }
 
+        function check($data){
+            $this->db->select('*');
+            $this->db->not_like($data);
+            $q=$this->db->get($this->table_name);
+            return $q->result();
+            /*$q = $this->db->query("
+            SELECT Kode
+            FROM barang
+            WHERE Kode NOT LIKE '$data'
+            ");
+            return $q->result();*/
+        }
+
         //model untuk save add data
         function insert($data, $id)
         {

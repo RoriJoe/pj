@@ -27,6 +27,7 @@
 </div>
 
 <script>
+    
     var oTable = $('#tb5').dataTable( {
         //"sScrollY": "300px", //heighnya
         //"sScrollX": "100%", //panjang width

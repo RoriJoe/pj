@@ -11,7 +11,7 @@
        echo "<tr>
         <td id='1' style='width:100px;' >
             <div class='input-append'>
-                <input type='text' class='validate[required] span2' id='kode_brg$i' id='appendedInputButton' name='kode_brg$i' style='width:100px' value='$row->Kode_Brg' disabled='true'/>
+                <input type='text' class='validate[required] span2' id='kode_brg$i' id='appendedInputButton' name='kode_brgd' style='width:100px' value='$row->Kode_Brg' disabled='true'/>
                 <a href='#myModal' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
@@ -21,8 +21,8 @@
         <td style='width:120px;'><input type='text' class='validate[required]' id='ket$i' name='ket$i' style='width:120px' value='$row->Keterangan' disabled='true'/></td>
         <td style='width:50px;'>
             <div class='btn-group'>
-		        <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-                <a class='btn' href='#' onclick='deleteRow(this)'><i class='icon-trash'></i></a>
+		        <a class='btn' href='#' name='pencil' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
+                <a class='btn' href='#' name='trash' onclick='deleteRow(this)'><i class='icon-trash'></i></a>
             </div>
         </td>
         </tr>

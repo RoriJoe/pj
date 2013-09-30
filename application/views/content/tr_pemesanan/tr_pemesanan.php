@@ -265,9 +265,8 @@ $(document).ready(function() {
     validation_engine();
     tampilDetailPO();
     key();
-    listBarang();
+    //listBarang();
 });
-
 /*
 template:
 -Alert
@@ -462,14 +461,43 @@ function listGudang(){
 //Table Barang
 function listBarang(){
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
-    data :{},
-    success:
-    function(hh){
-        $('#list_barang').html(hh);
-    }
-    });   
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+        data :{},
+        success:
+        function(hh){
+            $('#list_barang').html(hh);
+        }
+        });   
+    /*var arrKode = new Array();
+    
+    var table = document.getElementById('tb3');
+    var totalRow = table.rows.length-1;
+    if(totalRow == 1){
+        $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+        data :{},
+        success:
+        function(hh){
+            $('#list_barang').html(hh);
+        }
+        });   
+    }else{
+        for(var i=1;i<=totalRow;i++){
+            arrKode[i-1] = $('#kode_brg'+i).val();
+        }
+
+        $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/checkBarang",
+        data :{arrKode:arrKode,totalRow:totalRow},
+        success:
+        function(hh){
+            $('#list_barang').html(hh);
+        }
+        });   
+    }*/
 }
 
 function tampilDetailPO(){
@@ -506,12 +534,53 @@ function getBarang(){
     var x = $('input:radio[name=optionsRadios]:checked').val();
     var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
     var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
-    
+
     var row = filter;
-    
-    $('#kode_brg'+row).val(x);
-    $('#keterangan_brg'+row).val(z);
-    $('#satuan_brg'+row).val(y);    
+    var array = [];
+
+    var arrs = document.getElementsByName('kode_brgd');
+
+    found_flag = false;
+    for (i = 0; i < arrs.length; i++) {
+        if (arrs[i].value === x) {
+            found_flag = true;
+            break;
+        }
+    }
+
+    if (found_flag === true)
+    {
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
+    } else {
+        $('#kode_brg'+row).val(x);
+        $('#keterangan_brg'+row).val(z);
+        $('#satuan_brg'+row).val(y);
+    }
+/*
+    var i = array.length;
+    window.alert(array.length);
+    if(array.length == 0){
+        array.push(x);
+        window.alert(array.length);
+        $('#kode_brg'+row).val(x);
+        $('#keterangan_brg'+row).val(z);
+        $('#satuan_brg'+row).val(y);  
+    }else{
+        found_flag = false;
+        for (i = 0; i < array.length; i++) {
+            if (array[i][1] === x) {
+                found_flag = false;
+                break;
+            }
+        }
+
+        if (found_flag === true)
+        {
+            alert(i);
+        } else {
+            alert('not found');
+        }
+    }*/
 }
     
 //Radion Button response
@@ -614,12 +683,12 @@ function addRow(tableID) {
         
         var element0 = document.createElement("input");
         element0.type = "text";
-        element0.name="kode_brgd"+last;
+        element0.name="kode_brgd";
         element0.className="validate[required]";
         element0.className="span2"; 
         element0.id="kode_brg"+last;
         element0.setAttribute("onkeypress", "validAct("+last+")");
-        element0.setAttribute("disable", false);
+        element0.disabled="true";
         element0.style.width = "70px";
         
         var filter = document.createElement("a");
@@ -752,8 +821,25 @@ $("#save").click(function(){
         arrNilai[i-1] = $('#jumlah_brg'+i).val(); 
     }
 
+    var StartDate= document.getElementById('_tgl1').value;
+      var EndDate= document.getElementById('_tgl2').value;
+      var eDate = new Date(EndDate);
+      var sDate = new Date(StartDate);
+
     if(mode == "add"){ //add mode
-        if($("#formID").validationEngine('validate'))
+        if($('#gud').val() != ""){
+            if(kd_sup == 0){
+                bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+        }
+        else if(kd_sup == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+        else if(StartDate!= '' && StartDate!= '' && sDate> eDate)
+        {
+            bootstrap_alert.warning('<b>Gagal!</b> Pastikan Tanggal Kirim Setelah Tanggal PO');
+        }
+        else if($("#formID").validationEngine('validate') && $("#total").val() != 0)
         {
             $.ajax({
             type:'POST',
@@ -781,8 +867,23 @@ $("#save").click(function(){
                 }
             }
             });
+        }else{
+            bootstrap_alert.warning('<b>Gagal!</b> Masukkan Detail Barang & Pastikan Semua Field Terisi');
         }             
     }else if(mode == "edit"){ //Edit mode
+        if($('#gud').val() != ""){
+            if(kd_sup == 0){
+                bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+        }
+        else if(kd_sup == 0){
+            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+        else if(StartDate!= '' && StartDate!= '' && sDate> eDate)
+        {
+            bootstrap_alert.warning('<b>Gagal!</b> Pastikan Tanggal Kirim Setelah Tanggal PO');
+        }
+        else 
         if($("#formID").validationEngine('validate'))
         {
             $.ajax({
