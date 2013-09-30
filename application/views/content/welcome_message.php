@@ -21,14 +21,6 @@ $(document).ready(function(){
     max: 100,
     title: "Sample"
   }); 
-
-  var i = new JustGage({
-    id: "gauge3", 
-    value: getRandomInt(40, 80), 
-    min: 0,
-    max: 100,
-    title: "Sample"
-  }); 
 });
 
 </script>
@@ -63,7 +55,6 @@ $(document).ready(function(){
     <div class="tab-pane active" id="tab3">
       <div id="gauge" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
       <div id="gauge2" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
-      <div id="gauge3" class="300x150px" style="display: inline-block; width: 200px; height:140px;"></div>
     </div>
     <div class="tab-pane" id="tab1">
         <div id="stat" class="pull-left">

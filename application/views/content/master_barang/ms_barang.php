@@ -81,7 +81,7 @@ loadListBarang();
             </td>
             <td>Nama</td>
             <td>
-                <input type='text' class="validate[required,maxSize[25], minSize[2]],custom[onlyLetterSp]]" maxlength="25" id='_nama1' name='nama1' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[25], minSize[2]]]" maxlength="25" id='_nama1' name='nama1' style="width: 170px;margin-left: 10px; margin-right: 20px;">
             </td>
         </tr>
         <tr>
