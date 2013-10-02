@@ -1,7 +1,7 @@
 <script>
 //Auto Generate
 function autogen(){
-    $("#_kd").attr('disabled',false);
+    $("#_kd").attr('disabled',true);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     

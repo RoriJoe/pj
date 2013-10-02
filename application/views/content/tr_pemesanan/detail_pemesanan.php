@@ -31,7 +31,7 @@
             <input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg$i' style='width:70px' value='$row->Satuan1' readonly='true'/>
         </td>
         <td>
-            <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true'/>
+            <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true' />
         </td>
         <td>
             <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:70px' value='$row->Nilai' disabled='true'/>
@@ -49,6 +49,8 @@
 </div>
 
 <script>
+
+
     function editRow(row){
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
     var i = document.getElementById('kode_brg'+row);
@@ -187,8 +189,21 @@ function validAct(row){
     if(userVal.length == 20){
         alert("Maximum Kode Barang 20 Karakter");
     } 
-
-    
+	
+	//disable alfabet di hrg
+    var est = document.getElementById('harga_brg'+row);
+    est.addEventListener('input', function (prev) {
+    return function (evt) {
+        if (!/^\d{0,9}(?:\.\d{0,2})?$/.test(this.value)) {
+          this.value = prev;
+        }
+        else {
+          prev = this.value;
+        }
+    };
+    }(est.value), false);
+	
+	
     //disable alfabet di qty
     var foo = document.getElementById('qty_brg'+row);
     foo.addEventListener('input', function (prev) {
