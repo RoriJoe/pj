@@ -107,10 +107,10 @@
             $data['arrKet']=$this->input->post('arrKet');
 			
 			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
-			$templateView = $this->load->view('content/print_transaksi_so',$data);
+			$this->load->view('content/print_transaksi_so',$data);
 			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);
-			create_pdf($templateView, $data['filename']); //Create pdf     
+			//create_pdf($templateView, $data['filename']); //Create pdf     
 		}
 
 		/*

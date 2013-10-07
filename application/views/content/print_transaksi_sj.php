@@ -1,3 +1,15 @@
+<style type="text/css">
+	.bod td, th
+	{
+		border:1px solid black;
+	}
+	thead{
+		border:1px solid black;
+	}
+	table{
+		border-collapse:collapse;
+	}
+</style>
 <table>
 	<tr>
 		<td width="80%">
@@ -13,9 +25,9 @@
 </table>
 
 <hr/>
-<table class="table" width="100%" style="font-size: 11px">
+<table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
-		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
+		<tr style="background: #C5C5C5;">
 			<th>No SJ</th>
 			<th>No SO</th>
 			<th>Pelanggan</th>

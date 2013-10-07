@@ -8,6 +8,6 @@ if (!function_exists('create_pdf')) {
         require 'mpdf/mpdf.php';
         $mypdf = new mPDF();
         $mypdf->WriteHTML($html_data);
-        $mypdf->Output($file_name, 'I');
+        $mypdf->Output($file_name, 'D');
     }
 }

@@ -369,6 +369,7 @@ function validation_engine() {
 				  open();
 				  write(msg);
 				  close();
+                  win.print();
 				}
 	        }
 	     });

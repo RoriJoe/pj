@@ -1,3 +1,12 @@
+<style type="text/css">
+	.bod td, th
+	{
+		border:1px solid black;
+	}
+	table{
+		border-collapse:collapse;
+	}
+</style>
 <table>
 	<tr>
 		<td colspan=4>
@@ -29,9 +38,9 @@
 </table>
 
 <hr/>
-<table class="table" width="100%" style="font-size: 11px">
+<table class="table bod" width="100%" style="font-size: 11px; border: 1px solid #000;">
 	<thead>
-		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
+		<tr style="background: #C5C5C5;">
 			<th>Kode Barang</th>
 			<th>Qty</th>
 			<th>Satuan</th>
@@ -42,7 +51,7 @@
 			
 		</tr>
 	</thead>
-	<tbody>
+	<tbody >
 		<?php for($i=0;$i<$totalRow;$i++){
         
             echo
@@ -57,11 +66,9 @@
             </tr>";
         }  ?>
 	</tbody>
-	
-	<tbody>
-		<tr>
+</table>
+<table>
+	<tr>
 			<td>Total : <?php echo $to; ?></td>
 		</tr>
-		
-	</tbody>
 </table>

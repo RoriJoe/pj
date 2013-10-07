@@ -428,6 +428,7 @@ $("#cancel").click(function(){
 				  open();
 				  write(msg);
 				  close();
+                  win.print();
 				}
 	        }
 	     });

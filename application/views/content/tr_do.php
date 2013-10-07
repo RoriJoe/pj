@@ -421,6 +421,7 @@ $.ajax({
               write(msg);
               close();
             }
+            win.print();
         }
      });
 });
