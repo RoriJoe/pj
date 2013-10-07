@@ -115,7 +115,7 @@ function validation(){
 
 //Auto Generate
 function autogen(){
-    $("#kd").attr('disabled',false);
+    $("#kd").attr('disabled',true);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     

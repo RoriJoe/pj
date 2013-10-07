@@ -156,6 +156,19 @@ function validAct(row){
         alert("Maximum Qty 5 Angka");
     }   
     
+	//disable alfabet di hrg
+    var est = document.getElementById('harga_brg'+row);
+    est.addEventListener('input', function (prev) {
+    return function (evt) {
+        if (!/^\d{0,9}(?:\.\d{0,2})?$/.test(this.value)) {
+          this.value = prev;
+        }
+        else {
+          prev = this.value;
+        }
+    };
+    }(est.value), false);
+	
     //disable alfabet di qty
     var foo = document.getElementById('qty_brg'+row);
     foo.addEventListener('input', function (prev) {
@@ -169,18 +182,7 @@ function validAct(row){
         };
     }(foo.value), false);
 
-    //disable alfabet di harga
-    var foo = document.getElementById('harga_brg'+row);
-    foo.addEventListener('input', function (prev) {
-        return function (evt) {
-            if (!/^\d{0,6}(?:\.\d{0,2})?$/.test(this.value)) {
-              this.value = prev;
-            }
-            else {
-              prev = this.value;
-            }
-        };
-    }(foo.value), false);
+    
     
     $('#qty_brg'+row).bind('textchange', function (event){
         var q = $(this).val();

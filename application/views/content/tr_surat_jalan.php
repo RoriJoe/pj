@@ -5,6 +5,7 @@ function autogen(){
 	$('#save').attr('mode','add');
     $('#save').attr('disabled',true);
     $('#cancel').attr('disabled',true);
+	$('#sj').attr('disabled',true);
 
     $.ajax({
     type:'POST',

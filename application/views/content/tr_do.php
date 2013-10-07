@@ -3,7 +3,7 @@
 function autogen(){
     $('#add').attr('mode','new');
     $('#delete').attr('disabled', true);
-    $("#_so").attr('disabled',false);
+    $("#_so").attr('disabled',true);
 
     $('#save').attr('disabled',true);
     $('#cancel').attr('disabled',true);

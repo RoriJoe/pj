@@ -381,7 +381,7 @@ function autogen(){
     $('#add').attr('disabled',true);
 
     $('#delete').attr('disabled', true);
-    $("#po").attr('disabled',false);
+    $("#po").attr('disabled',true);
     $("#total").val("");
     $("#dpp").val("");
     $("#ppn").val("");

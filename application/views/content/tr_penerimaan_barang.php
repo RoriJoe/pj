@@ -8,7 +8,7 @@ function autogen(){
     $('#add').attr('disabled',true);
 
     $('#delete').attr('disabled', true);
-    $("#_bpb").attr('disabled',false);
+    $("#_bpb").attr('disabled',true);
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/auto_gen",
