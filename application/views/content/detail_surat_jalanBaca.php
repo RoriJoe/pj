@@ -14,17 +14,17 @@
     foreach($hasil as $row)
     {
         echo "<tr>
-        <td id='1' style='width:100px;'>
+        <td id='1'>
             <div class='input-append'>
                 <input type='text' class='validate[required]' id='kode_brg$i' id='appendedInputButton' name='kode_brg$i' value='$row->Kode_Brg' style='width:100px'; disabled='true'>
                 <a href='#myModal' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
-        <td style='width:120px';><input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur$i' value='$row->Barang' style='width:120px'; disabled='true'></td>
-        <td style='width:120px';><label id='nbu$i'>$row->Barang_SJ</label></td>
-        <td style='width:50px';><input type='text' class='validate[required]' id='qty$i' name='qty$i' value='$row->Qty1' style='width:20px'; disabled='true'></td>
-        <td style='width:120px';><input type='text' class='validate[required]' id='ket$i' name='ket$i' value='$row->Keterangan' style='width:120px'; disabled='true'></td>
-        <td style='width:50px';>
+        <td ><input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur$i' value='$row->Barang' style='width:120px'; disabled='true'></td>
+        <td><label id='nbu$i'>$row->Barang_SJ</label></td>
+        <td ><input type='text' class='validate[required]' id='qty$i' name='qty$i' value='$row->Qty1' style='width:20px'; disabled='true'></td>
+        <td><input type='text' class='validate[required]' id='ket$i' name='ket$i' value='$row->Keterangan' style='width:120px'; disabled='true'></td>
+        <td>
            <div class='btn-group'>
                 <a class='btn' href='#' onclick='editRow($i)' style='display:none;'><i id='icon$i' class='icon-pencil'></i></a>
                 <a class='btn' href='#' onclick='deleteRow(this)' style='display:none;'><i class='icon-trash'></i></a>

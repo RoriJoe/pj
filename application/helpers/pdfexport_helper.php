@@ -24,9 +24,9 @@
             $CI->mpdf->nbpgSuffix = ' pages';
             $CI->mpdf->SetHeader('{PAGENO}{nbpg}');
             $CI->mpdf = new mPDF('', 'A4', 0, '', 12, 12, 10, 10, 5, 5);
-            $style = base_url().'assets/css/bootstrap.css';
-            $stylesheet = file_get_contents( $style);
-            $CI->mpdf->WriteHTML($stylesheet,1);    
+            //$style = base_url().'assets/css/bootstrap.css';
+            //$stylesheet = file_get_contents( $style);
+            //$CI->mpdf->WriteHTML($stylesheet,1);    
 			//$CI->mpdf->WriteHTML($stylesheet2,2);                    
             $CI->mpdf->WriteHTML($htmView,2);                       
             //$CI->mpdf->Output(''.$filename.'.pdf','D');
