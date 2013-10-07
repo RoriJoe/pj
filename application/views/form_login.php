@@ -18,7 +18,7 @@
     <div id="konfirmasi" class="sukses"></div>
     <div class="login-box">
        <div class="login-image">
-        <img src="http://sisfoprima.com/pj/assets/img/login.png">
+        <img src="<?php base_url(); ?>assets/img/login.png">
         <div class="div-judul">
             <p>PD.PELITA JAYA</p>
         </div>

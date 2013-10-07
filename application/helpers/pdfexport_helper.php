@@ -20,7 +20,7 @@
             $CI->mpdf->SetDisplayMode('fullpage');
             $CI->mpdf->pagenumPrefix = 'Page number ';
             $CI->mpdf->pagenumSuffix = ' - ';
-            $CII->mpdf->nbpgPrefix = ' out of ';
+            $CI->mpdf->nbpgPrefix = ' out of ';
             $CI->mpdf->nbpgSuffix = ' pages';
             $CI->mpdf->SetHeader('{PAGENO}{nbpg}');
             $CI->mpdf = new mPDF('', 'A4', 0, '', 12, 12, 10, 10, 5, 5);
@@ -28,7 +28,7 @@
             //$stylesheet = file_get_contents( $style);
             //$CI->mpdf->WriteHTML($stylesheet,1);    
 			//$CI->mpdf->WriteHTML($stylesheet2,2);                    
-            $CI->mpdf->WriteHTML($htmView,2);                       
+            $CI->mpdf->WriteHTML($htmView,1);                       
             //$CI->mpdf->Output(''.$filename.'.pdf','D');
             $CI->mpdf->Output(''.$fileName.'.pdf','I');
 	    }

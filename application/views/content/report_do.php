@@ -55,8 +55,7 @@ $(function() {
 		
 	</div>
 	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">
-		
+		<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">	
 	</div>
 </div>
 </form>
