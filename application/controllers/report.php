@@ -7,7 +7,7 @@
 	        #load library dan helper yang dibutuhkan
 	        $this->load->library(array('table','form_validation'));
 	        $this->load->helper(array('form','url'));
-	        $this->load->helper(array('My_Pdf'));   //  Load helper
+	        $this->load->helper(array('my_pdf'));   //  Load helper
 	    }
 		
 		function print_sj(){ //just for testing!!!!
