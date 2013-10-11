@@ -133,7 +133,7 @@ loadListBarang();
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
-            <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
+            <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
             </td>
         </tr>
     </table>
@@ -186,6 +186,29 @@ $("#_nama1").keypress(function(e){
    if(userVal.length == 20){
        bootstrap_alert.warning('Maksimum Nama 25 Karakter');
    } 
+});
+
+//buat print
+$("#print").click(function(){
+$.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/report/print_master_barang",
+        data :{   
+        },
+
+        success:
+        function(msg)
+        {   
+            var win=window.open('');
+            with(win.document)
+            {
+              open();
+              write(msg);
+              close();
+            }
+            win.print();
+        }
+     });
 });
 
 $("#save").click(function(){

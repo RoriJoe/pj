@@ -54,8 +54,8 @@ function listBarang(){
 					Tanggal Dari
 				</td>
 				<td>
-					<input type="text" id="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
-					<input type="text" id="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
+					<input type="text" name="_tgl" id="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
+					<input type="text" name="_tgl2" id="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
 				</td>
 			</tr>
 			<tr>
@@ -64,14 +64,14 @@ function listBarang(){
 				</td>
 				<td style="text-align: center">
 					<div class='input-append' style="margin-bottom: 0; margin-top: 10px;">
-                		<input type='text' id="barang1" id='appendedInputButton'  style='width:170px' />
+                		<input type='text' name="barang1" id="barang1" id='appendedInputButton'  style='width:170px' />
                 		<a href='#myModal' onclick='getDetail(1)' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px;'><i class='icon-filter'></i></a>
             		</div>
 					<br/>
 					sampai
 					<br/>
 					<div class='input-append'>
-                		<input type='text' id="barang2" id='appendedInputButton'  style='width:170px' />
+                		<input type='text' name="barang2" id="barang2" id='appendedInputButton'  style='width:170px' />
                 		<a href='#myModal' onclick='getDetail(2)' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px;'><i class='icon-filter'></i></a>
             		</div>
 				</td>

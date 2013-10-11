@@ -29,17 +29,31 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php $i=1;
+		<?php $i=1;$k="";
+		
 		foreach($hasil2 as $row)
         {
+		$terima =$row->terima;
+		$keluar = $row->keluar;
+		$kode=$row->Kode;
+		$saw = $row->SAW;
+		$saldo = ($saw + $terima) - $keluar;
+		
+
             echo
             "<tr>
 				<td>$i</td>
                 <td>$row->Kode</td>
                 <td>$row->Nama</td>
                 <td>$row->Ukuran</td>
+				<td>$row->Nama2</td>
+				<td>$row->SAW</td>
+				<td>$row->terima</td>
+				<td>$row->keluar</td>
+				<td>$saldo</td>
+				<td>$row->Satuan1</td>
             </tr>";
-			$i++;
+			$i++;$k=$kode;
 		} ?>
 	</tbody>
 </table>

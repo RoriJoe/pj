@@ -75,7 +75,7 @@ $.ajax({
                 <br/>
                 <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
                 <button id="cac" class="btn" type="reset">Cancel</button>
-                <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
             </td>
         </tr>
     </table>
@@ -167,6 +167,30 @@ function key(){
 
 
 <script type="text/javascript">
+
+//buat print
+$("#print").click(function(){
+$.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/report/print_master_pelanggan",
+        data :{   
+        },
+
+        success:
+        function(msg)
+        {   
+            var win=window.open('');
+            with(win.document)
+            {
+              open();
+              write(msg);
+              close();
+            }
+            win.print();
+        }
+     });
+});
+
 $("#kd").keypress(function(e){
    var userVal = $("#kd").val();
    if(userVal.length == 20){

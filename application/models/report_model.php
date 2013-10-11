@@ -71,17 +71,43 @@ class report_model extends CI_Model{
 		}
 	}
 	
+	function print_kartustock($barang1,$barang2){ //Sementara
+		
+		$q = $this->db->query("
+		
+SELECT Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar
+		
+    from barang 
+	
+    LEFT OUTER JOIN saw_d ON barang.Kode = saw_d.Kd_Brg
+	LEFT OUTER JOIN saw_h ON saw_d.No_Saw = saw_h.No_Saw
+    LEFT OUTER JOIN bpb_d ON barang.Kode = bpb_d.Kode_brg
+    LEFT OUTER JOIN sj_d ON barang.Kode = sj_d.Kode_brg
+    where Kode between '$barang1' and '$barang2'
+    group by barang.Kode;");
+				return $q->result();
+		
+	}
 	
 	function print_mutasi($barang1,$barang2){ //Sementara
 		
-		$q = $this->db->query("SELECT Kode, Nama, Ukuran from barang where Kode between '$barang1' and '$barang2';");
+		$q = $this->db->query("
+		
+SELECT Kode, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar
+		
+    from barang 
+    LEFT OUTER JOIN saw_d ON barang.Kode = saw_d.Kd_Brg
+    LEFT OUTER JOIN bpb_d ON barang.Kode = bpb_d.Kode_brg
+    LEFT OUTER JOIN sj_d ON barang.Kode = sj_d.Kode_brg
+    where Kode between '$barang1' and '$barang2'
+    group by barang.Kode;");
 				return $q->result();
 		
 	}
 	
 	function print_os(){ //Sementara
 		
-		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Nama as NP, barang.Nama, Ukuran, Qty, Satuan1
+		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty, Satuan1
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
@@ -90,5 +116,24 @@ class report_model extends CI_Model{
 				return $q->result();
 		
 	}
+	
+	function print_master_barang(){
+		$q = $this->db->query("SELECT * from barang ");
+		return $q->result();
+	}
+	
+	function print_master_pelanggan(){
+		$q = $this->db->query("SELECT * from pelanggan ");
+		return $q->result();
+	}
+	function print_master_supplier(){
+		$q = $this->db->query("SELECT * from supplier ");
+		return $q->result();
+	}
+	function print_master_gudang(){
+		$q = $this->db->query("SELECT * from gudang ");
+		return $q->result();
+	}
+	
 }
 ?>

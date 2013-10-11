@@ -12,15 +12,34 @@
 </style>
 <table>
 	<tr>
-		<td width="80%">
+		<td colspan=2>
 			<h1 style="margin: 0">PD. PELITA JAYA</h1>
 			<h4 >LAPORAN SURAT JALAN</h4><br/>
 			
 		</td>
-		<td width="20%">
-			<div>Tanggal Kirim : <?php echo $_tgl ?></div>
-			
-		</td>
+	</tr>
+	<tr>
+		<td width="30%">Nomor SJ : </td>
+		<td width="25%"><?php echo $sj; ?></td>
+		<td width="30%">Tgl Kirim : </td>
+		<td><?php echo $_tgl; ?></td>
+	</tr>
+	<tr>
+		<td width="30%">Nomor SO : </td>
+		<td width="25%"><?php echo $_do; ?></td>
+		<td width="30%">Gudang : </td>
+		<td><?php echo $gg; ?></td>
+	</tr>
+	<tr>
+		<td width="30%">Pelanggan : </td>
+		<td width="25%"><?php echo $pn; ?></td>
+		<td width="30%">No PO : </td>
+		<td><?php echo $po; ?></td>
+	</tr>
+	<tr>
+		<td width="30%">Nomor Mobil : </td>
+		<td width="25%"><?php echo $mbl; ?></td>
+		
 	</tr>
 </table>
 
@@ -28,15 +47,9 @@
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
-			<th>No SJ</th>
-			<th>No SO</th>
-			<th>Pelanggan</th>
-			
-			<th>Gudang</th>
-			<th>No_PO</th>
-			<th>Kendaraan</th>
+			<th>Kode</th>
 			<th>Barang & Ukuran</th>
-			
+			<th>Barang SJ</th>
 			<th>Qty</th>
 			<th>Keterangan</th>
 		</tr>
@@ -46,13 +59,10 @@
         
             echo
             "<tr>
-                <td>$sj</td>
-                <td>$_do</td>
-                <td>$pn</td>
-				<td>$gg</td>
-				<td>$po</td>
-				<td>$mbl</td>
+                
+				<td>$kd_brg[$i]</td>
 				<td>$nama[$i]</td>
+				<td>$nbu[$i]</td>
 				<td>$qty[$i]</td>
 				
 				<td>$ktr[$i]</td>

@@ -16,6 +16,7 @@
 <table class="table" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
+			<th>Tanggal</th>
 			<th>No DO</th>
 			<th>Nama Pelanggan</th>
 			<th>Nama Barang</th>
@@ -25,17 +26,22 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach($hasil2 as $row)
-        {
+		<?php $s="";$d="";
+		foreach($hasil2 as $row)
+        {$dmy = date("d-m-Y", strtotime($row->Tgl));
+			if($dmy==$s||$d==$row->No_Do){
+				$dmy="";
+			}
             echo
             "<tr>
+				<td>$dmy</td>
                 <td>$row->No_Do</td>
                 <td>$row->NP</td>
                 <td>$row->Nama</td>
 				<td>$row->Ukuran</td>
 				<td>$row->Qty</td>
 				<td>$row->Satuan1</td>
-            </tr>";
+            </tr>";$s=$dmy;$d=$row->No_Do;
         } ?>
 	</tbody>
 </table>

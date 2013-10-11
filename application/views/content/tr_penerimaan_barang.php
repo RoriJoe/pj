@@ -568,7 +568,7 @@ $("#cancel").click(function(){
 	        success:
 	        function(msg)
 	        {	
-				var win=window.open('about:blank');
+				var win=window.open('');
 				with(win.document)
 				{
 				  open();

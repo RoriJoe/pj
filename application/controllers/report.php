@@ -113,6 +113,42 @@
 			//create_pdf($templateView, $data['filename']); //Create pdf     
 		}
 
+		
+		//MASTER 
+		
+		function print_master_barang(){
+			$this->load->model('report_model');
+			$data['tanggal'] = date('d/m/Y');
+			$data['filename'] = "Daftar Barang - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_master_barang();
+			$templateView  = $this->load->view('content/print_master_barang',$data);
+			      
+		}
+		
+		function print_master_pelanggan(){
+			$this->load->model('report_model');
+			$data['tanggal'] = date('d/m/Y');
+			$data['filename'] = "Daftar Pelanggan - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_master_pelanggan();
+			$templateView  = $this->load->view('content/print_master_pelanggan',$data);
+			      
+		}
+		function print_master_supplier(){
+			$this->load->model('report_model');
+			$data['tanggal'] = date('d/m/Y');
+			$data['filename'] = "Daftar Pelanggan - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_master_supplier();
+			$templateView  = $this->load->view('content/print_master_supplier',$data);
+			      
+		}
+		function print_master_gudang(){
+			$this->load->model('report_model');
+			$data['tanggal'] = date('d/m/Y');
+			$data['filename'] = "Daftar Pelanggan - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_master_gudang();
+			$templateView  = $this->load->view('content/print_master_gudang',$data);
+			      
+		}
 		/*
 		REPORT SECTION
 		*/
@@ -177,10 +213,12 @@
 
 			$barang1 = $this->input->post("barang1");
 			$barang2 = $this->input->post("barang2");
+			$tgl = $this->input->post("_tgl");
+			$tgl2 = $this->input->post("_tgl2");
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Mutasi - ". date('dmY');
-			$data['hasil2']=$this->report_model->print_mutasi($barang1,$barang2);
+			$data['hasil2']=$this->report_model->print_mutasi($barang1,$barang2,$tgl,$tgl2);
 			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
 			$templateView  = $this->load->view('content/print_mutasi',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);  
@@ -237,13 +275,17 @@
 			/*This Function is used for Exporting Pdf
 			* Any chnage in this fuction may cause unknown behaviour
 			*/
-			$this->load->model('tr_surat_jalan_model'); //edit!!
+			$this->load->model('report_model'); //edit!!
 			//$this->load->helper('pdfexport_helper.php');
-
+			$barang1 = $this->input->post("barang1");
+			$barang2 = $this->input->post("barang2");
+			$tgl = $this->input->post("_tgl");
+			$tgl2 = $this->input->post("_tgl2");
+			$data['asd']= $barang1.$barang2;
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Kartu_Stock - ". date('dmY');
-			$data['hasil2']=$this->tr_surat_jalan_model->get_paged_list();
+			$data['hasil2']=$this->report_model->print_kartustock($barang1,$barang2,$tgl,$tgl2);
 			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
 			$templateView  = $this->load->view('content/print_ks',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);
