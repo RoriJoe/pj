@@ -31,7 +31,7 @@
                    <ul>
                         <li><a class = "ajax" href="tr_do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Order</a></li>
                         <li><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
-                        <li><a class = "ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoice</a></li>
+                        <li><a class = "ajax" href="tr_invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoice</a></li>
                    </ul>
                 </li>
             </ul>

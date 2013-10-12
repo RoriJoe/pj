@@ -68,4 +68,8 @@
             $q=$this->db->query("select No_Saw from saw_h order by No_Saw desc limit 1");
             return $q->result();
         }
+        function get_invoice(){
+            $q=$this->db->query("select Kode from invoice order by Kode desc limit 1");
+            return $q->result();
+        }
 	}

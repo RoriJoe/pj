@@ -125,6 +125,13 @@
             $data['judul']="Detail Order";
             $this->template->display('content/tr_do', $data);
         }
+
+        //Transaksi Inovice
+        function tr_invoice()
+        {
+            $data['judul']="Invoice";
+            $this->template->display('content/tr_invoice/tr_invoice', $data);
+        }
 		
 		function report_sj(){
 			$data['judul']="Report SJ";

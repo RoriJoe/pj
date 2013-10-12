@@ -80,4 +80,12 @@
             $this->db->delete('do_d');
             //return "ok";
         }
+        function view(){
+            $this->db->select('A.No_Do, A.Tgl, A.Total, A.Kode_Plg, B.Perusahaan, B.Alamat1');
+            $this->db->from('do_h A');
+            $this->db->join('pelanggan B', 'B.Kode = A.Kode_Plg', 'left');
+            $query = $this->db->get();
+
+            return $query->result();    
+        }
     }

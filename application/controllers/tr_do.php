@@ -182,4 +182,9 @@
                     }
             echo $no;
         }
+
+        function viewSO(){
+            $data['hasil'] = $this->tr_do_model->view();
+            $this->load->view("content/list/list_so",$data);
+        }
     }
