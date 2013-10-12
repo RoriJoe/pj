@@ -93,47 +93,6 @@
                 </div>
                 <div class="tab-pane" id="rC">
                     
-                  <form id="formID">
-                      <table width="100%">
-                      <tr>
-                          <td width="20%">
-                              Name*  
-                          </td>
-                          <td width="45%">
-                              <input type="text" placeholder="Name" id="namas">
-                          </td>
-                          <td rowspan="3">
-                              Priority* : <br/>
-                              <label class="radio"><input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>
-                              Low
-                              </label>
-                              <label class="radio"><input type="radio" name="optionsRadios" id="optionsRadios1" value="2">
-                              Medium
-                              </label>
-                              <label class="radio"><input type="radio" name="optionsRadios" id="optionsRadios1" value="3">
-                              High
-                              </label>
-                              <button class="btn btn-primary btn-small" id="save">submit</button>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td width="20%">
-                              Title*    
-                          </td>
-                          <td width="45%">
-                              <input type="text" placeholder="Title" id="title">
-                          </td>
-                      </tr>
-                      <tr>
-                          <td width="20%">
-                              Description*  
-                          </td>
-                          <td>
-                              <textarea rows="1" style="height: 50px;" placeholder="Add Info, Description, tips, or url" id="desc"></textarea>
-                          </td>
-                      </tr>
-                    </table>
-                  </form>
                   
                 </div>
               </div>
