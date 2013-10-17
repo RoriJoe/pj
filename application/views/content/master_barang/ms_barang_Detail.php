@@ -1,4 +1,4 @@
-<div class="table table-hover CSSTabel tb-barang" style="height: 385px;">
+<div class="table table-hover CSSTabel tb-barang">
 <table id="tb1" style="width: 100%;">
     <thead>
         <th >Kode</th>

@@ -1,23 +1,23 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('Hacking Attemp Detected!');
 	class Login extends CI_CONTROLLER {
             function __construct(){
             parent::__construct();
             $this->load->model('login_model');
             $this->load->library('template');
+            $this->load->library("authex");
             
             $this->load->helper('url');  
-			$this->load->library('user_agent');
+
+			if($this->authex->logged_in())
+	        {
+	            //get the user info
+	            $this->get_level();
+	        }
 		}
 		function index()
 		{ 
             $data['error'] = ""; 
-			$data['uagent'] = "";
-			if ($this->agent->browser() == 'Internet Explorer' OR $this->agent->browser() == 'Firefox'){
-				$data['uagent'] = "0";
-			}else{
-			    $data['uagent'] = "1";
-			}
-			
+			$data['uagent'] = "";			
             $this->load->view('form_login',$data);
         }
         
@@ -28,22 +28,45 @@
 		  
 		function validatelogin()
 		{ 			
-			$query = $this->login_model->validate();
-			
-			if($query) // jika data user benar
-			{
-			$data = array(
-			'username' => $this->input->post('username'),
-			'is_logged_in' => true
-			);
-			$this->session->set_userdata($data);
-			redirect('menu/home',$data);
-			}
-			else // username atau password salah
-			{
-			$this->error();
-			}
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+			$this->authex->login($username, $password);
+
+			if(! $this->authex->logged_in())
+	        {
+	            redirect("login/error");
+	        }
+	        else
+	        {
+	            //get the user info
+	            $this->get_level();
+	        }
 		} 
+
+		function get_level(){
+			$user_info = $this->authex->get_userdata();
+
+	            if($user_info->Level == 1)
+	            {
+	                redirect("admin/home");
+	            }
+	            else if($user_info->Level == 2)
+	            {
+	            	redirect('staff/home');
+	            }
+	            else if($user_info->Level == 3)
+	            {
+	            	redirect('staff/home');
+	            }
+	            else if($user_info->Level == 4)
+	            {
+	            	redirect('staff/home');
+	            }
+	            else if($user_info->Level == 5)
+	            {
+	            	redirect('staff/home');
+	            }
+		}
 		
 		function logout()
 		{

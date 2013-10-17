@@ -89,11 +89,6 @@ list_invoice();
 </form>
 <div id="hasil2"></div>
 
-<div style="float: right;">
-    <input type="hidden" id="total1" />
-    <label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
-</div>
 <div>
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
     <button id="delete" class="btn">Delete</button>

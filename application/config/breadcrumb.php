@@ -145,7 +145,7 @@ $config['delimiter'] = " > ";
  * 		lang['stocks'] = 'Stok';
  * So, your breadcrumb now will be : Home > Gudang > Stok > Search Direct
  */
-$config['replacer'] = array('ms_barang' => 'Master Barang');
+$config['replacer'] = array();
 
 /**
  * --------------------------
@@ -200,7 +200,7 @@ $config['partial_replace'] = array();
  * If we set $config['exclude'] = array('stocks', 'warehouse') then from this URL "http://localhost/arstock/warehouse/stocks/insert"
  * we get breadcrumb: Home > Insert
  */
-$config['exclude'] = array('menu','home');
+$config['exclude'] = array('');
 
 /**
  * ------------------------------------

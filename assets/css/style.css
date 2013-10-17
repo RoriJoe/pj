@@ -1,4 +1,7 @@
 @charset "utf-8";
+.row-fluid [class*="span"] {
+    min-height: 26px;
+    }
 .logp{
 	width:70px;
 	height:auto;
@@ -75,6 +78,7 @@
     height:85px;
     background-size:100% 100%;
     text-align: center;
+    background-image: url(../img/header.png);
     /*border-bottom: 1px solid #001C37;*/
 }
 
@@ -342,7 +346,7 @@
     list-style: none;
     margin:4px auto auto auto;
     padding:0;
-    width:193px;
+    /*width:193px;*/
 }
 
 .sidebar ul li{
@@ -1847,7 +1851,7 @@ margin-left: 10px;
 }
 .signin {
 width: 335px;
-/*margin: 0 auto;*/
+margin: 0 auto;
 }
 .signin-box {
 padding: 20px 25px 15px;
@@ -2098,6 +2102,50 @@ tr{
 	width: 100%;
 	padding: 5px;
 	box-shadow: 0px 1px 1px #9C9C9C;
-	margin-left: 0;
+	margin-left: 0 !important;
 }
 
+#test embed{
+    width: 100%;
+    height: 200px;
+}
+#test4 embed{
+    width: 100%;
+    height: 200px;
+}
+.table-fluid{
+float: right;
+position: relative;
+padding: 6px;
+background-color: #fff;
+box-shadow: 0px 1px 1px #9C9C9C;
+}
+.bar-fluid{
+    background: #C24F4F;
+    height: 22px;
+    padding: 2px;
+}
+.hide-con-fluid{
+margin-bottom: 40px;
+padding-bottom: 10px;
+padding-top: 10px;
+padding-left: 10px;
+background-color: #fff;
+box-shadow: 0 1px 1px #B8B8B8;
+}
+.bar-fluid p{
+margin-left: 5px;
+margin-top: 0px;
+font-weight: bold;
+color: #fff;
+}
+
+.sidebar ul li ul a.head-ul{
+border-bottom: 2px solid #fff;
+font-weight: bold;
+color: #B4B4B4;
+}
+
+.sidebar ul li ul a.ul-divider{
+    border-bottom: 2px solid #fff;
+}

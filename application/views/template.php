@@ -6,12 +6,22 @@
     <title><?php echo $judul; ?></title>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui.min.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    
+    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>  
         <!--Drop Menu-->
     <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
-    <!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.cookie.js'></script>-->
-    <!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.hoverIntent.minified.js'></script>-->
+        <!--JS Sorting-->
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/jquery.dataTables.min.js"></script>
+    <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/FixedColumns.js"></script>-->
+    <!--JS VALIDATION-->
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine-id.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine.js" ></script>
+    <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquerypopupwindow.js"></script>-->
+
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/validation/validationEngine.jquery.css"/>
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/validation/template.css"/>
+    <!--REQUIRED-->
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.textchange.min.js"></script>
 
     <!--Initialize Drop Menu-->
     <script type="text/javascript">
@@ -38,11 +48,7 @@
         })
     })
     </script>
-    <!--Popup-->
-<!--    <script type="text/javascript" src="<?php echo base_url();?>assets/js/popup.js"></script>   -->
-<!--    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.2.min.js" ></script>   -->
-<!--    <script type="text/javascript" src="<?php echo base_url();?>assets/js/js-menu.js"></script> -->
-    
+
     <!--CSS AREA-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
@@ -62,17 +68,18 @@
         </div>
 
         <!-- content -->
-        <div id="content">
-            <div id="leftBar">
-                <?php echo $_side_menu; ?>
-            </div>
+        <div id="container" style="margin-top:45px;margin-right: 10px;">
+            <div class="row-fluid">
+                <div class="span2">
+                    <?php echo $_side_menu; ?>
+                </div>
 
-            <!-- RightBar -->
-            <div id="rightBar">
-                <div id="contentFull" >
-                    <?php echo $_content; ?>
+                <!-- RightBar -->
+                <div class="span10">
+                        <?php echo $_content; ?>
                 </div>
             </div>
+            
             <!-- end of div -->
         </div>
         <div style="clear:both;"></div>
@@ -82,24 +89,6 @@
             <?php echo $_footer; ?>
         </div>
     </div>
-</div>
-<div class="container">
-    <!--JS AREA-->
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script>
-         bootstrap_alert = function() {}
-
-        bootstrap_alert.info = function(message) {
-            $('#info').html('<div class="alert" ><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-        }
-    
-        var agent = <?php echo $uagent;?> ;
-        if(agent != 1){
-            bootstrap_alert.info('<strong>Peringatan!</strong> Browser yang sedang anda gunakan <strong>TIDAK</strong> mendukung secara penuh web ini, direkomendasikan untuk menggunakan <a href=https://www.google.com/intl/en/chrome/browser/>Google Chrome</a>');
-        }
-    </script>
-    <!--breadcrumb--><!--<script type='text/javascript' src='<?php echo base_url();?>assets/js/prefixfree-1.0.7.js'></script>-->
 </div>
 </body>
 </html>
