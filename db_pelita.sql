@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 30, 2013 at 09:12 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- Generation Time: Oct 12, 2013 at 04:19 AM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_pelita`
 --
+CREATE DATABASE IF NOT EXISTS `db_pelita` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_pelita`;
 
 -- --------------------------------------------------------
 
@@ -228,25 +230,23 @@ INSERT INTO `gudang` (`Kode`, `Nama`, `Alamat`, `Alamat2`, `Kota`, `Telp`, `Mili
 -- --------------------------------------------------------
 
 --
--- Table structure for table `issue`
+-- Table structure for table `invoice`
 --
 
-CREATE TABLE IF NOT EXISTS `issue` (
-  `email` varchar(25) NOT NULL,
-  `title` varchar(40) NOT NULL,
-  `desc` varchar(300) NOT NULL,
-  `priority` int(11) NOT NULL
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `Kode` varchar(8) NOT NULL,
+  `Kode_SO` varchar(10) NOT NULL,
+  `Term` int(11) NOT NULL,
+  `Tgl` date NOT NULL,
+  `Status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `issue`
+-- Dumping data for table `invoice`
 --
 
-INSERT INTO `issue` (`email`, `title`, `desc`, `priority`) VALUES
-('Guest', 'Bug #1', 'Sample Desc', 1),
-('Sherlock', 'PDF Function Error', 'mPDF yang digunakan sebagai library untuk mencetak PDF memiliki masalah, coba ganti dengan plugin library yang lebih sesuai.', 3),
-('Tony Stark', 'Performance Issue', 'setiap kali mengakses transaksi performance website menurun, Tips: atur ulang jQuery, Ajax, atau JS yang digunakan', 2),
-('Eddy', 'Bug di master barang', 'master barang menampilkan property yang berbeda', 0);
+INSERT INTO `invoice` (`Kode`, `Kode_SO`, `Term`, `Tgl`, `Status`) VALUES
+('1310001', 'SO1309003', 5, '2013-10-12', NULL);
 
 -- --------------------------------------------------------
 

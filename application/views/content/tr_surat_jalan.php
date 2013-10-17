@@ -1,11 +1,111 @@
+<!--**NOTIFICATION AREA**-->
+<div id="konfirmasi" class="sukses"></div>
+
+<!--//***MAIN FORM-->
+<div class="bar">
+    <p>Form Surat Jalan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+</div>
+
+<div id="konten" class="hide-con master-border">
+<form id="formID">
+    <table width="100%">
+        <tr>
+            <td style="width: 120px;">Nomor SJ</td>
+            <td>
+                <input type='text' class="validate[required]" id='sj' name='sj' style="width: 170px;">
+            </td>
+
+            <td>Tgl Kirim</td>
+            <td>
+                <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;">
+            </td>
+       </tr>
+       <tr>
+            <td>Nomor SO</td>
+            <td>
+                <div class="input-append" style="margin-bottom: 0;">
+				  <input type='text' class="validate[required] span2" id='_do' id="appendedInput" name='_do' style="width: 150px;">
+				  <a href="tr_do" role="button" id="tes" class="btn" type="button" data-toggle="button" data-placement="right" rel="popover" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+				</div>
+            </td>
+
+            <td>Gudang</td>
+            <td>
+                <select name="gg" class="validate[required]" id="gg" style="width: 186px;">
+                <?php
+                    echo "<option value = ''> -- Select -- </option>";
+                    foreach ($list_gudang as $isi)
+                    {
+                        echo "<option ";
+                        echo "value = '".$isi->Kode."'>".$isi->Nama."</option>";
+                    }
+                ?>
+                </select>
+            </td>
+       </tr>
+
+       <tr>
+            <td>Pelanggan</td>
+            <td>
+                <input type='text' class="validate[required]" id='pn' name='pn' style="width: 170px;">
+            </td>
+            <td>No. PO</td>
+            <td><input type='text' class="validate[required]" id='po' name='po' style="width: 170px;">
+            </td>
+        </tr>
+        <tr>
+            <td>Nomor Mobil</td>
+            <td>
+                <input type='text' class="validate[required,minSize[7],maxSize[9]] text-input" id='mbl' name='mbl' style="width: 170px;">
+            </td>
+            <td colspan="2">
+                <label class="checkbox">
+                    <input type="checkbox" id="ambil" name="ambil"> Ambil Sendiri
+                </label>
+            </td>
+        </tr>
+    </table>
+    <p style="visibility: hidden;" id="kode_p" name="kode_p"/>
+    <hr style="margin: 0;"/>
+</form>
+<div id="hasil2" style="height: 215px;"></div>
+<div style="margin-top: 10px;">
+    <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
+    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+    <button id="delete" class="btn" type="submit">Delete</button>
+    <button id="cancel" class="btn" type="submit">Cancel</button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print SJ"><i class="icon-print"></i></button>
+</div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Barang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_barang"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
+  </div>
+</div>
+
+<div id="hasil"></div>
+
+<script>  
+    $("#tes").popover({ content: 'Tambah Sales Order Baru?', trigger: 'hover'});
+</script>
 <script>
 var flag=0;
 //Auto Generate
 function autogen(){
-	$('#save').attr('mode','add');
+    $('#save').attr('mode','add');
     $('#save').attr('disabled',true);
     $('#cancel').attr('disabled',true);
-	$('#sj').attr('disabled',true);
+    $('#sj').attr('disabled',true);
 
     $.ajax({
     type:'POST',
@@ -19,20 +119,20 @@ function autogen(){
 }
 
 jQuery(document).ready(function() {
-	//Validasi JQuery
-	jQuery("#formID").validationEngine(
-	    {
-	        ajaxFormValidation: true,
-	        ajaxFormValidationMethod: 'post',
-	    });
-	});
+    //Validasi JQuery
+    jQuery("#formID").validationEngine(
+        {
+            ajaxFormValidation: true,
+            ajaxFormValidationMethod: 'post',
+        });
+    });
 
-	autogen();
-	tampilSJ();
-	animation();
-	$("#pn").attr('disabled',true);
-	$("#po").attr('disabled',true);
-	disable("no");
+    autogen();
+    tampilSJ();
+    animation();
+    $("#pn").attr('disabled',true);
+    $("#po").attr('disabled',true);
+    disable("no");
     key();
 
 //Auto Complete & Suggestion Search
@@ -91,7 +191,7 @@ function tampilSJ(){
                         $('#pn').val(data[1]);
                         $('#po').val(data[3]);
                         $('#mbl').val(data[5]);
-						$('#kode_p').val(data[8]);
+                        $('#kode_p').val(data[8]);
                         var tes = data[7];
                         if(tes == "Pelita"){
                             $("#ambil").prop("checked", false);
@@ -231,108 +331,6 @@ function listBarang(){
 }
 </script>
 
-
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
-<!--//***MAIN FORM-->
-<div class="bar">
-    <p>Form Surat Jalan <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-
-<div id="konten" class="hide-con master-border">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td style="width: 120px;">Nomor SJ</td>
-            <td>
-                <input type='text' class="validate[required]" id='sj' name='sj' style="width: 170px;">
-            </td>
-
-            <td>Tgl Kirim</td>
-            <td>
-                <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;">
-            </td>
-       </tr>
-       <tr>
-            <td>Nomor SO</td>
-            <td>
-                <div class="input-append" style="margin-bottom: 0;">
-				  <input type='text' class="validate[required] span2" id='_do' id="appendedInput" name='_do' style="width: 150px;">
-				  <a href="tr_do" role="button" id="tes" class="btn" type="button" data-toggle="button" data-placement="right" rel="popover" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
-				</div>
-            </td>
-
-            <td>Gudang</td>
-            <td>
-                <select name="gg" class="validate[required]" id="gg" style="width: 186px;">
-                <?php
-                    echo "<option value = ''> -- Select -- </option>";
-                    foreach ($list_gudang as $isi)
-                    {
-                        echo "<option ";
-                        echo "value = '".$isi->Kode."'>".$isi->Nama."</option>";
-                    }
-                ?>
-                </select>
-            </td>
-       </tr>
-
-       <tr>
-            <td>Pelanggan</td>
-            <td>
-                <input type='text' class="validate[required]" id='pn' name='pn' style="width: 170px;">
-            </td>
-            <td>No. PO</td>
-            <td><input type='text' class="validate[required]" id='po' name='po' style="width: 170px;">
-            </td>
-        </tr>
-        <tr>
-            <td>Nomor Mobil</td>
-            <td>
-                <input type='text' class="validate[required,minSize[7],maxSize[9]] text-input" id='mbl' name='mbl' style="width: 170px;">
-            </td>
-            <td colspan="2">
-                <label class="checkbox">
-                    <input type="checkbox" id="ambil" name="ambil"> Ambil Sendiri
-                </label>
-            </td>
-        </tr>
-    </table>
-    <p style="visibility: hidden;" id="kode_p" name="kode_p"/>
-    <hr style="margin: 0;"/>
-</form>
-<div id="hasil2" style="height: 215px;"></div>
-<div style="margin-top: 10px;">
-    <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn" type="submit">Delete</button>
-    <button id="cancel" class="btn" type="submit">Cancel</button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print SJ"><i class="icon-print"></i></button>
-</div>
-</div>
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_barang"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
-<div id="hasil"></div>
-
-<script>  
-    $("#tes").popover({ content: 'Tambah Sales Order Baru?', trigger: 'hover'});
-</script>
-
 <script>
 listBarang();
 
@@ -422,7 +420,7 @@ $("#cancel").click(function(){
 	        success:
 	        function(msg)
 	        {	
-				var win=window.open('');
+				var win=window.open('about:blank');
 				with(win.document)
 				{
 				  open();

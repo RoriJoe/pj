@@ -1,43 +1,33 @@
 <?php if (!defined('BASEPATH')) exit ('No direct script access allowed');
 	class Menu extends CI_CONTROLLER {
-
 		function __construct()
 		{
 			parent :: __construct();
-			$this->is_logged_in();
+			//$this->is_logged_in();
             $this->load->library('template');
-            $this->load->library('user_agent');
+            $this->load->library("authex");
+
             $this->load->helper('url');
             $this->load->model('combo_model');
+
+            if(! $this->authex->logged_in())
+	        {
+	            redirect("login");
+	        }
 		}
-		
-        function is_logged_in()
-		{
-		  $is_logged_in = $this->session->userdata('is_logged_in');
-		  if(!isset($is_logged_in) || $is_logged_in != true)
-		  {
-		  redirect('login/index');
-		  }
-		}
-        /*Load Home if login success*/
+
 		function home()
-		{
-			$this->load->library('id_chart/id_chart');
-			$data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
-			$data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
-			
-			$data['uagent'] = "";
-            if ($this->agent->browser() == 'Internet Explorer' OR $this->agent->browser() == 'Firefox'){
-                $data['uagent'] = "0";
-            }else{
-                $data['uagent'] = "1";
-            }
-            
-            $username = $this->session->userdata('username');
-            $data['judul']="Welcome";
-            $data['user']=$username;
-            $this->template->display('content/welcome_message', $data);
-		}
+	    {
+	        $this->load->library('id_chart/id_chart');
+	        $data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
+	        $data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
+	        
+	        $username = $this->session->userdata('username');
+	        $data['judul']="Welcome";
+	        $data['user']=$username;
+	        $this->template->display('content/welcome_message', $data);
+	    }
+
 		
 		function example1()
 		{
@@ -66,108 +56,6 @@
 							->render();
 		}
 
-        /*----Respon Click Side Menu----*/
-
-        //Master Barang
-        function ms_barang(){
-			$data['list_satuan']=$this->combo_model->list_satuan();
-            $data['judul']="Master Barang";
-            $this->template->display('content/master_barang/ms_barang', $data);
-        }
-
-        //Master Pelanggan
-        function ms_pelanggan(){
-            $data['judul']="Master Pelanggan";
-            $this->template->display('content/master_pelanggan/ms_pelanggan', $data);
-        }
-
-        //Master Supplier
-        function ms_supplier(){
-            $data['judul']="Master Supplier";
-            $this->template->display('content/master_supplier/ms_supplier', $data);
-        }
-
-        //Master Gudang
-        function ms_gudang(){
-            $data['judul']="Master Gudang";
-            $this->template->display('content/master_gudang/ms_gudang', $data);
-        }
-        
-        //Transaksi Pemesanan /PO
-        function tr_pemesanan()
-        {
-            $data['list_currency']=$this->combo_model->list_currency();
-            $data['judul']="Pemesanan / PO";
-            $this->template->display('content/tr_pemesanan/tr_pemesanan', $data);
-        }
-
-        //Transaksi Pemesanan Barang
-        function tr_penerimaan_barang()
-        {
-            $data['judul']="Penerimaan Barang";
-            $this->template->display('content/tr_penerimaan_barang', $data);
-        }
-
-        //Transaksi Surat Jalan
-        function tr_surat_jalan()
-        {
-            $data['list_gudang']=$this->combo_model->list_gudang();
-            $data['judul']="Surat Jalan";
-            $this->template->display('content/tr_surat_jalan', $data);
-        }
-
-        //Transaksi DO
-        function tr_do()
-        {
-            //$data['list_pelanggan']=$this->combo_model->list_gudang();
-			$username = $this->session->userdata('username');
-			$data['user']=$username;
-            $data['judul']="Detail Order";
-            $this->template->display('content/tr_do', $data);
-        }
-
-        //Transaksi Inovice
-        function tr_invoice()
-        {
-            $data['judul']="Invoice";
-            $this->template->display('content/tr_invoice/tr_invoice', $data);
-        }
-		
-		function report_sj(){
-			$data['judul']="Report SJ";
-			$this->template->display('content/report_sj', $data);
-		}
-		
-		function report_do(){
-			$data['judul']="Report DO";
-			$this->template->display('content/report_do', $data);
-		}
-		
-		function report_mutasi(){
-			$data['judul']="Report Mutasi";
-			$this->template->display('content/report_mutasi', $data);
-		}
-
-		function report_os(){
-			$data['judul']="Report os";
-			$this->template->display('content/report_os', $data);
-		}
-		
-		function report_penerimaan(){
-			$data['judul']="Report penerimaan";
-			$this->template->display('content/report_penerimaan', $data);
-		}
-		
-		function report_ks(){
-			$data['judul']="Report ks";
-			$this->template->display('content/report_ks', $data);
-		}
-
-		function saw(){
-			$data['judul']="Report ks";
-			$this->template->display('content/saw/saw_h', $data);
-		}
-        
         function logout()
         {
             $this->session->sess_destroy();
@@ -177,6 +65,4 @@
 			#$this->output->set_header("Pragma: no-cache"); 
             redirect('login');
         }
-
-        /*----End Respon Click Side Menu----*/
 	}

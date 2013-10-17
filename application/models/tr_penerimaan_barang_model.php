@@ -2,8 +2,8 @@
     class Tr_penerimaan_barang_model extends CI_Model{
 
         public $primary_key='No_Bpb';
-        public $table_name='Bpb_h';
-		public $table_detail='Bpb_d';
+        public $table_name='bpb_h';
+		public $table_detail='bpb_d';
 
         function __construct(){
             parent::__construct();
@@ -56,7 +56,7 @@
 		function update($data, $kode)
         {
             $this->db->where('No_Bpb', $kode);
-            $this->db->update('Bpb_h', $data);
+            $this->db->update('bpb_h', $data);
             return "ok";
         }
 		

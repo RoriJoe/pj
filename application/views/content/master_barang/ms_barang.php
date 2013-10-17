@@ -1,33 +1,4 @@
 <script>
-//Auto Generate
-function autogen(){
-    $("#_kd").attr('disabled',true);
-    $('#save').attr('mode','add');
-    $('button[type="submit"]').attr('disabled','disabled');
-    
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/auto_gen",
-    data :{},
-    success:
-        function(hh){
-            $('#_kd').val(hh);
-        }
-    });
-}
-//Form Validation
-function validationEngine(){
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
-    });
-}
-
 //load Side Table
 function loadListBarang(){
     $.ajax({
@@ -39,25 +10,6 @@ function loadListBarang(){
         $('#hasil').html(hh);
     }
     });
-}
-
-function animation(){
-    //Icon Animation
-jQuery(document).ready(function() {
-  jQuery(".hide-con").hide();
-  var i = document.getElementById('konten');
-  jQuery(".bar").click(function()
-  {
-        jQuery(this).next(".hide-con").slideToggle(500, function(){
-            // Animation complete.
-            if(i.style.display=="none"){
-                document.getElementById('icon').className='icon-chevron-down icon-white';
-            }else{
-                document.getElementById('icon').className='icon-chevron-up icon-white';
-            }
-        });
-  });
-});
 }
 
 loadListBarang();
@@ -154,6 +106,52 @@ $(document).ready(function() {
     key();
 });
 /*----------------------*/
+//Auto Generate
+function autogen(){
+    $("#_kd").attr('disabled',true);
+    $('#save').attr('mode','add');
+    $('button[type="submit"]').attr('disabled','disabled');
+    
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_barang/auto_gen",
+    data :{},
+    success:
+        function(hh){
+            $('#_kd').val(hh);
+        }
+    });
+}
+function animation(){
+    //Icon Animation
+    jQuery(document).ready(function() {
+    jQuery(".hide-con").hide();
+    var i = document.getElementById('konten');
+    jQuery(".bar").click(function()
+    {
+        jQuery(this).next(".hide-con").slideToggle(500, function(){
+            // Animation complete.
+            if(i.style.display=="none"){
+                document.getElementById('icon').className='icon-chevron-down icon-white';
+            }else{
+                document.getElementById('icon').className='icon-chevron-up icon-white';
+            }
+        });
+    });
+    });
+}
+//Form Validation
+function validationEngine(){
+    jQuery("#formID").validationEngine(
+    {
+        showOneMessage: true,
+        ajaxFormValidation: true,
+        ajaxFormValidationMethod: 'post',
+        autoHidePrompt: true,
+        autoHideDelay: 2500, 
+        fadeDuration: 0.3
+    });
+}
 
 /*
  * Click Respon
