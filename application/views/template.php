@@ -76,7 +76,10 @@
 
                 <!-- RightBar -->
                 <div class="span10">
-                        <?php echo $_content; ?>
+                        <div id="contentFull">
+                            <?php echo $_content; ?>
+                        </div>
+                            
                 </div>
             </div>
             

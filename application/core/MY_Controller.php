@@ -5,7 +5,7 @@
 			parent :: __construct();
 			//$this->is_logged_in();
             $this->load->library('template');
-            $this->load->library("authex");
+            $this->load->library('authex');
 
             $this->load->helper('url');
             $this->load->model('combo_model');
