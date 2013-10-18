@@ -121,6 +121,10 @@ bootstrap_alert.success = function(message) {
     $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
     $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
 
 function validation(){
     jQuery("#formID").validationEngine(
@@ -136,7 +140,7 @@ function validation(){
 
 //Auto Generate
 function autogen(){
-    $("#kd").attr('disabled',true);
+    $("#kd").attr('disabled',false);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     
@@ -207,6 +211,7 @@ function disableAlpha($id){
     };
     }(foo.value), false);
 };
+
 function disableNum($id){
     var foo = document.getElementById($id);
     foo.addEventListener('input', function (prev) {
@@ -248,17 +253,37 @@ $.ajax({
 });
 
 $("#cac").click(function(){
-   autogen();
-   $('#formID').each(function(){
+    autogen();
+    $('#formID').each(function(){
         this.reset();
     });
-    autogen();
+    $("#kd").attr('disabled',false);
 });
 
 $("#kd").keypress(function(e){
    var userVal = $("#kd").val();
    if(userVal.length == 20){
-       alert("Maximum Kode 20 Karakter");
+       bootstrap_alert.info('Maksimum Kode 20');
+   } 
+});
+
+$("#pr").keypress(function(e){
+   var userVal = $("#pr").val();
+   if(userVal.length == 30){
+       bootstrap_alert.info('Maksimum Karakter 30');
+   } 
+});
+
+$("#nm").keypress(function(e){
+   var userVal = $("#nm").val();
+   if(userVal.length == 30){
+       bootstrap_alert.info('Maksimum Karakter 30');
+   } 
+});
+$("#kt").keypress(function(e){
+   var userVal = $("#kt").val();
+   if(userVal.length == 13){
+       bootstrap_alert.info('Maksimum Karakter 13');
    } 
 });
 

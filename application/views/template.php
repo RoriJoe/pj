@@ -7,6 +7,7 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui.min.js" ></script>
     <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>  
+    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>  
         <!--Drop Menu-->
     <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
         <!--JS Sorting-->
@@ -46,7 +47,17 @@
             $('#contentFull').html(Res);
             });
         })
+
+        $('#loadingDiv')
+        .hide()  // hide it initially
+        .ajaxStart(function() {
+            $(this).show();
+        })
+        .ajaxStop(function() {
+            $(this).hide();
+        });
     })
+
     </script>
 
     <!--CSS AREA-->
@@ -76,10 +87,20 @@
 
                 <!-- RightBar -->
                 <div class="span10">
-                        <div id="contentFull">
-                            <?php echo $_content; ?>
+
+                    <div id="contentFull">
+                        <?php echo $_content; ?>
+                    </div>
+                    <div id="loadingDiv">
+                        <div id="facebookG">
+                        <div id="blockG_1" class="facebook_blockG">
                         </div>
-                            
+                        <div id="blockG_2" class="facebook_blockG">
+                        </div>
+                        <div id="blockG_3" class="facebook_blockG">
+                        </div>
+                        </div>
+                    </div>       
                 </div>
             </div>
             

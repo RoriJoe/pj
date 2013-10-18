@@ -260,6 +260,7 @@ listPO();
 
 <script type="text/javascript">
 $(document).ready(function() {
+
     autogen();
     animation();
     validation_engine();
@@ -286,6 +287,7 @@ bootstrap_alert.success = function(message) {
 }
 bootstrap_alert.info = function(message) {
     $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
 
 function animation(){
@@ -405,13 +407,15 @@ $(function() {
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
-        showAnim: "blind"
+        showAnim: "blind",
+        setDate: new Date()
     });
     $( "#_tgl2").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
-        showAnim: "blind"
+        showAnim: "blind",
+        setDate: new Date()
     });
 });
 
@@ -708,10 +712,9 @@ function key(){
         $('#cancel').removeAttr('disabled');
         $('#add').removeAttr('disabled');
     }
- });
- $("#al").keyup(function() {
-    if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
+    else{
+        $('#save').attr('disabled','disabled');
+        $('#add').attr('disabled','disabled');
     }
  });
 }
@@ -972,28 +975,32 @@ $("#save").click(function(){
 
 $("#delete").click(function(){
     var po = $('#po').val();
-
-     $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_po/delete",
-        data :{po:po
-        },
-        success:
-        function(msg)
-        {
-            if(msg == "ok")
+    bootbox.confirm("Anda yakin ingin menghapus data Pemesanan "+po+" ?", function(result)
+    {
+        if(result == true){
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_po/delete",
+            data :{po:po
+            },
+            success:
+            function(msg)
             {
-                bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
-                $('#formID').each(function(){
-                    this.reset();
-                });
-               listPO();
-               tampilDetailPO();
-               autogen();
-               $('#save').attr('mode','add');
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
+                    $('#formID').each(function(){
+                        this.reset();
+                    });
+                   listPO();
+                   tampilDetailPO();
+                   autogen();
+                   $('#save').attr('mode','add');
+                }
             }
+            });
         }
-        });
+    });
 });
 
 </script>

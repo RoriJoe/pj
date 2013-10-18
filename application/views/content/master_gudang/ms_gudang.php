@@ -35,7 +35,7 @@ load_list();
             </td>
             <td>Nama</td>
             <td>
-                <input type='text' class="validate[required, maxSize[30], minSize[3]]" maxlength="20" 
+                <input type='text' class="validate[required, maxSize[22], minSize[3]]" maxlength="22" 
                 id='nm' name='nm' 
                 style="width: 146px; margin-left: 10px; margin-right: 20px;">
             </td>
@@ -43,7 +43,7 @@ load_list();
         <tr>
             <td>Alamat</td>
             <td>
-                <textarea rows="2" class="validate[required]" id='al' name='al' style="resize:none; width:200px; height: 60px; margin-left: 10px; margin-right: 20px"></textarea>
+                <textarea rows="2" class="validate[required]" maxlength="100" id='al' name='al' style="resize:none; width:200px; height: 60px; margin-left: 10px; margin-right: 20px"></textarea>
             </td>
             <td>Kota</td>
             <td>
@@ -116,7 +116,7 @@ function validation(){
 
 //Auto Generate
 function autogen(){
-    $("#kd").attr('disabled',true);
+    $("#kd").attr('disabled',false);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     
@@ -143,15 +143,23 @@ bootstrap_alert.success = function(message) {
     $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
     $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
 
 function key(){
  $('button[type="submit"]').attr('disabled','disabled');
  $('input[type="text"]').keyup(function() {
     if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
+        $('button[type="submit"]').removeAttr('disabled');
+    }
+    else{
+        $('button[type="submit"]').attr('disabled','disabled');
     }
  });
- $("#al").keyup(function() {
+
+  $("#al").keyup(function() {
     if($(this).val() != '') {
        $('button[type="submit"]').removeAttr('disabled');
     }
@@ -210,11 +218,32 @@ $.ajax({
      });
 });
 
+$("#kd").keypress(function(e){
+   var userVal = $("#kd").val();
+   if(userVal.length == 20){
+       bootstrap_alert.info('Maksimum Kode 20');
+   } 
+});
+$("#nm").keypress(function(e){
+   var userVal = $("#nm").val();
+   if(userVal.length == 22){
+       bootstrap_alert.info('Maksimum Karakter 22');
+   } 
+});
+
+$("#kt").keypress(function(e){
+   var userVal = $("#kt").val();
+   if(userVal.length == 15){
+       bootstrap_alert.info('Nama Kota Melebihi Batas Karakter');
+   } 
+});
+
 $("#cac").click(function(){
    $('#formID').each(function(){
         this.reset();
     });
     autogen();
+    $("#kd").attr('disabled',false);
 });
 
 $("#save").click(function(){

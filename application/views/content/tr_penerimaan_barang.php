@@ -313,6 +313,7 @@ listBPB();
 
 <script>
 $(document).ready(function(){
+    $( "#_tgl" ).datepicker( "setDate", new Date());
     autogen();
     validation_engine()
     animation();
@@ -327,11 +328,9 @@ $('input[type="text"]').keyup(function() {
         $('#save').removeAttr('disabled');
         $('#cancel').removeAttr('disabled');
         $('#add').removeAttr('disabled');
-    }
- });
- $("#al").keyup(function() {
-    if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
+    }else{
+        $('#save').attr('disabled','disabled');
+        $('#add').attr('disabled','disabled');
     }
  });
 }
@@ -580,120 +579,123 @@ $("#cancel").click(function(){
 	     });
 }); 	
 		
-	//Save Click
-    $("#save").click(function(){
-    	var table = document.getElementById('tb3');
-        var totalRow = table.rows.length-1;
-        
-		if(totalRow != 0 && $('#kode_brg1').val() != ""){
-			
-		var _mode = $('#save').attr("mode");
-    	
-        var _bpb = $('#_bpb').val();
-        var _tgl = $('#_tgl').val();
-        var _gd = $('#kd_gd').val();
-        var _sp = $('#kd_sp').val();
-        var _ref = $('#_ref').val();
-
-        //detail bpb
-        var _arrKd_brg = new Array();
-        var _arrQty = new Array();
-        var _arrKet = new Array();
-        
-        for(var i=1;i<=totalRow;i++){
-            _arrKd_brg[i-1] = $('#kode_brg'+i).val();
-            _arrQty[i-1] = $('#qty_brg'+i).val();
-            _arrKet[i-1] = $('#keterangan_brg'+i).val();
-        }
+//Save Click
+$("#save").click(function(){
+	var table = document.getElementById('tb3');
+    var totalRow = table.rows.length-1;
+    
+	if(totalRow != 0 && $('#kode_brg1').val() != ""){
 		
-        if(_mode == "add") //add mode
+	var _mode = $('#save').attr("mode");
+	
+    var _bpb = $('#_bpb').val();
+    var _tgl = $('#_tgl').val();
+    var _gd = $('#kd_gd').val();
+    var _sp = $('#kd_sp').val();
+    var _ref = $('#_ref').val();
+
+    //detail bpb
+    var _arrKd_brg = new Array();
+    var _arrQty = new Array();
+    var _arrKet = new Array();
+    
+    for(var i=1;i<=totalRow;i++){
+        _arrKd_brg[i-1] = $('#kode_brg'+i).val();
+        _arrQty[i-1] = $('#qty_brg'+i).val();
+        _arrKet[i-1] = $('#keterangan_brg'+i).val();
+    }
+	
+    if(_mode == "add") //add mode
+    {
+        if(_gd == 0){
+        bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+        else if(_sp == 0){
+        bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+    	else if($("#formID").validationEngine('validate'))
         {
-            if(_gd == 0){
-            bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-            else if(_sp == 0){
-            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-        	else if($("#formID").validationEngine('validate'))
-	        {
-	            $.ajax({
-	            type:'POST',
-	            url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/insert",
-	            data :{_bpb:_bpb,_tgl:_tgl,_gd:_gd,_sp:_sp,_ref:_ref,
-	                    _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, _arrKet:_arrKet, totalRow:totalRow
-	            },
-	
-	            success:
-	            function(msg)
-	            {
-	                if(msg == "ok")
-	                {
-	                    bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
-						$('#formID').each(function(){
-							this.reset();
-						});
-	                    listBPB();
-						tampilDetailBPB();
-						autogen();
-						$('#save').attr('mode','add');
-	                }
-	                else{
-	                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
-	                }
-	            }
-	            });
-	        }     
-        }
-        
-        //Edit mode
-        else if(_mode == "edit")
-        { 
-            if(_gd == 0){
-            bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-            else if(_sp == 0){
-            bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-            else 
-        	if($("#formID").validationEngine('validate'))
-        	{
-        		$.ajax({
-	            type:'POST',
-	            url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/update",
-	            data :{_bpb:_bpb,_tgl:_tgl,_gd:_gd,_sp:_sp,_ref:_ref,
-	                    _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, _arrKet:_arrKet, totalRow:totalRow
-	            },
-	
-	            success:
-	            function(msg)
-	            {
-	                if(msg == "ok")
-	                {
-	                    bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
-                        $('#formID').each(function(){
-                                this.reset();
-                        });
-	                    listBPB();
-						tampilDetailBPB();
-						autogen();
-						$('#save').attr('mode','add');
-	                }
-	                else{
-	                    bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
-	                }
-	            }
-	            });
-        	}
-        }
-		}else{
-			bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan, Table Detail Barang Harus diisi!');
-		}  
-    });
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/insert",
+            data :{_bpb:_bpb,_tgl:_tgl,_gd:_gd,_sp:_sp,_ref:_ref,
+                    _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, _arrKet:_arrKet, totalRow:totalRow
+            },
 
-    $("#delete").click(function(){
-        var _bpb = $('#_bpb').val();
+            success:
+            function(msg)
+            {
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
+					$('#formID').each(function(){
+						this.reset();
+					});
+                    listBPB();
+					tampilDetailBPB();
+					autogen();
+					$('#save').attr('mode','add');
+                }
+                else{
+                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
+                }
+            }
+            });
+        }     
+    }
+    
+    //Edit mode
+    else if(_mode == "edit")
+    { 
+        if(_gd == 0){
+        bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+        else if(_sp == 0){
+        bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+        }
+        else 
+    	if($("#formID").validationEngine('validate'))
+    	{
+    		$.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/update",
+            data :{_bpb:_bpb,_tgl:_tgl,_gd:_gd,_sp:_sp,_ref:_ref,
+                    _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, _arrKet:_arrKet, totalRow:totalRow
+            },
 
-         $.ajax({
+            success:
+            function(msg)
+            {
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
+                    $('#formID').each(function(){
+                            this.reset();
+                    });
+                    listBPB();
+					tampilDetailBPB();
+					autogen();
+					$('#save').attr('mode','add');
+                }
+                else{
+                    bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
+                }
+            }
+            });
+    	}
+    }
+	}else{
+		bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan, Table Detail Barang Harus diisi!');
+	}  
+});
+
+$("#delete").click(function(){
+    var _bpb = $('#_bpb').val();
+
+    bootbox.confirm("Anda yakin ingin menghapus data Bukti Penerimaan Barang "+_bpb+" ?", function(result)
+    {
+        if(result==true){
+            $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/delete",
             data :{_bpb:_bpb
@@ -710,10 +712,12 @@ $("#cancel").click(function(){
                     });
                    listBPB();
                    tampilDetailBPB();
-				   autogen();
-				   $('#save').attr('mode','add');
+                   autogen();
+                   $('#save').attr('mode','add');
                 }
             }
             });
+        }
     });
+});
 </script>

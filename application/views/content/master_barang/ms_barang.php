@@ -39,7 +39,7 @@ loadListBarang();
         <tr>
             <td>Ukuran</td>
             <td>
-                <input type='text' class="validate[required,maxSize[25], minSize[4]]" id='_uk' name='uk' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="validate[required,maxSize[25], minSize[4]]" maxlength="25" id='_uk' name='uk' style="width: 170px;margin-left: 10px; margin-right: 20px;">
             </td>
             <td>Keterangan</td>
             <td>
@@ -108,7 +108,7 @@ $(document).ready(function() {
 /*----------------------*/
 //Auto Generate
 function autogen(){
-    $("#_kd").attr('disabled',true);
+    $("#_kd").attr('disabled',false);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     
@@ -169,6 +169,8 @@ function key(){
      $('input[type="text"]').keyup(function() {
         if($(this).val() != '') {
            $('button[type="submit"]').removeAttr('disabled');
+        }else{
+            $('button[type="submit"]').attr('disabled','disabled');
         }
      });
 }
@@ -181,8 +183,14 @@ $("#_kd").keypress(function(e){
 });
 $("#_nama1").keypress(function(e){
    var userVal = $("#_nama1").val();
-   if(userVal.length == 20){
-       bootstrap_alert.warning('Maksimum Nama 25 Karakter');
+   if(userVal.length == 25){
+       bootstrap_alert.info('Maksimum Nama 25 Karakter');
+   } 
+});
+$("#_uk").keypress(function(e){
+   var userVal = $("#_uk").val();
+   if(userVal.length == 25){
+       bootstrap_alert.info('Maksimum Ukuran 25 Karakter');
    } 
 });
 
@@ -350,6 +358,10 @@ bootstrap_alert.warning = function(message) {
 bootstrap_alert.success = function(message) {
 	$('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
 	$(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
 
 </script>

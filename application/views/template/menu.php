@@ -17,7 +17,7 @@
                 <ul>
                     <li><a class = "ajax" href="ms_pelanggan">Pelanggan</a></li>
                     <li><a class = "ajax" href="ms_supplier">Supplier</a></li>
-                    <li><a class = "ajax" href="#">Bank</a></li> 
+                    <li><a class = "ajax" href="ms_bank">Bank</a></li> 
                     <li><a class = "">Persediaan <i class="icon-chevron-right"></i></a>
                         <ul>
                             <li><a class = "ajax" href="ms_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barang</a></li>

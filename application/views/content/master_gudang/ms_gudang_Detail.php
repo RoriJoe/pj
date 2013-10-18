@@ -61,39 +61,37 @@
 
     $(".delete").click(function(){
         var id = $(this).attr("name");            
-        var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
-        if (r==true)
-          {
-            $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>index.php/ms_gudang/delete",
-            data :{id:id},
-            success: function(msg){
-                if(msg=="gagal"){
-                    bootstrap_alert.warning('<b>Gagal Menghapus</b> terjadi kesalahan');
-                }else{
-                    bootstrap_alert.success('<b>Sukses</b> Data '+id+' berhasil dihapus');
-                    autogen();
-                    $('#formID').each(function(){
-                        this.reset();
-                    });    
-                    $.ajax({
-                    type:'POST',
-                    url: "<?php echo base_url();?>index.php/ms_gudang/index",
-                    data :{},
-                    success: 
-                    function(hh){                
-                        $('#hasil').html(hh);            
+        bootbox.confirm("Anda yakin ingin menghapus data "+id+" ?", function(result)
+        {
+            if (result==true)
+            {
+                $.ajax({
+                type:'POST',
+                url: "<?php echo base_url();?>index.php/ms_gudang/delete",
+                data :{id:id},
+                success: function(msg){
+                    if(msg=="gagal"){
+                        bootstrap_alert.warning('<b>Gagal Menghapus</b> terjadi kesalahan');
+                    }else{
+                        bootstrap_alert.success('<b>Sukses</b> Data '+id+' berhasil dihapus');
+                        autogen();
+                        $('#formID').each(function(){
+                            this.reset();
+                        });    
+                        $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/ms_gudang/index",
+                        data :{},
+                        success: 
+                        function(hh){                
+                            $('#hasil').html(hh);            
+                        }
+                        });    
                     }
-                    });    
                 }
-            }
-            });    
-          }
-        else
-          {
-           return false;
-          }    
+                });    
+              }
+            });  
         });
 
 var oTable = $('#tb1').dataTable( {

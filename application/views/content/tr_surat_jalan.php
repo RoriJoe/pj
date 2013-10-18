@@ -531,30 +531,35 @@ $("#save").click(function(){
 
 $("#delete").click(function(){
     var sj = $('#sj').val();
+    bootbox.confirm("Anda yakin ingin menghapus data "+sj+" ?", function(result)
+    {
+        if(result == true){
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_surat_jalan/delete",
+            data :{sj:sj
+            },
 
-     $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_surat_jalan/delete",
-        data :{sj:sj
-        },
-
-        success:
-        function(msg)
-        {
-            if(msg == "ok")
-            {    
-                bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
-                $('#formID').each(function(){
-                    this.reset();
-                });
-                
-                autogen();
-                $('#hasil').html('');
-                disable("no");
-                tampilSJ();
-                tampilDetailDO();
+            success:
+            function(msg)
+            {
+                if(msg == "ok")
+                {    
+                    bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
+                    $('#formID').each(function(){
+                        this.reset();
+                    });
+                    
+                    autogen();
+                    $('#hasil').html('');
+                    disable("no");
+                    tampilSJ();
+                    tampilDetailDO();
+                }
             }
+            });
         }
-     });
+    });
+     
 });
 </script>

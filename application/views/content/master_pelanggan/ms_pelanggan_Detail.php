@@ -75,9 +75,11 @@
 
     $(".delete").click(function(){
         var id = $(this).attr("name");
-        var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
-        if (r==true)
-          {
+        //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+        bootbox.confirm("Anda yakin ingin menghapus data "+id+" ?", function(result)
+        {
+            if (result==true)
+            {
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/ms_pelanggan/delete",
@@ -103,11 +105,8 @@
                 }
             }
             });
-          }
-        else
-        {
-            return false;
-        }
+            }
+        });
     });
 
 var oTable = $('#tb1').dataTable( {

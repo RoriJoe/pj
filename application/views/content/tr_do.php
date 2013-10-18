@@ -653,28 +653,34 @@ $("#save").click(function(){
 $("#delete").click(function(){
     var so = $('#_so').val();
 
-     $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_do/delete",
-        data :{so:so
-        },
-
-        success:
-        function(msg)
+    bootbox.confirm("Anda yakin ingin menghapus data Sales Order "+so+" ?", function(result)
+    {
+        if(result == true)
         {
-            if(msg == "ok")
+            $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/tr_do/delete",
+            data :{so:so
+            },
+
+            success:
+            function(msg)
             {
-                bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
-                $('#formID').each(function(){
-                    this.reset();
-                });
-               listSO();
-               tampilDetailSO();
-			   autogen();
-			   $('#save').attr('mode','add');
+                if(msg == "ok")
+                {
+                    bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
+                    $('#formID').each(function(){
+                        this.reset();
+                    });
+                   listSO();
+                   tampilDetailSO();
+                   autogen();
+                   $('#save').attr('mode','add');
+                }
             }
+            });
         }
-        });
+    });
 });
 
 </script>

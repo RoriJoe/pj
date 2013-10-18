@@ -80,6 +80,11 @@
             $data['judul']="Master Gudang";
             $this->template->display('content/master_gudang/ms_gudang', $data);
         }
+
+        function ms_bank(){
+        	$data['judul']="Master Bank";
+        	$this->template->display('content/master_bank/ms_bank', $data);
+        }
         
         //Transaksi Pemesanan /PO
         function tr_pemesanan()

@@ -100,11 +100,12 @@ function deleteRowSO(row) {
         var table = document.getElementById('tb3');
         var rowCount = table.rows.length-1;
         if(rowCount <= 1) {
-            alert("Detail SO Tidak Boleh Kosong");
+            bootstrap_alert.warning('<b>Gagal Menghapus</b> Detail Table Tidak Boleh Kosong');
         }else{
            table.deleteRow(i);
            rowCount--;
            i--;
+           getTotal();
         }
     }catch(e) {
         alert(e);

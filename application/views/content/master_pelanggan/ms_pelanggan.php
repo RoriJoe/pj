@@ -45,7 +45,7 @@ $.ajax({
         <tr>
             <td>NPWP</td>
             <td>
-                <input type='text' class="validate[required]" id='np' name='np' style="width: 170px; margin-left: 10px; margin-right: 20px;" onclick="disableAlpha('np')">
+                <input type='text' class="validate[required]" maxlength="25" id='np' name='np' style="width: 170px; margin-left: 10px; margin-right: 20px;" onclick="disableAlpha('np')">
             </td>
             <td>Kota</td>
             <td>
@@ -121,6 +121,10 @@ bootstrap_alert.success = function(message) {
     $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
     $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
+bootstrap_alert.info = function(message) {
+    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+}
 
 function validation(){
     jQuery("#formID").validationEngine(
@@ -135,7 +139,7 @@ function validation(){
 }
     
 function autogen(){
-    $("#kd").attr('disabled',true);
+    $("#kd").attr('disabled',false);
     $('#save').attr('mode','add');
     $('button[type="submit"]').attr('disabled','disabled');
     
@@ -209,6 +213,18 @@ $("#cp").keypress(function(e){
        bootstrap_alert.info('Maksimum Karakter 20');
    } 
 });
+$("#np").keypress(function(e){
+   var userVal = $("#np").val();
+   if(userVal.length == 25){
+       bootstrap_alert.info('Maksimum Karakter 25');
+   } 
+});
+$("#kt").keypress(function(e){
+   var userVal = $("#kt").val();
+   if(userVal.length == 15){
+       bootstrap_alert.info('Nama Kota Melebihi Batas Karakter');
+   } 
+});
 
 function disableAlpha($id){
     var foo = document.getElementById($id);
@@ -239,10 +255,10 @@ function disableNum($id){
 
 $("#cac").click(function(){
    autogen();
-   $('#formID').each(function(){
+    $('#formID').each(function(){
         this.reset();
     });
-    autogen();
+    $("#kd").attr('disabled',false);
 });
 
 function retext(){  
