@@ -36,6 +36,12 @@
             speed: 'fast'
         });
     });
+
+    function PlaySound(soundObj) {
+        var sound = document.getElementById(soundObj);
+        if (sound)
+            sound.play();
+    }
     </script>
 
 
@@ -56,8 +62,7 @@
         .ajaxStop(function() {
             $(this).hide();
         });
-    })
-
+    });
     </script>
 
     <!--CSS AREA-->
@@ -114,5 +119,6 @@
         </div>
     </div>
 </div>
+<audio src="<?php echo base_url();?>assets/alert.mp3"  id="beep" />
 </body>
 </html>

@@ -11,6 +11,11 @@
             return $query->result();
         }
         
+        function list_tipe(){
+            $query = $this->db->get('tipe_rekening');
+            return $query->result();
+        }
+
         function list_currency(){
             $query = $this->db->get('currency');
             return $query->result();

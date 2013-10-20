@@ -65,7 +65,7 @@ loadListBarang();
                     }
                     ?>
                 </select>
-                <button type="button" id="tes" class="btn btn-mini" 
+                <button type="button" id="tes" class="btn btn-mini" tittle="Tambah Satuan"
                         data-toggle="button"
                         data-html="true" data-placement="bottom"
                         rel="popover"
@@ -85,8 +85,12 @@ loadListBarang();
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
+<<<<<<< HEAD
 			<button id="saw" class="btn" type="submit">Saldo Awal</button>
             <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
+=======
+            <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Barang"><i class="icon-print"></i></button>
+>>>>>>> origin/Saturday-Fix
             </td>
         </tr>
     </table>
@@ -325,6 +329,21 @@ $("#save").click(function(){
         return false;
 	}
 });
+
+function setSelectedIndex(s, valsearch)
+{
+// Loop through all the items in drop down list
+for (i = 0; i< s.options.length; i++)
+{ 
+    if (s.options[i].value == valsearch)
+    {
+        // Item is found. Set its property and exit
+        s.options[i].selected = true;
+        break;
+    }
+}
+return;
+}
 	
 function addCombo() {
     var textb = document.getElementById("txtCombo");
@@ -333,6 +352,7 @@ function addCombo() {
     var option = document.createElement("option");
     option.text = textb.value;
     option.value = textb.value;
+
     try {
         combo.add(option, null); //Standard
     }catch(error) {
@@ -352,8 +372,9 @@ function addCombo() {
 		{
 			if(msg == "ok")
 			{
+                setSelectedIndex(document.getElementById("_st"),_sat);
 				textb.value = "";
-				bootstrap_alert.success('<b>Sukses!</b> Satuan sudah ditambahkan');
+                $('#tes').popover('hide');
 			}
 			else{
 				bootstrap_alert.warning('<b>Gagal!</b> Satuan sudah ada');
@@ -361,7 +382,7 @@ function addCombo() {
 		}
 		});
 	}else{
-        bootstrap_alert.warning('<b>Kesalahan!</b> Field Tidak Boleh Kosong');
+        
     }
 }
 

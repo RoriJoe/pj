@@ -82,6 +82,7 @@
         }
 
         function ms_bank(){
+        	$data['list_tipe']=$this->combo_model->list_tipe();
         	$data['judul']="Master Bank";
         	$this->template->display('content/master_bank/ms_bank', $data);
         }
@@ -116,7 +117,7 @@
 			$username = $this->session->userdata('username');
 			$data['user']=$username;
             $data['judul']="Detail Order";
-            $this->template->display('content/tr_do', $data);
+            $this->template->display('content/SO/tr_do', $data);
         }
 
         //Transaksi Inovice

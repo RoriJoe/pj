@@ -18,7 +18,7 @@
             $data['hasil']=$this->tr_do_model->get_paged_list();
 
             //load view
-            $this->load->view('content/tr_do_Detail', $data);
+            $this->load->view('content/SO/tr_do_Detail', $data);
         }
 
         //SAVE ADD NEW TRIGGER
@@ -150,7 +150,7 @@
 
             $data['hasil']=$this->tr_do_model->get_detail_do($so);
             $data['kode']=$so;
-            $this->load->view("content/detail_DO",$data);
+            $this->load->view("content/SO/detail_DO",$data);
 
         }
         
@@ -166,19 +166,19 @@
                 {
                     $temp=$rr->No_Do;
                 }
-                $skr=substr($temp,2,4);
+                $skr=substr($temp,0,4);
                     if($skr==$tb){
                         $ang=intval(substr($temp,-3))+1;
                         if(strlen($ang) == 3){
-                            $no = "SO".$tb.$ang;
+                            $no = $tb.$ang;
                         }
                         else if(strlen($ang) == 2){
-                            $no = "SO".$tb."0".$ang;}
+                            $no = $tb."0".$ang;}
                         else{
-                            $no = "SO".$tb."00".$ang;
+                            $no = $tb."00".$ang;
                         }
                     }else {
-                        $no = "SO".$tb."001";
+                        $no = $tb."001";
                     }
             echo $no;
         }

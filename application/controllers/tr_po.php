@@ -27,19 +27,19 @@
                 {
                     $temp=$rr->Kode;
                 }
-                $skr=substr($temp,2,4);
+                $skr=substr($temp,0,4);
                     if($skr==$tb){
                         $ang=intval(substr($temp,-3))+1;
                         if(strlen($ang) == 3){
-                            $no = "PO".$tb.$ang;
+                            $no = $tb.$ang;
                         }
                         else if(strlen($ang) == 2){
-                            $no = "PO".$tb."0".$ang;}
+                            $no = $tb."0".$ang;}
                         else{
-                            $no = "PO".$tb."00".$ang;
+                            $no = $tb."00".$ang;
                         }
                     }else {
-                        $no = "PO".$tb."001";
+                        $no = $tb."001";
                     }
             echo $no;
         }

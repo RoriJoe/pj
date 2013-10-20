@@ -72,4 +72,16 @@
             return "ok";
         }
 
+        function add_tipe($data,$id){
+            $rr=$this->db->query("select * from tipe_rekening where Value = '$id'");
+            if($rr->num_rows() ==  0)
+            {
+                $q=$this->db->insert('tipe_rekening', $data);  
+                return "ok";
+            }else
+            {
+                return "gagal";
+            }
+        }
+
     }

@@ -8,6 +8,15 @@
         <th>No Perkiraan</th>
         <th>Action</th>
     </thead>
+    
+    <tr id="new">
+        <td><input type="text" name="itemcode" id="itemcode" style='width:70px' maxlength="20" onkeydown="disableAlpha('itemcode')" /></td>
+        <td><input type="text" name="itemname" id="itemname" style='width:120px' maxlength="50" onkeydown="disableNum('itemname')"/></td>
+        <td><input type="text" name="itemprice" id="itemprice" style='width:70px' maxlength="25"/></td>
+        <td><input type="text" name="itemqty" id="itemqty" style='width:70px' maxlength="25"/></td>
+        <td><input type="text" name="itemper" id="itemper" style='width:70px' maxlength="10" onkeydown="disableAlpha('itemper')"/></td>
+        <td><a class='btn btn-small' id="add_item" onclick='addRow()'><i id='icon$i' class='icon-plus'></i></a></td>
+    </tr>
 
     <tbody id="itemlist">
     <?php
@@ -32,49 +41,39 @@
 
 <script type="text/javascript">
     function clear (){
-        $("#_no_rek").val("");
-        $("#_an").val("");
-        $("#_tipe").val("");
-        $("#_cab").val("");
-        $("#_no_perk").val("");
+        $("#itemcode").val("");
+        $("#itemname").val("");
+        $("#itemprice").val("");
+        $("#itemqty").val("");
+        $("#itemper").val("");
     }
 
 $("tbody#itemlist").on("click","#hapus",function(){
     $(this).parent().parent().remove();
 });
 
-$("#_no_rek").keypress(function(e){
-var userVal = $("#_no_rek").val();
+$("#itemcode").keypress(function(e){
+var userVal = $("#itemcode").val();
 if(userVal.length == 20){
-   bootstrap_alert.info2('Maksimum Kode 20');
+   bootstrap_alert.info('Maksimum Kode 20');
 } 
 });
 
-$("#_an").keypress(function(e){
-   var userVal = $("#_an").val();
-   if(userVal.length == 50){
-       bootstrap_alert.info2('Maksimum 50 Karakter');
-   } 
+$("#itemper").keypress(function(e){
+var userVal = $("#itemper").val();
+if(userVal.length == 25){
+   bootstrap_alert.info('Maksimum Karakter 30');
+} 
 });
-$("#_cab").keypress(function(e){
-   var userVal = $("#_cab").val();
-   if(userVal.length == 25){
-       bootstrap_alert.info2('Maksimum 25 Karakter');
-   } 
-});
-$("#_no_perk").keypress(function(e){
-   var userVal = $("#_no_perk").val();
-   if(userVal.length == 10){
-       bootstrap_alert.info2('Maksimum 10 Karakter');
-   } 
-});
-function addRow() {
 
-    var itemcode = $("#_no_rek").val();
-    var itemname = $("#_an").val();
-    var itemprice = $("#_tipe").val();
-    var itemqty = $("#_cab").val();
-    var itemper = $("#_no_perk").val();
+
+
+function addRow() {
+    var itemcode = $("#itemcode").val();
+    var itemname = $("#itemname").val();
+    var itemprice = $("#itemprice").val();
+    var itemqty = $("#itemqty").val();
+    var itemper = $("#itemper").val();
 
     var items = "";
     if(itemcode != "" && itemname != "" && itemprice!="" && itemqty !="" && itemper !="")
@@ -82,9 +81,9 @@ function addRow() {
         $count = $("tbody#itemlist tr").length+1;
 
         items += "<tr>";
-        items += "<td width='100px'><input type='hidden' id='no_rekening"+$count+"' name='item[code][]' value='"+ itemcode +"' style='width:70px'/>"+itemcode+"</td>";
-        items += "<td width='100px'><input type='hidden' id='atas_nama"+$count+"' name='item[name][]' value='"+ itemname +"' style='width:70px'/>"+itemname+"</td>";
-        items += "<td><input type='hidden' class='span2' id='tipe"+$count+"' name='item[price][]' value='"+ itemprice +"' style='width:90px'/>"+itemprice+"</td>";
+        items += "<td width='50px'><input type='hidden' id='no_rekening"+$count+"' name='item[code][]' value='"+ itemcode +"' style='width:70px'/>"+itemcode+"</td>";
+        items += "<td width='50px'><input type='hidden' id='atas_nama"+$count+"' name='item[name][]' value='"+ itemname +"' style='width:70px'/>"+itemname+"</td>";
+        items += "<td><input type='text' class='span2' id='tipe"+$count+"' name='item[price][]' value='"+ itemprice +"' style='width:90px'/></td>";
         items += "<td><input type='text' class='span2' id='cabang"+$count+"' name='item[qty][]' value='"+ itemqty +"' style='width:90px'/></td>";
         items += "<td><input type='text' class='span2' id='no_perkiraan"+$count+"' name='item[per][]' value='"+ itemper +"' style='width:90px'/></td>";
         items += "<td><a href='javascript:void(0);' id='hapus'><i id='icon$i' class='icon-trash'></i></a></td></tr>";
@@ -93,20 +92,18 @@ function addRow() {
         {
             $("#itemlist").append(items);
             clear();
-            $('#myModal').modal('hide');
         }else{
-
             var callback = checkList(itemcode);
             if(callback === true){
                 $("#itemlist").append(items);
                 clear();
-                $('#myModal').modal('hide');
+                 bootstrap_alert.warning('Field Harus diisi Semua!');
             }
         }
     }
     else
     {
-        bootstrap_alert.info2('No rekening, Nama, Cabang, & Tipe Harus diisi');
+        bootstrap_alert.warning('Field Harus diisi Semua!');
     }
 }
 
@@ -114,7 +111,7 @@ function checkList(val){
     var cb = true;
     $("#itemlist tr").each(function(index){
         var input = $(this).find("input[type='hidden']:first");
-        if (input.val() == val){
+        if (input.val() == $(itemcode).val()){
             cb = false;
             bootstrap_alert.info('Rekening Sudah Ada');
         }

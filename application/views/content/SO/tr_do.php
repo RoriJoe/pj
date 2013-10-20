@@ -1,13 +1,138 @@
+<!--//***MAIN FORM-->
+<div class="bar bar2" style="width: 70%">
+    <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
+</div>
+<div id="konten" class="hide-con master-border" style="width: 68%;">
+<form id="formID">
+    <table width="100%">
+        <tr>
+            <td>Nomor SO</td>
+            <td>
+                <input type='text' class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
+                maxlength="20" id='_so' name='_so'>
+            </td>
+            
+            <td>Nomor PO</td>
+            <td>
+                <input type='text' class="span-form170 validate[maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
+                maxlength="20" id='_po' name='_po'>
+            </td>
+       </tr>
+       <tr>
+            <td>Tanggal SO</td>
+            <td>
+                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
+                style="width: 80px;margin-left: 10px; margin-right: 20px;">
+            </td>
+            <td>Tanggal PO</td>
+            <td>
+                <input type='text' class="validate[custom[date]]" id='_tgl2' name='_tgl2' 
+                style="width: 80px;margin-left: 10px; margin-right: 20px;">
+            </td>
+       </tr>
+
+       <tr>
+            <td>Pelanggan</td>
+            <td>
+                <input type="hidden" id="kd_plg" />
+                <div class="input-append">
+                 <input type='text' class="validate[required,maxSize[25], minSize[2]] span2" 
+                    maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()">
+                <a href="#myModal" role="button" class="btn" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-filter"></i></a>
+                <a href="ms_pelanggan" role="button" class="btn" title="Tambah Pelanggan" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+                </div>
+            </td>
+            <td>Sales</td>
+            <td>
+                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[2]],custom[onlyLetterSp]" 
+                maxlength="20" id="_sl" name='_sl'>
+                <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i> Barang</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<div id="hasil2" style="height: 238px;"></div>
+<div style="float: right;">
+    <input type="hidden" id="total2" />
+    <label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
+</div>
+<div>
+    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+    <button id="delete" class="btn">Delete</button>
+    <button id="cancel" class="btn">Cancel</button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
+</div>
+<!--**NOTIFICATION AREA**-->
+<div id="konfirmasi" class="sukses"></div>
+</div>
+
+<div id="popup-wrapper3" style="width:750px;height:400px;"></div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Pelanggan</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_pelanggan"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="getPelanggan()" data-dismiss="modal" aria-hidden="true">Done</button>
+  </div>
+</div>
+
+<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Barang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_barang"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
+  </div>
+</div>
+
+<div id="hasil"></div>
+
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/accounting.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
+
 <script>
+//Tampilkan Table yg disamping Via AJAX
+function listSO(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_do/index",
+    data :{},
+    success:
+    function(hh){
+        $('#hasil').html(hh);
+    }
+    });
+}
+listSO();
+
+jQuery(document).ready(function(){
+    tampilDetailSO();
+    autogen();
+    validation()
+    barAnimation();
+    key_tr();
+});
+
 //Auto Generate
 function autogen(){
     $('#add').attr('mode','new');
     $('#delete').attr('disabled', true);
-    $("#_so").attr('disabled',true);
 
+    $('#_so').attr('disabled',false);
     $('#save').attr('disabled',true);
-    $('#cancel').attr('disabled',true);
-    $('#add').attr('disabled',true);
     $('#delete').attr('disabled', true);
     $("#total").val("");
     $.ajax({
@@ -17,10 +142,9 @@ function autogen(){
     success:
         function(hh){
             $('#_so').val(hh);
+            $('#_sl').val('<?php echo $this->session->userdata('Nama'); ?>');
         }
-    });
-
-    tampilDetailSO();
+    });    
 }
 
 //Suggestion Pelanggan
@@ -54,78 +178,22 @@ function lookup_pelanggan(){
     });
 }
 
-//Auto Complete & Suggestion Search
-$("#_po").autocomplete({
-    minLength: 1,
-    source:
-    function(req, add){
-        $.ajax({
-            url: "<?php echo base_url(); ?>index.php/autocomplete/lookup_po",
-            dataType: 'json',
-            type: 'POST',
-            data: req,
-            success:
-            function(data){
-                if(data.response =="true"){
-                    add(data.message);
-                }
-            },
-        });
-    },
-
-    //tampilkan table detail
-    select:
-    function(event, ui) {
-        $('#_po').val(ui.item.value);
-        
-    },
-});
-
-//Validation engine
-function validation_engine() {
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
-    });
-}
-
 /*Tampilkan jQuery Tanggal*/
 $(function() {
     $( "#_tgl").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
-        showAnim: "blind"
+        showAnim: "blind",
+        defaultDate: new Date()
     });
     $( "#_tgl2").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
-        showAnim: "blind"
+        showAnim: "blind",
     });
 });
-
-//Icon Animation
-function animation(){
-  jQuery(".hide-con").hide();
-  var i = document.getElementById('konten');
-  jQuery(".bar").click(function()
-  {
-        jQuery(this).next(".hide-con").slideToggle(500, function(){
-        // Animation complete.
-        if(i.style.display=="none"){
-            document.getElementById('icon').className='icon-chevron-down icon-white';
-        }else{
-            document.getElementById('icon').className='icon-chevron-up icon-white';
-            }
-        });
-  });
-}
 
 //Table Pelanggan
 function listPelanggan(){
@@ -166,138 +234,9 @@ function tampilDetailSO(){
         }
     });
 }
-
-//Tampilkan Table yg disamping Via AJAX
-function listSO(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_do/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
-    });
-}
-
-
-listSO();
 </script>
 
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
-<!--//***MAIN FORM-->
-<div class="bar bar2" style="width: 70%">
-    <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border" style="width: 68%;">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td>Nomor SO</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_so' name='_so' style="width: 170px; margin-left: 10px; margin-right: 20px;">
-            </td>
-            
-            <td>Nomor PO</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_po' name='_po' style="width: 170px; margin-left: 10px; margin-right: 20px;">
-            </td>
-       </tr>
-       <tr>
-            <td>Tanggal SO</td>
-            <td>
-                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
-                style="width: 80px;margin-left: 10px; margin-right: 20px;">
-            </td>
-            <td>Tanggal PO</td>
-            <td>
-                <input type='text' class="validate[required,custom[date]]" id='_tgl2' name='_tgl2' 
-                style="width: 80px;margin-left: 10px; margin-right: 20px;">
-            </td>
-       </tr>
-
-       <tr>
-            <td>Pelanggan</td>
-            <td>
-                <input type="hidden" id="kd_plg" />
-                <div class="input-append">
-                 <input type='text' class="validate[required,maxSize[25], minSize[2]] span2" 
-                maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()">
-                <a href="#myModal" role="button" class="btn" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-filter"></i></a>
-                  
-                </div>
-            </td>
-            <td>Sales</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[25], minSize[2]],custom[onlyLetterSp]" 
-                maxlength="20" id="_sl" name='_sl' style="width: 170px; margin-left: 10px;">
-            </td>
-        </tr>
-    </table>
-</form>
-<div>
-    
-</div>
-<div id="hasil2" style="height: 238px;"></div>
-<div style="float: right;">
-    <input type="hidden" id="total2" />
-    <label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
-</div>
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn">Delete</button>
-    <button id="cancel" class="btn">Cancel</button>
-    <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
-</div>
-
-<div id="popup-wrapper3" style="width:750px;height:400px;"></div>
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Pelanggan</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_pelanggan"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getPelanggan()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_barang"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
-<br/>
-<div id="hasil"></div>
-<script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-jQuery(document).ready(function(){
-    autogen();
-    validation_engine()
-    animation();
-    key();
-});
-    
+<script type="text/javascript">   
 var filter="";
 
 //GET POPUP PELANGGAN
@@ -334,35 +273,6 @@ function getBarang(){
     }  
 }
 
-//ALERT
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(5000).addClass("in").fadeOut(3000);
-}
-bootstrap_alert.success = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-bootstrap_alert.info = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-}
-
-function key(){
- $('input[type="text"]').keyup(function() {
-    if($(this).val() != '') {
-        $('#save').removeAttr('disabled');
-        $('#cancel').removeAttr('disabled');
-        $('#add').removeAttr('disabled');
-    }
- });
- $("#al").keyup(function() {
-    if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
-    }
- });
-}
-
 //Cancel
 $("#cancel").click(function(){
     $('#formID').each(function(){
@@ -370,6 +280,7 @@ $("#cancel").click(function(){
     });
     autogen();
     tampilDetailSO();
+    $('#_so').attr('disabled', false);
     $('#save').attr('mode','add');
     document.getElementById('add').style.visibility = 'visible';
 });
@@ -410,7 +321,6 @@ $.ajax({
         data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
         },
-
         success:
         function(msg)
         {   
@@ -653,32 +563,45 @@ $("#save").click(function(){
 $("#delete").click(function(){
     var so = $('#_so').val();
 
-    bootbox.confirm("Anda yakin ingin menghapus data Sales Order "+so+" ?", function(result)
-    {
-        if(result == true)
-        {
-            $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>index.php/tr_do/delete",
-            data :{so:so
+    PlaySound('beep');
+    var id = $('#_so').val();
+    var pr = $('#_tgl').val();
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode SO: <b>"+id+"</b><br/>Tanggal SO : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
             },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/tr_do/delete",
+                        data :{so:so
+                        },
 
-            success:
-            function(msg)
-            {
-                if(msg == "ok")
-                {
-                    bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
-                    $('#formID').each(function(){
-                        this.reset();
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {
+                                bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                               listSO();
+                               tampilDetailSO();
+                               autogen();
+                               $('#save').attr('mode','add');
+                            }
+                        }
                     });
-                   listSO();
-                   tampilDetailSO();
-                   autogen();
-                   $('#save').attr('mode','add');
                 }
             }
-            });
         }
     });
 });

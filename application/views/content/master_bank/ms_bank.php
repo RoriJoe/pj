@@ -1,6 +1,3 @@
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
 <!--//***MAIN FORM-->
 <div class="bar bar2">
     <p>Form Bank <i id="icon" class='icon-chevron-down icon-white'></i></p>
@@ -12,7 +9,7 @@
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd' style="width: 75px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
+                <input type='text' class="span-form75 upper-form validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd'>
             </td>
 			<td>
 				Alamat
@@ -20,11 +17,14 @@
 			<td rowspan="2">
 				<textarea rows="2" class="validate[required,maxSize[100]]" maxlength="100" id='_al' name='_al' style="resize:none; width:170px; height: 60px; margin-left: 10px;"></textarea>
 			</td>
+            <td rowspan="2">
+                <a href="#myModal" role="button" class="btn" data-toggle="modal" id="rek" style="margin-left:10px;"><i id='icon$i' class='icon-plus'></i> Rekening</a>
+            </td>
         </tr>
         <tr>
             <td>Nama</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm' style="width: 170px;margin-left: 10px; margin-right: 20px;">
+            <td style="vertical-align: bottom;">
+                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm'>
             </td>
        </tr>       
     </table>
@@ -33,19 +33,96 @@
 	<div style="margin-top: 10px;">
 		<button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
 		<button id="cancel" class="btn" type="reset">Cancel</button>
-
 	</div>
+    <div id="konfirmasi" class="sukses"></div>
 </div>
 
-<div id="list" style="z-index:10"></div>
+<div id="list"></div>
 
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Tambah Rekening</h3>
+  </div>
+  <div class="modal-body">
+    <table>
+        <tr>
+            <td>No Rekening</td>
+            <td>
+                <input type='text' class="span-form170 upper-form validate[required,maxSize[20], minSize[2]],custom[onlyNumberSp]" maxlength="20" id='_no_rek' name='itemcode' onclick="disableAlpha('_no_rek')">
+            </td>
+            <td>Cabang</td>
+            <td style="vertical-align: bottom;">
+                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[3],custom[onlyLetterNumber]]" maxlength="25" id='_cab' name='_cab'>
+            </td>
+        </tr>
+        <tr>
+            <td>Atas Nama</td>
+            <td style="vertical-align: bottom;">
+                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterSp]]" maxlength="50" id='_an' name='_an' onclick="disableNum('_an')">
+            </td>
+            <td>Tipe</td>
+            <td>
+                <select name="_tipe" class="validate[required]" id="_tipe" style="margin-left: 10px; margin-right: 20px;">
+                <?php
+                foreach ($list_tipe as $isi)
+                {
+                    echo "<option ";
+                    echo "value = '".$isi->value."'>".$isi->value."</option>";
+                }
+                ?>
+                </select>
+                <button type="button" id="tes" class="btn btn-mini" tittle="Tambah Tipe Rekening"
+                        data-toggle="button"
+                        data-html="true" data-placement="bottom"
+                        rel="popover"
+                        style="margin-bottom:3px;"
+                        data-content="
+                        <div>
+                         <input  type='text' 
+                            class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
+                            style='width: 90px;margin-left: 10px;'
+                            />
+                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
+                        </div>"><i class='icon-plus'></i>
+                </button>
+            </td>
+            
+       </tr> 
+       <tr>
+            <td>No Perkiraan</td>
+            <td>
+                <select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
+                <?php
+                foreach ($list_perkiraan as $isi)
+                {
+                    echo "<option ";
+                    echo "value = '".$isi->value."'>".$isi->value."</option>";
+                }
+                ?>
+                </select>
+            </td>
+       </tr>      
+    </table>
+  </div>
+  <div class="modal-footer">
+    <div id="konfirmasi2" class="sukses"></div>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="addRow()">Done</button>
+  </div>
+</div>
+
+<script>  
+    $("#tes").popover({ title: 'Tambah Tipe Rekening', placement: 'left'});
+</script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
 loadListBank();
 
 $(document).ready(function(){
 	detailBank();
 	barAnimation();
-    validation_engine();
+    validation();
     key();
 });
 //load Side Table
@@ -74,87 +151,44 @@ function detailBank(){
     });
 }
 
-function validation_engine() {
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
-    });
-}
+$("#_kd").keypress(function(e){
+   var userVal = $("#_kd").val();
+   if(userVal.length == 5){
+       bootstrap_alert.info('Maksimum Kode 5 Karakter');
+   } 
+});
 
-//ALERT
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(5000).addClass("in").fadeOut(3000);
-}
-bootstrap_alert.success = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
+$("#_nm").keypress(function(e){
+   var userVal = $("#_nm").val();
+   if(userVal.length == 50){
+       bootstrap_alert.info('Maksimum Kode 50 Karakter');
+   } 
+});
+
+$("#_no_rek").keypress(function(e){
+   var userVal = $("#_no_rek").val();
+   if(userVal.length == 20){
+       bootstrap_alert.info2('Maksimum Kode 20 Karakter');
+   } 
+});
+$("#_an").keypress(function(e){
+   var userVal = $("#_an").val();
+   if(userVal.length == 50){
+       bootstrap_alert.info2('Maksimum Kode 50 Karakter');
+   } 
+});
+$("#_cab").keypress(function(e){
+   var userVal = $("#_cab").val();
+   if(userVal.length == 25){
+       bootstrap_alert.info2('Maksimum Kode 25 Karakter');
+   } 
+});
+
+bootstrap_alert.info2 = function(message) {
+    $('#konfirmasi2').html('<div class="alert alert-info" style="position:absolute; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
     $(".alert").delay(1500).addClass("in").fadeOut(5000);
 }
-bootstrap_alert.info = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
 
-function disableAlpha($id){
-    var foo = document.getElementById($id);
-    foo.addEventListener('input', function (prev) {
-    return function (evt) {
-        if (!/^[0-9\.\+\ ]*$/.test(this.value)) {
-          this.value = prev;
-        }
-        else {
-          prev = this.value;
-        }
-    };
-    }(foo.value), false);
-};
-function disableNum($id){
-    var foo = document.getElementById($id);
-    foo.addEventListener('input', function (prev) {
-    return function (evt) {
-        if (!/^[A-Za-z ]*$/.test(this.value)) {
-          this.value = prev;
-        }
-        else {
-          prev = this.value;
-        }
-    };
-    }(foo.value), false);
-};
-
-function barAnimation(){
-  jQuery(".hide-con").hide();
-  var i = document.getElementById('konten');
-  jQuery(".bar").click(function()
-  {
-        jQuery(this).next(".hide-con").slideToggle(500, function(){
-    // Animation complete.
-    if(i.style.display=="none"){
-        document.getElementById('icon').className='icon-chevron-down icon-white';
-    }else{
-        document.getElementById('icon').className='icon-chevron-up icon-white';
-            }
-        });
-  });
-}
-
-function key(){
- $('button[type="submit"]').attr('disabled','disabled');
- $('input[type="text"]').keyup(function() {
-    if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
-    }
-    else{
-    	 $('button[type="submit"]').attr('disabled','disabled');
-    }
- });
-}
 
 $("#cancel").click(function(){
     $('#formID').each(function(){
@@ -163,7 +197,7 @@ $("#cancel").click(function(){
     detailBank();
     $("#_kd").attr('disabled',false);
      $('button[type="submit"]').attr('disabled','disabled');
-    document.getElementById('add_item').style.visibility = 'visible';
+    document.getElementById('rek').style.visibility = 'visible';
 
 });
 
@@ -211,7 +245,7 @@ $("#save").click(function(){
 	            {
 	                if(msg == "ok")
 	                {
-	                    bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
+	                    bootstrap_alert.success('Data <b>'+_kd+' - '+_nm+'</b> sudah ditambahkan');
 	                    $('#formID').each(function(){
 	                        this.reset();
 	                    });
@@ -243,7 +277,7 @@ $("#save").click(function(){
 	            {
 	                if(msg == "ok")
 	                {
-	                    bootstrap_alert.success('<b>Sukses</b> Data berhasil diupdate');
+	                    bootstrap_alert.success('Data <b>'+_kd+' - '+_nm+'</b> berhasil diupdate');
 	                    $('#formID').each(function(){
 	                        this.reset();
 	                    });
@@ -261,7 +295,43 @@ $("#save").click(function(){
 	    }
     }
     else{
-        bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan, Table Detail Barang Harus diisi!');
+        bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan, Table Detail Rekening Harus diisi!');
     }  
 });
+
+function addCombo() {
+    var textb = document.getElementById("txtCombo");
+    var combo = document.getElementById("_tipe");
+
+    var option = document.createElement("option");
+    option.text = textb.value;
+    option.value = textb.value;
+
+    try {
+        combo.add(option, null); //Standard
+    }catch(error) {
+        combo.add(option); // IE only
+    }
+
+    var _val = $('#txtCombo').val();
+    if(_val !="")
+    {
+        $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>ms_bank/add_tipe", //SEND TO CONTROLLER
+        data :{_val:_val},
+
+        success:
+        function(msg) //GET MESSEGE FROM INSERT MODEL
+        {
+            if(msg == "ok")
+            {
+                setSelectedIndex(document.getElementById("_tipe"),_val);
+                textb.value = "";
+                $('#tes').popover('hide');
+            }
+        }
+        });
+    }
+}
 </script>

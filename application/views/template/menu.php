@@ -15,34 +15,34 @@
             </li>
             <li><a class=""><i class="icon-th-large"></i>&nbsp;Master</a>
                 <ul>
+                    <li><a class = "ajax" href="ms_gudang">Gudang</a></li>
                     <li><a class = "ajax" href="ms_pelanggan">Pelanggan</a></li>
                     <li><a class = "ajax" href="ms_supplier">Supplier</a></li>
                     <li><a class = "ajax" href="ms_bank">Bank</a></li> 
                     <li><a class = "">Persediaan <i class="icon-chevron-right"></i></a>
                         <ul>
                             <li><a class = "ajax" href="ms_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barang</a></li>
-                            <li><a class = "ajax" href="ms_gudang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gudang</a></li>
                         </ul>
                     </li>                   
                 </ul>
             </li>
             <li><a class=""><i class="icon-shopping-cart"></i>&nbsp;Transaksi</a>
                 <ul>
-                    <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Persediaan</a>
-                        <ul>
-                            <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
-                            <li><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
-                        </ul>
+                    <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Penjualan</a>
+                       <ul>
+                            <li><a class = "ajax" href="tr_do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Order</a></li>
+                       </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Pembelian</a>
                         <ul>
                             <li><a class = "ajax" href="tr_pemesanan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemesanan / PO</a></li>
                         </ul>
                     </li>
-                    <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Penjualan</a>
-                       <ul>
-                            <li><a class = "ajax" href="tr_do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Order</a></li>
-                       </ul>
+                    <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Persediaan</a>
+                        <ul>
+                            <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
+                            <li><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
+                        </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Keuangan</a>
                         <ul>
@@ -59,7 +59,6 @@
                             <li><a class = "ul-divider ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Neraca</a></li>
                         </ul>
                     </li>
-                    <li><a class="ajax" href="piutang">&nbsp;Status Piutang</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class="icon-book"></i>&nbsp; Laporan</a>

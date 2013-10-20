@@ -2151,9 +2151,8 @@ color: #B4B4B4;
 }
 
 #loadingDiv{
-    top: 123px;
-float: left;
-position: relative;
+top: 200px;
+position: absolute;
 margin-left: 300px;
 }
 
@@ -2271,5 +2270,29 @@ opacity:1}
 100%{
 transform:scale(0.7);
 opacity:0.1}
-
+}
+.dataTables_filter input { width: 135px }
+.warning-icon{
+    height: 40px;
+}
+.bootbox-body{
+    font-size: 17px;
+}
+.bootbox .modal-title{
+    color: #FF0000;
+}
+#konfirmasi{
+    position: relative; width: 100%; top: -35px;
+}
+.span-form75{
+    width: 90px !important; margin-left: 10px !important; margin-right: 20px !important;
+}
+.span-form170{
+    width: 170px !important; margin-left: 10px !important; margin-right: 20px !important;
+}
+.upper-form{
+    text-transform: uppercase;
+}
+.telp{
+    width: 150px !important; margin-left: 10px !important;
 }

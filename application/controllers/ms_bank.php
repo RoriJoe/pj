@@ -90,4 +90,20 @@
             echo $r;
             $this->ms_bank_model->delete_det($kode);
         }
+
+        function add_tipe(){
+            $id=$this->input->post('_val');
+            
+            $data= array(
+            'Value'=>$id
+            );
+            $in = $this->ms_bank_model->add_tipe($data,$id);
+            if($in == "ok")
+            {
+                echo "ok";
+            }
+            else{
+                echo "gagal";
+            }
+        }
     }
