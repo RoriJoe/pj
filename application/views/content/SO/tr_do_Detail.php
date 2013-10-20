@@ -65,7 +65,7 @@ $('#tb2 tr').click(function (e) {
 });
     
 var oTable = $('#tb2').dataTable( {
-    "sScrollY": "420px",
+    "sScrollY": "380px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
