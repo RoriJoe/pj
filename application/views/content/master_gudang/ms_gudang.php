@@ -82,6 +82,22 @@ $(document).ready(function(){
     validation();
     key();
 });
+
+function autogen(){
+    $("#kd").attr('disabled',false);
+    $('#save').attr('mode','add');
+    $('button[type="submit"]').attr('disabled','disabled');
+    
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_gudang/auto_gen",
+    data :{},
+    success:
+        function(hh){
+            $('#kd').val(hh);
+        }
+    });
+}
 </script>
 
 <script type="text/javascript">
