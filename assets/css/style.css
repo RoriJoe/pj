@@ -2296,3 +2296,15 @@ opacity:0.1}
 .telp{
     width: 150px !important; margin-left: 10px !important;
 }
+.CSSTabel .saw-barang th {
+    text-align: center !important;
+}
+.saw-box{
+    float: left;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px #B8B8B8;
+}

@@ -22,7 +22,7 @@
                             prs='$row->Qty1'
                             stn='$row->Satuan1'
                             ><i class='icon-pencil'></i></a>
-                    <a class='btn delete' kode='$row->Kode' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
+                    <a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
                 </div>
             </td>
         </tr>";
@@ -33,85 +33,99 @@
 
 <script>
    //Edit TRIGGER
-    $('.popup').click(function(){
-        
-        $("#_kd").attr('disabled',true);
-        
-        var id = $(this).attr("kode"); //atribut sebagai identifier data row
-        var nama = $(this).attr("nama");
-		var ukuran = $(this).attr("ukuran");
-		var keterangan = $(this).attr("kete");
-		var prs = $(this).attr("prs");
-		var stn = $(this).attr("stn");
-		
-		$('#_kd').val(id);
-		$('#_nama1').val(nama);
-		$('#_uk').val(ukuran);
-		$('#_ket').val(keterangan);
-		$('#_ps').val(prs);
-		
-		$('#save').attr('mode','edit');
-		
-		function setSelectedIndex(s, valsearch)
+$('.popup').click(function(){
+    
+    $("#_kd").attr('disabled',true);
+    
+    var id = $(this).attr("kode"); //atribut sebagai identifier data row
+    var nama = $(this).attr("nama");
+	var ukuran = $(this).attr("ukuran");
+	var keterangan = $(this).attr("kete");
+	var prs = $(this).attr("prs");
+	var stn = $(this).attr("stn");
+	
+	$('#_kd').val(id);
+	$('#_nama1').val(nama);
+	$('#_uk').val(ukuran);
+	$('#_ket').val(keterangan);
+	$('#_ps').val(prs);
+	
+	$('#save').attr('mode','edit');
+	
+	function setSelectedIndex(s, valsearch)
+	{
+	// Loop through all the items in drop down list
+	for (i = 0; i< s.options.length; i++)
+	{ 
+		if (s.options[i].value == valsearch)
 		{
-		// Loop through all the items in drop down list
-		for (i = 0; i< s.options.length; i++)
-		{ 
-			if (s.options[i].value == valsearch)
-			{
-				// Item is found. Set its property and exit
-				s.options[i].selected = true;
-				break;
-			}
+			// Item is found. Set its property and exit
+			s.options[i].selected = true;
+			break;
 		}
-		return;
-		}
-		setSelectedIndex(document.getElementById("_st"),stn);
-    });
+	}
+	return;
+	}
+	setSelectedIndex(document.getElementById("_st"),stn);
 
-    $(".delete").click(function(){
-        var id = $(this).attr("kode");
-        bootbox.confirm("Anda yakin ingin menghapus data "+id+" ?", function(result)
-        {
-            if (result==true)
-              {
-                $.ajax({
-                type:'POST',
-                url: "<?php echo base_url();?>index.php/ms_barang/delete",
-                data :{id:id},
-                success: function(msg){
-                    if(msg=="gagal"){
-    					bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
-                    }else{
-                        bootstrap_alert.success('<b>Sukses!</b> Data '+ id +' telah dihapus');
-    					autogen();
-                        $.ajax({
+    key();
+    jQuery(".hide-con").show();
+});
+
+$(".delete").click(function(){
+    PlaySound('beep');
+    var id = $(this).attr("kode");
+    var pr = $(this).attr("nama");
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode: <b>"+id+"</b><br/>Nama Gudang : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
                         type:'POST',
-                        url: "<?php echo base_url();?>index.php/ms_barang/index",
-                        data :{},
-                        success:
-                        function(hh){
-                            $('#hasil').html(hh);
+                        url: "<?php echo base_url();?>index.php/ms_barang/delete",
+                        data :{id:id},
+                        success: function(msg){
+                            if(msg=="gagal"){
+                                bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
+                            }
+                            else{
+                                bootstrap_alert.success('<b>Sukses!</b> Data '+ pr +' telah dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                autogen();
+                                loadListBarang();
+                            }
                         }
-                        });
-                    }
-                    $('#formID').each(function(){
-    					this.reset();
-    				});
+                    });
                 }
-                });
-              }
-        });
-        });
+            }
+        }
+    });
+});
 
 var oTable = $('#tb1').dataTable( {
-    "sScrollY": "300px",
+    "sScrollY": "380px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
-    "bLengthChange": false,
+    "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": "View _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

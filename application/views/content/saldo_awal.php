@@ -37,19 +37,22 @@
 	
 }
 	</script>
-<div class=" table  CSSTabel" style="width: 600px">
-<table id="tb1" style="width: 100%;">
-        <tr>
-            <th rowspan="2" align="center">Gudang</th>
-            <th colspan="2" align="center">Saldo Awal</th>
-            <th colspan="2" align="center">Stock Akhir</th>
-        </tr>
+<div class="saw-box table  CSSTabel" style="width: 62%;height: 270px;overflow-y: overlay;">
+<table id="tb5" class="saw-barang" style="width: 100%;">
+<thead>
 	<tr>
-		<th>Tanggal</th>
-		<th>Qty</th>
-		<th>Gudang</th>
+        <th rowspan="2" align="center" style="vertical-align: middle; border-right: 1px solid;">Gudang</th>
+        <th colspan="2" align="center" style="border-right: 1px solid;">Saldo Awal</th>
+        <th colspan="2" align="center" >Stock Akhir</th>
+    </tr>
+	<tr>
+		<th style="border-right: 1px solid;">Tanggal</th>
+		<th style="border-right: 1px solid;">Qty</th>
+		<th style="border-right: 1px solid;">Gudang</th>
 		<th>Penjualan</th>
 	</tr> 
+</thead>
+
 	<?php $i=1;$d=date("Y/m/d");
 	$d1 = date("d-m-Y", strtotime($d));
 	foreach($hasil as $row){
@@ -62,7 +65,7 @@
 	<tr>
 		<td><input disabled='disabled' type='text' id='gudang$i' name='gudang$i' value='$row->Nama' style='width: 120px;'></td>
 		<td><input type='text' id='tgl$i' name='tgl$i' value='$d1' style='width: 75px; '></td>
-		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; ' onkeypress='validAct($i)' onkeyup='this.value=ToUang(this.value);'></td>
+		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; text-align: right;' onkeypress='validAct($i)' onkeyup='this.value=ToUang(this.value);'></td>
 		<td><input disabled='disabled' value='$gudang' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 		<td><input disabled='disabled' value='$jual' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 	</tr>";
@@ -80,6 +83,6 @@
         } */ ?>
         </tbody> -->
     </table>
-	</div>
+</div>
 	
 	

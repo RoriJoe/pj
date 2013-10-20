@@ -15,15 +15,12 @@ function loadListBarang(){
 loadListBarang();
 </script>
 
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
 <!--//***MAIN FORM-->
 <div class="bar bar2">
     <p>Form Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
 
-<div id="konten" class="hide-con master-border" style="width: 62%;">
+<div id="konten" class="hide-con master-border" style="width: 62%; margin-bottom: 10px;">
 <form id="formID">
     <table>
         <tr>
@@ -91,20 +88,26 @@ loadListBarang();
         </tr>
     </table>
 </form>
+
+<!--**NOTIFICATION AREA**-->
+<div id="konfirmasi" class="sukses"></div>
 </div>
 <div id="hasil" style="z-index:10"></div>
 <div id="hasilsaw"></div>
+
+
 <script>  
     $("#tes").popover({ title: 'Tambah Satuan'});
-</script>  
-<script>
+</script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>  
+<script type="text/javascript">
 $(document).ready(function() {
  /*
  * Load Common Function
  */
     autogen();
-    validationEngine();
-    animation();
+    barAnimation();
+    validation();
     key();
 });
 /*----------------------*/
@@ -122,36 +125,6 @@ function autogen(){
         function(hh){
             $('#_kd').val("");
         }
-    });
-}
-function animation(){
-    //Icon Animation
-    jQuery(document).ready(function() {
-    jQuery(".hide-con").hide();
-    var i = document.getElementById('konten');
-    jQuery(".bar").click(function()
-    {
-        jQuery(this).next(".hide-con").slideToggle(500, function(){
-            // Animation complete.
-            if(i.style.display=="none"){
-                document.getElementById('icon').className='icon-chevron-down icon-white';
-            }else{
-                document.getElementById('icon').className='icon-chevron-up icon-white';
-            }
-        });
-    });
-    });
-}
-//Form Validation
-function validationEngine(){
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
     });
 }
 
@@ -178,17 +151,6 @@ $("#cac").click(function(){
 	});
     autogen();
 });
-
-function key(){
-    $('button[type="submit"]').attr('disabled','disabled');
-     $('input[type="text"]').keyup(function() {
-        if($(this).val() != '') {
-           $('button[type="submit"]').removeAttr('disabled');
-        }else{
-            $('button[type="submit"]').attr('disabled','disabled');
-        }
-     });
-}
 
 $("#_kd").keypress(function(e){
    var userVal = $("#_kd").val();
@@ -381,19 +343,4 @@ function addCombo() {
         
     }
 }
-
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-	$('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-	$(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-bootstrap_alert.success = function(message) {
-	$('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-	$(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-bootstrap_alert.info = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-
 </script>
