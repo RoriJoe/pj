@@ -24,6 +24,14 @@
             $this->load->view("content/list/list_barang",$data);
         }
 
+		
+		//Saldo Awal
+		function viewSaldoAwal(){
+            
+            $data['hasil'] = $this->ms_barang_model->get_saw();
+            //$data['nama']=$nama;
+            $this->load->view("content/saldo_awal",$data);
+        }
         function checkBarang(){
             //$nama = $this->input->post('k');
             $totalRow=$this->input->post('totalRow');

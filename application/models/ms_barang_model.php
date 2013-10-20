@@ -13,6 +13,30 @@
             return $q->result();
         }
         
+		function get_saw()
+        {
+		 /* SELECT gudang.Nama,sum(bpb_d.Qty1) as terima,sum(sj_d.Qty1) as sj, sum(do_d.Qty) as do
+            FROM gudang
+			left outer JOIN bpb_h ON gudang.Kode = bpb_h.Kode_Gudang
+			left outer JOIN bpb_d ON bpb_h.No_Bpb = bpb_d.No_Bpb
+            left outer JOIN sj_h ON gudang.Kode = sj_h.Kode_Gudang
+			left outer JOIN sj_d ON sj_h.No_Sj = sj_d.No_Sj
+                        left outer JOIN do_h ON gudang.Kode = do_h.Kode_Gudang
+			left outer JOIN do_d ON do_h.No_Do = do_d.No_Do
+			group by gudang.Kode */
+            $q = $this->db->query("
+            SELECT gudang.Nama,(select sum(bpb_d.Qty1) from bpb_d where bpb_d.No_Bpb=bpb_h.No_Bpb and bpb_h.Kode_gudang = gudang.Kode) as terima, (select sum(sj_d.Qty1) from sj_d where sj_d.No_Sj = sj_h.No_Sj) as sj,(select sum(do_d.Qty) from do_d where do_d.No_Do = do_h.No_Do) as so
+            FROM gudang
+		left outer JOIN bpb_h ON gudang.Kode = bpb_h.Kode_Gudang
+		
+            left outer JOIN sj_h ON gudang.Kode = sj_h.Kode_Gudang
+		left outer JOIN do_h ON gudang.Kode = do_h.Kode_Gudang
+                       
+group by gudang.Kode			
+            ");
+            return $q->result();
+        }
+		
         //Get Table Detail Data
         function get_paged_list()
         {

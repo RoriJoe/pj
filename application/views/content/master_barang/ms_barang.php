@@ -85,6 +85,7 @@ loadListBarang();
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
+			<button id="saw" class="btn" type="submit">Saldo Awal</button>
             <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
             </td>
         </tr>
@@ -92,6 +93,7 @@ loadListBarang();
 </form>
 </div>
 <div id="hasil" style="z-index:10"></div>
+<div id="hasilsaw"></div>
 <script>  
     $("#tes").popover({ title: 'Tambah Satuan'});
 </script>  
@@ -156,7 +158,20 @@ function validationEngine(){
 /*
  * Click Respon
  */
+ $("#saw").click(function(){
+		$.ajax({
+			type:'POST',
+			url: "<?php echo base_url();?>index.php/ms_barang/viewSaldoAwal",
+			data :{},
+			success:
+			function(hh){
+				$('#hasilsaw').html(hh);
+			}
+		});
+});
+ 
 $("#cac").click(function(){
+	$('#hasilsaw').html("");
    autogen();
    $('#formID').each(function(){
 		this.reset();
