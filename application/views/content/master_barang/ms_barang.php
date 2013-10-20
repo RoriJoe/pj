@@ -120,7 +120,7 @@ function autogen(){
     data :{},
     success:
         function(hh){
-            $('#_kd').val(hh);
+            $('#_kd').val("");
         }
     });
 }

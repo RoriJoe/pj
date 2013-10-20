@@ -1,8 +1,9 @@
+<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
+<h2 align="center">MUTASI STOCK</h2><hr/>
 <table>
 	<tr>
 		<td width="80%">
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >MUTASI STOCK</h4><br/>
+			
 			<div>PERIODE : </div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="20%">
@@ -47,10 +48,10 @@
                 <td>$row->Nama</td>
                 <td>$row->Ukuran</td>
 				<td>$row->Nama2</td>
-				<td>$row->SAW</td>
-				<td>$row->terima</td>
-				<td>$row->keluar</td>
-				<td>$saldo</td>
+				<td align='right'>$row->SAW</td>
+				<td align='right'>$row->terima</td>
+				<td align='right'>$row->keluar</td>
+				<td align='right'>$saldo</td>
 				<td>$row->Satuan1</td>
             </tr>";
 			$i++;$k=$kode;

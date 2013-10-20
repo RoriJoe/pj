@@ -1,8 +1,9 @@
+<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN DELIVERY ORDER</h2><br/>
 <table>
 	<tr>
 		<td width="80%">
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN DELIVERY ORDER</h4><br/>
+			
 			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="20%">
@@ -35,7 +36,7 @@
                 <td>$row->NP</td>
 				<td>$row->Nama</td>
 				<td>$row->Ukuran</td>
-				<td>$row->Qty</td>
+				<td align='right'>$row->Qty</td>
 				<td>$row->Satuan1</td>
             </tr>";
         } ?>

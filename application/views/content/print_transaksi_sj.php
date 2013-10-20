@@ -10,11 +10,12 @@
 		border-collapse:collapse;
 	}
 </style>
+<h1 style="margin: 0">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN SURAT JALAN</h2><hr/>
 <table>
 	<tr>
 		<td colspan=2>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN SURAT JALAN</h4><br/>
+			
 			
 		</td>
 	</tr>
@@ -43,7 +44,7 @@
 	</tr>
 </table>
 
-<hr/>
+
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -63,7 +64,7 @@
 				<td>$kd_brg[$i]</td>
 				<td>$nama[$i]</td>
 				<td>$nbu[$i]</td>
-				<td>$qty[$i]</td>
+				<td align='right'>$qty[$i]</td>
 				
 				<td>$ktr[$i]</td>
             </tr>";

@@ -10,19 +10,12 @@
 		border-collapse:collapse;
 	}
 </style>
-<table>
-	<tr>
-		<td colspan=4>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h3 >DAFTAR BARANG (STOCK)</h3>
-			<h4 >PERIODE : <?php echo $tanggal; ?></h4>
-			<br/>
-			
-		</td>
-	</tr>
-</table>
-
+<h1 >PD. PELITA JAYA</h1>
+<h2 align="center">DAFTAR BARANG (STOCK)</h2>
 <hr/>
+<h4>PERIODE : <?php echo $tanggal; ?></h4>
+
+
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -47,7 +40,7 @@
                 <td>$row->Kode</td>
                 <td>$row->Nama</td>
 				<td>$row->Ukuran</td>
-				<td>$row->Qty1</td>
+				<td align='right'>$row->Qty1</td>
 				<td>$row->Satuan1</td>
 				<td>$row->Nama2</td>
 				

@@ -1,8 +1,9 @@
+<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN SURAT JALAN</h2><hr/>
 <table>
 	<tr>
 		<td width="80%">
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN SURAT JALAN</h4><br/>
+			
 			<div>PERIODE : <?php echo $periode ?></div>
 		</td>
 		<td width="20%">
@@ -37,7 +38,7 @@
 				<td>$row->No_Mobil</td>
 				<td>$row->Nama</td>
 				<td>$row->Ukuran</td>
-				<td>$row->Qty1</td>
+				<td align='right'>$row->Qty1</td>
 				<td>$row->Satuan1</td>
             </tr>";
         } ?>

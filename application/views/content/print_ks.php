@@ -1,8 +1,9 @@
+<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
+<h2 align="center">KARTU STOCK</h2><hr/>
 <table>
 	<tr>
 		<td width="80%">
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >KARTU STOCK</h4><br/>
+			
 			<div>PERIODE : </div>
 		</td>
 		<td width="20%">

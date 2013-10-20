@@ -10,19 +10,10 @@
 		border-collapse:collapse;
 	}
 </style>
-<table>
-	<tr>
-		<td colspan=4>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h3 >DAFTAR GUDANG</h3>
-			<h4 >PERIODE : <?php echo $tanggal; ?></h4>
-			<br/>
-		</td>
-	</tr>
+<h1 style="margin: 0">PD. PELITA JAYA</h1>
+<h2 align="center">DAFTAR GUDANG</h2>
+<h4 >PERIODE : <?php echo $tanggal; ?></h4>
 
-</table>
-
-<hr/>
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">

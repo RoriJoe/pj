@@ -10,11 +10,13 @@
 		border-collapse:collapse;
 	}
 </style>
+<h1 style="margin: 0">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN PENERIMAAN BARANG</h2>
+			<hr/>
 <table>
 	<tr>
 		<td colspan=4>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN PENERIMAAN BARANG</h4><br/>
+			
 			
 		</td>
 		
@@ -39,7 +41,7 @@
 	
 </table>
 
-<hr/>
+
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -61,7 +63,7 @@
                 <td>$_arrNm_brg[$i]</td>
                 <td>$_arrUkur[$i]</td>
 				
-				<td>$_arrQty[$i]</td>
+				<td align='right'>$_arrQty[$i]</td>
 				<td>$_arrKet[$i]</td>
 				
             </tr>";

@@ -10,11 +10,12 @@
 		border-collapse:collapse;
 	}
 </style>
+<h1 style="margin: 0">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN PEMBELIAN/PO</h2><hr/>
 <table>
 	<tr>
 		<td colspan=4>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN PEMBELIAN/PO</h4><br/>
+			
 			
 		</td>
 		
@@ -45,7 +46,6 @@
 	</tr>
 </table>
 
-<hr/>
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -66,10 +66,10 @@
             "<tr>
                 <td>$arrKode[$i]</td>
                 <td>$arrNamabrg[$i]</td>
-                <td>$arrJumlah[$i]</td>
+                <td align='right'>$arrJumlah[$i]</td>
 				<td>$arrSatuan[$i]</td>
-				<td>$arrHarga[$i]</td>
-				<td>$arrNilai[$i]</td>
+				<td align='right'>$arrHarga[$i]</td>
+				<td align='right'>$arrNilai[$i]</td>
 				
             </tr>";
         }  ?>

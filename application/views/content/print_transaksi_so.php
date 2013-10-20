@@ -7,11 +7,12 @@
 		border-collapse:collapse;
 	}
 </style>
+<h1 style="margin: 0">PD. PELITA JAYA</h1>
+			<h2 align="center">LAPORAN SALES ORDER</h2><hr/>
 <table>
 	<tr>
 		<td colspan=4>
-			<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h4 >LAPORAN SALES ORDER</h4><br/>
+			
 			
 		</td>
 		
@@ -37,7 +38,7 @@
 	
 </table>
 
-<hr/>
+
 <table class="table bod" width="100%" style="font-size: 11px; border: 1px solid #000;">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -57,10 +58,10 @@
             echo
             "<tr>
                 <td>$arrKode[$i]</td>
-                <td>$arrQty[$i]</td>
+                <td align='right'>$arrQty[$i]</td>
                 <td>$arrSatuan[$i]</td>
-				<td>$arrHarga[$i]</td>
-				<td>$arrJumlah[$i]</td>
+				<td align='right'>$arrHarga[$i]</td>
+				<td align='right'>$arrJumlah[$i]</td>
 				<td>$arrKet[$i]</td>
 				
             </tr>";
