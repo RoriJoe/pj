@@ -85,12 +85,8 @@ loadListBarang();
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
-<<<<<<< HEAD
 			<button id="saw" class="btn" type="submit">Saldo Awal</button>
-            <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
-=======
             <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Barang"><i class="icon-print"></i></button>
->>>>>>> origin/Saturday-Fix
             </td>
         </tr>
     </table>
