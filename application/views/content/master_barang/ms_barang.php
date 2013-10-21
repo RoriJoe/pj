@@ -1,4 +1,26 @@
 <script>
+function AddDot(Num){
+		Num += '';
+		Num = Num.replace(/\./g, '');
+		
+		x=Num.split('.');
+		x1=x[0];
+		x2=x.length >1 ?',' + x[1] : '';
+		var rgx =/(\d+)(\d{3})/;
+		while (rgx.test(x1))
+		{
+		x1=x1.replace(rgx,'$1'+'.'+'$2');
+		}
+		return x1+x2;
+	}
+	
+	
+	function ubah(a){
+		var harga = a;
+		harga = AddDot(harga);
+		return harga;
+		//document.getElementById("qty").value=harga;
+	}
 //load Side Table
 function loadListBarang(){
     $.ajax({
@@ -48,14 +70,14 @@ loadListBarang();
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" name='hb' style="width: 145px; text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" name='hb' style="width: 145px; text-align:right;" onkeyup='this.value=ubah(this.value);' >
                 </div>
             </td>
             <td>Harga Jual</td>
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" name='hj' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" name='hj' style="width: 145px;text-align:right;" onkeyup='this.value=ubah(this.value);' >
                 </div>
             </td>
        </tr>
@@ -199,12 +221,15 @@ $.ajax({
         function(msg)
         {   
             var win=window.open('');
-            with(win.document)
+             with(win.document)
             {
+			
               open();
+			  document.title="BARANG";
               write(msg);
               close();
             }
+			 
             win.print();
         }
      });

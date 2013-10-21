@@ -1,17 +1,43 @@
 <script>
-	function addCommas(n){
-    var rx=  /(\d+)(\d{3})/;
-    return String(n).replace(/^\d+/, function(w){
-        while(rx.test(w)){
-            w= w.replace(rx, '$1,$2');
-        }
-        return w;
-    });
-}
-	function ToUang(nStr) { 
+	
+	/* function ToUang(nStr) { 
 	nStr += ''; x = nStr.split('.'); x1 = x[0]; x2 = x.length > 1 ? '.' + x[1] : ''; 
 	var rgx = /(\d+)(\d{3})/; while (rgx.test(x1)) { x1 = x1.replace(rgx, '$1' + '.' + '$2'); } 
-	return x1 + x2; } 
+	return x1 + x2; }  */
+	
+	function AddDot(Num){
+		Num += '';
+		Num = Num.replace(/\./g, '');
+		
+		x=Num.split('.');
+		x1=x[0];
+		x2=x.length >1 ?',' + x[1] : '';
+		var rgx =/(\d+)(\d{3})/;
+		while (rgx.test(x1))
+		{
+		x1=x1.replace(rgx,'$1'+'.'+'$2');
+		}
+		return x1+x2;
+	}
+	//BUAT hapus titik
+	function BackUang(nStr){
+		var hasil='';
+		a = nStr.length;
+		for(i=0;i<a;i++){
+			x = nStr.charAt(i);
+			if(!isNaN(x)){
+				hasil+=x;
+			}
+		}
+		return hasil;
+	}
+	
+	function ubah(a){
+	
+		var harga = a;
+		harga = AddDot(harga);
+		return harga;
+	}
 	
 	function validAct(row){
     
@@ -65,7 +91,7 @@
 	<tr>
 		<td><input disabled='disabled' type='text' id='gudang$i' name='gudang$i' value='$row->Nama' style='width: 120px;'></td>
 		<td><input type='text' id='tgl$i' name='tgl$i' value='$d1' style='width: 75px; '></td>
-		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; text-align: right;' onkeypress='validAct($i)' onkeyup='this.value=ToUang(this.value);'></td>
+		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; text-align: right;'   onkeyup='this.value=ubah(this.value);' onkeydown='validAct($i)'></td>
 		<td><input disabled='disabled' value='$gudang' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 		<td><input disabled='disabled' value='$jual' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 	</tr>";

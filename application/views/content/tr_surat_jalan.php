@@ -56,7 +56,7 @@
         <tr>
             <td>Nomor Mobil</td>
             <td>
-                <input type='text' class="validate[required,minSize[7],maxSize[9]] text-input" id='mbl' name='mbl' style="width: 170px;">
+                <input type='text' class="validate[required,minSize[3],maxSize[12]] text-input" id='mbl' name='mbl' style="width: 170px;">
             </td>
             <td colspan="2">
                 <label class="checkbox">
