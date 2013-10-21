@@ -1,8 +1,8 @@
 <!--//***MAIN FORM-->
-<div class="bar bar2" style="width: 70%">
+<div class="bar bar2" style="width: 74%">
     <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
-<div id="konten" class="hide-con master-border" style="width: 68%;">
+<div id="konten" class="hide-con master-border" style="width: 72%;">
 <form id="formID">
     <table width="100%">
         <tr>
@@ -39,13 +39,20 @@
                  <input type='text' class="validate[required,maxSize[25], minSize[2]] span2" 
                     maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()">
                 <a href="#myModal" role="button" class="btn" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-filter"></i></a>
-                <a href="ms_pelanggan" role="button" class="btn" title="Tambah Pelanggan" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+                <a class="ajax btn" href="ms_pelanggan" role="button"  title="Tambah Pelanggan" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
                 </div>
             </td>
             <td>Sales</td>
             <td>
-                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[2]],custom[onlyLetterSp]" 
-                maxlength="20" id="_sl" name='_sl'>
+                <select name="_sl" class="validate[required]" id="_sl" style="width: 148px; margin-left: 10px; margin-right: 20px;">
+                    <?php
+                    foreach ($list_sales as $isi)
+                    {
+                        echo "<option ";
+                        echo "value = '".$isi->username."'>".$isi->username."</option>";
+                    }
+                    ?>
+                </select>
                 <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i> Barang</button>
             </td>
         </tr>
@@ -123,7 +130,6 @@ jQuery(document).ready(function(){
     autogen();
     validation()
     barAnimation();
-    key_tr();
 });
 
 //Auto Generate
@@ -132,8 +138,8 @@ function autogen(){
     $('#delete').attr('disabled', true);
 
     $('#_so').attr('disabled',false);
-    $('#save').attr('disabled',true);
     $('#delete').attr('disabled', true);
+    document.getElementById('add').style.visibility = 'visible';
     $("#total").val("");
     $.ajax({
     type:'POST',
@@ -142,7 +148,9 @@ function autogen(){
     success:
         function(hh){
             $('#_so').val(hh);
-            $('#_sl').val('<?php echo $this->session->userdata('Nama'); ?>');
+            //$('#_sl').val('<?php echo $this->session->userdata('Nama'); ?>');
+            var a = '<?php echo $user;?>';
+            setSelectedIndex(document.getElementById("_sl"),a);
         }
     });    
 }
@@ -176,6 +184,21 @@ function lookup_pelanggan(){
             $("#_pn").validationEngine('showPrompt', 'Data Pelanggan Tersedia', 'pass');
         },
     });
+}
+
+function setSelectedIndex(s, valsearch)
+{
+// Loop through all the items in drop down list
+for (i = 0; i< s.options.length; i++)
+{ 
+    if (s.options[i].value == valsearch)
+    {
+        // Item is found. Set its property and exit
+        s.options[i].selected = true;
+        break;
+    }
+}
+return;
 }
 
 /*Tampilkan jQuery Tanggal*/
@@ -251,6 +274,7 @@ function getPelanggan(){
 function getBarang(){
     var x = $('input:radio[name=optionsRadios]:checked').val();
     var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
+    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
     
     var row = filter;
     
@@ -269,7 +293,8 @@ function getBarang(){
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
         $('#kode_brg'+row).val(x);
-        $('#satuan_brg'+row).val(y);  
+        $('#satuan_brg'+row).val(y); 
+        $('#nama_brg'+row).val(z); 
     }  
 }
 
@@ -362,7 +387,7 @@ function addRow(tableID) {
     element0.disabled = "true";
     element0.id="kode_brg"+last;
     element0.setAttribute("onkeypress", "validAct("+last+")");
-    element0.style.width = "70px";
+    element0.style.width = "80px";
     
     var filter = document.createElement("a");
     filter.className="btn btn-tbl";
@@ -383,12 +408,12 @@ function addRow(tableID) {
     var cell1 = row.insertCell(1);
     var element1 = document.createElement("input");
     element1.type = "text";
-    element1.name = "qty_brg";
-    element1.id="qty_brg"+last;
-    element1.setAttribute("onkeypress", "validAct("+last+")");
-    element1.style.width = "30px";
+    element1.name = "nama_brg[]";
+    element1.disabled = "true";
+    element1.id="nama_brg"+last;
+    element1.style.width = "80px";
     cell1.appendChild(element1);
-    
+
     //KOLOM 3
     var cell2 = row.insertCell(2);
     var element2 = document.createElement("input");
@@ -396,38 +421,48 @@ function addRow(tableID) {
     element2.name = "satuan_brg[]";
     element2.disabled = "true";
     element2.id="satuan_brg"+last;
-    element2.style.width = "70px";
+    element2.style.width = "40px";
     cell2.appendChild(element2);
-    
-    //KOLOM 4
+
+    //KOLOM 2
     var cell3 = row.insertCell(3);
     var element3 = document.createElement("input");
     element3.type = "text";
-    element3.name = "harga[]";
-    element3.id="harga_brg"+last;
-    element0.setAttribute("onkeypress", "validAct("+last+")");
-    element3.style.width = "70px";
+    element3.name = "qty_brg";
+    element3.id="qty_brg"+last;
+    element3.setAttribute("onkeypress", "validAct("+last+")");
+    element3.style.width = "30px";
     cell3.appendChild(element3);
-    //KOLOM 5
+    
+    //KOLOM 4
     var cell4 = row.insertCell(4);
     var element4 = document.createElement("input");
     element4.type = "text";
-    element4.name = "jumlah";
-    element4.id="jumlah_brg"+last;
+    element4.name = "harga[]";
+    element4.id="harga_brg"+last;
+    element4.setAttribute("onkeypress", "validAct("+last+")");
     element4.style.width = "70px";
-    element4.disabled = "true";
     cell4.appendChild(element4);
-    //KOLOM 6
+    //KOLOM 5
     var cell5 = row.insertCell(5);
     var element5 = document.createElement("input");
     element5.type = "text";
-    element5.name = "keterangan[]";
-    element5.id="keterangan_brg"+last;
-    element5.style.width = "80px";
+    element5.name = "jumlah";
+    element5.id="jumlah_brg"+last;
+    element5.style.width = "70px";
+    element5.disabled = "true";
     cell5.appendChild(element5);
-    //KOLOM 7
+    //KOLOM 6
     var cell6 = row.insertCell(6);
-                
+    var element6 = document.createElement("input");
+    element6.type = "text";
+    element6.name = "keterangan[]";
+    element6.id="keterangan_brg"+last;
+    element6.style.width = "80px";
+    cell6.appendChild(element6);
+
+    //KOLOM 7
+    var cell7 = row.insertCell(7);          
     var iIcon1 = document.createElement("i");
     iIcon1.className = "icon-ok";
     iIcon1.id="icon"+last;
@@ -445,8 +480,8 @@ function addRow(tableID) {
     iAnchor2.href = "#";
     iAnchor2.appendChild(iIcon2);
     
-    cell6.appendChild(iAnchor1);
-    cell6.appendChild(iAnchor2);
+    cell7.appendChild(iAnchor1);
+    cell7.appendChild(iAnchor2);
 }
 
 

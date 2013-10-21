@@ -9,6 +9,7 @@
     <tbody>
     <?php foreach($hasil as $row)
     {
+        $limit = number_format($row->Limit_Kredit,0,",",".");
         echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Perusahaan</td>
@@ -28,6 +29,8 @@
                     fax='$row->Fax1'
                     fax1='$row->Fax2'
                     npwp='$row->NPWP'
+                    limit='$limit'
+                    lama='$row->Lama'
 			 ><i class='icon-pencil'></i></a>
 
 			 <a class='btn delete' name='$row->Kode' pr='$row->Perusahaan' style='padding: 2px 6px;'><i class='icon-trash'></i></a></div>
@@ -55,6 +58,8 @@ $('.edit').click(function(){
     var tel2 = $(this).attr("telp2");
     var fx = $(this).attr("fax");
     var fx1 = $(this).attr("fax1");
+    var limit = $(this).attr("limit");
+    var lama = $(this).attr("lama");
     
     $('#kd').val(kd);
     $('#pr').val(pr);
@@ -68,6 +73,8 @@ $('.edit').click(function(){
     $('#tl3').val(tel2);
     $('#fx1').val(fx);
     $('#fx2').val(fx1);
+    $('#lk').val(limit);
+    $('#term').val(lama);
     
     $('#save').attr('mode','edit');
     key();

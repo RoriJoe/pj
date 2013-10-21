@@ -70,14 +70,14 @@ loadListBarang();
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" name='hb' style="width: 145px; text-align:right;" onkeyup='this.value=ubah(this.value);' >
+                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" name='hb' style="width: 145px; text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
             <td>Harga Jual</td>
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" name='hj' style="width: 145px;text-align:right;" onkeyup='this.value=ubah(this.value);' >
+                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" name='hj' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
        </tr>
@@ -209,6 +209,36 @@ $("#_uk").keypress(function(e){
    } 
 });
 
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
+function conv(input){
+    var nStr = input.value + '';
+    nStr = nStr.replace( /\,/g, "");
+    x = nStr.split( '.' );
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while ( rgx.test(x1) ) {
+        x1 = x1.replace( rgx, '$1' + ',' + '$2' );
+    }
+    input.value = x1 + x2;
+}
+
 //buat print
 $("#print").click(function(){
 $.ajax({
@@ -246,13 +276,15 @@ $("#save").click(function(){
 		var _uk = $('#_uk').val();
 		var _ps = $('#_ps').val();
 		var _st = $('#_st').val();
+        var _hb = $('#hb').val().replace(/\./g, "");
+        var _hj = $('#hj').val().replace(/\./g, "");
 		
 		if($("#formID").validationEngine('validate'))
 		{
 			$.ajax({
 			type:'POST',
 			url: "<?php echo base_url();?>index.php/ms_barang/insert", //SEND TO CONTROLLER
-			data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st},
+			data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st,_hb:_hb,_hj:_hj},
 
 			success:
 			function(msg)
@@ -291,13 +323,15 @@ $("#save").click(function(){
         var _uk = $('#_uk').val();
         var _ps = $('#_ps').val();
         var _st = $('#_st').val();
+        var _hb = $('#hb').val().replace(/\./g, "");
+        var _hj = $('#hj').val().replace(/\./g, "");
 	    
         if($("#formID").validationEngine('validate'))
         {
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/ms_barang/update",
-            data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st},
+            data :{_kd:_kd,_nama1:_nama1,_ket:_ket,_uk:_uk,_ps:_ps,_st:_st,_hb:_hb,_hj:_hj},
             success:
             function(msg){
                 if(msg=="ok")

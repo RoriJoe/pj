@@ -199,5 +199,13 @@
             }
             echo $temp;
         }
+
+        #Show All 
+        function view_po_pelanggan(){
+
+            $data['hasil']=$this->tr_surat_jalan_model->get_list();
+            //load view
+            $this->load->view('content/list/list_pelanggan',$data);
+        }
 		
     }

@@ -1,4 +1,4 @@
-<div class="table CSSTabel table-list table-hover" style="height: 395px;">
+<div class="table CSSTabel table-list table-hover">
     <table id="tb1">
         <thead>
             <th>No SJ</th>
@@ -22,14 +22,19 @@
 <script>
 
 var oTable = $('#tb1').dataTable( {
-    "sScrollY": "290px",
+    "sScrollY": "380px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
-    "bLengthChange": false,
+    "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": " _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
-
 </script>

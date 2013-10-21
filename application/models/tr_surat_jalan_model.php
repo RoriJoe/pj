@@ -110,4 +110,15 @@
                 WHERE No_Do = '$_do'");
             return $q->result();
         }
+
+        function get_list()
+        {
+            $query = $this->db->query("
+                SELECT A.*
+                FROM pelanggan A
+                WHERE A.Kode IN (SELECT Kode_Plg FROM do_h)
+                ");
+
+            return $query->result();
+        }
     }

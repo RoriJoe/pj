@@ -12,8 +12,7 @@
         function get_paged_list()
         {
             $q = $this->db->query("
-            SELECT Kode,Nama, Nama1, Perusahaan, Alamat1, Kota, KodeP, Telp, Telp1, Telp2, Fax1, Fax2
-            ,NPWP
+            SELECT Kode,Nama, Nama1, Perusahaan, Alamat1, Kota, KodeP, Telp, Telp1, Telp2, Fax1, Fax2, Limit_Kredit, Lama, NPWP
             FROM pelanggan
             ");
             return $q->result();

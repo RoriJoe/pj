@@ -116,6 +116,7 @@
             //$data['list_pelanggan']=$this->combo_model->list_gudang();
 			$username = $this->session->userdata('username');
 			$data['user']=$username;
+			$data['list_sales']=$this->combo_model->list_sales();
             $data['judul']="Detail Order";
             $this->template->display('content/SO/tr_do', $data);
         }

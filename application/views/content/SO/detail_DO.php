@@ -16,8 +16,9 @@
 <table id="tb3">
     <thead>
         <th>Kode Barang</th>
-        <th>Qty</th>
+        <th>Nama</th>
         <th>Satuan</th>
+        <th>Qty</th>
         <th>Harga Satuan</th>
         <th>Jumlah</th>
         <th>Keterangan</th>
@@ -31,16 +32,20 @@
         echo "<tr>
         <td>
             <div class='input-append'>
-                <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:70px' value='$row->Kode_Brg' disabled='true'/>
+                <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:80px' value='$row->Kode_Brg' disabled='true'/>
                 <a href='#myModal2' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>    
         </td>
         <td>
-            <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:30px' value='$row->Qty' disabled='true'/>
+            <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:80px' value='$row->Nama' readonly='true'/>
         </td>
         <td>
-            <input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg$i' style='width:70px' value='$row->Satuan1' readonly='true'/>
+            <input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg$i' style='width:40px' value='$row->Satuan1' readonly='true'/>
         </td>
+        <td>
+            <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:30px' value='$row->Qty' disabled='true'/>
+        </td>
+        
         <td>
             <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true'/>
         </td>

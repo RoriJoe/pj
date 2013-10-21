@@ -56,7 +56,7 @@ $.ajax({
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" name='lk' style="width: 145px;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" name='lk' style="width: 145px; text-align:right" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
             <td>Terms</td>
@@ -248,6 +248,8 @@ $("#save").click(function(){
     var fx1 = $('#fx1').val();
     var fx2 = $('#fx2').val();
     var np = $('#np').val();
+    var lk = $('#lk').val().replace(/\./g, "");
+    var term = $('#term').val();
     
     if(mode == "add"){  
         if($("#formID").validationEngine('validate'))
@@ -255,7 +257,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/ms_pelanggan/insert", //SEND TO CONTROLLER
-            data :{kd:kd,pr:pr,cp:cp,al:al,kt:kt,kp:kp,tl1:tl1,tl2:tl2,tl3:tl3,fx1:fx1,fx2:fx2,np:np},
+            data :{kd:kd,pr:pr,cp:cp,al:al,kt:kt,kp:kp,tl1:tl1,tl2:tl2,tl3:tl3,fx1:fx1,fx2:fx2,np:np,lk:lk,term:term},
     
             success:
             function(msg) //GET MESSEGE FROM INSERT MODEL
@@ -293,7 +295,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/ms_pelanggan/update", //SEND TO CONTROLLER
-            data :{kd:kd,pr:pr,cp:cp,al:al,kt:kt,kp:kp,tl1:tl1,tl2:tl2,tl3:tl3,fx1:fx1,fx2:fx2,np:np},
+            data :{kd:kd,pr:pr,cp:cp,al:al,kt:kt,kp:kp,tl1:tl1,tl2:tl2,tl3:tl3,fx1:fx1,fx2:fx2,np:np,lk:lk,term:term},
     
             success:
             function(msg) //GET MESSEGE FROM INSERT MODEL

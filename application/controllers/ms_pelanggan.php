@@ -42,6 +42,8 @@
             $fx1=$this->input->post('fx1');
             $fx2=$this->input->post('fx2');
             $np=$this->input->post('np');
+            $lk=$this->input->post('lk');
+            $term=$this->input->post('term');
             $myvar  = empty($myvar) ? NULL : $myvar;
             
             //ADD TO ARRAY FOR SEND TO MODEL
@@ -59,10 +61,10 @@
                     'Telp2'=>$tl3,
                     'Fax1'=>$fx1,
                     'Fax2'=>$fx2,  
-                    'Limit'=>$myvar,
+                    'Limit_Kredit'=>$lk,
                     'Piutang'=>$myvar,
                     'NPWP'=>$np,
-                    'Lama'=>$myvar
+                    'Lama'=>$term
             );
             
             $in = $this->ms_pelanggan_model->insert($data,$id);
@@ -96,6 +98,8 @@
             $fx1=$this->input->post('fx1');
             $fx2=$this->input->post('fx2');
             $np=$this->input->post('np');
+            $lk=$this->input->post('lk');
+            $term=$this->input->post('term');
             $myvar  = empty($myvar) ? NULL : $myvar;
             
             $data= array(
@@ -111,10 +115,10 @@
                     'Telp2'=>$tl3,
                     'Fax1'=>$fx1,
                     'Fax2'=>$fx2,  
-                    'Limit'=>$myvar,
+                    'Limit_Kredit'=>$lk,
                     'Piutang'=>$myvar,
                     'NPWP'=>$np,
-                    'Lama'=>$myvar
+                    'Lama'=>$term
             );
             $q = $this->ms_pelanggan_model->update($data,$id);
             echo $q;

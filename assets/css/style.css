@@ -2271,7 +2271,7 @@ opacity:1}
 transform:scale(0.7);
 opacity:0.1}
 }
-.dataTables_filter input { width: 135px }
+.dataTables_filter input {width: 115px; }
 .warning-icon{
     height: 40px;
 }

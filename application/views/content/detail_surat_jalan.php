@@ -16,7 +16,7 @@
             </div>
         </td>
         <td><input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur$i' style='width:120px' value='$row->Nama $row->Ukuran' disabled='true'/></td>
-        <td><label id='nbu$i'>$row->Nama $row->Ukuran</label></td>
+        <td><label id='nbu$i'>$row->Nama $row->Ukuran $row->Keterangan</label></td>
         <td><input type='text' class='validate[required]' id='qty$i' name='qty$i' style='width:20px' value='$row->Qty' disabled='true'/></td>
         <td><input type='text' class='validate[required]' id='ket$i' name='ket$i' style='width:120px' value='$row->Keterangan' disabled='true'/></td>
         <td>

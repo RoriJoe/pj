@@ -10,6 +10,11 @@
             $query = $this->db->get('satuan');
             return $query->result();
         }
+        function list_sales(){
+            $this->db->select('username');
+            $query = $this->db->get('muser');
+            return $query->result();
+        }
         
         function list_tipe(){
             $query = $this->db->get('tipe_rekening');

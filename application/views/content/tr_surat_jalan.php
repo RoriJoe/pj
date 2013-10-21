@@ -21,12 +21,14 @@
             </td>
        </tr>
        <tr>
-            <td>Nomor SO</td>
+            <td>Pelanggan</td>
             <td>
-                <div class="input-append" style="margin-bottom: 0;">
-				  <input type='text' class="validate[required] span2" id='_do' id="appendedInput" name='_do' style="width: 150px;">
-				  <a href="tr_do" role="button" id="tes" class="btn" type="button" data-toggle="button" data-placement="right" rel="popover" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
-				</div>
+                <input type="hidden" id="kd_plg" />
+                <div class="input-append" style="margin-bottom:0;">
+                 <input type='text' class="validate[required] span2" 
+                    maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 148px; " onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()">
+                <a href="#myModal2" role="button" class="btn" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-filter"></i></a>
+                </div>
             </td>
 
             <td>Gudang</td>
@@ -45,9 +47,12 @@
        </tr>
 
        <tr>
-            <td>Pelanggan</td>
+            <td>Nomor SO</td>
             <td>
-                <input type='text' class="validate[required]" id='pn' name='pn' style="width: 170px;">
+                <div class="input-append" style="margin-bottom: 0;">
+                  <input type='text' class="validate[required] span2" id='_do' id="appendedInput" name='_do' style="width: 150px;">
+                  <a href="tr_do" role="button" id="tes" class="btn" type="button" data-toggle="button" data-placement="right" rel="popover" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+                </div>
             </td>
             <td>No. PO</td>
             <td><input type='text' class="validate[required]" id='po' name='po' style="width: 170px;">
@@ -56,7 +61,7 @@
         <tr>
             <td>Nomor Mobil</td>
             <td>
-                <input type='text' class="validate[required,minSize[3],maxSize[12]] text-input" id='mbl' name='mbl' style="width: 170px;">
+                <input type='text' class="validate[required,minSize[3],maxSize[15]] text-input" id='mbl' name='mbl' style="width: 100px;">
             </td>
             <td colspan="2">
                 <label class="checkbox">
@@ -93,6 +98,20 @@
   </div>
 </div>
 
+<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Pelanggan</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_pelanggan"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="getPelanggan()" data-dismiss="modal" aria-hidden="true">Done</button>
+  </div>
+</div>
+
 <div id="hasil"></div>
 
 <script>  
@@ -102,10 +121,10 @@
 var flag=0;
 //Auto Generate
 function autogen(){
+    $('#sj').attr('disabled',false);
     $('#save').attr('mode','add');
     $('#save').attr('disabled',true);
     $('#cancel').attr('disabled',true);
-    $('#sj').attr('disabled',true);
 
     $.ajax({
     type:'POST',
@@ -116,6 +135,18 @@ function autogen(){
             $('#sj').val(hh);
         }
     });
+}
+
+function listPelanggan(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_surat_jalan/view_po_pelanggan",
+    data :{},
+    success:
+    function(hh){
+        $('#list_pelanggan').html(hh);
+    }
+    });   
 }
 
 jQuery(document).ready(function() {
@@ -130,7 +161,6 @@ jQuery(document).ready(function() {
     autogen();
     tampilSJ();
     animation();
-    $("#pn").attr('disabled',true);
     $("#po").attr('disabled',true);
     disable("no");
     key();
@@ -201,8 +231,10 @@ function tampilSJ(){
                         }
 
                         var sj=$('#sj').val();
+                        $('#sj').attr('disabled',true);
                         $('#save').attr('mode','edit');
                         $('#cancel').attr('disabled',false);
+                        jQuery(".hide-con").show();
                         
                         $.ajax({ //utk tabel detail
                         type:'POST',
@@ -359,6 +391,14 @@ function getBarang(){
         $('#kode_brg'+row).val(x);
         $('#brg_ukur'+row).val(z+" "+y);  
     }
+}
+
+function getPelanggan(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    $('#pn').val(x);
+    $('#kd_plg').val(k);
+    
 }
 
 //ALERT
@@ -531,33 +571,48 @@ $("#save").click(function(){
 
 $("#delete").click(function(){
     var sj = $('#sj').val();
-    bootbox.confirm("Anda yakin ingin menghapus data "+sj+" ?", function(result)
-    {
-        if(result == true){
-            $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>index.php/tr_surat_jalan/delete",
-            data :{sj:sj
-            },
 
-            success:
-            function(msg)
-            {
-                if(msg == "ok")
-                {    
-                    bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
-                    $('#formID').each(function(){
-                        this.reset();
+    PlaySound('beep');
+    var id = $('#sj').val();
+    var pr = $('#_tgl').val();
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode SJ: <b>"+id+"</b><br/>Tanggal SJ : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/tr_surat_jalan/delete",
+                        data :{sj:sj
+                        },
+
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {    
+                                bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                
+                                autogen();
+                                $('#hasil').html('');
+                                disable("no");
+                                tampilSJ();
+                                tampilDetailDO();
+                            }
+                        }
                     });
-                    
-                    autogen();
-                    $('#hasil').html('');
-                    disable("no");
-                    tampilSJ();
-                    tampilDetailDO();
                 }
             }
-            });
         }
     });
      

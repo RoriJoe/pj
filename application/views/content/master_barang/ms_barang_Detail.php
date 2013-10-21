@@ -9,6 +9,8 @@
     <tbody>
     <?php foreach($hasil as $row)
     {
+        $hb = number_format($row->Harga_Beli,0,",",".");
+        $hj = number_format($row->Harga_Jual,0,",",".");
         echo "<tr>
             <td>$row->Kode</td>
             <td nama='$row->Nama'>$row->Nama</td>
@@ -21,6 +23,8 @@
                             kete='$row->Nama2'
                             prs='$row->Qty1'
                             stn='$row->Satuan1'
+                            hb='$hb'
+                            hj='$hj'
                             ><i class='icon-pencil'></i></a>
                     <a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
                 </div>
@@ -43,12 +47,16 @@ $('.popup').click(function(){
 	var keterangan = $(this).attr("kete");
 	var prs = $(this).attr("prs");
 	var stn = $(this).attr("stn");
+    var hb = $(this).attr("hb");
+    var hj = $(this).attr("hj");
 	
 	$('#_kd').val(id);
 	$('#_nama1').val(nama);
 	$('#_uk').val(ukuran);
 	$('#_ket').val(keterangan);
 	$('#_ps').val(prs);
+    $('#hb').val(hb);
+    $('#hj').val(hj);
 	
 	$('#save').attr('mode','edit');
 	

@@ -1,4 +1,4 @@
-<div class="table CSSTabel table-hover tb-barang">
+<div class="table CSSTabel table-hover tb-barang" style="width:24%">
     <table id="tb2">
         <thead>
             <th>No SO</th>
@@ -57,7 +57,6 @@ $('#tb2 tr').click(function (e) {
     $('#total').val(accounting.formatMoney(to, "Rp ",2,".",","));
 
     tampilDetailSO();
-    key_tr();
     $('#add').attr('mode','edit');
     $('#save').attr('mode','edit');
     $('#cancel').attr('disabled',false);
@@ -74,7 +73,7 @@ var oTable = $('#tb2').dataTable( {
     "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {
          "sSearch": "",
-         "sLengthMenu": "View _MENU_ ",
+         "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },

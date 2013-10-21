@@ -58,6 +58,8 @@
             $uk=$this->input->post('_uk');
             $ps=$this->input->post('_ps');
             $st=$this->input->post('_st');
+            $hb=$this->input->post('_hb');
+            $hj=$this->input->post('_hj');
             $myvar  = empty($myvar) ? NULL : $myvar;
             $myvar2  = empty($myvar2) ? NULL : $myvar2;
             $myvar3  = empty($myvar3) ? NULL : $myvar3;
@@ -75,6 +77,8 @@
                     'Tgl_Saw'=>$myvar2,
                     'Saw'=>$myvar3,
                     'SawGudang'=>$myvar4,
+                    'Harga_Beli'=>$hb,
+                    'Harga_Jual'=>$hj
             );
 
             $in = $this->ms_barang_model->insert($data,$id);
@@ -95,6 +99,8 @@
             $uk=$this->input->post('_uk');
             $ps=$this->input->post('_ps');
             $st=$this->input->post('_st');
+            $hb=$this->input->post('_hb');
+            $hj=$this->input->post('_hj');
             $myvar  = empty($myvar) ? NULL : $myvar;
             $myvar2  = empty($myvar2) ? NULL : $myvar2;
             $myvar3  = empty($myvar3) ? NULL : $myvar3;
@@ -110,6 +116,8 @@
                     'Tgl_Saw'=>$myvar2,
                     'Saw'=>$myvar3,
                     'SawGudang'=>$myvar4,
+                    'Harga_Beli'=>$hb,
+                    'Harga_Jual'=>$hj
             );
             $q = $this->ms_barang_model->update($data,$id);
             echo $q;

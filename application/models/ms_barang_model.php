@@ -41,7 +41,7 @@ group by gudang.Kode
         function get_paged_list()
         {
             $q = $this->db->query("
-            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1
+            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual
             FROM barang
             ");
             return $q->result();
