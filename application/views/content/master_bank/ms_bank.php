@@ -61,7 +61,7 @@
             <td style="vertical-align: bottom;">
                 <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterSp]]" maxlength="50" id='_an' name='_an' onclick="disableNum('_an')">
             </td>
-            <td>Tipe</td>
+            <td>Jenis</td>
             <td>
                 <select name="_tipe" class="validate[required]" id="_tipe" style="margin-left: 10px; margin-right: 20px;">
                 <?php
@@ -198,7 +198,6 @@ $("#cancel").click(function(){
     $("#_kd").attr('disabled',false);
      $('button[type="submit"]').attr('disabled','disabled');
     document.getElementById('rek').style.visibility = 'visible';
-
 });
 
 $("#save").click(function(){

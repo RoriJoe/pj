@@ -3,7 +3,7 @@
     <thead>
         <th>No Rekening</th>
         <th>Atas Nama</th>
-        <th>Tipe</th>
+        <th>Jenis</th>
         <th>Cabang</th>
         <th>No Perkiraan</th>
         <th>Action</th>
