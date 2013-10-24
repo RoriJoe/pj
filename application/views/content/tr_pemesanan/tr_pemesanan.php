@@ -54,7 +54,7 @@ listPO();
             <td>
                 <input  type='text' 
                         class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' 
-                        style="width: 80px; margin-right: 20px;">
+                        style="width: 80px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
             </td>
             <td>Currency</td>
             <td>

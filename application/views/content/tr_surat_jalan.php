@@ -17,7 +17,7 @@
 
             <td>Tgl Kirim</td>
             <td>
-                <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;">
+                <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;" value="<?php echo date('d-m-Y');?>">
             </td>
        </tr>
        <tr>

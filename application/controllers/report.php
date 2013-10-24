@@ -217,6 +217,7 @@
 			$tgl = date('Y-m-d', strtotime($this->input->post("_tgl")));
 			$tgl2 = date('Y-m-d', strtotime($this->input->post("_tgl2")));
 			$data['tanggal'] = date('d/m/Y');
+			$data['periode'] = $this->input->post("_tgl")." - ".$this->input->post("_tgl2");
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Mutasi - ". date('dmY');
 			$data['hasil2']=$this->report_model->print_mutasi($barang1,$barang2,$tgl,$tgl2);

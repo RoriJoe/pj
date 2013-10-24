@@ -59,7 +59,7 @@ list_invoice();
             <td>Tanggal</td>
             <td>
                 <input  type='text' placeholder='dd-mm-yyyy'
-                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' 
+                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
                         style="width: 80px; margin-right: 20px;">
             </td>
             <td>Pelanggan</td>

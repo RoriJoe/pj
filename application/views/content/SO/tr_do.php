@@ -21,7 +21,7 @@
        <tr>
             <td>Tanggal SO</td>
             <td>
-                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
+                <input type='text' class="validate[required,custom[date]]" value="<?php echo date('d-m-Y');?>" id='_tgl' name='_tgl' 
                 style="width: 80px;margin-left: 10px; margin-right: 20px;">
             </td>
             <td>Tanggal PO</td>
