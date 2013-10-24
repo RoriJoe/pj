@@ -49,7 +49,7 @@
             $data['kode']=$id;
             $this->load->view("content/saw/saw_d",$data);
         }
-
+		
         function insert($modes)
         {
             $a=$this->input->post('noSaw');

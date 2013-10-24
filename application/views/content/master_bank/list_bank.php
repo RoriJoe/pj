@@ -75,6 +75,7 @@ $(".delete").click(function(){
                                 loadListBank();
                                 detailBank();
                                 $("#_kd").attr('disabled',false);
+								document.getElementById('rek').style.visibility = 'visible';
                             }
                             document.getElementById('rek').style.visibility = 'visible';
                             $('#formID').each(function(){

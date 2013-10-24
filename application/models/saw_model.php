@@ -24,7 +24,8 @@
                 WHERE No_Saw = '$id'");
             return $q->result();
         }
-
+		
+		
         function insert($data,$kode)
         {
             $rr=$this->db->query("select * from saw_h where No_Saw = '$kode'");

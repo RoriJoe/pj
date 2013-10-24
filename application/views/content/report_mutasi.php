@@ -72,15 +72,15 @@ function listBarang(){
 					Tanggal Dari
 				</td>
 				<td>
-					<input type="text" id="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
-					<input type="text" id="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
+					<input type="text" id="_tgl" name="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
+					<input type="text" id="_tgl2" name="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
 				</td>
 			</tr>
 		</table>
 	</div>
 	
 	<div class="pull-left" id="range" style="margin-top: 20px; margin-left: 10px">
-		<input type="text" id="_tgl" style="width: 150px;"/> s/d <input type="text" id="_tgl2" style="width: 150px;"/>
+		<input type="text" id="tgl1" name="tgl1" style="width: 150px;"/> s/d <input type="text" id="tgl2" name="tgl2" style="width: 150px;"/>
 	</div>
 	
 	<div style="clear: both;"></div>

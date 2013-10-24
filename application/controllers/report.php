@@ -213,8 +213,9 @@
 
 			$barang1 = $this->input->post("barang1");
 			$barang2 = $this->input->post("barang2");
-			$tgl = $this->input->post("_tgl");
-			$tgl2 = $this->input->post("_tgl2");
+			
+			$tgl = date('Y-m-d', strtotime($this->input->post("_tgl")));
+			$tgl2 = date('Y-m-d', strtotime($this->input->post("_tgl2")));
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Mutasi - ". date('dmY');

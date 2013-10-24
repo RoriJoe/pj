@@ -89,18 +89,40 @@ SELECT Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM
 		
 	}
 	
-	function print_mutasi($barang1,$barang2){ //Sementara
+	function print_mutasi($barang1,$barang2,$tgl,$tgl2){ 
 		
-		$q = $this->db->query("
-		
-SELECT Kode, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar
+		$q = $this->db->query("SELECT Kode, Nama, Ukuran, Nama2,Satuan1,
+SAW.saldoawal as saw,
+bpb.terima as terima,
+sj.kirim as keluar
+
 		
     from barang 
-    LEFT OUTER JOIN saw_d ON barang.Kode = saw_d.Kd_Brg
-    LEFT OUTER JOIN bpb_d ON barang.Kode = bpb_d.Kode_brg
-    LEFT OUTER JOIN sj_d ON barang.Kode = sj_d.Kode_brg
+	LEFT outer JOIN 
+        ( Select a.Kd_Brg,SUM(a.QtySaw1) as saldoawal
+        from saw_d as a
+        Inner JOIN saw_h as b ON a.No_Saw=b.No_Saw
+        where (b.Tgl between '$tgl' and '$tgl2')
+        group by a.Kd_Brg
+        ) as SAW ON barang.Kode = SAW.Kd_Brg
+        LEFT outer JOIN
+        (Select a.Kode_brg,SUM(a.Qty1) as terima
+        from bpb_d as a
+        INNER JOIN bpb_h as b ON a.No_Bpb=b.No_Bpb
+        where (b.Tgl_Bpb between '$tgl' and '$tgl2')
+        group by a.Kode_brg
+        ) as bpb ON barang.Kode = bpb.Kode_brg
+    	LEFT Outer Join
+    	(Select a.Kode_Brg,SUM(a.Qty1) as kirim
+        from sj_d as a
+        INNER JOIN sj_h as b ON a.No_Sj=b.No_Sj
+        where (b.Tgl between '$tgl' and '$tgl2')
+        group by a.Kode_Brg
+        ) as sj ON barang.Kode = sj.Kode_Brg
+        
+   
     where Kode between '$barang1' and '$barang2'
-    group by barang.Kode;");
+    order by barang.Kode;");
 				return $q->result();
 		
 	}

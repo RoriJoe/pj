@@ -48,7 +48,7 @@
                 <td>$row->Nama</td>
                 <td>$row->Ukuran</td>
 				<td>$row->Nama2</td>
-				<td align='right'>$row->SAW</td>
+				<td align='right'>$row->saw</td>
 				<td align='right'>$row->terima</td>
 				<td align='right'>$row->keluar</td>
 				<td align='right'>$saldo</td>

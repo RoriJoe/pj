@@ -1,24 +1,23 @@
 <script>
 	
-	/* function ToUang(nStr) { 
-	nStr += ''; x = nStr.split('.'); x1 = x[0]; x2 = x.length > 1 ? '.' + x[1] : ''; 
-	var rgx = /(\d+)(\d{3})/; while (rgx.test(x1)) { x1 = x1.replace(rgx, '$1' + '.' + '$2'); } 
-	return x1 + x2; }  */
+	function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
 	
-	function AddDot(Num){
-		Num += '';
-		Num = Num.replace(/\./g, '');
-		
-		x=Num.split('.');
-		x1=x[0];
-		x2=x.length >1 ?',' + x[1] : '';
-		var rgx =/(\d+)(\d{3})/;
-		while (rgx.test(x1))
-		{
-		x1=x1.replace(rgx,'$1'+'.'+'$2');
-		}
-		return x1+x2;
-	}
+	
 	//BUAT hapus titik
 	function BackUang(nStr){
 		var hasil='';
@@ -32,36 +31,8 @@
 		return hasil;
 	}
 	
-	function ubah(a){
-	
-		var harga = a;
-		harga = AddDot(harga);
-		return harga;
-	}
-	
-	function validAct(row){
-    
-    
-    //disable alfabet di qty
-    var foo = document.getElementById('qty'+row);
-	
-    foo.addEventListener('input', function (prev) {
-        return function (evt) {
-		
-            if (!/^\d{0,9}(?:\.\d{0,2})?$/.test(this.value)) {
-              this.value = prev;
-			  
-            }
-            else {
-             prev = this.value;
-			  
-            }
-        };
-    }(foo.value), false);
 	
 	
-	
-}
 	</script>
 <div class="saw-box table  CSSTabel" style="width: 62%;height: 270px;overflow-y: overlay;">
 <table id="tb5" class="saw-barang" style="width: 100%;">
@@ -91,7 +62,7 @@
 	<tr>
 		<td><input disabled='disabled' type='text' id='gudang$i' name='gudang$i' value='$row->Nama' style='width: 120px;'></td>
 		<td><input type='text' id='tgl$i' name='tgl$i' value='$d1' style='width: 75px; '></td>
-		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; text-align: right;'   onkeyup='this.value=ubah(this.value);' onkeydown='validAct($i)'></td>
+		<td><input type='text' id='qty$i' name='qty$i' style='width: 60px; text-align: right;'   onkeyup=\"formatAngka(this,'.')\" ></td>
 		<td><input disabled='disabled' value='$gudang' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 		<td><input disabled='disabled' value='$jual' type='text' id='_kd' name='kd' style='width: 60px;'></td>
 	</tr>";

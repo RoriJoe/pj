@@ -14,7 +14,7 @@
         }
         
 		function get_saw()
-        {
+        { 
 		 /* SELECT gudang.Nama,sum(bpb_d.Qty1) as terima,sum(sj_d.Qty1) as sj, sum(do_d.Qty) as do
             FROM gudang
 			left outer JOIN bpb_h ON gudang.Kode = bpb_h.Kode_Gudang
