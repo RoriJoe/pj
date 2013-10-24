@@ -25,7 +25,10 @@
             return $q->result();
         }
 		
-		
+		function get_barang(){
+            $q = $this->db->query("select Kode,Ukuran,Nama,Satuan1,QtyOp from barang");
+            return $q->result();
+        }
         function insert($data,$kode)
         {
             $rr=$this->db->query("select * from saw_h where No_Saw = '$kode'");

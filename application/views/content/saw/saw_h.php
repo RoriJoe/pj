@@ -124,6 +124,19 @@ function disableAlpha($id){
     }(foo.value), false);
 };
 
+function addBarang(){
+    
+    $.ajax({ 
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/saw/addBarang",
+        data :{},
+        success:
+        function(hh){
+           $('#detail').html(hh);
+        }
+    });
+}
+
 function detailSaw(){
     var id = $('#noSaw').val();
     $.ajax({ //utk tabel detail DO
@@ -144,7 +157,7 @@ function detailSaw(){
 
 <!--//***MAIN FORM-->
 <div class="bar">
-    <p>Form Pendataan Saldo Awal <i id="icon" class='icon-chevron-down icon-white'></i></p>
+    <p>Form Pendataan Stock Opname <i id="icon" class='icon-chevron-down icon-white'></i></p>
 </div>
 <div id="konten" class="hide-con master-border">
 <form id="formID">
@@ -157,7 +170,7 @@ function detailSaw(){
                 style="width: 170px; margin-left: 10px; margin-right: 20px;text-transform: uppercase;"/>
             </td>
 
-            <td>Tgl BPB</td>
+            <td>Tgl Pendataan</td>
             <td>
                 <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
                 style="width: 80px;margin-left: 10px; margin-right: 20px;">
@@ -222,6 +235,7 @@ function detailSaw(){
 
 <script type="text/javascript">
 $(document).ready(function(){
+	addBarang();
     listSaw();
     autogen();
     validation_engine();
@@ -245,7 +259,7 @@ $("#cancel").click(function(){
     $('#formID').each(function(){
         this.reset();
     });
-
+	addBarang();sss
     autogen();
     document.getElementById('add').style.visibility = 'visible';
 });

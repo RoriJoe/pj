@@ -50,6 +50,14 @@
             $this->load->view("content/saw/saw_d",$data);
         }
 		
+		function addBarang(){
+            
+
+            $data['hasil']=$this->saw_model->get_barang();
+            //$data['kode']=$id;
+            $this->load->view("content/saw/saw_detail",$data);
+        }
+		
         function insert($modes)
         {
             $a=$this->input->post('noSaw');

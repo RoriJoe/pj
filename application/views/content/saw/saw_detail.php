@@ -17,7 +17,7 @@
         <td>
             <div class='input-append'>
                 <input type='text' class='span2' 
-                id='kode_brg$i' id='appendedInputButton' name='kode_brgd' value='$row->Kd_Brg' 
+                id='kode_brg$i' id='appendedInputButton' name='kode_brgd' value='$row->Kode' 
                 onkeypress='validAct($i)' 
                 maxlength='20' 
                 style='width:80px' disabled='true'/>
@@ -43,10 +43,10 @@
             style='width:70px' readonly='true'/>
         </td>
         <td>
-            <input type='text' name='Nama' id='qty_brg$i' value='$row->QtySaw1' 
+            <input type='text' name='Nama' id='qty_brg$i'  
             onkeypress='validAct($i)' maxlength='5' 
             class='validate[required]' 
-            style='width:45px' disabled='true'/>
+            style='width:45px' />
         </td>
         <td>
             <input type='text' name='satuan' id='satuan_brg$i' value='$row->Satuan1'  
@@ -54,8 +54,10 @@
             style='width:80px' disabled='true'/>
         </td>
         <td>
-            <a class='btn' href='#' onclick='editRow($i)' style='display:none'><i id='icon$i' class='icon-pencil'></i></a>
-            <a class='btn' href='#' onclick='deleteRow(this)' style='display:none'><i class='icon-trash'></i></a>
+			<input type='text' name='selisih' id='selisih$i' 
+            class='validate[required]' 
+            style='width:40px' readonly='true'/>
+			<label id='qtyop$i' name='qtyop$i' style='visibility: hidden;'>$row->QtyOp</label>
         </td>
         </tr>
         ";
@@ -121,5 +123,13 @@ function validAct(row){
             }
         };
     }(foo.value), false);
+	
+	$('#qty_brg'+row).bind('textchange', function (event){
+        var q = $(this).val();
+        var h = $("#qtyop"+row).text();
+        hasil = q-h;
+       $('#selisih'+row).val(hasil); 
+       
+    });
 }
 </script>
