@@ -97,7 +97,14 @@
             $data['pl']=$this->input->post('pl');
             $data['sl']=$this->input->post('sl');
             $data['to']=$this->input->post('to');
-            
+			
+			$data['disc']=$this->input->post('disc');
+            $data['discT']=$this->input->post('discT');
+			 $data['dpp']=$this->input->post('dpp');
+            $data['ppnT']=$this->input->post('ppnT');
+            $data['ppn']=$this->input->post('ppn');
+            $data['grant']=$this->input->post('grant');
+			
 			$data['totalRow']=$this->input->post('totalRow');
 			$data['arrKode']=$this->input->post('arrKode');
             $data['arrQty']=$this->input->post('arrQty');
