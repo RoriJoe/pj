@@ -2308,3 +2308,7 @@ opacity:0.1}
     background-color: #fff;
     box-shadow: 0 1px 1px #B8B8B8;
 }
+
+.menu-border-bottom{
+    border-bottom: 1px solid #fff;
+}

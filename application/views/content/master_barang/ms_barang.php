@@ -393,12 +393,14 @@ function addCombo() {
     }
 
 	var _sat = $('#txtCombo').val();
+    var nm = $('#txtCombo').val();
+    var kd = $('#txtCombo').val();
 	if(_sat !="")
 	{
 		$.ajax({
 		type:'POST',
-		url: "<?php echo base_url();?>index.php/ms_barang/add_satuan", //SEND TO CONTROLLER
-		data :{_sat:_sat},
+		url: "<?php echo base_url();?>index.php/ms_satuan/insert", //SEND TO CONTROLLER
+		data :{kd:kd,nm:nm},
 
 		success:
 		function(msg) //GET MESSEGE FROM INSERT MODEL

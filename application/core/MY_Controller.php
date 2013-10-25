@@ -75,6 +75,12 @@
             $this->template->display('content/master_supplier/ms_supplier', $data);
         }
 
+        //Master Supplier
+        function ms_satuan(){
+            $data['judul']="Master Satuan";
+            $this->template->display('content/master_satuan/ms_satuan', $data);
+        }
+
         //Master Gudang
         function ms_gudang(){
             $data['judul']="Master Gudang";

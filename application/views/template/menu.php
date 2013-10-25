@@ -22,6 +22,7 @@
                     <li><a class = "">Persediaan <i class="icon-chevron-right"></i></a>
                         <ul>
                             <li><a class = "ajax" href="ms_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barang</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="ms_satuan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Satuan</a></li>
                         </ul>
                     </li>                   
                 </ul>
@@ -30,24 +31,24 @@
                 <ul>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Penjualan</a>
                        <ul>
-                            <li><a class = "ajax" href="tr_do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Order</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="tr_do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Order</a></li>
                        </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Pembelian</a>
                         <ul>
-                            <li><a class = "ajax" href="tr_pemesanan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemesanan / PO</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="tr_pemesanan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemesanan / PO</a></li>
                         </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Persediaan</a>
                         <ul>
                             <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
-                            <li><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
                         </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Keuangan</a>
                         <ul>
                             <li><a class = "ajax" href="tr_invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoice</a></li>
-                            <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terima Tagihan</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terima Tagihan</a></li>
                         </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Akuntansi</a>
@@ -56,7 +57,7 @@
                             <li><a class = "ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Transaksi Jurnal</a></li>
                             <li><a class = "ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Buku Besar</a></li>
                             <li><a class = "ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Rugi Laba</a></li>
-                            <li><a class = "ul-divider ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Neraca</a></li>
+                            <li class="menu-border-bottom"><a class = "ul-divider ajax" href="">&nbsp;&nbsp;&nbsp;&nbsp;Cetak Neraca</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -68,7 +69,7 @@
                   <li><a class="ajax" href="report_mutasi">Mutasi</a></li>
                   <li><a class="ajax" href="report_os">Outstanding</a></li>
                   <li><a class="ajax" href="report_penerimaan">Penerimaan</a></li>
-                  <li><a class="ajax" href="report_ks">Kartu Stock</a></li>
+                  <li class="menu-border-bottom"><a class="ajax" href="report_ks">Kartu Stock</a></li>
                 </ul>
             </li>
         <?php
