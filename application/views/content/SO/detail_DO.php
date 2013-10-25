@@ -19,8 +19,8 @@
         <th>Nama</th>
         <th>Satuan</th>
         <th>Qty</th>
-        <th>Harga Satuan</th>
-        <th>Jumlah</th>
+        <th>Hrg Satuan(RP)</th>
+        <th>Nilai(RP)</th>
         <th>Keterangan</th>
         <th>Action</th>
     </thead>
@@ -137,7 +137,7 @@ function getDetail(row){
     listBarang();
     filter = row;
 }
-
+temp=0;
 function getTotal(){
     var arr = document.getElementsByName('jumlah');
     var total = 0;
@@ -145,8 +145,86 @@ function getTotal(){
         if(parseInt(arr[i].value))
             total += parseInt(arr[i].value);
     }
+	temp=total;
     $('#total').val(accounting.formatMoney(total, "Rp ",2,".",","));
     $('#total2').val(total);
+	$("#dpp").val(accounting.formatMoney(total, "Rp ",2,".",","));
+    $("#dpp2").val(total);
+	$("#granT").val(accounting.formatMoney(total, "Rp ",2,".",","));
+	$("#granT2").val(total);
+}
+
+function hitung(){
+    $('#disc').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var total2 = $("#total2").val();
+
+        var h = $(this).val();
+        if(temp != 0){
+            var q = temp;
+        } else if(total2 != 0){
+            var q = total2;
+        }
+        
+        hasil = q*h/100;
+
+        
+        var disco = hasil;
+		var dpp = total2-disco;
+        temp2=hasil;
+        $("#discT").val(accounting.formatMoney(hasil, "",2,".",","));
+        $("#dpp").val(accounting.formatMoney(dpp, "Rp ",2,".",","));
+        $("#dpp2").val(dpp);
+        //$("#total2").val(q+hasil);  */
+
+    });  
+$('#discT').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var total2 = $("#total2").val();
+
+        var h = $(this).val();
+        if(temp != 0){
+            var q = temp;
+        } else if(total2 != 0){
+            var q = total2;
+        }
+        
+        hasil = (h/q)*100;
+
+		var dpp = q-h;
+        
+        $("#disc").val(hasil);
+        $("#dpp").val(accounting.formatMoney(dpp, "Rp ",2,".",","));
+        $("#dpp2").val(dpp);
+        //$("#total2").val(q+hasil);  */
+
+    });     	
+}
+
+function hitungPPN(){
+    $('#ppn').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var dpp = $("#dpp2").val();
+
+        var h = $(this).val();
+        /* if(temp != 0){
+            var q = temp;
+        } else if(total2 != 0){
+            var q = total2;
+        }
+         */
+        hasil = dpp*h/100;
+
+        
+        var ppnT = hasil;
+		var grant = dpp-0+ppnT;
+        temp2=hasil;
+        $("#ppnT").val(accounting.formatMoney(hasil, "",2,".",","));
+        $("#granT").val(accounting.formatMoney(grant, "Rp ",2,".",","));
+        $("#granT2").val(grant);
+        //$("#total2").val(q+hasil); 
+
+    });       	
 }
 
 function validAct(row){

@@ -32,6 +32,11 @@
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
 			$to = $this->input->post('to');
+			
+			$disc = $this->input->post('disc');
+			$dpp = $this->input->post('dpp');
+			$ppn = $this->input->post('ppn');
+			$grant = $this->input->post('grant');
 			$temp=8;
             $myvar  = empty($myvar) ? NULL : $myvar;
 
@@ -45,7 +50,11 @@
 				'Kode_Gudang'=>$temp,
 				'Kirim'=>$myvar,
 				'Otorisasi'=>$sl,
-				'Total'=>$to
+				'Total'=>$to,
+				'discount'=>$disc,
+				'dpp'=>$dpp,
+				'ppn'=>$ppn,
+				'grandttl'=>$grant
             );
 
             $in = $this->tr_do_model->insertDo($data,$so);

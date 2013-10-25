@@ -71,5 +71,17 @@
 <table>
 	<tr>
 			<td>Total : <?php echo $to; ?></td>
-		</tr>
+	</tr>
+	<tr>
+			<td>Discount : <?php echo $disc." % ".$discT; ?></td>
+	</tr>
+	<tr>
+			<td>DPP : <?php echo $dpp; ?></td>
+	</tr>
+	<tr>
+			<td>PPN : <?php echo $ppn." % ".$ppnT; ?></td>
+	</tr>
+	<tr>
+			<td>Grand Total : <?php echo $grant; ?></td>
+	</tr>
 </table>

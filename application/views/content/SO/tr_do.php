@@ -60,9 +60,43 @@
 </form>
 <div id="hasil2" style="height: 238px;"></div>
 <div style="float: right;">
-    <input type="hidden" id="total2" />
-    <label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
+<table>
+<tr>
+	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+	</td>
+	<td><input type="hidden" id="total2" />
+    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true"></td>
+</tr>
+<tr>
+	<td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
+	</td>
+	<td><input type="hidden" id="disc2" />
+    <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onclick="hitung()">%
+	<input style="width:69px;" id="discT" name="discT" type="text" >
+	</td>
+</tr>
+<tr>
+	<td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
+	</td>
+	<td><input type="hidden" id="dpp2" />
+    <input style="width:120px; margin-right: 145px;" id="dpp" name="dpp" type="text" readonly="true"></td>
+</tr>
+ <tr>
+		<td>
+			<label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
+		</td>
+		<td>
+			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onclick="hitungPPN()">% 
+			<input style="width:69px;" id="ppnT" name="ppnT" type="text" onclick="hitungPPN()">
+		</td>
+</tr> 
+<tr>
+	<td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
+	</td>
+	<td><input type="hidden" id="granT2" />
+    <input style="width:120px; " id="granT" name="granT" type="text" readonly="true"></td>
+</tr>      
+</table>
 </div>
 <div>
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
@@ -320,7 +354,14 @@ $("#print").click(function(){
     var pl = $('#kd_plg').val();
     var sl = $('#_sl').val();
     var to = $('#total').val();
-    
+	
+	var disc = $('#disc').val();
+	var dpp = $('#dpp').val();
+	var ppn = $('#ppn').val();
+	var grant = $('#granT').val();
+    var ppnT = $('#ppnT').val();
+	var discT = $('#discT').val();
+	
     var arrKode = new Array();
     var arrQty = new Array();
     var arrSatuan = new Array();
@@ -343,7 +384,7 @@ $("#print").click(function(){
 $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/report/print_transaksi_so",
-        data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,
+        data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,ppnT:ppnT,discT:discT,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
         },
         success:
@@ -501,6 +542,11 @@ $("#save").click(function(){
     var sl = $('#_sl').val();
     var to = $('#total2').val();
     
+	var disc = $('#disc').val();
+	var dpp = $('#dpp2').val();
+	var ppn = $('#ppn').val();
+	var grant = $('#granT2').val();
+	
     var arrKode = new Array();
     var arrQty = new Array();
 	var arrSatuan = new Array();
@@ -529,7 +575,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_do/insert",
-            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,
+            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
             },
 
