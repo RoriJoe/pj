@@ -1,9 +1,9 @@
 <div class="table table-hover CSSTabel tb-barang">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th >Kode</th>
-        <th >Nama</th>
-        <th >Action</th>
+        <th width="30%">Kode</th>
+        <th width="50%">Nama</th>
+        <th width="20%">Action</th>
     </thead>
 
     <tbody>

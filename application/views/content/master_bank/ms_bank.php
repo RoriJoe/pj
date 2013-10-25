@@ -64,6 +64,7 @@
             <td>Jenis</td>
             <td>
                 <select name="_tipe" class="validate[required]" id="_tipe" style="margin-left: 10px; margin-right: 20px;">
+                <option value="">- Pilih -</option>
                 <?php
                 foreach ($list_tipe as $isi)
                 {
@@ -93,6 +94,7 @@
             <td>No Perkiraan</td>
             <td>
                 <select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
+                <option value="">- Pilih -</option>
                 <?php
                 foreach ($list_perkiraan as $isi)
                 {

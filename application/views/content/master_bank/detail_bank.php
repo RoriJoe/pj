@@ -1,12 +1,11 @@
 <div class=" table  CSSTabel" style="overflow: auto; height: 220px">
 <table id="tb3">
     <thead>
-        <th>No Rekening</th>
-        <th>Atas Nama</th>
-        <th>Jenis</th>
-        <th>Cabang</th>
-        <th>No Perkiraan</th>
-        <th>Action</th>
+        <th width="20%">No Rekening</th>
+        <th width="30%">Atas Nama</th>
+        <th width="15%">Jenis</th>
+        <th width="20%">Cabang</th>
+        <th width="15%">No Perkiraan</th>
     </thead>
 
     <tbody id="itemlist">
@@ -18,10 +17,9 @@
             <tr>
                 <td><input type='hidden' name='item[code][]' value='$row->no_rekening' style='width:70px'/>$row->no_rekening</td>
                 <td>$row->atas_nama</td>
-                <td><input type='text' name='item[price][]' value='$row->tipe' style='width:70px' readonly='true'/></td>
-                <td><input type='text' name='item[qty][]' value='$row->cabang' style='width:70px' readonly='true'/></td>
-                <td><input type='text' name='item[per][]' value='$row->no_perkiraan' style='width:70px' readonly='true'/></td>
-                <td><a href='javascript:void(0);' id='hapus'></a></td>
+                <td><input type='text' name='item[price][]' value='$row->tipe' style='width:87%' readonly='true'/></td>
+                <td><input type='text' name='item[qty][]' value='$row->cabang' style='width:87%' readonly='true'/></td>
+                <td><input type='text' name='item[per][]' value='$row->no_perkiraan' style='width:87%' readonly='true'/></td>
             </tr>
         ";
         $i++;
@@ -77,17 +75,17 @@ function addRow() {
     var itemper = $("#_no_perk").val();
 
     var items = "";
-    if(itemcode != "" && itemname != "" && itemprice!="" && itemqty !="" && itemper !="")
+    if(itemcode != "" && itemname != "" && itemprice!="" && itemqty !="")
     {
         $count = $("tbody#itemlist tr").length+1;
 
         items += "<tr>";
-        items += "<td width='100px'><input type='hidden' id='no_rekening"+$count+"' name='item[code][]' value='"+ itemcode +"' style='width:70px'/>"+itemcode+"</td>";
-        items += "<td width='100px'><input type='hidden' id='atas_nama"+$count+"' name='item[name][]' value='"+ itemname +"' style='width:70px'/>"+itemname+"</td>";
-        items += "<td><input type='hidden' class='span2' id='tipe"+$count+"' name='item[price][]' value='"+ itemprice +"' style='width:90px'/>"+itemprice+"</td>";
-        items += "<td><input type='text' class='span2' id='cabang"+$count+"' name='item[qty][]' value='"+ itemqty +"' style='width:90px'/></td>";
-        items += "<td><input type='text' class='span2' id='no_perkiraan"+$count+"' name='item[per][]' value='"+ itemper +"' style='width:90px'/></td>";
-        items += "<td><a href='javascript:void(0);' id='hapus'><i id='icon$i' class='icon-trash'></i></a></td></tr>";
+        items += "<td width='20%'><input type='hidden' id='no_rekening"+$count+"' name='item[code][]' value='"+ itemcode +"'/>"+itemcode+"</td>";
+        items += "<td width='20%'><input type='hidden' id='atas_nama"+$count+"' name='item[name][]' value='"+ itemname +"'/>"+itemname+"</td>";
+        items += "<td width='15%'><input type='hidden' class='span2' id='tipe"+$count+"' name='item[price][]' value='"+ itemprice +"' style='width:90%'/>"+itemprice+"</td>";
+        items += "<td width='15%'><input type='text' class='span2' id='cabang"+$count+"' name='item[qty][]' value='"+ itemqty +"' style='width:90%'/></td>";
+        items += "<td width='15%'><input type='text' class='span2' id='no_perkiraan"+$count+"' name='item[per][]' value='"+ itemper +"' style='width:90%'/></td>";
+        items += "<td width='10%'><a href='javascript:void(0);' id='hapus'><i id='icon$i' class='icon-trash'></i></a></td></tr>";
     
         if ($("tbody#itemlist tr").length == 0)
         {
@@ -116,7 +114,7 @@ function checkList(val){
         var input = $(this).find("input[type='hidden']:first");
         if (input.val() == val){
             cb = false;
-            bootstrap_alert.info('Rekening Sudah Ada');
+            bootstrap_alert.info2('No Rekening Sudah Ada');
         }
     });
     return cb;
