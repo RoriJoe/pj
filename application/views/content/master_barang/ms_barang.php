@@ -48,7 +48,7 @@ loadListBarang();
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 75px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
+                <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 120px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
             </td>
             <td>Nama</td>
             <td>
@@ -84,7 +84,7 @@ loadListBarang();
        <tr>
             <td>Persediaan</td>
             <td>
-            	<div class="input-append">
+            	<div class="input-append" style="margin-bottom:0">
                     <input class="span2 validate[required,custom[number]]" readonly="true" id='_ps' name='ps' style="width: 80px;margin-left: 10px; margin-right: 20px;" type="text" value="0">
                 </div>
             </td>
@@ -96,7 +96,7 @@ loadListBarang();
                     foreach ($list_satuan as $isi)
                     {
                         echo "<option ";
-                        echo "value = '".$isi->Value."'>".$isi->Value."</option>";
+                        echo "value = '".$isi->Kode_satuan."'>".$isi->Kode_satuan."</option>";
                     }
                     ?>
                 </select>
@@ -113,6 +113,14 @@ loadListBarang();
                             />
                         <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
                         </div>"><i class='icon-plus'></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td>Tgl Persediaan</td>
+            <td>
+                <input  type='text' 
+                        class="" id='_tgl1' name='_tgl1' 
+                        style="width: 80px; margin-left: 10px;" readonly="true">
             </td>
        </tr>
 
