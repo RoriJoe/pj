@@ -23,6 +23,11 @@
             $this->load->view('content/list/list_gudang',$data);
         }
 
+        //POP
+        function popGudang(){
+            $this->load->view('content/pop/gudang');
+        }
+
         //Untuk auto generate
         function auto_gen()
         {

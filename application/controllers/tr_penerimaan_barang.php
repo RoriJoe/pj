@@ -18,7 +18,27 @@
             $data['hasil']=$this->tr_penerimaan_barang_model->get_paged_list();
 			
             //load view
-            $this->load->view('content/tr_penerimaan_barang_detail',$data);
+            $this->load->view('content/tr_penerimaan/tr_penerimaan_barang_detail',$data);
+        }
+
+        function viewPO(){
+            $id=$this->input->post('po');
+            $data['hasil']=$this->tr_penerimaan_barang_model->get_detail_po($id);
+            $this->load->view("content/tr_penerimaan/detail_penerimaan_barang",$data);
+        }
+
+        function viewPOdata(){
+            $id=$this->input->post('po');
+            $query=$this->tr_penerimaan_barang_model->get_detail_poData($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Kode_Gudang'] = $row->Kode_gud;
+                $final['Gudang'] = $row->Nama;
+                $final['Kode_Supplier'] = $row->Kode_sup;
+                $final['Supplier'] = $row->Perusahaan;
+            }
+            echo json_encode($final);
         }
 
 
@@ -29,6 +49,7 @@
             $c=$this->input->post('_gd');
             $d=$this->input->post('_sp');
             $e=$this->input->post('_ref');
+            $f=$this->input->post('po');
 
             $myvar  = empty($myvar) ? NULL : $myvar;
             $data= array(
@@ -37,6 +58,7 @@
                     'No_Reff'=>$e,
                     'Kode_Supp'=>$d,
                     'Kode_Gudang'=>$c,
+                    'No_Po'=>$f,
                 );
             $in = $this->tr_penerimaan_barang_model->insert($data,$a);
 
@@ -72,6 +94,7 @@
             $c=$this->input->post('_gd');
             $d=$this->input->post('_sp');
             $e=$this->input->post('_ref');
+            $f=$this->input->post('po');
 
             $myvar  = empty($myvar) ? NULL : $myvar;
             $data= array(
@@ -79,6 +102,7 @@
                     'No_Reff'=>$e,
                     'Kode_Supp'=>$d,
                     'Kode_Gudang'=>$c,
+                    'No_Po'=>$f,
                 );
 				
             $in = $this->tr_penerimaan_barang_model->update($data,$a);
@@ -88,15 +112,15 @@
 			$arrQty=$this->input->post('_arrQty');
 			$arrKet=$this->input->post('_arrKet');
 			$totalRow=$this->input->post('totalRow');
-			for($i=0;$i<$totalRow;$i++){
-                $datadet= array(
-                    'Qty1'=>$arrQty[$i],
-                    'Keterangan'=>$arrKet[$i]
-                );
-                $this->tr_penerimaan_barang_model->update_det($datadet,$a,$arrKode[$i]);
-            }
+
+            $datadet= array(
+                'Kode_brg'=>$arrKode,
+                'Qty1'=>$arrQty,
+                'Keterangan'=>$arrKet
+            );
+            $this->tr_penerimaan_barang_model->update_det($datadet,$a);
 			
-			if($in == "ok")
+            if($in == "ok")
             {
                 echo "ok";
             }
@@ -120,7 +144,7 @@
 
             $data['hasil']=$this->tr_penerimaan_barang_model->get_detail_pb($bpb);
             $data['kode']=$bpb;
-            $this->load->view("content/detail_penerimaan_barang",$data);
+            $this->load->view("content/tr_penerimaan/detail_penerimaan_barang",$data);
         }
 		
 		#Untuk auto generate
@@ -135,20 +159,32 @@
                 {
                     $temp=$rr->No_Bpb;
                 }
-                $skr=substr($temp,3,4);
+                $skr=substr($temp,0,4);
                     if($skr==$tb){
                         $ang=intval(substr($temp,-3))+1;
                         if(strlen($ang) == 3){
-                            $no = "BPB".$tb.$ang;
+                            $no = $tb.$ang;
                         }
                         else if(strlen($ang) == 2){
-                            $no = "BPB".$tb."0".$ang;}
+                            $no = $tb."0".$ang;}
                         else{
-                            $no = "BPB".$tb."00".$ang;
+                            $no = $tb."00".$ang;
                         }
                     }else {
-                        $no = "BPB".$tb."001";
+                        $no = $tb."001";
                     }
             echo $no;
+        }
+
+        function po_call(){
+            $query = $this->tr_penerimaan_barang_model->get_po_list();
+
+            $final['']='-- Select PO --';
+            foreach ($query as $a) 
+            {
+                $final[$a->Kode] = $a->Kode;
+            }
+
+            echo form_dropdown('po',$final,'1','id="po" onchange="get_po_data()"');
         }
     }

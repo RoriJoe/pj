@@ -1,12 +1,12 @@
 <div class="table table-hover CSSTabel tb-barang">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th >Kode Satuan</th>
-        <th >Satuan</th>
-        <th >Action</th>
+        <th width="35%">Kode Satuan</th>
+        <th width="50%">Satuan</th>
+        <th width="15%">Action</th>
     </thead>
     
-    <tbody>
+    <tbody id="tb_detail">
     <?php foreach($hasil as $row)
     {
         echo "<tr>

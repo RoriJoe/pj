@@ -18,13 +18,13 @@
         <td>
             <div class='input-append' style='margin-bottom:0;'>
                 <input type='text' class='validate[required] span2' id='kode_brg$i' id='appendedInputButton' name='kode_brg[]' style='width:100px' value='$row->Kode_Brg' disabled='true'/>
-                <a href='#myModal' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
         <td>
             <div class='input-append' style='margin-bottom:0;'>
                 <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur[]' style='width:140px' value='$row->Nama $row->Ukuran' disabled='true'/>
-                <a href='#myModal' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
         <td>

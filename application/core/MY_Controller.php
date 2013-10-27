@@ -105,7 +105,7 @@
         function tr_penerimaan_barang()
         {
             $data['judul']="Penerimaan Barang";
-            $this->template->display('content/tr_penerimaan_barang', $data);
+            $this->template->display('content/tr_penerimaan/tr_penerimaan_barang', $data);
         }
 
         //Transaksi Surat Jalan

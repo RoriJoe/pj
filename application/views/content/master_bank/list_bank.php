@@ -6,7 +6,7 @@
         <th width="20%">Action</th>
     </thead>
 
-    <tbody>
+    <tbody id="tb_detail">
     <?php foreach($hasil as $row)
     {
         echo "<tr>

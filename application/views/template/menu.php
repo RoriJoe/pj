@@ -41,8 +41,8 @@
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Persediaan</a>
                         <ul>
-                            <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
                             <li class="menu-border-bottom"><a class = "ajax" href="tr_surat_jalan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surat Jalan</a></li>
+                            <li><a class = "ajax" href="tr_penerimaan_barang">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan Barang</a></li>
                         </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Keuangan</a>

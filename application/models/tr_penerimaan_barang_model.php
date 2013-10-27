@@ -60,12 +60,28 @@
             return "ok";
         }
 		
-        function update_det($datadet,$kode,$kb)
+        function update_det($datadet,$kode)
         {
-			$where = "No_Bpb = '$kode' AND Kode_brg = '$kb'";
-			
-			$this->db->where($where);
-			$this->db->update('bpb_d', $datadet);
+			$count1=0;
+            $result = $this -> db -> query ("select Kode from bpb_d where No_Bpb = '$kode' limit 1");
+            $temp = $result->result_array();
+            $data['rek'] = $temp[0]['Kode'];
+            
+            $count1=0;
+            foreach($datadet['Kode_brg'] as $d)
+            {
+                $save=array
+                (
+                    'Kode_brg' => $datadet['Kode_brg'][$count1],
+                    'Qty1'=>$datadet['Qty1'][$count1],
+                    'Keterangan'=>$datadet['Keterangan'][$count1]                  
+                );
+                $this->db->where('No_Bpb',$kode);
+                $this->db->where('Kode',$data['rek']);
+                $this->db->update('bpb_d',$save);
+                $count1++;
+                $data['rek']++;
+            }
         }
 		
         //model untuk delete
@@ -80,5 +96,35 @@
             $this->db->where('No_Bpb',$kode);
             $this->db->delete('Bpb_d');
             //return "ok";
+        }
+
+        function get_detail_po($id){
+            $q = $this->db->query("SELECT po_d.Kode_barang AS Kode_brg, po_d.Jumlah AS Qty1, po_d.Keterangan,
+                barang.Nama, barang.Ukuran, concat(barang.Nama,' ',barang.Ukuran) AS Nama
+                FROM po_d
+                LEFT OUTER JOIN barang
+                ON po_d.Kode_Barang = barang.Kode
+                WHERE Kode_po = '$id'");
+            return $q->result();
+        }
+
+        function get_detail_poData($id){
+            $query = $this->db->query("SELECT B.Kode AS Kode_sup, B.Perusahaan ,C.Nama, C.Kode AS Kode_gud
+                FROM po_h A
+                LEFT JOIN supplier B ON B.Kode = A.Kode_supplier
+                LEFT JOIN gudang C ON C.Kode = A.Kode_gudang
+                WHERE A.Kode = '$id'
+                LIMIT 1");
+            return $query->result();
+        }
+
+        function get_po_list(){
+            $query = $this->db->query("
+                SELECT A.Kode
+                FROM po_h A
+                WHERE A.Kode NOT IN (SELECT No_Po FROM bpb_h)
+                ");
+
+            return $query->result();
         }
     }

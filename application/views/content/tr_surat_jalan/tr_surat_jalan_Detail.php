@@ -6,7 +6,7 @@
             <th>Pelanggan</th>
         </thead>
 
-        <tbody>
+        <tbody id="tb_detail">
         <?php foreach($hasil as $row)
         {
             echo
@@ -23,7 +23,7 @@
 </div>
 
 <script>
-$('#tb1 tr').click(function (e) {
+$('#tb1 tbody tr').click(function (e) {
     var sj=$(this).attr("_no_sj");
 
     $('#sj').attr('disabled',true);

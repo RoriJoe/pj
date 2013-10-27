@@ -6,7 +6,7 @@
         <th >Action</th>
     </thead>
 
-    <tbody>
+    <tbody id="tb_detail">
     <?php foreach($hasil as $row)
     {
         $limit = number_format($row->Limit_Kredit,0,",",".");

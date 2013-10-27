@@ -29,14 +29,14 @@ $('#item_plg tr').dblclick(function (e) {
 
     if (checkRadio != null){
         getPelanggan();
-        $('#myModal2').modal('hide');
+        $('#modalPelanggan').modal('hide');
     }
     
 });
 
 $('input:radio[name="optionsRadios"]').change(function(){
     getPelanggan();
-    $('#myModal2').modal('hide');
+    $('#modalPelanggan').modal('hide');
 });
 
 $(document).ready(function() {

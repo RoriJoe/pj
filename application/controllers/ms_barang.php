@@ -24,6 +24,14 @@
             $this->load->view("content/list/list_barang",$data);
         }
 
+        #POPUP Show Product
+        function viewBarang2(){
+            //$nama = $this->input->post('k');
+            $data['hasil'] = $this->ms_barang_model->get_paged_list();
+            //$data['nama']=$nama;
+            $this->load->view("content/list/list_barang_full",$data);
+        }
+
 		
 		//Saldo Awal
 		function viewSaldoAwal(){

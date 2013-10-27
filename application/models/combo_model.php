@@ -25,6 +25,15 @@
             $query = $this->db->get('currency');
             return $query->result();
         }
+
+        function list_po(){
+            $query = $this->db->query("
+                SELECT A.Kode
+                FROM po_h A
+                WHERE A.Kode NOT IN (SELECT No_Po FROM bpb_h)
+                ");
+            return $query->result();
+        }
         
         function getang()//ambil no sj akhir
         {

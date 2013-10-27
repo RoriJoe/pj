@@ -24,7 +24,7 @@
                     <div class="input-append" style="margin-bottom:0;">
                      <input type='text' class="span2" 
                         maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 148px;">
-                    <a href="#myModal2" role="button" class="btn" id="f_plg" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                    <a href="#modalPelanggan" role="button" class="btn" id="f_plg" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
                     </div>
                 </td>
 
@@ -89,7 +89,7 @@
 </div>
 
 <!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Barang</h3>
@@ -99,7 +99,7 @@
   </div>
 </div>
 
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Pelanggan</h3>
@@ -124,7 +124,7 @@ jQuery(document).ready(function() {
     get_so_list();
     listSJ();
     autogen();
-    validation()
+    validation();
     barAnimation();
     $("#po").attr('disabled',true);
     $("#pn").attr('disabled',true);

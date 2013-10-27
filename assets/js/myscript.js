@@ -63,16 +63,16 @@ function key(){
 }
 
 function key_tr(){
-$('button[type="submit"]').attr('disabled','disabled');
+$('#save').attr('disabled','disabled');
 $('#add').attr('disabled','disabled');
  $('input[type="text"]').keyup(function() {
     if($(this).val() != '') {
-       $('button[type="submit"]').removeAttr('disabled');
+       $('#save').removeAttr('disabled');
        $('#add').removeAttr('disabled');
     }
     else
     {
-        $('button[type="submit"]').attr('disabled','disabled');
+        $('#save').attr('disabled','disabled');
         $('#add').attr('disabled','disabled');
     }
  });

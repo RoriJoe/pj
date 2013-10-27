@@ -2068,6 +2068,7 @@ tr{
 
 #tb_detail td {
     padding: 0px;
+    padding-top: 2px;
 }
 
 .btn-tbl{

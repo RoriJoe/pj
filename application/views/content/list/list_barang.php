@@ -52,13 +52,13 @@ $('#item_brg tr').dblclick(function (e) {
 
     if (checkRadio != null){
         getBarang();
-        $('#myModal').modal('hide');
+        $('#modalBarang').modal('hide');
     }
 });
 
 $('input:radio[name="optionsRadios"]').change(function(){
     getBarang();
-    $('#myModal').modal('hide');
+    $('#modalBarang').modal('hide');
 });
  
 var oTable = $('#tb5').dataTable( {

@@ -1,9 +1,9 @@
-<div class="CSSTabel" style="height: 245px;">
+<div class="table table-hover CSSTabel">
 <table id="tb4">
     <thead>
         <th>Kode</th><th>Nama</th><th>Alamat</th><th>Kota</th><th>Telp</th><th>Select</th>
     </thead>
-    <tbody>
+    <tbody id="item_gudang">
     <?php
     foreach($hasil as $row)
     {
@@ -22,14 +22,30 @@
 </div>
 
 <script>
-    
+$('#item_gudang tr').dblclick(function (e) {
+
+    $(this).find('td input[type=radio]').prop('checked', true);
+    getGudang();
+    $('#modalGudang').modal('hide');
+});
+
+$('input:radio[name="optionsRadios"]').change(function(){
+    getGudang();
+    $('#modalGudang').modal('hide');
+});
+
 var oTable = $('#tb4').dataTable( {
-    //"sScrollY": "300px", //heighnya
-    //"sScrollX": "100%", //panjang width
-    "sScrollXInner": "100%", //overflow dalem
-    "bScrollCollapse": false,
-    "bPaginate": false,
-    "sPaginationType": "full_numbers",
+    "sScrollY": "240px",
+    "sScrollYInner": "110%",
+    "bPaginate": true,
+    "bLengthChange": true,
+    "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": "View _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>
