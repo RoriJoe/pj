@@ -54,7 +54,6 @@ $('#item_brg tr').dblclick(function (e) {
         getBarang();
         $('#myModal').modal('hide');
     }
-    
 });
 
 $('input:radio[name="optionsRadios"]').change(function(){

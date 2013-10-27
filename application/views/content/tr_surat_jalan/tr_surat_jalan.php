@@ -107,10 +107,6 @@
   <div class="modal-body">
     <div id="list_pelanggan"></div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getPelanggan()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
 </div>
 
 <div id="list"></div>

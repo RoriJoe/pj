@@ -1,5 +1,5 @@
-<div class="table CSSTabel table-list table-hover">
-    <table id="tb1">
+<div class="table table-hover CSSTabel tb-barang" style="width:25%;">
+    <table id="tb1" style="width: 100%;">
         <thead>
             <th>No SJ</th>
             <th>No SO</th>
