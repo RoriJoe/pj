@@ -28,7 +28,7 @@
             </tr>
             ";
         }else{
-            echo "<tr>
+            echo "<tr class='warning'>
             <td>$row->Kode</td>
             <td>$row->Nama</td>
             <td>$row->Ukuran</td>
@@ -64,8 +64,6 @@ $('input:radio[name="optionsRadios"]').change(function(){
 var oTable = $('#tb5').dataTable( {
     "sScrollY": "240px",
     "sScrollYInner": "110%",
-    "sScrollX": "100%", //panjang width
-    "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
     "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],

@@ -2,10 +2,10 @@
 <table id="tb3">
     <thead>
         <th width="20%">No Rekening</th>
-        <th width="30%">Atas Nama</th>
+        <th width="25%">Atas Nama</th>
         <th width="15%">Jenis</th>
         <th width="20%">Cabang</th>
-        <th width="15%">No Perkiraan</th>
+        <th width="20%">No Perkiraan</th>
     </thead>
 
     <tbody id="itemlist">

@@ -38,21 +38,19 @@ $('input:radio[name="optionsRadios"]').change(function(){
     getPelanggan();
     $('#myModal2').modal('hide');
 });
- 
-var oTable = $('#tb4').dataTable( {
-    "sScrollY": "250px",
-    "sScrollYInner": "110%",
-    "sScrollX": "100%", //panjang width
-    "sScrollXInner": "100%", //overflow dalem
-    "bPaginate": true,
-    "bLengthChange": true,
-    "aaSorting": [[ 4, "desc" ]],
-    "oLanguage": {
-         "sSearch": "",
-         "sLengthMenu": "View _MENU_ ",
-         "sEmptyTable": "Tidak ada data tersedia",
-         "sZeroRecords": "Data tidak ditemukan"
-       },
-    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
-} );
+
+$(document).ready(function() {
+    var oTable = $('#tb4').dataTable( {
+        "bPaginate": true,
+        "bLengthChange": true,
+        "aaSorting": [[ 4, "desc" ]],
+        "oLanguage": {
+             "sSearch": "",
+             "sLengthMenu": "View _MENU_ ",
+             "sEmptyTable": "Tidak ada data tersedia",
+             "sZeroRecords": "Data tidak ditemukan"
+           },
+        "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+    } );
+});
 </script>

@@ -64,7 +64,7 @@ load_list();
                 <br/>
                 <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
                 <button id="cac" class="btn" type="reset">Cancel</button>
-				<button id="print" class="btn"  data-toggle="tooltip" title="Print Daftar Gudang"><i class="icon-print"></i></button>
+				<button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Gudang"><i class="icon-print"></i></button>
             </td>
         </tr>
     </table>
