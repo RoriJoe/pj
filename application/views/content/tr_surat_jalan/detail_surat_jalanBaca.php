@@ -20,14 +20,19 @@
                 <a href='#myModal' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
-        <td ><input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur$i' value='$row->Barang' style='width:120px'; disabled='true'></td>
+        <td >
+            <div class='input-append'>
+                <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur$i' value='$row->Barang' style='width:120px'; disabled='true'>
+                <a href='#myModal' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+            </div>
+        </td>
         <td><label id='nbu$i'>$row->Barang_SJ</label></td>
         <td ><input type='text' class='validate[required]' id='qty$i' name='qty$i' value='$row->Qty1' style='width:20px'; disabled='true'></td>
         <td><input type='text' class='validate[required]' id='ket$i' name='ket$i' value='$row->Keterangan' style='width:120px'; disabled='true'></td>
         <td>
            <div class='btn-group'>
-                <a class='btn' href='#' onclick='editRow($i)' style='display:none;'><i id='icon$i' class='icon-pencil'></i></a>
-                <a class='btn' href='#' onclick='deleteRow(this)' style='display:none;'><i class='icon-trash'></i></a>
+                <a class='btn' name='edit' id='edit$i' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
+                <a class='btn' name='delete' id='delete$i' href='#' onclick='deleteRow(this)'><i class='icon-trash'></i></a>
             </div>
         </td>
         </tr>
@@ -43,6 +48,26 @@
 </div>
 
 <script>
+jQuery(document).ready(function() {
+    var kirim = $('#kirim').val();
+    var table = document.getElementById('tbdsj');
+    var rowCount = table.rows.length;
+
+    var i;
+    for(i=1; i<rowCount; i++){
+        if(kirim > 0){
+            document.getElementById('edit'+i).style.visibility = 'hidden';
+            document.getElementById('delete'+i).style.visibility = 'hidden';
+        }
+        else
+        {
+            document.getElementById('edit'+i).style.visibility = 'visible';
+            document.getElementById('delete'+i).style.visibility = 'visible';
+        }
+    }
+    
+});
+
 function editRow(row){
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
     var i = document.getElementById('kode_brg'+row);

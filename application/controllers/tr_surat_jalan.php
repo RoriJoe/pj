@@ -17,12 +17,10 @@
             //Get data dari model
             $data['hasil']=$this->tr_surat_jalan_model->get_paged_list();
             //load view
-            $this->load->view('content/tr_surat_jalan_Detail',$data);
+            $this->load->view('content/tr_surat_jalan/tr_surat_jalan_Detail',$data);
         }
 
-		
-		
-        #Fungsi saat table samping di klik
+        #Fungsi saat table samping di klik /*NOT USE ANYMORE!!!!!*/
         function passSJ()
         {
             $sj=$this->input->post('sj');
@@ -34,6 +32,29 @@
                 $temp=$rr->No_Sj."|".$rr->Perusahaan."|".$rr->No_Do."|".$rr->No_Po."|".$rr->Kode_Gudang."|".$rr->No_Mobil."|".$dmy."|".$rr->Keterangan."|".$rr->Kode_Plg;
             }
             echo $temp;
+        }
+
+        function getSJ(){
+            $id=$this->input->post('id');
+            $query = $this->tr_surat_jalan_model->get_h_sj($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $originalDate = $row->Tgl;
+                $dmy = date("d-m-Y", strtotime($originalDate));
+
+                $final['Perusahaan'] = $row->Perusahaan;
+                $final['Kirim'] = $row->Kirim;
+                $final['Do'] = $row->No_Do;
+                $final['Po'] = $row->No_Po;
+                $final['Gudang'] = $row->Kode_Gudang;
+                $final['Mobil'] = $row->No_Mobil;
+                $final['Tgl'] = $dmy;
+                $final['Keterangan'] = $row->Keterangan;
+                $final['Kode_Plg'] = $row->Kode_Plg;
+
+            }
+            echo json_encode($final);
         }
 
         #Fungsi Insert Data baru
@@ -109,7 +130,6 @@
                     'No_Mobil'=>$mbl,
                     'Kode_Plg'=>$pn,
                     'Kode_Gudang'=>$gg,
-                    'Kirim'=>$myvar,
                     'Keterangan'=>$ket
             );
             $q = $this->tr_surat_jalan_model->updateSj($data,$sj);
@@ -122,17 +142,15 @@
             $qty=$this->input->post('qty');
             $ktr=$this->input->post('ktr');
             $totaltx=$this->input->post('totaltx');
-            for($i=0;$i<$totaltx;$i++){
-                $datadet= array(
-					'No_Sj'=>$sj,
-                    'Kode_Brg'=>$kd_brg[$i],
-                    'Barang'=>$nama[$i],
-                    'Barang_SJ'=>$nbu[$i],
-                    'Qty1'=>$qty[$i],
-                    'Keterangan'=>$ktr[$i]
-                );
-				$this->tr_surat_jalan_model->updateSj_det($datadet,$sj,$nbu[$i]);
-            }
+
+            $datadet= array(
+                'Kode_Brg'=>$kd_brg,
+                'Barang'=>$nama,
+                'Barang_SJ'=>$nbu,
+                'Qty1'=>$qty,
+                'Keterangan'=>$ktr
+            );
+			$this->tr_surat_jalan_model->updateSj_det($datadet,$sj);
         }
 
         #Delete
@@ -149,14 +167,14 @@
             $so=$this->input->post('so');
             $data['hasil']=$this->tr_surat_jalan_model->get_detail_do($so);
             $data['kode']=$so;
-            $this->load->view("content/detail_surat_jalan",$data);
+            $this->load->view("content/tr_surat_jalan/detail_surat_jalan",$data);
 
         }
         #viewSO utk tabel detail SJ
         function viewSJ(){
             $sj=$this->input->post('sj');
             $data['hasil']=$this->tr_surat_jalan_model->get_detail_sj($sj)->result();
-            $this->load->view("content/detail_surat_jalanBaca",$data);
+            $this->load->view("content/tr_surat_jalan/detail_surat_jalan",$data);
         }
 
         #Untuk auto generate
@@ -207,5 +225,40 @@
             //load view
             $this->load->view('content/list/list_pelanggan',$data);
         }
-		
+
+        function so_call(){
+            $id = $this->input->post('id');
+            $query = $this->tr_surat_jalan_model->get_so_list($id);
+
+            $final['']='-- Select SO --';
+            foreach ($query as $a) 
+            {
+                $final[$a->No_Do] = $a->No_Do;
+            }
+
+            echo form_dropdown('_do',$final,'1','id="_do" onchange="displayResult(this)"');
+        }
+
+        function mobil_call(){
+            $query = $this->tr_surat_jalan_model->get_mobil_list();
+
+            $final['']='-- Select Mobil --';
+            foreach ($query as $a) 
+            {
+                $final[$a->No_mobil] = $a->No_mobil;
+            }
+
+            echo form_dropdown('_mbl',$final,'1','id="_mbl"');
+        }
+
+		function cek_kirim(){
+            $id=$this->input->post('id');
+            $query = $this->tr_surat_jalan_model->get_kirim($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Kirim'] = $row->Kirim;
+            }
+            echo json_encode($final);
+        }
     }

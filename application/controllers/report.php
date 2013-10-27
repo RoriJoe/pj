@@ -80,8 +80,17 @@
             $data['qty']=$this->input->post('qty');
             $data['ktr']=$this->input->post('ktr');
             $data['totaltx']=$this->input->post('totaltx');
+
+            $this->load->model('tr_surat_jalan_model');
+            $sj=$this->input->post('sj');
+            $kirim=$this->input->post('count');
+            $datas= array(
+                    'Kirim'=>$kirim,
+            );
+            $q = $this->tr_surat_jalan_model->update_kirim($datas,$sj);
+            echo $q;
 			
-			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
+			$data['filename'] = "SJ - ". date('dmY');
 			$this->load->view('content/print_transaksi_sj',$data);
 			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);

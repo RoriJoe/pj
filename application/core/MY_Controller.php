@@ -113,7 +113,7 @@
         {
             $data['list_gudang']=$this->combo_model->list_gudang();
             $data['judul']="Surat Jalan";
-            $this->template->display('content/tr_surat_jalan', $data);
+            $this->template->display('content/tr_surat_jalan/tr_surat_jalan', $data);
         }
 
         //Transaksi DO
