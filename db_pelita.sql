@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2013 at 05:43 PM
+-- Generation Time: Oct 27, 2013 at 02:47 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `bank_d` (
   `cabang` varchar(25) NOT NULL,
   `no_perkiraan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `bank_d`
@@ -83,10 +83,13 @@ CREATE TABLE IF NOT EXISTS `barang` (
   `Nama2` varchar(20) NOT NULL,
   `Satuan1` varchar(6) NOT NULL,
   `Qty1` float(11,0) DEFAULT NULL,
+  `QtyOp` int(11) DEFAULT NULL,
   `QtyGudang` int(11) DEFAULT NULL,
   `Tgl_Saw` date DEFAULT NULL,
   `Saw` int(11) DEFAULT NULL,
   `SawGudang` int(11) DEFAULT NULL,
+  `Harga_Beli` decimal(10,0) NOT NULL,
+  `Harga_Jual` decimal(10,0) NOT NULL,
   PRIMARY KEY (`Kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -94,19 +97,20 @@ CREATE TABLE IF NOT EXISTS `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`) VALUES
-('B1307001', '200x52', 'Pipa L', 'PL22', 'Batang', 5, NULL, NULL, NULL, NULL),
-('B1307002', '22x20', 'Plat', 'P22', 'Lembar', 0, NULL, NULL, NULL, NULL),
-('B1307003', '25x25x25', 'Plat Segi Tiga', 'PST2', 'Meter', 55, NULL, NULL, NULL, NULL),
-('B1307004', '15x12', 'Pipa Silinder X', 'PS15', 'Meter', 15, NULL, NULL, NULL, NULL),
-('B1307005', '200 x 500', 'Besi Super', 'BS25', 'Roll', 25, NULL, NULL, NULL, NULL),
-('B1307006', '400x500', 'Pipa Besi 3', 'Tes Data', 'Batang', 5235, NULL, NULL, NULL, NULL),
-('B1309001', '5 x 12', 'Beton Ulir', '18-KS', 'Inci', 0, NULL, NULL, NULL, NULL),
-('B1309002', '13 x 5', 'Besi 1', '18-KS', 'Cm', 0, NULL, NULL, NULL, NULL),
-('B1309003', '2 x 2 x 3', 'Besi 2', '2KS', 'Inci', 0, NULL, NULL, NULL, NULL),
-('B1309004', '3 X 3 X 6', 'Besi 3', '3KS', 'Meter', 0, NULL, NULL, NULL, NULL),
-('B1309005', '4 X 4L', 'Besi 4', '4BS', 'Cm', 0, NULL, NULL, NULL, NULL),
-('B1309006', '5 X 5 ', 'Besi 5x', '5BS', 'Inci', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
+('aaaaa', 'aaaa', 'aaaaa', 'aaaaa', 'Batang', 0, 3, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307001', '200x52', 'Pipa L', 'PL22', 'Batang', 5, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307002', '22x20', 'Plat', 'P22', 'Lembar', 0, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307003', '25x25x25', 'Plat Segi Tiga', 'PST2', 'Meter', 55, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307004', '15x12', 'Pipa Silinder X', 'PS15', 'Meter', 15, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307005', '200 x 500', 'Besi Super', 'BS25', 'Roll', 25, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1307006', '400x500', 'Pipa Besi 3', 'Tes Data', 'Batang', 5235, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309001', '5 x 12', 'Beton Ulir', '18-KS', 'Inci', 0, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309002', '13 x 5', 'Besi 1', '18-KS', 'Cm', 0, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309003', '2 x 2 x 3', 'Besi 2', '2KS', 'Inci', 0, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309004', '3 X 3 X 6', 'Besi 3', '3KS', 'Meter', 0, 0, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309005', '4 X 4L', 'Besi 4', '4BS', 'Cm', 0, 4, NULL, NULL, NULL, NULL, '0', '0'),
+('B1309006', '5 X 5 ', 'Besi 5x', '5BS', 'Inci', 0, 0, NULL, NULL, NULL, NULL, '250000', '270000');
 
 -- --------------------------------------------------------
 
@@ -127,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `bpb_d` (
 
 INSERT INTO `bpb_d` (`No_Bpb`, `Kode_brg`, `Qty1`, `Keterangan`) VALUES
 ('BPB1309001', 'B1307001', 10, ''),
-('BPB1309002', 'B1307002', 5, 'tes'),
+('BPB1309002', 'B1307002', 20, 'tes'),
 ('BPB1309003', 'B1307001', 1, '11'),
 ('BPB1309004', 'B1307001', 46, 'twffwaf'),
 ('BPB1309004', 'B1307003', 15, 'Tes 2');
@@ -194,7 +198,19 @@ CREATE TABLE IF NOT EXISTS `do_d` (
   `Status` varchar(1) NOT NULL,
   `Keterangan` varchar(30) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `do_d`
+--
+
+INSERT INTO `do_d` (`No`, `No_Do`, `Kode_Brg`, `Qty`, `Harga`, `Jumlah`, `Status`, `Keterangan`) VALUES
+(2, '1310002', 'B1307003', 4, 2000, 8000, '', ''),
+(3, '1310002', 'B1307002', 5, 2000, 10000, '', ''),
+(5, '1310003', 'aaaaa', 5, 2000, 10000, '', ''),
+(6, '1310003', 'B1307001', 10, 50000000, 500000000, '', ''),
+(7, '1310004', '', 23, 1000, 23000, '', '23'),
+(8, '1310005', 'B1307001', 23, 15, 345, '', '23');
 
 -- --------------------------------------------------------
 
@@ -212,8 +228,22 @@ CREATE TABLE IF NOT EXISTS `do_h` (
   `Kirim` varchar(1) DEFAULT NULL,
   `Otorisasi` varchar(30) NOT NULL,
   `Total` decimal(10,0) NOT NULL,
+  `discount` int(11) DEFAULT NULL,
+  `dpp` int(11) NOT NULL,
+  `ppn` int(11) NOT NULL,
+  `grandttl` int(11) NOT NULL,
   PRIMARY KEY (`No_Do`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `do_h`
+--
+
+INSERT INTO `do_h` (`No_Do`, `Tgl`, `No_Po`, `Tgl_Po`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Otorisasi`, `Total`, `discount`, `dpp`, `ppn`, `grandttl`) VALUES
+('1310002', '2013-10-23', 'dgsdg', '2013-10-24', 'P1309001', '8', NULL, 'sip', '18000', NULL, 0, 0, 0),
+('1310003', '2013-10-23', '1305588552588', '2013-10-23', 'P1307007', '8', NULL, 'admin', '500010000', NULL, 0, 0, 0),
+('1310004', '2013-10-25', '1307001', '2013-10-26', 'P1307002', '8', NULL, 'admin', '23000', 5, 21850, 10, 24035),
+('1310005', '2013-10-25', '1307002', '2013-10-25', 'P1307002', '8', NULL, 'admin', '345', 5, 328, 10, 361);
 
 -- --------------------------------------------------------
 
@@ -275,6 +305,25 @@ INSERT INTO `invoice` (`Kode`, `Kode_SO`, `Term`, `Tgl`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mobil`
+--
+
+CREATE TABLE IF NOT EXISTS `mobil` (
+  `No_mobil` varchar(15) NOT NULL,
+  `Jenis` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`No_mobil`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mobil`
+--
+
+INSERT INTO `mobil` (`No_mobil`, `Jenis`) VALUES
+('B 0852 VXY', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `muser`
 --
 
@@ -293,10 +342,10 @@ CREATE TABLE IF NOT EXISTS `muser` (
 --
 
 INSERT INTO `muser` (`username`, `password`, `Nama`, `Level`, `Last_Login`, `image`) VALUES
-('ada', '56d43845311fa224342668fc2c72fd97', 'ada', 1, '2013-10-19 23:02:00', 'ada.png'),
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 1, '2013-10-19 23:02:00', 'user.png'),
-('eddy', '5aa8fed9741d33c63868a87f1af05ab7', 'eddy', 2, '2013-10-19 23:02:00', 'eddy.jpg'),
-('sip', '06b15d3af713e318d123274a98d70bc9', 'Sip', 1, '2013-10-19 23:02:00', 'sip.png');
+('ada', '56d43845311fa224342668fc2c72fd97', 'ada', 1, '2013-10-25 09:58:57', 'ada.png'),
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 1, '2013-10-25 09:58:57', 'user.png'),
+('eddy', '5aa8fed9741d33c63868a87f1af05ab7', 'eddy', 2, '2013-10-25 09:58:57', 'eddy.jpg'),
+('sip', '06b15d3af713e318d123274a98d70bc9', 'Sip', 1, '2013-10-25 09:58:57', 'sip.png');
 
 -- --------------------------------------------------------
 
@@ -333,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   `Telp2` varchar(20) DEFAULT NULL,
   `Fax1` varchar(20) NOT NULL,
   `Fax2` varchar(20) DEFAULT NULL,
-  `Limit` decimal(10,0) DEFAULT NULL,
+  `Limit_Kredit` decimal(10,0) DEFAULT NULL,
   `Piutang` decimal(10,0) DEFAULT NULL,
   `NPWP` varchar(25) NOT NULL,
   `Lama` int(11) DEFAULT NULL,
@@ -344,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `KodeP`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit`, `Piutang`, `NPWP`, `Lama`) VALUES
+INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `KodeP`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit_Kredit`, `Piutang`, `NPWP`, `Lama`) VALUES
 ('P1307001', 'Tony', NULL, 'Stark', 'Jl. Alabama', NULL, 'Bekasi', '11475', '085247447', '0854444458', '-', '0551-8558', '-', NULL, NULL, '258 2587 57771', NULL),
 ('P1307002', 'Agung', NULL, 'Sentosa', 'Jl. Merdeka', NULL, 'Tanggerang', '11758', '085552475', '-', '-', '0221-25475', '', NULL, NULL, '7878 47125 58815', NULL),
 ('P1307003', 'aggagwgw', NULL, 'OK JAJA PT.', 'hesh', NULL, 'hesh', 'seh', '535253', '', '', '123456', '', NULL, NULL, '6346464326', NULL),
@@ -354,10 +403,10 @@ INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alam
 ('P1307007', 'Soedirman', NULL, 'MERDEKA PT.', 'Jl. Pondok Indah', NULL, 'Jakarta', '11525', '0852478566', '', '', '055248885', '', NULL, NULL, '52225774441', NULL),
 ('P1307008', 'Tesla', NULL, 'Tesla Power', 'Jl. tesla', NULL, 'tes', '35555', '356346', '', '', '123456', '', NULL, NULL, '346346346', NULL),
 ('P1307009', 'Bung Tomo', NULL, ' Bersatu Maju PT.', 'gsegseg', NULL, 'Bandung', '46333', '521353252', '', '', '634634', '', NULL, NULL, '35325', NULL),
-('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '0852479552', '6285788555822', '', '02215877', '', NULL, NULL, '487995577758852', NULL),
+('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '0852479552', '6285788555822', '', '02215877', '', '25000000', NULL, '487995577758852', 10),
 ('P1309002', 'Kim Jong Kook', NULL, 'ABADI BARU YES', 'Jl. Gangnam No.35', NULL, 'Bekasi', '15400', '021-528444485', '', '', '021788588', '', NULL, NULL, '777858442000457', NULL),
 ('P1309003', 'Sidoel Ha', NULL, 'SIDO TENGGELAM', 'Jl. Pajajaran', NULL, 'Bunyu', '11710', '258552282', '52588475552', '55847852566', '258547', '24470444', NULL, NULL, '4356463646463', NULL),
-('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', NULL, NULL, '123456782', NULL);
+('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', '100000', NULL, '123456782', 25);
 
 -- --------------------------------------------------------
 
@@ -432,22 +481,23 @@ INSERT INTO `po_h` (`Kode`, `Tgl_po`, `Tgl_kirim`, `Permintaan`, `Currency`, `Ur
 --
 
 CREATE TABLE IF NOT EXISTS `satuan` (
+  `Kode_satuan` varchar(10) NOT NULL,
   `Value` varchar(10) NOT NULL,
-  PRIMARY KEY (`Value`)
+  PRIMARY KEY (`Kode_satuan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satuan`
 --
 
-INSERT INTO `satuan` (`Value`) VALUES
-('Batang'),
-('Cm'),
-('Inci'),
-('Kg'),
-('Lembar'),
-('Meter'),
-('Roll');
+INSERT INTO `satuan` (`Kode_satuan`, `Value`) VALUES
+('Batang', 'Batang'),
+('Cm', 'Centimeter'),
+('Inci', 'Inci'),
+('Kg', 'Kilogram'),
+('Lembar', 'Lembar'),
+('M', 'Meter'),
+('Roll', 'Roll');
 
 -- --------------------------------------------------------
 
@@ -474,8 +524,32 @@ INSERT INTO `saw_d` (`No_Saw`, `Kd_Brg`, `QtySaw1`) VALUES
 ('1309001', 'B1307005', 13),
 ('1309001', 'B1307006', 15),
 ('1309001', 'B1309004', 13),
-('1309002', 'B1307001', 15),
-('1309002', 'B1307003', 16);
+('1310001', 'aaaaa', 23),
+('1310001', 'B1307001', 12),
+('1310001', 'B1307002', 13),
+('1310001', 'B1307003', 0),
+('1310001', 'B1307004', 0),
+('1310001', 'B1307005', 0),
+('1310001', 'B1307006', 0),
+('1310001', 'B1309001', 0),
+('1310001', 'B1309002', 0),
+('1310001', 'B1309003', 0),
+('1310001', 'B1309004', 0),
+('1310001', 'B1309005', 0),
+('1310001', 'B1309006', 0),
+('1310002', 'aaaaa', 5),
+('1310002', 'B1307001', 4),
+('1310002', 'B1307002', 2),
+('1310002', 'B1307003', 3),
+('1310002', 'B1307004', 1),
+('1310002', 'B1307005', 0),
+('1310002', 'B1307006', 0),
+('1310002', 'B1309001', 0),
+('1310002', 'B1309002', 0),
+('1310002', 'B1309003', 0),
+('1310002', 'B1309004', 0),
+('1310002', 'B1309005', 0),
+('1310002', 'B1309006', 0);
 
 -- --------------------------------------------------------
 
@@ -498,7 +572,8 @@ INSERT INTO `saw_h` (`No_Saw`, `Tgl`, `Kd_Gudang`) VALUES
 ('0504013', '2013-10-23', 'G1307001'),
 ('0504014', '2013-10-25', 'G1307001'),
 ('1309001', '2013-10-24', 'G1309001'),
-('1309002', '2013-10-25', 'G1309001');
+('1310001', '2013-10-24', 'G1309004'),
+('1310002', '2013-10-25', 'G1309001');
 
 -- --------------------------------------------------------
 
@@ -507,27 +582,24 @@ INSERT INTO `saw_h` (`No_Saw`, `Tgl`, `Kd_Gudang`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `sj_d` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
   `No_Sj` varchar(7) NOT NULL,
   `Kode_Brg` varchar(22) NOT NULL,
   `Barang` varchar(50) NOT NULL,
   `Barang_SJ` varchar(50) DEFAULT NULL,
   `Qty1` int(11) NOT NULL,
   `Status` varchar(1) NOT NULL,
-  `Keterangan` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Keterangan` varchar(30) NOT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `sj_d`
 --
 
-INSERT INTO `sj_d` (`No_Sj`, `Kode_Brg`, `Barang`, `Barang_SJ`, `Qty1`, `Status`, `Keterangan`) VALUES
-('130701', 'B1307003', 'Plat Segi Tiga 25x25x25', 'Plat Segi Tiga', 0, '', 'tesx'),
-('130701', 'B1307005', 'Besi Super 200 x 500', 'Pipa Silinder', 0, '', 'ubah data'),
-('1307001', 'B1307005', 'Besi Super 200 x 500', 'Pipa L', 10, '', 'Ubah dari b1 ke b5'),
-('1307001', 'B1307002', 'Plat 22x20', 'Plat', 5, '', 'tes2'),
-('1307001', 'B1307003', 'Plat Segi Tiga 25x25x25', 'Plat Segi Tiga', 7, '', 'tes3'),
-('1309001', 'B1307006', 'Pipa Besi 3 400x500', 'Pipa L', 10, '', 'Tes#1'),
-('1309001', 'B1307004', 'Pipa Silinder X 15x12', 'Pipa Silinder X', 5, '', 'Test#2');
+INSERT INTO `sj_d` (`No`, `No_Sj`, `Kode_Brg`, `Barang`, `Barang_SJ`, `Qty1`, `Status`, `Keterangan`) VALUES
+(21, '1310001', 'B1307006', 'Pipa Besi 3 400x500', 'Plat Segi Tiga 25x25x25 ', 4, '', 'tesffffgesgse'),
+(22, '1310001', 'B1307003', 'Plat Segi Tiga 25x25x25', 'Plat 22x20 ', 5, '', 'fgeegse');
 
 -- --------------------------------------------------------
 
@@ -540,10 +612,10 @@ CREATE TABLE IF NOT EXISTS `sj_h` (
   `Tgl` date NOT NULL,
   `No_Do` varchar(20) NOT NULL,
   `No_Po` varchar(25) NOT NULL,
-  `No_Mobil` varchar(10) NOT NULL,
+  `No_Mobil` varchar(15) NOT NULL,
   `Kode_Plg` varchar(20) NOT NULL,
   `Kode_Gudang` varchar(20) NOT NULL,
-  `Kirim` varchar(1) DEFAULT NULL,
+  `Kirim` int(11) DEFAULT NULL,
   `Keterangan` varchar(20) NOT NULL,
   PRIMARY KEY (`No_Sj`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -553,8 +625,7 @@ CREATE TABLE IF NOT EXISTS `sj_h` (
 --
 
 INSERT INTO `sj_h` (`No_Sj`, `Tgl`, `No_Do`, `No_Po`, `No_Mobil`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Keterangan`) VALUES
-('1307001', '2013-07-19', 'SO1307001', 'PO12345', 'L 9359 K', 'P1307003', 'G1307001', NULL, 'Pelita'),
-('1309001', '2013-10-18', 'SO1309003', 'PO1309002', 'M 0293 K', 'P1307005', 'G1309004', NULL, 'Ambil Sendiri');
+('1310001', '2013-10-27', '1310002', 'dgsdg', 'B 0852 VXY', 'P1309001', 'G1307001', NULL, 'Pelita');
 
 -- --------------------------------------------------------
 
