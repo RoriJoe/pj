@@ -10,14 +10,25 @@
 
         function get_paged_list()
         {
+            $q = $this->db->query("SELECT po_h.Kode, po_h.Tgl_po,
+                supplier.Perusahaan
+                FROM po_h
+                LEFT OUTER JOIN supplier
+                ON po_h.Kode_supplier = supplier.Kode
+                ORDER BY po_h.Tgl_po DESC");
+
+            return $q->result();
+        }
+
+        function get_h_po($id){
             $q = $this->db->query("SELECT po_h.*,
                 supplier.Perusahaan, gudang.Nama
                 FROM po_h
                 LEFT OUTER JOIN supplier
                 ON po_h.Kode_supplier = supplier.Kode
                 LEFT OUTER JOIN gudang
-                ON po_h.Kode_gudang = gudang.Kode");
-
+                ON po_h.Kode_gudang = gudang.Kode
+                WHERE po_h.Kode = '$id' LIMIT 1");
             return $q->result();
         }
         
@@ -74,6 +85,31 @@
             $this->db->update('po_h', $data);
             return "ok";
         }
+
+        function updatePo_det($datadet,$kode)
+        {
+			$count1=0;
+            $result = $this -> db -> query ("select No from po_d where Kode_po = '$kode' limit 1");
+            $temp = $result->result_array();
+            $data['rek'] = $temp[0]['No'];
+
+            $count1=0;
+            foreach($datadet['Kode_barang'] as $d)
+            {
+                $save=array
+                (
+                    'Kode_barang' 	=>$datadet['Kode_barang'][$count1],
+                    'Jumlah'		=>$datadet['Jumlah'][$count1],
+                    'Harga'			=>$datadet['Harga'][$count1],
+                    'Nilai'			=>$datadet['Nilai'][$count1],                 
+                );
+                $this->db->where('Kode_po',$kode);
+                $this->db->where('No',$data['rek']);
+                $this->db->update('po_d',$save);
+                $count1++;
+                $data['rek']++;
+            }
+        }
                 
         function delete($po)
         {
@@ -86,6 +122,24 @@
             $this->db->where('Kode_po',$po);
             $this->db->delete('po_d');
             //return "ok";
+        }
+
+        function get_kirim($id){
+            $query = $this->db->query("
+                SELECT A.Counter
+                FROM po_h A
+                WHERE A.Kode = '$id'
+                LIMIT 1
+                ");
+
+            return $query->result();
+        }
+
+        function update_kirim($datas, $id)
+        {
+            $this->db->where('Kode',$id);
+            $this->db->update('po_h', $datas);
+            return $id;
         }
     }
 /*

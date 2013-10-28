@@ -43,6 +43,34 @@
                     }
             echo $no;
         }
+
+        function retrieveForm(){
+            $id=$this->input->post('id');
+            $query = $this->tr_po_model->get_h_po($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $originalDate1 = $row->Tgl_po;
+				$dmy1 = date("d-m-Y", strtotime($originalDate1));
+				$originalDate2 = $row->Tgl_kirim;
+				$dmy2 = date("d-m-Y", strtotime($originalDate2));
+
+                $final['Tgl_Kirim'] = $dmy2;
+                $final['Tgl_Po'] = $dmy1;
+                $final['Permintaan'] = $row->Permintaan;
+                $final['Currency'] = $row->Currency;
+                $final['Urgent'] = $row->Urgent;
+                $final['Nama_Gudang'] = $row->Nama;
+                $final['Kode_Gudang'] = $row->Kode_gudang;
+                $final['Nama_Supplier'] = $row->Perusahaan;
+                $final['Kode_Supplier'] = $row->Kode_supplier;
+                $final['Counter'] = $row->Counter;
+                $final['Total'] = $row->Total;
+                $final['Dpp'] = $row->DPP;
+                $final['Ppn'] = $row->PPN;        
+            }
+            echo json_encode($final);
+        }
         
         function add_currency(){
             $id=$this->input->post('cur');
@@ -116,7 +144,7 @@
             );
 
             if($modes=="add"){
-                 $in = $this->tr_po_model->insertPo($data1,$po);
+                $in = $this->tr_po_model->insertPo($data1,$po);
 
                 //DETAIL po
                 $arrKode    =$this->input->post('arrKode');
@@ -145,7 +173,22 @@
                     echo "gagal";
                 }
             }else if($modes=="edit"){
+            	//DETAIL po
+                $arrKode    =$this->input->post('arrKode');
+                $arrHarga   =$this->input->post('arrHarga');
+                $arrJumlah  =$this->input->post('arrJumlah');
+                $arrNilai   =$this->input->post('arrNilai');
+                $totalRow   =$this->input->post('totalRow');
+
+                $datadet= array(
+                    'Kode_barang'   =>$arrKode,
+                    'Harga'         =>$arrHarga,
+                    'Jumlah'        =>$arrJumlah,
+                    'Nilai'         =>$arrNilai
+                );
+                
                 $in = $this->tr_po_model->updatePo($data2,$po);
+                $this->tr_po_model->updatePo_det($datadet,$po);
                 if($in == "ok")
                 {
                     echo "ok";
@@ -165,6 +208,17 @@
             $r = $this->tr_po_model->delete($po);
             echo $r;
             $this->tr_po_model->delete_det($po);
+        }
+
+        function cek_kirim(){
+            $id=$this->input->post('id');
+            $query = $this->tr_po_model->get_kirim($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Kirim'] = $row->Counter;
+            }
+            echo json_encode($final);
         }        
     }
 

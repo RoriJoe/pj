@@ -1,8 +1,5 @@
 <?php
     class Tr_do extends CI_Controller{
-
-        private $limit=10;
-
         function __construct(){
             parent::__construct();
 
@@ -21,6 +18,36 @@
             $this->load->view('content/SO/tr_do_Detail', $data);
         }
 
+        function retrieveForm(){
+            $id=$this->input->post('id');
+            $query = $this->tr_do_model->get_h_so($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $originalDate1 = $row->Tgl;
+                $dmy1 = date("d-m-Y", strtotime($originalDate1));
+                $originalDate2 = $row->Tgl_Po;
+                $dmy2 = date("d-m-Y", strtotime($originalDate2));
+
+                $final['Tgl'] = $dmy1;
+                $final['Tgl_Po'] = $dmy2;
+                $final['Po'] = $row->No_Po;
+                $final['Nama_Plg'] = $row->Perusahaan;
+                $final['Kode_Plg'] = $row->Kode_Plg;
+                $final['Nama_Gudang'] = $row->Kirim;
+                $final['Kode_Gudang'] = $row->Kode_Gudang;
+                $final['Term'] = $row->Lama;
+                $final['Kirim'] = $row->Kirim;
+                $final['Otorisasi'] = $row->Otorisasi;
+                $final['Total'] = $row->Total;
+                $final['Disc'] = $row->discount;
+                $final['Dpp'] = $row->dpp;
+                $final['Ppn'] = $row->ppn;
+                $final['Grand'] = $row->grandttl;            
+            }
+            echo json_encode($final);
+        }
+
         //SAVE ADD NEW TRIGGER
         function insert()
         {
@@ -32,6 +59,7 @@
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
 			$to = $this->input->post('to');
+            $term = $this->input->post('term');
 			
 			$disc = $this->input->post('disc');
 			$dpp = $this->input->post('dpp');
@@ -57,6 +85,9 @@
 				'grandttl'=>$grant
             );
 
+            $term=array('Lama'=>$term);
+
+            $this->tr_do_model->updateTerm($term,$pl);
             $in = $this->tr_do_model->insertDo($data,$so);
             
 			
@@ -100,6 +131,11 @@
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
 			$to = $this->input->post('to');
+			$disc = $this->input->post('disc');
+			$dpp = $this->input->post('dpp');
+			$ppn = $this->input->post('ppn');
+			$grant = $this->input->post('grant');
+            $term = $this->input->post('term');
 			//$total = $this->input->post('total');
 			$temp=8;
             $myvar  = empty($myvar) ? NULL : $myvar;
@@ -113,9 +149,14 @@
 				'Kode_Gudang'=>$temp,
 				'Kirim'=>$myvar,
 				'Otorisasi'=>$sl,
-				'Total'=>$to
+				'Total'=>$to,
+				'discount'=>$disc,
+				'dpp'=>$dpp,
+				'ppn'=>$ppn,
+				'grandttl'=>$grant
             );
-
+            $term=array('Lama'=>$term);
+            $this->tr_do_model->updateTerm($term,$pl);
             $in = $this->tr_do_model->updateDo($data,$so);
             
 			
@@ -127,15 +168,14 @@
 			$arrJumlah=$this->input->post('arrJumlah');
 			$arrKet=$this->input->post('arrKet');
 			$totalRow=$this->input->post('totalRow');
-			for($i=0;$i<$totalRow;$i++){
                 $datadet= array(
-                    'Qty'=>$arrQty[$i],
-                    'Harga'=>$arrHarga[$i],
-                    'Jumlah'=>$arrJumlah[$i],
-                    'Keterangan'=>$arrKet[$i]
+                    'Kode_Brg'=>$arrKode,
+                    'Qty'=>$arrQty,
+                    'Harga'=>$arrHarga,
+                    'Jumlah'=>$arrJumlah,
+                    'Keterangan'=>$arrKet
                 );
-                $this->tr_do_model->updateDo_det($datadet,$so,$arrKode[$i]);
-            }
+                $this->tr_do_model->updateDo_det($datadet,$so);
 			
 			if($in == "ok")
             {

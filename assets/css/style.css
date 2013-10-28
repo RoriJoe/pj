@@ -2008,7 +2008,7 @@ input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hove
 .tb-barang{
     width: 28%;
     float: right;
-    z-index: 2;
+    /*z-index: 2;*/
     top: -25px;
     position: relative;
     background-color: #fff;
@@ -2316,4 +2316,12 @@ opacity:0.1}
 
 .menu-border-bottom{
     border-bottom: 1px solid #fff;
+}
+.modal-body {
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+.input-append{
+    margin-bottom: 0px !important;
 }

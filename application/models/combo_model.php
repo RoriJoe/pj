@@ -11,8 +11,8 @@
             return $query->result();
         }
         function list_sales(){
-            $this->db->select('username');
-            $query = $this->db->get('muser');
+            $this->db->select('Nama');
+            $query = $this->db->get('sales');
             return $query->result();
         }
         

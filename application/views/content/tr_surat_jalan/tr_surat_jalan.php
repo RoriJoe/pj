@@ -84,7 +84,7 @@
         <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
         <button id="delete" class="btn" type="submit">Delete</button>
         <button id="cancel" class="btn" type="submit">Cancel</button>
-        <button id="print" class="btn"  data-toggle="tooltip" title="Print Surat Jalan"><i class="icon-print"></i></button>
+        <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i></button>
     </div>
 </div>
 
@@ -120,16 +120,22 @@
 var flag=0;
 
 jQuery(document).ready(function() {
-    get_mobil_list();
-    get_so_list();
     listSJ();
     autogen();
     validation();
     barAnimation();
     $("#po").attr('disabled',true);
     $("#pn").attr('disabled',true);
+    get_mobil_list();
+    get_so_list();
     listBarang();
 });
+
+function addBarang(){
+    editRow(row);
+    getDetail(row);
+    $('#modalBarang').modal('show');
+}
 
 function resetForm(){
     $('#save').attr('mode','add');
@@ -160,6 +166,16 @@ function autogen(){
     });
 }
 
+/*jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind"
+    });
+});
+
 function listSJ(){
     $.ajax({
     type:'POST',
@@ -185,16 +201,6 @@ function listPelanggan(){
     });   
 }
 
-/*jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
-
 //PopUp Barang
 function listBarang(){
     $.ajax({
@@ -210,9 +216,9 @@ function listBarang(){
 
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('ukuran');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
+    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
     
     var row = filter;
 
@@ -394,9 +400,6 @@ function cek_kirim(){
         }
     });
 }
-</script>
-
-<script>
 
 $("#cancel").click(function(){
     $('#delete').attr('disabled',true);

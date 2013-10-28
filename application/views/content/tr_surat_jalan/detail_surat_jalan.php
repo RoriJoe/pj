@@ -67,17 +67,32 @@ function visibleEdit() {
     
 }
 
-var oTable = $('#tb_detail').dataTable( {
-    "sScrollY": "180px",
-    "sScrollYInner": "100%",
-    "sScrollX": "100%", //panjang width
-    "sScrollXInner": "100%", //overflow dalem
-    "bPaginate": false,
-    "bLengthChange": false,
-    "bFilter": false,
-    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
-
-} );
+function editRow(row){
+    //$(this).parent().next().find('input[type="text"]').attr('disabled');
+    var i = document.getElementById('kode_brg'+row);
+    if (i.disabled == true){
+        document.getElementById('kode_brg'+row).disabled=false;
+        document.getElementById('f_brg'+row).style.visibility = 'visible';
+        document.getElementById('f_brgs'+row).style.visibility = 'visible';
+        document.getElementById('icon'+row).className='icon-ok';
+        document.getElementById('brg_ukur'+row).disabled=false;
+        document.getElementById('qty'+row).disabled=false;
+        document.getElementById('ket'+row).disabled=false;
+        getDetail(row);
+        $('#modalBarang').modal('show');
+        return false;
+    }
+    else{
+        document.getElementById('kode_brg'+row).disabled=true;
+        document.getElementById('f_brg'+row).style.visibility = 'hidden';
+        document.getElementById('f_brgs'+row).style.visibility = 'hidden';
+        document.getElementById('icon'+row).className='icon-pencil';
+        document.getElementById('brg_ukur'+row).disabled=true;
+        document.getElementById('qty'+row).disabled=true;
+        document.getElementById('ket'+row).disabled=true;
+        return true;
+    }
+}
 
 function getDetail(row){
     filter = row;
@@ -100,28 +115,14 @@ function deleteRow(row) {
     }
 }
 
-function editRow(row){
-    //$(this).parent().next().find('input[type="text"]').attr('disabled');
-    var i = document.getElementById('kode_brg'+row);
-    if (i.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
-        document.getElementById('f_brg'+row).style.visibility = 'visible';
-        document.getElementById('f_brgs'+row).style.visibility = 'visible';
-        document.getElementById('icon'+row).className='icon-ok';
-        document.getElementById('brg_ukur'+row).disabled=false;
-        document.getElementById('qty'+row).disabled=false;
-        document.getElementById('ket'+row).disabled=false;
-        return false;
-    }
-    else{
-        document.getElementById('kode_brg'+row).disabled=true;
-        document.getElementById('f_brg'+row).style.visibility = 'hidden';
-        document.getElementById('f_brgs'+row).style.visibility = 'hidden';
-        document.getElementById('icon'+row).className='icon-pencil';
-        document.getElementById('brg_ukur'+row).disabled=true;
-        document.getElementById('qty'+row).disabled=true;
-        document.getElementById('ket'+row).disabled=true;
-        return true;
-    }
-}
+var oTable = $('#tb_detail').dataTable( {
+    "sScrollY": "180px",
+    "sScrollYInner": "100%",
+    "sScrollX": "100%", //panjang width
+    "sScrollXInner": "100%", //overflow dalem
+    "bPaginate": false,
+    "bLengthChange": false,
+    "bFilter": false,
+    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+} );
 </script>

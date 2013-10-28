@@ -27,11 +27,13 @@ $('#tb1 tbody tr').click(function (e) {
     var sj=$(this).attr("_no_sj");
 
     $('#sj').attr('disabled',true);
+    $('#_do').attr('disabled',true);
+    $('#pn').attr('disabled',true);
+    
     $('#save').attr('mode','edit');
     $('#cancel').attr('disabled',false);
     $('#delete').attr('disabled',false);
-    $('#_do').attr('disabled',true);
-    $('#pn').attr('disabled',true);
+    
     document.getElementById('f_plg').style.visibility = 'hidden';
 
     $('#sj').val(sj);

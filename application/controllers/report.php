@@ -17,8 +17,15 @@
 		}
 		
 		function print_transaksi_po(){
-	
-			$data['po']=$this->input->post('po');
+			$this->load->model('tr_po_model');
+            $id=$this->input->post('po');
+            $kirim=$this->input->post('count');
+            $data2= array(
+                    'Counter'=>$kirim,
+            );
+            $q = $this->tr_po_model->update_kirim($data2,$id);
+
+            $data['po']=$this->input->post('po');
 			$data['_tgl1']=date('d-m-Y', strtotime($this->input->post('_tgl1')));
 			$data['_tgl2']=date('d-m-Y', strtotime($this->input->post('_tgl2')));
 			$data['kd_gud']=$this->input->post('kd_gud');
@@ -39,7 +46,7 @@
 			$data['arrNilai']=$this->input->post('arrNilai');
 			$data['arrNamabrg']=$this->input->post('arrNamabrg');
 			$data['arrSatuan']=$this->input->post('arrSatuan');
-			
+
 			$this->load->view('content/print_transaksi_po',$data);
 		}
 		
@@ -63,6 +70,14 @@
 		}
 		
 		function print_transaksi_sj(){
+			$this->load->model('tr_surat_jalan_model');
+            $sj=$this->input->post('sj');
+            $kirim=$this->input->post('count');
+            $datas= array(
+                    'Kirim'=>$kirim,
+            );
+            $q = $this->tr_surat_jalan_model->update_kirim($datas,$sj);
+            
 			$this->load->helper('pdfexport_helper.php');
 			
 			$data['sj']=$this->input->post('sj');
@@ -81,15 +96,6 @@
             $data['ktr']=$this->input->post('ktr');
             $data['totaltx']=$this->input->post('totaltx');
 
-            $this->load->model('tr_surat_jalan_model');
-            $sj=$this->input->post('sj');
-            $kirim=$this->input->post('count');
-            $datas= array(
-                    'Kirim'=>$kirim,
-            );
-            $q = $this->tr_surat_jalan_model->update_kirim($datas,$sj);
-            echo $q;
-			
 			$data['filename'] = "SJ - ". date('dmY');
 			$this->load->view('content/print_transaksi_sj',$data);
 			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);

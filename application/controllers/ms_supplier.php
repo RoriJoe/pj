@@ -24,6 +24,11 @@
             $this->load->view('content/list/list_supplier',$data);
         }
 
+        //POP
+        function popSupplier(){
+            $this->load->view('content/pop/supplier');
+        }
+
         //SAVE ADD NEW TRIGGER
         function insert()
         {

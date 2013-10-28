@@ -20,9 +20,14 @@
         #Show All 
         function viewPelanggan(){
             //request data table
-            $data['hasil']=$this->ms_pelanggan_model->get_paged_list();
+            $data['hasil']=$this->ms_pelanggan_model->popList();
             //load view
             $this->load->view('content/list/list_pelanggan',$data);
+        }
+
+        //POP
+        function popPelanggan(){
+            $this->load->view('content/pop/pelanggan');
         }
         
 

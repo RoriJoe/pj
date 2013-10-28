@@ -9,39 +9,33 @@
             <td>Nomor SO</td>
             <td>
                 <input type='text' class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_so' name='_so'>
+                maxlength="20" id='_so' name='_so'/>
             </td>
             
             <td>Nomor PO</td>
             <td>
-                <input type='text' class="span-form170 validate[maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_po' name='_po'>
+                <input type='text' class="span-form75 validate[maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
+                maxlength="20" id='_po' name='_po'> <input type='text' class="validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2' 
+                style="width: 80px;margin-right: 20px;"/>
             </td>
        </tr>
        <tr>
             <td>Tanggal SO</td>
             <td>
-                <input type='text' class="validate[required,custom[date]]" value="<?php echo date('d-m-Y');?>" id='_tgl' name='_tgl' 
-                style="width: 80px;margin-left: 10px; margin-right: 20px;">
+                <input type='text' class="" value="<?php echo date('d-m-Y');?>" id='_tgl' name='_tgl' 
+                style="width: 80px;margin-left: 10px; margin-right: 20px;"/>
             </td>
-            <td>Tanggal PO</td>
-            <td>
-                <input type='text' class="validate[custom[date]]" id='_tgl2' name='_tgl2' 
-                style="width: 80px;margin-left: 10px; margin-right: 20px;">
-            </td>
-       </tr>
-
-       <tr>
             <td>Pelanggan</td>
             <td>
                 <input type="hidden" id="kd_plg" />
-                <div class="input-append">
-                 <input type='text' class="validate[required,maxSize[25], minSize[2]] span2" 
-                    maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()">
-                <a href="#myModal" role="button" class="btn" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-filter"></i></a>
-                <a class="ajax btn" href="ms_pelanggan" role="button"  title="Tambah Pelanggan" style="padding: 2px 3px;"><i class="icon-plus"></i></a>
+                <div class="input-append" style="margin-bottom:0px;">
+                 <input type='text' class="span2" disabled="disabled"
+                    maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
                 </div>
             </td>
+       </tr>
+       <tr>
             <td>Sales</td>
             <td>
                 <select name="_sl" class="validate[required]" id="_sl" style="width: 148px; margin-left: 10px; margin-right: 20px;">
@@ -49,69 +43,76 @@
                     foreach ($list_sales as $isi)
                     {
                         echo "<option ";
-                        echo "value = '".$isi->username."'>".$isi->username."</option>";
+                        echo "value = '".$isi->Nama."'>".$isi->Nama."</option>";
                     }
                     ?>
                 </select>
-                <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i> Barang</button>
+            </td>
+            <td>Term</td>
+            <td>
+                <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px; margin-left:10px;" maxlength="3" id='terms' name='terms'/> Hari
+                <a href='#'id="add" mode="new" class="btn btn-small" title="Tambah Barang" onclick="addBarang()" style="margin-left:30px;"><i class="icon-plus"></i> Barang</a>
             </td>
         </tr>
     </table>
 </form>
-<div id="hasil2" style="height: 238px;"></div>
-<div style="float: right;">
-<table>
-<tr>
-	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-	</td>
-	<td><input type="hidden" id="total2" />
-    <input style="float: right; width:120px; margin-right: 145px;" id="total" name="total" type="text" readonly="true"></td>
-</tr>
-<tr>
-	<td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
-	</td>
-	<td><input type="hidden" id="disc2" />
-    <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onclick="hitung()">%
-	<input style="width:69px;" id="discT" name="discT" type="text" >
-	</td>
-</tr>
-<tr>
-	<td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
-	</td>
-	<td><input type="hidden" id="dpp2" />
-    <input style="width:120px; margin-right: 145px;" id="dpp" name="dpp" type="text" readonly="true"></td>
-</tr>
- <tr>
-		<td>
-			<label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
-		</td>
-		<td>
-			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onclick="hitungPPN()">% 
-			<input style="width:69px;" id="ppnT" name="ppnT" type="text" onclick="hitungPPN()">
-		</td>
-</tr> 
-<tr>
-	<td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
-	</td>
-	<td><input type="hidden" id="granT2" />
-    <input style="width:120px; " id="granT" name="granT" type="text" readonly="true"></td>
-</tr>      
-</table>
-</div>
-<div>
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn">Delete</button>
-    <button id="cancel" class="btn">Cancel</button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
-</div>
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
+
+    <div id="hasil2" style="height: 238px;"></div>
+
+    <div style="float: right; margin-right: 25px;">
+        <table>
+        <tr>
+        	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+        	</td>
+        	<td><input type="hidden" id="total2" />
+            <input style="float: right; width:120px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true"></td>
+        </tr>
+        <tr>
+        	<td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
+        	</td>
+        	<td><input type="hidden" id="disc2" />
+            <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
+        	<input style="width:69px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
+        	</td>
+        </tr>
+        <tr>
+        	<td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
+        	</td>
+        	<td><input type="hidden" id="dpp2" />
+            <input style="width:120px; margin-right: 145px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true"></td>
+        </tr>
+         <tr>
+        		<td>
+        			<label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
+        		</td>
+        		<td>
+        			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
+        			<input style="width:69px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
+        		</td>
+        </tr> 
+        <tr>
+        	<td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
+        	</td>
+        	<td><input type="hidden" id="granT2" />
+            <input style="width:120px; text-align:right;" id="granT" name="granT" type="text" readonly="true"></td>
+        </tr>      
+        </table>
+    </div>
+
+    <div>
+        <button id="save" mode="add" class="btn btn-primary">Save</button>
+        <button id="delete" class="btn">Delete</button>
+        <button id="cancel" class="btn">Cancel</button>
+        <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i></button>
+    </div>
+    <!--**NOTIFICATION AREA**-->
+    <div id="konfirmasi" class="sukses"></div>
 </div>
 
 <div id="popup-wrapper3" style="width:750px;height:400px;"></div>
 
 <!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Pelanggan</h3>
@@ -120,12 +121,11 @@
     <div id="list_pelanggan"></div>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getPelanggan()" data-dismiss="modal" aria-hidden="true">Done</button>
+    <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
   </div>
 </div>
 
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Barang</h3>
@@ -133,9 +133,15 @@
   <div class="modal-body">
     <div id="list_barang"></div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
+</div>
+
+<div id="modalNewPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Tambah Pelanggan</h3>
+  </div>
+  <div class="modal-body">
+    <div id="add_pelanggan"></div>
   </div>
 </div>
 
@@ -144,7 +150,69 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/accounting.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
-<script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    listSO();
+    tampilDetailSO();
+    autogen();
+    validation()
+    barAnimation();
+});
+
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
+function addBarang(){
+    addRow();
+    var row = $("tbody#itemlist tr").length;
+    editRow(row);
+    getDetail(row);
+    $('#modalBarang').modal('show');
+}
+
+
+function addPelanggan(){
+    $('#modalPelanggan').modal('hide');
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_pelanggan/popPelanggan",
+    data :{},
+    success:
+    function(hh){
+        $('#add_pelanggan').html(hh);
+    }
+    });  
+} 
+
+$("#_so").keypress(function(e){
+   var userVal = $("#_so").val();
+   if(userVal.length == 20){
+       bootstrap_alert.info('Maksimum Kode 20 Karakter');
+   } 
+});
+
+$("#_po").keypress(function(e){
+   var userVal = $("#_po").val();
+   if(userVal.length == 20){
+       bootstrap_alert.info('Maksimum Kode 20 Karakter');
+   } 
+});
+
+
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
     $.ajax({
@@ -157,24 +225,53 @@ function listSO(){
     }
     });
 }
-listSO();
 
-jQuery(document).ready(function(){
-    tampilDetailSO();
-    autogen();
-    validation()
-    barAnimation();
-});
+function retrieveForm(idSO){
+    var id = idSO;
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_do/retrieveForm",
+        data :{id:id},
+        dataType: 'json',
+        success:
+        function(msg){
+            $('#_po').val(msg.Po);
+            $('#_tgl').val(msg.Tgl);
+            $('#_tgl2').val(msg.Tgl_Po);
+            $('#kd_plg').val(msg.Kode_Plg);
+            $('#_pn').val(msg.Nama_Plg);
+            $('#_sl').val(msg.Otorisasi);
+            $('#terms').val(msg.Term);
+
+            $('#total').val(accounting.formatMoney(msg.Total, "",0,"."));
+            var total_disc = msg.Total*msg.Disc/100;
+            $('#disc').val(msg.Disc);
+            $('#discT').val(accounting.formatMoney(total_disc, "",0,"."));
+            var total_ppn = msg.Dpp*msg.Ppn/100;
+            $('#ppn').val(msg.Ppn);
+            $('#ppnT').val(accounting.formatMoney(total_ppn, "",0,"."));
+            $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
+            $('#granT').val(accounting.formatMoney(msg.Grand, "",0,"."));
+        }
+    }); 
+}
 
 //Auto Generate
 function autogen(){
     $('#add').attr('mode','new');
     $('#delete').attr('disabled', true);
-
     $('#_so').attr('disabled',false);
-    $('#delete').attr('disabled', true);
     document.getElementById('add').style.visibility = 'visible';
+    document.getElementById('f_plg').style.visibility = 'visible';
+
     $("#total").val("");
+    $('#disc').val("");
+    $('#discT').val("");
+    $('#ppn').val("");
+    $('#ppnT').val("");
+    $('#dpp').val("");
+    $('#granT').val("");
+
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_do/auto_gen",
@@ -291,24 +388,25 @@ function tampilDetailSO(){
         }
     });
 }
-</script>
 
-<script type="text/javascript">   
 var filter="";
 
 //GET POPUP PELANGGAN
 function getPelanggan(){
     var x = $('input:radio[name=optionsRadios]:checked').val();
     var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    var t = $('input:radio[name=optionsRadios]:checked').attr('term');
     $('#_pn').val(x);
     $('#kd_plg').val(k);
-    
+    $('#terms').val(t);
 }
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
+    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
+    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
+    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
+    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
     
     var row = filter;
     
@@ -328,7 +426,8 @@ function getBarang(){
     } else {
         $('#kode_brg'+row).val(x);
         $('#satuan_brg'+row).val(y); 
-        $('#nama_brg'+row).val(z); 
+        $('#nama_brg'+row).val(z +" "+p); 
+        $('#harga_brg'+row).val(o); 
     }  
 }
 
@@ -344,6 +443,22 @@ $("#cancel").click(function(){
     document.getElementById('add').style.visibility = 'visible';
 });
 
+function addRow() {
+    var items = "";
+    $count = $("tbody#itemlist tr").length+1;
+
+    items += "<tr>";
+    items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:134px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='8%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true'/></td>";
+    items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
+    items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
+    items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";
+    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn btn-small' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
+
+    $("#itemlist").append(items);
+}
+
 //BUAT PRINT
 $("#print").click(function(){
 //deklarasi variable
@@ -354,6 +469,7 @@ $("#print").click(function(){
     var pl = $('#kd_plg').val();
     var sl = $('#_sl').val();
     var to = $('#total').val();
+    var term = $('#terms').val();
 	
 	var disc = $('#disc').val();
 	var dpp = $('#dpp').val();
@@ -369,8 +485,8 @@ $("#print").click(function(){
     var arrJumlah = new Array();
     var arrKet = new Array();
     
-    var table = document.getElementById('tb3');
-    var totalRow = table.rows.length-1;
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length;
     for(var i=1;i<=totalRow;i++){
         arrKode[i-1] = $('#kode_brg'+i).val();
         arrQty[i-1] = $('#qty_brg'+i).val();
@@ -384,7 +500,7 @@ $("#print").click(function(){
 $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/report/print_transaksi_so",
-        data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,ppnT:ppnT,discT:discT,
+        data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,ppnT:ppnT,discT:discT, term:term,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
         },
         success:
@@ -402,132 +518,6 @@ $.ajax({
      });
 });
 
-//Tambah Row Barang
-function addRow(tableID) {
-    var mode = $('#add').attr("mode");
-
-    if (mode == "new"){
-        $('#tb3 tbody').empty();
-    }    
-    var table = document.getElementById(tableID);
-    var rowCount = table.rows.length;
-    var last = rowCount;
-    var row = table.insertRow(rowCount);
-
-    //KOLOM 1
-    var cell1 = row.insertCell(0);
-    var iDiv2 = document.createElement("div");
-    iDiv2.className = "input-append";
-    iDiv2.id="kode_brg[]";
-
-    var element0 = document.createElement("input");
-    element0.type = "text";
-    element0.name="kode_brgd";
-    element0.className="validate[required]";
-    element0.className="span2"; 
-    element0.disabled = "true";
-    element0.id="kode_brg"+last;
-    element0.setAttribute("onkeypress", "validAct("+last+")");
-    element0.style.width = "80px";
-    
-    var filter = document.createElement("a");
-    filter.className="btn btn-tbl";
-    filter.id="f_brg"+last;
-    filter.href="#myModal2";
-    filter.setAttribute("onclick", "getDetail("+last+")");
-    filter.setAttribute("role", "button");
-    filter.setAttribute("data-toggle", "modal");
-    var iIcon3 = document.createElement("i");
-    iIcon3.className = "icon-filter";
-    
-    filter.appendChild(iIcon3);
-    iDiv2.appendChild(element0);
-    iDiv2.appendChild(filter);
-    cell1.appendChild(iDiv2);
-
-    //KOLOM 2
-    var cell1 = row.insertCell(1);
-    var element1 = document.createElement("input");
-    element1.type = "text";
-    element1.name = "nama_brg[]";
-    element1.disabled = "true";
-    element1.id="nama_brg"+last;
-    element1.style.width = "80px";
-    cell1.appendChild(element1);
-
-    //KOLOM 3
-    var cell2 = row.insertCell(2);
-    var element2 = document.createElement("input");
-    element2.type = "text";
-    element2.name = "satuan_brg[]";
-    element2.disabled = "true";
-    element2.id="satuan_brg"+last;
-    element2.style.width = "40px";
-    cell2.appendChild(element2);
-
-    //KOLOM 2
-    var cell3 = row.insertCell(3);
-    var element3 = document.createElement("input");
-    element3.type = "text";
-    element3.name = "qty_brg";
-    element3.id="qty_brg"+last;
-    element3.setAttribute("onkeypress", "validAct("+last+")");
-    element3.style.width = "30px";
-    cell3.appendChild(element3);
-    
-    //KOLOM 4
-    var cell4 = row.insertCell(4);
-    var element4 = document.createElement("input");
-    element4.type = "text";
-    element4.name = "harga[]";
-    element4.id="harga_brg"+last;
-    element4.setAttribute("onkeypress", "validAct("+last+")");
-    element4.style.width = "70px";
-    cell4.appendChild(element4);
-    //KOLOM 5
-    var cell5 = row.insertCell(5);
-    var element5 = document.createElement("input");
-    element5.type = "text";
-    element5.name = "jumlah";
-    element5.id="jumlah_brg"+last;
-    element5.style.width = "70px";
-    element5.disabled = "true";
-    cell5.appendChild(element5);
-    //KOLOM 6
-    var cell6 = row.insertCell(6);
-    var element6 = document.createElement("input");
-    element6.type = "text";
-    element6.name = "keterangan[]";
-    element6.id="keterangan_brg"+last;
-    element6.style.width = "80px";
-    cell6.appendChild(element6);
-
-    //KOLOM 7
-    var cell7 = row.insertCell(7);          
-    var iIcon1 = document.createElement("i");
-    iIcon1.className = "icon-ok";
-    iIcon1.id="icon"+last;
-    var iIcon2 = document.createElement("i");
-    iIcon2.className = "icon-trash";
-    
-    var iAnchor1 = document.createElement("a");
-    iAnchor1.className = "btn";
-    iAnchor1.href = "#";
-    iAnchor1.setAttribute('onclick', 'editRow('+last+')')
-    iAnchor1.appendChild(iIcon1);
-    var iAnchor2 = document.createElement("a");
-    iAnchor2.className = "btn";
-    iAnchor2.setAttribute('onclick', 'deleteRowSO(this)')
-    iAnchor2.href = "#";
-    iAnchor2.appendChild(iIcon2);
-    
-    cell7.appendChild(iAnchor1);
-    cell7.appendChild(iAnchor2);
-}
-
-
-   
-
 //Save Click
 $("#save").click(function(){
 	
@@ -540,13 +530,14 @@ $("#save").click(function(){
     var tglPo = $('#_tgl2').val();
     var pl = $('#kd_plg').val();
     var sl = $('#_sl').val();
-    var to = $('#total2').val();
+    var to = $('#total').val().replace(/\./g, "");
+    var term = $('#terms').val();
     
 	var disc = $('#disc').val();
-	var dpp = $('#dpp2').val();
+	var dpp = $('#dpp').val().replace(/\./g, "");
 	var ppn = $('#ppn').val();
-	var grant = $('#granT2').val();
-	
+	var grant = $('#granT').val().replace(/\./g, "");
+
     var arrKode = new Array();
     var arrQty = new Array();
 	var arrSatuan = new Array();
@@ -554,14 +545,14 @@ $("#save").click(function(){
     var arrJumlah = new Array();
     var arrKet = new Array();
     
-    var table = document.getElementById('tb3');
-    var totalRow = table.rows.length-1;
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length;
     for(var i=1;i<=totalRow;i++){
 		arrKode[i-1] = $('#kode_brg'+i).val();
 		arrQty[i-1] = $('#qty_brg'+i).val();
 		arrSatuan[i-1] = $('#satuan_brg'+i).val();
-		arrHarga[i-1] = $('#harga_brg'+i).val();
-		arrJumlah[i-1] = $('#jumlah_brg'+i).val();
+		arrHarga[i-1] = $('#harga_brg'+i).val().replace(/\./g, "");
+		arrJumlah[i-1] = $('#jumlah_brg'+i).val().replace(/\./g, "");
 		arrKet[i-1] = $('#keterangan_brg'+i).val();	
 	}
 
@@ -570,12 +561,12 @@ $("#save").click(function(){
             bootstrap_alert.warning('<b>Gagal!</b> Data Pelanggan Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else
-     	if($("#formID").validationEngine('validate') && $("#total").val() != 0)
+     	if($("#formID").validationEngine('validate') && totalRow != 0)
         {
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_do/insert",
-            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,
+            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,term:term,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
             },
 
@@ -584,7 +575,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Data '+so+' berhasil ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -612,7 +603,7 @@ $("#save").click(function(){
     		$.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_do/update",
-            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,
+            data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,term:term, disc:disc,dpp:dpp,ppn:ppn,grant:grant,
                     arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
             },
 
@@ -621,7 +612,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses</b> data '+so+' berhasil di update');
                     $('#formID').each(function(){
                             this.reset();
                     });

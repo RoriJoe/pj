@@ -3,12 +3,12 @@
     <thead>
         <th width="20%">Kode Barang</th>
         <th width="30%">Nama</th>
-        <th width="15%">Ukuran</th>
+        <th width="20%">Ukuran</th>
         <th width="15%">Satuan</th>
-        <th width="15%">Qty</th>
+        <th width="7%">Qty</th>
         <th width="10%">Select</th>
     </thead>
-    <tbody id="item_brg">
+    <tbody id="item_brg tb_detail">
     <?php
     foreach($hasil as $row)
     {
@@ -19,16 +19,17 @@
             <td>$row->Ukuran</td>
             <td>$row->Satuan1</td>
             <td>$row->Qty1</td>
-            <td><input type='radio' name='optionsRadios'
+            <td><input type='radio' name='optionsRadiosBarang'
                     kd='$row->Kode' 
                     satuan='$row->Satuan1' 
                     nama='$row->Nama' 
                     ukuran='$row->Ukuran'
+                    harga='$row->Harga_Jual'
                     value='$row->Kode'></td>
             </tr>
             ";
         }else{
-            echo "<tr class='warning'>
+            echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Nama</td>
             <td>$row->Ukuran</td>
@@ -45,8 +46,7 @@
 </div>
 
 <script>
-$('#item_brg tr').dblclick(function (e) {
-
+$('#tb5 tbody tr').dblclick(function (e) {
     $(this).find('td input[type=radio]').prop('checked', true);
     var checkRadio = $(this).find('td input[type=radio]:checked').val();
 
@@ -56,14 +56,12 @@ $('#item_brg tr').dblclick(function (e) {
     }
 });
 
-$('input:radio[name="optionsRadios"]').change(function(){
+$('input:radio[name="optionsRadiosBarang"]').change(function (e){
     getBarang();
     $('#modalBarang').modal('hide');
 });
  
 var oTable = $('#tb5').dataTable( {
-    "sScrollY": "240px",
-    "sScrollYInner": "110%",
     "bPaginate": true,
     "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],

@@ -10,11 +10,21 @@
 
         function get_paged_list()
         {
-            $q = $this->db->query("SELECT do_h.*,
+            $q = $this->db->query("SELECT do_h.No_Do,
                 pelanggan.Perusahaan
                 FROM do_h
                 LEFT OUTER JOIN pelanggan
                 ON do_h.Kode_Plg = pelanggan.Kode");
+            return $q->result();
+        }
+
+        function get_h_so($id){
+            $q = $this->db->query("SELECT do_h.*,
+                pelanggan.Perusahaan, pelanggan.Lama
+                FROM do_h
+                LEFT OUTER JOIN pelanggan
+                ON do_h.Kode_Plg = pelanggan.Kode
+                WHERE No_Do = '$id' LIMIT 1");
             return $q->result();
         }
 
@@ -51,6 +61,11 @@
         {
             $this->db->insert('do_d', $datadet);
         }
+
+        function updateTerm($term,$pl){
+            $this->db->where('Kode',$pl);
+            $this->db->update('pelanggan', $term);
+        }
 		
 		
 		function updateDo($data, $so)
@@ -60,12 +75,30 @@
             return "ok";
         }
 		
-        function updateDo_det($datadet,$so,$kb)
+        function updateDo_det($datadet,$kode)
         {
-			$where = "No_Do = '$so' AND Kode_Brg = '$kb'";
-			
-			$this->db->where($where);
-			$this->db->update('do_d', $datadet);
+			$count1=0;
+            $result = $this -> db -> query ("select No from do_d where No_Do = '$kode' limit 1");
+            $temp = $result->result_array();
+            $data['rek'] = $temp[0]['No'];
+
+            $count1=0;
+            foreach($datadet['Kode_Brg'] as $d)
+            {
+                $save=array
+                (
+                    'Kode_Brg' => $datadet['Kode_Brg'][$count1],
+                    'Qty'=>$datadet['Qty'][$count1],
+                    'Harga'=>$datadet['Harga'][$count1],
+                    'Jumlah'=>$datadet['Jumlah'][$count1],
+                    'Keterangan'=>$datadet['Keterangan'][$count1]                  
+                );
+                $this->db->where('No_Do',$kode);
+                $this->db->where('No',$data['rek']);
+                $this->db->update('do_d',$save);
+                $count1++;
+                $data['rek']++;
+            }
         }
 		
 		function delete($so)

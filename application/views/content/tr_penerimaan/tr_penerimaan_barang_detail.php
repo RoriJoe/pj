@@ -2,8 +2,7 @@
 <table id="tb2">
     <thead>
         <th>No BPB</th>
-        <th>Gudang</th>
-        <th>Tanggal</th>
+        <th>Supplier</th>
     </thead>
 
     <tbody id="tb_detail">
@@ -22,8 +21,7 @@
              _kd_po = '$row->No_Po'>
        
             <td>$row->No_Bpb</a></td>
-            <td>$row->Kode_Gudang</td>
-            <td>$dmy1</td>
+            <td>$row->Perusahaan</td>
         </tr>";
     } ?>
     </tbody>

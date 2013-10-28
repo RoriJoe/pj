@@ -46,7 +46,7 @@
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" name='lk' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
             <td>Kota</td>

@@ -18,6 +18,14 @@
             return $q->result();
         }
 
+        function popList(){
+            $q = $this->db->query("
+            SELECT Kode,Nama, Perusahaan, Alamat1, Limit_Kredit, Lama
+            FROM pelanggan
+            ");
+            return $q->result();
+        }
+
         //model untuk save add data
         function insert($data, $id)
         {

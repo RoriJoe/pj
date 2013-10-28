@@ -18,11 +18,12 @@
         <td>$row->Ukuran</td>
         <td>$row->Satuan1</td>
         <td>$row->Qty1</td>
-        <td><input type='radio' name='optionsRadios'
+        <td><input type='radio' name='optionsRadiosBarang'
                 kd='$row->Kode' 
                 satuan='$row->Satuan1' 
                 nama='$row->Nama' 
                 ukuran='$row->Ukuran'
+                harga='$row->Harga_Jual'
                 value='$row->Kode'></td>
         </tr>
         ";
@@ -40,7 +41,7 @@ $('#item_brg tr').dblclick(function (e) {
     $('#modalBarang').modal('hide');
 });
 
-$('input:radio[name="optionsRadios"]').change(function(){
+$('input:radio[name="optionsRadiosBarang"]').change(function(){
     getBarang();
     $('#modalBarang').modal('hide');
 });

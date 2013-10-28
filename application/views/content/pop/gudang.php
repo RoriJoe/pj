@@ -40,6 +40,7 @@
         </tr>
         <tr>
             <td colspan="4">
+            	<div id="konfirmasi2" class="sukses"></div>
                 <br/>
                 <button id="saveGudang" class="btn btn-primary" mode="add">Save</button>
                 <button id="cacGudang" class="btn" type="reset">Cancel</button>
@@ -112,6 +113,8 @@ $("#saveGudang").click(function(){
                 {
                     $('#_gd').val(nm);
                     $('#kd_gd').val(kd);
+                    $('#gud').val(nm);
+    				$('#kd_gud').val(kd); 
                     bootstrap_alert.success('Data <b>'+kd+' - '+nm+'</b> berhasil ditambahkan');
                     $('#formGudang').each(function(){
                         this.reset();
@@ -121,7 +124,7 @@ $("#saveGudang").click(function(){
                 }
                 else
                 {
-                    bootstrap_alert.success('Data Gudang gagal ditambahkan');
+                    bootstrap_alert.warning2('Data Gudang gagal ditambahkan');
                 }
             }
         });

@@ -1,28 +1,3 @@
-<script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-function listPO(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_po/index",
-    data :{},
-    success:
-    function(hh){
-        $('#listPO').html(hh);
-    }
-    });
-}
-
-listPO();
-</script>
-<!--
-*
-*Notification Area
-*@DONT REMOVE!
-*  
--->
-<div id="konfirmasi" class="sukses"></div>
-
 <!--Main Form-->
 <div class="bar">
     <p>Form Pemesanan / PO <i id="icon" class='icon-chevron-down icon-white'></i></p>
@@ -37,7 +12,7 @@ listPO();
                 <input  type='text' 
                         class="validate[requiredmaxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
                         id='po' name='po' 
-                        style="width: 170px;text-transform: uppercase;">
+                        style="width: 100px;text-transform: uppercase;">
             </td>
 
             <td>Permintaan</td>
@@ -56,7 +31,7 @@ listPO();
                         class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' 
                         style="width: 80px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
             </td>
-            <td>Currency</td>
+            <!--<td>Currency</td>
             <td>
                 <select name="cur" class="validate[required]" id="cur">
                     <?php
@@ -84,13 +59,13 @@ listPO();
                         
                         "
                         ><i class='icon-plus'></i></button>
-            </td>
+            </td>-->
        </tr>
        <tr>
             <td>Tanggal Kirim</td>
             <td>
                 <input  type='text' 
-                        class="validate[required,custom[date]]" id='_tgl2' name='_tgl2' 
+                        class="" id='_tgl2' name='_tgl2' 
                         style="width: 80px; margin-right: 20px;">
             </td>
             <td>Urgent</td>
@@ -103,43 +78,23 @@ listPO();
        </tr>
       
         <tr>
-            <td colspan="2">
-                <table>
-                    <tr>
-                        <td rowspan="2" width="90px;">Kirim Ke</td>
-                        <td>
-                            <input  type="radio" 
-                                    name="kirim" id="optionsRadios1" value="option1" 
-                                    onclick="radioRespons()" checked>
+        	<td>Kirim Ke</td>
+            <td>
+                <input  type="hidden" id="kd_gud" />
 
-                            <input  type="hidden" id="kd_gud" />
+                <div    class="input-append" 
+                        style="margin-bottom: 0;">
 
-                            <div    class="input-append" 
-                                    style="margin-left: 10px;margin-bottom: 0;">
+                	<input  type='text' placeholder="Gudang" 
+                        class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
+                        id="gud" id='appendedInputButton' name='gud'
+                        style="width: 148px;"
+                        onclick="lookup_gudang()">
 
-                            <input  type='text' placeholder="Gudang" 
-                                    class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
-                                    id="gud" id='appendedInputButton' name='gud'
-                                    style="width: 148px;"
-                                    onclick="lookup_gudang()">
-
-                            <a  href="#modalGud" id="filterGud" role="button" class="btn" 
-                                data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" 
-                                style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input  type="radio" name="kirim" id="optionsRadios2" value="option2" onclick="radioRespons()">
-                            <input  type='text' disabled="disabled" placeholder="Proyek" 
-                                    class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
-                                    id="proy" id='appendedInputButton' name='proy' 
-                                    style="width: 148px; margin-left: 10px;">              
-                        </td>
-                    </tr>
-                </table>
+                	<a  href="#modalGudang" id="filterGud" role="button" class="btn" 
+                    	data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" 
+                    	style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
+                </div>
             </td>
             <td>Supplier</td>
             <td>
@@ -150,13 +105,14 @@ listPO();
                             style="width: 148px;" 
                             onclick="lookup_supplier()">
 
-                <a  href="#modalSup" role="button" 
+                <a  href="#modalSupplier" role="button" 
                     class="btn" data-toggle="modal" data-toggle="tooltip" 
                     title="Filter Supplier" 
                     style="padding: 2px 3px;" 
                     onclick="listSupplier()"><i class="icon-filter"></i></a>
                   
                 </div>
+                <a id="add" mode="new" class="btn btn-small" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</a>
             </td>
         </tr>
     </table>
@@ -164,7 +120,7 @@ listPO();
     <hr style="margin: 0;"/>
 </form>
 <div id="hasil2" style="height: 200px;"></div>
-<div style="float: right;">
+<div style="float: right;margin-right: -65px;">
     <table>
         <tr>
             <td width="50px">
@@ -172,7 +128,7 @@ listPO();
             </td>
             <td>
                 <input  type="hidden" id="dpp2" />
-                <input style="width:200px;" id="dpp" name="dpp" type="text" readonly="true">
+                <input style="width:127px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true">
             </td>
         </tr>
         <tr>
@@ -180,7 +136,8 @@ listPO();
                 PPN
             </td>
             <td>
-                <input style="width:30px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onclick="hitung()"> % <input style="width:135px;" id="ppnT" name="ppnT" type="text" readonly="true">
+                <input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitung()"> % 
+                <input style="width:68px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitung()">
             </td>
         </tr>
         <tr>
@@ -188,19 +145,19 @@ listPO();
                 Total
             </td>
             <td>
-                <input  type="hidden" id="total2" />
-                <input style="width:200px; margin-right: 145px;" id="total" name="total" type="text" readonly="true">
+            	<input type="hidden" id="kirim" />
+                <input style="width:127px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true">
             </td>
         </tr>
     </table>
     
 </div>
+<div id="konfirmasi" class="sukses"></div>
 <div>
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
     <button id="delete" class="btn">Delete</button>
     <button id="cancel" class="btn">Cancel</button>
-    <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print SO"><i class="icon-print"></i></button>
+    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i></button>
 </div>
 </div>
 
@@ -208,7 +165,7 @@ listPO();
 <!-- 
     Modal 
 -->
-<div id="modalSup" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalSupplier" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Supplier</h3>
@@ -217,12 +174,11 @@ listPO();
     <div id="list_supplier"></div>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getSupplier()" data-dismiss="modal" aria-hidden="true">Done</button>
+    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
   </div>
 </div>
 
-<div id="modalGud" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalGudang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Gudang</h3>
@@ -231,12 +187,11 @@ listPO();
     <div id="list_gudang"></div>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getGudang()" data-dismiss="modal" aria-hidden="true">Done</button>
+    <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
   </div>
 </div>
 
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List Barang</h3>
@@ -244,12 +199,27 @@ listPO();
   <div class="modal-body">
     <div id="list_barang"></div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
+</div>
+
+<div id="modalNewGudang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Tambah Gudang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="add_gudang"></div>
   </div>
 </div>
 
+<div id="modalNewSupplier" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Tambah Supplier</h3>
+  </div>
+  <div class="modal-body">
+    <div id="add_supplier"></div>
+  </div>
+</div>
 
 <!--@Load table List via AJAX-->
 <div id="listPO"></div>
@@ -257,67 +227,122 @@ listPO();
 <script>  
     $("#tes").popover({ title: 'Tambah Currency'});
 </script>  
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+	listPO();
     autogen();
-    animation();
-    validation_engine();
+    validation()
+    barAnimation();
     tampilDetailPO();
-    key();
-    //listBarang();
 });
-/*
-template:
--Alert
--Animation
--Validation Engin
--Auto Generate Code
--Date Picker
-*/
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(5000).addClass("in").fadeOut(3000);
-}
-bootstrap_alert.success = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-bootstrap_alert.info = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
+
+function addGudang(){
+    $('#modalGudang').modal('hide');
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_gudang/popGudang",
+    data :{},
+    success:
+    function(hh){
+        $('#add_gudang').html(hh);
+    }
+    });  
+} 
+
+function addSupplier(){
+    $('#modalSupplier').modal('hide');
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_supplier/popSupplier",
+    data :{},
+    success:
+    function(hh){
+        $('#add_supplier').html(hh);
+    }
+    });  
+} 
+
+function retrieveForm(idPO){
+    var id = idPO;
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_po/retrieveForm",
+        data :{id:id},
+        dataType: 'json',
+        success:
+        function(msg){
+	        $('#_tgl1').val(msg.Tgl_Po);
+	        $('#_tgl2').val(msg.Tgl_Kirim);
+	        $('#permintaan').val(msg.Permintaan);
+	        $('#kd_sup').val(msg.Kode_Supplier);
+	        $('#sup').val(msg.Nama_Supplier);
+	        $('#kd_gud').val(msg.Kode_Gudang);
+	        $('#gud').val(msg.Nama_Gudang);
+	        $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
+	        $('#ppn').val(msg.Ppn);
+	        $('#kirim').val(msg.Counter);
+
+	        var total_PPN = msg.Dpp*msg.Ppn/100;
+	        $('#ppnT').val(accounting.formatMoney(total_PPN, "",0,"."));
+	        $('#total').val(accounting.formatMoney(msg.Total, "",0,"."));
+
+        	setSelectedIndex(document.getElementById("urg"),msg.Urgent);
+        }
+    }); 
 }
 
-function animation(){
-  jQuery(".hide-con").hide();
-  var i = document.getElementById('konten');
-  jQuery(".bar").click(function()
-  {
-        jQuery(this).next(".hide-con").slideToggle(500, function(){
-        // Animation complete.
-        if(i.style.display=="none"){
-            document.getElementById('icon').className='icon-chevron-down icon-white';
-        }else{
-            document.getElementById('icon').className='icon-chevron-up icon-white';
-            }
-        });
-  });
+function addBarang(){
+    addRow();
+    var row = $("tbody#itemlist tr").length;
+    editRow(row);
+    getDetail(row);
+    $('#modalBarang').modal('show');
 }
 
-function validation_engine() {
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
+function listPO(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_po/index",
+    data :{},
+    success:
+    function(hh){
+        $('#listPO').html(hh);
+    }
     });
 }
 
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
+function cek_kirim(){
+    var id = $('#po').val();
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_po/cek_kirim",
+        data :{id:id},
+        dataType: 'json',
+        success:
+        function(msg){
+            $('#kirim').val(msg.Kirim);
+        }
+    });
+}
 
 //BUAT PRINT
  $("#print").click(function(){
@@ -330,10 +355,13 @@ function validation_engine() {
     var cur = $('#cur').val();
     var urg = $('#urg').val();
     var kd_sup = $('#kd_sup').val();
+    //COUNTER
+    var kirim = $('#kirim').val();
+    var count = parseInt(kirim)+1;
 	
-	var dpp = $('#dpp2').val();
-    var ppn = $('#ppn').val().replace(/\./g, "");
-    var to = $('#total2').val();
+	var dpp = $('#dpp').val();
+    var ppn = $('#ppnT').val();
+    var to = $('#total').val();
     
     var arrKode = new Array();
     var arrHarga = new Array();
@@ -342,8 +370,8 @@ function validation_engine() {
 	var arrNamabrg = new Array();
     var arrSatuan = new Array();
     
-    var table = document.getElementById('tb3');
-    var totalRow = table.rows.length-1;
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length;
     for(var i=1;i<=totalRow;i++){
         arrKode[i-1] = $('#kode_brg'+i).val();
         arrHarga[i-1] = $('#harga_brg'+i).val();
@@ -356,7 +384,7 @@ function validation_engine() {
 	$.ajax({
 	        type:'POST',
 	        url: "<?php echo base_url();?>index.php/report/print_transaksi_po",
-	        data :{ po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup, 
+	        data :{ po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,count:count,
 	                dpp:dpp,ppn:ppn,to:to,
                     arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,arrNamabrg:arrNamabrg,
 					arrSatuan:arrSatuan
@@ -373,18 +401,17 @@ function validation_engine() {
 				  close();
                   win.print();
 				}
+				cek_kirim();
 	        }
 	     });
 }); 
 
 function autogen(){
     $('#add').attr('mode','new');
-    $('#save').attr('disabled',true);
-    $('#cancel').attr('disabled',true);
-    $('#add').attr('disabled',true);
+    $('#add').attr('disabled', false);
 
     $('#delete').attr('disabled', true);
-    $("#po").attr('disabled',true);
+    $("#po").attr('disabled',false);
     $("#total").val("");
     $("#dpp").val("");
     $("#ppn").val("");
@@ -481,22 +508,9 @@ function lookup_gudang(){
     });
 }
 
-function disableAlpha($id){
-    var foo = document.getElementById($id);
-    foo.addEventListener('input', function (prev) {
-    return function (evt) {
-        if (!/^[0-9]*$/.test(this.value)) {
-          this.value = prev;
-        }
-        else {
-          prev = this.value;
-        }
-    };
-    }(foo.value), false);
-};
-
 //Table Supplier
 function listSupplier(){
+	$('#add').attr('disabled',false);
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/ms_supplier/viewSupplier",
@@ -525,42 +539,13 @@ function listGudang(){
 function listBarang(){
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang2",
         data :{},
         success:
         function(hh){
             $('#list_barang').html(hh);
         }
-        });   
-    /*var arrKode = new Array();
-    
-    var table = document.getElementById('tb3');
-    var totalRow = table.rows.length-1;
-    if(totalRow == 1){
-        $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
-        data :{},
-        success:
-        function(hh){
-            $('#list_barang').html(hh);
-        }
-        });   
-    }else{
-        for(var i=1;i<=totalRow;i++){
-            arrKode[i-1] = $('#kode_brg'+i).val();
-        }
-
-        $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_barang/checkBarang",
-        data :{arrKode:arrKode,totalRow:totalRow},
-        success:
-        function(hh){
-            $('#list_barang').html(hh);
-        }
-        });   
-    }*/
+    });   
 }
 
 function tampilDetailPO(){
@@ -594,10 +579,11 @@ function getGudang(){
 }
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('satuan');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
-
+    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
+    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
+    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
+    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
     var row = filter;
     var array = [];
 
@@ -616,37 +602,14 @@ function getBarang(){
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
         $('#kode_brg'+row).val(x);
-        $('#keterangan_brg'+row).val(z);
+        $('#keterangan_brg'+row).val(z +" "+p);
         $('#satuan_brg'+row).val(y);
+        $('#harga_brg'+row).val(o); 
     }
-/*
-    var i = array.length;
-    window.alert(array.length);
-    if(array.length == 0){
-        array.push(x);
-        window.alert(array.length);
-        $('#kode_brg'+row).val(x);
-        $('#keterangan_brg'+row).val(z);
-        $('#satuan_brg'+row).val(y);  
-    }else{
-        found_flag = false;
-        for (i = 0; i < array.length; i++) {
-            if (array[i][1] === x) {
-                found_flag = false;
-                break;
-            }
-        }
-
-        if (found_flag === true)
-        {
-            alert(i);
-        } else {
-            alert('not found');
-        }
-    }*/
 }
     
 //Radion Button response
+/*
 function radioRespons(){
     if(document.getElementById('optionsRadios1').checked){
         $('#gud').attr('disabled', false);
@@ -705,139 +668,22 @@ function addCombo() {
     }
 }
 
-function key(){
- $('input[type="text"]').keyup(function() {
-    if($(this).val() != '') {
-        $('#save').removeAttr('disabled');
-        $('#cancel').removeAttr('disabled');
-        $('#add').removeAttr('disabled');
-    }
-    else{
-        $('#save').attr('disabled','disabled');
-        $('#add').attr('disabled','disabled');
-    }
- });
+function addRow() {
+    var items = "";
+    $count = $("tbody#itemlist tr").length+1;
+
+    items += "<tr>";
+    items += "<td width='17%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:98px; text-transform: uppercase;' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='20%'><div class='input-append'><input type='text' name='nama_brg' class='span2' maxlength='22' id='keterangan_brg"+$count+"' style='width:120px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='10%'><input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg"+$count+"' style='width:65px;' readonly='true'/></td>";
+    items += "<td width='7%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:30px' disabled='true'/></td>";
+    items += "<td width='17%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='12' class='validate[required]' id='harga_brg"+$count+"' style='width:95px;text-align:right;' disabled='true' /></td>";
+    items += "<td width='17%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:95px;text-align:right;' disabled='true'/></td>";
+    items += "<td width='15%'><div class='btn-group' style='margin-bottom:0;'><a class='btn btn-small' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil' ></i></a><a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
+
+    $("#itemlist").append(items);
 }
 
-var filter="";
-
-//Tambah Row Barang
-function addRow(tableID) {
-    var mode = $('#add').attr("mode");
-
-    if (mode == "new"){
-        $('#tb3 tbody').empty();
-    }    
-    var table = document.getElementById(tableID);
-    var rowCount = table.rows.length;
-    var last = rowCount;
-
-        var table = document.getElementById(tableID);
-
-        var rowCount = table.rows.length;
-        var row = table.insertRow(rowCount);
-        
-        //KOLOM 1
-        var cell1 = row.insertCell(0);
-        var iDiv2 = document.createElement("div");
-        iDiv2.className = "input-append";
-        iDiv2.id="kode_brg[]";
-        
-        var element0 = document.createElement("input");
-        element0.type = "text";
-        element0.name="kode_brgd";
-        element0.className="validate[required]";
-        element0.className="span2"; 
-        element0.id="kode_brg"+last;
-        element0.setAttribute("onkeypress", "validAct("+last+")");
-        element0.disabled="true";
-        element0.style.width = "70px";
-        
-        var filter = document.createElement("a");
-        filter.className="btn btn-tbl";
-        filter.id="f_brg"+last;
-        filter.href="#myModal2";
-        filter.setAttribute("onclick", "getDetail("+last+")");
-        filter.setAttribute("role", "button");
-        filter.setAttribute("data-toggle", "modal");
-        var iIcon3 = document.createElement("i");
-        iIcon3.className = "icon-filter";
-        
-        filter.appendChild(iIcon3);
-        iDiv2.appendChild(element0);
-        iDiv2.appendChild(filter);
-        cell1.appendChild(iDiv2);
-        //KOLOM 
-        var cell1 = row.insertCell(1);
-        var element1 = document.createElement("input");
-        element1.type = "text";
-        element1.name = "keterangan[]";
-        element1.id="keterangan_brg"+last;
-        element1.style.width = "80px";
-        element1.disabled = "true";
-        cell1.appendChild(element1);
-        //KOLOM 2
-        var cell1 = row.insertCell(2);
-        var element1 = document.createElement("input");
-        element1.type = "text";
-        element1.name = "qty_brg";
-        element1.id="qty_brg"+last;
-        element1.setAttribute("onkeypress", "validAct("+last+")");
-        element1.style.width = "30px";
-        cell1.appendChild(element1);
-        
-        //KOLOM 3
-        var cell2 = row.insertCell(3);
-        var element2 = document.createElement("input");
-        element2.type = "text";
-        element2.name = "satuan_brg[]";
-        element2.disabled = "true";
-        element2.id="satuan_brg"+last;
-        element2.style.width = "70px";
-        cell2.appendChild(element2);
-        
-        //KOLOM 4
-        var cell3 = row.insertCell(4);
-        var element3 = document.createElement("input");
-        element3.type = "text";
-        element3.name = "harga[]";
-        element3.id="harga_brg"+last;
-        element0.setAttribute("onkeypress", "validAct("+last+")");
-        element3.style.width = "70px";
-        cell3.appendChild(element3);
-        //KOLOM 5
-        var cell4 = row.insertCell(5);
-        var element4 = document.createElement("input");
-        element4.type = "text";
-        element4.name = "jumlah";
-        element4.id="jumlah_brg"+last;
-        element4.style.width = "70px";
-        element4.disabled = "true";
-        cell4.appendChild(element4);
-
-        //KOLOM 7
-        var cell6 = row.insertCell(6);
-                    
-        var iIcon1 = document.createElement("i");
-        iIcon1.className = "icon-ok";
-        iIcon1.id="icon"+last;
-        var iIcon2 = document.createElement("i");
-        iIcon2.className = "icon-trash";
-        
-        var iAnchor1 = document.createElement("a");
-        iAnchor1.className = "btn";
-        iAnchor1.href = "#";
-        iAnchor1.setAttribute('onclick', 'editRow('+last+')')
-        iAnchor1.appendChild(iIcon1);
-        var iAnchor2 = document.createElement("a");
-        iAnchor2.className = "btn";
-        iAnchor2.setAttribute('onclick', 'deleteRowSO(this)')
-        iAnchor2.href = "#";
-        iAnchor2.appendChild(iIcon2);
-        
-        cell6.appendChild(iAnchor1);
-        cell6.appendChild(iAnchor2);
-}
 
 //Cancel
 $("#cancel").click(function(){
@@ -865,22 +711,23 @@ $("#save").click(function(){
     var cur = $('#cur').val();
     var urg = $('#urg').val();
     var kd_sup = $('#kd_sup').val();
-    var dpp = $('#dpp2').val();
-    var ppn = $('#ppn').val().replace(/\./g, "");
-    var to = $('#total2').val();
+
+    var dpp = $('#dpp').val().replace(/\./g, "");
+    var ppn = $('#ppn').val();
+    var to = $('#total').val().replace(/\./g, "");
     
     var arrKode = new Array();
     var arrHarga = new Array();
     var arrJumlah = new Array();
     var arrNilai = new Array();
     
-    var table = document.getElementById('tb3');
-    var totalRow = table.rows.length-1;
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length;
     for(var i=1;i<=totalRow;i++){
         arrKode[i-1] = $('#kode_brg'+i).val();
-        arrHarga[i-1] = $('#harga_brg'+i).val();
+        arrHarga[i-1] = $('#harga_brg'+i).val().replace(/\./g, "");
         arrJumlah[i-1] = $('#qty_brg'+i).val();
-        arrNilai[i-1] = $('#jumlah_brg'+i).val(); 
+        arrNilai[i-1] = $('#jumlah_brg'+i).val().replace(/\./g, ""); 
     }
 
     var StartDate= document.getElementById('_tgl1').value;
@@ -901,7 +748,7 @@ $("#save").click(function(){
         {
             bootstrap_alert.warning('<b>Gagal!</b> Pastikan Tanggal Kirim Setelah Tanggal PO');
         }
-        else if($("#formID").validationEngine('validate') && $("#total").val() != 0)
+        else if($("#formID").validationEngine('validate') && totalRow != 0)
         {
             $.ajax({
             type:'POST',
@@ -915,7 +762,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses!</b> Data '+po+' berhasil ditambahkan');
                     $('#formID').each(function(){
                         this.reset();
                     });
@@ -955,7 +802,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses!</b> data '+po+'  berhasil di Update');
                     $('#formID').each(function(){
                             this.reset();
                     });
@@ -975,30 +822,45 @@ $("#save").click(function(){
 
 $("#delete").click(function(){
     var po = $('#po').val();
-    bootbox.confirm("Anda yakin ingin menghapus data Pemesanan "+po+" ?", function(result)
-    {
-        if(result == true){
-            $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>index.php/tr_po/delete",
-            data :{po:po
+
+    PlaySound('beep');
+    var id = $('#po').val();
+    var pr = $('#_tgl1').val();
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode PO: <b>"+id+"</b><br/>Tanggal PO: <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
             },
-            success:
-            function(msg)
-            {
-                if(msg == "ok")
-                {
-                    bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
-                    $('#formID').each(function(){
-                        this.reset();
-                    });
-                   listPO();
-                   tampilDetailPO();
-                   autogen();
-                   $('#save').attr('mode','add');
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+		            type:'POST',
+		            url: "<?php echo base_url();?>index.php/tr_po/delete",
+		            data :{po:po
+		            },
+		            success:
+		            function(msg)
+		            {
+		                if(msg == "ok")
+		                {
+		                    bootstrap_alert.success('<b>Sukses!</b> Data '+po+' telah dihapus');
+		                    $('#formID').each(function(){
+		                        this.reset();
+		                    });
+		                   listPO();
+		                   tampilDetailPO();
+		                   autogen();
+		                   $('#save').attr('mode','add');
+		                }
+		            }
+		            });
                 }
             }
-            });
         }
     });
 });

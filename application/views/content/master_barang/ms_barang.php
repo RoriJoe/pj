@@ -70,14 +70,14 @@ loadListBarang();
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" name='hb' style="width: 145px; text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hb' style="width: 145px; text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
             <td>Harga Jual</td>
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" name='hj' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hj' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
        </tr>

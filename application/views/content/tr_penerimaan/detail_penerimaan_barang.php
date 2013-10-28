@@ -110,23 +110,6 @@ function editRow(row){
         }
     }
 }
-/*
-function deleteRow(row) {
-    try {
-        var i = row.parentNode.parentNode.rowIndex;
-        var table = document.getElementById('tb3');
-        var rowCount = table.rows.length-1;
-        if(rowCount <= 1) {
-            alert("Detail SO Tidak Boleh Kosong");
-        }else{
-           table.deleteRow(i);
-           rowCount--;
-           i--;
-        }
-    }catch(e) {
-        alert(e);
-    }
-}*/
 
 $("tbody#itemlist").on("click","#hapus",function(){
     $(this).parent().parent().parent().remove();
