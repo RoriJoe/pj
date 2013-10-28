@@ -47,7 +47,7 @@
         </td>
         
         <td>
-            <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true'/>
+            <input type='text' name='harga_brg'  maxlength='12' class='validate[required]' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true'/>
         </td>
         <td>
             <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:70px' value='$row->Jumlah' disabled='true'/>
@@ -68,6 +68,23 @@
 </div>
 
 <script>
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
 function editRow(row){
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
     var j = document.getElementById('qty_brg'+row);
@@ -229,6 +246,7 @@ function hitungPPN(){
 
 function validAct(row){
     //max kode 20
+	
     var userVal = $("#kode_brg"+row).val();
     if(userVal.length == 20){
         alert("Maximum Kode Barang 20 Karakter");

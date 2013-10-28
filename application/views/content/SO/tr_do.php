@@ -21,7 +21,7 @@
        <tr>
             <td>Tanggal SO</td>
             <td>
-                <input type='text' class="validate[required,custom[date]]" value="<?php echo date('d-m-Y');?>" id='_tgl' name='_tgl' 
+                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
                 style="width: 80px;margin-left: 10px; margin-right: 20px;">
             </td>
             <td>Tanggal PO</td>
@@ -72,7 +72,7 @@
 	</td>
 	<td><input type="hidden" id="disc2" />
     <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onclick="hitung()">%
-	<input style="width:69px;" id="discT" name="discT" type="text" >
+	<input style="width:66px;" id="discT" name="discT" type="text" >
 	</td>
 </tr>
 <tr>
@@ -87,7 +87,7 @@
 		</td>
 		<td>
 			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onclick="hitungPPN()">% 
-			<input style="width:69px;" id="ppnT" name="ppnT" type="text" onclick="hitungPPN()">
+			<input style="width:66px;" id="ppnT" name="ppnT" type="text" onclick="hitungPPN()" readonly="true">
 		</td>
 </tr> 
 <tr>
@@ -145,6 +145,22 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script>
+/*Tampilkan jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        defaultDate: new Date()
+    });
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+    });
+});
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
     $.ajax({
@@ -160,6 +176,7 @@ function listSO(){
 listSO();
 
 jQuery(document).ready(function(){
+	$("#_tgl").datepicker( "setDate", new Date());
     tampilDetailSO();
     autogen();
     validation()
@@ -235,22 +252,7 @@ for (i = 0; i< s.options.length; i++)
 return;
 }
 
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
+
 
 //Table Pelanggan
 function listPelanggan(){

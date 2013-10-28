@@ -117,9 +117,20 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script>
+/*jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind"
+    });
+});
+
 var flag=0;
 
 jQuery(document).ready(function() {
+$( "#_tgl" ).datepicker( "setDate", new Date());
     get_mobil_list();
     get_so_list();
     listSJ();
@@ -185,15 +196,6 @@ function listPelanggan(){
     });   
 }
 
-/*jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
 
 //PopUp Barang
 function listBarang(){
