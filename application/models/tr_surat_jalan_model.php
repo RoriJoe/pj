@@ -77,7 +77,19 @@
                 $data['rek']++;
             }
         }
-
+		function update_brg($kdbrg,$qty){
+			/* $query = $this -> db -> query ("UPDATE saw_d SET QtySaw1 = QtySaw1 - $qty 
+			WHERE Kd_Brg = $kdbrg and No_Saw=
+			(SELECT No_Saw FROM saw_h ORDER BY No_Saw DESC LIMIT 1)");
+			 */
+			$this->db->set('QtySaw1', "QtySaw1 - '$qty'", FALSE);
+			
+			$where = "Kd_Brg = '$kdbrg' AND No_Saw =
+			(SELECT No_Saw FROM saw_h ORDER BY No_Saw DESC LIMIT 1);";
+			
+			$this->db->where($where);
+			$this->db->update('saw_d');
+		}
         //model untuk delete
         function delete($sj)
         {
