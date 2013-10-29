@@ -28,7 +28,7 @@
             <td>Tanggal PO</td>
             <td>
                 <input  type='text' 
-                        id='_tgl1' name='_tgl1' 
+                        id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>"
                         style="width: 80px; margin-right: 20px;" >
             </td>
             <!--<td>Currency</td>
@@ -229,29 +229,25 @@
 </script>  
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-<<<<<<< HEAD
-function autogen(){
-    $('#add').attr('mode','new');
-    $('#add').attr('disabled', false);
-=======
 $(document).ready(function() {
     listBarang();
-	listPO();
+    listPO();
     autogen();
     validation()
     barAnimation();
     tampilDetailPO();
 });
->>>>>>> origin/Fix-Wenesday
-
+function autogen(){
+    $('#add').attr('mode','new');
+    $('#add').attr('disabled', false);
     $('#delete').attr('disabled', true);
     $("#po").attr('disabled',false);
     $("#total").val("");
     $("#dpp").val("");
     $("#ppn").val("");
     $("#ppnT").val("");
-    
     
     $.ajax({
     type:'POST',
@@ -263,6 +259,7 @@ $(document).ready(function() {
         }
     });
 }
+
 $(function() {
     $( "#_tgl1").datepicker({
         changeMonth: true,
@@ -281,14 +278,7 @@ $(function() {
     });
     
 });
-$(document).ready(function() {
-$( "#_tgl1" ).datepicker( "setDate", new Date());
-	listPO();
-    autogen();
-    validation()
-    barAnimation();
-    tampilDetailPO();
-});
+
 
 function addGudang(){
     $('#modalGudang').modal('hide');

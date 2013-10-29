@@ -22,7 +22,7 @@
        <tr>
             <td>Tanggal SO</td>
             <td>
-                <input type='text' class=""  id='_tgl' name='_tgl' 
+                <input type='text' class="validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>"
                 style="width: 80px;margin-left: 10px; margin-right: 20px;"/>
             </td>
             <td>Pelanggan</td>
@@ -150,6 +150,15 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script type="text/javascript">
+jQuery(document).ready(function(){
+    listBarang();
+    listSO();
+    tampilDetailSO();
+    autogen();
+    validation()
+    barAnimation();
+});
+
 /*Tampilkan jQuery Tanggal*/
 $(function() {
     $( "#_tgl").datepicker({
@@ -165,18 +174,6 @@ $(function() {
         dateFormat: "dd-mm-yy",
         showAnim: "blind",
     });
-});
-jQuery(document).ready(function(){
-<<<<<<< HEAD
-$( "#_tgl" ).datepicker( "setDate", new Date());
-=======
-    listBarang();
->>>>>>> origin/Fix-Wenesday
-    listSO();
-    tampilDetailSO();
-    autogen();
-    validation()
-    barAnimation();
 });
 
 function formatAngka(objek, separator) {

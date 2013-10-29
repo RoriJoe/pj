@@ -131,11 +131,8 @@ $(function() {
     });
 });
 $(document).ready(function(){
-<<<<<<< HEAD
-$( "#_tgl" ).datepicker( "setDate", new Date());
-=======
+    $( "#_tgl" ).datepicker( "setDate", new Date());
     listBarang();
->>>>>>> origin/Fix-Wenesday
     listBPB();
     validation();
     barAnimation();
