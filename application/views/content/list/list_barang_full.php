@@ -1,12 +1,11 @@
 <div class="table table-hover CSSTabel">
 <table id="tb5">
     <thead>
-        <th width="20%">Kode Barang</th>
-        <th width="30%">Nama</th>
-        <th width="15%">Ukuran</th>
-        <th width="15%">Satuan</th>
-        <th width="15%">Qty</th>
-        <th width="10%">Select</th>
+        <th>Kode Barang</th>
+        <th>Nama</th>
+        <th>Satuan</th>
+        <th>Qty</th>
+        <th>Select</th>
     </thead>
     <tbody id="item_brg">
     <?php
@@ -14,8 +13,7 @@
     {
         echo "<tr>
         <td>$row->Kode</td>
-        <td>$row->Nama</td>
-        <td>$row->Ukuran</td>
+        <td>$row->Nama $row->Ukuran</td>
         <td>$row->Satuan1</td>
         <td>$row->Qty1</td>
         <td><input type='radio' name='optionsRadiosBarang'
@@ -47,11 +45,10 @@ $('input:radio[name="optionsRadiosBarang"]').change(function(){
 });
  
 var oTable = $('#tb5').dataTable( {
-    "sScrollY": "240px",
     "sScrollYInner": "110%",
     "bPaginate": true,
     "bLengthChange": true,
-    "aaSorting": [[ 4, "desc" ]],
+    "aaSorting": [[ 2, "asc" ]],
     "oLanguage": {
          "sSearch": "",
          "sLengthMenu": "View _MENU_ ",

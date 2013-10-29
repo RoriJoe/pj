@@ -58,7 +58,7 @@
 </form>
     <div id="hasil2" style="height: 238px;"></div>
 
-    <div style="float: right; margin-right: 75px;">
+    <div style="float: right; margin-right: 50px;">
         <table>
         <tr>
         	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
@@ -71,7 +71,7 @@
         	</td>
         	<td><input type="hidden" id="disc2" />
             <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
-        	<input style="width:69px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
+        	<input style="width:66px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
         	</td>
         </tr>
         <tr>
@@ -86,7 +86,7 @@
         		</td>
         		<td>
         			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
-        			<input style="width:69px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
+        			<input style="width:66px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
         		</td>
         </tr> 
         <tr>
@@ -167,7 +167,11 @@ $(function() {
     });
 });
 jQuery(document).ready(function(){
+<<<<<<< HEAD
 $( "#_tgl" ).datepicker( "setDate", new Date());
+=======
+    listBarang();
+>>>>>>> origin/Fix-Wenesday
     listSO();
     tampilDetailSO();
     autogen();
@@ -451,7 +455,7 @@ function addRow() {
     items += "<tr>";
     items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
     items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:134px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='8%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true'/></td>";
+    items += "<td width='8%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
     items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";

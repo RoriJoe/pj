@@ -52,6 +52,14 @@
             $this->db->update('sj_h', $data);
             return "ok";
         }
+        //model untuk batal
+        function updateBatal($data, $sj)
+        {
+            $this->db->where('No_Sj',$sj);
+            $this->db->update('sj_h', $data);
+            return "ok";
+        }
+
         function updateSj_det($datadet,$sj)
         {
             $count1=0;

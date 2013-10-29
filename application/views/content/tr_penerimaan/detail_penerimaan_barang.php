@@ -47,7 +47,7 @@
                 <input type='text' name='Nama' id='qty_brg$i' value='$row->Qty1' 
                 onkeypress='validAct($i)' maxlength='5' 
                 class='validate[required]' 
-                style='width:45px' disabled='true'/>
+                style='width:45px' disabled='true' autofocus/>
             </td>
             <td width='20%'>
                 <input type='text' name='keterangan' id='keterangan_brg$i' value='$row->Keterangan'  
@@ -82,8 +82,7 @@ function editRow(row){
         document.getElementById('qty_brg'+row).disabled=false;
         document.getElementById('icon'+row).className='icon-ok';
         document.getElementById('keterangan_brg'+row).disabled=false;
-        getDetail(row);
-        $('#modalBarang').modal('show');
+        document.getElementById("qty_brg"+row).focus();
         return false;
     }
     else{
@@ -102,11 +101,11 @@ function editRow(row){
             document.getElementById('icon'+row).className='icon-pencil';
             document.getElementById('keterangan_brg'+row).disabled=true;
 
-            var _mode = $('#save').attr("mode");
-            if(_mode == "add"){
-                addBarang();
-                return true;
-            }
+            //var _mode = $('#save').attr("mode");
+            //if(_mode == "add"){
+              //  addBarang();
+            //}
+            return true;
         }
     }
 }
@@ -116,7 +115,6 @@ $("tbody#itemlist").on("click","#hapus",function(){
 });
 
 function getDetail(row){
-    listBarang();
     filter = row;
 }
 

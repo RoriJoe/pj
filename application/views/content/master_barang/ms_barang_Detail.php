@@ -86,7 +86,7 @@ $(".delete").click(function(){
     var pr = $(this).attr("nama");
     //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
-        message: "Kode: <b>"+id+"</b><br/>Nama Gudang : <b>"+pr+"</b>",
+        message: "Kode: <b>"+id+"</b><br/>Nama Barang : <b>"+pr+"</b>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {

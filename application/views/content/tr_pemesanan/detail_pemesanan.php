@@ -60,7 +60,6 @@
 
 <script>
 function getDetail(row){
-    listBarang();
     filter = row;
 }
 
@@ -76,8 +75,7 @@ function editRow(row){
         document.getElementById('qty_brg'+row).disabled=false;
         document.getElementById('icon'+row).className='icon-ok';
         document.getElementById('harga_brg'+row).disabled=false;
-        getDetail(row);
-        $('#modalBarang').modal('show');
+        document.getElementById("qty_brg"+row).focus();
         return false;
     }
     else{

@@ -3,9 +3,9 @@
     <thead>
         <th width="15%">Kode Barang</th>
         <th width="22%">Nama</th>
-        <th width="8%">Qty</th>
-        <th width="15%">Hrg Satuan(RP)</th>
-        <th width="15%">Nilai(RP)</th>
+        <th width="8%" style="text-align: center;">Qty</th>
+        <th width="15%" style="text-align: center;">Hrg Satuan(RP)</th>
+        <th width="15%" style="text-align: center;">Nilai(RP)</th>
         <th width="15%">Keterangan</th>
         <th width="10%">Action</th>
     </thead>
@@ -89,8 +89,7 @@ function editRow(row){
         document.getElementById('icon'+row).className='icon-ok';
         document.getElementById('harga_brg'+row).disabled=false;
         document.getElementById('keterangan_brg'+row).disabled=false;
-        getDetail(row);
-        $('#modalBarang').modal('show');
+        document.getElementById("qty_brg"+row).focus();
         return false;
     }
     else{
@@ -140,7 +139,6 @@ function deleteRowSO(row) {
 }
 
 function getDetail(row){
-    listBarang();
     filter = row;
 }
 temp=0;

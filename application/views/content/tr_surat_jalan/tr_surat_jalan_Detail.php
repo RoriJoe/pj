@@ -37,12 +37,11 @@ $('#tb1 tbody tr').click(function (e) {
     document.getElementById('f_plg').style.visibility = 'hidden';
 
     $('#sj').val(sj);
-
-    loadDetailSJ();
     show_so("view");
     getFormSj(sj);
+    loadDetailSJ();
     cek_kirim();
-
+    cek_batal();
     jQuery(".hide-con").show();
 });
 

@@ -93,7 +93,7 @@
 
                 	<a  href="#modalGudang" id="filterGud" role="button" class="btn" 
                     	data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" 
-                    	style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
+                    	style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-search"></i></a>
                 </div>
             </td>
             <td>Supplier</td>
@@ -109,7 +109,7 @@
                     class="btn" data-toggle="modal" data-toggle="tooltip" 
                     title="Filter Supplier" 
                     style="padding: 2px 3px;" 
-                    onclick="listSupplier()"><i class="icon-filter"></i></a>
+                    onclick="listSupplier()"><i class="icon-search"></i></a>
                   
                 </div>
                 <a id="add" mode="new" class="btn btn-small" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</a>
@@ -120,7 +120,7 @@
     <hr style="margin: 0;"/>
 </form>
 <div id="hasil2" style="height: 200px;"></div>
-<div style="float: right;margin-right: -65px;">
+<div style="float: right;margin-right: -40px;">
     <table>
         <tr>
             <td width="50px">
@@ -230,9 +230,20 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
 function autogen(){
     $('#add').attr('mode','new');
     $('#add').attr('disabled', false);
+=======
+$(document).ready(function() {
+    listBarang();
+	listPO();
+    autogen();
+    validation()
+    barAnimation();
+    tampilDetailPO();
+});
+>>>>>>> origin/Fix-Wenesday
 
     $('#delete').attr('disabled', true);
     $("#po").attr('disabled',false);

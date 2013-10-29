@@ -30,7 +30,9 @@
         <td>
             <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:140px' value='$row->Barang_SJ' disabled='true'/>
         </td>
-        <td><input type='text' class='validate[required]' id='qty$i' name='qty[]' style='width:45px' value='$row->Qty' maxlength='5' disabled='true'/></td>
+        <td>
+            <input type='hidden' id='last_qty$i' value='$row->Qty'/>
+            <input type='text' class='validate[required]' onkeypress='validAct($i)' maxlength='5' id='qty$i' name='qty[]' style='width:45px' placeholder='$row->Qty' value='$row->Qty' maxlength='5' disabled='true'/></td>
         <td><input type='text' class='validate[required]' id='ket$i' name='ket[]' style='width:120px' value='$row->Keterangan' disabled='true'/></td>
         <td>
             <div class='btn-group' style='margin-bottom:0;'>
@@ -70,24 +72,20 @@ function visibleEdit() {
 function editRow(row){
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
     var i = document.getElementById('kode_brg'+row);
-    if (i.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
+    var j = document.getElementById('qty'+row);
+    if (j.disabled == true){
         document.getElementById('f_brg'+row).style.visibility = 'visible';
         document.getElementById('f_brgs'+row).style.visibility = 'visible';
         document.getElementById('icon'+row).className='icon-ok';
-        document.getElementById('brg_ukur'+row).disabled=false;
         document.getElementById('qty'+row).disabled=false;
         document.getElementById('ket'+row).disabled=false;
-        getDetail(row);
-        $('#modalBarang').modal('show');
+        document.getElementById("qty"+row).focus();
         return false;
     }
     else{
-        document.getElementById('kode_brg'+row).disabled=true;
         document.getElementById('f_brg'+row).style.visibility = 'hidden';
         document.getElementById('f_brgs'+row).style.visibility = 'hidden';
         document.getElementById('icon'+row).className='icon-pencil';
-        document.getElementById('brg_ukur'+row).disabled=true;
         document.getElementById('qty'+row).disabled=true;
         document.getElementById('ket'+row).disabled=true;
         return true;
@@ -114,6 +112,39 @@ function deleteRow(row) {
         alert(e);
     }
 }
+
+function validAct(row){
+    //max qty 5
+    var qty = $("#qty"+row).val();
+    if(qty.length == 5){
+        bootstrap_alert.warning("Maximum Qty 5 Angka");
+    }   
+        
+    //disable alfabet di qty
+    var foo = document.getElementById('qty'+row);
+    foo.addEventListener('input', function (prev) {
+        return function (evt) {
+            if (!/^\d{0,6}(?:\.\d{0,2})?$/.test(this.value)) {
+              this.value = prev;
+            }
+            else {
+              prev = this.value;
+            }
+        };
+    }(foo.value), false);
+
+    $('#qty'+row).bind('textchange', function (event){
+        var q = $(this).val();
+        var qty_before = $("#last_qty"+row).val();
+        if(q > qty_before){
+            bootstrap_alert.warning("Qty tidak boleh lebih besar dari Qty di SO");
+            $('#save').attr('disabled',true);
+        } else{
+            $('#save').attr('disabled',false);
+        }
+        });
+}
+
 
 var oTable = $('#tb_detail').dataTable( {
     "sScrollY": "180px",

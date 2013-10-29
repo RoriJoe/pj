@@ -131,7 +131,11 @@ $(function() {
     });
 });
 $(document).ready(function(){
+<<<<<<< HEAD
 $( "#_tgl" ).datepicker( "setDate", new Date());
+=======
+    listBarang();
+>>>>>>> origin/Fix-Wenesday
     listBPB();
     validation();
     barAnimation();
@@ -321,12 +325,13 @@ function listBarang(){
 
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('nama');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('ukuran');
+    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
+    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
+    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
     
     var row = filter;
-
+    
     var arrs = document.getElementsByName('kode_brg[]');
 
     found_flag = false;
@@ -342,9 +347,9 @@ function getBarang(){
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang!</b> Barang sudah ada dalam List');
     } else {
         $('#kode_brg'+row).val(x);
-        $('#nama_brg'+row).val(z);
-        $('#ukuran_brg'+row).val(y);
-    }
+        $('#nama_brg'+row).val(z +" "+p); 
+        $('#harga_brg'+row).val(o); 
+    }  
 }
  function addGudang(){
     $('#modalGudang').modal('hide');

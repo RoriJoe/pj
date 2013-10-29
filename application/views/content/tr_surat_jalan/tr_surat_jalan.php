@@ -83,8 +83,9 @@
         <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
         <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
         <button id="delete" class="btn" type="submit">Delete</button>
-        <button id="cancel" class="btn" type="submit">Cancel</button>
+        <button id="cancel" class="btn" type="reset">Cancel</button>
         <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i></button>
+        <button id="batal" class="btn btn-danger pull-right" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SJ</button>
     </div>
 </div>
 
@@ -117,29 +118,20 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script>
-/*jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
-
 var flag=0;
 
 jQuery(document).ready(function() {
 $( "#_tgl" ).datepicker( "setDate", new Date());
     listSJ();
+    listBarang();
     autogen();
     validation();
     barAnimation();
     $("#po").attr('disabled',true);
     $("#pn").attr('disabled',true);
-    get_mobil_list();
     get_so_list();
-    listBarang();
+    document.getElementById("ambil").checked=true;
+    change();
 });
 
 function addBarang(){
@@ -149,14 +141,20 @@ function addBarang(){
 }
 
 function resetForm(){
+    document.getElementById('save').style.visibility = 'visible';
+    document.getElementById('print').style.visibility = 'visible';
+    document.getElementById('batal').style.visibility = 'hidden';
+    document.getElementById('f_plg').style.visibility = 'visible';
+
     $('#save').attr('mode','add');
     $('#save').attr('disabled',false);
     $('#delete').attr('disabled',true);
     $('#_do').attr('disabled',false);
     $('#pn').attr('disabled',true);
+
     $('#kirim').val(0);
-    document.getElementById('f_plg').style.visibility = 'visible';
     show_so("reset");
+    document.getElementById("ambil").checked=true;
     change();
 }
 
@@ -316,6 +314,7 @@ function getFormSj(IDsj){
     var id = IDsj;
     $.ajax({
         type:'POST',
+        async:false,
         url: "<?php echo base_url();?>index.php/tr_surat_jalan/getSJ",
         data :{id:id},
         dataType: 'json',
@@ -325,7 +324,7 @@ function getFormSj(IDsj){
             $('#gg').val(msg.Gudang);
             $('#pn').val(msg.Perusahaan);
             $('#po').val(msg.Po);
-            $('#kode_p').val(msg.Kode_Plg);
+            $('#kd_plg').val(msg.Kode_Plg);
             $('#_do').val(msg.Do);
             $('#kirim').val(msg.Kirim);
 
@@ -394,14 +393,27 @@ function cek_kirim(){
     var id = $('#sj').val();
     $.ajax({
         type:'POST',
+        async:false,
         url: "<?php echo base_url();?>index.php/tr_surat_jalan/cek_kirim",
         data :{id:id},
         dataType: 'json',
         success:
         function(msg){
             $('#kirim').val(msg.Kirim);
+            if($('#kirim').val() > 0){
+                document.getElementById('batal').style.visibility = 'visible';
+            }
         }
     });
+}
+
+function cek_batal(){
+    var id = $('#_do').val();
+    if(id === "(BATAL)"){
+        document.getElementById('save').style.visibility = 'hidden';
+        document.getElementById('batal').style.visibility = 'hidden';
+        document.getElementById('print').style.visibility = 'hidden';
+    }
 }
 
 $("#cancel").click(function(){
@@ -453,6 +465,7 @@ $("#cancel").click(function(){
         success:
         function(msg)
         {	
+            cek_kirim();
 			var win=window.open('about:blank');
 			with(win.document)
 			{
@@ -461,7 +474,6 @@ $("#cancel").click(function(){
 			  close();
               win.print();
 			}
-            cek_kirim();
             loadDetailSJ();
         }
     });
@@ -621,49 +633,49 @@ $("#delete").click(function(){
      
 });
 
-function getDetail(row){
-    filter = row;
-}
+ $("#batal").click(function(){
+    var sj = $('#sj').val();
+    var so = "(BATAL)";
 
-function deleteRow(row) {
-    try {
-        var i = row.parentNode.parentNode.rowIndex;
-        var table = document.getElementById('tb_detail');
-        var rowCount = table.rows.length;
-        if(rowCount <= 1) {
-            bootstrap_alert.warning('<b>Gagal Menghapus</b> Detail Table Tidak Boleh Kosong');
-        }else{
-           table.deleteRow(i);
-           rowCount--;
-           i--;
+    PlaySound('beep');
+    var id = $('#sj').val();
+    var pr = $('#_tgl').val();
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode SJ: <b>"+id+"</b><br/>Tanggal SJ : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin membatalkan Surat Jalan Berikut?",
+        buttons: {
+            main: {
+                label: "Kembali",
+            },
+            danger: {
+                label: "Batalkan SJ",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/tr_surat_jalan/update3",
+                        data :{sj:sj,so:so},
+
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {    
+                                bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' telah dibatalkan');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                resetForm();
+                                listSJ();
+                                autogen();
+                                loadDetailSJ();
+                            }
+                        }
+                    });
+                }
+            }
         }
-    }catch(e) {
-        alert(e);
-    }
-}
-
-function editRow(row){
-    //$(this).parent().next().find('input[type="text"]').attr('disabled');
-    var i = document.getElementById('kode_brg'+row);
-    if (i.disabled == true){
-        document.getElementById('kode_brg'+row).disabled=false;
-        document.getElementById('f_brg'+row).style.visibility = 'visible';
-        document.getElementById('f_brgs'+row).style.visibility = 'visible';
-        document.getElementById('icon'+row).className='icon-ok';
-        document.getElementById('brg_ukur'+row).disabled=false;
-        document.getElementById('qty'+row).disabled=false;
-        document.getElementById('ket'+row).disabled=false;
-        return false;
-    }
-    else{
-        document.getElementById('kode_brg'+row).disabled=true;
-        document.getElementById('f_brg'+row).style.visibility = 'hidden';
-        document.getElementById('f_brgs'+row).style.visibility = 'hidden';
-        document.getElementById('icon'+row).className='icon-pencil';
-        document.getElementById('brg_ukur'+row).disabled=true;
-        document.getElementById('qty'+row).disabled=true;
-        document.getElementById('ket'+row).disabled=true;
-        return true;
-    }
-}
+    });
+ });    
 </script>

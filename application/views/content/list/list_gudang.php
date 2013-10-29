@@ -23,7 +23,6 @@
 
 <script>
 $('#item_gudang tr').dblclick(function (e) {
-
     $(this).find('td input[type=radio]').prop('checked', true);
     getGudang();
     $('#modalGudang').modal('hide');
@@ -35,7 +34,6 @@ $('input:radio[name="optionsRadios"]').change(function(){
 });
 
 var oTable = $('#tb4').dataTable( {
-    "sScrollY": "240px",
     "sScrollYInner": "110%",
     "bPaginate": true,
     "bLengthChange": true,

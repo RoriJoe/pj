@@ -43,6 +43,7 @@
                 $originalDate = $row->Tgl;
                 $dmy = date("d-m-Y", strtotime($originalDate));
 
+                $final['Kode_Plg'] = $row->Kode_Plg;
                 $final['Perusahaan'] = $row->Perusahaan;
                 $final['Kirim'] = $row->Kirim;
                 $final['Do'] = $row->No_Do;
@@ -51,8 +52,6 @@
                 $final['Mobil'] = $row->No_Mobil;
                 $final['Tgl'] = $dmy;
                 $final['Keterangan'] = $row->Keterangan;
-                $final['Kode_Plg'] = $row->Kode_Plg;
-
             }
             echo json_encode($final);
         }
@@ -77,7 +76,7 @@
                     'No_Mobil'=>$mbl,
                     'Kode_Plg'=>$pn,
                     'Kode_Gudang'=>$gg,
-                    'Kirim'=>$myvar,
+                    'Kirim'=>0,
                     'Keterangan'=>$ket
                 );
             $in = $this->tr_surat_jalan_model->insertSj($data,$sj);
@@ -157,6 +156,18 @@
                 'Keterangan'=>$ktr
             );
 			$this->tr_surat_jalan_model->updateSj_det($datadet,$sj);
+        }
+
+        function update3()
+        {
+            $sj=$this->input->post('sj');
+            $_do=$this->input->post('so');
+
+            $data= array(
+                    'No_Do'=>$_do,
+            );
+            $q = $this->tr_surat_jalan_model->updateBatal($data,$sj);
+            echo $q;
         }
 
         #Delete

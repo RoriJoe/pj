@@ -1,4 +1,4 @@
-<div class="CSSTabel" style="height: 245px;">
+<div class="table table-hover CSSTabel">
 <table id="tb6">
     <thead>
         <th>Kode</th><th>Nama</th><th>Perusahaan</th><th>Alamat</th><th>Select</th>
