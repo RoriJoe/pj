@@ -33,8 +33,6 @@ function loadListBarang(){
     }
     });
 }
-
-loadListBarang();
 </script>
 
 <!--//***MAIN FORM-->
@@ -151,6 +149,7 @@ $(document).ready(function() {
  /*
  * Load Common Function
  */
+    loadListBarang();
     autogen();
     barAnimation();
     validation();

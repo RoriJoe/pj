@@ -175,7 +175,7 @@
                     'Jumlah'=>$arrJumlah,
                     'Keterangan'=>$arrKet
                 );
-                $this->tr_do_model->updateDo_det($datadet,$so);
+            $this->tr_do_model->updateDo_det($datadet,$so);
 			
 			if($in == "ok")
             {

@@ -100,7 +100,7 @@
                 $data['rek']++;
             }
         }
-		
+
 		function delete($so)
         {
             $this->db->where('No_Do',$so);
