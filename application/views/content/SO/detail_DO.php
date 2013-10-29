@@ -9,6 +9,7 @@
         <th width="15%">Keterangan</th>
         <th width="10%">Action</th>
     </thead>
+</table>
 <div class="table CSSTabel" style="overflow-y:scroll;height:192px;">
     <table id="tb_detail">
         <tbody id="itemlist">
