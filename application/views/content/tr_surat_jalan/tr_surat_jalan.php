@@ -117,6 +117,16 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script>
+/*jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind"
+    });
+});
+
 var flag=0;
 
 jQuery(document).ready(function() {

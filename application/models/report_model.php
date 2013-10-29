@@ -71,8 +71,12 @@ class report_model extends CI_Model{
 		}
 	}
 	
-	function print_kartustock($barang1,$barang2){ //Sementara
-		
+	function print_kartustock($barang1,$barang2,$tgl,$tgl2){ //Sementara
+		/* SELECT saw_h.Tgl as Tgl,QtySaw1 as saw,0 as terima,0 as kirim  FROM `saw_h` left outer join saw_d on saw_h.No_Saw=saw_d.No_Saw where saw_d.Kd_Brg = '' and saw_h.Tgl between '' and ''
+union Select Tgl_Bpb,0,bpb_d.Qty1,0 from bpb_h left outer join bpb_d on bpb_h.No_Bpb=bpb_d.No_Bpb where bpb_d.Kode_brg= '' and Tgl_Bpb between '' and''
+union select sj_h.Tgl,0,0,sj_d.Qty1 from sj_h left outer join sj_d on
+sj_h.No_Sj=sj_d.No_Sj where sj_d.Kode_Brg='' and sj_h.Tgl between '' and ''
+order by Tgl,saw */
 		$q = $this->db->query("
 		
 SELECT Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar

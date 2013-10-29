@@ -29,7 +29,7 @@
             <td>
                 <input  type='text' 
                         class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' 
-                        style="width: 80px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
+                        style="width: 80px; margin-right: 20px;" >
             </td>
             <!--<td>Currency</td>
             <td>
@@ -251,6 +251,25 @@ function addGudang(){
     });  
 } 
 
+$(function() {
+    $( "#_tgl1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        setDate: new Date()
+        
+    });
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        setDate: new Date()
+    });
+    
+});
+
 function addSupplier(){
     $('#modalSupplier').modal('hide');
     $.ajax({
@@ -429,22 +448,6 @@ function autogen(){
     });
 }
 
-$(function() {
-    $( "#_tgl1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-    });
-});
 
 //Suggestion Supplier
 function lookup_supplier(){

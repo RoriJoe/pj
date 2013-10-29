@@ -26,6 +26,8 @@
 			<th>Ukuran</th>
 			<th>Qty</th>
 			<th>Satuan</th>
+			<th>Hrg Beli</th>
+			<th>Hrg Jual</th>
 			<th>Keterangan</th>
 			
 		</tr>
@@ -42,6 +44,8 @@
 				<td>$row->Ukuran</td>
 				<td align='right'>$row->Qty1</td>
 				<td>$row->Satuan1</td>
+				<td>$row->Harga_Beli</td>
+				<td>$row->Harga_Jual</td>
 				<td>$row->Nama2</td>
 				
             </tr>";$i++;

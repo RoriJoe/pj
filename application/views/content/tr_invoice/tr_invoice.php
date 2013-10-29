@@ -118,8 +118,17 @@ list_invoice();
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/alert.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+$(function() {
+    $( "#_tgl1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+    });
+});
     //load function here
 $(document).ready(function(){
+$( "#_tgl1" ).datepicker( "setDate", new Date());
     autogen();
     validation_engine();
     detail_SO();
@@ -138,14 +147,7 @@ function autogen(){
     });
 }
 
-$(function() {
-    $( "#_tgl1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
+
 
 function lookup_so(){
 $("#so").autocomplete({

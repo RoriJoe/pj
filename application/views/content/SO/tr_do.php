@@ -56,7 +56,6 @@
         </tr>
     </table>
 </form>
-
     <div id="hasil2" style="height: 238px;"></div>
 
     <div style="float: right; margin-right: 25px;">
@@ -212,6 +211,22 @@ $("#_po").keypress(function(e){
    } 
 });
 
+/*Tampilkan jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        defaultDate: new Date()
+    });
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+    });
+});
 
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
@@ -225,7 +240,6 @@ function listSO(){
     }
     });
 }
-
 function retrieveForm(idSO){
     var id = idSO;
     $.ajax({
@@ -332,22 +346,7 @@ for (i = 0; i< s.options.length; i++)
 return;
 }
 
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
+
 
 //Table Pelanggan
 function listPelanggan(){

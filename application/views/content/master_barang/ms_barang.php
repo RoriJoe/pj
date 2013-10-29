@@ -126,7 +126,7 @@ function loadListBarang(){
             <td colspan="4">
             <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
             <button id="cac" class="btn" type="reset">Cancel</button>
-			<button id="saw" class="btn" type="submit">Saldo Awal</button>
+			<!--<button id="saw" class="btn" type="submit">Saldo Awal</button> -->
             <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Barang"><i class="icon-print"></i></button>
             </td>
         </tr>

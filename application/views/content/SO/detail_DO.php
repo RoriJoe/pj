@@ -9,7 +9,6 @@
         <th width="15%">Keterangan</th>
         <th width="10%">Action</th>
     </thead>
-</table>
 <div class="table CSSTabel" style="overflow-y:scroll;height:192px;">
     <table id="tb_detail">
         <tbody id="itemlist">
@@ -59,6 +58,23 @@
 </div>
 
 <script>
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
 function editRow(row){
     var _mode = $('#save').attr("mode");
     //$(this).parent().next().find('input[type="text"]').attr('disabled');
@@ -274,7 +290,6 @@ function hitungPPN(){
         var h = $(this).val().replace(/\./g, "");
         
         ppn = (h/total)*100;
-
         var dpp = total*1+1*h;
         
         $("#ppn").val(ppn);
