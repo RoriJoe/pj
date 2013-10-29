@@ -130,9 +130,9 @@
 			
 			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
 			$this->load->view('content/print_transaksi_so',$data);
-			//$templateView  = $this->load->view('content/print_transaksi_sj',$data,TRUE);
-			//exportMeAsMPDF($templateView,$data['filename']);
-			//create_pdf($templateView, $data['filename']); //Create pdf     
+			//$templateView  = $this->load->view('content/print_sj',$data,TRUE);
+			
+			//create_pdf($templateView, $data['filename']); //Create pdf        
 		}
 
 		

@@ -16,7 +16,7 @@
 
             <td>Tgl BPB</td>
             <td>
-                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
+                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
             </td>
        </tr>
        <tr>
@@ -121,7 +121,17 @@
 <div id="hasil"></div>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script>
+/*Tampilkan jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind"
+    });
+});
 $(document).ready(function(){
+$( "#_tgl" ).datepicker( "setDate", new Date());
     listBPB();
     validation();
     barAnimation();
@@ -208,15 +218,7 @@ function lookup_gudang(){
     });
 }
 
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
+
 
 function get_po_data(){
     var po = $('#po').val();

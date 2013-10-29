@@ -134,6 +134,11 @@
             $this->template->display('content/tr_invoice/tr_invoice', $data);
         }
 		
+		function tr_terima_bayar()
+        {
+            $data['judul']="Terima Pembayaran";
+            $this->template->display('content/tr_terima_bayar/tr_terima_bayar', $data);
+        }
 		function report_sj(){
 			$data['judul']="Report SJ";
 			$this->template->display('content/report_sj', $data);

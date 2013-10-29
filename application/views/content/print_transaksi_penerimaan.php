@@ -10,8 +10,9 @@
 		border-collapse:collapse;
 	}
 </style>
-<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h2 align="center">LAPORAN PENERIMAAN BARANG</h2>
+<h2 style="margin: 0">PD. PELITA JAYA</h2>
+Pangeran Jaya Karta No.30, Jakarta Pusat
+			<h2 align="center">PENERIMAAN BARANG</h2>
 			<hr/>
 <table>
 	<tr>
@@ -40,7 +41,7 @@
 	</tr>
 	
 </table>
-
+<br/>
 
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>

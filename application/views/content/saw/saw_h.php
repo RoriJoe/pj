@@ -235,6 +235,7 @@ function detailSaw(){
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$( "#_tgl" ).datepicker( "setDate", new Date());
 	addBarang();
     listSaw();
     autogen();
@@ -259,8 +260,9 @@ $("#cancel").click(function(){
     $('#formID').each(function(){
         this.reset();
     });
-	addBarang();sss
-    autogen();
+	autogen();
+	addBarang();
+    
     document.getElementById('add').style.visibility = 'visible';
 });
 
@@ -469,6 +471,7 @@ $("#save").click(function(){
                     $('#formID').each(function(){
                         this.reset();
                     });
+					addBarang();
                     autogen();
                     listSaw();
                     detailSaw();
@@ -545,6 +548,7 @@ $("#delete").click(function(){
                listSaw();
                 detailSaw();
                autogen();
+			   addBarang();
                $('#save').attr('mode','add');
             }
         }

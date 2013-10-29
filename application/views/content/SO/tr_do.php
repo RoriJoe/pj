@@ -22,7 +22,7 @@
        <tr>
             <td>Tanggal SO</td>
             <td>
-                <input type='text' class="" value="<?php echo date('d-m-Y');?>" id='_tgl' name='_tgl' 
+                <input type='text' class=""  id='_tgl' name='_tgl' 
                 style="width: 80px;margin-left: 10px; margin-right: 20px;"/>
             </td>
             <td>Pelanggan</td>
@@ -150,7 +150,24 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script type="text/javascript">
+/*Tampilkan jQuery Tanggal*/
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        defaultDate: new Date()
+    });
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+    });
+});
 jQuery(document).ready(function(){
+$( "#_tgl" ).datepicker( "setDate", new Date());
     listSO();
     tampilDetailSO();
     autogen();
@@ -211,22 +228,7 @@ $("#_po").keypress(function(e){
    } 
 });
 
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
+
 
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){

@@ -31,7 +31,7 @@
         }
         function insert($data,$kode)
         {
-            $rr=$this->db->query("select * from saw_h where No_Saw = '$kode'");
+            $rr=$this->db->query("select * from saw_h where No_Saw = '$kode' LIMIT 1");
             if($rr->num_rows() ==  0)
             {
                 $q=$this->db->insert('saw_h', $data);
@@ -47,6 +47,15 @@
             $this->db->insert('saw_d', $datadet);
             
         }
+		function update_brg($kdbrg,$qty){
+
+			$this->db->set('Qty1', "Qty1 + '$qty'", FALSE);
+			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
+			$where = "Kode = '$kdbrg' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
+		}
         
 
         function update($data, $kode)

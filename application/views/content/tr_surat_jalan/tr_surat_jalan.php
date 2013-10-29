@@ -130,6 +130,7 @@ $(function() {
 var flag=0;
 
 jQuery(document).ready(function() {
+$( "#_tgl" ).datepicker( "setDate", new Date());
     listSJ();
     autogen();
     validation();
@@ -176,15 +177,7 @@ function autogen(){
     });
 }
 
-/*jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
+
 
 function listSJ(){
     $.ajax({

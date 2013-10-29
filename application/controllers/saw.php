@@ -87,6 +87,10 @@
                     );
                     $this->saw_model->insert_det($datadet);
                 }
+				for($i=0;$i<$totalRow;$i++){
+                    $this->saw_model->update_brg($arrKode[$i],$arrQty[$i]);
+                }
+				
             }else if ($modes == "edit"){
                 $data= array(
                     'Tgl'=>$b,

@@ -1,14 +1,16 @@
 <?php
-    class Tr_invoice_model extends CI_Model{
+    class Tr_terima_bayar_model extends CI_Model{
         function __construct(){
             parent::__construct();
         }
 
         function get_list(){
-        	$this->db->select('I.*, B.Perusahaan, B.Alamat1');
-        	$this->db->from('invoice I');
-        	$this->db->join('do_h D', 'D.No_Do = I.Kode_SO');
-        	$this->db->join('pelanggan B', 'B.Kode = D.Kode_Plg', 'left');
+			$this->db->select('t.*');
+        	$this->db->from('terima_bayar t');
+        	//$this->db->join('invoice I', 'I.Kode = t.Invoice');
+        	//$this->db->join('pelanggan B', 'B.Kode = D.Kode_Plg', 'left');
+			
+        	
         	$query = $this->db->get();
 
         	return $query->result();
@@ -50,11 +52,5 @@
             $this->db->where('Kode',$id);
             $this->db->delete('invoice');
             return "ok";
-        }
-		
-		function find($keyword){
-            $this->db->like('Kode',$keyword,'after');
-            $query=$this->db->get('invoice');
-            return $query->result_array();
         }
     }

@@ -77,7 +77,16 @@
         {
             $this->db->insert('po_d', $datadet);
         }
-        
+        //update stok jual
+		function update_brg($kdbrg,$qty){
+			
+			$this->db->set('Qty1', "Qty1 + '$qty'", FALSE);
+			$where = "Kode = '$kdbrg' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
+
+		}
         
         function updatePo($data, $po)
         {

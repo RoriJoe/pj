@@ -110,6 +110,10 @@
                 );
                 $this->tr_do_model->insertDo_det($datadet,$so);
             }
+			//update stok jual
+			for($i=0;$i<$totalRow;$i++){
+                $this->tr_do_model->update_brg($arrKode[$i],$arrQty[$i]);
+            }
 			
 			if($in == "ok")
             {

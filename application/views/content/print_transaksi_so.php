@@ -7,8 +7,9 @@
 		border-collapse:collapse;
 	}
 </style>
-<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h2 align="center">LAPORAN SALES ORDER</h2><hr/>
+<h2 style="margin: 0">PD. PELITA JAYA</h2>
+Pangeran Jaya Karta No.30, Jakarta Pusat
+			<h2 align="center">SALES ORDER</h2><hr/>
 <table>
 	<tr>
 		<td colspan=4>
@@ -37,8 +38,7 @@
 	</tr>
 	
 </table>
-
-
+<br/>
 <table class="table bod" width="100%" style="font-size: 11px; border: 1px solid #000;">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -68,6 +68,8 @@
         }  ?>
 	</tbody>
 </table>
+<br/>
+<br/>
 <table>
 	<tr>
 			<td>Total : <?php echo $to; ?></td>

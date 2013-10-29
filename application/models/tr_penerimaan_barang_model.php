@@ -51,6 +51,16 @@
             $this->db->insert('bpb_d', $datadet);
             
         }
+		//buat update stok fisik
+		function update_brg($kdbrg,$qty){
+			
+			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
+			$where = "Kode = '$kdbrg' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
+
+		}
 		
 
 		function update($data, $kode)

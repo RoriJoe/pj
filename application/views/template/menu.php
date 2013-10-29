@@ -48,7 +48,7 @@
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Keuangan</a>
                         <ul>
                             <li><a class = "ajax" href="tr_invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoice</a></li>
-                            <li class="menu-border-bottom"><a class = "ajax">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terima Pembayaran</a></li>
+                            <li class="menu-border-bottom"><a class = "ajax" href="tr_terima_bayar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terima Pembayaran</a></li>
                         </ul>
                     </li>
                     <li><a class = ""><i class="icon-chevron-right"></i>&nbsp;Akuntansi</a>

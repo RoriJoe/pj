@@ -61,6 +61,17 @@
         {
             $this->db->insert('do_d', $datadet);
         }
+		
+		//update stok jual
+		function update_brg($kdbrg,$qty){
+			
+			$this->db->set('Qty1', "Qty1 - '$qty'", FALSE);
+			$where = "Kode = '$kdbrg' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
+
+		}
 
         function updateTerm($term,$pl){
             $this->db->where('Kode',$pl);

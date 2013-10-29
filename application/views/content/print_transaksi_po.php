@@ -10,8 +10,9 @@
 		border-collapse:collapse;
 	}
 </style>
-<h1 style="margin: 0">PD. PELITA JAYA</h1>
-			<h2 align="center">LAPORAN PEMBELIAN/PO</h2><hr/>
+<h2 style="margin: 0">PD. PELITA JAYA</h2>
+Pangeran Jaya Karta No.30, Jakarta Pusat
+			<h2 align="center">PEMBELIAN/PO</h2><hr/>
 <table>
 	<tr>
 		<td colspan=4>
@@ -45,7 +46,7 @@
 		<td><?php echo $kd_sup; ?></td>
 	</tr>
 </table>
-
+<br/>
 <table class="table bod" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5;">
@@ -75,6 +76,7 @@
         }  ?>
 	</tbody>
 </table>
+<br/>
 <table class="bod" style="margin-top:10px;">
 	<tr>
 		<td>DPP : <?php echo $dpp; ?></td>

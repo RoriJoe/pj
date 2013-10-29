@@ -29,7 +29,7 @@
             <td>
                 <input  type='text' 
                         id='_tgl1' name='_tgl1' 
-                        style="width: 80px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
+                        style="width: 80px; margin-right: 20px;" >
             </td>
             <!--<td>Currency</td>
             <td>
@@ -230,7 +230,48 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+function autogen(){
+    $('#add').attr('mode','new');
+    $('#add').attr('disabled', false);
+
+    $('#delete').attr('disabled', true);
+    $("#po").attr('disabled',false);
+    $("#total").val("");
+    $("#dpp").val("");
+    $("#ppn").val("");
+    $("#ppnT").val("");
+    
+    
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_po/auto_gen",
+    data :{},
+    success:
+        function(hh){
+            $('#po').val(hh);
+        }
+    });
+}
+$(function() {
+    $( "#_tgl1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        setDate: new Date()
+        
+    });
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        setDate: new Date()
+    });
+    
+});
 $(document).ready(function() {
+$( "#_tgl1" ).datepicker( "setDate", new Date());
 	listPO();
     autogen();
     validation()
@@ -251,24 +292,7 @@ function addGudang(){
     });  
 } 
 
-$(function() {
-    $( "#_tgl1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-        
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-    });
-    
-});
+
 
 function addSupplier(){
     $('#modalSupplier').modal('hide');
@@ -425,28 +449,6 @@ function cek_kirim(){
 	     });
 }); 
 
-function autogen(){
-    $('#add').attr('mode','new');
-    $('#add').attr('disabled', false);
-
-    $('#delete').attr('disabled', true);
-    $("#po").attr('disabled',false);
-    $("#total").val("");
-    $("#dpp").val("");
-    $("#ppn").val("");
-    $("#ppnT").val("");
-    
-    
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_po/auto_gen",
-    data :{},
-    success:
-        function(hh){
-            $('#po').val(hh);
-        }
-    });
-}
 
 
 //Suggestion Supplier

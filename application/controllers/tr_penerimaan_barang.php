@@ -76,6 +76,9 @@
                 );
                 $this->tr_penerimaan_barang_model->insert_det($datadet);
             }
+			for($i=0;$i<$totalRow;$i++){
+                $this->tr_penerimaan_barang_model->update_brg($arrKode[$i],$arrQty[$i]);
+            }
 			
 			if($in == "ok")
             {

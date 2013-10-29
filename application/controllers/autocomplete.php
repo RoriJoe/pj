@@ -13,6 +13,25 @@ class Autocomplete extends CI_Controller{
         $this->load->helper('form');
     }
 	
+	function lookup_invoice(){
+        $this->load->model('tr_invoice_model');
+        $keyword=$this->input->post('term');
+        $data['response']='false';
+        $query=$this->tr_invoice_model->find($keyword);
+        
+        if(!empty($query)){
+            $data['response']='true';
+            $data['message']=array();
+            foreach($query as $row){
+                $data['message'][]=array(
+                'id'=>$row['Kode'],
+                'value'=>$row['Kode']
+                );
+            }
+        }
+        echo json_encode($data);
+    }
+	
     function lookup(){
         $this->load->model('tr_do_model');
         $keyword=$this->input->post('term');
