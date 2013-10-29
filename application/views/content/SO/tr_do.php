@@ -14,7 +14,7 @@
             
             <td>Nomor PO</td>
             <td>
-                <input type='text' class="span-form75 validate[maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
+                <input type='text' class="span-form75 validate[custom[onlyLetterNumber]]" 
                 maxlength="20" id='_po' name='_po'> <input type='text' class="validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2' 
                 style="width: 80px;margin-right: 20px;"/>
             </td>
