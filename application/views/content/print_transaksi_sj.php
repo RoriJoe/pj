@@ -51,7 +51,6 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		<tr style="background: #C5C5C5;">
 			<th>Kode</th>
 			<th>Barang & Ukuran</th>
-			<th>Barang SJ</th>
 			<th>Qty</th>
 			<th>Keterangan</th>
 		</tr>
@@ -61,12 +60,9 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
         
             echo
             "<tr>
-                
 				<td>$kd_brg[$i]</td>
-				<td>$nama[$i]</td>
 				<td>$nbu[$i]</td>
 				<td align='right'>$qty[$i]</td>
-				
 				<td>$ktr[$i]</td>
             </tr>";
         } ?>

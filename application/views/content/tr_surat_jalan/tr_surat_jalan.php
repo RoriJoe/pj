@@ -413,6 +413,10 @@ function cek_batal(){
         document.getElementById('save').style.visibility = 'hidden';
         document.getElementById('batal').style.visibility = 'hidden';
         document.getElementById('print').style.visibility = 'hidden';
+    }else{
+        document.getElementById('batal').style.visibility = 'visible';
+        document.getElementById('save').style.visibility = 'visible';
+        document.getElementById('print').style.visibility = 'visible';
     }
 }
 
@@ -450,7 +454,7 @@ $("#cancel").click(function(){
     for(var i=1;i<=totaltx;i++){
         kd_brg[i-1] = $('#kode_brg'+i).val();
         nama[i-1] = $('#brg_ukur'+i).val();
-        nbu[i-1] = $('#nbu'+i).text();
+        nbu[i-1] = $('#nbu'+i).val();
         qty[i-1] = $('#qty'+i).val();
         ktr[i-1] = $('#ket'+i).val();
     }
