@@ -162,6 +162,7 @@
         {
             $sj=$this->input->post('sj');
             $_do=$this->input->post('so');
+
 			$kd_brg=$this->input->post('kd_brg');
 			/*  $qty=$this->input->post('qty');
 			 $totaltx=$this->input->post('totaltx');
