@@ -88,6 +88,7 @@
             $data['po']=$this->input->post('po');
             $data['mbl']=$this->input->post('mbl');
             $data['ket']=$this->input->post('ket');
+			$data['count']=$this->input->post('count');
 			
 			$data['kd_brg']=$this->input->post('kd_brg');
             $data['nama']=$this->input->post('nama');

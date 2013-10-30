@@ -14,6 +14,7 @@
     $i=1;
     foreach($hasil as $row)
     {
+	
        echo "<tr>
         <td>
             <div class='input-append' style='margin-bottom:0;'>

@@ -217,10 +217,11 @@ function listBarang(){
 
 //GET POPUP Barang
 function getBarang(){
+var y = "";
     var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    y = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
     var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
-    
+    alert(y);
     var row = filter;
 
     var arrs = document.getElementsByName('kode_brg[]');
@@ -238,7 +239,7 @@ function getBarang(){
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada dalam list');
     } else {
         $('#kode_brg'+row).val(x);
-        $('#brg_ukur'+row).val(z+" "+y);  
+        $('#brg_ukur'+row).val(z+' '+y);  
     }
 }
 //GET PopUp Pelanggan

@@ -12,7 +12,8 @@
 </style>
 <h2 style="margin: 0">PD. PELITA JAYA</h2>
 Pangeran Jaya Karta No.30, Jakarta Pusat
-			<h2 align="center">SURAT JALAN</h2><hr/>
+			<h2 align="center">SURAT JALAN </h2>
+			<h3>Reprint <?php echo $count;?></h3><hr/>
 <table>
 	<tr>
 		<td colspan=2>

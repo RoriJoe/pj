@@ -12,6 +12,7 @@
     foreach($hasil as $row)
     {
         if($row->Qty1 > 0){
+		
             echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Nama $row->Ukuran</td>
