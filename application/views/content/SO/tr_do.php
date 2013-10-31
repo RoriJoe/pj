@@ -114,7 +114,7 @@
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Pelanggan</h3>
+    <h3 id="myModalLabel">List Pelanggan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_pelanggan"></div>
@@ -127,10 +127,10 @@
 <div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
+    <h3 id="myModalLabel">List Barang <input type="text" id="SearchBarang" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
-    <div id="list_barang"></div>
+        <div id="list_barang"></div>
   </div>
 </div>
 
@@ -142,9 +142,14 @@
   <div class="modal-body">
     <div id="add_pelanggan"></div>
   </div>
+  <div class="modal-footer">
+    <button id="savePelanggan" class="btn btn-primary" mode="add">Save</button>
+    <button id="cencelPelanggan" class="btn" type="reset">Cancel</button>
+  </div>
 </div>
 
 <div id="hasil"></div>
+<div id="list_barang"></div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/accounting.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
@@ -367,13 +372,13 @@ function listPelanggan(){
 //Table Barang
 function listBarang(){
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
-    data :{},
-    success:
-    function(hh){
-        $('#list_barang').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+        data :{},
+        success:
+        function(hh){
+            $('#list_barang').html(hh);
+        }
     });   
 }
 
@@ -404,19 +409,17 @@ function getPelanggan(){
 }
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    /*var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
     var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
     var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
-    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');*/
     
     var row = filter;
-    
     var arrs = document.getElementsByName('kode_brgd');
-
     found_flag = false;
     for (i = 0; i < arrs.length; i++) {
-        if (arrs[i].value === x) {
+        if (arrs[i].value === id) {
             found_flag = true;
             break;
         }
@@ -426,10 +429,19 @@ function getBarang(){
     {
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
-        $('#kode_brg'+row).val(x);
-        $('#satuan_brg'+row).val(y); 
-        $('#nama_brg'+row).val(z +" "+p); 
-        $('#harga_brg'+row).val(o); 
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
+            data :{id:id},
+            dataType: 'json',
+            success:
+            function(msg){
+                $('#kode_brg'+row).val(id);
+                $('#satuan_brg'+row).val(msg.Satuan); 
+                $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
+                $('#harga_brg'+row).val(msg.Harga); 
+            }
+        }); 
     }  
 }
 

@@ -32,6 +32,20 @@
             $this->load->view("content/list/list_barang_full",$data);
         }
 
+        function getSelectedRadio(){
+            $id=$this->input->post('id');
+            $query = $this->ms_barang_model->get_selected($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Nama'] = $row->Nama;
+                $final['Ukuran'] = $row->Ukuran;
+                $final['Satuan'] = $row->Satuan1;  
+                $final['Harga'] = $row->Harga_Jual;          
+            }
+            echo json_encode($final);
+        }
+
 		
 		//Saldo Awal
 		function viewSaldoAwal(){

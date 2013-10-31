@@ -122,9 +122,6 @@ $(".delete").click(function(){
 
 var oTable = $('#tb1').dataTable( {
     "sScrollY": "380px",
-    "sScrollYInner": "110%",
-    "sScrollX": "100%", //panjang width
-    "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
     "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],

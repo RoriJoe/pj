@@ -10,19 +10,11 @@
     <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>  
         <!--Drop Menu-->
     <script type='text/javascript' src='<?php echo base_url();?>assets/js/jquery.dcjqaccordion.js'></script>
-        <!--JS Sorting-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/jquery.dataTables.min.js"></script>
-    <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/FixedColumns.js"></script>-->
-    <!--JS VALIDATION-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine-id.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine.js" ></script>
-    <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquerypopupwindow.js"></script>-->
 
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/validation/validationEngine.jquery.css"/>
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/validation/template.css"/>
     <!--REQUIRED-->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.textchange.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
 
     <!--Initialize Drop Menu-->
     <script type="text/javascript">
@@ -35,18 +27,7 @@
             showCount: false,
             speed: 'fast'
         });
-    });
 
-    function PlaySound(soundObj) {
-        var sound = document.getElementById(soundObj);
-        if (sound)
-            sound.play();
-    }
-    </script>
-
-
-    <script>
-    $(document).ready(function(){
         $('.ajax').click(function(e){
             e.preventDefault();
             $.get($(this).attr('href'),function(Res){
@@ -54,6 +35,7 @@
             });
         })
 
+        //INITILIZE LOADING GIF ON AJAX CALL
         $('#loadingDiv')
         .hide()  // hide it initially
         .ajaxStart(function() {
@@ -63,6 +45,12 @@
             $(this).hide();
         });
     });
+
+    function PlaySound(soundObj) {
+        var sound = document.getElementById(soundObj);
+        if (sound)
+            sound.play();
+    }
     </script>
 
     <!--CSS AREA-->
@@ -113,5 +101,13 @@
     </div>
 </div>
 <audio src="<?php echo base_url();?>assets/alert.mp3"  id="beep" />
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.textchange.min.js"></script>
+<!--JS Sorting-->
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+<!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/datatable/FixedColumns.js"></script>-->
+<!--JS VALIDATION-->
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine-id.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/validation/jquery.validationEngine.js" ></script>
+<!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquerypopupwindow.js"></script>-->
 </body>
 </html>

@@ -47,6 +47,16 @@ group by gudang.Kode
             return $q->result();
         }
 
+        function get_selected($id)
+        {
+            $q = $this->db->query("
+            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual
+            FROM barang
+            WHERE Kode = '$id' LIMIT 1
+            ");
+            return $q->result();
+        }
+
         function check($data){
             $this->db->select('*');
             $this->db->not_like($data);
