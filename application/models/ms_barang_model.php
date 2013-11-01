@@ -40,17 +40,24 @@ group by gudang.Kode
         //Get Table Detail Data
         function get_paged_list()
         {
+            $q = $this->db->query(" SELECT Kode, Ukuran, Nama
+                                    FROM barang");
+            return $q->result();
+        }
+
+        //Get Table Detail Data
+        function get_paged_listPop()
+        {
             $q = $this->db->query("
-            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual
-            FROM barang
-            ");
+            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual 
+            FROM barang");
             return $q->result();
         }
 
         function get_selected($id)
         {
             $q = $this->db->query("
-            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual
+            SELECT Kode, Ukuran, Nama, Nama2, Satuan1, Qty1, Harga_Beli, Harga_Jual,Tgl_Saw
             FROM barang
             WHERE Kode = '$id' LIMIT 1
             ");
@@ -87,7 +94,7 @@ group by gudang.Kode
         //model untuk get data update     
         function getUpdate($id)
         {
-            $this->db->where($this->primary_key,$id);
+            $this->db->where($this->primary_key,$id);            
             $q=$this->db->get($this->table_name);
             return $q->result();
         }
@@ -96,6 +103,7 @@ group by gudang.Kode
         function update($data, $id)
         {
             $this->db->where($this->primary_key,$id);
+            $this->db->limit(1);
             $this->db->update($this->table_name, $data);
             return "ok";
         }
@@ -103,6 +111,7 @@ group by gudang.Kode
         function delete($id)
         {
             $this->db->where($this->primary_key,$id);
+            $this->db->limit(1);
             $this->db->delete($this->table_name);
             return "ok";
         }

@@ -19,9 +19,35 @@
         #POPUP Show Product
         function viewBarang(){
             //$nama = $this->input->post('k');
-            $data['hasil'] = $this->ms_barang_model->get_paged_list();
+            $data['hasil'] = $this->ms_barang_model->get_paged_listPop();
             //$data['nama']=$nama;
             $this->load->view("content/list/list_barang",$data);
+        }
+
+        function retrieveForm(){
+            $id=$this->input->post('id');
+            $query = $this->ms_barang_model->get_selected($id);
+            foreach($query as $row)
+            {
+                $originalDate = $row->Tgl_Saw;
+                $date = date("d-m-Y", strtotime($originalDate));
+                $dateFormat = '';
+                if ($originalDate != null){
+                    $dateFormat = $date;
+                }else{
+                    $dateFormat = '';   
+                }
+
+                $final['Tgl'] = $dateFormat;
+                $final['Ukuran'] = $row->Ukuran;
+                $final['Nama'] = $row->Nama;
+                $final['Keterangan'] = $row->Nama2;
+                $final['Persediaan'] = $row->Qty1;
+                $final['Satuan'] = $row->Satuan1;
+                $final['Beli'] = number_format($row->Harga_Beli,0,",",".");
+                $final['Jual'] = number_format($row->Harga_Jual,0,",",".");         
+            }
+            echo json_encode($final);
         }
 
         #POPUP Show Product

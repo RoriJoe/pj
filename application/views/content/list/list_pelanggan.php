@@ -3,8 +3,7 @@
     <thead>
         <th width="15%">Kode</th>
         <th width="40%">Perusahaan</th>
-        <th width="20%">CP</th>
-        <th width="20%">Alamat</th>
+        <th width="40%">Contact Person</th>
         <th width="5%">Select</th>
     </thead>
     <tbody id="item_plg tb_detail">
@@ -15,7 +14,6 @@
         <td>$row->Kode</td>
         <td>$row->Perusahaan</td>
         <td>$row->Nama</td>
-        <td>$row->Alamat1</td>
         <td><input type='radio' name='optionsRadios' kd='$row->Kode' nama='$row->Perusahaan' term='$row->Lama' alamat='$row->Alamat1' value='$row->Perusahaan'></td>
         </tr>
         ";

@@ -9,7 +9,7 @@
         <tr>
             <td>Kode Satuan</td>
             <td>
-                <input type='text' class="span-form75 validate[required,maxSize[10],custom[onlyLetterNumber]]" maxlength="10" 
+                <input type='text' class="span-form75 validate[required,maxSize[10]]" maxlength="10" 
                 id='kd' name='kd'>
             </td>         
         </tr>

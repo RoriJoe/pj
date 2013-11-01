@@ -17,7 +17,9 @@
         $i=1;
         foreach($hasil as $row)
         {
-            $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);  	
+            $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);  
+            $harga_satuan = number_format($row->Harga, 0, ',', '.');
+            $jumlah_nilai = number_format($row->Jumlah, 0, ',', '.');
             echo "<tr>
             <td width='15%'>
                 <div class='input-append'>
@@ -35,10 +37,10 @@
                 <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:35px;text-align:right;' value='$row->Qty' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$row->Harga' disabled='true'/>
+                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$harga_satuan' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$row->Jumlah' disabled='true'/>
+                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
             </td>
             <td width='15%'>
                 <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:88px' value='$row->Keterangan' disabled='true'/>

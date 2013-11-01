@@ -1,39 +1,3 @@
-<script>
-function AddDot(Num){
-		Num += '';
-		Num = Num.replace(/\./g, '');
-		
-		x=Num.split('.');
-		x1=x[0];
-		x2=x.length >1 ?',' + x[1] : '';
-		var rgx =/(\d+)(\d{3})/;
-		while (rgx.test(x1))
-		{
-		x1=x1.replace(rgx,'$1'+'.'+'$2');
-		}
-		return x1+x2;
-	}
-	
-	function ubah(a){
-		var harga = a;
-		harga = AddDot(harga);
-		return harga;
-		//document.getElementById("qty").value=harga;
-	}
-//load Side Table
-function loadListBarang(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
-    });
-}
-</script>
-
 <!--//***MAIN FORM-->
 <div class="bar bar2">
     <p>Form Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
@@ -142,20 +106,30 @@ function loadListBarang(){
 <script>  
     $("#tes").popover({ title: 'Tambah Satuan'});
 </script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>  
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script> 
+
 <script type="text/javascript">
 $(document).ready(function() {
- /*
- * Load Common Function
- */
     loadListBarang();
     autogen();
     barAnimation();
     validation();
     key();
 });
-/*----------------------*/
-//Auto Generate
+
+//load Side Table
+function loadListBarang(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_barang/index",
+    data :{},
+    success:
+    function(hh){
+        $('#hasil').html(hh);
+    }
+    });
+}
+
 function autogen(){
     $("#_kd").attr('disabled',false);
     $('#save').attr('mode','add');
@@ -172,19 +146,16 @@ function autogen(){
     });
 }
 
-/*
- * Click Respon
- */
  $("#saw").click(function(){
-		$.ajax({
-			type:'POST',
-			url: "<?php echo base_url();?>index.php/ms_barang/viewSaldoAwal",
-			data :{},
-			success:
-			function(hh){
-				$('#hasilsaw').html(hh);
-			}
-		});
+	$.ajax({
+		type:'POST',
+		url: "<?php echo base_url();?>index.php/ms_barang/viewSaldoAwal",
+		data :{},
+		success:
+		function(hh){
+			$('#hasilsaw').html(hh);
+		}
+	});
 });
  
 $("#cac").click(function(){
@@ -232,17 +203,25 @@ function formatAngka(objek, separator) {
   objek.value = c;
 }
 
-function conv(input){
-    var nStr = input.value + '';
-    nStr = nStr.replace( /\,/g, "");
-    x = nStr.split( '.' );
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while ( rgx.test(x1) ) {
-        x1 = x1.replace( rgx, '$1' + ',' + '$2' );
-    }
-    input.value = x1 + x2;
+function retrieveForm(myID){
+    var id = myID;
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/retrieveForm",
+        data :{id:id},
+        dataType: 'json',
+        success:
+        function(msg){
+            $('#_nama1').val(msg.Nama);
+            $('#_uk').val(msg.Ukuran);
+            $('#_ket').val(msg.Keterangan);
+            $('#_ps').val(msg.Persediaan);
+            $('#hb').val(msg.Beli);
+            $('#hj').val(msg.Jual);
+
+            setSelectedIndex(document.getElementById("_st"),msg.Satuan);
+        }
+    }); 
 }
 
 //buat print
@@ -297,7 +276,7 @@ $("#save").click(function(){
 			{
 				if(msg == "ok")
 				{
-					bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
+					bootstrap_alert.success('<b>Sukses</b> Data Barang <b>'+_kd+'-'+_nama1+'</b> sudah ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -342,7 +321,7 @@ $("#save").click(function(){
             function(msg){
                 if(msg=="ok")
                 {
-                        bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
+                        bootstrap_alert.success('<b>Sukses</b> Update Barang <b>'+_kd+'-'+_nama1+'</b> berhasil dilakukan');
                         $('#formID').each(function(){
                                 this.reset();
                         });
@@ -367,6 +346,46 @@ $("#save").click(function(){
         }
         return false;
 	}
+});
+
+$(".delete").click(function(){
+    PlaySound('beep');
+    var id = $(this).attr("kode");
+    var pr = $(this).attr("nama");
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode: <b>"+id+"</b><br/>Nama Barang : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/ms_barang/delete",
+                        data :{id:id},
+                        success: function(msg){
+                            if(msg=="gagal"){
+                                bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
+                            }
+                            else{
+                                bootstrap_alert.success('<b>Sukses!</b> Data '+ pr +' telah dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                autogen();
+                                loadListBarang();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
 });
 
 function setSelectedIndex(s, valsearch)
@@ -425,5 +444,28 @@ function addCombo() {
 	}else{
         
     }
+}
+
+//NOT USE
+function AddDot(Num){
+    Num += '';
+    Num = Num.replace(/\./g, '');
+    
+    x=Num.split('.');
+    x1=x[0];
+    x2=x.length >1 ?',' + x[1] : '';
+    var rgx =/(\d+)(\d{3})/;
+    while (rgx.test(x1))
+    {
+    x1=x1.replace(rgx,'$1'+'.'+'$2');
+    }
+    return x1+x2;
+}
+    
+function ubah(a){
+    var harga = a;
+    harga = AddDot(harga);
+    return harga;
+    //document.getElementById("qty").value=harga;
 }
 </script>
