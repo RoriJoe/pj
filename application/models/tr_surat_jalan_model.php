@@ -159,11 +159,32 @@
             return $query->result();
         }
 
+        function get_list2()
+        {
+            $query = $this->db->query("
+                SELECT A.Kode, A.Perusahaan, A.Nama, A.Alamat1, A.Lama
+                FROM pelanggan A
+                WHERE A.Kode IN (SELECT Kode_Plg FROM sj_h)
+                ");
+
+            return $query->result();
+        }
+
         function get_so_list($id){
             $query = $this->db->query("
                 SELECT A.No_Do
                 FROM do_h A
                 WHERE A.Kode_Plg = '$id' AND A.No_Do NOT IN (SELECT No_Do FROM sj_h)
+                ");
+
+            return $query->result();
+        }
+
+        function get_sj_list($id){
+            $query = $this->db->query("
+                SELECT A.No_Sj
+                FROM sj_h A
+                WHERE A.Kode_Plg = '$id' AND A.No_Sj NOT IN (SELECT Kode_SJ FROM invoice)
                 ");
 
             return $query->result();

@@ -31,35 +31,6 @@
                         id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>"
                         style="width: 80px; margin-right: 20px;" >
             </td>
-            <!--<td>Currency</td>
-            <td>
-                <select name="cur" class="validate[required]" id="cur">
-                    <?php
-                    foreach ($list_currency as $isi)
-                    {
-                        echo "<option ";
-                        echo "value = '".$isi->value."'>".$isi->value."</option>";
-                    }
-                    ?>
-                </select>
-
-                <button type="button" id="tes" class="btn btn-mini" 
-                        data-toggle="button"
-                        data-html="true" data-placement="bottom"
-                        rel="popover"
-                        style="margin-bottom:3px;"
-                        data-content="
-                        <div>
-                         <input  type='text' 
-                            class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
-                            style='width: 90px;margin-left: 10px;'
-                            />
-                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
-                        </div>
-                        
-                        "
-                        ><i class='icon-plus'></i></button>
-            </td>-->
        </tr>
        <tr>
             <td>Tanggal Kirim</td>
@@ -120,7 +91,7 @@
     <hr style="margin: 0;"/>
 </form>
 <div id="hasil2" style="height: 200px;"></div>
-<div style="float: right;margin-right: -40px;">
+<div style="float: right;margin-right: -20px;">
     <table>
         <tr>
             <td width="50px">
@@ -194,7 +165,7 @@
 <div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
+    <h3 id="myModalLabel">List Barang <input type="text" id="SearchBarang" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_barang"></div>
@@ -209,6 +180,10 @@
   <div class="modal-body">
     <div id="add_gudang"></div>
   </div>
+    <div class="modal-footer">
+        <button id="saveGudang" class="btn btn-primary" mode="add">Save</button>
+        <button id="cacGudang" class="btn" type="reset">Cancel</button>
+    </div>
 </div>
 
 <div id="modalNewSupplier" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -219,6 +194,10 @@
   <div class="modal-body">
     <div id="add_supplier"></div>
   </div>
+    <div class="modal-footer">
+        <button id="saveSupplier" class="btn btn-primary" mode="add">Save</button>
+        <button id="cacSupplier" class="btn" type="reset">Cancel</button>
+    </div>
 </div>
 
 <!--@Load table List via AJAX-->
@@ -244,6 +223,7 @@ function autogen(){
     $('#add').attr('disabled', false);
     $('#delete').attr('disabled', true);
     $("#po").attr('disabled',false);
+    $('#save').attr('disabled',false);
     $("#total").val("");
     $("#dpp").val("");
     $("#ppn").val("");
@@ -292,8 +272,6 @@ function addGudang(){
     }
     });  
 } 
-
-
 
 function addSupplier(){
     $('#modalSupplier').modal('hide');
@@ -585,19 +563,14 @@ function getGudang(){
 }
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
-    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
-    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
-    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
     var row = filter;
     var array = [];
-
     var arrs = document.getElementsByName('kode_brgd');
 
     found_flag = false;
     for (i = 0; i < arrs.length; i++) {
-        if (arrs[i].value === x) {
+        if (arrs[i].value === id) {
             found_flag = true;
             break;
         }
@@ -607,11 +580,20 @@ function getBarang(){
     {
         bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
-        $('#kode_brg'+row).val(x);
-        $('#keterangan_brg'+row).val(z +" "+p);
-        $('#satuan_brg'+row).val(y);
-        $('#harga_brg'+row).val(o); 
-    }
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
+            data :{id:id},
+            dataType: 'json',
+            success:
+            function(msg){
+                $('#kode_brg'+row).val(id);
+                $('#satuan_brg'+row).val(msg.Satuan); 
+                $('#keterangan_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
+                $('#harga_brg'+row).val(msg.Harga); 
+            }
+        }); 
+    }  
 }
     
 //Radion Button response

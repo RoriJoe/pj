@@ -28,6 +28,7 @@ $('#tb_detail tr').click(function (e) {
         //$('#add').attr('mode','edit');
         $("#po").attr('disabled',true);
         $('#save').attr('mode','edit');
+        $('#save').attr('disabled',false);
         $('#delete').attr('disabled', false);
         $('#cancel').attr('disabled',false);
         $('#add').attr('disabled',true);

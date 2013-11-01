@@ -28,9 +28,16 @@
                 $dmy1 = date("d-m-Y", strtotime($originalDate1));
                 $originalDate2 = $row->Tgl_Po;
                 $dmy2 = date("d-m-Y", strtotime($originalDate2));
+                $tgl2 = '';
+                if ($originalDate2 != null){
+                    $tgl2 = $dmy2;
+                }else{
+                    $tgl2 = '';   
+                }
+                
 
                 $final['Tgl'] = $dmy1;
-                $final['Tgl_Po'] = $dmy2;
+                $final['Tgl_Po'] = $tgl2;
                 $final['Po'] = $row->No_Po;
                 $final['Nama_Plg'] = $row->Perusahaan;
                 $final['Kode_Plg'] = $row->Kode_Plg;
@@ -56,6 +63,12 @@
 			$tglSo = date('Y-m-d', strtotime($this->input->post('tglSo')));
 			$po = $this->input->post('po');
 			$tglPo = date('Y-m-d', strtotime($this->input->post('tglPo')));
+            $tgl2 = '';
+            if ($tglPo != null){
+                $tgl2 = $tglPo;
+            }else{
+                $tgl2 = '';
+            }
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
 			$to = $this->input->post('to');
@@ -73,7 +86,7 @@
 				'No_Do'=>$so,
 				'Tgl'=>$tglSo,
 				'No_Po'=>$po,
-				'Tgl_Po'=>$tglPo,
+				'Tgl_Po'=>$tgl2,
 				'Kode_Plg'=>$pl,
 				'Kode_Gudang'=>$temp,
 				'Kirim'=>$myvar,
@@ -132,6 +145,7 @@
 			$tglSo = date('Y-m-d', strtotime($this->input->post('tglSo')));
 			$po = $this->input->post('po');
 			$tglPo = date('Y-m-d', strtotime($this->input->post('tglPo')));
+
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
 			$to = $this->input->post('to');
@@ -143,6 +157,13 @@
 			//$total = $this->input->post('total');
 			$temp=8;
             $myvar  = empty($myvar) ? NULL : $myvar;
+
+            $tgl2 = '';
+            if ($tglPo != null){
+                $tgl2 = $tglPo;
+            }else{
+                $tgl2 = '';
+            }
 
             //ADD TO ARRAY FOR SEND TO MODEL
             $data= array(				

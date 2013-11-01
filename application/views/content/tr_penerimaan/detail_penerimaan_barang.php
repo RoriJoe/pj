@@ -1,8 +1,8 @@
 <div class=" table CSSTabel">
 <table>
     <thead>
-        <th width="30%">Kode Brg</th>
-        <th width="30%">Nama Brg</th>
+        <th width="20%">Kode Brg</th>
+        <th width="40%">Nama Brg</th>
         <th width="10%">Qty</th>
         <th width="20%">Keterangan</th>
         <th width="10%">Action</th>
@@ -16,13 +16,13 @@
         foreach($hasil as $row)
         {
             echo "<tr>
-            <td width='30%'>
+            <td width='20%'>
                 <div class='input-append' style='margin-bottom:0;'>
                     <input type='text' class='span2' 
                     id='kode_brg$i' id='appendedInputButton' name='kode_brg[]' value='$row->Kode_brg' 
                     onkeypress='validAct($i)' 
                     maxlength='20' 
-                    style='width:100%' disabled='true'/>
+                    style='width:83%' disabled='true'/>
                     
                     <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i'
                      role='button' class='btn' data-toggle='modal' 
@@ -31,11 +31,11 @@
                 </div>    
             </td>
             
-            <td width='30%'>
+            <td width='40%'>
                 <div class='input-append' style='margin-bottom:0;'>
                     <input type='text' class='span2' 
                     id='nama_brg$i' id='appendedInputButton' value='$row->Nama' 
-                    style='width:98%' disabled='true'/>
+                    style='width:140%' disabled='true'/>
                     
                     <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i'
                      role='button' class='btn' data-toggle='modal' 

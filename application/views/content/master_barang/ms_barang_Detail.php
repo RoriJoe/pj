@@ -1,9 +1,9 @@
-<div class="table table-hover CSSTabel tb-barang">
+<div class="table table-hover CSSTabel tb-barang" style="width:33%;">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th width="35%">Kode</th>
-        <th width="50%">Nama</th>
-        <th width="15%">Action</th>
+        <th width="15%">Kode</th>
+        <th width="75%">Nama</th>
+        <th width="10%">Action</th>
     </thead>
 
     <tbody id="tb_detail">
@@ -13,10 +13,10 @@
         $hj = number_format($row->Harga_Jual,0,",",".");
         echo "<tr>
             <td>$row->Kode</td>
-            <td nama='$row->Nama'>$row->Nama</td>
+            <td nama='$row->Nama'>$row->Nama $row->Ukuran</td>
             <td>
                 <div class='btn-group'>
-                    <a class='btn popup' style='padding: 2px 6px;'
+                    <a class='btn popup btn-small' style='padding: 2px 6px;'
                             nama='$row->Nama'
                             kode='$row->Kode'
                             ukuran='$row->Ukuran'
@@ -26,7 +26,7 @@
                             hb='$hb'
                             hj='$hj'
                             ><i class='icon-pencil'></i></a>
-                    <a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
+                    <a class='btn delete btn-small' kode='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
                 </div>
             </td>
         </tr>";

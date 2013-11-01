@@ -40,9 +40,42 @@
             echo $no;
         }
 
+        function getSJ(){
+            $id=$this->input->post('id');
+            $query = $this->tr_invoice_model->get_h_invoice($id);
+            foreach($query as $row)
+            {
+                $originalDate = $row->Tgl;
+                $dmy = date("d-m-Y", strtotime($originalDate));
+
+                $final['Perusahaan'] = $row->Perusahaan;
+                $final['Kode_Sj'] = $row->Kode_SJ;
+                $final['Term'] = $row->Term;
+                $final['Alamat'] = $row->Alamat1;
+                $final['Tanggal'] = $dmy;
+
+            }
+            echo json_encode($final);
+        }
+
+        function retrieveTotal(){
+            $id=$this->input->post('id');
+            $query = $this->tr_invoice_model->get_h_so($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Total'] = $row->Total;
+                $final['Disc'] = $row->discount;
+                $final['Dpp'] = $row->dpp;
+                $final['Ppn'] = $row->ppn;
+                $final['Grand'] = $row->grandttl;            
+            }
+            echo json_encode($final);
+        }
+
         function get_so(){
         	$temp="";
-        	$id = $this->input->post('so');
+        	$id = $this->input->post('sj');
         	$result = $this->tr_invoice_model->get_so($id);
         	foreach ($result as $rr)
             {
@@ -50,12 +83,11 @@
             }
             echo $temp;
         }
-        function Detail_SO(){ //viewdo utk tabel detail DO
-        	$this->load->model('tr_do_model');
-            $so=$this->input->post('so');
 
-            $data['hasil']=$this->tr_do_model->get_detail_do($so);
-            $data['kode']=$so;
+        function Detail_SJ(){ //viewdo utk tabel detail DO
+            $sj=$this->input->post('sj');
+
+            $data['hasil']=$this->tr_invoice_model->get_detail_do($sj);
             $this->load->view("content/tr_invoice/detail_invoice",$data);
         }
         //SAVE ADD NEW TRIGGER
@@ -71,14 +103,14 @@
             //ADD TO ARRAY FOR SEND TO MODEL
             $data1= array(
                 'Kode'      =>$id,
-                'Kode_SO'   =>$so,
+                'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
                 'Status'    =>$empty
             );
 
             $data2= array(
-                'Kode_SO'   =>$so,
+                'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
                 'Status'    =>$empty
@@ -94,7 +126,7 @@
                     echo "gagal";
                 }
             }else if($modes=="edit"){
-                $in = $this->tr_invice_model->update($data2,$id);
+                $in = $this->tr_invoice_model->update($data2,$id);
                 if($in == "ok")
                 {
                     echo "ok";

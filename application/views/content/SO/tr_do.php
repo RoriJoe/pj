@@ -58,7 +58,7 @@
 </form>
     <div id="hasil2" style="height: 238px;"></div>
 
-    <div style="float: right; margin-right: 50px;">
+    <div style="float: right; margin-right: 75px;">
         <table>
         <tr>
         	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>

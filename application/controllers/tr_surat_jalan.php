@@ -262,6 +262,26 @@
             echo form_dropdown('_do',$final,'1','id="_do" onchange="displayResult(this)"');
         }
 
+        function view_sj_pelanggan(){
+
+            $data['hasil']=$this->tr_surat_jalan_model->get_list2();
+            //load view
+            $this->load->view('content/list/list_pelanggan',$data);
+        }
+
+        function sj_call(){
+            $id = $this->input->post('id');
+            $query = $this->tr_surat_jalan_model->get_sj_list($id);
+
+            $final['']='-- Select SJ --';
+            foreach ($query as $a) 
+            {
+                $final[$a->No_Sj] = $a->No_Sj;
+            }
+
+            echo form_dropdown('_sj',$final,'1','id="_sj" onchange="displayResult(this)"');
+        }
+
         function mobil_call(){
             $query = $this->tr_surat_jalan_model->get_mobil_list();
 

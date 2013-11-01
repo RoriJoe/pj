@@ -1,5 +1,5 @@
 <div class="table table-hover CSSTabel">
-    <table id="tb5">
+    <table id="popBarang">
         <thead>
             <th>Kode Barang</th>
             <th>Nama & Ukuran</th>
@@ -37,7 +37,7 @@
 </div>
 
 <script>
-$('#item_brg tr').dblclick(function (e) {
+$('#popBarang tbody tr').dblclick(function (e) {
     $(this).find('td input[type=radio]').prop('checked', true);
     var checkRadio = $(this).find('td input[type=radio]:checked').val();
     getBarang();
@@ -49,7 +49,7 @@ $('input:radio[name="optionsRadiosBarang"]').change(function(){
     $('#modalBarang').modal('hide');
 });
  
-var oTable = $('#tb5').dataTable( {
+var bTable = $('#popBarang').dataTable( {
    "aaSorting": [[ 1, "asc" ]],
     "bScrollCollapse": true,
     "bPaginate": true,
@@ -64,12 +64,11 @@ var oTable = $('#tb5').dataTable( {
        },
     "bDeferRender": true,
     //"sScrollY": "200",
-    "sPaginationType": "full_numbers"
+    "sPaginationType": "full_numbers",
+    "sDom": '<"top"i>rt<"bottom"lp><"clear">'
 } );
 
-$('.dataTables_filter').hide();
-
 $('#SearchBarang').keyup(function(){
-      oTable.fnFilter( $(this).val() );
+      bTable.fnFilter( $(this).val() );
 })
 </script>

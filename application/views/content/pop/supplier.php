@@ -52,8 +52,6 @@
             <td colspan="4">
             	<div id="konfirmasi2" class="sukses"></div>
                 <br />
-                <button id="saveSupplier" class="btn btn-primary" mode="add">Save</button>
-                <button id="cacSupplier" class="btn" type="reset">Cancel</button>
             </td>
         </tr>
     </table>
@@ -83,7 +81,7 @@ function autogenSupplier(){
 }
 
 function validationSupplier(){
-jQuery("#formPelanggan").validationEngine(
+jQuery("#formSupplier").validationEngine(
 {
     showOneMessage: true,
     ajaxFormValidation: true,
@@ -92,7 +90,7 @@ jQuery("#formPelanggan").validationEngine(
     autoHideDelay: 2500, 
     fadeDuration: 0.3,
     promptPosition : "bottomLeft", scroll: false
-    });
+});
 }
 
 

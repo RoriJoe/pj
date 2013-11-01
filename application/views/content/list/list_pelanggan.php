@@ -1,5 +1,5 @@
 <div class="table table-hover CSSTabel">
-<table id="tb4">
+<table id="popListPelanggan">
     <thead>
         <th width="15%">Kode</th>
         <th width="40%">Perusahaan</th>
@@ -16,7 +16,7 @@
         <td>$row->Perusahaan</td>
         <td>$row->Nama</td>
         <td>$row->Alamat1</td>
-        <td><input type='radio' name='optionsRadios' kd='$row->Kode' nama='$row->Perusahaan' term='$row->Lama' value='$row->Perusahaan'></td>
+        <td><input type='radio' name='optionsRadios' kd='$row->Kode' nama='$row->Perusahaan' term='$row->Lama' alamat='$row->Alamat1' value='$row->Perusahaan'></td>
         </tr>
         ";
     }   ?>
@@ -25,7 +25,7 @@
 </div>
 
 <script>
-$('#tb4 tbody tr').dblclick(function (e) {
+$('#popListPelanggan tbody tr').dblclick(function (e) {
     $(this).find('td input[type=radio]').prop('checked', true);
     getPelanggan();
     $('#modalPelanggan').modal('hide');
@@ -36,11 +36,11 @@ $('input:radio[name="optionsRadios"]').change(function(){
     $('#modalPelanggan').modal('hide');
 });
 
-var lTable = $('#tb4').dataTable( {
+var lTable = $('#popListPelanggan').dataTable( {
         "aaSorting": [[ 1, "asc" ]],
         "bScrollCollapse": true,
         "bPaginate": true,
-        "bAutoWidth": false,
+        "bAutoWidth": true,
         "bLengthChange": false,
         "bInfo": false,
         "oLanguage": {
@@ -51,10 +51,9 @@ var lTable = $('#tb4').dataTable( {
            },
         "bDeferRender": true,
         //"sScrollY": "200",
-        "sPaginationType": "full_numbers"
+        "sPaginationType": "full_numbers",
+        "sDom": '<"top"i>rt<"bottom"lp><"clear">'
 } );
-//$('.dataTables_scrollHeadInner,.dataTables_scrollHeadInner .dataTable').width('99%');
-$('.dataTables_filter').hide();
 
 $('#SearchPelanggan').keyup(function(){
     lTable.fnFilter( $(this).val() );

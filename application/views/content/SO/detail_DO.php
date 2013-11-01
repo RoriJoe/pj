@@ -17,7 +17,7 @@
         $i=1;
         foreach($hasil as $row)
         {
-        	
+            $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);  	
             echo "<tr>
             <td width='15%'>
                 <div class='input-append'>
@@ -27,7 +27,7 @@
             </td>
             <td width='22%'>
                 <div class='input-append'>
-                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:134px' value='$row->Nama' readonly='true'/>
+                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:134px' value=\"".$ukuran."\" readonly='true'/>
                 <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>
             </td>

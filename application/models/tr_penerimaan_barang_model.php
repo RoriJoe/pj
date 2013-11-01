@@ -98,13 +98,13 @@
         function delete($kode)
         {
             $this->db->where('No_Bpb',$kode);
-            $this->db->delete('Bpb_h');
+            $this->db->delete('bpb_h');
             return "ok";
         }
 		function delete_det($kode)
         {
             $this->db->where('No_Bpb',$kode);
-            $this->db->delete('Bpb_d');
+            $this->db->delete('bpb_d');
             //return "ok";
         }
 

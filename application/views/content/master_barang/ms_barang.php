@@ -14,7 +14,6 @@ function AddDot(Num){
 		return x1+x2;
 	}
 	
-	
 	function ubah(a){
 		var harga = a;
 		harga = AddDot(harga);
