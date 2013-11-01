@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.6deb1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2013 at 11:28 AM
--- Server version: 5.5.34-0ubuntu0.13.10.1
--- PHP Version: 5.5.3-1ubuntu2
+-- Generation Time: Nov 01, 2013 at 06:37 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_pelita`
 --
+CREATE DATABASE IF NOT EXISTS `db_pelita` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_pelita`;
 
 -- --------------------------------------------------------
 
@@ -844,9 +846,6 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('58PP016BTG', '16"', 'PIPA', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('58PP020BTG', '20"', 'PIPA', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('58PPKG', 'DALAM HITUNGAN KG', 'PIPA', '', 'Kg', 0, 0, 34500, '0000-00-00', 23000, 34500, 0, 0),
-('A', '', '', '', '', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('AAA', 'aaa', 'aaa', 'aa', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('aaaaa', 'aaaa', 'aaaaa', 'aaaaa', 'Batang', 0, 3, NULL, NULL, NULL, NULL, 0, 0),
 ('AH0196', '18 / 19 X 6', 'ASS HITAM', '', 'Batang', 12, 0, 327, '0000-00-00', 45, 327, 0, 0),
 ('AH0206', '20 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AH0216', '21 X 6', 'ASS HITAM', '', 'Batang', 19, 0, 2558, '0000-00-00', 147, 2558, 0, 0),
@@ -862,18 +861,18 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0346', '34 X 6', 'ASS HITAM', '', 'Batang', 6, 0, 272, '0000-00-00', 16, 272, 0, 0),
 ('AH0356', '35 X 6', 'ASS HITAM', '', 'Batang', 76, 0, 2108, '0000-00-00', 124, 2108, 0, 0),
 ('AH0366', '36 X 6', 'ASS HITAM', '', 'Batang', 51, 0, 901, '0000-00-00', 53, 901, 0, 0),
-('AH03855', '38 X 5,5', 'ASS HITAM', '', 'Batang', 188, 0, 7362, '0000-00-00', 433, 7362, 0, 0),
+('AH03855', '38 X 5,5', 'ASS HITAM', '', 'Batang', 173, 0, 7362, '0000-00-00', 433, 7362, 0, 0),
 ('AH0386', '38 X 6', 'ASS HITAM', '', 'Batang', 50, 0, 2, '0000-00-00', 1, 2, 0, 0),
 ('AH0396', '39 X 6', 'ASS HITAM', '', 'Batang', 92, 0, 1904, '0000-00-00', 112, 1904, 0, 0),
 ('AH0406', '40 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 950, '0000-00-00', 63, 950, 0, 0),
 ('AH0426', '42 X 6', 'ASS HITAM', '', 'Batang', 6, 0, 94, '0000-00-00', 6, 94, 0, 0),
 ('AH0436', '43 X 6', 'ASS HITAM', '', 'Batang', 7, 0, 48, '0000-00-00', 4, 48, 0, 0),
-('AH0446', '44 X 6', 'ASS HITAM', '', 'Batang', 20, 0, 0, '0000-00-00', 0, 0, 0, 0),
+('AH0446', '44 X 6', 'ASS HITAM', '', 'Batang', 5, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AH0456', '45 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 60, '0000-00-00', 0, 60, 0, 0),
 ('AH0466', '46 X 6', 'ASS HITAM', '', 'Batang', 7, 0, 119, '0000-00-00', 7, 119, 0, 0),
 ('AH0486', '48 X 6', 'ASS HITAM', '', 'Batang', 8, 0, 136, '0000-00-00', 8, 136, 0, 0),
-('AH0506', '50 X 6', 'ASS HITAM', '', 'Batang', 52, 0, 5127, '0000-00-00', 166, 5127, 0, 0),
-('AH0526', '52 X 6', 'ASS HITAM', '', 'Batang', 11, 0, 133, '0000-00-00', 37, 133, 0, 0),
+('AH0506', '50 X 6', 'ASS HITAM', '', 'Batang', 36, 0, 5127, '0000-00-00', 166, 5127, 0, 0),
+('AH0526', '52 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 133, '0000-00-00', 37, 133, 0, 0),
 ('AH0536', '53 X 6', 'ASS HITAM', '', 'Batang', 3, 0, 163, '0000-00-00', 5, 163, 0, 0),
 ('AH0556', '55 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 420, '0000-00-00', 22, 420, 0, 0),
 ('AH0586', '58 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 3244, '0000-00-00', 179, 3244, 0, 0),
@@ -904,14 +903,14 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0976', '97 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 376, '0000-00-00', 299, 376, 0, 0),
 ('AH097688', '97 X 6''88', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 278, 24, 0, 0),
 ('AH09845', '98 X 4''5', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 278, 24, 0, 0),
-('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 1, 0, 1446, '0000-00-00', 49, 1446, 0, 0),
-('AH1006', '100 X 6', 'ASS HITAM', '', 'Batang', 16, 0, 2086, '0000-00-00', 85, 2086, 0, 0),
+('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 16, -14, 1446, '0000-00-00', 49, 1446, 0, 0),
+('AH1006', '100 X 6', 'ASS HITAM', '', 'Batang', 1, 0, 2086, '0000-00-00', 85, 2086, 0, 0),
 ('AH1016', '101 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 164, '0000-00-00', 21, 164, 0, 0),
 ('AH1026', '102 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 651, '0000-00-00', 53, 651, 0, 0),
 ('AH1056', '105 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 125, '0000-00-00', 5, 125, 0, 0),
 ('AH1106', '110 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 89, '0000-00-00', 4, 89, 0, 0),
-('AH1126', '112 X 6', 'ASS HITAM', '', 'Batang', 1, 0, 50, '0000-00-00', 2, 50, 0, 0),
-('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 8, 0, 1000, '0000-00-00', 40, 1000, 0, 0),
+('AH1126', '112 X 6', 'ASS HITAM', '', 'Batang', 5, -41, 50, '0000-00-00', 2, 50, 0, 0),
+('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 1, -21, 1000, '0000-00-00', 40, 1000, 0, 0),
 ('AH1156', '115 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 175, '0000-00-00', 7, 175, 0, 0),
 ('AH1206', '120 X 6', 'ASS HITAM', '', 'Batang', 10, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AH1256', '125 X 6', 'ASS HITAM', '', 'Batang', 8, 0, 400, '0000-00-00', 16, 400, 0, 0),
@@ -925,7 +924,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH3306', '330 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 1, 24, 0, 0),
 ('AH350094', '350 X 6100/ 9''4', 'ASS HITAM', '', 'Batang', 1, 0, 62, '0000-00-00', 4, 62, 0, 0),
 ('AH3501', '350 X 1MTR', 'ASS HITAM', '', 'Batang', 1, 0, 25, '0000-00-00', 1, 25, 0, 0),
-('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 0, 0, 63, '0000-00-00', 21, 63, 0, 0),
+('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 15, 15, 63, '0000-00-00', 21, 63, 0, 0),
 ('AP000126', '1/2" @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AP000346', '3/4" (19MM) @6M', 'ASS PUTIH', '', 'Batang', 8, 0, 702, '0000-00-00', 102, 702, 0, 0),
 ('AP000386', '3/8" @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
@@ -964,8 +963,8 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AP0456', '45MM @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('B1307001', '200x52', 'Pipa L', 'PL22', 'Batang', 5, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307002', '22x20', 'Plat', 'P22', 'Lembar', 0, 0, NULL, NULL, NULL, NULL, 0, 0),
-('B1307003', '25x25x25', 'Plat Segi Tiga', 'PST2', 'Meter', 55, 0, NULL, NULL, NULL, NULL, 0, 0),
-('B1307004', '15x12', 'Pipa Silinder X', 'PS15', 'Meter', 15, 0, NULL, NULL, NULL, NULL, 0, 0),
+('B1307003', '25x25x25', 'Plat Segi Tiga', 'PST2', 'Meter', 55, -7, NULL, NULL, NULL, NULL, 0, 0),
+('B1307004', '15x12', 'Pipa Silinder X', 'PS15', 'Meter', 15, -7, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307005', '200 x 500', 'Besi Super', 'BS25', 'Roll', 25, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307006', '400x500', 'Pipa Besi 3', 'Tes Data', 'Batang', 5235, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1309001', '5 x 12', 'Beton Ulir', '18-KS', 'Inci', 0, 0, NULL, NULL, NULL, NULL, 0, 0),
@@ -1003,7 +1002,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('BU01312FITW', '13 X 12', 'B-ULIR', 'F.ITW', 'Batang', 0, 0, 8385, '0000-00-00', 240, 8385, 0, 0),
 ('BU01312KS', '13 X 12', 'B-ULIR', 'KS', 'Batang', 128, 0, 37887, '0000-00-00', 2248, 37887, 0, 0),
 ('BU01312KSI', '13 X 12', 'B-ULIR', 'KSI', 'Batang', 1449, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('BU01312MS', '13 X 12', 'B-ULIR', 'MS', 'Batang', 700, 0, 0, '0000-00-00', 0, 0, 0, 0),
+('BU01312MS', '13 X 12', 'B-ULIR', 'MS', 'Batang', 700, -15, 0, '0000-00-00', 0, 0, 0, 0),
 ('BU01612KS', '16 X 12', 'B-ULIR', 'KS', 'Batang', 0, 0, 70708, '0000-00-00', 3072, 70708, 0, 0),
 ('BU01612KSF', '16 X 12', 'B-ULIR', 'KS-FULL', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('BU01612KSI', '16 X 12', 'B-ULIR', 'KSI', 'Batang', 454, 0, 4913, '0000-00-00', 788, 4913, 0, 0),
@@ -1091,11 +1090,11 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('HNS1001481030', '100 X 148 X 10''30M', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
 ('HNS100148806', '100 X 148 X 8''06M', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
 ('HNS17524512', '175 X 245 X 12', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
-('HNS19415012', '194 X 150 X 12', 'H BEAM', 'NS', 'Batang', 0, 0, 8, '0000-00-00', 0, 8, 0, 0);
-INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
+('HNS19415012', '194 X 150 X 12', 'H BEAM', 'NS', 'Batang', 0, 0, 8, '0000-00-00', 0, 8, 0, 0),
 ('HNS2001508', '200 X 150 X 8', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
 ('HNS24417512', '244 X 175 X 12', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
-('HNS30030010440', '300 X 300 X 10,440', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0),
+('HNS30030010440', '300 X 300 X 10,440', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0);
+INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
 ('HNS300300106', '300 X 300 X 10,6', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0),
 ('HNS30030011TD', '300 X 300 X 11', 'H BEAM', 'TD', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('HNS3003004TD', '300 X 300 X 4', 'H BEAM', 'NS-TD', 'Batang', 0, 0, 10, '0000-00-00', 2, 10, 0, 0),
@@ -1124,7 +1123,6 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('IPE1407012', '140 X 70 X 12', 'I P E', '', 'Batang', 3, 0, 342, '0000-00-00', 16, 342, 0, 0),
 ('IPE140706', '140 X 70 X 6', 'I P E', '', 'Batang', 1, 0, 61, '0000-00-00', 6, 61, 0, 0),
 ('IPE152896', '152 X 89 X 6', 'I P E', '', 'Batang', 0, 0, 3679, '0000-00-00', 199, 3679, 0, 0),
-('Kode', 'Ukuran', 'Nama', 'Nama2', 'Satuan', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PB002348KS', '2,2 /2,3 X 4 X 8', 'P-BORDES', 'KS', 'Lembar', 6100, 0, 655, '0000-00-00', 31, 655, 0, 0),
 ('PB00248KS', '2 X 4 X 8', 'P-BORDES', 'KS', 'Lembar', 70, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PB00248LN', '2 X 4 X 8', 'P-BORDES', 'LN', 'Lembar', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
@@ -1590,12 +1588,12 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PPH00312356S', '3 1/2" (3''5) X 6', 'PIPA HITAM', 'SEAM LESS', 'Batang', 25, 0, 713, '0000-00-00', 25, 713, 0, 0),
 ('PPH003286', '3" (2''5 / 2''8) X 6', 'PIPA HITAM', '', 'Batang', 110, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PPH003456W', '3" (4''5 / 5) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 218, 0, 848, '0000-00-00', 62, 848, 0, 0),
-('PPH00366SSCH40', '3" (6) X 6', 'PIPA HITAM', 'SEAM LESS SCH40', 'Batang', 0, 0, 11595, '0000-00-00', 390, 11595, 0, 0);
-INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
+('PPH00366SSCH40', '3" (6) X 6', 'PIPA HITAM', 'SEAM LESS SCH40', 'Batang', 0, 0, 11595, '0000-00-00', 390, 11595, 0, 0),
 ('PPH0036776S', '3" (6''7/7) X 6', 'PIPA HITAM', 'SEAM LESS', 'Batang', 5, 0, 1281, '0000-00-00', 57, 1281, 0, 0),
 ('PPH004236', '4" (2''3) X 6', 'PIPA HITAM', '', 'Batang', 224, 0, 10332, '0000-00-00', 369, 10332, 0, 0),
 ('PPH004296', '4" (2''5/2''8/2''9) X 6', 'PIPA HITAM', '', 'Batang', 182, 0, 21, '0000-00-00', 1, 21, 0, 0),
-('PPH004386', '4" (3''8) X 6', 'PIPA HITAM', '', 'Batang', 0, 0, 166, '0000-00-00', 8, 166, 0, 0),
+('PPH004386', '4" (3''8) X 6', 'PIPA HITAM', '', 'Batang', 0, 0, 166, '0000-00-00', 8, 166, 0, 0);
+INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
 ('PPH004456', '4" (4''5) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 1, 0, 148, '0000-00-00', 16, 148, 0, 0),
 ('PPH004566W', '4" (5/6) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 103, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PPH00466SSCH40', '4" (5''5/6) X 6', 'PIPA HITAM', 'SEAM LESS SCH40', 'Batang', 6, 0, 9093, '0000-00-00', 445, 9093, 0, 0),
@@ -1659,7 +1657,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PS0061006', '6 X 100 X 6', 'P-STRIP', '', 'Batang', 856, 0, 70161, '0000-00-00', 1799, 70161, 0, 0),
 ('PS006196', '6 X 19 X 6', 'P-STRIP', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PS0062006', '6 X 200 X 6', 'P-STRIP', '', 'Batang', 153, 0, 6084, '0000-00-00', 156, 6084, 0, 0),
-('PS006256', '6 X 25 X 6', 'P-STRIP', '', 'Batang', 5413, 0, 1560, '0000-00-00', 40, 1560, 0, 0),
+('PS006256', '6 X 25 X 6', 'P-STRIP', '', 'Batang', 5413, -5, 1560, '0000-00-00', 40, 1560, 0, 0),
 ('PS006326', '6 X 32 X 6', 'P-STRIP', '', 'Batang', 2796, 0, 72795, '0000-00-00', 1855, 72795, 0, 0),
 ('PS006386', '6 X 38 X 6', 'P-STRIP', '', 'Batang', 2339, 0, 34190, '0000-00-00', 1315, 34190, 0, 0),
 ('PS006506', '6 X 50 X 6', 'P-STRIP', '', 'Batang', 1488, 0, 0, '0000-00-00', 0, 0, 0, 0),
@@ -1730,7 +1728,6 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PSB1005036', '100x50x2,6/3x6', 'P-STAL BUIS', '', 'Batang', 676, 0, 5397, '0000-00-00', 420, 5397, 0, 0),
 ('PSB150150456', '150x150x4''5x6', 'P-STAL BUIS', '', 'Batang', 0, 0, 1625, '0000-00-00', 125, 1625, 0, 0),
 ('PSB15075486', '150x75x4''8x6', 'P-STAL BUIS', '', 'Batang', 1, 0, 1261, '0000-00-00', 97, 1261, 0, 0),
-('SEGI065656', '', '', '', 'Batang', 0, 0, 9146, '0000-00-00', 356, 9146, 0, 0),
 ('SG00886DN', '8 X 8 X 6', 'SEGI', 'DN', 'Batang', 11276, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('SG00886LN', '8 X 8 X 6', 'SEGI', 'LN', 'Batang', 317, 0, 65129, '0000-00-00', 1975, 65129, 0, 0),
 ('SG010106LN', '10 X 10 X 6', 'SEGI', 'LN', 'Batang', 0, 0, 333282, '0000-00-00', 7858, 333282, 0, 0),
@@ -2077,8 +2074,8 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('WFNS3961998', '396 X 199 X 8', 'IWF', 'NS', 'Batang', 1, 0, 8, '0000-00-00', 1, 8, 0, 0),
 ('WFNS53520512LN', '535 X 205 X 12', 'IWF', 'NS - LN', 'Batang', 2, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('WFNS588300325', '588 X 300 X 3,25', 'IWF', 'NS', 'Batang', 0, 0, 16, '0000-00-00', 2, 16, 0, 0),
-('WFNS6002009', '600 X 200 X 9', 'IWF', 'NS-GG', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('WFNS70030010', '700 X 300 X 10', 'IWF', 'NS', 'Batang', 0, 0, 8, '0000-00-00', 1, 8, 0, 0);
+('WFNS6002009', '600 X 200 X 9', 'IWF', 'NS-GG', 'Batang', 0, 0, NULL, NULL, NULL, NULL, 20000000, 22000000),
+('WFNS70030010', '700 X 300 X 10', 'IWF', 'NS', 'M', 0, 0, NULL, NULL, NULL, NULL, 1000000, 2000000);
 
 -- --------------------------------------------------------
 
@@ -2093,26 +2090,16 @@ CREATE TABLE IF NOT EXISTS `bpb_d` (
   `Qty1` int(11) NOT NULL,
   `Keterangan` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`Kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `bpb_d`
 --
 
 INSERT INTO `bpb_d` (`Kode`, `No_Bpb`, `Kode_brg`, `Qty1`, `Keterangan`) VALUES
-(10, '1310001', 'B1307004', 1, ''),
-(11, '1310001', 'B1307005', 2, ''),
-(12, '1310002', 'B1307006', 10, ''),
-(13, '1310002', 'B1307004', 15, ''),
-(14, '1310003', 'B1307001', 2, ''),
-(15, '1310003', 'B1307003', 2, ''),
-(16, '1310003', 'B1307006', 15, ''),
-(17, '1310003', 'B1307004', 255, ''),
-(18, '1310004', 'B1307001', 50, ''),
-(19, '1310004', 'B1307002', 20, ''),
-(20, '1310004', 'B1307003', 30, ''),
-(21, '1310004', 'B1307006', 15, ''),
-(22, '1310004', '', 0, '');
+(12, '1311001', 'AHCAMPURAN', 15, ''),
+(13, '1311001', 'AH1005900', 15, ''),
+(14, '1311001', 'AH1126', 4, '');
 
 -- --------------------------------------------------------
 
@@ -2135,10 +2122,7 @@ CREATE TABLE IF NOT EXISTS `bpb_h` (
 --
 
 INSERT INTO `bpb_h` (`No_Bpb`, `Tgl_Bpb`, `No_Reff`, `Kode_Supp`, `Kode_Gudang`, `No_Po`) VALUES
-('1310001', '2013-10-27', '123456', 'S1307002', 'G1307001', 'PO1309002'),
-('1310002', '2013-10-27', '123456', 'S1307003', 'G1307002', 'PO1309001'),
-('1310003', '2013-10-27', '5285847777', 'S1309001', 'G1309003', 'PO1309005'),
-('1310004', '2013-10-27', '25847747', 'S1309001', 'G1310001', 'PO1309006');
+('1311001', '2013-11-02', '123465', 'S1309002', 'G1307001', '1311001');
 
 -- --------------------------------------------------------
 
@@ -2177,23 +2161,19 @@ CREATE TABLE IF NOT EXISTS `do_d` (
   `Status` varchar(1) NOT NULL,
   `Keterangan` varchar(30) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `do_d`
 --
 
 INSERT INTO `do_d` (`No`, `No_Do`, `Kode_Brg`, `Qty`, `Harga`, `Jumlah`, `Status`, `Keterangan`) VALUES
-(16, '1310001', 'B1307006', 5, 1000000, 5000000, '', ''),
-(17, '1310002', 'B1307006', 7, 100000, 700000, '', ''),
-(18, '1310002', 'B1307003', 7, 200000, 1400000, '', ''),
-(19, '1310002', 'B1307004', 7, 10000000, 70000000, '', ''),
-(20, '1310003', 'B1307003', 3, 1000000, 3000000, '', ''),
-(21, '1310003', 'B1307004', 7, 500000, 3500000, '', ''),
-(22, '1310003', 'B1307005', 5, 100000, 500000, '', ''),
-(23, '1310003', 'B1307001', 7, 300000, 2100000, '', ''),
-(24, '1310003', 'B1307006', 5, 200000, 1000000, '', ''),
-(25, '1310004', 'PPH00246W', 10, 100000, 1000000, '', '1111111');
+(28, '1311001', 'AH1006', 15, '100000', '1500000', '', ''),
+(29, '1311001', 'AH1135538', 7, '200000', '1400000', '', ''),
+(30, '1311001', 'AH1126', 15, '1000000', '15000000', '', ''),
+(31, '1311002', 'AH0446', 15, '1000000', '15000000', '', ''),
+(32, '1311002', 'AH0506', 16, '2000000', '32000000', '', '#barang2'),
+(33, '1311002', 'AH0526', 11, '1000000', '11000000', '', '');
 
 -- --------------------------------------------------------
 
@@ -2223,10 +2203,8 @@ CREATE TABLE IF NOT EXISTS `do_h` (
 --
 
 INSERT INTO `do_h` (`No_Do`, `Tgl`, `No_Po`, `Tgl_Po`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Otorisasi`, `Total`, `discount`, `dpp`, `ppn`, `grandttl`) VALUES
-('1310001', '2013-10-28', '', '1970-01-01', 'P1307001', '8', NULL, 'admin', 5000000, 1, 4950000, 1, 4999500),
-('1310002', '2013-10-28', '123456', '2013-10-30', 'P1307001', '8', NULL, 'eddy', 72100000, 1, 71379000, 1, 72092790),
-('1310003', '2013-10-28', '123456789', '1970-01-01', 'P1307003', '8', NULL, 'Edson', 10100000, 1, 9999000, 5, 10498950),
-('1310004', '2013-10-29', 'aaa12', '2013-10-16', 'P1307005', '8', NULL, 'Eddy', 1000000, 10, 900000, 10, 990000);
+('1311001', '2013-11-01', 'PO123456', '2013-11-02', 'P1307009', '8', NULL, 'Eddy', '17900000', 1, 17721000, 2, '18075420'),
+('1311002', '2013-11-01', '', NULL, 'P1307009', '8', NULL, 'Eddy', '58000000', 1, 57420000, 2, '58568400');
 
 -- --------------------------------------------------------
 
@@ -2260,10 +2238,10 @@ INSERT INTO `gudang` (`Kode`, `Nama`, `Alamat`, `Alamat2`, `Kota`, `Telp`, `Mili
 ('G1307001', 'Special Warehouse', 'Jl.Semesta Alam 3', NULL, 'Jakarta', '08524795555', NULL, '08125852555', '012-345', '067-890', NULL, NULL, NULL, NULL),
 ('G1307002', 'Gudang Murni', 'Jl.Semesta', NULL, 'Jakarta', '0123456789', NULL, '', '0551 2575', '', NULL, NULL, NULL, NULL),
 ('G1309001', 'Gudang Satu', 'Jl. Satu', NULL, 'Satu', '085247956204', NULL, '575475675675', '085247956204', '085247956204', NULL, NULL, NULL, NULL),
-('G1309002', 'Gudag Dua', 'Jl. Belok Dua', NULL, 'Jakarta', '02547778522', NULL, '', '155288254', '', NULL, NULL, NULL, NULL),
+('G1309002', 'Gudang Dua', 'Jl. Belok Dua', NULL, 'Jakarta', '02547778522', NULL, '', '155288254', '', NULL, NULL, NULL, NULL),
 ('G1309003', 'Gudang Tiga', 'Jl. Sepon', NULL, 'Sepon', '456123789', NULL, '', '456123789', '', NULL, NULL, NULL, NULL),
 ('G1309004', 'Gudang Empat', 'Jl. Empat', NULL, 'Empat', '1234555', NULL, '', '1234444', '', NULL, NULL, NULL, NULL),
-('G1310001', 'tes', 'tess', NULL, 'tess', '214214124214', NULL, '', '42142142421412', '', NULL, NULL, NULL, NULL);
+('G1311001', 'Gudang Lites', 'Jl. Lite & BIte', NULL, 'Lite', '123456789', NULL, '', '123456789', '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2273,18 +2251,24 @@ INSERT INTO `gudang` (`Kode`, `Nama`, `Alamat`, `Alamat2`, `Kota`, `Telp`, `Mili
 
 CREATE TABLE IF NOT EXISTS `invoice` (
   `Kode` varchar(8) NOT NULL,
-  `Kode_SO` varchar(10) NOT NULL,
+  `Kode_SJ` varchar(10) NOT NULL,
   `Term` int(11) NOT NULL,
   `Tgl` date NOT NULL,
-  `Status` varchar(200) DEFAULT NULL
+  `Status` varchar(200) DEFAULT NULL,
+  `Total` decimal(15,0) NOT NULL,
+  `Discount` int(11) DEFAULT NULL,
+  `Dpp` int(11) NOT NULL,
+  `Ppn` int(11) NOT NULL,
+  `Grand` decimal(15,0) NOT NULL,
+  PRIMARY KEY (`Kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`Kode`, `Kode_SO`, `Term`, `Tgl`, `Status`) VALUES
-('1310001', 'SO1309003', 5, '2013-10-12', NULL);
+INSERT INTO `invoice` (`Kode`, `Kode_SJ`, `Term`, `Tgl`, `Status`, `Total`, `Discount`, `Dpp`, `Ppn`, `Grand`) VALUES
+('1311001', '1311001', 22, '2013-11-01', NULL, '16900000', 1, 16731000, 5, '17567550');
 
 -- --------------------------------------------------------
 
@@ -2387,11 +2371,12 @@ INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alam
 ('P1307007', 'Soedirman', NULL, 'MERDEKA PT.', 'Jl. Pondok Indah', NULL, 'Jakarta', '11525', '0852478566', '', '', '055248885', '', NULL, NULL, '52225774441', 41),
 ('P1307008', 'Tesla', NULL, 'Tesla Power', 'Jl. tesla', NULL, 'tes', '35555', '356346', '', '', '123456', '', NULL, NULL, '346346346', 23),
 ('P1307009', 'Bung Tomo', NULL, ' Bersatu Maju PT.', 'gsegseg', NULL, 'Bandung', '46333', '521353252', '', '', '634634', '', NULL, NULL, '35325', 22),
-('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '', '6285788555822', '', '02215877', '', 25000000, NULL, '487995577758852', 10),
+('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '', '6285788555822', '', '02215877', '', '25000000', NULL, '487995577758852', 10),
 ('P1309002', 'Kim Jong Kook', NULL, 'ABADI BARU YES', 'Jl. Gangnam No.35', NULL, 'Bekasi', '15400', '021-528444485', '', '', '021788588', '', NULL, NULL, '777858442000457', 14),
 ('P1309003', 'Sidoel Ha', NULL, 'SIDO TENGGELAM', 'Jl. Pajajaran', NULL, 'Bunyu', '11710', '258552282', '52588475552', '55847852566', '258547', '24470444', NULL, NULL, '4356463646463', 7),
-('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', 100000, NULL, '123456782', 25),
-('P1310001', 'tes', NULL, 'tes', 'tes', NULL, 'hrhs', '46346', '332236362', '', '', '62362362363', '', 100000000000, NULL, '235632636', 25);
+('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', '100000', NULL, '123456782', 25),
+('P1311001', 'Koraswadi', NULL, 'Kora-Kora CV.', 'Jl. Sungai Kora III', NULL, 'Jakarta', '11450', '123456789', '', '', '123456789', '', '25000000', NULL, '258147369', 50),
+('P1311002', 'Torino', NULL, 'Tori-Tori', 'Torino', NULL, 'Jakarta', '11540', '123456789', '', '', '132465789', '', '25000000', NULL, '123456789', 20);
 
 -- --------------------------------------------------------
 
@@ -2408,26 +2393,17 @@ CREATE TABLE IF NOT EXISTS `po_d` (
   `Nilai` decimal(12,0) NOT NULL,
   `Keterangan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `po_d`
 --
 
 INSERT INTO `po_d` (`No`, `Kode_po`, `Kode_barang`, `Harga`, `Jumlah`, `Nilai`, `Keterangan`) VALUES
-(1, 'PO1309001', 'B1307006', 5000, 10, 50000, NULL),
-(2, 'PO1309002', 'B1307004', 2000, 5, 10000, NULL),
-(3, 'PO1309002', 'B1307005', 10000, 7, 70000, NULL),
-(4, 'PO1309003', 'B1307001', 1000, 2, 2000, NULL),
-(5, 'PO1309004', 'B1307001', 100, 1, 100, NULL),
-(6, 'PO1309004', '', 0, 0, 0, NULL),
-(7, 'PO1309005', 'B1307001', 1000, 2, 2000, NULL),
-(8, 'PO1309005', 'B1307003', 2000, 2, 4000, NULL),
-(9, 'PO1309006', 'B1307001', 209000, 1, 209000, NULL),
-(10, 'PO1309006', 'B1307002', 25000, 20, 500000, NULL),
-(11, 'PO1309006', 'B1307003', 20000000, 30, 600000000, NULL),
-(12, 'PO1309007', 'B1307001', 19999, 2, 39998, NULL),
-(13, '1310001', 'B1307006', 2500000, 10, 25000000, NULL);
+(12, 'PO1309007', 'B1307001', '19999', 2, '39998', NULL),
+(14, '1311001', 'AHCAMPURAN', '1000000', 15, '15000000', NULL),
+(15, '1311001', 'AH1005900', '200000', 15, '3000000', NULL),
+(16, '1311001', 'AH1126', '2000000', 4, '8000000', NULL);
 
 -- --------------------------------------------------------
 
@@ -2457,13 +2433,7 @@ CREATE TABLE IF NOT EXISTS `po_h` (
 --
 
 INSERT INTO `po_h` (`Kode`, `Tgl_po`, `Tgl_kirim`, `Permintaan`, `Currency`, `Urgent`, `Kode_supplier`, `Kode_gudang`, `Nama_proyek`, `DPP`, `PPN`, `Total`, `Counter`) VALUES
-('1310001', '2013-10-28', '1970-01-01', 'Tidak Ada', '0', 'Tidak', 'S1307001', 'G1307001', '0', 25000000, 1, 25250000, 3),
-('PO1309001', '2013-09-25', '2013-09-27', NULL, 'Rupiah', 'Ya', 'S1307003', 'G1307002', NULL, 100000, 0, 100000, NULL),
-('PO1309002', '2013-09-20', '2013-09-25', 'Tidak Ada', '0', 'Ya', 'S1307002', 'G1307001', '0', 80000, 5, 84000, NULL),
-('PO1309003', '2013-09-20', '2013-09-22', 'Tidak Ada', 'Rupiah', 'Ya', 'S1307001', 'G1307001', '', 2000, 5, 2100, NULL),
-('PO1309004', '2013-09-11', '2013-09-24', 'Tidak Ada', 'Rupiah', 'Tidak', 'S1307001', 'G1307001', '', 100, 0, 100, NULL),
-('PO1309005', '2013-09-12', '2013-09-27', 'Tidak Ada', 'Dollar', 'Ya', 'S1309001', 'G1309003', '', 6000, 4, 6240, NULL),
-('PO1309006', '2013-10-01', '2013-10-18', 'Tidak Ada', '0', 'Tidak', 'S1309001', 'G1309003', '0', 600709000, 5, 630744450, NULL);
+('1311001', '2013-11-01', '1970-01-01', 'Tidak Ada', '0', 'Ya', 'S1309002', 'G1307001', '0', '26000000', 1, '26260000', 0);
 
 -- --------------------------------------------------------
 
@@ -2545,12 +2515,12 @@ INSERT INTO `saw_d` (`No_Saw`, `Kd_Brg`, `QtySaw1`) VALUES
 ('1310001', 'B1309005', 0),
 ('1310001', 'B1309006', 0),
 ('1310002', 'aaaaa', 5),
-('1310002', 'B1307001', 4),
+('1310002', 'B1307001', -10),
 ('1310002', 'B1307002', 2),
-('1310002', 'B1307003', 3),
-('1310002', 'B1307004', 1),
-('1310002', 'B1307005', 0),
-('1310002', 'B1307006', 0),
+('1310002', 'B1307003', -9),
+('1310002', 'B1307004', -20),
+('1310002', 'B1307005', -10),
+('1310002', 'B1307006', -15),
 ('1310002', 'B1309001', 0),
 ('1310002', 'B1309002', 0),
 ('1310002', 'B1309003', 0),
@@ -2597,17 +2567,16 @@ CREATE TABLE IF NOT EXISTS `sj_d` (
   `Status` varchar(1) NOT NULL,
   `Keterangan` varchar(30) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `sj_d`
 --
 
 INSERT INTO `sj_d` (`No`, `No_Sj`, `Kode_Brg`, `Barang`, `Barang_SJ`, `Qty1`, `Status`, `Keterangan`) VALUES
-(27, '1310001', 'B1307006', 'Pipa Besi 3 400x500', 'Pipa Besi 3 400x500 ', 7, '', ''),
-(28, '1310001', 'B1307003', 'Plat Segi Tiga 25x25x25', 'Plat Segi Tiga 25x25x25 ', 7, '', ''),
-(29, '1310001', 'B1307004', 'Pipa Silinder X 15x12', 'Pipa Silinder X 15x12 ', 7, '', ''),
-(30, '1310002', 'PS005506', 'P-STRIP 5 X 50 X 6', 'PIPA HITAM 2" (3', 15, '', '1111111');
+(52, '1311001', 'BP01012GG', 'B- POLOS 10 X 12', 'AH1006', 5, '', ''),
+(53, '1311001', 'AH1135538', 'ASS HITAM 113 X 5/5''38', 'AH1135538', 7, '', ''),
+(54, '1311001', 'AH1126', 'ASS HITAM 112 X 6', 'AH1126', 15, '', '');
 
 -- --------------------------------------------------------
 
@@ -2633,8 +2602,7 @@ CREATE TABLE IF NOT EXISTS `sj_h` (
 --
 
 INSERT INTO `sj_h` (`No_Sj`, `Tgl`, `No_Do`, `No_Po`, `No_Mobil`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Keterangan`) VALUES
-('1310001', '2013-10-28', '1310002', '123456', 'A 2592 DY', 'P1307001', 'G1307002', 0, 'Ambil Sendiri'),
-('1310002', '2013-10-29', '1310004', 'aaa12', '1111', 'P1307005', 'G1309001', 3, 'Ambil Sendiri');
+('1311001', '2013-11-01', '1311001', 'PO123456', 'B 0852 VXY', 'P1307009', 'G1309002', 0, 'Pelita');
 
 -- --------------------------------------------------------
 
@@ -2684,13 +2652,14 @@ CREATE TABLE IF NOT EXISTS `supplier` (
 --
 
 INSERT INTO `supplier` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit_Kredit`) VALUES
-('S1307001', 'Tony Stark', NULL, 'Stark Company', 'Jl. Alabama', NULL, 'Tangerang', '085247956204', '', '', '0221 25884', '', 100000000),
-('S1307002', 'Cockie', NULL, 'Hammer PT.', 'Jl. Kelma', NULL, 'Bandung', '08522257', '', '', '08547782', '', 0),
-('S1307003', 'Arifin', NULL, 'Olala PT.', 'Gedung Energy', NULL, 'Jakarta', '3523362366', '', '', '0552 478855', '', 25000),
-('S1309001', 'AFRO', NULL, 'AFRO PACIFIC INDAH STEEL', 'P.Jayakarta No.35', NULL, 'Jakarta', '628 6885 5524', '', '', '02158887', '', 6588558),
-('S1309002', 'Ha Dong Hoon', NULL, ' HAHA PT.', 'Jl. Gangnam', NULL, 'Seoul', '0852577752', '', '', '021587745', '', 20000),
-('S1309003', 'Turan Boss', NULL, ' TURBO CV.', 'Jl. Speeds', NULL, 'Sebatik', '789456123', '', '', '789456123', '', 20000),
-('S1309004', 'Grahams', NULL, 'Graham Bell CV.', 'Jl. Liku', NULL, 'Leavis', '12345679', '', '', '123456', '', 999999999999);
+('S1307001', 'Tony Stark', NULL, 'Stark Company', 'Jl. Alabama', NULL, 'Tangerang', '085247956204', '', '', '0221 25884', '', '100000000'),
+('S1307002', 'Cockie', NULL, 'Hammer PT.', 'Jl. Kelma', NULL, 'Bandung', '08522257', '', '', '08547782', '', '0'),
+('S1307003', 'Arifin', NULL, 'Olala PT.', 'Gedung Energy', NULL, 'Jakarta', '3523362366', '', '', '0552 478855', '', '25000'),
+('S1309001', 'AFRO', NULL, 'AFRO PACIFIC INDAH STEEL', 'P.Jayakarta No.35', NULL, 'Jakarta', '628 6885 5524', '', '', '02158887', '', '6588558'),
+('S1309002', 'Ha Dong Hoon', NULL, ' HAHA PT.', 'Jl. Gangnam', NULL, 'Seoul', '0852577752', '', '', '021587745', '', '20000'),
+('S1309003', 'Turan Boss', NULL, ' TURBO CV.', 'Jl. Speeds', NULL, 'Sebatik', '789456123', '', '', '789456123', '', '20000'),
+('S1309004', 'Grahams', NULL, 'Graham Bell CV.', 'Jl. Liku', NULL, 'Leavis', '12345679', '', '', '123456', '', '999999999999'),
+('S1311001', 'Tovan Wahyudi', NULL, 'Angin Topan PT.', 'Jl. Pantoloan IV No.15', NULL, 'Bekasi', '789456123', '123456789', '', '11223345', '', '200000000');
 
 -- --------------------------------------------------------
 
