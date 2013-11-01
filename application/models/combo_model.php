@@ -91,4 +91,8 @@
             $q=$this->db->query("select Kode from invoice order by Kode desc limit 1");
             return $q->result();
         }
+		function get_terimabyr(){
+            $q=$this->db->query("select Kode from terima_bayar order by Kode desc limit 1");
+            return $q->result();
+        }
 	}
