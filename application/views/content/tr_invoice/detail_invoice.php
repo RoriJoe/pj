@@ -1,40 +1,43 @@
-<div class="table CSSTabel" style="overflow: auto; height: 195px">
+<div class="table CSSTabel">
 <table id="tb_detail">
     <thead>
-        <th>Kode Barang</th>
+        <th>Kode</th>
         <th>Nama Barang</th>
-        <th>Qty</th>
         <th>Satuan</th>
-        <th>Harga Satuan</th>
-        <th>Jumlah</th>
+        <th>Qty</th>
+        <th>Hrg Satuan (Rp)</th>
+        <th>Jumlah (Rp)</th>
         <th>Keterangan</th>
     </thead>
-    <tbody>
+    <tbody id="itemlist">
     <?php
     $i=1;
     foreach($hasil as $row)
     {
+        $Harga = number_format($row->Harga, 0, ',', '.');
+        $qty = $row->Qty1;
+        $Jumlah = number_format($row->Harga*$qty, 0, ',', '.');
         echo "<tr>
         <td>
-            <input type='text' class='span2' id='kode_brg$i' id='appendedInputButton' name='kode_brgd' style='width:70px' value='$row->Kode_Brg' disabled='true'/> 
+            $row->Kode_Brg
         </td>
         <td>
-            <input type='text' name='nama_brg' id='nama_brg$i' style='width:100px' value='$row->Nama' disabled='true'/>
+            $row->Barang $row->Ukuran 
         </td>
         <td>
-            <input type='text' name='qty_brg' id='qty_brg$i' style='width:30px' value='$row->Qty' disabled='true'/>
+            $row->Satuan1
         </td>
         <td>
-            <input type='text' name='satuan_brg' id='satuan_brg$i' style='width:70px' value='$row->Satuan1' readonly='true'/>
+            $row->Qty1
         </td>
         <td>
-            <input type='text' name='harga_brg' id='harga_brg$i' style='width:70px' value='$row->Harga' disabled='true'/>
+            <input type='text' name='harga_brg' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$Harga' readonly='true'/>
         </td>
         <td>
-            <input type='text' name='jumlah' id='jumlah_brg$i' style='width:70px' value='$row->Jumlah' disabled='true'/>
+            <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$Jumlah' disabled='true'/>
         </td>
         <td>
-            <input type='text' name='keterangan' id='keterangan_brg$i' style='width:80px' value='$row->Keterangan' disabled='true'/>
+            $row->Keterangan
         </td>
         </tr>
         ";
@@ -43,3 +46,16 @@
     </tbody>
 </table>
 </div>
+
+<script type="text/javascript">
+var oTable = $('#tb_detail').dataTable( {
+    "sScrollY": "180px",
+    "sScrollYInner": "100%",
+    "sScrollX": "100%", //panjang width
+    "sScrollXInner": "100%", //overflow dalem
+    "bPaginate": false,
+    "bLengthChange": false,
+    "bFilter": false,
+    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+} );
+</script>

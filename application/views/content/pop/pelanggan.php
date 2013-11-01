@@ -65,8 +65,6 @@
             <td colspan="4">
                 <div id="konfirmasi2" class="sukses"></div>
                 <br/>
-                <button id="savePelanggan" class="btn btn-primary" mode="add">Save</button>
-                <button id="cencelPelanggan" class="btn" type="reset">Cancel</button>
             </td>
         </tr>
     </table>

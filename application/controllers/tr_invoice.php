@@ -40,24 +40,52 @@
             echo $no;
         }
 
-        function get_so(){
-        	$temp="";
-        	$id = $this->input->post('so');
-        	$result = $this->tr_invoice_model->get_so($id);
-        	foreach ($result as $rr)
+        function getSJ(){
+            $id=$this->input->post('id');
+            $query = $this->tr_invoice_model->get_h_invoice($id);
+            foreach($query as $row)
             {
-                $temp=$rr->Perusahaan."|".$rr->Kode_Plg."|".$rr->Alamat1."|".$rr->No_Do;
-            }
-            echo $temp;
-        }
-        function Detail_SO(){ //viewdo utk tabel detail DO
-        	$this->load->model('tr_do_model');
-            $so=$this->input->post('so');
+                $originalDate = $row->Tgl;
+                $dmy = date("d-m-Y", strtotime($originalDate));
 
-            $data['hasil']=$this->tr_do_model->get_detail_do($so);
-            $data['kode']=$so;
+                $final['Perusahaan'] = $row->Perusahaan;
+                $final['Kode_Sj'] = $row->Kode_SJ;
+                $final['Term'] = $row->Term;
+                $final['Alamat'] = $row->Alamat1;
+                $final['Tanggal'] = $dmy;
+
+                $final['Total'] = $row->Total;
+                $final['Disc'] = $row->Discount;
+                $final['Dpp'] = $row->Dpp;
+                $final['Ppn'] = $row->Ppn;
+                $final['Grand'] = $row->Grand;
+
+            }
+            echo json_encode($final);
+        }
+
+        function retrieveTotal(){
+            $id=$this->input->post('id');
+            $query = $this->tr_invoice_model->get_h_so($id);
+            $data['message']=array();
+            foreach($query as $row)
+            {
+                $final['Total'] = $row->Total;
+                $final['Disc'] = $row->discount;
+                $final['Dpp'] = $row->dpp;
+                $final['Ppn'] = $row->ppn;
+                $final['Grand'] = $row->grandttl;            
+            }
+            echo json_encode($final);
+        }
+
+        function Detail_SJ(){ //viewdo utk tabel detail DO
+            $sj=$this->input->post('sj');
+
+            $data['hasil']=$this->tr_invoice_model->get_detail_sj($sj);
             $this->load->view("content/tr_invoice/detail_invoice",$data);
         }
+
         //SAVE ADD NEW TRIGGER
         function save($modes)
         {
@@ -68,20 +96,36 @@
             $term     	= $this->input->post('term');
             $empty  	= empty($empty) ? NULL : $empty;
 
+            $to = $this->input->post('to');            
+            $disc = $this->input->post('disc');
+            $dpp = $this->input->post('dpp');
+            $ppn = $this->input->post('ppn');
+            $grant = $this->input->post('grant');
+
             //ADD TO ARRAY FOR SEND TO MODEL
             $data1= array(
                 'Kode'      =>$id,
-                'Kode_SO'   =>$so,
+                'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
-                'Status'    =>$empty
+                'Status'    =>$empty,
+                'Total'     =>$to,
+                'Discount'  =>$disc,
+                'Dpp'       =>$dpp,
+                'Ppn'       =>$ppn,
+                'Grand'     =>$grant
             );
 
             $data2= array(
-                'Kode_SO'   =>$so,
+                'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
-                'Status'    =>$empty
+                'Status'    =>$empty,
+                'Total'     =>$to,
+                'Discount'  =>$disc,
+                'Dpp'       =>$dpp,
+                'Ppn'       =>$ppn,
+                'Grand'     =>$grant
             );
 
             if($modes=="add"){
@@ -94,7 +138,7 @@
                     echo "gagal";
                 }
             }else if($modes=="edit"){
-                $in = $this->tr_invice_model->update($data2,$id);
+                $in = $this->tr_invoice_model->update($data2,$id);
                 if($in == "ok")
                 {
                     echo "ok";

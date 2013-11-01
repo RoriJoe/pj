@@ -55,6 +55,13 @@
 				$originalDate2 = $row->Tgl_kirim;
 				$dmy2 = date("d-m-Y", strtotime($originalDate2));
 
+                $tgl2 = '';
+                if ($originalDate2 != null){
+                    $tgl2 = $dmy2;
+                }else{
+                    $tgl2 = '';   
+                }
+
                 $final['Tgl_Kirim'] = $dmy2;
                 $final['Tgl_Po'] = $dmy1;
                 $final['Permintaan'] = $row->Permintaan;
@@ -103,6 +110,12 @@
             $po         = $this->input->post('po');
             $_tgl1      = date('Y-m-d', strtotime($this->input->post('_tgl1')));
             $_tgl2      = date('Y-m-d', strtotime($this->input->post('_tgl2')));
+            $tgl2 = '';
+            if ($_tgl2 != null){
+                $tgl2 = $_tgl2;
+            }else{
+                $tgl2 = '';
+            }
             $cur        = $this->input->post('cur');
             $kd_gud     = $this->input->post('kd_gud');
             $proy       = $this->input->post('proy');
@@ -117,7 +130,7 @@
             $data1= array(
                 'Kode'          =>$po,
                 'Tgl_po'        =>$_tgl1,
-                'Tgl_kirim'     =>$_tgl2,
+                'Tgl_kirim'     =>$tgl2,
                 'Permintaan'    =>$permintaan,
                 'Currency'      =>$cur,
                 'Urgent'        =>$urg,
@@ -131,7 +144,7 @@
 
             $data2= array(
                 'Tgl_po'        =>$_tgl1,
-                'Tgl_kirim'     =>$_tgl2,
+                'Tgl_kirim'     =>$tgl2,
                 'Permintaan'    =>$permintaan,
                 'Currency'      =>$cur,
                 'Urgent'        =>$urg,

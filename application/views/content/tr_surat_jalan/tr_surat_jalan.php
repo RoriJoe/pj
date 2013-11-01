@@ -55,6 +55,12 @@
                 </td>
             </tr>
             <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <label class="checkbox">
+                        <input type="checkbox" id="ambil" name="ambil" onclick="change()"> Ambil Sendiri
+                    </label>
+                </td>
                 <td>Nomor Mobil</td>
                 <td>
                     <div id="mobil">
@@ -62,11 +68,6 @@
                             <option value = ''> -- Pilih Mobil-- </option>"
                         </select>
                     </div>
-                </td>
-                <td colspan="2">
-                    <label class="checkbox">
-                        <input type="checkbox" id="ambil" name="ambil" onclick="change()"> Ambil Sendiri
-                    </label>
                 </td>
             </tr>
         </table>
@@ -93,7 +94,7 @@
 <div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
+    <h3 id="myModalLabel">List Barang <input type="text" id="SearchBarang" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_barang"></div>
@@ -103,7 +104,7 @@
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Pelanggan</h3>
+    <h3 id="myModalLabel">List Pelanggan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_pelanggan"></div>
@@ -217,18 +218,14 @@ function listBarang(){
 
 //GET POPUP Barang
 function getBarang(){
-var y = "";
-    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    y = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
-    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
-    alert(y);
-    var row = filter;
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
 
+    var row = filter;
     var arrs = document.getElementsByName('kode_brg[]');
 
     found_flag = false;
     for (i = 0; i < arrs.length; i++) {
-        if (arrs[i].value === x) {
+        if (arrs[i].value === id) {
             found_flag = true;
             break;
         }
@@ -236,11 +233,20 @@ var y = "";
 
     if (found_flag === true)
     {
-        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada dalam list');
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
-        $('#kode_brg'+row).val(x);
-        $('#brg_ukur'+row).val(z+' '+y);  
-    }
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
+            data :{id:id},
+            dataType: 'json',
+            success:
+            function(msg){
+                $('#kode_brg'+row).val(id);
+                $('#brg_ukur'+row).val(msg.Nama+' '+msg.Ukuran);  
+            }
+        }); 
+    }  
 }
 //GET PopUp Pelanggan
 function getPelanggan(){
@@ -403,7 +409,10 @@ function cek_kirim(){
             $('#kirim').val(msg.Kirim);
             if($('#kirim').val() > 0){
                 document.getElementById('batal').style.visibility = 'visible';
+            }else{
+                document.getElementById('batal').style.visibility = 'hidden';
             }
+
         }
     });
 }
@@ -504,6 +513,7 @@ $("#save").click(function(){
 
     //detail SJ
     var kd_brg = new Array();
+    var kd_brgSj = new Array();
     var nama = new Array();
     var nbu = new Array();
     var qty = new Array();
@@ -513,6 +523,7 @@ $("#save").click(function(){
     var totaltx = table.rows.length-1;
     for(var i=1;i<=totaltx;i++){
         kd_brg[i-1] = $('#kode_brg'+i).val();
+        kd_brgSj[i-1] = $('#kode_brgSj'+i).val();
         nama[i-1] = $('#brg_ukur'+i).val();
         nbu[i-1] = $('#nbu'+i).val();
         qty[i-1] = $('#qty'+i).val();
@@ -527,7 +538,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/tr_surat_jalan/insertheader",
                 data :{sj:sj,_tgl:_tgl,_do:_do,gg:gg,pn:pn,po:po,ot:ot,mbl:mbl,ket:ket,
-                        kd_brg:kd_brg, nama:nama, nbu:nbu, qty:qty, ktr:ktr, totaltx:totaltx
+                        kd_brg:kd_brg, kd_brgSj:kd_brgSj, nama:nama,qty:qty, ktr:ktr, totaltx:totaltx
                 },
         
                 success:
@@ -559,7 +570,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/tr_surat_jalan/update2",
                 data :{sj:sj,_tgl:_tgl,_do:_do,gg:gg,pn:pn,po:po,ot:ot,mbl:mbl,ket:ket,
-                        kd_brg:kd_brg, nama:nama, nbu:nbu, qty:qty, ktr:ktr, totaltx:totaltx
+                        kd_brg:kd_brg,kd_brgSj:kd_brgSj, nama:nama, qty:qty, ktr:ktr, totaltx:totaltx
                 },
         
                 success:

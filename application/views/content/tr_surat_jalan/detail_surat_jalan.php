@@ -14,7 +14,8 @@
     $i=1;
     foreach($hasil as $row)
     {
-	
+        $namaSJ = htmlentities($row->Barang_SJ);	
+        $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);    
        echo "<tr>
         <td>
             <div class='input-append' style='margin-bottom:0;'>
@@ -24,12 +25,13 @@
         </td>
         <td>
             <div class='input-append' style='margin-bottom:0;'>
-                <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur[]' style='width:140px' value='$row->Nama $row->Ukuran' disabled='true'/>
+                <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur[]' style='width:140px' value=\"".$ukuran."\" disabled='true'/>
                 <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
         <td>
-            <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:140px' value='$row->Barang_SJ' disabled='true'/>
+            <input type='hidden' id='kode_brgSj$i' name='kode_brgSj[]' value='$row->Kode_BrgSj'/>
+            <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:140px' value=\"".$namaSJ."\" disabled='true'/>
         </td>
         <td>
             <input type='hidden' id='last_qty$i' value='$row->Qty'/>
@@ -137,7 +139,7 @@ function validAct(row){
     $('#qty'+row).bind('textchange', function (event){
         var q = $(this).val();
         var qty_before = $("#last_qty"+row).val();
-        if(q > qty_before){
+        if(q > parseInt(qty_before)){
             bootstrap_alert.warning("Qty tidak boleh lebih besar dari Qty di SO");
             $('#save').attr('disabled',true);
         } else{

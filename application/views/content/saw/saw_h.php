@@ -1,14 +1,5 @@
 <script type="text/javascript">
 function autogen(){
-    $('#add').attr('mode','new');
-
-    $('#save').attr('disabled',true);
-    $('#cancel').attr('disabled',true);
-    $('#add').attr('disabled',true);
-    $('#delete').attr('disabled', true);
-
-    $("#noSaw").attr('disabled',false);
-
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/saw/auto_gen",
@@ -152,9 +143,6 @@ function detailSaw(){
 
 </script>
 
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
 <!--//***MAIN FORM-->
 <div class="bar">
     <p>Form Pendataan Stock Opname <i id="icon" class='icon-chevron-down icon-white'></i></p>
@@ -191,14 +179,18 @@ function detailSaw(){
        </tr>
     </table>
 </form>
-<div id="detail" style="height: 215px;"></div>
+<hr style="margin:0;" />
+<div id="detail"></div>
+<!--**NOTIFICATION AREA**-->
+<div id="konfirmasi" class="sukses"></div>
+
 <div style="margin-top: 10px;"> 
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
     <button id="delete" class="btn" type="submit">Delete</button>
     <button id="cancel" class="btn" type="submit">Cancel</button>
-    <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addRow('tb3')"><i class="icon-plus"></i></button>
-    <button id="print" class="btn" onclick="alert('Fungsi Print masih dalam pengembangan :D')" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
-    
+
+    <button id="print" class="btn" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
+    <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
 </div>
 
 </div>
@@ -233,15 +225,28 @@ function detailSaw(){
   </div>
 </div>
 
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$( "#_tgl" ).datepicker( "setDate", new Date());
-	addBarang();
     listSaw();
     autogen();
-    validation_engine();
-    key();
-	
+    validation();	
+    resetForm();
+});
+
+function resetForm(){
+    $( "#_tgl" ).datepicker( "setDate", new Date());
+    $('#delete').attr('disabled', true);
+    $("#noSaw").attr('disabled',false);
+    $('#save').attr('mode','add');
+    $('#cancel').attr('disabled',false);
+    $('#save').attr('disabled',false);
+}
+
+$('#loadBtn')
+.click(function () {
+    loadBarang();
 });
 
 function listSaw(){
@@ -256,15 +261,9 @@ function listSaw(){
     });
 }
 
-$("#cancel").click(function(){
-    $('#formID').each(function(){
-        this.reset();
-    });
-	autogen();
-	addBarang();
-    
-    document.getElementById('add').style.visibility = 'visible';
-});
+function loadBarang(){
+    addBarang();
+}
 
 //GET POPUP Barang
 function getGudang(){
@@ -302,129 +301,18 @@ function getBarang(){
     }
 }
 
-function addRow(tableID) {
-var mode = $('#add').attr("mode");
+$("#cancel").click(function(){
+    $('#formID').each(function(){
+        this.reset();
+    });
+    autogen();
+    resetForm();
+    //document.getElementById('add').style.visibility = 'visible';
+});
 
-if (mode == "new"){
-    $('#tb3 tbody').empty();
-}    
-var table = document.getElementById(tableID);
-var rowCount = table.rows.length;
-var last = rowCount;
-
-    var table = document.getElementById(tableID);
-
-    var rowCount = table.rows.length;
-    var row = table.insertRow(rowCount);
-    
-    //KOLOM 1
-    var cell1 = row.insertCell(0);
-    var iDiv2 = document.createElement("div");
-    iDiv2.className = "input-append";
-    iDiv2.id="kode_brg[]";
-    
-    var element0 = document.createElement("input");
-    element0.type = "text";
-    element0.name="kode_brgd";
-    element0.className="validate[required]";
-    element0.className="span2"; 
-    element0.id="kode_brg"+last;
-    element0.disabled = "true";
-    element0.setAttribute("onkeypress", "validAct("+last+")");
-    element0.style.width = "70px";
-    
-    var filter = document.createElement("a");
-    filter.className="btn btn-tbl";
-    filter.id="f_brg"+last;
-    filter.href="#myModal2";
-    filter.setAttribute("onclick", "getDetail("+last+")");
-    filter.setAttribute("role", "button");
-    filter.setAttribute("data-toggle", "modal");
-    var iIcon3 = document.createElement("i");
-    iIcon3.className = "icon-filter";
-    
-    filter.appendChild(iIcon3);
-    iDiv2.appendChild(element0);
-    iDiv2.appendChild(filter);
-    cell1.appendChild(iDiv2);
-
-    //KOLOM 2
-    var cell1 = row.insertCell(1);
-    var element1 = document.createElement("input");
-    element1.type = "text";
-    element1.name = "nama_brg[]";
-    element1.disabled = "true";
-    element1.id="nama_brg"+last;
-    element1.style.width = "95px";
-    cell1.appendChild(element1);
-    
-    //KOLOM 3
-    var cell2 = row.insertCell(2);
-    var element2 = document.createElement("input");
-    element2.type = "text";
-    element2.name = "ukuran_brg[]";
-    element2.disabled = "true";
-    element2.id="ukuran_brg"+last;
-    element2.style.width = "75px";
-    cell2.appendChild(element2);
-    
-    //KOLOM 4
-    var cell3 = row.insertCell(3);
-    var element3 = document.createElement("input");
-    element3.type = "text";
-    element3.name = "qty_brg";
-    element3.id="qty_brg"+last;
-    element3.setAttribute("onkeypress", "validAct("+last+")");
-    element3.style.width = "45px";
-    cell3.appendChild(element3);
-   
-    //KOLOM 5
-    var cell5 = row.insertCell(4);
-    var element5 = document.createElement("input");
-    element5.type = "text";
-    element5.name = "satuan[]";
-    element5.id="satuan_brg"+last;
-    element5.disabled = "true";
-    element5.style.width = "80px";
-    cell5.appendChild(element5);
-    
-    //KOLOM 6
-    var cell6 = row.insertCell(5);
-                
-    var iIcon1 = document.createElement("i");
-    iIcon1.className = "icon-ok";
-    iIcon1.id="icon"+last;
-    var iIcon2 = document.createElement("i");
-    iIcon2.className = "icon-trash";
-    
-    var iAnchor1 = document.createElement("a");
-    iAnchor1.className = "btn";
-    iAnchor1.href = "#";
-    iAnchor1.setAttribute('onclick', 'editRow('+last+')')
-    iAnchor1.appendChild(iIcon1);
-    var iAnchor2 = document.createElement("a");
-    iAnchor2.className = "btn";
-    iAnchor2.setAttribute('onclick', 'deleteRow(this)')
-    iAnchor2.href = "#";
-    iAnchor2.appendChild(iIcon2);
-    
-    cell6.appendChild(iAnchor1);
-    cell6.appendChild(iAnchor2);
-}
-
-//ALERT
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-error" style="position:absolute; width:52%; "><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(5000).addClass("in").fadeOut(3000);
-}
-bootstrap_alert.success = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-success" style="position:absolute; width:52%"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-    $(".alert").delay(1500).addClass("in").fadeOut(5000);
-}
-bootstrap_alert.info = function(message) {
-    $('#konfirmasi').html('<div class="alert alert-info" style="position:absolute; width:52%;"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
-}
+$('#print').click(function () {
+    bootstrap_alert.info('fungsi print dalam pengerjaan');
+});
 
 //Save Click
 $("#save").click(function(){
@@ -471,11 +359,10 @@ $("#save").click(function(){
                     $('#formID').each(function(){
                         this.reset();
                     });
-					addBarang();
                     autogen();
                     listSaw();
                     detailSaw();
-                    $('#save').attr('mode','add');
+                    resetForm();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
@@ -489,7 +376,7 @@ $("#save").click(function(){
     else if(_mode == "edit")
     { 
         if(_gd == 0){
-        bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else 
         if($("#formID").validationEngine('validate'))
@@ -513,7 +400,8 @@ $("#save").click(function(){
                     autogen();
                     listSaw();
                     detailSaw();
-                    $('#save').attr('mode','add');
+                    //$('#save').attr('mode','add');
+                    resetForm();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
@@ -530,29 +418,47 @@ $("#save").click(function(){
 $("#delete").click(function(){
     var noSaw = $('#noSaw').val();
 
-     $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/saw/delete",
-        data :{noSaw:noSaw
-        },
+    PlaySound('beep');
+    var id = $('#noSaw').val();
+    var pr = $('#_tgl').val();
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode SO: <b>"+id+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/saw/delete",
+                        data :{noSaw:noSaw
+                        },
 
-        success:
-        function(msg)
-        {
-            if(msg == "ok")
-            {
-                bootstrap_alert.success('<b>Sukses</b> Data telah dihapus');
-                $('#formID').each(function(){
-                    this.reset();
-                });
-               listSaw();
-                detailSaw();
-               autogen();
-			   addBarang();
-               $('#save').attr('mode','add');
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {
+                                bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                listSaw();
+                                detailSaw();
+                                autogen();
+                                resetForm();
+                            }
+                        }
+                    });
+                }
             }
         }
-        });
+    });
 });
 
 </script>

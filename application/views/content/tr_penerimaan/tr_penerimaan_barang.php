@@ -100,7 +100,7 @@
 <div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
+    <h3 id="myModalLabel">List Barang <input type="text" id="SearchBarang" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_barang"></div>
@@ -115,6 +115,10 @@
   <div class="modal-body">
     <div id="add_gudang"></div>
   </div>
+  <div class="modal-footer">
+        <button id="saveGudang" class="btn btn-primary" mode="add">Save</button>
+        <button id="cacGudang" class="btn" type="reset">Cancel</button>
+    </div>
 </div>
 
 
@@ -322,10 +326,7 @@ function listBarang(){
 
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
-    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
-    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
     
     var row = filter;
     
@@ -333,7 +334,7 @@ function getBarang(){
 
     found_flag = false;
     for (i = 0; i < arrs.length; i++) {
-        if (arrs[i].value === x) {
+        if (arrs[i].value === id) {
             found_flag = true;
             break;
         }
@@ -341,12 +342,21 @@ function getBarang(){
 
     if (found_flag === true)
     {
-        bootstrap_alert.warning('<b>Gagal Menambahkan Barang!</b> Barang sudah ada dalam List');
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
     } else {
-        $('#kode_brg'+row).val(x);
-        $('#nama_brg'+row).val(z +" "+p); 
-        $('#harga_brg'+row).val(o); 
-    }  
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
+            data :{id:id},
+            dataType: 'json',
+            success:
+            function(msg){
+                $('#kode_brg'+row).val(id);
+                $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
+                $('#harga_brg'+row).val(msg.Harga); 
+            }
+        }); 
+    }   
 }
  function addGudang(){
     $('#modalGudang').modal('hide');
@@ -595,8 +605,8 @@ function addRow() {
     $count = $("tbody#itemlist tr").length+1;
 
     items += "<tr>";
-    items += "<td width='20%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='kode_brg"+$count+"' id='appendedInputButton' name='kode_brg[]' onkeypress='validAct($)' maxlength='20' style='width:100%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='30%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='nama_brg"+$count+"' id='appendedInputButton' style='width:98%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='20%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='kode_brg"+$count+"' id='appendedInputButton' name='kode_brg[]' onkeypress='validAct($)' maxlength='20' style='width:83%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='40%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='nama_brg"+$count+"' id='appendedInputButton' style='width:140%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
     items += "<td width='10%'><input type='text' name='Nama' id='qty_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' style='width:45px' disabled='true'/></td>";
     items += "<td width='20%'><input type='text' name='keterangan' id='keterangan_brg"+$count+"' class='validate[required]' maxlength='22' style='width:80%' disabled='true'/></td>";
     items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn btn-small' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";

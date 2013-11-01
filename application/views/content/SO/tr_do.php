@@ -58,7 +58,7 @@
 </form>
     <div id="hasil2" style="height: 238px;"></div>
 
-    <div style="float: right; margin-right: 50px;">
+    <div style="float: right; margin-right: 75px;">
         <table>
         <tr>
         	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
@@ -114,7 +114,7 @@
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Pelanggan</h3>
+    <h3 id="myModalLabel">List Pelanggan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
     <div id="list_pelanggan"></div>
@@ -127,10 +127,10 @@
 <div id="modalBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
+    <h3 id="myModalLabel">List Barang <input type="text" id="SearchBarang" placeholder="Search"></h3>
   </div>
   <div class="modal-body">
-    <div id="list_barang"></div>
+        <div id="list_barang"></div>
   </div>
 </div>
 
@@ -142,9 +142,14 @@
   <div class="modal-body">
     <div id="add_pelanggan"></div>
   </div>
+  <div class="modal-footer">
+    <button id="savePelanggan" class="btn btn-primary" mode="add">Save</button>
+    <button id="cencelPelanggan" class="btn" type="reset">Cancel</button>
+  </div>
 </div>
 
 <div id="hasil"></div>
+<div id="list_barang"></div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/accounting.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
@@ -367,13 +372,13 @@ function listPelanggan(){
 //Table Barang
 function listBarang(){
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
-    data :{},
-    success:
-    function(hh){
-        $('#list_barang').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+        data :{},
+        success:
+        function(hh){
+            $('#list_barang').html(hh);
+        }
     });   
 }
 
@@ -404,19 +409,17 @@ function getPelanggan(){
 }
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    /*var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
     var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
     var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
-    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');
+    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');*/
     
     var row = filter;
-    
     var arrs = document.getElementsByName('kode_brgd');
-
     found_flag = false;
     for (i = 0; i < arrs.length; i++) {
-        if (arrs[i].value === x) {
+        if (arrs[i].value === id) {
             found_flag = true;
             break;
         }
@@ -424,12 +427,22 @@ function getBarang(){
 
     if (found_flag === true)
     {
-        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada dalam detail');
     } else {
-        $('#kode_brg'+row).val(x);
-        $('#satuan_brg'+row).val(y); 
-        $('#nama_brg'+row).val(z +" "+p); 
-        $('#harga_brg'+row).val(o); 
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
+            data :{id:id},
+            dataType: 'json',
+            success:
+            function(msg){
+                $('#kode_brg'+row).val(id);
+                $('#last_qty'+row).val(msg.Qty_Jual);
+                $('#satuan_brg'+row).val(msg.Satuan); 
+                $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
+                $('#harga_brg'+row).val(msg.Harga); 
+            }
+        }); 
     }  
 }
 
@@ -452,7 +465,7 @@ function addRow() {
     items += "<tr>";
     items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
     items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:134px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='8%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
+    items += "<td width='8%'><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
     items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";
@@ -563,7 +576,7 @@ $("#save").click(function(){
             bootstrap_alert.warning('<b>Gagal!</b> Data Pelanggan Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else
-     	if($("#formID").validationEngine('validate') && totalRow != 0)
+     	if($("#formID").validationEngine('validate') && totalRow != 0 && grant != '')
         {
             $.ajax({
             type:'POST',

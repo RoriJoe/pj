@@ -29,7 +29,7 @@
         }
 
         function get_detail_do($id){
-            $this->db->select('do_d.*, barang.Nama, barang.Satuan1');
+            $this->db->select('do_d.*, barang.Nama, barang.Ukuran, barang.Satuan1, barang.Qty1');
             $this->db->from('do_d');
             $this->db->join('barang','barang.Kode = do_d.Kode_brg');
             $this->db->where($this->primary_key, $id);

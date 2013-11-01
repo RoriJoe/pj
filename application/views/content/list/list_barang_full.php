@@ -1,5 +1,5 @@
 <div class="table table-hover CSSTabel">
-<table id="tb5">
+<table id="popBarangFull">
     <thead>
         <th>Kode Barang</th>
         <th>Nama</th>
@@ -16,13 +16,7 @@
         <td>$row->Nama $row->Ukuran</td>
         <td>$row->Satuan1</td>
         <td>$row->Qty1</td>
-        <td><input type='radio' name='optionsRadiosBarang'
-                kd='$row->Kode' 
-                satuan='$row->Satuan1' 
-                nama='$row->Nama' 
-                ukuran='$row->Ukuran'
-                harga='$row->Harga_Jual'
-                value='$row->Kode'></td>
+        <td><input type='radio' name='optionsRadiosBarang' value='$row->Kode'></td>
         </tr>
         ";
     }   ?>
@@ -32,7 +26,6 @@
 
 <script>
 $('#item_brg tr').dblclick(function (e) {
-
     $(this).find('td input[type=radio]').prop('checked', true);
     var checkRadio = $(this).find('td input[type=radio]:checked').val();
     getBarang();
@@ -44,17 +37,25 @@ $('input:radio[name="optionsRadiosBarang"]').change(function(){
     $('#modalBarang').modal('hide');
 });
  
-var oTable = $('#tb5').dataTable( {
-    "sScrollYInner": "110%",
+var lfTable = $('#popBarangFull').dataTable( {
+   "aaSorting": [[ 1, "asc" ]],
+    "bScrollCollapse": true,
     "bPaginate": true,
-    "bLengthChange": true,
-    "aaSorting": [[ 2, "asc" ]],
+    "bAutoWidth": false,
+    "bLengthChange": false,
+    "bInfo": false,
     "oLanguage": {
          "sSearch": "",
          "sLengthMenu": "View _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
-    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+    "bDeferRender": true,
+    "sPaginationType": "full_numbers",
+    "sDom": '<"top"i>rt<"bottom"lp><"clear">'
 } );
+
+$('#SearchBarang').keyup(function(){
+      lfTable.fnFilter( $(this).val() );
+})
 </script>

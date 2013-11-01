@@ -17,6 +17,8 @@
 	    $i=1;
 	    foreach($hasil as $row)
 	    {
+            $harga_satuan = number_format($row->Harga, 0, ',', '.');
+            $jumlah_nilai = number_format($row->Nilai, 0, ',', '.');
 	        echo "<tr>
 	        <td width='17%'>
 	            <div class='input-append'>
@@ -37,10 +39,10 @@
 	            <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:30px' value='$row->Jumlah' disabled='true'/>
 	        </td>
 	        <td width='17%'>
-	            <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:95px;text-align:right;' value='$row->Harga' disabled='true' />
+	            <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:95px;text-align:right;' value='$harga_satuan' disabled='true' />
 	        </td>
 	        <td width='17%'>
-	            <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:95px;text-align:right;' value='$row->Nilai' disabled='true'/>
+	            <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:95px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
 	        </td>
 	        <td width='15%'>
 	        <div class='btn-group' style='margin-bottom:0;'>

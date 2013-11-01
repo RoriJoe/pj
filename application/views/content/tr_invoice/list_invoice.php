@@ -1,26 +1,18 @@
-<div class="table CSSTabel table-list table-hover" style="height: 395px;">
+<div class="table table-hover CSSTabel tb-barang" style="width:25%;">
     <table id="tbl_list">
         <thead>
             <th>No Invoice</th>
-            <th>Nomor SO</th>
+            <th>Nomor SJ</th>
         </thead>
 
-        <tbody>
+        <tbody id="tb_detail">
         <?php foreach($hasil as $row)
-        {   $originalDate1 = $row->Tgl;
-            $dmy1 = date("d-m-Y", strtotime($originalDate1));
-            echo
+        {   echo
             "<tr
                 kode = $row->Kode
-                so = $row->Kode_SO
-                term = $row->Term
-                tgl = $dmy1
-                plg = $row->Perusahaan
-                alamat = $row->Alamat1
             >
-
                 <td>$row->Kode</td>
-                <td>$row->Kode_SO</td>
+                <td>$row->Kode_SJ</td>
             </tr>";
         } ?>
         </tbody>
@@ -30,35 +22,32 @@
 <script type="text/javascript">
 $('#tbl_list tr').click(function (e) {
     $('#delete').attr('disabled', false);
+    $('#no_invo').attr('disabled', true);
+    document.getElementById('f_plg').style.visibility = 'hidden';
     
-    var id = $(this).attr("kode"); 
-    var tgl = $(this).attr("tgl");
-    var so = $(this).attr("so");
-    var term = $(this).attr("term");
-    var plg = $(this).attr("plg");
-    var alamat = $(this).attr("alamat");
-    
+    var id = $(this).attr("kode");     
     $('#no_invo').val(id);
-    $('#_tgl1').val(tgl);
-    $('#so').val(so);
-    $('#term').val(term);
-    $('#plg').val(plg);
-    $('#al').val(alamat);
-
-    
+    show_sj("view");
+    getFormInvoice(id);
     $('#save').attr('mode','edit');
-    detail_SO();
+    jQuery(".hide-con").show();
 });
 
 
 var oTable = $('#tbl_list').dataTable( {
-    "sScrollY": "290px",
+    "sScrollY": "380px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
-    "bLengthChange": false,
+    "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": " _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

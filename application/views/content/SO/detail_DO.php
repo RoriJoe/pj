@@ -17,28 +17,33 @@
         $i=1;
         foreach($hasil as $row)
         {
-        	
+            $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);  
+            $harga_satuan = number_format($row->Harga, 0, ',', '.');
+            $jumlah_nilai = number_format($row->Jumlah, 0, ',', '.');
             echo "<tr>
             <td width='15%'>
                 <div class='input-append'>
+                    <input type='hidden' id='last_kode$i' value='$row->Kode_Brg'/>
                     <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' value='$row->Kode_Brg' disabled='true'/>
                     <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>    
             </td>
             <td width='22%'>
                 <div class='input-append'>
-                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:134px' value='$row->Nama' readonly='true'/>
+                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:134px' value=\"".$ukuran."\" readonly='true'/>
                 <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>
             </td>
             <td width='8%'>
+                <input type='hidden' id='cur_qty$i' value='$row->Qty1'/>
+                <input type='hidden' id='last_qty$i' value='$row->Qty'/>
                 <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:35px;text-align:right;' value='$row->Qty' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$row->Harga' disabled='true'/>
+                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$harga_satuan' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$row->Jumlah' disabled='true'/>
+                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
             </td>
             <td width='15%'>
                 <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:88px' value='$row->Keterangan' disabled='true'/>
@@ -173,10 +178,15 @@ function validAct(row){
     $('#qty_brg'+row).bind('textchange', function (event){
         var q = $(this).val();
         var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
-        hasil = q*h;
+        var qty_before = $('#last_qty'+row).val();
 
-        $('#jumlah_brg'+row).val(accounting.formatMoney(hasil, "",0,".")); 
-        getTotal();
+        if(q > parseInt(qty_before)){
+            bootstrap_alert.warning("Persediaan Penjualan untuk Barang ini Max. "+qty_before);
+        } else{
+            hasil = q*h;
+            $('#jumlah_brg'+row).val(accounting.formatMoney(hasil, "",0,".")); 
+            getTotal();
+        }
     });
     
     $('#harga_brg'+row).bind('textchange', function (event){

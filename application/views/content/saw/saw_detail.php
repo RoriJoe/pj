@@ -1,63 +1,39 @@
-<div class=" table  CSSTabel" style="overflow: auto; height: 220px">
+<div class=" table  CSSTabel">
 <table id="tb3">
     <thead>
         <th>Kode Brg</th>
         <th>Nama Brg</th>
-        <th>Ukuran</th>
-        <th>Qty</th>
         <th>Satuan</th>
+        <th>Qty</th>
         <th>Selisih</th>
     </thead>
-    <tbody>
+    <tbody id="tb_detail">
     <?php
     $i=1;
     foreach($hasil as $row)
     {
         echo "<tr>
         <td>
-            <div class='input-append'>
-                <input type='text' class='span2' 
-                id='kode_brg$i' id='appendedInputButton' name='kode_brgd' value='$row->Kode' 
-                onkeypress='validAct($i)' 
-                maxlength='20' 
-                style='width:80px' disabled='true'/>
-                
-                <a href='#myModal3' onclick='getDetail($i)' id='f_brg$i'
-                 role='button' class='btn' data-toggle='modal' 
-                 style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i>
-                </a>
-            </div>    
+                <input type='text' class='span2' style='width:120px;padding: 2px 3px;' id='kode_brg$i' name='kode_brgd' value='$row->Kode' disabled='disabled'/>
         </td>
         
         <td>
-            <input type='text' name='nama_brg' id='nama_brg$i' value='$row->Nama'  
-            class='validate[required]' 
-            onkeypress='validAct($i)' 
-            maxlength='25'
-            style='width:95px' disabled='true'/>
+            $row->Nama $row->Ukuran
         </td>
-        
         <td>
-            <input type='text' name='ukuran_brg' id='ukuran_brg$i' value='$row->Ukuran'
-            class='validate[required]' 
-            style='width:70px' readonly='true'/>
+            $row->Satuan1
         </td>
         <td>
             <input type='text' name='Nama' id='qty_brg$i'  
             onkeypress='validAct($i)' maxlength='5' 
-            class='validate[required]' 
-            style='width:45px' />
-        </td>
-        <td>
-            <input type='text' name='satuan' id='satuan_brg$i' value='$row->Satuan1'  
-            class='validate[required]' maxlength='22' 
-            style='width:80px' disabled='true'/>
+            class='validate[required] span2' 
+            style='width:45px;padding: 2px 3px;' />
         </td>
         <td>
 			<input type='text' name='selisih' id='selisih$i' 
-            class='validate[required]' 
-            style='width:40px' readonly='true'/>
-			<label id='qtyop$i' name='qtyop$i' style='visibility: hidden;'>$row->QtyOp</label>
+            class='validate[required] span2' 
+            style='width:40px;padding: 2px 3px;' readonly='true'/>
+			<input type='hidden' id='qtyop$i' name='qtyop$i' style='visibility: hidden;' value='$row->QtyOp'/>
         </td>
         </tr>
         ";
@@ -102,13 +78,13 @@ function validAct(row){
     //max kode 20
     var userVal = $("#kode_brg"+row).val();
     if(userVal.length == 20){
-        alert("Maximum Kode Barang 20 Karakter");
+        bootstrap_alert.warning("Maximum Kode Barang 20 Karakter");
     } 
     
     //max qty 5
     var qty = $("#qty_brg"+row).val();
     if(qty.length == 5){
-        alert("Maximum Qty 5 Angka");
+        bootstrap_alert.warning("Maximum Qty 5 Angka");
     }   
     
     //disable alfabet di qty
@@ -132,4 +108,22 @@ function validAct(row){
        
     });
 }
+
+var oTable = $('#tb3').dataTable( {
+    "sScrollY": "200px",
+    "sScrollYInner": "100%",
+    "sScrollX": "100%", //panjang width
+    "sScrollXInner": "100%", //overflow dalem
+    "bPaginate": true,
+    "bLengthChange": true,
+    "aaSorting": [[ 1, "asc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": " _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
+    "sPaginationType": "full_numbers",
+    "bInfo": true//Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+} );
 </script>
