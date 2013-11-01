@@ -2,7 +2,7 @@
     <table id="tbl_list">
         <thead>
             <th>No Terima</th>
-            <th>No Invoice</th>
+            <th>Tanggal</th>
         </thead>
 
         <tbody>
@@ -12,15 +12,14 @@
             echo
             "<tr
                 kode = $row->Kode
-                so = $row->Kode_SO
-                term = $row->Term
                 tgl = $dmy1
-                plg = $row->Perusahaan
-                alamat = $row->Alamat1
+                plg = $row->Kode_plg
+				
+				nama = $row->Perusahaan
             >
 
                 <td>$row->Kode</td>
-                <td>$row->Kode_SO</td>
+                <td>$dmy1</td>
             </tr>";
         } ?>
         </tbody>
@@ -30,24 +29,28 @@
 <script type="text/javascript">
 $('#tbl_list tr').click(function (e) {
     $('#delete').attr('disabled', false);
-    
+   
     var id = $(this).attr("kode"); 
     var tgl = $(this).attr("tgl");
-    var so = $(this).attr("so");
-    var term = $(this).attr("term");
+  
     var plg = $(this).attr("plg");
-    var alamat = $(this).attr("alamat");
     
-    $('#no_invo').val(id);
+	var nama = $(this).attr("Nama");
+   
+    $('#no_terima').val(id);
     $('#_tgl1').val(tgl);
-    $('#so').val(so);
-    $('#term').val(term);
-    $('#plg').val(plg);
-    $('#al').val(alamat);
+   
+    $('#kd_plg').val(plg);
+    $('#_pn').val(nama);
 
     
     $('#save').attr('mode','edit');
+	detail_pembayaran();
+	detail_invoice();
     detail_SO();
+	
+	
+	
 });
 
 

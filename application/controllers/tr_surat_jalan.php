@@ -164,11 +164,11 @@
             $_do=$this->input->post('so');
 
 			$kd_brg=$this->input->post('kd_brg');
-			/*  $qty=$this->input->post('qty');
+			$qty=$this->input->post('qty');
 			 $totaltx=$this->input->post('totaltx');
 			 for($i=0;$i<$totaltx;$i++){
-                $this->tr_surat_jalan_model->update_brg($kd_brg[$i],$qty[$i]);
-            } */
+                $this->tr_surat_jalan_model->update_brg2($kd_brg[$i],$qty[$i]);
+            }
             $data= array(
                     'No_Do'=>$_do
             );

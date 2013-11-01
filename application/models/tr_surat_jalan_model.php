@@ -94,6 +94,15 @@
 			$this->db->update('barang');
 
 		}
+		function update_brg2($kdbrg,$qty){
+			
+			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
+			$where = "Kode = '$kdbrg' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
+
+		}
         //model untuk delete
         function delete($sj)
         {
