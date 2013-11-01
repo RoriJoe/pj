@@ -52,7 +52,7 @@
         
         function get_detail_po($id){
             $q = $this->db->query("SELECT po_d.*,
-                barang.Nama, barang.Satuan1
+                barang.Nama, barang.Satuan1, barang.Ukuran
                 FROM po_d
                 LEFT OUTER JOIN barang
                 ON po_d.Kode_barang = barang.Kode

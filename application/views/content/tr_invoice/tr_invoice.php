@@ -56,7 +56,7 @@
     </table>
 </form>
 <div id="hasil2"></div>
-<div id="totalBox" style="float: right; margin-right: 0px; visibility:hidden;">
+<div id="totalBox" style="float: right; margin-right: -35px; visibility:hidden;">
         <table>
         <tr>
             <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>

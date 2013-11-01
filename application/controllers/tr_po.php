@@ -62,7 +62,7 @@
                     $tgl2 = '';   
                 }
 
-                $final['Tgl_Kirim'] = $dmy2;
+                $final['Tgl_Kirim'] = $tgl2;
                 $final['Tgl_Po'] = $dmy1;
                 $final['Permintaan'] = $row->Permintaan;
                 $final['Currency'] = $row->Currency;
@@ -106,15 +106,16 @@
         //SAVE ADD NEW TRIGGER
         function save($modes)
         {
-
+            $myvar  = empty($myvar) ? NULL : $myvar;
             $po         = $this->input->post('po');
             $_tgl1      = date('Y-m-d', strtotime($this->input->post('_tgl1')));
-            $_tgl2      = date('Y-m-d', strtotime($this->input->post('_tgl2')));
+            $tglPo     = $this->input->post('_tgl2');
+
             $tgl2 = '';
-            if ($_tgl2 != null){
-                $tgl2 = $_tgl2;
+            if ($tglPo != ''){
+                $tgl2 = date('Y-m-d', strtotime($this->input->post('tglPo')));
             }else{
-                $tgl2 = '';
+                $tgl2 = $myvar;
             }
             $cur        = $this->input->post('cur');
             $kd_gud     = $this->input->post('kd_gud');

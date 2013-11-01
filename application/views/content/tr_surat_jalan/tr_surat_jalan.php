@@ -407,7 +407,9 @@ function cek_kirim(){
         success:
         function(msg){
             $('#kirim').val(msg.Kirim);
-            if($('#kirim').val() > 0){
+
+            var id2 = $('#_do').val();
+            if($('#kirim').val() > 0 && id2 != "(BATAL)"){
                 document.getElementById('batal').style.visibility = 'visible';
             }else{
                 document.getElementById('batal').style.visibility = 'hidden';

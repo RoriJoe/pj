@@ -45,16 +45,25 @@
         function insert()
         {
             $a=$this->input->post('_bpb');
-            $b=date('Y-m-d', strtotime($this->input->post('_tgl')));
+            //$b=date('Y-m-d', strtotime($this->input->post('_tgl')));
             $c=$this->input->post('_gd');
             $d=$this->input->post('_sp');
             $e=$this->input->post('_ref');
             $f=$this->input->post('po');
 
             $myvar  = empty($myvar) ? NULL : $myvar;
+            $tglPo = $this->input->post('_tgl');
+            $tgl2 = '';
+            if ($tglPo != ''){
+                $tgl2 = date('Y-m-d', strtotime($this->input->post('_tgl')));
+            }else{
+                $tgl2 = $myvar;
+            }
+
+            
             $data= array(
                     'No_Bpb'=>$a,
-                    'Tgl_Bpb'=>$b,
+                    'Tgl_Bpb'=>$tgl2,
                     'No_Reff'=>$e,
                     'Kode_Supp'=>$d,
                     'Kode_Gudang'=>$c,
@@ -93,15 +102,24 @@
         function update()
         {
 			$a=$this->input->post('_bpb');
-            $b=date('Y-m-d', strtotime($this->input->post('_tgl')));
+            //$b=date('Y-m-d', strtotime($this->input->post('_tgl')));
             $c=$this->input->post('_gd');
             $d=$this->input->post('_sp');
             $e=$this->input->post('_ref');
             $f=$this->input->post('po');
 
+            //$myvar  = empty($myvar) ? NULL : $myvar;
             $myvar  = empty($myvar) ? NULL : $myvar;
+            $tglPo = $this->input->post('_tgl');
+            $tgl2 = '';
+            if ($tglPo != ''){
+                $tgl2 = date('Y-m-d', strtotime($this->input->post('_tgl')));
+            }else{
+                $tgl2 = $myvar;
+            }
+
             $data= array(
-                    'Tgl_Bpb'=>$b,
+                    'Tgl_Bpb'=>$tgl2,
                     'No_Reff'=>$e,
                     'Kode_Supp'=>$d,
                     'Kode_Gudang'=>$c,

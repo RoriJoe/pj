@@ -17,6 +17,7 @@
 	    $i=1;
 	    foreach($hasil as $row)
 	    {
+            $ukuran = htmlentities($row->Nama.' '.$row->Ukuran); 
             $harga_satuan = number_format($row->Harga, 0, ',', '.');
             $jumlah_nilai = number_format($row->Nilai, 0, ',', '.');
 	        echo "<tr>
@@ -28,7 +29,7 @@
 	        </td>
 	        <td width='20%'>
 	       		<div class='input-append'>
-	            	<input type='text' name='nama_brg' class='span2' maxlength='22' id='keterangan_brg$i' style='width:120px' value='$row->Nama' disabled='true'/>
+	            	<input type='text' name='nama_brg' class='span2' maxlength='22' id='keterangan_brg$i' style='width:120px' value='$ukuran' disabled='true'/>
 	        		<a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
 	            </div> 
 	        </td>

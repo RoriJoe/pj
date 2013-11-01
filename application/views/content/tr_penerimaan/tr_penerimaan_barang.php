@@ -164,6 +164,7 @@ function autogen(){
     $('#add').attr('disabled',true);
     $('#cancel').attr('disabled',false);
     $('#delete').attr('disabled',true);
+    $('#po').attr('disabled',false);
 
     $.ajax({
     type:'POST',
