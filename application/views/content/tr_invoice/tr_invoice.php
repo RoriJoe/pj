@@ -106,20 +106,6 @@
 <!--@Load table List via AJAX-->
 <div id="list_invoice"></div>
 
-<div id="modalSO" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Sales Order</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_so"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getSO()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -141,10 +127,52 @@ $(document).ready(function(){
     list_invoice();
     autogen();
     validation();
-    barAnimation();
+//    barAnimation();
     displayResult();
     get_sj_list();
 });
+
+function list_invoice(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_invoice/index",
+    data :{},
+    success:
+    function(hh){
+        $('#list_invoice').html(hh);
+    }
+    });
+}
+
+function autogen(){
+    $('#delete').attr('disabled', true);
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_invoice/auto_gen",
+    data :{},
+    success:
+        function(hh){
+            $('#no_invo').val(hh);
+        }
+    });
+}
+
+$(function() {
+    $( "#_tgl1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+    });
+});
+
+
+function displayResult(selTag)
+{
+    tampilDetailInvoice();
+    tampilTotalDo();
+    document.getElementById('totalBox').style.visibility = 'visible';
+}
 
 function show_sj(mode){
     var modes = mode;
@@ -163,18 +191,12 @@ function show_sj(mode){
     }
 }
 
-function displayResult(selTag)
-{
-    tampilDetailInvoice();
-    tampilTotalDo();
-    document.getElementById('totalBox').style.visibility = 'visible';
-}
-
 //Table Detail yang dibawah
 function tampilDetailInvoice(){
     var sj = $('#_sj').val();
     $.ajax({ //utk tabel detail
         type:'POST',
+        async:false,
         url: "<?php echo base_url();?>index.php/tr_invoice/Detail_SJ",
         data :{sj:sj},
         success:
@@ -185,38 +207,112 @@ function tampilDetailInvoice(){
 }
 
 function tampilTotalDo(){
-    var id = $('#_sj').val();
-    $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_invoice/retrieveTotal",
-        data :{id:id},
-        dataType: 'json',
-        success:
-        function(msg){
-            $('#total').val(accounting.formatMoney(msg.Total, "",0,"."));
-            var total_disc = msg.Total*msg.Disc/100;
-            $('#disc').val(msg.Disc);
-            $('#discT').val(accounting.formatMoney(total_disc, "",0,"."));
-            var total_ppn = msg.Dpp*msg.Ppn/100;
-            $('#ppn').val(msg.Ppn);
-            $('#ppnT').val(accounting.formatMoney(total_ppn, "",0,"."));
-            $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
-            $('#granT').val(accounting.formatMoney(msg.Grand, "",0,"."));
-        }
-    }); 
+    var arr = document.getElementsByName('jumlah');
+    var total = 0;
+    for(i=0; i < arr.length; i++){
+        if(parseInt(arr[i].value))
+            total += parseInt(arr[i].value.replace(/\./g, ""));
+    }
+
+    $('#total').val(accounting.formatMoney(total, "",0,"."));
+    $("#dpp").val(accounting.formatMoney(total, "",0,"."));
+    $("#granT").val(accounting.formatMoney(total, "",0,"."));
+    $('#disc').val("");
+    $('#discT').val("");
+    $('#ppn').val("");
+    $('#ppnT').val("");
 }
 
-//GET PopUp Pelanggan
-function getPelanggan(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('kd');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('term');
-    var w = $('input:radio[name=optionsRadios]:checked').attr('alamat');
-    $('#pn').val(x);
-    $('#kd_plg').val(y);
-    $('#al').val(w);
-    $('#term').val(z);
-    get_sj_list(y);
+function hitung(){
+$('#disc').bind('textchange', function (event){    
+    //disableAlpha('ppn');
+    var total = $("#total").val().replace(/\./g, "");
+    var h = $(this).val();
+
+    /*if(temp != 0){
+        var q = temp;
+    } else if(total2 != 0){
+        var q = total2;
+    }*/
+    
+    disc = total*h/100;
+
+    var dpp = total-disc;
+    $("#discT").val(accounting.formatMoney(disc, "",0,"."));
+    $("#dpp").val(accounting.formatMoney(dpp, "",0,"."));
+    $('#ppn').val("");
+    $('#ppnT').val("");
+}); 
+
+$('#discT').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var total = $("#total").val().replace(/\./g, "");
+
+        var h = $(this).val().replace(/\./g, "");
+        
+        disc = (h/total)*100;
+
+        var dpp = total-h;
+        
+        $("#disc").val(disc);
+        $("#dpp").val(accounting.formatMoney(dpp, "",0,"."));
+        //$("#total2").val(q+hasil);  */
+        $('#ppn').val("");
+        $('#ppnT').val("");
+        formatAngka(this,'.');
+    });         
+}
+
+function hitungPPN(){
+    $('#ppn').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var dpp = $("#dpp").val().replace(/\./g, "");
+
+        var h = $(this).val();
+        /* if(temp != 0){
+            var q = temp;
+        } else if(total2 != 0){
+            var q = total2;
+        }
+         */
+        ppn = dpp*h/100;
+
+        var grant = dpp-0+ppn;
+        $("#ppnT").val(accounting.formatMoney(ppn, "",0,"."));
+        $("#granT").val(accounting.formatMoney(grant, "",0,"."));
+    });  
+
+    $('#ppnT').bind('textchange', function (event){    
+        //disableAlpha('ppn');
+        var total = $("#dpp").val().replace(/\./g, "");
+
+        var h = $(this).val().replace(/\./g, "");
+        
+        ppn = (h/total)*100;
+        var dpp = total*1+1*h;
+        
+        $("#ppn").val(ppn);
+        $("#granT").val(accounting.formatMoney(dpp, "",0,"."));
+
+        formatAngka(this,'.');
+    });        
+}
+
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
 }
 
 //PopUp Pelanggan
@@ -232,25 +328,17 @@ function listPelanggan(){
     });   
 }
 
-$(function() {
-    $( "#_tgl1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
-
-function list_invoice(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_invoice/index",
-    data :{},
-    success:
-    function(hh){
-        $('#list_invoice').html(hh);
-    }
-    });
+//GET PopUp Pelanggan
+function getPelanggan(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var y = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    var z = $('input:radio[name=optionsRadios]:checked').attr('term');
+    var w = $('input:radio[name=optionsRadios]:checked').attr('alamat');
+    $('#pn').val(x);
+    $('#kd_plg').val(y);
+    $('#al').val(w);
+    $('#term').val(z);
+    get_sj_list(y);
 }
 
 //Tampilkan SO sesuai pelanggan
@@ -271,18 +359,6 @@ function get_sj_list($user_id){
     });
 }
 
-function autogen(){
-    $('#delete').attr('disabled', true);
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_invoice/auto_gen",
-    data :{},
-    success:
-        function(hh){
-            $('#no_invo').val(hh);
-        }
-    });
-}
 
 function getFormInvoice(IDsj){
     var id = IDsj;
@@ -298,102 +374,20 @@ function getFormInvoice(IDsj){
             $('#term').val(msg.Term);
             $('#al').val(msg.Alamat);
             $('#_sj').val(msg.Kode_Sj);
-
             displayResult();
+
+            $('#total').val(accounting.formatMoney(msg.Total, "",0,"."));
+            var total_disc = msg.Total*msg.Disc/100;
+            $('#disc').val(msg.Disc);
+            $('#discT').val(accounting.formatMoney(total_disc, "",0,"."));
+            var total_ppn = msg.Dpp*msg.Ppn/100;
+            $('#ppn').val(msg.Ppn);
+            $('#ppnT').val(accounting.formatMoney(total_ppn, "",0,"."));
+            $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
+            $('#granT').val(accounting.formatMoney(msg.Grand, "",0,"."));
         }
     });
 }
-
-
-/*
-function lookup_so(){
-$("#so").autocomplete({
-    minLength: 1,
-    source:
-    function(req, add){
-        $.ajax({
-            url: "<?php echo base_url(); ?>index.php/autocomplete/lookup",
-            dataType: 'json',
-            type: 'POST',
-            data: req,
-            success:
-            function(data){
-                if(data.response =="true"){
-                    add(data.message);
-                }
-            },
-        });
-    },
-
-    //tampilkan table detail
-    select:
-    function(event, ui) {
-        $('#so').val(ui.item.value);
-        get_so();
-        detail_SO();
-    },
-});
-}
-/*
-function get_so() {
-    var _do = $('#_do').val();
-    $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_invoice/get_so",
-        data :{_do:_do},
-        success:
-        function(msg){
-            data=msg.split("|");
-            $('#plg').val(data[0]);
-            $('#so').val(data[3]);
-            $('#kd_plg').val(data[1]);
-            $('#al').val(data[2]);
-        }
-    });
-}
-
-function detail_SO(){
-    var so = $('#so').val();
-    $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_invoice/Detail_SO",
-        data :{so:so},
-        success:
-        function(hh){
-           $('#hasil2').html(hh);
-        }
-    });
-}
-
-//Table Gudang
-function list_SO(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_do/viewSO",
-    data :{},
-    success:
-    function(hh){
-        $('#list_so').html(hh);
-    }
-    });   
-}
-
-//GET POPUP SO
-function getSO(){
-    var a = $('input:radio[name=optionsRadios]:checked').val();
-    var b = $('input:radio[name=optionsRadios]:checked').attr('pelanggan');
-    var c = $('input:radio[name=optionsRadios]:checked').attr('kode_plg');
-    var d = $('input:radio[name=optionsRadios]:checked').attr('alamat');
-    var e = $('input:radio[name=optionsRadios]:checked').attr('total');
-
-    $('#so').val(a);
-    $('#kd_plg').val(c);
-    $('#plg').val(b);
-    $('#al').val(d);  
-    $('#total1').val(e);
-    $('#total').val(accounting.formatMoney(e, "Rp ",2,".",","));
-    detail_SO();
-}*/
 
 function reset_form(){
     $('#formID').each(function(){
@@ -424,20 +418,28 @@ $("#save").click(function(){
     var _tgl = $('#_tgl1').val();
     var so = $('#_sj').val();
     var term = $('#term').val();
+
+    var to = $('#total').val().replace(/\./g, ""); 
+    var disc = $('#disc').val();
+    var dpp = $('#dpp').val().replace(/\./g, "");
+    var ppn = $('#ppn').val();
+    var grant = $('#granT').val().replace(/\./g, "");
+
+
     if(mode == "add"){ //add mode
         if($("#formID").validationEngine('validate'))
         {
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_invoice/save/add",
-            data :{id:id,_tgl:_tgl,so:so,term:term},
+            data :{id:id,_tgl:_tgl,so:so,term:term,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant},
 
             success:
             function(msg)
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses!</b> Data Invoice '+id+' berhasil ditambahkan');
                     reset_form();
                     list_invoice();
                 }
@@ -457,7 +459,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_invoice/save/edit",
-            data :{id:id,_tgl:_tgl,so:so,term:term},
+            data :{id:id,_tgl:_tgl,so:so,term:term,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant},
 
             success:
             function(msg)

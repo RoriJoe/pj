@@ -409,7 +409,10 @@ function cek_kirim(){
             $('#kirim').val(msg.Kirim);
             if($('#kirim').val() > 0){
                 document.getElementById('batal').style.visibility = 'visible';
+            }else{
+                document.getElementById('batal').style.visibility = 'hidden';
             }
+
         }
     });
 }
@@ -510,6 +513,7 @@ $("#save").click(function(){
 
     //detail SJ
     var kd_brg = new Array();
+    var kd_brgSj = new Array();
     var nama = new Array();
     var nbu = new Array();
     var qty = new Array();
@@ -519,6 +523,7 @@ $("#save").click(function(){
     var totaltx = table.rows.length-1;
     for(var i=1;i<=totaltx;i++){
         kd_brg[i-1] = $('#kode_brg'+i).val();
+        kd_brgSj[i-1] = $('#kode_brgSj'+i).val();
         nama[i-1] = $('#brg_ukur'+i).val();
         nbu[i-1] = $('#nbu'+i).val();
         qty[i-1] = $('#qty'+i).val();
@@ -533,7 +538,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/tr_surat_jalan/insertheader",
                 data :{sj:sj,_tgl:_tgl,_do:_do,gg:gg,pn:pn,po:po,ot:ot,mbl:mbl,ket:ket,
-                        kd_brg:kd_brg, nama:nama, nbu:nbu, qty:qty, ktr:ktr, totaltx:totaltx
+                        kd_brg:kd_brg, kd_brgSj:kd_brgSj, nama:nama,qty:qty, ktr:ktr, totaltx:totaltx
                 },
         
                 success:
@@ -565,7 +570,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/tr_surat_jalan/update2",
                 data :{sj:sj,_tgl:_tgl,_do:_do,gg:gg,pn:pn,po:po,ot:ot,mbl:mbl,ket:ket,
-                        kd_brg:kd_brg, nama:nama, nbu:nbu, qty:qty, ktr:ktr, totaltx:totaltx
+                        kd_brg:kd_brg,kd_brgSj:kd_brgSj, nama:nama, qty:qty, ktr:ktr, totaltx:totaltx
                 },
         
                 success:

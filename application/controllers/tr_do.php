@@ -59,15 +59,16 @@
         function insert()
         {
             //GET VARIABLE FROM MODEL //kd:kd,pr:pr,cp:cp,al:al,kt:kt,kp:kp,tl1:tl1,tl2:tl2,tl3:tl3,fx1:fx1,fx2:fx2,np:np
-			$so = $this->input->post('so');
+			$myvar  = empty($myvar) ? NULL : $myvar;
+            $so = $this->input->post('so');
 			$tglSo = date('Y-m-d', strtotime($this->input->post('tglSo')));
 			$po = $this->input->post('po');
-			$tglPo = date('Y-m-d', strtotime($this->input->post('tglPo')));
+			$tglPo = $this->input->post('tglPo');
             $tgl2 = '';
-            if ($tglPo != null){
-                $tgl2 = $tglPo;
+            if ($tglPo != ''){
+                $tgl2 = date('Y-m-d', strtotime($this->input->post('tglPo')));
             }else{
-                $tgl2 = '';
+                $tgl2 = $myvar;
             }
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
@@ -79,7 +80,6 @@
 			$ppn = $this->input->post('ppn');
 			$grant = $this->input->post('grant');
 			$temp=8;
-            $myvar  = empty($myvar) ? NULL : $myvar;
 
             //ADD TO ARRAY FOR SEND TO MODEL
             $data= array(
@@ -144,7 +144,7 @@
             $so = $this->input->post('so');
 			$tglSo = date('Y-m-d', strtotime($this->input->post('tglSo')));
 			$po = $this->input->post('po');
-			$tglPo = date('Y-m-d', strtotime($this->input->post('tglPo')));
+			$tglPo = $this->input->post('tglPo');
 
 			$pl = $this->input->post('pl');
 			$sl = $this->input->post('sl');
@@ -159,17 +159,17 @@
             $myvar  = empty($myvar) ? NULL : $myvar;
 
             $tgl2 = '';
-            if ($tglPo != null){
-                $tgl2 = $tglPo;
+            if ($tglPo != ''){
+                $tgl2 = date('Y-m-d', strtotime($this->input->post('tglPo')));
             }else{
-                $tgl2 = '';
+                $tgl2 = $myvar;
             }
 
             //ADD TO ARRAY FOR SEND TO MODEL
             $data= array(				
 				'Tgl'=>$tglSo,
 				'No_Po'=>$po,
-				'Tgl_Po'=>$tglPo,
+				'Tgl_Po'=>$tgl2,
 				'Kode_Plg'=>$pl,
 				'Kode_Gudang'=>$temp,
 				'Kirim'=>$myvar,

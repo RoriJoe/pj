@@ -84,7 +84,7 @@
             //detail SJ
             $kd_brg=$this->input->post('kd_brg');
             $nama=$this->input->post('nama');
-            $nbu=$this->input->post('nbu');
+            $nbu=$this->input->post('kd_brgSj');
             $qty=$this->input->post('qty');
             $ktr=$this->input->post('ktr');
             $totaltx=$this->input->post('totaltx');
@@ -143,7 +143,7 @@
 			//detail SJ
             $kd_brg=$this->input->post('kd_brg');
             $nama=$this->input->post('nama');
-            $nbu=$this->input->post('nbu');
+            $nbu=$this->input->post('kd_brgSj');
             $qty=$this->input->post('qty');
             $ktr=$this->input->post('ktr');
             $totaltx=$this->input->post('totaltx');

@@ -67,7 +67,8 @@
                 $final['Nama'] = $row->Nama;
                 $final['Ukuran'] = $row->Ukuran;
                 $final['Satuan'] = $row->Satuan1;  
-                $final['Harga'] = $row->Harga_Jual;          
+                $final['Harga'] = $row->Harga_Jual;    
+                $final['Qty_Jual'] = $row->Qty1;       
             }
             echo json_encode($final);
         }

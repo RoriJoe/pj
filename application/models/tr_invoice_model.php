@@ -26,15 +26,6 @@
             return $query->result(); 
         }
 
-        function get_so($id){
-        	$this->db->select('A.No_Do, A.Kode_Plg, B.Perusahaan, B.Alamat1');
-        	$this->db->from('do_h A');
-        	$this->db->join('pelanggan B', 'B.Kode = A.Kode_Plg', 'left');
-        	$this->db->where('A.No_Do', $id);
-        	$query = $this->db->get(); 
-
-        	return $query->result();	
-        }
         function insert($data,$id)
         {
             $this->db->select('Kode');
@@ -52,17 +43,6 @@
             }
         }
 
-        function get_detail_sj($sj){
-            $this->db->select('A.Kode_Brg, A.Barang, A.Barang_SJ, A.Qty1 AS Qty, A.Keterangan,B.Satuan1, B.Nama, B.Ukuran');
-            $this->db->from('sj_d A');
-            $this->db->join('barang B','B.Kode = A.Kode_Brg');
-            $this->db->join('do_d C','C.No_Do = A.Kode_Brg');
-            $this->db->where('No_Sj', $sj);
-            
-            $query = $this->db->get();
-            return $query->result();
-        }
-
         function get_h_so($id){
             $q = $this->db->query("SELECT B.No_Do, B.No_Sj, A.Total, A.dpp, A.discount, A.ppn, A.grandttl
                 FROM sj_h B
@@ -72,12 +52,12 @@
             return $q->result();
         }
 
-        function get_detail_do($id){
-            $this->db->select('sj_h.No_Do, sj_h.No_Sj, do_d.*, barang.Nama, barang.Satuan1');
-            $this->db->from('sj_h');
-            $this->db->join('do_d','do_d.No_DO = sj_h.No_Do');
-            $this->db->join('barang','barang.Kode = do_d.Kode_brg');
-            $this->db->where('No_Sj', $id);
+        function get_detail_sj($id){
+            $this->db->select('A.No_Sj,A.Kode_Brg,A.Keterangan,A.Barang,A.Qty1,B.Ukuran,B.Satuan1,C.Harga');
+            $this->db->from('sj_d A');
+            $this->db->join('barang B','B.Kode = A.Kode_Brg','left');
+            $this->db->join('do_d C','C.Kode_Brg = A.Barang_SJ');
+            $this->db->where('A.No_Sj', $id);
             
             $query = $this->db->get();
             return $query->result();

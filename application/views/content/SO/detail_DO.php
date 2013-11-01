@@ -23,6 +23,7 @@
             echo "<tr>
             <td width='15%'>
                 <div class='input-append'>
+                    <input type='hidden' id='last_kode$i' value='$row->Kode_Brg'/>
                     <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' value='$row->Kode_Brg' disabled='true'/>
                     <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>    
@@ -34,6 +35,8 @@
                 </div>
             </td>
             <td width='8%'>
+                <input type='hidden' id='cur_qty$i' value='$row->Qty1'/>
+                <input type='hidden' id='last_qty$i' value='$row->Qty'/>
                 <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:35px;text-align:right;' value='$row->Qty' disabled='true'/>
             </td>
             <td width='15%'>
@@ -175,10 +178,15 @@ function validAct(row){
     $('#qty_brg'+row).bind('textchange', function (event){
         var q = $(this).val();
         var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
-        hasil = q*h;
+        var qty_before = $('#last_qty'+row).val();
 
-        $('#jumlah_brg'+row).val(accounting.formatMoney(hasil, "",0,".")); 
-        getTotal();
+        if(q > parseInt(qty_before)){
+            bootstrap_alert.warning("Persediaan Penjualan untuk Barang ini Max. "+qty_before);
+        } else{
+            hasil = q*h;
+            $('#jumlah_brg'+row).val(accounting.formatMoney(hasil, "",0,".")); 
+            getTotal();
+        }
     });
     
     $('#harga_brg'+row).bind('textchange', function (event){

@@ -427,7 +427,7 @@ function getBarang(){
 
     if (found_flag === true)
     {
-        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada');
+        bootstrap_alert.warning('<b>Gagal Menambahkan Barang</b> Barang sudah ada dalam detail');
     } else {
         $.ajax({
             type:'POST',
@@ -437,6 +437,7 @@ function getBarang(){
             success:
             function(msg){
                 $('#kode_brg'+row).val(id);
+                $('#last_qty'+row).val(msg.Qty_Jual);
                 $('#satuan_brg'+row).val(msg.Satuan); 
                 $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
                 $('#harga_brg'+row).val(msg.Harga); 
@@ -464,7 +465,7 @@ function addRow() {
     items += "<tr>";
     items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
     items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:134px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='8%'><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
+    items += "<td width='8%'><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
     items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";
@@ -575,7 +576,7 @@ $("#save").click(function(){
             bootstrap_alert.warning('<b>Gagal!</b> Data Pelanggan Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else
-     	if($("#formID").validationEngine('validate') && totalRow != 0)
+     	if($("#formID").validationEngine('validate') && totalRow != 0 && grant != '')
         {
             $.ajax({
             type:'POST',

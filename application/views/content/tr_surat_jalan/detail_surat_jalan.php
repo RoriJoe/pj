@@ -30,6 +30,7 @@
             </div>
         </td>
         <td>
+            <input type='hidden' id='kode_brgSj$i' name='kode_brgSj[]' value='$row->Kode_BrgSj'/>
             <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:140px' value=\"".$namaSJ."\" disabled='true'/>
         </td>
         <td>
@@ -138,7 +139,7 @@ function validAct(row){
     $('#qty'+row).bind('textchange', function (event){
         var q = $(this).val();
         var qty_before = $("#last_qty"+row).val();
-        if(q > qty_before){
+        if(q > parseInt(qty_before)){
             bootstrap_alert.warning("Qty tidak boleh lebih besar dari Qty di SO");
             $('#save').attr('disabled',true);
         } else{

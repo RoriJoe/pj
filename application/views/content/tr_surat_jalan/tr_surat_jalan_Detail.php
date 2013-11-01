@@ -40,8 +40,8 @@ $('#tb1 tbody tr').click(function (e) {
     show_so("view");
     getFormSj(sj);
     loadDetailSJ();
-    cek_kirim();
     cek_batal();
+    cek_kirim();
     jQuery(".hide-con").show();
 });
 

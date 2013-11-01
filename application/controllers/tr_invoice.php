@@ -54,6 +54,12 @@
                 $final['Alamat'] = $row->Alamat1;
                 $final['Tanggal'] = $dmy;
 
+                $final['Total'] = $row->Total;
+                $final['Disc'] = $row->Discount;
+                $final['Dpp'] = $row->Dpp;
+                $final['Ppn'] = $row->Ppn;
+                $final['Grand'] = $row->Grand;
+
             }
             echo json_encode($final);
         }
@@ -73,23 +79,13 @@
             echo json_encode($final);
         }
 
-        function get_so(){
-        	$temp="";
-        	$id = $this->input->post('sj');
-        	$result = $this->tr_invoice_model->get_so($id);
-        	foreach ($result as $rr)
-            {
-                $temp=$rr->Perusahaan."|".$rr->Kode_Plg."|".$rr->Alamat1."|".$rr->No_Do;
-            }
-            echo $temp;
-        }
-
         function Detail_SJ(){ //viewdo utk tabel detail DO
             $sj=$this->input->post('sj');
 
-            $data['hasil']=$this->tr_invoice_model->get_detail_do($sj);
+            $data['hasil']=$this->tr_invoice_model->get_detail_sj($sj);
             $this->load->view("content/tr_invoice/detail_invoice",$data);
         }
+
         //SAVE ADD NEW TRIGGER
         function save($modes)
         {
@@ -100,20 +96,36 @@
             $term     	= $this->input->post('term');
             $empty  	= empty($empty) ? NULL : $empty;
 
+            $to = $this->input->post('to');            
+            $disc = $this->input->post('disc');
+            $dpp = $this->input->post('dpp');
+            $ppn = $this->input->post('ppn');
+            $grant = $this->input->post('grant');
+
             //ADD TO ARRAY FOR SEND TO MODEL
             $data1= array(
                 'Kode'      =>$id,
                 'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
-                'Status'    =>$empty
+                'Status'    =>$empty,
+                'Total'     =>$to,
+                'Discount'  =>$disc,
+                'Dpp'       =>$dpp,
+                'Ppn'       =>$ppn,
+                'Grand'     =>$grant
             );
 
             $data2= array(
                 'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
-                'Status'    =>$empty
+                'Status'    =>$empty,
+                'Total'     =>$to,
+                'Discount'  =>$disc,
+                'Dpp'       =>$dpp,
+                'Ppn'       =>$ppn,
+                'Grand'     =>$grant
             );
 
             if($modes=="add"){
