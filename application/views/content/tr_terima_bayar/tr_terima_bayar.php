@@ -78,6 +78,8 @@ list_terima_bayar();
     <button id="cancel" class="btn">Cancel</button>
     <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i></button>
 	<a href='#'id="addBank" mode="new" class="btn btn-small" title="Tambah JenisBank" onclick="addBank()" style="margin-left:30px;"><i class="icon-plus"></i></a>
+	<input type="hidden" id="kdban" />
+
 </div>
 </div>
 <!--@Load table List via AJAX-->
@@ -159,34 +161,7 @@ function autogen(){
 
 
 
-function lookup_so(){
-$("#invoice").autocomplete({
-    minLength: 1,
-    source:
-    function(req, add){
-        $.ajax({
-            url: "<?php echo base_url(); ?>index.php/autocomplete/lookup_invoice",
-            dataType: 'json',
-            type: 'POST',
-            data: req,
-            success:
-            function(data){
-                if(data.response =="true"){
-                    add(data.message);
-                }
-            },
-        });
-    },
 
-    //tampilkan table detail
-    select:
-    function(event, ui) {
-        $('#invoice').val(ui.item.value);
-        
-        detail_SO();
-    },
-});
-}
 function addPelanggan(){
     $('#modalPelanggan').modal('hide');
     $.ajax({
@@ -335,7 +310,8 @@ function displayResult(selTag,row)
         function(hh){
             data=hh.split("|");
             //tampilDetailDO();
-            $('#ninvo'+row).val(data[3]);
+            $('#ninvo'+row).val(accounting.formatMoney(data[3], "",0,"."));
+			
 			document.getElementById('add2').style.visibility = 'visible';
         }
     });
@@ -370,16 +346,16 @@ $("#save").click(function(){
 	var kode_plg = $('#kd_plg').val();
     var _tgl = $('#_tgl1').val();
     var baris1 = $("tbody#itemlist tr").length;
-	var totInv = $('#totInvo').val();
-	var totByr = $('#totByr').val();
+	var totInv = $('#totInvo').val().replace(/\./g, "");
+	var totByr = $('#totByr').val().replace(/\./g, "");
 	
 	var arrInvoice = new Array();
 	var arrNbayar = new Array();
 	var arrNinvo = new Array();
 	 for(var i=1;i<=baris1;i++){
 		arrInvoice[i-1] = $('#invoi'+i).val();
-		arrNinvo[i-1] = $('#ninvo'+i).val().replace(/\./g, "");;
-		arrNbayar[i-1] = $('#nbayar'+i).val().replace(/\./g, "");;
+		arrNinvo[i-1] = $('#ninvo'+i).val().replace(/\./g, "");
+		arrNbayar[i-1] = $('#nbayar'+i).val().replace(/\./g, "");
 	 }
 	 
 	var baris2 = $("tbody#itemlist2 tr").length;
@@ -387,7 +363,7 @@ $("#save").click(function(){
 	var arrNilaiB = new Array();
 	for(var i=1;i<=baris2;i++){
 		arrJenisB[i-1] = $('#_sl'+i).val();
-		arrNilaiB[i-1] = $('#nilaiB'+i).val();
+		arrNilaiB[i-1] = $('#nilaiB'+i).val().replace(/\./g, "");
 		
 	 }
 	 
@@ -398,6 +374,7 @@ $("#save").click(function(){
 	var arrRef = new Array();
 	var arrTgl1 = new Array();
 	var arrTgl2 = new Array();
+	var arrNil = new Array();
 	var arrBank2 = new Array();
 	var arrReken2 = new Array();
   
@@ -408,6 +385,7 @@ $("#save").click(function(){
 		arrRef[i-1] = $('#noref'+i).val();
 		arrTgl1[i-1] = $('#_tglc1'+i).val();
 		arrTgl2[i-1] = $('#_tglc2'+i).val();
+		arrNil[i-1] = $('#nilaitr'+i).val().replace(/\./g, "");
 		arrBank2[i-1] = $('#bank'+i).val();
 		arrReken2[i-1] = $('#rek'+i).val();
 		
@@ -421,7 +399,7 @@ $("#save").click(function(){
             url: "<?php echo base_url();?>index.php/tr_terima_bayar/save/add",
             data :{id:id,_tgl:_tgl,kode_plg:kode_plg,totInv:totInv,totByr:totByr,
 			baris1:baris1,baris2:baris2,baris3:baris3,arrInvoice:arrInvoice,
-			 arrNbayar:arrNbayar,arrNinvo:arrNinvo,arrJenisB:arrJenisB,arrNilaiB:arrNilaiB,arrJenis:arrJenis,arrBank1:arrBank1,
+			 arrNbayar:arrNbayar,arrNinvo:arrNinvo,arrJenisB:arrJenisB,arrNilaiB:arrNilaiB,arrJenis:arrJenis,arrBank1:arrBank1,arrNil:arrNil,
 	 arrReken1:arrReken1,arrRef:arrRef,arrTgl1:arrTgl1,arrTgl2:arrTgl2,arrBank2:arrBank2,arrReken2:arrReken2},
 
             success:
@@ -513,8 +491,8 @@ function addRow() {
 
     items += "<tr>";
     items += "<td><div id='no_invoice"+$count+"'></div></td>";
-    items += "<td> <input style='width:85px;margin-right: 5px;' id='ninvo"+$count+"' name='ninvo"+$count+"' type='text' readonly='true'></td>";
-    items += "<td> <input style='width:85px;' id='nbayar"+$count+"' name='nbayar"+$count+"' type='text' readonly='true'></td></tr>";
+    items += "<td> <input style='width:85px;margin-right: 5px;text-align: right;' id='ninvo"+$count+"' name='ninvo"+$count+"' type='text' readonly='true'></td>";
+    items += "<td> <input style='width:85px;text-align: right;' id='nbayar"+$count+"' name='nbayar"+$count+"' type='text' readonly='true'></td></tr>";
 	
     $("#itemlist").append(items);
 }
@@ -541,33 +519,56 @@ function addRow2() {
 	
 
     items += "<tr>";
-    items += "<td><select name='_sl"+$count+"' class='jenisbayar' onchange='getJenisByr(this,"+$count+")' id='_sl"+$count+"' style='width: 110px; margin-left: 5px;'><option value=''>-Pilih-</option><option value='Tunai'>Tunai</option><option value='Bank'>Bank</option></select></td>";
+    items += "<td><select name='_sl"+$count+"' class='jenisbayar' onchange='getJenisByr(this,"+$count+")'  id='_sl"+$count+"' style='width: 110px; margin-left: 5px;'><option value=''>-Pilih-</option><option value='Tunai'>Tunai</option><option value='Bank'>Bank</option><option value='Biaya'>Biaya Bank</option><option value='Discount'>Discount</option></select></td>";
    
-    items += "<td> <input style='width:110px;' disabled='disabled' id='nilaiB"+$count+"' name='nilaiB"+$count+"' type='text' onkeypress='validAct("+$count+")'></td></tr>";
+    items += "<td> <input style='width:110px;text-align: right;'  disabled='disabled' id='nilaiB"+$count+"' name='nilaiB' type='text' onkeypress='validAct("+$count+")'></td></tr>";
 	
     $("#itemlist2").append(items);
 }
-//jenis bayar dari select jenis pembayaran
+//jenis bayar dari select jenis pembayaran  onchange='getJenisByr(this,"+$count+")'
+
 function getJenisByr(sel,row) {
-    var value = sel.options[sel.selectedIndex].value;
-	if(value==""){
+	var flag=0;
+	var value = sel.options[sel.selectedIndex].value;
+	$(".jenisbayar").each(function(){
+		
+		if($(this).val()=="Bank"){
+					
+			flag=1;
+		}
+	});  
+    
+	if(value=="Bank"){
+	
+		$('#kdban').val("nilaiB"+row);
+		document.getElementById("nilaiB"+row).value="";
 		document.getElementById("nilaiB"+row).disabled = true;
-	}else if(value=="Bank"){
 		document.getElementById('addBank').style.visibility = 'visible';
-		document.getElementById("nilaiB"+row).disabled = false;
+		addBank();
+		
 	}else{
 		document.getElementById('addBank').style.visibility = 'hidden';
 		document.getElementById("nilaiB"+row).disabled = false;
-	}	
+		if(flag==0){
+				$("tbody#itemlistdet tr").remove();
+		}
+	}
+	
 }
-/* $(".jenisbayar").live("change",function(){	
+/* $(".jenisbayar").live("change",function(){
+	var id = $(this).attr('id');	
 	$(".jenisbayar").each(function(){
-		if($(this).val()==""){
-			
-		}else if($(this).val()=="Bank"){		
+		
+		if($(this).val()=="Bank"){
+					
 			document.getElementById('addBank').style.visibility = 'visible';
+			addBank();
 		}else{
+		
 		document.getElementById('addBank').style.visibility = 'hidden';
+			if($("tbody#itemlistdet tr").length>0){
+				$("tbody#itemlistdet tr").remove();
+			}
 		}
 	});  
 });  */
@@ -591,6 +592,7 @@ function addRow3() {
 	items += "<td><input style='width:60px;margin-right: 5px;' id='noref"+$count+"' name='noref"+$count+"' type='text' ></td>";
 	items += "<td><input style='width:65px;margin-right: 5px;' id='_tglc1"+$count+"' name='_tglc1"+$count+"' type='text' autocomplete='off' ></td>";
 	items += "<td><input style='width:60px;margin-right: 5px;' id='_tglc2"+$count+"' name='_tglc2"+$count+"' type='text' autocomplete='off' ></td>";
+	items += "<td><input style='width:60px;margin-right: 5px;text-align: right;' id='nilaitr"+$count+"' name='nilaitr' onkeyup='valid("+$count+")' type='text' autocomplete='off' ></td>";
 	
 	items += "<td><div id='trmbank"+$count+"'></div></td>";
 	items += "<td><div id='trmrek"+$count+"'><select style='width:105px;'><option>-Rek-</option></select></div></td></tr>";
@@ -677,14 +679,7 @@ function validAct(row){
         };
     }(foo.value), false);
 
-//FUNGSI HITUNG
-    /* $('#nilaiB'+row).bind('textchange', function (event){
-        var q = $(this).val();
-        //var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
-       // hasil = q*h;
-		totalbyr+=q
-        $('#totByr').val(accounting.formatMoney(totalbyr, "",0,"."));
-    });  */
+
     $('#nilaiB'+row).blur(function () {
     //$('#nilaiB'+row).bind('textchange', function (event){
         
@@ -694,43 +689,16 @@ function validAct(row){
         //getTotal();
         //formatAngka(this,'.');
 		var nilaiInvo=$('#ninvo'+row).val();
-		  if(h>nilaiInvo-0){
-		
-			$('#nbayar'+row).val(accounting.formatMoney(nilaiInvo, "",0,"."));
-			if(rowInvoice>1){
-			var x=h-nilaiInvo;
-			var y=$('#ninvo'+(row+1)).val();
-				if(x>y-0){
-					$('#nbayar'+(row+1)).val(accounting.formatMoney(y, "",0,"."));
-				}else{
-					$('#nbayar'+(row+1)).val(accounting.formatMoney(x, "",0,"."));
-				}
-			
-			}
-		}/* else if(row>1){
-			var nilaiA=$('#nbayar'+(row-1)).val().replace(/\./g, "");;
-			var nilaiInvo2=$('#ninvo'+(row-1)).val();
-			//$('#nbayar'+row).val(accounting.formatMoney(nilaiA+" "+nilaiInvo2, "",0,".")); 
-			
-			if(nilaiA<nilaiInvo2-0){
-				var tambah = nilaiA*1+h*1;
-				$('#nbayar'+(row-1)).val(accounting.formatMoney(tambah, "",0,".")); 
-			}else{
-				$('#nbayar'+(row-1)).val(accounting.formatMoney(nilaiInvo2, "",0,"."));
-			}
-		} */
-		else {
-			$('#nbayar'+row).val(accounting.formatMoney(h, "",0,"."));
-			$('#totInvo'+row).val(accounting.formatMoney(h, "",0,"."));
-		} 
+		   
 		
 	
-		 
+		 getTotal();
+		 formatAngka(this,'.');
     });
 }
 
-function getTotal(row){
-    var arr = document.getElementsById('nilaiB'+row);
+function getTotal(){
+    var arr = document.getElementsByName('nilaiB');
     var total = 0;
     for(i=0; i < arr.length; i++){
         if(parseInt(arr[i].value))
@@ -738,9 +706,112 @@ function getTotal(row){
     }
     temp=total;
     $('#totByr').val(accounting.formatMoney(total, "",0,"."));
-   /*  $("#dpp").val(accounting.formatMoney(total, "",0,"."));
-    $("#granT").val(accounting.formatMoney(total, "",0,".")); */
+	
+	var rowIn = $("tbody#itemlist tr").length;
+        
+	var totIn=0;
+	var arrIno = new Array();
+	 for(i=0; i < rowIn; i++){
+	 
+		arrIno[i] = $('#ninvo'+(i+1)).val().replace(/\./g, "");
+		totIn+=parseInt(arrIno[i]);
+			
+	} 
+	
+	if(total>totIn){
+		
+		$('#totInvo').val(accounting.formatMoney(totIn, "",0,"."));
+		for(i=0; i < rowIn; i++){
+			$('#nbayar'+(i+1)).val(accounting.formatMoney(arrIno[i], "",0,"."));
+		}
+	}else if(total<=totIn){
+	
+		for(i=0; i < rowIn; i++){
+			if(total>arrIno[i]){
+				$('#totInvo').val(accounting.formatMoney(total, "",0,"."));
+				$('#nbayar'+(i+1)).val(accounting.formatMoney(arrIno[i], "",0,"."));
+				$('#nbayar'+(i+2)).val(accounting.formatMoney(total-arrIno[i], "",0,"."));
+				break;
+			}else{
+				$('#totInvo').val(accounting.formatMoney(total, "",0,"."));
+				$('#nbayar'+(i+1)).val(accounting.formatMoney(total, "",0,"."));
+				$('#nbayar'+(i+2)).val(accounting.formatMoney('', "",0,"."));
+				break;
+			}
+		}
+	}
    
+}
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 0;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
+
+function valid(row){
+       
+    	
+    //disable alfabet di qty
+    var foo = document.getElementById('nilaiB'+row);
+    foo.addEventListener('input', function (prev) {
+        return function (evt) {
+            if (!/^\d{0,9}(?:\.\d{0,2})?$/.test(this.value)) {
+              this.value = prev;
+            }
+            else {
+              prev = this.value;
+            }
+        };
+    }(foo.value), false);
+
+//FUNGSI HITUNG
+    /* $('#nilaiB'+row).bind('textchange', function (event){
+        var q = $(this).val();
+        //var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
+       // hasil = q*h;
+		totalbyr+=q
+        $('#totByr').val(accounting.formatMoney(totalbyr, "",0,"."));
+    });  */
+    $('#nilaitr'+row).blur(function () {
+    //$('#nilaiB'+row).bind('textchange', function (event){
+        
+		var h = $(this).val().replace(/\./g, "");
+        
+		
+        //getTotal();
+        //formatAngka(this,'.');
+		var nilaiInvo=$('#ninvo'+row).val();
+		 
+		
+		getTotal2();
+		formatAngka(this,'.');
+    });
+}
+
+function getTotal2(){
+getTotal();
+    var arr = document.getElementsByName('nilaitr');
+	var b = $('#kdban').val();
+	
+    var total = 0;
+    for(i=0; i < arr.length; i++){
+        if(parseInt(arr[i].value))
+            total += parseInt(arr[i].value.replace(/\./g, ""));
+    }
+    temp=total;
+   // $('#totByr').val(accounting.formatMoney(total, "",0,"."));
+   $('#'+b).val(accounting.formatMoney(total, "",0,"."));
 }
 
 </script>

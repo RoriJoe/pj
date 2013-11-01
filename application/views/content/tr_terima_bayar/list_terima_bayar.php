@@ -14,9 +14,8 @@
                 kode = $row->Kode
                 tgl = $dmy1
                 plg = $row->Kode_plg
-				toInv = $row->TotalInvoice
-                toBayar = $row->TotalBayar
-				nama = $row->Nama
+				
+				nama = $row->Perusahaan
             >
 
                 <td>$row->Kode</td>
@@ -33,23 +32,25 @@ $('#tbl_list tr').click(function (e) {
    
     var id = $(this).attr("kode"); 
     var tgl = $(this).attr("tgl");
-    var toBayar = $(this).attr("toBayar");
+  
     var plg = $(this).attr("plg");
-    var toInv = $(this).attr("toInv");
-	var nama = $(this).attr("Nama");
     
+	var nama = $(this).attr("Nama");
+   
     $('#no_terima').val(id);
     $('#_tgl1').val(tgl);
-    $('#totInvo').val(toInv);
-    $('#totByr').val(toBayar);
+   
     $('#kd_plg').val(plg);
     $('#_pn').val(nama);
 
     
     $('#save').attr('mode','edit');
-    detail_SO();
 	detail_pembayaran();
-	detail_invoice()
+	detail_invoice();
+    detail_SO();
+	
+	
+	
 });
 
 

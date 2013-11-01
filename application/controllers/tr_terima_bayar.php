@@ -100,8 +100,9 @@
 			$arrReken1     = $this->input->post('arrReken1');
 			
 			$arrRef     = $this->input->post('arrRef');
-			$arrTgl1     = date('Y-m-d', strtotime($this->input->post('arrTgl1')));
-			$arrTgl2     = date('Y-m-d', strtotime($this->input->post('arrTgl1')));
+			$arrTgl1     = $this->input->post('arrTgl1');
+			$arrTgl2     = $this->input->post('arrTgl2');
+			$arrNil     = $this->input->post('arrNil');
 			$arrBank2     = $this->input->post('arrBank2');
 			$arrReken2     = $this->input->post('arrReken2');
 			
@@ -114,9 +115,7 @@
             $data1= array(
                 'Kode'      =>$id,
                 'Kode_plg'   =>$kode_plg,
-                'Tgl'    	=>$_tgl,
-				'TotalInvoice'=>$totInv,
-				'TotalBayar'  =>$totByr  
+                'Tgl'    	=>$_tgl
             );
 			
 			
@@ -130,7 +129,8 @@
 					'Kode'   =>$id,
 					'NoInvoice' =>$arrInvoice[$i],
 					'NilaiInvoice'    	=>$arrNinvo[$i],
-					'NilaiBayar'    =>$arrNbayar[$i]
+					'NilaiBayar'    =>$arrNbayar[$i],
+					'Total'=>$totInv
 				);
 				$this->tr_terima_bayar_model->insert_det1($data);
 			}
@@ -139,20 +139,24 @@
 				$data2= array(
 					'Kode'   =>$id,
 					'Jenis'    =>$arrJenisB[$i],
-					'Nilai'    =>$arrNilaiB[$i]
+					'Nilai'    =>$arrNilaiB[$i],
+					'Total'  =>$totByr  
 				);
 				$this->tr_terima_bayar_model->insert_det2($data2);
 			}
 			
 			for($i=0;$i<$baris3;$i++){
+			$tgl1=date('Y-m-d', strtotime($arrTgl1[$i]));
+			$tgl2=date('Y-m-d', strtotime($arrTgl2[$i]));
 				$data3= array(
 					'Kode'   =>$id,
 					'Jenis'    =>$arrJenis[$i],
 					'DariBank'    =>$arrBank1[$i],
 					'DariRek'    =>$arrReken1[$i],
 					'Ref'    =>$arrRef[$i],
-					'TglGiro'    =>$arrTgl1[$i],
-					'TglCair'    =>$arrTgl2[$i],
+					'TglGiro'    =>$tgl1,
+					'TglCair'    =>$tgl2,
+					'Nilai'    =>$arrNil[$i],
 					'TerimaBank'    =>$arrBank2[$i],
 					'TerimaRek'    =>$arrReken2[$i]
 				);

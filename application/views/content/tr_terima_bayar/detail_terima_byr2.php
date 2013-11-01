@@ -15,12 +15,15 @@
 	<tbody id="itemlist">
 	<?php
    $i=1;
+   $t=0;
     foreach($hasil as $row)
-    {
+    {$t=number_format($row->Total);
+	$duit=number_format($row->NilaiInvoice);
+	$duit2=number_format($row->NilaiBayar);
         echo "<tr>
         <td> <input value='$row->NoInvoice' disabled='disabled' style='width: 80px; margin-left: 5px;' id='invoi$i' name='_sl$i' type='text' ></td>
-		<td><input value='$row->NilaiInvoice' disabled='disabled' style='width: 85px; margin-left: 5px;' id='ninvo$i' name='ninvo$i' type='text' ></td>
-		<td><input value='$row->NilaiBayar' disabled='disabled' style='width: 85px; margin-left: 5px;' id='nbayar$i' name='nbayar$i' type='text' ></td>
+		<td><input value='$duit' disabled='disabled' style='width: 85px; margin-left: 5px;text-align: right;' id='ninvo$i' name='ninvo$i' type='text' ></td>
+		<td><input value='$duit2' disabled='disabled' style='width: 85px; margin-left: 5px;text-align: right;' id='nbayar$i' name='nbayar$i' type='text' ></td>
 
        
         </tr>
@@ -31,7 +34,7 @@
 	</tbody>
 	<tr>
 		<td colspan="2" ><b>Total</b></td>
-		<td><input style="width:85px;margin-right: 5px;" id="totInvo" name="totInvo" type="text" readonly="true"></td>
+		<td><input style="width:85px;margin-right: 5px;text-align: right;" id="totInvo" value="<?php echo $t; ?>" name="totInvo" type="text" readonly="true"></td>
 	</tr>
 </table>
 </div>

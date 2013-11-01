@@ -5,7 +5,7 @@
         }
 
         function get_list(){
-			$this->db->select('t.*,B.Nama');
+			$this->db->select('t.*,B.Perusahaan');
         	$this->db->from('terima_bayar t');
         	
         	$this->db->join('pelanggan B', 'B.Kode = t.Kode_plg', 'left');
@@ -26,10 +26,11 @@
         }
         function insert($data,$id)
         {
-            $this->db->select('Kode');
+            /* $this->db->select('Kode');
             $this->db->from('terima_bayar');
-            $this->db->where('Kode', $id);
-            $query = $this->db->get();
+            $this->db->where('Kode', $id); 
+			$this->db->get();*/
+            $query = $this->db->query("Select Kode from terima_bayar where Kode = '$id' ");
 
             if($query->num_rows() ==  0)
             {
