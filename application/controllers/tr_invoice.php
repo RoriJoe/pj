@@ -93,6 +93,7 @@
             $id         = $this->input->post('id');
             $_tgl      	= date('Y-m-d', strtotime($this->input->post('_tgl')));
             $so        	= $this->input->post('so');
+			 $plg        	= $this->input->post('plg');
             $term     	= $this->input->post('term');
             $empty  	= empty($empty) ? NULL : $empty;
 
@@ -106,6 +107,7 @@
             $data1= array(
                 'Kode'      =>$id,
                 'Kode_SJ'   =>$so,
+				'Kode_plg'   =>$plg,
                 'Term'     	=>$term,
                 'Tgl'    	=>$_tgl,
                 'Status'    =>$empty,
@@ -119,6 +121,7 @@
             $data2= array(
                 'Kode_SJ'   =>$so,
                 'Term'     	=>$term,
+				'Kode_plg'   =>$plg,
                 'Tgl'    	=>$_tgl,
                 'Status'    =>$empty,
                 'Total'     =>$to,

@@ -1,5 +1,6 @@
 <script>
  $(document).ready(function() {
+	//table();
 	$("#range").hide();
 
     $("#cetakBatas").click(function() {
@@ -10,6 +11,9 @@
         $("#range").hide().eq($(this).index()).hide();
     });
 }); 
+$("#view").click(function(){
+    table();
+});
 
 /*Tampilkan jQuery Tanggal*/
 $(function() {
@@ -27,6 +31,22 @@ $(function() {
     });
 });
 
+function table(){
+
+	var sel = $('input[name="optionsRadios"]:checked').val();
+	var _tgl = $('#_tgl').val();
+	var _tgl2 = $('#_tgl2').val();
+	
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>report/table_do",
+    data :{sel:sel,_tgl:_tgl,_tgl2:_tgl2},
+    success:
+    function(hh){
+        $('#tabpreview').html(hh);
+    }
+    });
+}
 //action="../report/print_report_do" method="post" action="../report/print_report_do" method="post" target="_blank"
 </script>
 
@@ -54,10 +74,11 @@ $(function() {
 	</div>
 	<div class="pull-right" style="margin-top: 45px;">
 		<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">	
+		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
 	</div>
 </div>
 </form>
-
+<div id="tabpreview"></div>
 <script>
 
 </script>

@@ -19,7 +19,7 @@ list_terima_bayar();
 *@DONT REMOVE!
 *  
 -->
-<div id="konfirmasi" class="sukses"></div>
+
 
 <!--Main Form-->
 <div class="bar">
@@ -71,7 +71,7 @@ list_terima_bayar();
 
 
 <div id="hasil2"></div>
-
+<div id="konfirmasi" class="sukses"></div>
 <div>
     <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
     <button id="delete" class="btn">Delete</button>
@@ -276,7 +276,9 @@ function getPelanggan(){
     $('#kd_plg').val(k);
     //$('#terms').val(t);
 	var baris1 = $("tbody#itemlist tr").length;
-	
+	if(baris1>0){
+		$("tbody#itemlist tr").remove();
+	}
 	addInvoice();
 }
 
@@ -450,8 +452,8 @@ $("#save").click(function(){
 
 $("#delete").click(function(){
     var id = $('#no_terima').val();
-
-    $.ajax({
+	var tgl = $('#_tgl1').val();
+    /* $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/tr_terima_bayar/delete",
         data :{id:id},
@@ -463,6 +465,38 @@ $("#delete").click(function(){
                 bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
                 reset_form();
                 list_terima_bayar();
+            }
+        }
+    });
+	 */
+	
+	bootbox.dialog({
+        message: "No Terima: <b>"+id+"</b><br/>Tanggal No_Terima : <b>"+tgl+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+						type:'POST',
+						url: "<?php echo base_url();?>index.php/tr_terima_bayar/delete",
+						data :{id:id},
+						success:
+						function(msg)
+						{
+							if(msg == "ok")
+							{
+								bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
+								reset_form();
+								list_terima_bayar();
+							}
+						}
+					});
+                }
             }
         }
     });
@@ -502,12 +536,7 @@ function addBayar(){
     addRow2();
     var row = $("tbody#itemlist2 tr").length;
 	
-	/* var rowCombo=document.getElementById("invoi"+row).length-1;
 	
-	if(row==rowCombo){
-	document.getElementById('add').style.visibility = 'hidden';
-	}else{document.getElementById('add').style.visibility = 'visible';
-	} */
     /* editRow(row);
     getDetail(row);
     $('#modalBarang').modal('show'); */
@@ -775,14 +804,7 @@ function valid(row){
         };
     }(foo.value), false);
 
-//FUNGSI HITUNG
-    /* $('#nilaiB'+row).bind('textchange', function (event){
-        var q = $(this).val();
-        //var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
-       // hasil = q*h;
-		totalbyr+=q
-        $('#totByr').val(accounting.formatMoney(totalbyr, "",0,"."));
-    });  */
+
     $('#nilaitr'+row).blur(function () {
     //$('#nilaiB'+row).bind('textchange', function (event){
         

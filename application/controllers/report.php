@@ -316,4 +316,23 @@
 			//exportMeAsMPDF($templateView,$data['filename']);
 			create_pdf($templateView, $data['filename']);                                                                 
 		}
+		
+		function table_do(){
+            //Get data dari model
+            //$data['hasil']=$this->tr_surat_jalan_model->get_paged_list();
+			$this->load->model('report_model'); //edit!!
+			//$this->load->helper('pdfexport_helper.php');
+
+			$radio = "Semua";//$this->input->post("optionsRadios");
+			if($radio=="Batas"){
+			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+
+			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
+			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			}else{ $tgl=""; $tgl2=""; }
+			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2);
+			$data['hasil']="";
+            //load view
+            $this->load->view('content/report_table_do',$data);
+        }
 	}

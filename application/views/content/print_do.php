@@ -1,3 +1,5 @@
+
+
 <h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
 			<h2 align="center">LAPORAN DELIVERY ORDER</h2><br/>
 <table>
@@ -17,7 +19,7 @@
 <table class="table" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
-			<th>No DO</th>
+			<th>No SO</th>
 			<th>No PO</th>
 			<th>Pelanggan</th>
 			<th>Nama Barang</th>
