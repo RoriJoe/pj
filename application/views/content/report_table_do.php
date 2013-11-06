@@ -4,7 +4,7 @@
 <label style="
     width: 50%;
     float: left;"><b>Laporan SALES ORDER</b></label>
-<label>Periode</label>
+<label>Periode : <?php echo $periode;?></label>
 <!--<div style="border: 1px solid #ACABAB;margin-top:8px;width:800px;float: left;">-->
 						<!--<img src="images/down-arrow.png" style=float:right; onclick="Max()" id="MaxB" value=""/>
 						<table border=0>
