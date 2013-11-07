@@ -106,9 +106,103 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="span3">
         <!--@Load table List via AJAX-->
         <div id="list_invoice"></div>
+=======
+<div id="konten" class="hide-con master-border">
+<form id="formID">
+    <table width="100%">
+        <tr>
+            <td style="width: 120px;">No Invoice</td>
+            <td>
+                <input  type='text' 
+                        class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
+                        id='no_invo' name='no_invo' 
+                        style="width: 120px;text-transform: uppercase;">
+            </td>
+
+            <td>Pelanggan</td>
+            <td>
+                <input type="hidden" id="kd_plg" />
+                <div class="input-append" style="margin-bottom:0;">
+                 <input type='text' class="span2" 
+                    maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 148px;" readonly="true">
+                <a href="#modalPelanggan" role="button" class="btn" id="f_plg" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                </div>
+            </td>
+       </tr>
+       
+       <tr>
+            <td>Tanggal</td>
+            <td>
+                <input  type='text' placeholder='dd-mm-yyyy'
+                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                        style="width: 80px; margin-right: 20px;">
+            </td>
+            <td>Nomor SJ</td>
+            <td>
+                <div id="no_sj">
+                </div>
+            </td>
+       </tr>
+       <tr>
+            <td>Term</td>
+            <td>
+                <input  type='text' 
+                        class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
+                        style="width: 30px;"> Hari
+            </td>
+            <td>Alamat</td>
+            <td>
+                <textarea rows="2" class="validate[required]" id='al' name='al' 
+                    style="resize:none; width:170px; height: 60px;" disabled="disabled">
+                </textarea>
+            </td>
+       </tr>
+    </table>
+</form>
+<div id="hasil2"></div>
+<div id="totalBox" style="float: right; margin-right: -45px; visibility:hidden;">
+        <table>
+        <tr>
+            <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+            </td>
+            <td><input type="hidden" id="total2" />
+            <input style="float: right; width:120px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true"></td>
+        </tr>
+        <tr>
+            <td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
+            </td>
+            <td><input type="hidden" id="disc2" />
+            <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
+            <input style="width:66px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
+            </td>
+            <td><input type="hidden" id="dpp2" />
+            <input style="width:120px; margin-right: 145px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true"></td>
+        </tr>
+         <tr>
+                <td>
+                    <label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
+                </td>
+                <td>
+                    <input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
+                    <input style="width:66px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
+                </td>
+        </tr> 
+        <tr>
+            <td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
+            </td>
+            <td><input type="hidden" id="granT2" />
+            <input style="width:120px; text-align:right;" id="granT" name="granT" type="text" readonly="true"></td>
+        </tr>      
+        </table>
+>>>>>>> e318a7a489d137e798633bb74d4a155066cb1231
     </div>
 </div>
 
