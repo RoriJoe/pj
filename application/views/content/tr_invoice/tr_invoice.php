@@ -423,6 +423,7 @@ $("#save").click(function(){
     var id = $('#no_invo').val();
     var _tgl = $('#_tgl1').val();
     var so = $('#_sj').val();
+	var plg = $('#kd_plg').val();
     var term = $('#term').val();
 
     var to = $('#total').val().replace(/\./g, ""); 
@@ -438,7 +439,7 @@ $("#save").click(function(){
             $.ajax({
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_invoice/save/add",
-            data :{id:id,_tgl:_tgl,so:so,term:term,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant},
+            data :{id:id,_tgl:_tgl,so:so,term:term,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,plg:plg},
 
             success:
             function(msg)

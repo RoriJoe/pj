@@ -146,8 +146,12 @@
 			}
 			
 			for($i=0;$i<$baris3;$i++){
-			$tgl1=date('Y-m-d', strtotime($arrTgl1[$i]));
-			$tgl2=date('Y-m-d', strtotime($arrTgl2[$i]));
+			if($arrTgl1[$i]==""){
+				$tgl1="";$tgl2="";
+			}else{
+				$tgl1=date('Y-m-d', strtotime($arrTgl1[$i]));
+				$tgl2=date('Y-m-d', strtotime($arrTgl2[$i]));
+			}
 				$data3= array(
 					'Kode'   =>$id,
 					'Jenis'    =>$arrJenis[$i],
@@ -214,7 +218,7 @@
 
             foreach ($tm as $rr)
             {
-                $temp=$rr->Kode."|".$rr->Kode_plg."|".$rr->Tgl."|".$rr->granTotal;
+                $temp=$rr->Kode."|".$rr->Kode_plg."|".$rr->Tgl."|".$rr->Grand;
             }
             echo $temp;
         }
