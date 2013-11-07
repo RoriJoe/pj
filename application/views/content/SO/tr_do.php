@@ -591,7 +591,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data '+so+' berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Data Sales Order '+so+' berhasil ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -601,7 +601,7 @@ $("#save").click(function(){
 					$('#save').attr('mode','add');
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
+                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Sales Order sudah ada');
                 }
             }
             });

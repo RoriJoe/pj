@@ -1122,3 +1122,8 @@ margin-left: 300px;
 .padding-filter{
     padding: 0px 5px;margin-bottom: 8px;
 }
+
+#tb-invoice thead th{
+    padding: 1px;
+    vertical-align: middle;
+}

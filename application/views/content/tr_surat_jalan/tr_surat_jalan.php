@@ -553,7 +553,7 @@ $("#save").click(function(){
                     $('#hasil2').html('');
                     if(msg == "ok")
                     {
-                        bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' sudah ditambahkan');
+                        bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' berhasil ditambahkan');
                         $('#formID').each(function(){
                             this.reset();
                         });
@@ -563,7 +563,7 @@ $("#save").click(function(){
                         loadDetailSJ();
                     }
                     else{
-                        bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data '+sj+' sudah ada');
+                        bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Surat Jalan '+sj+' sudah ada');
                     }
                 }
                 });
@@ -637,7 +637,7 @@ $("#delete").click(function(){
                         {
                             if(msg == "ok")
                             {    
-                                bootstrap_alert.success('<b>Sukses</b> Data '+sj+' telah dihapus');
+                                bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' telah dihapus');
                                 $('#formID').each(function(){
                                     this.reset();
                                 });

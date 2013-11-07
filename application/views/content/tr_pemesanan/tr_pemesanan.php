@@ -617,7 +617,7 @@ function addCombo() {
         {
             if(msg == "ok")
             {
-                bootstrap_alert.success('<b>Sukses</b> Currency sudah ditambahkan');
+                bootstrap_alert.success('<b>Sukses</b> Currency Baru telah ditambahkan');
                 
                 var textb = document.getElementById("txtCombo");
                 var combo = document.getElementById("cur");

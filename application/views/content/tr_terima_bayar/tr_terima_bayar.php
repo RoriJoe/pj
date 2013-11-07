@@ -1,90 +1,72 @@
-<script type="text/javascript">
-function list_terima_bayar(){
-    $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_terima_bayar/index",
-    data :{},
-    success:
-    function(hh){
-        $('#list_terima_bayar').html(hh);
-    }
-    });
-}
+<div class="row-fluid">
+    <div class="span9">
+        <!--Main Form-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Terima Pembayaran <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
+        <div id="konten" class="hide-con master-border">
+            <form id="formID">
+                <table>
+                    <tr>
+                        <td>No Terima</td>
+                        <td>
+                            <input  type='text' 
+                                    class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
+                                    id='no_terima' name='no_terima' 
+                                    style="width: 120px;text-transform: uppercase;" disabled="disabled">
+                        </td>
 
-list_terima_bayar();
-</script>
-<!--
-*
-*Notification Area
-*@DONT REMOVE!
-*  
--->
+                        <td>Pelanggan</td>
+                        <td>
+                            <input type="hidden" id="kd_plg" />
+                            <div class="input-append money" style="margin-bottom:0px;">
+                             <input type='text' class="span2" disabled="disabled"
+                                maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                            <a href="#modalPelanggan" style="margin-bottom:2px;" id="f_plg" role="button" class="btn padding-filter" title="Search Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                            </div>
+                        </td>
 
+                        <td>Tanggal</td>
+                        <td>
+                            <input  type='text' placeholder='dd-mm-yyyy'
+                                    class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                                    style="width: 80px; margin-right: 20px;">
+                        </td> 
+                   </tr>   
+                </table>
+            </form>
 
-<!--Main Form-->
-<div class="bar">
-    <p>Form Terima Pembayaran <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-
-<div id="konten" class="hide-con master-border">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td style="width: 120px;">No Terima</td>
-            <td>
-                <input  type='text' 
-                        class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
-                        id='no_terima' name='no_terima' 
-                        style="width: 120px;text-transform: uppercase;" disabled="disabled">
-            </td>
-
-             <td>Pelanggan</td>
-            <td>
-                <input type="hidden" id="kd_plg" />
-                <div class="input-append" style="margin-bottom:0px;">
-                 <input type='text' class="span2" disabled="disabled"
-                    maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+            <div class="row-fluid">
+                <div class="span6">
+                    <div id="invoice"></div>
                 </div>
-            </td>
-       </tr>
-       
-       <tr>
-            <td>Tanggal</td>
-            <td>
-                <input  type='text' placeholder='dd-mm-yyyy'
-                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
-                        style="width: 80px; margin-right: 20px;">
-            </td>
-            
-       </tr>
-       
-    </table>
-</form>
+                <div class="offset1 span5">
+                    <div id="pembayaran"></div>
+                </div>
+            </div> 
 
-<div id="pembayaran" style="float: right;">
+            <div id="hasil2"></div>
 
+            <div id="konfirmasi" class="sukses"></div>
+
+            <div>
+                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+                <button id="delete" class="btn">Delete</button>
+                <button id="cancel" class="btn">Cancel</button>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i> Print</button>
+                <a href='#'id="addBank" mode="new" class="btn" title="Tambah JenisBank" onclick="addBank()" style="margin-left:30px;"><i class="icon-plus"></i> Bank</a>
+                <input type="hidden" id="kdban" />
+
+            </div>
+        </div>
+    </div>
+
+    <div class="span3">
+        <!--@Load table List via AJAX-->
+        <div id="list_terima_bayar"></div>
+    </div>
 </div>
-<div id="invoice">
 
-</div>
-
-
-<div id="hasil2"></div>
-<div id="konfirmasi" class="sukses"></div>
-<div>
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn">Delete</button>
-    <button id="cancel" class="btn">Cancel</button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i></button>
-	<a href='#'id="addBank" mode="new" class="btn btn-small" title="Tambah JenisBank" onclick="addBank()" style="margin-left:30px;"><i class="icon-plus"></i></a>
-	<input type="hidden" id="kdban" />
-
-</div>
-</div>
-<!--@Load table List via AJAX-->
-<div id="list_terima_bayar"></div>
-<div id="popup-wrapper3" style="width:750px;height:400px;"></div>
 <div id="modalSO" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -120,10 +102,11 @@ list_terima_bayar();
     <div id="add_pelanggan"></div>
   </div>
 </div>
+
 <!--Le Script-->
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/bar.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/alert.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/accounting.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
+
 <script type="text/javascript">
 $(function() {
     $( "#_tgl1").datepicker({
@@ -136,15 +119,29 @@ $(function() {
     //load function here
 $(document).ready(function(){
 $( "#_tgl1" ).datepicker( "setDate", new Date());
+    list_terima_bayar();
     autogen();
-    validation_engine();
+    validation();
     detail_SO();
 	detail_pembayaran();
 	detail_invoice()
+    //barAnimation();
 	/* /* document.getElementById('add').style.visibility = 'hidden';
 	document.getElementById('add2').style.visibility = 'hidden'; */
 	document.getElementById('addBank').style.visibility = 'hidden'; 
 });
+
+function list_terima_bayar(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/tr_terima_bayar/index",
+    data :{},
+    success:
+    function(hh){
+        $('#list_terima_bayar').html(hh);
+    }
+    });
+}
 
 function autogen(){
     $('#delete').attr('disabled', true);
@@ -158,9 +155,6 @@ function autogen(){
         }
     });
 }
-
-
-
 
 function addPelanggan(){
     $('#modalPelanggan').modal('hide');
@@ -409,12 +403,12 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Data berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses!</b> Data Penerimaan Tagihan '+id+' berhasil ditambahkan');
                     reset_form();
                     list_terima_bayar();
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
+                    bootstrap_alert.warning('<b>Gagal!</b> Kode Penerimaan Tagihan sudah ada');
                 }
             }
             });
@@ -436,7 +430,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses!</b> Update Penerimaan Tagihan '+id+' berhasil dilakukan');
                     reset_form();
                     list_terima_bayar();
                 }
@@ -490,7 +484,7 @@ $("#delete").click(function(){
 						{
 							if(msg == "ok")
 							{
-								bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
+								bootstrap_alert.success('<b>Sukses!</b> Data Penerimaan Tagihan '+id+' telah dihapus');
 								reset_form();
 								list_terima_bayar();
 							}
@@ -525,8 +519,8 @@ function addRow() {
 
     items += "<tr>";
     items += "<td><div id='no_invoice"+$count+"'></div></td>";
-    items += "<td> <input style='width:85px;margin-right: 5px;text-align: right;' id='ninvo"+$count+"' name='ninvo"+$count+"' type='text' readonly='true'></td>";
-    items += "<td> <input style='width:85px;text-align: right;' id='nbayar"+$count+"' name='nbayar"+$count+"' type='text' readonly='true'></td></tr>";
+    items += "<td> <input style='width:100px;text-align: right;' id='ninvo"+$count+"' name='ninvo"+$count+"' type='text' readonly='true'></td>";
+    items += "<td> <input style='width:100px;text-align: right;' id='nbayar"+$count+"' name='nbayar"+$count+"' type='text' readonly='true'></td></tr>";
 	
     $("#itemlist").append(items);
 }
@@ -548,9 +542,9 @@ function addRow2() {
 	
 
     items += "<tr>";
-    items += "<td><select name='_sl"+$count+"' class='jenisbayar' onchange='getJenisByr(this,"+$count+")'  id='_sl"+$count+"' style='width: 110px; margin-left: 5px;'><option value=''>-Pilih-</option><option value='Tunai'>Tunai</option><option value='Bank'>Bank</option><option value='Biaya'>Biaya Bank</option><option value='Discount'>Discount</option></select></td>";
+    items += "<td><select name='_sl"+$count+"' class='jenisbayar' onchange='getJenisByr(this,"+$count+")'  id='_sl"+$count+"' style='width: 130px; margin-left: 5px;'><option value=''>-Pilih-</option><option value='Tunai'>Tunai</option><option value='Bank'>Bank</option><option value='Biaya'>Biaya Bank</option><option value='Discount'>Discount</option></select></td>";
    
-    items += "<td> <input style='width:110px;text-align: right;'  disabled='disabled' id='nilaiB"+$count+"' name='nilaiB' type='text' onkeypress='validAct("+$count+")'></td></tr>";
+    items += "<td> <input style='width:130px;text-align: right;'  disabled='disabled' id='nilaiB"+$count+"' name='nilaiB' type='text' onkeypress='validAct("+$count+")'></td></tr>";
 	
     $("#itemlist2").append(items);
 }

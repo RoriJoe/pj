@@ -473,7 +473,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses!</b> Update Invoice '+id+' berhasil dilakukan');
                     reset_form();
                     list_invoice();
                 }

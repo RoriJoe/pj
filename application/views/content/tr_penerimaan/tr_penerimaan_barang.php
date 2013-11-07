@@ -491,7 +491,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data Penerimaan Barang'+_bpb+' sudah ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Data Penerimaan Barang '+_bpb+' berhasil ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -502,7 +502,7 @@ $("#save").click(function(){
 					$('#save').attr('mode','add');
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data '+_bpb+' sudah ada');
+                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Penerimaan '+_bpb+' sudah ada');
                 }
             }
             });
@@ -533,7 +533,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses</b> Update Penerimaan Barang '+_bpb+' berhasil dilakukan');
                     $('#formID').each(function(){
                             this.reset();
                     });
@@ -581,7 +581,7 @@ $("#delete").click(function(){
                         {
                             if(msg == "ok")
                             {
-                                bootstrap_alert.success('<b>Sukses</b> Data '+_bpb+' telah dihapus');
+                                bootstrap_alert.success('<b>Sukses</b> Penerimaan Barang '+_bpb+' telah dihapus');
                                 $('#formID').each(function(){
                                     this.reset();
                                 });

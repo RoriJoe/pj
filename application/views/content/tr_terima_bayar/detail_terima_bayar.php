@@ -1,22 +1,4 @@
-<script>
-/*Tampilkan jQuery Tanggal*/
-/* $(function() {
-    $( "#_tglc1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-    $( "#_tglc2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-}); */
-</script>
-<div class="table CSSTabel" style="overflow: auto; height: 195px">
+<div class="table CSSTabel" style="overflow: auto; height: 170px; margin-bottom:5px;">
 <table id="tb_detail">
     <thead>
         <th>Jenis</th>

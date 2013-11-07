@@ -358,7 +358,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data sudah ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Pendataan Stok Opname '+noSaw+' berhasil ditambahkan');
                     $('#formID').each(function(){
                         this.reset();
                     });
@@ -396,14 +396,13 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses</b> Update Pendataan Stok Opname '+noSaw+' berhasil dilakukan');
                     $('#formID').each(function(){
                             this.reset();
                     });
                     autogen();
                     listSaw();
                     detailSaw();
-                    //$('#save').attr('mode','add');
                     resetForm();
                 }
                 else{
@@ -447,7 +446,7 @@ $("#delete").click(function(){
                         {
                             if(msg == "ok")
                             {
-                                bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                                bootstrap_alert.success('Pendataan Stok Opname <b>'+id+'</b> berhasil dihapus');
                                 $('#formID').each(function(){
                                     this.reset();
                                 });

@@ -1,4 +1,4 @@
-<div class="table CSSTabel table-list table-hover" style="height: 395px;">
+<div class="table CSSTabel table-list table-hover">
     <table id="tbl_list">
         <thead>
             <th>No Terima</th>
@@ -27,7 +27,7 @@
 </div>
 
 <script type="text/javascript">
-$('#tbl_list tr').click(function (e) {
+$('#tbl_list tbody tr').click(function (e) {
     $('#delete').attr('disabled', false);
    
     var id = $(this).attr("kode"); 
@@ -55,13 +55,20 @@ $('#tbl_list tr').click(function (e) {
 
 
 var oTable = $('#tbl_list').dataTable( {
-    "sScrollY": "290px",
+    "sScrollY": "380px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
-    "bLengthChange": false,
+    "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "",
+         "sLengthMenu": " _MENU_ ",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
+    "sPaginationType": "full_numbers",
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>
