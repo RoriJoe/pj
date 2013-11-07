@@ -451,7 +451,7 @@ $("#save").click(function(){
                     list_invoice();
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
+                    bootstrap_alert.warning('<b>Gagal!</b> Kode Invoice sudah ada');
                 }
             }
             });
@@ -513,7 +513,7 @@ $("#delete").click(function(){
                     {
                         if(msg == "ok")
                         {
-                            bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                            bootstrap_alert.success('Data Invoice <b>'+id+'</b> berhasil dihapus');
                             reset_form();
                             list_invoice();
                         }
