@@ -14,7 +14,8 @@
     {
         echo "<tr>
         <td>
-                <input type='text' class='span2' style='width:120px;padding: 2px 3px;' id='kode_brg$i' name='kode_brgd' value='$row->Kode' disabled='disabled'/>
+            <input type='hidden' class='span2' style='width:120px;padding: 2px 3px;' id='kode_brg$i' name='kode_brgd' value='$row->Kode' disabled='disabled'/>
+            $row->Kode
         </td>
         
         <td>
@@ -115,6 +116,7 @@ var oTable = $('#tb3').dataTable( {
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
+    "bAutoWidth": false,
     "bLengthChange": true,
     "aaSorting": [[ 1, "asc" ]],
     "oLanguage": {
@@ -124,6 +126,6 @@ var oTable = $('#tb3').dataTable( {
          "sZeroRecords": "Data tidak ditemukan"
        },
     "sPaginationType": "full_numbers",
-    "bInfo": true//Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+    "bInfo": false//Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

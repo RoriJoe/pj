@@ -1,4 +1,4 @@
-<div class="table CSSTabel">
+<div class="table CSSTabel" style="margin-bottom:5px;">
 <table id="tb_detail">
     <thead>
         <th>Kode</th>
@@ -22,7 +22,7 @@
             $row->Kode_Brg
         </td>
         <td>
-            $row->Barang $row->Ukuran 
+            $row->Barang
         </td>
         <td>
             $row->Satuan1
@@ -49,7 +49,7 @@
 
 <script type="text/javascript">
 var oTable = $('#tb_detail').dataTable( {
-    "sScrollY": "180px",
+    "sScrollY": "130px",
     "sScrollYInner": "100%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem

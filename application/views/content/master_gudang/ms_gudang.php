@@ -1,4 +1,71 @@
+<!--//***MAIN FORM-->
+<div class="row-fluid">
+      <div class="span5">
+        <div class="bar" style="" title="Show/Hide Form">
+            <p>Form Gudang <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
+
+        <div id="konten" class="hide-con master-border">
+
+        <form id="formID">
+                <div class="field-wrap">
+                    Kode
+                    <input type='text' class="span-form75 upper-form validate[required,maxSize[22], minSize[5]],custom[onlyLetterNumber]]" maxlength="22" 
+                    id='kd' name='kd'>
+                </div>
+                <div class="field-wrap">
+                    Nama
+                    <input type='text' class="validate[required, maxSize[30], minSize[3]]" maxlength="30" 
+                    id='nm' name='nm' style=" width: 170px; ">
+                </div>
+
+                <div class="field-wrap">
+                    Alamat
+                    <textarea rows="2" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:170px; height: 60px; margin-left: 0px; margin-right: 10px"></textarea>
+                </div>
+
+                <div class="field-wrap">
+                    Kota
+                    <input type='text' class="validate[required, maxSize[15], minSize[3]]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;" onclick="disableNum('kt')">
+                </div>
+
+                <div class="field-wrap">
+                    Telp
+                    <input type='text' placeholder="Telp 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' onclick="disableAlpha('tl1')" style=" margin-left: 17px; ">
+                    <input type='text' placeholder="Telp 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
+                </div>
+
+                <div class="field-wrap">
+                    Fax
+                    <input type='text' placeholder="Fax 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx1' name='fx1' onclick="disableAlpha('fx1')" style="margin-left:19px;">
+                    <input type='text' placeholder="Fax 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')">
+                </div><br/>
+                <div class="field-wrap action-group">
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                        <button id="cac" class="btn" type="reset">Cancel</button>
+                        <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Gudang"><i class="icon-print"></i> Print</button>
+                </div>
+        </form>
+        <!--**NOTIFICATION AREA**-->
+        <div id="konfirmasi" class="sukses"></div>
+        </div>
+    </div>
+
+    <div class="offset4 span3">
+        <div id="hasil"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    load_list();
+    autogen();
+    barAnimation();
+    validation();
+    key();
+});
 
 function load_list(){
 $.ajax({
@@ -11,77 +78,6 @@ $.ajax({
     }
 });
 }
-
-load_list();
-</script>
-
-<!--//***MAIN FORM-->
-<div class="bar bar2">
-    <p>Form Gudang <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-
-<div id="konten" class="hide-con master-border" style="width: 62%;">
-<form id="formID" style="margin-left: 30px;">
-    <table>
-        <tr>
-            <td>Kode</td>
-            <td>
-                <input type='text' class="span-form75 upper-form validate[required,maxSize[22], minSize[5]],custom[onlyLetterNumber]]" maxlength="22" 
-                id='kd' name='kd'>
-            </td>
-            <td>Nama</td>
-            <td>
-                <input type='text' class="span-form170 validate[required, maxSize[30], minSize[3]]" maxlength="30" 
-                id='nm' name='nm'>
-            </td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>
-                <textarea rows="2" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:200px; height: 60px; margin-left: 10px; margin-right: 20px"></textarea>
-            </td>
-            <td>Kota</td>
-            <td>
-                <input type='text' class="validate[required, maxSize[15], minSize[3]]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;" onclick="disableNum('kt')">
-            </td>
-        </tr>
-        <tr>
-            <td>Telp</td>
-            <td colspan="3">
-                <input type='text' placeholder="Telp 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' onclick="disableAlpha('tl1')">
-                <input type='text' placeholder="Telp 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
-            </td>
-        </tr>
-        <tr>
-            <td>Fax</td>
-            <td colspan="3">
-                <input type='text' placeholder="Fax 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx1' name='fx1' onclick="disableAlpha('fx1')">
-                <input type='text' placeholder="Fax 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <br/>
-                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <button id="cac" class="btn" type="reset">Cancel</button>
-				<button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Gudang"><i class="icon-print"></i></button>
-            </td>
-        </tr>
-    </table>
-</form>
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-</div>
-<div id="hasil"></div>
-
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    autogen();
-    barAnimation();
-    validation();
-    key();
-});
 
 function autogen(){
     $("#kd").attr('disabled',false);
@@ -98,17 +94,12 @@ function autogen(){
         }
     });
 }
-</script>
 
-<script type="text/javascript">
-//buat print
 $("#print").click(function(){
-$.ajax({
+    $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/report/print_master_gudang",
-        data :{   
-        },
-
+        data :{   },
         success:
         function(msg)
         {   
@@ -121,7 +112,7 @@ $.ajax({
             }
             win.print();
         }
-     });
+    });
 });
 
 $("#kd").keypress(function(e){

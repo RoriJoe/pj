@@ -1,38 +1,42 @@
-<!--//***MAIN FORM-->
-<div class="bar bar2" style="width: 42%;">
-    <p>Form Satuan <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span4">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Satuan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
 
-<div id="konten" class="hide-con master-border" style="width: 40%;">
-<form id="formID" style="margin-left: 30px;">
-    <table>
-        <tr>
-            <td>Kode Satuan</td>
-            <td>
-                <input type='text' class="span-form75 validate[required,maxSize[10]]" maxlength="10" 
-                id='kd' name='kd'>
-            </td>         
-        </tr>
-        <tr>
-            <td>Satuan</td>
-            <td>
-                <input type='text' class="span-form170 validate[required, maxSize[10]]" maxlength="10" 
-                id='nm' name='nm'>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <br/>
-                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <button id="cac" class="btn" type="reset">Cancel</button>
-            </td>
-        </tr>
-    </table>
-</form>
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
+        <div id="konten" class="hide-con master-border">
+        <form id="formID">
+            <table>
+                <tr>
+                    <td>Kode Satuan</td>
+                    <td>
+                        <input type='text' class="span-form75 validate[required,maxSize[10]]" maxlength="10" 
+                        id='kd' name='kd'>
+                    </td>         
+                </tr>
+                <tr>
+                    <td>Satuan</td>
+                    <td>
+                        <input type='text' class="span-form170 validate[required, maxSize[10]]" maxlength="10" 
+                        id='nm' name='nm'>
+                    </td>
+                </tr>
+            </table>
+            <div class="field-wrap action-group">
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <button id="cac" class="btn" type="reset">Cancel</button>
+            </div>
+            
+        </form>
+        <!--**NOTIFICATION AREA**-->
+        <div id="konfirmasi" class="sukses"></div>
+        </div>
+    </div>
+    <div class="offset5 span3">
+        <div id="hasil"></div>
+    </div>
 </div>
-<div id="hasil"></div>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">

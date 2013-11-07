@@ -1,43 +1,49 @@
-<!--//***MAIN FORM-->
-<div class="bar bar2">
-    <p>Form Bank <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span6">
+        <!--//***MAIN FORM-->
+        <div class="bar">
+            <p>Form Bank <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
 
-<div id="konten" class="hide-con master-border" style="width: 62%;">
-<form id="formID">
-    <table>
-        <tr>
-            <td>Kode</td>
-            <td>
-                <input type='text' class="span-form75 upper-form validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd'>
-            </td>
-			<td>
-				Alamat
-			</td>
-			<td rowspan="2">
-				<textarea rows="2" class="validate[required,maxSize[100]]" maxlength="100" id='_al' name='_al' style="resize:none; width:170px; height: 60px; margin-left: 10px;"></textarea>
-			</td>
-            <td rowspan="2">
-                <a href="#myModal" role="button" class="btn" data-toggle="modal" id="rek" style="margin-left:10px;"><i id='icon$i' class='icon-plus'></i> Rekening</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Nama</td>
-            <td style="vertical-align: bottom;">
-                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm'>
-            </td>
-       </tr>       
-    </table>
-</form>
-	<div id="detail"></div>
-	<div style="margin-top: 10px;">
-		<button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-		<button id="cancel" class="btn" type="reset">Cancel</button>
-	</div>
-    <div id="konfirmasi" class="sukses"></div>
-</div>
+        <div id="konten" class="hide-con master-border">
+        <form id="formID">
+            <table>
+                <tr>
+                    <td>Kode</td>
+                    <td>
+                        <input type='text' class="span-form75 upper-form validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd'>
+                    </td>
+                    <td>
+                        Alamat
+                    </td>
+                    <td rowspan="2">
+                        <textarea rows="3" class="validate[required,maxSize[100]]" maxlength="100" id='_al' name='_al' style="resize:none; width:150px; margin-left: 10px;"></textarea>
+                    </td>
+                    <td rowspan="2">
+                        <a href="#myModal" role="button" class="btn" data-toggle="modal" id="rek" style="margin-left:10px;">Tambah Rekening</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td style="vertical-align: bottom;">
+                        <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm'>
+                    </td>
+               </tr>       
+            </table>
+        </form>
+            <div id="detail"></div>
+            <div style="margin-top: 10px; text-align:center;">
+                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <button id="cancel" class="btn" type="reset">Cancel</button>
+            </div>
+            <div id="konfirmasi" class="sukses"></div>
+        </div>
+    </div>
 
-<div id="list"></div>
+    <div class="offset3 span3">
+        <div id="list"></div>
+    </div>
+</div>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -49,7 +55,7 @@
         <tr>
             <td>No Rekening</td>
             <td>
-                <input type='text' class="span-form170 upper-form validate[required,maxSize[20], minSize[2]],custom[onlyNumberSp]" maxlength="20" id='_no_rek' name='itemcode' onclick="disableAlpha('_no_rek')">
+                <input type='text' style="width: 155px; margin-right:10px;" class="span-form170 upper-form validate[required,maxSize[20], minSize[2]],custom[onlyLetterNumber]" maxlength="20" id='_no_rek' name='itemcode' onclick="disableAlpha('_no_rek')">
             </td>
             <td>Cabang</td>
             <td style="vertical-align: bottom;">
@@ -59,7 +65,7 @@
         <tr>
             <td>Atas Nama</td>
             <td style="vertical-align: bottom;">
-                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterSp]]" maxlength="50" id='_an' name='_an' onclick="disableNum('_an')">
+                <input type='text' style="width: 155px;" class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterSp]]" maxlength="50" id='_an' name='_an' onclick="disableNum('_an')">
             </td>
             <td>Jenis</td>
             <td>
@@ -82,9 +88,9 @@
                         <div>
                          <input  type='text' 
                             class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
-                            style='width: 90px;margin-left: 10px;'
+                            style='width: 130px;margin-left: 10px;margin-bottom: 0;'
                             />
-                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
+                        <button class='btn btn-primary' onclick='addCombo()'>Tambah</button>
                         </div>"><i class='icon-plus'></i>
                 </button>
             </td>
@@ -109,8 +115,8 @@
   </div>
   <div class="modal-footer">
     <div id="konfirmasi2" class="sukses"></div>
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="addRow()">Done</button>
+    <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-small btn-primary" onclick="addRow()">Done</button>
   </div>
 </div>
 
@@ -308,12 +314,6 @@ function addCombo() {
     option.text = textb.value;
     option.value = textb.value;
 
-    try {
-        combo.add(option, null); //Standard
-    }catch(error) {
-        combo.add(option); // IE only
-    }
-
     var _val = $('#txtCombo').val();
     if(_val !="")
     {
@@ -327,6 +327,12 @@ function addCombo() {
         {
             if(msg == "ok")
             {
+                try {
+                    combo.add(option, null); //Standard
+                }catch(error) {
+                    combo.add(option); // IE only
+                }
+
                 setSelectedIndex(document.getElementById("_tipe"),_val);
                 textb.value = "";
                 $('#tes').popover('hide');

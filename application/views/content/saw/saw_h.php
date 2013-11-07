@@ -1,4 +1,111 @@
+<div class="row-fluid">
+    <div class="span7">
+        <!--//***MAIN FORM-->
+        <div class="bar">
+            <p>Form Pendataan Stock Opname <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
+        <div id="konten" class="hide-con master-border">
+            <form id="formID">
+                <table>
+                    <tr>
+                        <td>Nomor Trans</td>
+                        <td>
+                            <input type='text' class="validate[required,maxSize[7], minSize[7]],custom[onlyNumberSp]" 
+                            maxlength="7" id='noSaw' name='noSaw' onclick="disableAlpha('noSaw')" 
+                            style="width: 120px; margin-left: 10px; margin-right: 20px;text-transform: uppercase;"/>
+                        </td>
+
+                        <td>Tgl Pendataan</td>
+                        <td>
+                            <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
+                            style="width: 80px;margin-left: 10px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
+                        </td>
+                   </tr>
+                   <tr>
+                       <td>Gudang</td>
+                        <td>
+                            <input type="hidden" class="validate[required]" id="kd_gd" />
+                            <div class="input-append money">
+                             <input type='text' class="validate[required,maxSize[25], minSize[5]] span2" 
+                                maxlength="30" id="gud" id='appendedInputButton' name='_gd' 
+                                style="width: 135px; margin-left: 10px;" onclick="lookup_gudang()"/>
+                            <a href="#modalGudang" style="margin-bottom:2px;" role="button" class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" onclick="listGudang()"><i class="icon-filter"></i></a>
+                              
+                            </div>
+                        </td>
+                   </tr>
+                </table>
+            </form>
+            <hr style="margin:0;" />
+            <div id="detail"></div>
+            <!--**NOTIFICATION AREA**-->
+            <div id="konfirmasi" class="sukses"></div>
+
+            <div style="margin-top: 10px;"> 
+                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+                <button id="delete" class="btn" type="submit">Delete</button>
+                <button id="cancel" class="btn" type="submit">Cancel</button>
+
+                <button id="print" class="btn" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i> Print</button>
+                <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
+            </div>
+        </div>
+    </div>
+    <div class="offset2 span3">     
+        <div id="list"></div>
+    </div>
+</div>
+
+<div id="modalGudang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Gudang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_gudang"></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+  </div>
+</div>
+
+<div id="modalNewGudang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Tambah Gudang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="add_gudang"></div>
+  </div>
+    <div class="modal-footer">
+        <button id="saveGudang" class="btn btn-primary" mode="add">Save</button>
+        <button id="cacGudang" class="btn" type="reset">Cancel</button>
+    </div>
+</div>
+
+<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Barang</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_barang"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
+  </div>
+</div>
+
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$( "#_tgl" ).datepicker( "setDate", new Date());
+    autogen();
+    validation();	
+    resetForm();
+});
+
 function autogen(){
     $.ajax({
     type:'POST',
@@ -23,6 +130,20 @@ function listGudang(){
     }
     });   
 }
+
+function addGudang(){
+    $('#modalGudang').modal('hide');
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_gudang/popGudang",
+    data :{},
+    success:
+    function(hh){
+        $('#add_gudang').html(hh);
+    }
+    });  
+} 
+
 function listBarang(){
     $.ajax({
     type:'POST',
@@ -34,17 +155,7 @@ function listBarang(){
     }
     });   
 }
-function validation_engine() {
-    jQuery("#formID").validationEngine(
-    {
-        showOneMessage: true,
-        ajaxFormValidation: true,
-        ajaxFormValidationMethod: 'post',
-        autoHidePrompt: true,
-        autoHideDelay: 2500, 
-        fadeDuration: 0.3
-    });
-}
+
 function lookup_gudang(){
     $("#gud").autocomplete({
     minLength: 1,
@@ -101,20 +212,6 @@ $('input[type="text"]').keyup(function() {
  });
 }
 
-function disableAlpha($id){
-    var foo = document.getElementById($id);
-    foo.addEventListener('input', function (prev) {
-    return function (evt) {
-        if (!/^[0-9]*$/.test(this.value)) {
-          this.value = prev;
-        }
-        else {
-          prev = this.value;
-        }
-    };
-    }(foo.value), false);
-};
-
 function addBarang(){
     
     $.ajax({ 
@@ -140,100 +237,6 @@ function detailSaw(){
         }
     });
 }
-
-</script>
-
-<!--//***MAIN FORM-->
-<div class="bar">
-    <p>Form Pendataan Stock Opname <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td>Nomor Trans</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[7], minSize[7]],custom[onlyNumberSp]" 
-                maxlength="7" id='noSaw' name='noSaw' onclick="disableAlpha('noSaw')" 
-                style="width: 170px; margin-left: 10px; margin-right: 20px;text-transform: uppercase;"/>
-            </td>
-
-            <td>Tgl Pendataan</td>
-            <td>
-                <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
-                style="width: 80px;margin-left: 10px; margin-right: 20px;">
-            </td>
-       </tr>
-       <tr>
-            <td>Gudang</td>
-            <td>
-                <input type="hidden" class="validate[required]" id="kd_gd" />
-                <div class="input-append">
-                 <input type='text' class="validate[required,maxSize[25], minSize[5]] span2" 
-                    maxlength="30" id="gud" id='appendedInputButton' name='_gd' 
-                    style="width: 148px; margin-left: 10px;" onclick="lookup_gudang()"/>
-                <a href="#myModal" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-filter"></i></a>
-                  
-                </div>
-            </td>
-       </tr>
-    </table>
-</form>
-<hr style="margin:0;" />
-<div id="detail"></div>
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
-
-<div style="margin-top: 10px;"> 
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn" type="submit">Delete</button>
-    <button id="cancel" class="btn" type="submit">Cancel</button>
-
-    <button id="print" class="btn" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>
-    <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
-</div>
-
-</div>
-
-<div id="list" style="height: 215px;"></div>
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Gudang</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_gudang"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getGudang()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Barang</h3>
-  </div>
-  <div class="modal-body">
-    <div id="list_barang"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary" onclick="getBarang()" data-dismiss="modal" aria-hidden="true">Done</button>
-  </div>
-</div>
-
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$( "#_tgl" ).datepicker( "setDate", new Date());
-    listSaw();
-    autogen();
-    validation();	
-    resetForm();
-});
 
 function resetForm(){
     $( "#_tgl" ).datepicker( "setDate", new Date());
@@ -265,12 +268,12 @@ function loadBarang(){
     addBarang();
 }
 
-//GET POPUP Barang
 function getGudang(){
     var x = $('input:radio[name=optionsRadios]:checked').val();
-    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    var y = $('input:radio[name=optionsRadios]:checked').attr('kd');
+
     $('#gud').val(x);
-    $('#kd_gd').val(k);  
+    $('#kd_gud').val(y);    
 }
 function getBarang(){
     var x = $('input:radio[name=optionsRadios]:checked').val();

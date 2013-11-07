@@ -1,101 +1,89 @@
-<script>
-$.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_pelanggan/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
-});
-</script>
+<div class="row-fluid">
+    <div class="span6">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Pelanggan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
 
-<!--//***MAIN FORM-->
-<div class="bar bar2">
-    <p>Form Pelanggan <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-
-<div id="konten" class="hide-con master-border" style="width: 62%;">
-<form id="formID">
-    <table>
-        <tr>
-            <td>Kode</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]] span-form75 upper-form" maxlength="20" id='kd' name='kd'>
-            </td>
-            <td>Perusahaan</td>
-            <td>
-                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr'>
-            </td>
-        </tr>
-        <tr>
-            <td>Contact Person</td>
-            <td>
-                <input type='text' class="span-form170 validate[required, maxSize[25], minSize[3]],custom[onlyLetterSp]]" maxlength="25" id='cp' name='cp' onclick="disableNum('cp')">
-            </td>
-            <td>Alamat</td>
-            <td>
-                <textarea rows="2" class="validate[required]" id='al' name='al' style="resize:none; width:218px; height: 60px; margin-left: 10px;"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>NPWP</td>
-            <td>
-                <input type='text' class="span-form170 validate[required]" maxlength="25" id='np' name='np' onclick="disableAlpha('np')">
-            </td>
-            <td>Kota</td>
-            <td>
-                <input type='text' class="validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;">
-                &nbsp; 
-                Kode Pos
-                <input type='text' class="validate[required, maxSize[5], minSize[5]],custom[onlyNumberSp]]" maxlength="5" id='kp' name='kp' style="width: 50px;" onclick="disableAlpha('kp')">
-            </td>
-        </tr>
-        <tr>
-            <td>Limit Kredit</td>
-            <td>
-                <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
-                  <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 145px; text-align:right" onkeyup="formatAngka(this,'.')" >
+        <div id="konten" class="hide-con master-border">
+        <form id="formID">
+            <div class="field-wrap">
+                Kode
+                <input type='text' class="validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]] upper-form" maxlength="20" id='kd' name='kd'
+                style="width:95px; margin-left:20px; margin-right:10px;">
+            </div>
+            <div class="field-wrap" style=" margin-left: 44px; ">
+                Perusahaan
+                <input type='text' class="validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr' style="width: 155px; margin-left:20px;">
+            </div>
+            <br/>
+            <div class="field-wrap">
+                NPWP
+                <input type='text' class="span-form170 validate[required]" maxlength="25" id='np' name='np' onclick="disableAlpha('np')" style="width:150px;">
+            </div>
+            <div class="field-wrap" style=" margin-left: 12px; ">
+                Contact Person
+                <input type='text' class="validate[required, maxSize[25], minSize[3]],custom[onlyLetterSp]]" maxlength="25" id='cp' name='cp' onclick="disableNum('cp')" style="width: 155px;">
+            </div>
+        
+            <div class="field-wrap">
+                Limit Kredit
+                <div class="input-prepend" style="margin-bottom: 0; display:inline-block;">
+                  <span class="add-on" style="padding: 4px;margin-bottom:5px;">Rp</span>
+                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 125px; text-align:right" onkeyup="formatAngka(this,'.')" >
                 </div>
-            </td>
-            <td>Terms</td>
-            <td>
+            </div>
+            
+            <div class="field-wrap">
+                Terms
                 <input  type='text' 
-                        class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
-                        style="width: 30px;margin-left: 10px;"> Hari
-            </td>
-        </tr>
-       <tr>
-            <td>Telp</td>
-            <td colspan="3">
-                <input type='text' placeholder="Telp 1" class="telp validate[required, minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')">
+                            class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
+                            style="width: 30px;margin-left: 3px;"> Hari
+            </div>
+            <br/>
+            <div class="field-wrap">
+                Alamat
+                <textarea rows="3" class="validate[required]" id='al' name='al' style="resize:none; width:150px; margin-left: 10px;"></textarea>
+            </div>
+
+            <div class="field-wrap">
+                Kota
+                <input type='text' class="validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;">
+                
+                Kode Pos
+                <input type='text' class="validate[required, maxSize[5], minSize[5]],custom[onlyNumberSp]]" maxlength="5" id='kp' name='kp' style="width: 40px;" onclick="disableAlpha('kp')">
+            </div>
+
+            
+            <div class="field-wrap">
+                Telp
+                <input type='text' placeholder="Telp 1" class="telp validate[required, minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')" style="margin-left:26px;">
                 <input type='text' placeholder="Telp 2" class="telp validate[minSize[5]],custom[phone]]" maxlength="20" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
                 <input type='text' placeholder="Telp 3" class="telp validate[minSize[5]],custom[phone]]" maxlength="20" id='tl3' name='tl3' value="" onclick="disableAlpha('tl3')">
-            </td>
-       </tr>
-       <tr>
-            <td>Fax</td>
-            <td colspan="3">
-                <input type='text' placeholder="Fax 1" class="telp validate[required, minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')">
+            </div>
+
+            <div class="field-wrap">
+                Fax
+                <input type='text' placeholder="Fax 1" class="telp validate[required, minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')" style="margin-left:28px;">
                 <input type='text' placeholder="Fax 2" class="telp validate[minSize[5]],custom[phone]]" id='fx2' maxlength="20" name='fx2' value=""  onclick="disableAlpha('fx2')">
-            </td>
-       </tr>
-        <tr >
-            <td colspan="4">
-                <br/>
+            </div>
+            <br/>
+            <div class="field-wrap action-group">
                 <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
                 <button id="cencel" class="btn" type="reset">Cancel</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Pelanggan"><i class="icon-print"></i></button>
-            </td>
-        </tr>
-    </table>
-</form>
-<div id="konfirmasi" class="sukses"></div>
-</div>
-<!--//***END MAIN FROM-->
+                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Pelanggan"><i class="icon-print"></i> Print</button>
+            </div>
+        </form>
+        <div id="konfirmasi" class="sukses"></div>
+        </div>
+        <!--//***END MAIN FROM-->
+    </div>
 
-<div id="hasil"></div>
+    <div class="offset3 span3">
+        <div id="hasil"></div>
+    </div>
+</div>
+
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
@@ -104,6 +92,15 @@ $.ajax({
  */
 $(document).ready(function() 
 {
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_pelanggan/index",
+        data :{},
+        success:
+        function(hh){
+            $('#hasil').html(hh);
+        }
+    });
     autogen();
     barAnimation();
     validation();
@@ -161,24 +158,22 @@ function conv(input){
 //buat print
 $("#print").click(function(){
 $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/report/print_master_pelanggan",
-        data :{   
-        },
-
-        success:
-        function(msg)
-        {   
-            var win=window.open('');
-            with(win.document)
-            {
-              open();
-              write(msg);
-              close();
-            }
-            win.print();
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/report/print_master_pelanggan",
+    data :{ },
+    success:
+    function(msg)
+    {   
+        var win=window.open('');
+        with(win.document)
+        {
+          open();
+          write(msg);
+          close();
         }
-     });
+        win.print();
+    }
+    });
 });
 
 $("#kd").keypress(function(e){

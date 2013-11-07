@@ -1,4 +1,4 @@
-<div class="table CSSTabel table-hover tb-barang" style="width:24%">
+<div class="table CSSTabel table-hover table-list">
     <table id="tb2">
         <thead>
             <th>No SO</th>
@@ -49,6 +49,7 @@ var oTable = $('#tb2').dataTable( {
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
+    "sPaginationType": "full_numbers",
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

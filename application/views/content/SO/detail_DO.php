@@ -1,17 +1,17 @@
-<div class="table  CSSTabel">
+<div class="table CSSTabel">
 <table>
     <thead>
         <th width="15%">Kode Barang</th>
         <th width="22%">Nama</th>
-        <th width="8%" style="text-align: center;">Qty</th>
-        <th width="15%" style="text-align: center;">Hrg Satuan(RP)</th>
-        <th width="15%" style="text-align: center;">Nilai(RP)</th>
+        <th width="8%">Qty</th>
+        <th width="15%">Hrg Satuan(RP)</th>
+        <th width="15%">Nilai(RP)</th>
         <th width="15%">Keterangan</th>
         <th width="10%">Action</th>
     </thead>
 </table>
-<div class="table CSSTabel" style="overflow-y:scroll;height:192px;">
-    <table id="tb_detail">
+<div class="" style="overflow-y:scroll;height:140px;">
+    <table class="table" id="tb_detail">
         <tbody id="itemlist">
         <?php
         $i=1;
@@ -24,34 +24,34 @@
             <td width='15%'>
                 <div class='input-append'>
                     <input type='hidden' id='last_kode$i' value='$row->Kode_Brg'/>
-                    <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' value='$row->Kode_Brg' disabled='true'/>
-                    <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                    <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:92px' value='$row->Kode_Brg' disabled='true'/>
+                    <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>    
             </td>
             <td width='22%'>
                 <div class='input-append'>
-                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:134px' value=\"".$ukuran."\" readonly='true'/>
-                <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                <input type='text' name='nama_brg' class='validate[required]' id='nama_brg$i' style='width:132px' value=\"".$ukuran."\" readonly='true'/>
+                <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
                 </div>
             </td>
             <td width='8%'>
                 <input type='hidden' id='cur_qty$i' value='$row->Qty1'/>
                 <input type='hidden' id='last_qty$i' value='$row->Qty'/>
-                <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:35px;text-align:right;' value='$row->Qty' disabled='true'/>
+                <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:40px;text-align:right;' value='$row->Qty' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$harga_satuan' disabled='true'/>
+                <input type='text' name='harga_brg' onkeypress='validAct($i)' maxlength='12' class='validate[required]' id='harga_brg$i' style='width:93px; text-align:right;' value='$harga_satuan' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
+                <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:93px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
             </td>
             <td width='15%'>
-                <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:88px' value='$row->Keterangan' disabled='true'/>
+                <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:93px' value='$row->Keterangan' disabled='true'/>
             </td>
             <td width='10%'>
             <div class='btn-group' style='margin-bottom:0;'>
-                <a class='btn btn-small' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-                <a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
+                <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
+                <a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
             </div>
             </td>
             </tr>
@@ -60,7 +60,6 @@
         } ?>
     </tbody>
     </table>
-</div>
 </div>
 
 <script>

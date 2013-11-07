@@ -53,13 +53,15 @@
         }
 
         function get_detail_sj($id){
-            $this->db->select('A.No_Sj,A.Kode_Brg,A.Keterangan,A.Barang,A.Qty1,B.Ukuran,B.Satuan1,C.Harga');
-            $this->db->from('sj_d A');
-            $this->db->join('barang B','B.Kode = A.Kode_Brg','left');
-            $this->db->join('do_d C','C.Kode_Brg = A.Barang_SJ');
-            $this->db->where('A.No_Sj', $id);
-            
-            $query = $this->db->get();
+            $query = $this->db->query("
+                SELECT A.No_Sj, A.Kode_Brg, A.Keterangan, A.Barang,A.Qty1, B.Ukuran,B.Satuan1,D.No_Sj,E.Harga
+                FROM sj_d A
+                LEFT JOIN barang B ON B.Kode = A.Kode_Brg
+                LEFT JOIN sj_h D ON D.No_Sj = A.No_Sj
+                LEFT JOIN do_d E ON E.Kode_Brg = A.Barang_SJ
+                WHERE E.No_Do = D.No_Do
+                AND A.No_Sj = '$id'
+            ");
             return $query->result();
         }
 

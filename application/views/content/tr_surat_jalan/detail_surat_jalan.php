@@ -20,18 +20,18 @@
         <td>
             <div class='input-append' style='margin-bottom:0;'>
                 <input type='text' class='validate[required] span2' id='kode_brg$i' id='appendedInputButton' name='kode_brg[]' style='width:100px' value='$row->Kode_Brg' disabled='true'/>
-                <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
         <td>
             <div class='input-append' style='margin-bottom:0;'>
-                <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur[]' style='width:140px' value=\"".$ukuran."\" disabled='true'/>
-                <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+                <input type='text' class='validate[required]' id='brg_ukur$i' name='brg_ukur[]' style='width:157px' value=\"".$ukuran."\" disabled='true'/>
+                <a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
             </div>
         </td>
         <td>
             <input type='hidden' id='kode_brgSj$i' name='kode_brgSj[]' value='$row->Kode_BrgSj'/>
-            <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:140px' value=\"".$namaSJ."\" disabled='true'/>
+            <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:160px' value=\"".$namaSJ."\" disabled='true'/>
         </td>
         <td>
             <input type='hidden' id='last_qty$i' value='$row->Qty'/>
@@ -39,7 +39,7 @@
         <td><input type='text' class='validate[required]' id='ket$i' name='ket[]' style='width:120px' value='$row->Keterangan' disabled='true'/></td>
         <td>
             <div class='btn-group' style='margin-bottom:0;'>
-		        <a class='btn btn-small' id='edit$i' href='#' name='pencil' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
+		        <a class='btn' id='edit$i' href='#' name='pencil' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
             </div>
         </td>
         </tr>
@@ -150,7 +150,7 @@ function validAct(row){
 
 
 var oTable = $('#tb_detail').dataTable( {
-    "sScrollY": "180px",
+    "sScrollY": "200px",
     "sScrollYInner": "100%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem

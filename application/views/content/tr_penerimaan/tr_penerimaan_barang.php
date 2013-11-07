@@ -1,71 +1,69 @@
-<!--//***MAIN FORM-->
-<div class="bar">
-    <p>Form Pendataan Penerimaan Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span9">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Pendataan Penerimaan Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
 
-<div id="konten" class="hide-con master-border">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td>Nomor BPB</td>
-            <td>
+        <div id="konten" class="hide-con master-border">
+        <form id="formID">
+            <div class="field-wrap">
+                Nomor BPB
                 <input type='text' 
                 class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
                 maxlength="20" id='_bpb' name='_bpb'/>
-            </td>
-
-            <td>Tgl BPB</td>
-            <td>
-                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
-            </td>
-       </tr>
-       <tr>
-            <td>Gudang</td>
-            <td>
+            </div>
+            <div class="field-wrap" style=" margin-left: 5px; ">
+                Gudang
                 <input type="hidden" class="validate[required]" id="kd_gd" />
-                <div class="input-append" style="margin-bottom: 0px;">
+                <div class="input-append money" style="margin-bottom: 0px;">
                  <input type='text' class="validate[required] span2" 
                     maxlength="30" id="_gd" id='appendedInputButton' name='_gd' 
-                    style="width: 148px; margin-left: 10px;" onclick="lookup_gudang()"/>
-                <a href="#modalGudang" role="button" class="btn" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" style="padding: 2px 3px;" onclick="listGudang()"><i class="icon-search"></i></a>
-                  
+                    style="width: 134px; margin-bottom:8px;" onclick="lookup_gudang()"/>
+                <a href="#modalGudang" role="button" class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" onclick="listGudang()"><i class="icon-search"></i></a>
                 </div>
-            </td>
-            <td>
+            </div>
+            <div class="field-wrap" style=" margin-left: 5px; ">
+                Tgl BPB
+                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
+            </div>
+            <br/>
+            <div class="field-wrap">
                 Nomor PO
-            </td>
-            <td>
-                <div id="no_po" style="margin-left:10px;">
-                </div>
-            </td>
-       </tr>
-
-       <tr>
-            <td>Supplier</td>
-            <td>
+                <div id="no_po" style="margin-left:10px;" class="money"></div>
+            </div>
+            <div class="field-wrap">
+                Supplier
                 <input type="hidden" class="validate[required]" id="kd_sp" />
-                 <input type='text' class="span2" 
-                maxlength="30" id="_sp" id='appendedInputButton' name='_sp' style="width: 148px; margin-left: 10px;" readonly="true">
-            </td>
-            <td>No Reff Supplier</td>
-            <td>
-            	<input type='text' class="span-form170 validate[required,maxSize[25], minSize[5]],custom[onlyNumberSp]" 
-                maxlength="25" id='_ref' name='_ref' onclick="disableAlpha('_ref')" />
-            </td>
-        </tr>
-    </table>
-</form>
+                <input type='text' class="span2" 
+                    maxlength="30" id="_sp" id='appendedInputButton' name='_sp' style="width: 158px;" readonly="true">
+            </div>
+            <div class="field-wrap" style=" margin-left: 5px; ">
+                No Reff Supplier
+                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[5]],custom[onlyNumberSp]" 
+                        maxlength="25" id='_ref' name='_ref' onclick="disableAlpha('_ref')" style=" width: 150px; " />
+            </div>
+            <div class="field-wrap"></div>
+            <div class="field-wrap"></div>
+            <div class="field-wrap"></div>
+            <div class="field-wrap"></div>
+        </form>
 
-    <div id="hasil2"></div>
-    <!--**NOTIFICATION AREA**-->
-    <div id="konfirmasi" class="sukses"></div>
+            <div id="hasil2"></div>
+            <!--**NOTIFICATION AREA**-->
+            <div id="konfirmasi" class="sukses"></div>
 
-    <div style="margin-top: 10px;">	
-    	<button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-        <button id="delete" class="btn" type="submit">Delete</button>
-        <button id="cancel" class="btn" type="submit">Cancel</button>
-        <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</button>
-        <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i></button>   
+            <div style="margin-top: 10px;"> 
+                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+                <button id="delete" class="btn" type="submit">Delete</button>
+                <button id="cancel" class="btn" type="submit">Cancel</button>
+                <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</button>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i> Print</button>   
+            </div>
+        </div>
+    </div>
+    <div class="span3">
+        <div id="hasil"></div>
     </div>
 </div>
 
@@ -121,8 +119,6 @@
     </div>
 </div>
 
-
-<div id="hasil"></div>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script>
 /*Tampilkan jQuery Tanggal*/
@@ -353,6 +349,7 @@ function getBarang(){
             success:
             function(msg){
                 $('#kode_brg'+row).val(id);
+                $('#satuan_brg'+row).val(msg.Satuan);
                 $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
                 $('#harga_brg'+row).val(msg.Harga); 
             }
@@ -494,7 +491,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data '+_bpb+' sudah ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Data Penerimaan Barang'+_bpb+' sudah ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -606,11 +603,12 @@ function addRow() {
     $count = $("tbody#itemlist tr").length+1;
 
     items += "<tr>";
-    items += "<td width='20%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='kode_brg"+$count+"' id='appendedInputButton' name='kode_brg[]' onkeypress='validAct($)' maxlength='20' style='width:83%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='40%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='nama_brg"+$count+"' id='appendedInputButton' style='width:140%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='20%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='kode_brg"+$count+"' id='appendedInputButton' name='kode_brg[]' onkeypress='validAct($)' maxlength='20' style='width:83%' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='30%'><div class='input-append' style='margin-bottom:0;'><input type='text' class='span2' id='nama_brg"+$count+"' id='appendedInputButton' style='width:200px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='10%'><input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg"+$count+"' style='width:55px;' readonly='true'/></td>";
     items += "<td width='10%'><input type='text' name='Nama' id='qty_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' style='width:45px' disabled='true'/></td>";
     items += "<td width='20%'><input type='text' name='keterangan' id='keterangan_brg"+$count+"' class='validate[required]' maxlength='22' style='width:80%' disabled='true'/></td>";
-    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn btn-small' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
+    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
 
     $("#itemlist").append(items);
 }

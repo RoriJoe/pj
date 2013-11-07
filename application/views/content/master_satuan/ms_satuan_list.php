@@ -1,7 +1,7 @@
-<div class="table table-hover CSSTabel tb-barang">
+<div class="table table-hover CSSTabel table-list">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th width="35%">Kode Satuan</th>
+        <th width="35%">Kode</th>
         <th width="50%">Satuan</th>
         <th width="15%">Action</th>
     </thead>
@@ -14,11 +14,11 @@
             <td>$row->Value</td>
             <td>
             <div class='btn-group'>
-                <a class='btn popup' style='padding: 2px 6px;'
+                <a class='btn popup list-edit'
                     kode='$row->Kode_satuan'
                     satuan='$row->Value'
                 ><i class='icon-pencil'></i></a>
-             <a class='btn delete' name='$row->Kode_satuan' nama='$row->Value' style='padding: 2px 6px;'><i class='icon-trash'></i></a></div>
+             <a class='btn delete list-edit' name='$row->Kode_satuan' nama='$row->Value'><i class='icon-trash'></i></a></div>
             </td>
         </tr>";
     } ?>
@@ -90,7 +90,7 @@ var oTable = $('#tb1').dataTable( {
     "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {
          "sSearch": "",
-         "sLengthMenu": "View _MENU_ ",
+         "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },

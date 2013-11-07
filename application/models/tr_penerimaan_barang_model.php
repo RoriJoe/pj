@@ -24,7 +24,7 @@
 		
 		function get_detail_pb($id){
 			$q = $this->db->query("SELECT bpb_d.*,
-                barang.Nama, barang.Ukuran
+                barang.Nama, barang.Ukuran, barang.Satuan1
                 FROM bpb_d
                 LEFT OUTER JOIN barang
                 ON bpb_d.Kode_brg = barang.Kode
@@ -110,7 +110,7 @@
 
         function get_detail_po($id){
             $q = $this->db->query("SELECT po_d.Kode_barang AS Kode_brg, po_d.Jumlah AS Qty1, po_d.Keterangan,
-                barang.Nama, barang.Ukuran, concat(barang.Nama,' ',barang.Ukuran) AS Nama
+                barang.Nama, barang.Satuan1, barang.Ukuran, concat(barang.Nama,' ',barang.Ukuran) AS Nama
                 FROM po_d
                 LEFT OUTER JOIN barang
                 ON po_d.Kode_Barang = barang.Kode
