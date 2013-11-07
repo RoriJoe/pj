@@ -19,16 +19,16 @@
         $Jumlah = number_format($row->Harga*$qty, 0, ',', '.');
         echo "<tr>
         <td>
-            $row->Kode_Brg
+            <label id='kd$i'>$row->Kode_Brg</label>
         </td>
         <td>
-            $row->Barang $row->Ukuran 
+            <label id='brg$i'>$row->Barang $row->Ukuran </label>
         </td>
         <td>
-            $row->Satuan1
+            <label id='satuan$i'>$row->Satuan1</label>
         </td>
         <td>
-            $row->Qty1
+            <label id='qty$i'>$row->Qty1</label>
         </td>
         <td>
             <input type='text' name='harga_brg' class='validate[required]' id='harga_brg$i' style='width:88px; text-align:right;' value='$Harga' readonly='true'/>
@@ -37,7 +37,7 @@
             <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:88px;text-align:right;' value='$Jumlah' disabled='true'/>
         </td>
         <td>
-            $row->Keterangan
+            <label id='ket$i'>$row->Keterangan</label>
         </td>
         </tr>
         ";

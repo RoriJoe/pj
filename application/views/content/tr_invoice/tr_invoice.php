@@ -408,6 +408,72 @@ $("#cancel").click(function(){
     reset_form();
 });
 
+//BUAT PRINT
+$("#print").click(function(){
+//deklarasi variable
+    var id = $('#no_invo').val();
+    var _tgl = $('#_tgl1').val();
+    var so = $('#_sj').val();
+	var plg = $('#pn').val();
+    var term = $('#term').val();
+
+    var to = $('#total').val(); 
+    var disc = $('#disc').val();
+    var dpp = $('#dpp').val();
+    var ppn = $('#ppn').val();
+    var grant = $('#granT').val();
+	var discT = $('#discT').val();
+	var ppnT = $('#ppnT').val();
+
+	var arrKode = new Array();
+    var arrBrg = new Array();
+	var arrSat = new Array();
+    var arrQty = new Array();
+	var arrHrg = new Array();
+    var arrJml = new Array();
+	var arrKet = new Array();
+  
+
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length-1;
+    for(var i=1;i<=totalRow;i++){
+        arrKode[i-1] = $('#kd'+i).text();
+        arrBrg[i-1] = $('#brg'+i).text();
+        arrSat[i-1] = $('#satuan'+i).text();
+        arrQty[i-1] = $('#qty'+i).text();
+        arrHrg[i-1] = $('#harga_brg'+i).val();
+		arrJml[i-1] = $('#jumlah_brg'+i).val();
+        arrKet[i-1] = $('#ket'+i).text(); 
+    }
+    
+    
+$.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/report/print_transaksi_invoice",
+        data :{ id:id,_tgl:_tgl,so:so,term:term,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,plg:plg,discT:discT,ppnT:ppnT,
+		arrKode:arrKode,arrBrg:arrBrg,arrSat:arrSat,arrQty:arrQty,arrHrg:arrHrg,arrJml:arrJml,arrKet:arrKet,totalRow:totalRow
+        },
+        success:
+        function(msg)
+        {   
+			var d = new Date();
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth() + 1; //Months are zero based
+			var curr_year = d.getFullYear();
+			var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+            var win=window.open('');
+            with(win.document)
+            {
+              open();
+			   win.document.title="Invoice "+tgl;
+              write(msg);
+              close();
+            }
+            win.print();
+        }
+     });
+});
+
 //Save Click
 $("#save").click(function(){
     

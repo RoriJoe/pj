@@ -9,6 +9,7 @@ $(document).ready(function() {
     $("#cetakAll").click(function() {
         $("#range").hide().eq($(this).index()).hide();
     });
+	table();
 });
 
 /*Tampilkan jQuery Tanggal*/
@@ -26,6 +27,49 @@ $(function() {
         showAnim: "blind"
     });
 });
+
+$("#view").click(function(){
+    table();
+});
+
+$("#print").click(function(){
+	var d = new Date();
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth() + 1; //Months are zero based
+	var curr_year = d.getFullYear();
+	var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+$('#lab1').text("");
+    var data = $('#tabpreview').html();
+	
+	var mywindow = window.open('', '', '');
+	mywindow.document.write('<title>Laporan Sales Order '+tgl+'</title>');
+	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td, .draggable th, .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;}</style>');
+	
+	mywindow.document.write('');
+	mywindow.document.write('<center><h2>Laporan Sales Order</h2></center>');
+	mywindow.document.write(data); 
+	
+
+	mywindow.print();
+	mywindow.close();
+
+	return true;
+});
+function table(){
+
+	var sel = $('input[name="optionsRadios"]:checked').val();
+	
+	
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>report/table_os",
+    data :{sel:sel},
+    success:
+		function(hh){
+			$('#tabpreview').html(hh);
+		}
+    });
+}
 </script>
 
 <!--//***MAIN FORM-->
@@ -36,17 +80,19 @@ $(function() {
 <div id="konten" class="hide-con master-border" style="width: 48%;">
 	<div class="pull-left">
 		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakAll" value="option1" checked>
+  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
   			Cetak Semua
 		</label>
 	</div>
 	<div style="clear: both;"></div>
 	<div style="margin-top: 20px" class="pull-right">
-		<input role="button" type="submit" class="btn btn-primary"  value="Print">
+		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+		<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
+		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
 	</div>
 </div>
 </form>
-
+<div id="tabpreview"></div>
 <script>
 
 </script>

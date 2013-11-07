@@ -9,7 +9,7 @@
 </style>
 <h2 style="margin: 0">PD. PELITA JAYA</h2>
 Pangeran Jaya Karta No.30, Jakarta Pusat
-			<h2 align="center">SALES ORDER</h2><hr/>
+			<h2 align="center">INVOICE</h2><hr/>
 <table>
 	<tr>
 		<td colspan=4>
@@ -19,22 +19,22 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		
 	</tr>
 	<tr>
-		<td width="30%">Nomor SO : </td>
-		<td width="25%"><?php echo $so; ?></td>
-		<td width="30%">Nomor PO : </td>
-		<td><?php echo $po; ?></td>
+		<td width="30%">Nomor Invoice : </td>
+		<td width="25%"><?php echo $id; ?></td>
+		<td width="30%">Pelanggan : </td>
+		<td><?php echo $plg; ?></td>
 	</tr>
 	<tr>
-		<td>Tanggal SO : </td>
-		<td><?php echo $tglSo; ?></td>
-		<td>Tanggal PO : </td>
-		<td><?php echo $tglPo; ?></td>
+		<td>Tanggal : </td>
+		<td><?php echo $_tgl; ?></td>
+		<td>Nomor SJ: </td>
+		<td><?php echo $so; ?></td>
 	</tr>
 	<tr>
-		<td>Pelanggan </td>
-		<td><?php echo $pl; ?></td>
-		<td>Sales </td>
-		<td><?php echo $sl; ?></td>
+		<td>Term </td>
+		<td><?php echo $term; ?></td>
+		<td>Alamat </td>
+		<td><?php echo $to; ?></td>
 	</tr>
 	
 </table>
@@ -42,10 +42,11 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 <table class="table bod" width="100%" style="font-size: 11px; border: 1px solid #000;">
 	<thead>
 		<tr style="background: #C5C5C5;">
-			<th>Kode Barang</th>
-			<th>Nama</th>
+			<th>Kode</th>
+			<th>Nama Barang</th>
+			<th>Satuan</th>
 			<th>Qty</th>
-			<th>Harga Satuan</th>
+			<th>Hrg Satuan(Rp)</th>
 			<th>Jumlah</th>
 			<th>Keterangan</th>
 			
@@ -53,14 +54,17 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 	</thead>
 	<tbody >
 		<?php for($i=0;$i<$totalRow;$i++){
-        
+       
             echo
             "<tr>
-                <td>$arrKode[$i]</td>
-				<td>$arrNama[$i]</td>
+				
+                <td class=' sorting_1'>$arrKode[$i]</td>
+				<td>$arrBrg[$i]</td>
+				<td>$arrSat[$i]</td>
                 <td align='right'>$arrQty[$i]</td>
-				<td align='right'>$arrHarga[$i]</td>
-				<td align='right'>$arrJumlah[$i]</td>
+                
+				<td align='right'>$arrHrg[$i]</td>
+				<td align='right'>$arrJml[$i]</td>
 				<td>$arrKet[$i]</td>
 				
             </tr>";

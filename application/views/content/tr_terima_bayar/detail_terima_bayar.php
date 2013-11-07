@@ -19,15 +19,24 @@
 <div class="table CSSTabel" style="overflow: auto; height: 195px">
 <table id="tb_detail">
     <thead>
-        <th>Jenis</th>
-        <th>Dari Bank</th>
-        <th>Dari Rek</th>
-        <th>Referensi</th>
-        <th>Tgl Giro/Cek</th>
-        <th>Tgl Cair</th>
-		<th>Nilai</th>
-        <th>Terima Bank</th>
-		<th>Terima Rek</th>
+	<tr>
+		<th rowspan="2"><center>Jenis</center></th>
+		<th colspan="3"><center>Dari</center></th>
+		<th colspan="2"><center>Tgl</center></th>
+		<th rowspan="2"><center>Nilai</center></th>
+		<th colspan="2"><center>Terima</center></th>
+	</tr>
+	<tr>
+		<th>Bank</th>
+        <th>Rek</th>
+        <th>No Ref.</th>
+        <th>Giro/Cek</th>
+        <th>Cair</th>
+        <th>Bank</th>
+		<th>Rek</th>
+	</tr>
+        
+        
     </thead>
     <tbody id="itemlistdet">
 	

@@ -47,9 +47,15 @@ list_terima_bayar();
                 <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
                 </div>
             </td>
+			<td>Tanggal</td>
+            <td>
+                <input  type='text' placeholder='dd-mm-yyyy'
+                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                        style="width: 80px; margin-right: 20px;">
+            </td>
        </tr>
        
-       <tr>
+       <!--<tr>
             <td>Tanggal</td>
             <td>
                 <input  type='text' placeholder='dd-mm-yyyy'
@@ -57,7 +63,7 @@ list_terima_bayar();
                         style="width: 80px; margin-right: 20px;">
             </td>
             
-       </tr>
+       </tr>-->
        
     </table>
 </form>

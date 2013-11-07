@@ -499,10 +499,13 @@ $("#print").click(function(){
     var arrHarga = new Array();
     var arrJumlah = new Array();
     var arrKet = new Array();
-    
+    var arrNama = new Array();
+	
     var table = document.getElementById('tb_detail');
     var totalRow = table.rows.length;
     for(var i=1;i<=totalRow;i++){
+	
+	 arrNama[i-1] = $('#nama_brg'+i).val();
         arrKode[i-1] = $('#kode_brg'+i).val();
         arrQty[i-1] = $('#qty_brg'+i).val();
         arrSatuan[i-1] = $('#satuan_brg'+i).val();
@@ -516,15 +519,21 @@ $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/report/print_transaksi_so",
         data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,ppnT:ppnT,discT:discT, term:term,
-                    arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
+                    arrNama:arrNama,arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
         },
         success:
         function(msg)
         {   
+			var d = new Date();
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth() + 1; //Months are zero based
+			var curr_year = d.getFullYear();
+			var tgl = curr_date + "-" + curr_month + "-" + curr_year;
             var win=window.open('');
             with(win.document)
             {
               open();
+			   win.document.title="Sales Order "+tgl;
               write(msg);
               close();
             }

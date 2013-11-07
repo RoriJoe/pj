@@ -9,6 +9,7 @@ $(document).ready(function() {
     $("#cetakAll").click(function() {
         $("#range").hide().eq($(this).index()).hide();
     });
+	table();
 });
 
 /*Tampilkan jQuery Tanggal*/
@@ -26,6 +27,55 @@ $(function() {
         showAnim: "blind"
     });
 });
+
+function table(){
+
+	var sel = $('input[name="optionsRadios"]:checked').val();
+	var _tgl = $('#_tgl').val();
+	var _tgl2 = $('#_tgl2').val();
+	
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>report/table_sj",
+    data :{sel:sel,_tgl:_tgl,_tgl2:_tgl2},
+    success:
+		function(hh){
+			$('#tabpreview').html(hh);
+		}
+    });
+}
+
+$("#view").click(function(){
+    table();
+});
+
+$("#print").click(function(){
+
+$('#lab1').text("");
+	//TANGGAL
+	var d = new Date();
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth() + 1; //Months are zero based
+	var curr_year = d.getFullYear();
+	var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+	
+    var data = $('#tabpreview').html();
+	
+	var mywindow = window.open('', '', '');
+	mywindow.document.write('<title>Laporan Surat Jalan '+tgl+'</title>');
+	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td, .draggable th, .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;},header{ display:none;}</style>');
+	
+	mywindow.document.write('');
+	mywindow.document.write('<center><h2>Laporan Surat Jalan</h2></center>');
+	mywindow.document.write(data); 
+
+
+	mywindow.print();
+	mywindow.close();
+
+	return true;
+});
+
 </script>
 
 <!--//***MAIN FORM-->
@@ -47,14 +97,16 @@ $(function() {
 	
 	<div class="pull-left" id="range" style="margin-left: 10px; border: 1px solid #C6C6C6; padding: 5px;">
 		<p><b>Tanggal Surat Jalan Mulai</b></p>
-		<input type="text" id="_tgl" name="_tgl" style="width: 150px;"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;"/>
+		<input type="text" id="_tgl" name="_tgl" style="width: 150px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;" value="<?php echo date('d-m-Y');?>"/>
 	</div>
 	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="submit" class="btn btn-primary"  value="Print">
+		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+		<!--<input role="button" type="submit" class="btn btn-primary"  value="Print">-->
+		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
 	</div>
 </div>
 </form>
-
+<div id="tabpreview"></div>
 <script>
 
 </script>

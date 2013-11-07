@@ -2,7 +2,7 @@
 
 <div class="table CSSTabel table-list2" style="margin-top:8px;width:700px;float: left;">
 <label id="lab1"style="
-    margin-left: 5px;"><b>Laporan SALES ORDER</b></label>
+    margin-left: 5px;"><b>Laporan Outstanding</b></label>
 
 <table>
 	<tr>
@@ -21,7 +21,16 @@
 							<div id="TableLaporanSPK" style=overflow:auto; class='CssTblLaporan' >
 								
 									<table border='0px' id="tablesorter" class="draggable" style=width:700px;>
-										<thead><tr><th>No SO</th><th>No PO</th><th>Pelanggan</th><th>Nama Barang</th><th>Tanggal</th><th>Qty</th><th>Total</th><th>Satuan</th></tr></thead>
+										<thead><tr>
+										<th>Tanggal</th>
+										<th>No DO</th>
+										<th>Nama Pelanggan</th>
+										<th>Nama Barang</th>
+										
+										<th>Qty</th>
+										<th>Total</th>
+										<th>Satuan</th>
+										</tr></thead>
 										
 										<?php
 											$no_so="";$tgl="";$plg="";
@@ -36,11 +45,12 @@
 											}
 												echo
 												"<tr>
+													
 													<td>$no_so</td>
-													<td>$row->No_Po</td>
-													<td>$plg</td>
-													<td>$row->Nama $row->Ukuran</td>
 													<td>$tgl</td>
+													<td>$row->NP</td>
+													<td>$row->Nama $row->Ukuran</td>
+													
 													<td align='right'>$row->Qty</td>
 													<td align='right'>$duit</td>
 													<td>$row->Satuan1</td>
