@@ -103,6 +103,11 @@
             }
 			for($i=0;$i<$totaltx;$i++){
                 $this->tr_surat_jalan_model->update_brg($kd_brg[$i],$qty[$i]);
+				
+            }
+			
+			for($i=0;$i<$totaltx;$i++){
+                $this->tr_surat_jalan_model->update_qtytemp($kd_brg[$i],$qty[$i]);
             }
 			
             if($in == "ok")

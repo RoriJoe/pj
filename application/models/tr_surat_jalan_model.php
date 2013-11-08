@@ -85,7 +85,7 @@
                 $data['rek']++;
             }
         }
-		function update_brg($kdbrg,$qty){
+		function update_brg($kdbrg,$qty){//SAVE utk kurangin stok opname
 			
 			$this->db->set('QtyOp', "QtyOp - '$qty'", FALSE);
 			$where = "Kode = '$kdbrg' ;";
@@ -94,7 +94,16 @@
 			$this->db->update('barang');
 
 		}
-		function update_brg2($kdbrg,$qty){
+		function update_qtytemp($kdbrg,$qty){//SAVE utk kurangin stok TEMP di SO
+			
+			$this->db->set('QtyTemp', "QtyTemp - '$qty'", FALSE);
+			$where = "Kode_Brg = '$kdbrg' ;";
+			$this->db->where($where);
+			$this->db->update('do_d');
+
+		}
+		
+		function update_brg2($kdbrg,$qty){//kalo batal
 			
 			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
 			$where = "Kode = '$kdbrg' ;";
@@ -119,7 +128,7 @@
         }
 
         function get_detail_sj($sj){
-            $this->db->select('A.Kode_Brg, A.Barang, A.Barang_SJ AS Kode_BrgSj, concat(C.Nama, '.',C.Ukuran) AS Barang_SJ, A.Qty1 AS Qty, A.Keterangan, B.Nama, B.Ukuran', FALSE);
+            $this->db->select('A.Kode_Brg, A.Barang, A.Barang_SJ AS Kode_BrgSj, concat(C.Nama, '.',C.Ukuran) AS Barang_SJ, A.Qty1 AS QtyTemp, A.Keterangan, B.Nama, B.Ukuran', FALSE);
             $this->db->from('sj_d A');
             $this->db->join('barang B','B.Kode = A.Kode_Brg');
             $this->db->join('barang C','C.Kode = A.Barang_SJ', 'left');
@@ -180,11 +189,14 @@
             return $query->result();
         }
 
-        function get_so_list($id){
+        function get_so_list($id){ //PILIH SO YG TDK 0 //
+				/* SELECT A.No_Do
+                FROM do_h A
+                WHERE A.Kode_Plg = '$id' AND A.No_Do NOT IN (SELECT No_Do FROM sj_h) */
             $query = $this->db->query("
                 SELECT A.No_Do
-                FROM do_h A
-                WHERE A.Kode_Plg = '$id' AND A.No_Do NOT IN (SELECT No_Do FROM sj_h)
+				FROM do_h A left outer join do_d ON A.No_Do=do_d.No_Do
+				WHERE A.Kode_Plg = '$id' AND QtyTemp>0
                 ");
 
             return $query->result();

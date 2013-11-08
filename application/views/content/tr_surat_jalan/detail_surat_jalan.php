@@ -34,8 +34,8 @@
             <input type='text' class='validate[required]' id='nbu$i' name='nbu[]' style='width:160px' value=\"".$namaSJ."\" disabled='true'/>
         </td>
         <td>
-            <input type='hidden' id='last_qty$i' value='$row->Qty'/>
-            <input type='text' class='validate[required]' onkeypress='validAct($i)' maxlength='5' id='qty$i' name='qty[]' style='width:45px' placeholder='$row->Qty' value='$row->Qty' maxlength='5' disabled='true'/></td>
+            <input type='hidden' id='last_qty$i' value='$row->QtyTemp'/>
+            <input type='text' class='validate[required]' onkeypress='validAct($i)' maxlength='5' id='qty$i' name='qty[]' style='width:45px' placeholder='$row->QtyTemp' value='$row->QtyTemp' maxlength='5' disabled='true'/></td>
         <td><input type='text' class='validate[required]' id='ket$i' name='ket[]' style='width:120px' value='$row->Keterangan' disabled='true'/></td>
         <td>
             <div class='btn-group' style='margin-bottom:0;'>
