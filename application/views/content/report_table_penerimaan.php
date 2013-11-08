@@ -1,6 +1,6 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/js/dragtable.js';?>" ></script>
 
-<div class="table CSSTabel table-list2" style="margin-top:8px;width:700px;float: left;">
+<div class="table CSSTabel table-list2">
 <label id="lab1"style="
     margin-left: 5px;"><b>Laporan Penerimaan Barang</b></label>
 
@@ -17,10 +17,10 @@
 	</tr>
 </table>
 
-						<div style=overflow:auto;height:375px; id="LimitTab">
+						<div style=overflow:auto;height:300px; id="LimitTab">
 							
 								
-									<table border='0px' id="tablesorter" class="draggable" style=width:700px;>
+									<table border='0px' id="tablesorter" class="draggable">
 										<thead><tr>
 										<th>Tanggal</th>
 										<th>No. BPB.</th>

@@ -79,36 +79,40 @@ $('#lab1').text("");
 });
 </script>
 
-<!--//***MAIN FORM-->
-<form action="<?php echo base_url();?>report/print_report_penerimaan" method="post" target="_blank">
-<div class="bar bar2" style="width: 50%">
-    <p>Laporan Penerimaan Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border" style="width: 48%;">
-	<div>
-		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
-  			Cetak Semua
-		</label>
-		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakBatas" value="Batas">
-  			Cetak Batas
-		</label>
-	</div>
-	
-	<div class="pull-left" id="range" style="margin-left: 10px; border: 1px solid #C6C6C6; padding: 5px;">
-		<p><b>Tanggal BPB Mulai</b></p>
-		<input type="text" id="_tgl" name="_tgl" style="width: 150px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;" value="<?php echo date('d-m-Y');?>"/>
-	</div>
-	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
-		<!--<input role="button" type="submit" class="btn btn-primary"  value="Print">-->
-		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
-		
-	</div>
-</div>
-</form>
-<div id="tabpreview"></div>
-<script>
+<div class="row-fluid">
+    <div class="span3">
+		<!--//***MAIN FORM-->
+		<form action="<?php echo base_url();?>report/print_report_penerimaan" method="post" target="_blank">
+		<div class="bar">
+		    <p>Laporan Penerimaan Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
+		</div>
+		<div id="konten" class="hide-con master-border">
+			<div>
+				<label class="radio">
+		  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
+		  			Cetak Semua
+				</label>
+				<label class="radio">
+		  		<input type="radio" name="optionsRadios" id="cetakBatas" value="Batas">
+		  			Cetak Batas
+				</label>
+			</div>
+			
+			<div id="range" style="border: 1px solid #C6C6C6; padding: 5px;">
+				<p><b>Tanggal BPB Mulai</b></p>
+				<input type="text" id="_tgl" name="_tgl" style="width: 65px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 65px;" value="<?php echo date('d-m-Y');?>"/>
+			</div>
+			<div style="margin-top: 10px;">
+				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+				<!--<input role="button" type="submit" class="btn btn-primary"  value="Print">-->
+				<input role="button" type="button" class="btn"  id="view" value="Preview">	
+				
+			</div>
+		</div>
+		</form>
+    </div>
 
-</script>
+    <div class="span9">
+      <div id="tabpreview"></div>
+    </div>
+</div>
