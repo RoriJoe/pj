@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="span3">
         <!--@Load table List via AJAX-->
         <div id="list_terima_bayar"></div>
