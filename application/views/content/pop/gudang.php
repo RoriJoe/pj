@@ -6,18 +6,16 @@
                 <input type='text' class="span-form75 upper-form validate[required,maxSize[22], minSize[5]],custom[onlyLetterNumber]]" maxlength="22" 
                 id='kd' name='kd'>
             </td>
-        </tr>
-        <tr>
             <td>Nama</td>
             <td>
                 <input type='text' class="span-form170 validate[required, maxSize[30], minSize[3]]" maxlength="30" 
-                id='nm' name='nm'>
+                id='nm' name='nm' style=" width: 170px; ">
             </td>
         </tr>
         <tr>
             <td>Alamat</td>
             <td>
-                <textarea rows="2" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:200px; height: 60px; margin-left: 10px; margin-right: 20px"></textarea>
+                <textarea rows="3" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:200px; margin-left: 10px; margin-right: 20px"></textarea>
             </td>
             <td>Kota</td>
             <td>

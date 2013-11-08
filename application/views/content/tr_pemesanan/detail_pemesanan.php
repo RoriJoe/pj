@@ -24,17 +24,17 @@
 	        <td width='17%'>
 	            <div class='input-append'>
 	                <input type='text' class='span2' id='kode_brg$i' onkeypress='validAct($i)' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:98px; text-transform: uppercase;' value='$row->Kode_barang' disabled='true'/>
-	                <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+	                <a href='#modalBarang' onclick='getDetail($i)' id='f_brg$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
 	            </div>    
 	        </td>
 	        <td width='20%'>
 	       		<div class='input-append'>
 	            	<input type='text' name='nama_brg' class='span2' maxlength='22' id='keterangan_brg$i' style='width:120px' value='$ukuran' disabled='true'/>
-	        		<a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a>
+	        		<a href='#modalBarang' onclick='getDetail($i)' id='f_brgs$i' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a>
 	            </div> 
 	        </td>
 	        <td width='10%'>
-	            <input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg$i' style='width:65px;' value='$row->Satuan1' readonly='true'/>
+	            <input type='text' name='satuan_brg' class='validate[required]' id='satuan_brg$i' style='width:55px;' value='$row->Satuan1' readonly='true'/>
 	        </td>
 	        <td width='7%'>
 	            <input type='text' name='qty_brg' onkeypress='validAct($i)' maxlength='5' class='validate[required]' id='qty_brg$i' style='width:30px' value='$row->Jumlah' disabled='true'/>
@@ -47,8 +47,8 @@
 	        </td>
 	        <td width='15%'>
 	        <div class='btn-group' style='margin-bottom:0;'>
-	            <a class='btn btn-small' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil' ></i></a>
-	            <a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
+	            <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil' ></i></a>
+	            <a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
 	        </div>
 	        </td>
 	        </tr>

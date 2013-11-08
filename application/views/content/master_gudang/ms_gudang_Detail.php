@@ -1,9 +1,9 @@
-<div class="table table-hover CSSTabel tb-barang">
+<div class="table table-hover CSSTabel table-list">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th width="35%">Kode</th>
-        <th width="50%">Nama</th>
-        <th width="15%">Action</th>
+        <th width="30%">Kode</th>
+        <th width="60%">Nama</th>
+        <th width="10%">Action</th>
     </thead>
     
     <tbody id="tb_detail">
@@ -14,7 +14,7 @@
             <td>$row->Nama</td>
             <td>
             <div class='btn-group'>
-                <a class='btn popup' style='padding: 2px 6px;'
+                <a class='btn popup' style='padding: 0px 3px;'
                     kode='$row->Kode'
                     nama='$row->Nama'
                     alamat='$row->Alamat'
@@ -24,7 +24,7 @@
                     fax='$row->Fax'
                     fax1='$row->Fax1'
              ><i class='icon-pencil'></i></a>
-             <a class='btn delete' name='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a></div>
+             <a class='btn delete' name='$row->Kode' nama='$row->Nama' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>
             </td>
         </tr>";
     } ?>
@@ -37,7 +37,7 @@
 $('.popup').click(function(){
     $("#kd").attr('disabled',true);
         
-    var kd = $(this).attr("kode"); //atribut sebagai identifier data row
+    var kd = $(this).attr("kode");
     var nm = $(this).attr("nama");
     var al = $(this).attr("alamat");
     var kt = $(this).attr("kota");
@@ -65,7 +65,6 @@ $(".delete").click(function(){
     PlaySound('beep');
     var id = $(this).attr("name");
     var pr = $(this).attr("nama");
-    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
         message: "Kode: <b>"+id+"</b><br/>Nama Gudang : <b>"+pr+"</b>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
@@ -110,10 +109,11 @@ var oTable = $('#tb1').dataTable( {
     "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {
          "sSearch": "",
-         "sLengthMenu": "View _MENU_ ",
+         "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
+       "sPaginationType": "full_numbers",
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

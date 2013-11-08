@@ -1,8 +1,8 @@
-<div class="table table-hover CSSTabel tb-barang" style="width:33%;">
+<div class="table table-hover CSSTabel table-list" style="width:98%;">
 <table id="tb1" style="width: 100%;">
     <thead>
-        <th width="15%">Kode</th>
-        <th width="75%">Nama</th>
+        <th width="20%">Kode</th>
+        <th width="70%">Nama</th>
         <th width="10%">Action</th>
     </thead>
 
@@ -43,6 +43,7 @@ $('.popup').click(function(){
 var oTable = $('#tb1').dataTable( {
     "sScrollY": "380px",
     "bPaginate": true,
+    "bAutoWidth": false,
     "bLengthChange": true,
     "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {

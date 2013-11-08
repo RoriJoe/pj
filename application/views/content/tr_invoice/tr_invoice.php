@@ -1,110 +1,116 @@
-<!--Main Form-->
-<div class="bar">
-    <p>Form Inovice <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span9">
+        <!--Main Form-->
+        <div class="bar">
+            <p>Form Inovice <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
 
-<div id="konten" class="hide-con master-border">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td style="width: 120px;">No Invoice</td>
-            <td>
-                <input  type='text' 
-                        class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
-                        id='no_invo' name='no_invo' 
-                        style="width: 120px;text-transform: uppercase;">
-            </td>
+        <div id="konten" class="hide-con master-border" style=" height: 370px; ">
+        <form id="formID">
+            <table>
+                <tr>
+                    <td> No Invoice</td>
+                    <td>
+                        <input  type='text' 
+                                class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
+                                id='no_invo' name='no_invo' 
+                                style="width: 80px;text-transform: uppercase;">
+                    </td>
 
-            <td>Pelanggan</td>
-            <td>
-                <input type="hidden" id="kd_plg" />
-                <div class="input-append" style="margin-bottom:0;">
-                 <input type='text' class="span2" 
-                    maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 148px;" readonly="true">
-                <a href="#modalPelanggan" role="button" class="btn" id="f_plg" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
-                </div>
-            </td>
-       </tr>
-       
-       <tr>
-            <td>Tanggal</td>
-            <td>
-                <input  type='text' placeholder='dd-mm-yyyy'
-                        class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
-                        style="width: 80px; margin-right: 20px;">
-            </td>
-            <td>Nomor SJ</td>
-            <td>
-                <div id="no_sj">
-                </div>
-            </td>
-       </tr>
-       <tr>
-            <td>Term</td>
-            <td>
-                <input  type='text' 
-                        class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
-                        style="width: 30px;"> Hari
-            </td>
-            <td>Alamat</td>
-            <td>
-                <textarea rows="2" class="validate[required]" id='al' name='al' 
-                    style="resize:none; width:170px; height: 60px;" disabled="disabled">
-                </textarea>
-            </td>
-       </tr>
-    </table>
-</form>
-<div id="hasil2"></div>
-<div id="totalBox" style="float: right; margin-right: -45px; visibility:hidden;">
-        <table>
-        <tr>
-            <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-            </td>
-            <td><input type="hidden" id="total2" />
-            <input style="float: right; width:120px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true"></td>
-        </tr>
-        <tr>
-            <td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
-            </td>
-            <td><input type="hidden" id="disc2" />
-            <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
-            <input style="width:66px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
-            </td>
-        </tr>
-        <tr>
-            <td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
-            </td>
-            <td><input type="hidden" id="dpp2" />
-            <input style="width:120px; margin-right: 145px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true"></td>
-        </tr>
-         <tr>
-                <td>
-                    <label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
-                </td>
-                <td>
-                    <input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
-                    <input style="width:66px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
-                </td>
-        </tr> 
-        <tr>
-            <td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
-            </td>
-            <td><input type="hidden" id="granT2" />
-            <input style="width:120px; text-align:right;" id="granT" name="granT" type="text" readonly="true"></td>
-        </tr>      
-        </table>
+                    <td>Tanggal</td>
+                    <td>
+                        <input  type='text' placeholder='dd-mm-yyyy'
+                                class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                                style="width: 80px; margin-right: 12px;">
+                    </td>
+                    <td>Pelanggan</td>
+                    <td>
+                        <input type="hidden" id="kd_plg" />
+                        <div class="input-append money" style="margin-bottom:0;">
+                         <input type='text' class="span2" 
+                            maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 124px;" readonly="true">
+                        <a href="#modalPelanggan" style="margin-bottom:3px;" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                        </div>
+                    </td>
+               </tr>
+               
+               <tr>
+                    <td>Nomor SJ</td>
+                    <td>
+                        <div id="no_sj">
+                        </div>
+                    </td>
+
+                    <td colspan="2">Term
+                        <input  type='text' 
+                                class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
+                                style="width: 30px;"> Hari
+                    </td>
+
+                    <td>Alamat</td>
+                    <td>
+                        <textarea rows="3" class="validate[required]" id='al' name='al' 
+                            style="resize:none; width:135px;" disabled="disabled">
+                        </textarea>
+                    </td>
+               </tr>
+            </table>
+        </form>
+        <div id="hasil2"></div>
+        <div id="totalBox" style="float: right; margin-right: -35px; visibility:hidden;">
+                <table>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+                    </td>
+                    <td><input type="hidden" id="total2" />
+                    <input style="float: right; width:120px; margin-right: 145px;text-align:right;" class="no-margin-b" id="total" name="total" type="text" readonly="true"></td>
+                </tr>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
+                    </td>
+                    <td><input type="hidden" id="disc2" />
+                    <input style="width:20px; " class="no-margin-b" maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
+                    <input style="width:70px;text-align:right;" class="no-margin-b" onkeypress="hitung()" id="discT" name="discT" type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
+                    </td>
+                    <td><input type="hidden" id="dpp2" />
+                    <input style="width:120px; margin-right: 145px;text-align:right;" class="no-margin-b" id="dpp" name="dpp" type="text" readonly="true"></td>
+                </tr>
+                 <tr>
+                        <td>
+                            <label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
+                        </td>
+                        <td>
+                            <input style="width:20px;" class="no-margin-b" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
+                            <input style="width:70px;text-align:right;" class="no-margin-b" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
+                        </td>
+                </tr> 
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
+                    </td>
+                    <td><input type="hidden" id="granT2" />
+                    <input style="width:120px; text-align:right;" class="no-margin-b" id="granT" name="granT" type="text" readonly="true"></td>
+                </tr>      
+                </table>
+            </div>
+        <div>
+            <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+            <button id="delete" class="btn">Delete</button>
+            <button id="cancel" class="btn">Cancel</button>
+            <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i> Print</button>
+        </div>
+        <div id="konfirmasi" class="sukses"></div>
+        </div>
     </div>
-<div>
-    <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-    <button id="delete" class="btn">Delete</button>
-    <button id="cancel" class="btn">Cancel</button>
-    <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i></button>
+
+    <div class="span3">
+        <!--@Load table List via AJAX-->
+        <div id="list_invoice"></div>
+    </div>
 </div>
-<div id="konfirmasi" class="sukses"></div>
-</div>
-<!--@Load table List via AJAX-->
-<div id="list_invoice"></div>
 
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -127,7 +133,7 @@ $(document).ready(function(){
     list_invoice();
     autogen();
     validation();
-//    barAnimation();
+    //barAnimation();
     displayResult();
     get_sj_list();
 });
@@ -511,7 +517,7 @@ $("#save").click(function(){
                     list_invoice();
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
+                    bootstrap_alert.warning('<b>Gagal!</b> Kode Invoice sudah ada');
                 }
             }
             });
@@ -533,7 +539,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Update berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses!</b> Update Invoice '+id+' berhasil dilakukan');
                     reset_form();
                     list_invoice();
                 }
@@ -573,7 +579,7 @@ $("#delete").click(function(){
                     {
                         if(msg == "ok")
                         {
-                            bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                            bootstrap_alert.success('Data Invoice <b>'+id+'</b> berhasil dihapus');
                             reset_form();
                             list_invoice();
                         }

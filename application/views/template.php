@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title><?php echo $judul; ?></title>
@@ -55,9 +56,9 @@
 
     <!--CSS AREA-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
+    <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
 </head>
 
@@ -79,8 +80,7 @@
                 </div>
 
                 <!-- RightBar -->
-                <div class="span10">
-
+                <div class="span10" style=" margin-top: 10px; ">
                     <div id="contentFull">
                         <?php echo $_content; ?>
                     </div>

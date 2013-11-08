@@ -202,13 +202,13 @@
 			 $ro = $this->input->post('ro');
             $query = $this->tr_terima_bayar_model->get_invoice_list($id);
 
-            $final['']='-- No Invoice --';
+            $final['']='No Invoice';
             foreach ($query as $a) 
             {
                 $final[$a->Kode] = $a->Kode;
             }
 
-            echo form_dropdown('invoi'.$ro,$final,'1',"id='invoi".$ro."' onchange='displayResult(this,".$ro.")'");
+            echo form_dropdown('invoi'.$ro,$final,'1',"id='invoi".$ro."' style='width: 100px;'  onchange='displayResult(this,".$ro.")'");
         }
 		function ambil_invoice(){
             $temp="";

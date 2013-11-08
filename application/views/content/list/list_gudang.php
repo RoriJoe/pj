@@ -44,6 +44,7 @@ var oTable = $('#tb4').dataTable( {
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
+       "sPaginationType": "full_numbers",
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 </script>

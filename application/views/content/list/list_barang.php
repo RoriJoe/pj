@@ -1,4 +1,4 @@
-<div class="table table-hover CSSTabel">
+<div class="table table-hover CSSTabel no-margin-b">
     <table id="popBarang">
         <thead>
             <th>Kode Barang</th>

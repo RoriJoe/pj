@@ -291,7 +291,7 @@
                 $final[$a->No_mobil] = $a->No_mobil;
             }
 
-            echo form_dropdown('_mbl',$final,'1','id="_mbl"');
+            echo form_dropdown('_mbl',$final,'1','id="_mbl" style=" width: 120px; "');
         }
 
 		function cek_kirim(){

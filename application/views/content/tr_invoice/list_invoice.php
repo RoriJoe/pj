@@ -1,4 +1,4 @@
-<div class="table table-hover CSSTabel tb-barang" style="width:25%;">
+<div class="table table-hover CSSTabel table-list">
     <table id="tbl_list">
         <thead>
             <th>No Invoice</th>

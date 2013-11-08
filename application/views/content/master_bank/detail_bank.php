@@ -17,7 +17,7 @@
             <tr>
                 <td><input type='hidden' name='item[code][]' value='$row->no_rekening' style='width:70px'/>$row->no_rekening</td>
                 <td>$row->atas_nama</td>
-                <td><input type='text' name='item[price][]' value='$row->tipe' style='width:87%' readonly='true'/></td>
+                <td><input type='text' name='item[price][]' value='$row->tipe' style='width:84%' readonly='true'/></td>
                 <td><input type='text' name='item[qty][]' value='$row->cabang' style='width:87%' readonly='true'/></td>
                 <td><input type='text' name='item[per][]' value='$row->no_perkiraan' style='width:87%' readonly='true'/></td>
             </tr>

@@ -225,3 +225,8 @@
             }
 		}
     }
+
+    //POP
+    function popBarang(){
+        $this->load->view('content/pop/barang');
+    }

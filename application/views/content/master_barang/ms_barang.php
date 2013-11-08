@@ -1,58 +1,59 @@
-<!--//***MAIN FORM-->
-<div class="bar bar2">
-    <p>Form Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span6">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+        <p>Form Barang <i id="icon" class='icon-chevron-down icon-white' ></i></p>
+        </div>
 
-<div id="konten" class="hide-con master-border" style="width: 62%; margin-bottom: 10px;">
-<form id="formID">
-    <table>
-        <tr>
-            <td>Kode</td>
-            <td>
+        <div id="konten" class="hide-con master-border">
+            <form id="formID">
+
+            <div class="field-wrap">
+                Kode
                 <input type='text' class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_kd' name='kd' style="width: 120px; margin-left: 10px; margin-right: 20px; text-transform: uppercase;">
-            </td>
-            <td>Nama</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[25], minSize[2]]]" maxlength="25" id='_nama1' name='nama1' style="width: 170px;margin-left: 10px; margin-right: 20px;">
-            </td>
-        </tr>
-        <tr>
-            <td>Ukuran</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[25], minSize[4]]" maxlength="25" id='_uk' name='uk' style="width: 170px;margin-left: 10px; margin-right: 20px;">
-            </td>
-            <td>Keterangan</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[20]]" id='_ket' name='ket' style="width: 170px;margin-left: 10px; margin-right: 20px;">
-            </td>
-       </tr>
-       <tr>
-            <td>Harga Beli</td>
-            <td>
-                <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
-                  <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hb' style="width: 145px; text-align:right;" onkeyup="formatAngka(this,'.')" >
+            </div>
+            <div class="field-wrap">
+                Nama
+                <input type='text' class="validate[required,maxSize[25], minSize[2]]]" maxlength="25" id='_nama1' name='nama1' style="width: 170px; margin-right: 20px;">
+            </div>
+            <br/>
+            <div class="field-wrap">
+                Ukuran
+                <input type='text' class="validate[required,maxSize[25], minSize[4]]" maxlength="25" id='_uk' name='uk' style="width: 120px;margin-right: 20px;">
+            </div>
+            <div class="field-wrap">
+                Keterangan
+                <input type='text' class="validate[required,maxSize[20]]" id='_ket' name='ket' style="width: 138px; margin-right: 20px;">
+            </div>
+            <br/>
+            <div class="field-wrap">
+                Harga Beli
+                <div class="input-prepend input-append money">
+                  <span class="add-on custom-add-on">Rp</span>
+                  <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hb' style="width: 120px; text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
-            </td>
-            <td>Harga Jual</td>
-            <td>
-                <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
-                  <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hj' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+            </div>
+            <div class="field-wrap">
+                Harga Jual
+                <div class="input-prepend input-append money">
+                  <span class="add-on custom-add-on">Rp</span>
+                  <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hj' style="width: 120px;text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
-            </td>
-       </tr>
-       <tr>
-            <td>Persediaan</td>
-            <td>
-            	<div class="input-append" style="margin-bottom:0">
-                    <input class="span2 validate[required,custom[number]]" readonly="true" id='_ps' name='ps' style="width: 80px;margin-left: 10px; margin-right: 20px;" type="text" value="0">
-                </div>
-            </td>
-
-            <td>Satuan</td>
-            <td>
-                <select name="st" class="validate[required]" id="_st" style="margin-left: 10px; margin-right: 20px;">
+            </div>
+            <br/>
+            <div class="field-wrap">
+                Persediaan
+                <input class="span2 validate[required,custom[number]]" readonly="true" id='_ps' name='ps' style="width: 70px;" type="text" value="0">
+            </div>
+            <div class="field-wrap">
+                Tgl Persediaan
+                <input  type='text' 
+                    class="" id='_tgl1' name='_tgl1' 
+                    style="width: 80px;" readonly="true">
+            </div>
+            <div class="field-wrap">
+                <div class="input-append money">
+                    <select name="st" class="validate[required]" id="_st" id="appendedInput" style="margin-left: 10px;margin-bottom: 8px;">
                     <?php
                     foreach ($list_satuan as $isi)
                     {
@@ -60,48 +61,39 @@
                         echo "value = '".$isi->Kode_satuan."'>".$isi->Kode_satuan."</option>";
                     }
                     ?>
-                </select>
-                <button type="button" id="tes" class="btn btn-mini" tittle="Tambah Satuan"
-                        data-toggle="button"
+                    </select>
+                    <a id="tes" class="add-on btn btn-mini" tittle="Tambah Satuan"
+                        data-toggle="button" style="margin-bottom:8px;"
                         data-html="true" data-placement="bottom"
                         rel="popover"
-                        style="margin-bottom:3px;"
                         data-content="
                         <div>
                          <input  type='text' 
                             class='span2' id='txtCombo' id='appendedInput' name='txtCombo' 
-                            style='width: 90px;margin-left: 10px;'
+                            style='width: 130px;margin-left: 10px;margin-bottom: 0;'
                             />
-                        <button class='btn btn-primary btn-small' onclick='addCombo()'>Tambah</button>
-                        </div>"><i class='icon-plus'></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>Tgl Persediaan</td>
-            <td>
-                <input  type='text' 
-                        class="" id='_tgl1' name='_tgl1' 
-                        style="width: 80px; margin-left: 10px;" readonly="true">
-            </td>
-       </tr>
+                        <button class='btn btn-primary' onclick='addCombo()' style='margin-left:10px;'>Tambah</button>
+                        </div>"><i class='icon-plus'></i>
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <div class="field-wrap action-group">
+                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <button id="cac" class="btn" type="reset">Cancel</button>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Barang"><i class="icon-print"></i> Print</button>
+            </div>
 
-        <tr >
-            <td colspan="4">
-            <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-            <button id="cac" class="btn" type="reset">Cancel</button>
-			<!--<button id="saw" class="btn" type="submit">Saldo Awal</button> -->
-            <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Barang"><i class="icon-print"></i></button>
-            </td>
-        </tr>
-    </table>
-</form>
+            </form>
+            <!--**NOTIFICATION AREA**-->
+            <div id="konfirmasi" class="sukses"></div>
+        </div>
+    </div>
 
-<!--**NOTIFICATION AREA**-->
-<div id="konfirmasi" class="sukses"></div>
+    <div class="offset2 span4">
+        <div id="hasil"></div>
+    </div>
 </div>
-<div id="hasil" style="z-index:10"></div>
-<div id="hasilsaw"></div>
-
 
 <script>  
     $("#tes").popover({ title: 'Tambah Satuan'});

@@ -1,44 +1,26 @@
-<!--//***MAIN FORM-->
-<div class="bar bar2" style="width: 74%">
-    <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border" style="width: 72%;">
-<form id="formID">
-    <table width="100%">
-        <tr>
-            <td>Nomor SO</td>
-            <td>
+<div class="row-fluid">
+    <div class="span9">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
+        <div id="konten" class="hide-con master-border" style="height: 360px;">
+        <form id="formID">
+            <div class="field-wrap">
+                Nomor SO
                 <input type='text' class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_so' name='_so'/>
-            </td>
-            
-            <td>Nomor PO</td>
-            <td>
-                <input type='text' class="span-form75 validate[custom[onlyLetterNumber]]" 
-                maxlength="20" id='_po' name='_po'> <input type='text' class="validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2' 
-                style="width: 80px;margin-right: 20px;"/>
-            </td>
-       </tr>
-       <tr>
-            <td>Tanggal SO</td>
-            <td>
-                <input type='text' class="validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>"
-                style="width: 80px;margin-left: 10px; margin-right: 20px;"/>
-            </td>
-            <td>Pelanggan</td>
-            <td>
-                <input type="hidden" id="kd_plg" />
-                <div class="input-append" style="margin-bottom:0px;">
-                 <input type='text' class="span2" disabled="disabled"
-                    maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
-                </div>
-            </td>
-       </tr>
-       <tr>
-            <td>Sales</td>
-            <td>
-                <select name="_sl" class="validate[required]" id="_sl" style="width: 148px; margin-left: 10px; margin-right: 20px;">
+                    maxlength="20" id='_so' name='_so'/>
+            </div>
+            <div class="field-wrap">
+                Nomor PO
+                <input type='text' class="validate[custom[onlyLetterNumber]]" 
+                    maxlength="20" id='_po' name='_po' style='width: 120px;'> 
+                <input type='text' class="validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2' 
+                    style="width: 80px;"/>
+            </div>
+            <div class="field-wrap" style="margin-left:10px;">
+                Sales
+                <select name="_sl" class="validate[required]" id="_sl" style="width: 148px; margin-right: 20px;">
                     <?php
                     foreach ($list_sales as $isi)
                     {
@@ -47,68 +29,87 @@
                     }
                     ?>
                 </select>
-            </td>
-            <td>Term</td>
-            <td>
-                <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px; margin-left:10px;" maxlength="3" id='terms' name='terms'/> Hari
-                <a href='#'id="add" mode="new" class="btn btn-small" title="Tambah Barang" onclick="addBarang()" style="margin-left:30px;"><i class="icon-plus"></i> Barang</a>
-            </td>
-        </tr>
-    </table>
-</form>
-    <div id="hasil2" style="height: 238px;"></div>
+            </div>
+            <br/>
+            <div class="field-wrap">
+                Tanggal SO
+                <input type='text' class="validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>"
+                    style="width: 80px; margin-right: 20px;"/>
+            </div>
+            <div class="field-wrap">
+                Pelanggan
+                <input type="hidden" id="kd_plg" />
+                    <div class="input-append money" style="margin-bottom:0px;">
+                     <input type='text' class="span2" disabled="disabled"
+                        maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                    <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                    </div>
+            </div>
+            <div class="field-wrap" style="margin-left:20px;">
+                Terms
+                <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px;" maxlength="3" id='terms' name='terms'/> Hari
+                <a href='#'id="add" mode="new" class="btn" title="Tambah Barang" onclick="addBarang()" style="margin-left:48px;"><i class="icon-plus"></i> Barang</a>
+            </div>
+            <br/>
+        </form>
 
-    <div style="float: right; margin-right: 75px;">
-        <table>
-        <tr>
-        	<td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
-        	</td>
-        	<td><input type="hidden" id="total2" />
-            <input style="float: right; width:120px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true"></td>
-        </tr>
-        <tr>
-        	<td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
-        	</td>
-        	<td><input type="hidden" id="disc2" />
-            <input style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
-        	<input style="width:66px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
-        	</td>
-        </tr>
-        <tr>
-        	<td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
-        	</td>
-        	<td><input type="hidden" id="dpp2" />
-            <input style="width:120px; margin-right: 145px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true"></td>
-        </tr>
-         <tr>
-        		<td>
-        			<label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
-        		</td>
-        		<td>
-        			<input style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
-        			<input style="width:66px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
-        		</td>
-        </tr> 
-        <tr>
-        	<td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
-        	</td>
-        	<td><input type="hidden" id="granT2" />
-            <input style="width:120px; text-align:right;" id="granT" name="granT" type="text" readonly="true"></td>
-        </tr>      
-        </table>
+        <div id="hasil2" style="height: 170px;"></div>
+
+            <div style="float: right; margin-right: 75px;">
+                <table>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
+                    </td>
+                    <td><input type="hidden" id="total2" />
+                    <input class="no-margin-b"  style="float: right; width:120px; margin-right: 145px;text-align:right;" id="total" name="total" type="text" readonly="true"></td>
+                </tr>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Discount</b> </label>
+                    </td>
+                    <td><input type="hidden" id="disc2" />
+                    <input class="no-margin-b" style="width:20px; " maxlength="2" id="disc" name="disc" type="text" onkeypress="hitung()">%
+                    <input class="no-margin-b" style="width:70px;text-align:right;" onkeypress="hitung()" id="discT" name="discT" type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>DPP</b> </label>
+                    </td>
+                    <td><input type="hidden" id="dpp2" />
+                    <input class="no-margin-b" style="width:120px; margin-right: 145px;text-align:right;" id="dpp" name="dpp" type="text" readonly="true"></td>
+                </tr>
+                 <tr>
+                        <td>
+                            <label style="float: left; margin-right: 10px;"><b>PPN</b> </label>
+                        </td>
+                        <td>
+                            <input class="no-margin-b" style="width:20px;" class="" maxlength="2" id="ppn" name="ppn" type="text" onkeypress="hitungPPN()">% 
+                            <input class="no-margin-b" style="width:70px;text-align:right;" id="ppnT" name="ppnT" type="text" onkeypress="hitungPPN()">
+                        </td>
+                </tr> 
+                <tr>
+                    <td><label style="float: left; margin-right: 10px;"><b>Grand Total</b> </label>
+                    </td>
+                    <td><input type="hidden" id="granT2" />
+                    <input class="no-margin-b" style="width:120px; text-align:right;" id="granT" name="granT" type="text" readonly="true"></td>
+                </tr>      
+                </table>
+            </div>
+
+            <div class="field-wrap">
+                <button id="save" mode="add" class="btn btn-primary">Save</button>
+                <button id="delete" class="btn">Delete</button>
+                <button id="cancel" class="btn">Cancel</button>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+            </div>
+            <!--**NOTIFICATION AREA**-->
+            <div id="konfirmasi" class="sukses"></div>
+        </div>
     </div>
 
-    <div>
-        <button id="save" mode="add" class="btn btn-primary">Save</button>
-        <button id="delete" class="btn">Delete</button>
-        <button id="cancel" class="btn">Cancel</button>
-        <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i></button>
+    <div class="span3">
+        <div id="hasil"></div>
     </div>
-    <!--**NOTIFICATION AREA**-->
-    <div id="konfirmasi" class="sukses"></div>
 </div>
-
-<div id="popup-wrapper3" style="width:750px;height:400px;"></div>
 
 <!-- Modal -->
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -148,7 +149,7 @@
   </div>
 </div>
 
-<div id="hasil"></div>
+
 <div id="list_barang"></div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/accounting.min.js"></script>
@@ -463,13 +464,13 @@ function addRow() {
     $count = $("tbody#itemlist tr").length+1;
 
     items += "<tr>";
-    items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:134px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn' data-toggle='modal' style='padding: 2px 3px; visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='8%'><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:35px;text-align:right;' disabled='true' autofocus/></td>";
+    items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:130px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
+    items += "<td width='8%'><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:40px;text-align:right;' disabled='true' autofocus/></td>";
     items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";
-    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn btn-small' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn btn-small' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
+    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
 
     $("#itemlist").append(items);
 }
@@ -599,7 +600,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> Data '+so+' berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses</b> Data Sales Order '+so+' berhasil ditambahkan');
 					$('#formID').each(function(){
 						this.reset();
 					});
@@ -609,7 +610,7 @@ $("#save").click(function(){
 					$('#save').attr('mode','add');
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
+                    bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Sales Order sudah ada');
                 }
             }
             });
@@ -636,7 +637,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses</b> data '+so+' berhasil di update');
+                    bootstrap_alert.success('<b>Sukses</b> data Sales Order '+so+' berhasil di update');
                     $('#formID').each(function(){
                             this.reset();
                     });
@@ -646,7 +647,7 @@ $("#save").click(function(){
 					$('#save').attr('mode','add');
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
+                    bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan Kode SO Sudah Ada');
                 }
             }
             });
@@ -685,7 +686,7 @@ $("#delete").click(function(){
                         {
                             if(msg == "ok")
                             {
-                                bootstrap_alert.success('Data <b>'+id+'</b> berhasil dihapus');
+                                bootstrap_alert.success('Data Sales Order <b>'+id+'</b> berhasil dihapus');
                                 $('#formID').each(function(){
                                     this.reset();
                                 });
@@ -701,5 +702,4 @@ $("#delete").click(function(){
         }
     });
 });
-
 </script>

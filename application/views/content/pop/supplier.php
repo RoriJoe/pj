@@ -3,17 +3,17 @@
         <tr>
             <td>Kode</td>
             <td>
-                <input type='text' class="span-form75 upper-form validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]" maxlength="20" id='kd' name='kd'>
+                <input type='text' class="upper-form validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]" maxlength="20" id='kd' name='kd' style="width:70px;">
             </td>
             <td>Perusahaan</td>
             <td>
-                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr'>
+                <input type='text' class="span-form170 validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr' style="width:130px;">
             </td>
         </tr>
         <tr>
             <td>Nama</td>
             <td>
-                <input type='text' class="span-form170 validate[required, maxSize[30], minSize[3]],custom[onlyLetterSp]]" maxlength="30" id='nm' name='nm'>
+                <input type='text' class="validate[required, maxSize[30], minSize[3]],custom[onlyLetterSp]]" maxlength="30" id='nm' name='nm' style="width:130px;">
             </td>
             <td>Alamat</td>
             <td>
@@ -25,7 +25,7 @@
             <td>
                 <div class="input-prepend input-append" style="margin-bottom: 0; margin-left: 10px;">
                   <span class="add-on" style="margin: 0; padding: 2px;">Rp</span>
-                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 110px;text-align:right;" onkeyup="formatAngka(this,'.')" >
                 </div>
             </td>
             <td>Kota</td>

@@ -1,92 +1,87 @@
-<!--//***MAIN FORM-->
-<div class="bar">
-    <p>Form Surat Jalan <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
+<div class="row-fluid">
+    <div class="span9">
+        <!--//***MAIN FORM-->
+        <div class="bar" title="Show/Hide Form">
+            <p>Form Surat Jalan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+        </div>
+        <div id="konten" class="hide-con master-border">
+            <form id="formID">
 
-<div id="konten" class="hide-con master-border">
-    <form id="formID">
-        <table width="100%">
-            <tr>
-                <td>Nomor SJ</td>
-                <td>
-                    <input type='text' class="validate[required]" id='sj' name='sj' style="width: 75px;">
-                </td>
-
-                <td>Tgl Kirim</td>
-                <td>
-                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;" value="<?php echo date('d-m-Y');?>">
-                </td>
-           </tr>
-           <tr>
-                <td>Pelanggan</td>
-                <td>
+                <div class="field-wrap">
+                    Nomor SJ
+                    <input type='text' class="validate[required]" id='sj' name='sj' style="width: 85px;margin-left:5px;">
+                </div>
+                <div class="field-wrap" style=" margin-left: 20px; ">
+                    Pelanggan
                     <input type="hidden" id="kd_plg" />
-                    <div class="input-append" style="margin-bottom:0;">
+                    <div class="input-append money" style="margin-bottom:0;">
                      <input type='text' class="span2" 
-                        maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 148px;">
-                    <a href="#modalPelanggan" role="button" class="btn" id="f_plg" title="Filter Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                        maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 115px;margin-bottom:8px;">
+                    <a href="#modalPelanggan" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                     </div>
-                </td>
-
-                <td>Gudang</td>
-                <td>
-                    <select name="gg" class="validate[required]" id="gg" style="width: 186px;">
-                    <?php
-                        echo "<option value = ''> -- Pilih Gudang -- </option>";
-                        foreach ($list_gudang as $isi)
-                        {
-                            echo "<option ";
-                            echo "value = '".$isi->Kode."'>".$isi->Nama."</option>";
-                        }
-                    ?>
+                </div>
+                <div class="field-wrap" style=" margin-left: 16px; ">
+                    Tgl Kirim
+                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;margin-left: 10px;" value="<?php echo date('d-m-Y');?>">
+                </div>
+                <div class="field-wrap" style=" margin-left: 5px; ">
+                    Gudang
+                    <select name="gg" class="validate[required]" id="gg" style="width: 128px;">
+                        <?php
+                            echo "<option value = ''> -- Pilih Gudang -- </option>";
+                            foreach ($list_gudang as $isi)
+                            {
+                                echo "<option ";
+                                echo "value = '".$isi->Kode."'>".$isi->Nama."</option>";
+                            }
+                        ?>
                     </select>
-                </td>
-           </tr>
-
-           <tr>
-                <td>Nomor SO</td>
-                <td>
-                    <div id="no_so">
-                    </div>
-                </td>
-                <td>No. PO</td>
-                <td>
-                    <input type='text' class="validate[required]" id='po' name='po' style="width: 170px;">
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <label class="checkbox">
-                        <input type="checkbox" id="ambil" name="ambil" onclick="change()"> Ambil Sendiri
+                </div>
+                <br/>
+                <div class="field-wrap">
+                    Nomor SO
+                    <div id="no_so" style="display:inline-block;"></div>
+                </div>
+                <div class="field-wrap">
+                    Nomor PO
+                    <input type='text' class="validate[required]" id='po' name='po' style="width: 125px;">
+                </div>
+                <div class="field-wrap" style=" margin-left: 15px; ">
+                    <label class="checkbox" style=" display: inline; ">
+                        <input type="checkbox" id="ambil" name="ambil" onclick="change()" style=" float: none; "> Ambil Sendiri
                     </label>
-                </td>
-                <td>Nomor Mobil</td>
-                <td>
-                    <div id="mobil">
+                </div>
+                <div class="field-wrap" style=" margin-left: 25px; ">
+                    Nomor Mobil
+                    <div id="mobil" style="display:inline-block;">
                         <select style="width: 170px;" id='_mbl' name='_mbl'>
                             <option value = ''> -- Pilih Mobil-- </option>"
                         </select>
                     </div>
-                </td>
-            </tr>
-        </table>
-        <input type="hidden" id="kirim" />
-        <!--<p style="visibility: hidden;" id="kode_p" name="kode_p"/>-->
-        <hr style="margin: 0;"/>
-    </form>
+                </div>
+                <input type="hidden" id="kirim" />
+            </form>
 
-    <div id="hasil2" style="height: 215px;"></div>
-    <!--**NOTIFICATION AREA**-->
-    <div id="konfirmasi" class="sukses"></div>
+            <div id="hasil2"></div>
+            <!--**NOTIFICATION AREA**-->
+            <div id="konfirmasi" class="sukses"></div>
 
-    <div style="margin-top: 10px;">
-        <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
-        <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-        <button id="delete" class="btn" type="submit">Delete</button>
-        <button id="cancel" class="btn" type="reset">Cancel</button>
-        <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i></button>
-        <button id="batal" class="btn btn-danger pull-right" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SJ</button>
+            <div style="margin-top: 10px;">
+                <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
+                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
+                <button id="cancel" class="btn" type="reset">Cancel</button>
+                <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i> Print</button>
+
+                <div  class="pull-right">
+                <button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SJ</button>
+                <button id="delete" class="btn" type="submit">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="span3">
+        <div id="list"></div>
     </div>
 </div>
 
@@ -111,8 +106,6 @@
   </div>
 </div>
 
-<div id="list"></div>
-
 <script>  
     $("#tes").popover({ content: 'Tambah Sales Order Baru?', trigger: 'hover'});
 </script>
@@ -134,6 +127,17 @@ $( "#_tgl" ).datepicker( "setDate", new Date());
     document.getElementById("ambil").checked=true;
     change();
 });
+
+$(function() {
+    $( "#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+        showAnim: "blind",
+        defaultDate: new Date()
+    });
+});
+
 
 function addBarang(){
     editRow(row);
@@ -386,7 +390,7 @@ function show_so(mode){
 
     if(mode=="view"){
         _div.removeChild(_text);
-        var s= "<input type='text' name='_do' id='_do' style='width:120px' readonly='true'>";
+        var s= "<input type='text' name='_do' id='_do' style='width:106px' readonly='true'>";
         _div.innerHTML=s;
     }
     else
@@ -555,7 +559,7 @@ $("#save").click(function(){
                     $('#hasil2').html('');
                     if(msg == "ok")
                     {
-                        bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' sudah ditambahkan');
+                        bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' berhasil ditambahkan');
                         $('#formID').each(function(){
                             this.reset();
                         });
@@ -565,7 +569,7 @@ $("#save").click(function(){
                         loadDetailSJ();
                     }
                     else{
-                        bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data '+sj+' sudah ada');
+                        bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Surat Jalan '+sj+' sudah ada');
                     }
                 }
                 });
@@ -639,7 +643,7 @@ $("#delete").click(function(){
                         {
                             if(msg == "ok")
                             {    
-                                bootstrap_alert.success('<b>Sukses</b> Data '+sj+' telah dihapus');
+                                bootstrap_alert.success('<b>Sukses</b> Surat Jalan '+sj+' telah dihapus');
                                 $('#formID').each(function(){
                                     this.reset();
                                 });

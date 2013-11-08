@@ -1,4 +1,4 @@
-<div class="table table-hover CSSTabel tb-barang" style="width:25%;">
+<div class="table table-hover CSSTabel table-list">
     <table id="tb1">
         <thead>
             <th>Kode Saw</th>

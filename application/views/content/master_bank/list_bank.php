@@ -1,4 +1,4 @@
-<div class="table table-hover CSSTabel tb-barang">
+<div class="table table-hover CSSTabel table-list">
 <table id="tb1" style="width: 100%;">
     <thead>
         <th width="30%">Kode</th>
@@ -14,12 +14,12 @@
             <td>$row->nama_bank</td>
             <td>
                 <div class='btn-group'>
-                    <a class='btn edit' style='padding: 2px 6px;'
+                    <a class='btn edit list-edit'
                             kode='$row->kode_bank'
                             nama='$row->nama_bank'
                             alamat='$row->alamat'
                     ><i class='icon-pencil'></i></a>
-                    <a class='btn delete' kode='$row->kode_bank' nama='$row->nama_bank' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
+                    <a class='btn delete list-edit' kode='$row->kode_bank' nama='$row->nama_bank'><i class='icon-trash'></i></a>
                 </div>
             </td>
         </tr>";
@@ -99,7 +99,7 @@ var oTable = $('#tb1').dataTable( {
     "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {
          "sSearch": "",
-         "sLengthMenu": "View _MENU_ ",
+         "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },

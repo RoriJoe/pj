@@ -1,4 +1,4 @@
-<div class="table CSSTabel table-hover tb-barang" style="width:24%">
+<div class="table CSSTabel table-hover table-list">
     <table id="tbLsPO">
         <thead>
             <th>Kode PO</th>
@@ -43,12 +43,14 @@ var oTable = $('#tbLsPO').dataTable( {
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
     "bLengthChange": true,
+    "aaSorting": [[ 4, "desc" ]],
     "oLanguage": {
          "sSearch": "",
          "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
+    "sPaginationType": "full_numbers",
     "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );
 
