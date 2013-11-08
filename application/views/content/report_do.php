@@ -102,52 +102,84 @@ function getPelanggan(){
     $('#kd_plg'+row).val(k);
     
 }
-//action="../report/print_report_do" method="post" action="../report/print_report_do" method="post" target="_blank"
 </script>
+<div class="row-fluid">
+    <div class="span3">
+      <!--//***MAIN FORM-->
+      <form action="<?php echo base_url();?>report/print_report_do" method="post" target="_blank">
+      <div class="bar" >
+          <p>Report Delivery Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
+      </div>
 
-<!--//***MAIN FORM-->
-<form action="<?php echo base_url();?>report/print_report_do" method="post" target="_blank">
-<div class="bar bar2" style="width: 50%">
-    <p>Report Delivery Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border" style="width: 48%;">
-	<div>
-		<label class="radio">
-  		<input type="radio" name="optionsRadios1" id="cetakAll" value="Semua" checked>
-  			Cetak Semua
-		</label>
-		<label class="radio">
-  		<input type="radio" name="optionsRadios1" id="cetakBatas" value="Batas">
-  			Cetak Batas
-		</label>
-	</div>
-	
-	<div class="pull-left" id="range" style="margin-left: 10px; border: 1px solid #C6C6C6; padding: 5px;">
-		<p><b>Tanggal Delivery Order Mulai</b></p>
-		<input type="text" id="_tgl" name="_tgl" style="width: 150px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;" value="<?php echo date('d-m-Y');?>"/>
-		<p><b>Pelanggan Mulai</b></p>
-            
+      <div id="konten" class="hide-con master-border">
+        <table>
+          <tr>
+            <td>
+              <label class="radio">
+                <input type="radio" name="optionsRadios1" id="cetakAll" value="Semua" checked>
+                  Cetak Semua
+              </label>
+            </td>
+            <td>
+              <label class="radio" style="margin-left:5px;">
+                <input type="radio" name="optionsRadios1" id="cetakBatas" value="Batas">
+                  Cetak Batas
+              </label>
+            </td>
+          </tr>
+        </table>
+        
+        <div id="range">
+          <table>
+            <tr>
+              <td colspan="3"><b>Tanggal Delivery Order Mulai</b></td>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" id="_tgl" name="_tgl" style="width: 65px;" value="<?php echo date('01-m-Y');?>"/>
+                s/d
+                <input type="text" id="_tgl2" name="_tgl2" style="width: 65px;" value="<?php echo date('d-m-Y');?>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Pelanggan Mulai</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 <input type="hidden" id="kd_plg1" />
-                
-                 <input type='text' class="span2" disabled="disabled"
-                    maxlength="20" id="_pn1" id='appendedInputButton' name='_pn1' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="getDetail(1)"><i class="icon-search"></i></a>
-				s/d
-				<input type="hidden" id="kd_plg2" />
-                
-                 <input type='text' class="span2" disabled="disabled"
-                    maxlength="20" id="_pn2" id='appendedInputButton' name='_pn2' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                <a href="#modalPelanggan" id="f_plg2" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="getDetail(2)"><i class="icon-search"></i></a>
-               
-            
-	</div>
-	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
-		<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
-		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
-	</div>
+                <div class="input-append">
+                  <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn1" placeholder='Batas Awal' id='appendedInputButton' name='_pn1' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                  <a href="#modalPelanggan" id="f_plg" style="margin-bottom:4px;" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" onclick="getDetail(1)"><i class="icon-search"></i></a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="input-append">
+                  <input type="hidden" id="kd_plg2" />
+                  <input type='text' class="span2" disabled="disabled"
+                            maxlength="20" id="_pn2" id='appendedInputButton' name='_pn2' placeholder='Batas Akhir' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                  <a href="#modalPelanggan" id="f_plg2" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="margin-bottom:4px;" onclick="getDetail(2)"><i class="icon-search"></i></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <input role="button" type="button" class="btn btn-primary"  id="print" value="Print"> 
+          <input role="button" type="button" class="btn"  id="view" value="Preview">  
+        </div>
+      </div>
+      </form>
+    </div>
+
+    <div class="span9">
+      <div id="tabpreview"></div>
+    </div>
 </div>
-</form>
+
 
 <div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -161,8 +193,3 @@ function getPelanggan(){
     <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
   </div>
 </div>
-
-<div id="tabpreview"></div>
-<script>
-
-</script>

@@ -72,27 +72,31 @@ function table(){
 }
 </script>
 
-<!--//***MAIN FORM-->
-<form action="<?php echo base_url();?>report/print_report_os" method="post" target="_blank">
-<div class="bar bar2" style="width: 50%">
-    <p>Laporan Outstanding Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
-</div>
-<div id="konten" class="hide-con master-border" style="width: 48%;">
-	<div class="pull-left">
-		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
-  			Cetak Semua
-		</label>
-	</div>
-	<div style="clear: both;"></div>
-	<div style="margin-top: 20px" class="pull-right">
-		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
-		<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
-		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
-	</div>
-</div>
-</form>
-<div id="tabpreview"></div>
-<script>
+<div class="row-fluid">
+    <div class="span3">
+    	<!--//***MAIN FORM-->
+		<form action="<?php echo base_url();?>report/print_report_os" method="post" target="_blank">
+		<div class="bar">
+		    <p>Laporan Outstanding Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
+		</div>
+		<div id="konten" class="hide-con master-border">
+			<div class="pull-left">
+				<label class="radio">
+		  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
+		  			Cetak Semua
+				</label>
+			</div>
+			<div style="clear: both;"></div>
+			<div style="margin-top: 10px">
+				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+				<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
+				<input role="button" type="button" class="btn"  id="view" value="Preview">	
+			</div>
+		</div>
+		</form>
+    </div>
 
-</script>
+    <div class="span9">
+      <div id="tabpreview"></div>
+    </div>
+</div>

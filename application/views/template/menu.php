@@ -85,7 +85,7 @@
             if($this->session->userdata('level') == 1): ?>
             <li class="dropdown-submenu"><a tabindex="-1" href="#"><i class="icon-wrench"></i>Maintenance</a>
                 <ul class="dropdown-menu" style=" top: -22px; ">
-                  <li><a class="ajax" href="saw">Create Saldo Awal</a></li>
+                  <li><a class="ajax" href="saw">Stock Opname</a></li>
                   <li><a class="ajax" href="user">Create Password</a></li>
                 </ul>
             </li>

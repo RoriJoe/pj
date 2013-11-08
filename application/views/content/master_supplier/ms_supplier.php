@@ -7,45 +7,57 @@
 
         <div id="konten" class="hide-con master-border">
         <form id="formID" style="margin-left: 15px;">
-            <div class="field-wrap">
-                Kode
-                <input type='text' style="width:95px; margin-left:5px; margin-right:10px;" class="upper-form validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]" maxlength="20" id='kd' name='kd'>
-            </div>
-            <div class="field-wrap">
-                Perusahaan
-                <input type='text' style="width: 145px;" class="validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr'>
-            </div>
-            <div class="field-wrap">
-                Nama
-                <input type='text' style="width: 135px;" class="validate[required, maxSize[30], minSize[3]],custom[onlyLetterSp]]" maxlength="30" id='nm' name='nm'>
-            </div>
-            <div class="field-wrap">
-                Limit
-                <div class="input-prepend input-append money">
-                  <span class="add-on custom-add-on">Rp</span>
-                  <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 145px;text-align:right;" onkeyup="formatAngka(this,'.')" >
-                </div>
-            </div>
-            <div class="field-wrap">
-                Alamat
-                <textarea rows="3" class="validate[required, maxSize[30], minSize[3]]]" maxlength="30" id='al' name='al' style="resize:none; width:128px;"></textarea>
-            </div>
-            <div class="field-wrap">
-                Kota
-                <input type='text' class="validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt' style="width: 80px;" onclick="disableNum('kt')">
-            </div>
-            <div class="field-wrap">
-                Telp
-                <input type='text' placeholder="Telp 1" class="telp validate[required, maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')">
-                <input type='text' placeholder="Telp 2" class="telp validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
-                <input type='text' placeholder="Telp 3" class="telp validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl3' name='tl3' value="" onclick="disableAlpha('tl3')">
-            </div>
-            <div class="field-wrap">
-                Fax
-                <input type='text' placeholder="Fax 1" class="telp validate[required, maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')">
-                <input type='text' placeholder="Fax 2" class="telp validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')">
-            </div>
-            <br/>
+            <table>
+                <tr>
+                    <td>Kode</td>
+                    <td>
+                        <input type='text' style="width:95px; margin-right:10px;" class="upper-form validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]" maxlength="20" id='kd' name='kd'>
+                    </td>
+                    <td>Perusahaan</td>
+                    <td>
+                        <input type='text' style="width: 140px;" class="validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td style="padding-right:10px;">
+                        <input type='text' style="width: 135px;" class="validate[required, maxSize[30], minSize[3]],custom[onlyLetterSp]]" maxlength="30" id='nm' name='nm'>
+                    </td>
+                    <td colspan="2">Limit
+                        <div class="input-prepend input-append money">
+                          <span class="add-on custom-add-on">Rp</span>
+                          <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 130px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Alamat</td>
+                    <td rowspan="2">
+                        <textarea rows="3" class="validate[required, maxSize[30], minSize[3]]]" maxlength="30" id='al' name='al' style="resize:none; width:135px;"></textarea>
+                    </td>
+                    <td colspan="2">Kota
+                        <input type='text' class="validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt' style="width: 80px;" onclick="disableNum('kt')">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Telp</td>
+                    <td colspan="3">
+                        <input type='text' placeholder="Telp 1" class="validate[required, maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')" style="width:110px;">
+                        <input type='text' placeholder="Telp 2" class="validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')" style="width:110px;">
+                        <input type='text' placeholder="Telp 3" class="validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='tl3' name='tl3' value="" onclick="disableAlpha('tl3')" style="width:110px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td colspan="3">
+                        <input type='text' placeholder="Fax 1" class="validate[required, maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')" style="width:110px;">
+                        <input type='text' placeholder="Fax 2" class="validate[maxSize[20], minSize[5]],custom[phone]]" maxlength="20" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')" style="width:110px;"> 
+                    </td>
+                </tr>
+            </table>
             <div class="field-wrap action-group">
                 <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
                 <button id="cac" class="btn" type="reset">Cancel</button>

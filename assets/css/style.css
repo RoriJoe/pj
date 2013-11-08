@@ -1127,3 +1127,8 @@ margin-left: 300px;
     padding: 1px;
     vertical-align: middle;
 }
+#tabpreview{
+    padding: 5px;
+    border: 1px solid #C9C9C9;
+    border-radius: 4px;
+}
