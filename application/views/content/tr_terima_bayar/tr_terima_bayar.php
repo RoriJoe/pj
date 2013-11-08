@@ -40,6 +40,7 @@
                 <div class="span6">
                     <div id="invoice"></div>
                 </div>
+
                 <div class="offset1 span5">
                     <div id="pembayaran"></div>
                 </div>

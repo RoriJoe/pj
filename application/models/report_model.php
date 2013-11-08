@@ -5,7 +5,7 @@ class report_model extends CI_Model{
 	}
 
 	
-	function print_do($radio,$tgl,$tgl2){
+	function print_do($radio,$tgl,$tgl2,$plg1,$plg2){
 	
 /*SELECT do_h.*,
 			pelanggan.Nama
@@ -14,7 +14,7 @@ class report_model extends CI_Model{
 			ON do_h.Kode_Plg = pelanggan.Kode*/
 			
 			if($radio=="Semua"){
-			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Nama as NP, barang.Nama, Ukuran, Qty, Satuan1
+			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty, Satuan1,Tgl,grandttl
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
@@ -22,12 +22,13 @@ class report_model extends CI_Model{
 			");
 			return $q->result();
 			}else{
-			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Nama as NP, barang.Nama, Ukuran, Qty, Satuan1
+			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty, Satuan1,Tgl,grandttl
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
 			LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
-			where do_h.Tgl between ('$tgl') and ('$tgl2')");
+			where do_h.Tgl between ('$tgl') and ('$tgl2')
+			AND do_h.Kode_Plg between '$plg1' and '$plg2' ");
 			return $q->result();
 			}
 	
@@ -133,7 +134,7 @@ sj.kirim as keluar
 	
 	function print_os(){ //Sementara
 		
-		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty, Satuan1
+		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty, Satuan1,grandttl
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode

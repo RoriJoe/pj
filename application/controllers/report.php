@@ -123,11 +123,13 @@
 			
 			$data['totalRow']=$this->input->post('totalRow');
 			$data['arrKode']=$this->input->post('arrKode');
+			$data['arrNama']=$this->input->post('arrNama');
             $data['arrQty']=$this->input->post('arrQty');
             $data['arrSatuan']=$this->input->post('arrSatuan');
             $data['arrHarga']=$this->input->post('arrHarga');
             $data['arrJumlah']=$this->input->post('arrJumlah');
             $data['arrKet']=$this->input->post('arrKet');
+			
 			
 			$data['filename'] = "Report_Transaksi_SJ - ". date('dmY');
 			$this->load->view('content/print_transaksi_so',$data);
@@ -135,7 +137,42 @@
 			
 			//create_pdf($templateView, $data['filename']); //Create pdf        
 		}
-
+		
+		function print_transaksi_invoice(){
+			//$this->load->helper('pdfexport_helper.php');
+			
+			$data['id']=$this->input->post('id');
+            $data['_tgl']=date('d-m-Y', strtotime($this->input->post('_tgl')));
+			//$data['tglPo']=date('d-m-Y', strtotime($this->input->post('tglPo')));
+            $data['so']=$this->input->post('so');
+            $data['term']=$this->input->post('term');
+           
+            $data['to']=$this->input->post('to');
+			 $data['disc']=$this->input->post('disc');
+			 $data['dpp']=$this->input->post('dpp');
+			 $data['ppn']=$this->input->post('ppn');
+			 $data['grant']=$this->input->post('grant');
+			 $data['plg']=$this->input->post('plg');
+			 $data['discT']=$this->input->post('discT');
+			 $data['ppnT']=$this->input->post('ppnT');
+			
+			$data['totalRow']=$this->input->post('totalRow');
+			$data['arrKode']=$this->input->post('arrKode');
+            $data['arrBrg']=$this->input->post('arrBrg');
+            $data['arrSat']=$this->input->post('arrSat');
+            $data['arrQty']=$this->input->post('arrQty');
+            $data['arrHrg']=$this->input->post('arrHrg');
+            $data['arrKet']=$this->input->post('arrKet');
+			$data['arrJml']=$this->input->post('arrJml');
+			
+			
+			
+			$data['filename'] = "Report_Transaksi_Invoice - ". date('dmY');
+			$this->load->view('content/print_transaksi_invoice',$data);
+			//$templateView  = $this->load->view('content/print_sj',$data,TRUE);
+			
+			//create_pdf($templateView, $data['filename']); //Create pdf        
+		}
 		
 		//MASTER 
 		
@@ -329,15 +366,81 @@
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
 			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
-			}else{ $tgl=""; $tgl2=""; }
+			$plg1=$this->input->post('plg1');
+			$plg2=$this->input->post('plg2');
+			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
 
 			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
 			
 			
-			
-			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2);
+			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2,$plg1,$plg2);
 			
             //load view
             $this->load->view('content/report_table_do',$data);
+        }
+		
+		function table_sj(){
+            //Get data dari model
+            
+			$this->load->model('report_model'); //edit!!
+
+			$radio = $this->input->post("sel");
+			if($radio=="Batas"){
+			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+
+			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
+			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			}else{ $tgl=""; $tgl2=""; }
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			
+			
+			$data['hasil2']=$this->report_model->print_sj($radio,$tgl,$tgl2);
+			
+            //load view
+            $this->load->view('content/report_table_sj',$data);
+        }
+		
+		function table_penerimaan(){
+            //Get data dari model
+            
+			$this->load->model('report_model'); //edit!!
+
+			$radio = $this->input->post("sel");
+			if($radio=="Batas"){
+			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+
+			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
+			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			}else{ $tgl=""; $tgl2=""; }
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			
+			
+			$data['hasil2']=$this->report_model->print_penerimaan($radio,$tgl,$tgl2);
+			
+            //load view
+            $this->load->view('content/report_table_penerimaan',$data);
+        }
+		
+		function table_os(){
+            //Get data dari model
+            
+			$this->load->model('report_model'); //edit!!
+
+			$radio = $this->input->post("sel");
+			
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			
+			
+			$data['hasil2']=$this->report_model->print_os();
+			
+            //load view
+            $this->load->view('content/report_table_os',$data);
         }
 	}

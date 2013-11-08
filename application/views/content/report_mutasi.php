@@ -31,7 +31,7 @@ $(function() {
 function listBarang(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang2",
     data :{},
     success:
     function(hh){
@@ -72,8 +72,8 @@ function listBarang(){
 					Tanggal Dari
 				</td>
 				<td>
-					<input type="text" id="_tgl" name="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
-					<input type="text" id="_tgl2" name="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
+					<input type="text" id="_tgl" name="_tgl" style="width: 150px; margin-top: 10px" value="<?php echo date('01-m-Y');?>"/> s/d  
+					<input type="text" id="_tgl2" name="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px" value="<?php echo date('d-m-Y');?>"/>
 				</td>
 			</tr>
 		</table>
@@ -116,6 +116,7 @@ function getBarang(){
     var row = filter;
     
     $('#barang'+row).val(x);  
+	
 }
 
 function getDetail(filterID){

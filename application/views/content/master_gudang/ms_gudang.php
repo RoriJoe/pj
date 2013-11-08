@@ -103,10 +103,18 @@ $("#print").click(function(){
         success:
         function(msg)
         {   
+			var d = new Date();
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth() + 1; //Months are zero based
+			var curr_year = d.getFullYear();
+			
+			var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+			
             var win=window.open('');
             with(win.document)
             {
               open();
+			  win.document.title="Gudang "+tgl;
               write(msg);
               close();
             }

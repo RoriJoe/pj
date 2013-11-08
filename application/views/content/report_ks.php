@@ -54,8 +54,8 @@ function listBarang(){
 					Tanggal Dari
 				</td>
 				<td>
-					<input type="text" name="_tgl" id="_tgl" style="width: 150px; margin-top: 10px"/> s/d  
-					<input type="text" name="_tgl2" id="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px"/>
+					<input type="text" name="_tgl" id="_tgl" style="width: 150px; margin-top: 10px" value="<?php echo date('01-m-Y');?>"/> s/d  
+					<input type="text" name="_tgl2" id="_tgl2" style="width: 150px; margin-top: 10px; margin-left: 5px" value="<?php echo date('d-m-Y');?>"/>
 				</td>
 			</tr>
 			<tr>

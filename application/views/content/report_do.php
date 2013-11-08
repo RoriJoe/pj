@@ -1,6 +1,6 @@
 <script>
  $(document).ready(function() {
-	//table();
+	
 	$("#range").hide();
 
     $("#cetakBatas").click(function() {
@@ -10,9 +10,34 @@
     $("#cetakAll").click(function() {
         $("#range").hide().eq($(this).index()).hide();
     });
+	table();
 }); 
 $("#view").click(function(){
     table();
+});
+
+$("#print").click(function(){
+	var d = new Date();
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth() + 1; //Months are zero based
+	var curr_year = d.getFullYear();
+	var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+$('#lab1').text("");
+    var data = $('#tabpreview').html();
+	
+	var mywindow = window.open('', '', '');
+	mywindow.document.write('<title>Laporan Sales Order '+tgl+'</title>');
+	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td, .draggable th, .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;}</style>');
+	
+	mywindow.document.write('');
+	mywindow.document.write('<center><h2>Laporan Sales Order</h2></center>');
+	mywindow.document.write(data); 
+	
+
+	mywindow.print();
+	mywindow.close();
+
+	return true;
 });
 
 /*Tampilkan jQuery Tanggal*/
@@ -33,19 +58,49 @@ $(function() {
 
 function table(){
 
-	var sel = $('input[name="optionsRadios"]:checked').val();
+	var sel = $('input[name="optionsRadios1"]:checked').val();
 	var _tgl = $('#_tgl').val();
 	var _tgl2 = $('#_tgl2').val();
+	var plg1 = $('#kd_plg1').val();
+	var plg2 = $('#kd_plg2').val();
 	
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>report/table_do",
-    data :{sel:sel,_tgl:_tgl,_tgl2:_tgl2},
+    data :{sel:sel,_tgl:_tgl,_tgl2:_tgl2,plg1:plg1,plg2:plg2},
+    success:
+		function(hh){
+			$('#tabpreview').html(hh);
+		}
+    });
+}
+
+function listPelanggan(){
+    $.ajax({
+    type:'POST',
+    url: "<?php echo base_url();?>index.php/ms_pelanggan/viewPelanggan",
+    data :{},
     success:
     function(hh){
-        $('#tabpreview').html(hh);
+        $('#list_pelanggan').html(hh);
     }
-    });
+    });   
+} 
+var filter ="";
+function getDetail(filterID){
+listPelanggan();
+    filter = filterID;
+}
+function getPelanggan(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+     var row = filter;
+    
+     
+	
+    $('#_pn'+row).val(x);
+    $('#kd_plg'+row).val(k);
+    
 }
 //action="../report/print_report_do" method="post" action="../report/print_report_do" method="post" target="_blank"
 </script>
@@ -58,26 +113,55 @@ function table(){
 <div id="konten" class="hide-con master-border" style="width: 48%;">
 	<div>
 		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
+  		<input type="radio" name="optionsRadios1" id="cetakAll" value="Semua" checked>
   			Cetak Semua
 		</label>
 		<label class="radio">
-  		<input type="radio" name="optionsRadios" id="cetakBatas" value="Batas">
+  		<input type="radio" name="optionsRadios1" id="cetakBatas" value="Batas">
   			Cetak Batas
 		</label>
 	</div>
 	
 	<div class="pull-left" id="range" style="margin-left: 10px; border: 1px solid #C6C6C6; padding: 5px;">
 		<p><b>Tanggal Delivery Order Mulai</b></p>
-		<input type="text" id="_tgl" name="_tgl" style="width: 150px;"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;"/>
-		
+		<input type="text" id="_tgl" name="_tgl" style="width: 150px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 150px;" value="<?php echo date('d-m-Y');?>"/>
+		<p><b>Pelanggan Mulai</b></p>
+            
+                <input type="hidden" id="kd_plg1" />
+                
+                 <input type='text' class="span2" disabled="disabled"
+                    maxlength="20" id="_pn1" id='appendedInputButton' name='_pn1' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="getDetail(1)"><i class="icon-search"></i></a>
+				s/d
+				<input type="hidden" id="kd_plg2" />
+                
+                 <input type='text' class="span2" disabled="disabled"
+                    maxlength="20" id="_pn2" id='appendedInputButton' name='_pn2' style="width: 148px; margin-left: 10px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                <a href="#modalPelanggan" id="f_plg2" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 2px 3px;" onclick="getDetail(2)"><i class="icon-search"></i></a>
+               
+            
 	</div>
 	<div class="pull-right" style="margin-top: 45px;">
-		<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">	
+		<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+		<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
 		<input role="button" type="button" class="btn btn-primary"  id="view" value="Preview">	
 	</div>
 </div>
 </form>
+
+<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Pelanggan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_pelanggan"></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
+  </div>
+</div>
+
 <div id="tabpreview"></div>
 <script>
 
