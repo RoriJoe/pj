@@ -119,7 +119,8 @@
                     'Qty'=>$arrQty[$i],
                     'Harga'=>$arrHarga[$i],
                     'Jumlah'=>$arrJumlah[$i],
-                    'Keterangan'=>$arrKet[$i]
+                    'Keterangan'=>$arrKet[$i],
+					'QtyTemp'=>$arrQty[$i]
                 );
                 $this->tr_do_model->insertDo_det($datadet,$so);
             }
@@ -198,7 +199,8 @@
                     'Qty'=>$arrQty,
                     'Harga'=>$arrHarga,
                     'Jumlah'=>$arrJumlah,
-                    'Keterangan'=>$arrKet
+                    'Keterangan'=>$arrKet,
+					'QtyTemp'=>$arrQty[$i]
                 );
             $this->tr_do_model->updateDo_det($datadet,$so);
 			
