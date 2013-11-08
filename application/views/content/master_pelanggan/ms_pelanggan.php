@@ -172,6 +172,7 @@ $.ajax({
 		var curr_year = d.getFullYear();
 		
 		var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+
         var win=window.open('');
         with(win.document)
         {

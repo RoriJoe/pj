@@ -31,7 +31,7 @@
                             <input  type='text' placeholder='dd-mm-yyyy'
                                     class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
                                     style="width: 80px; margin-right: 20px;">
-                        </td>
+                        </td> 
                    </tr>   
                 </table>
             </form>
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="span3">
         <!--@Load table List via AJAX-->
         <div id="list_terima_bayar"></div>
