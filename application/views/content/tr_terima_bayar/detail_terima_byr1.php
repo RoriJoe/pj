@@ -25,8 +25,8 @@
 		$duit=number_format($row->Nilai);
 		$t=number_format($row->Total);
 	        echo "<tr>
-	        <td> <input value='$row->Jenis' disabled='disabled' style='width: 135px; margin-left: 5px;  margin-bottom:0;' id='_sl$i' name='_sl$i' type='text' ></td>
-			<td><input value='$duit' disabled='disabled' style='width: 130px; margin-left: 5px;text-align: right;  margin-bottom:0;' id='nilaiB$i' name='nilaiB' type='text' ></td>
+	        <td> <input value='$row->Jenis' disabled='disabled' style='width: 115px; margin-left: 5px;  margin-bottom:0;' id='_sl$i' name='_sl$i' type='text' ></td>
+			<td><input value='$duit' disabled='disabled' style='width: 115px; margin-left: 5px;text-align: right;  margin-bottom:0;' id='nilaiB$i' name='nilaiB' type='text' ></td>
 
 	       
 	        </tr>
