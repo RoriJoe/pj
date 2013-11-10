@@ -4,19 +4,19 @@
 <label id="lab1"style="
     margin-left: 5px;"><b>Laporan Outstanding</b></label>
 
-<table>
+<table width="100%;">
 	<tr>
-		<td width="80%">
+		<td width="70%">
 			<div><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
-		<td width="20%">
-			<div><b>Tanggal : <?php echo $tanggal ?></b></div>		
+		<td width="30%" style="text-align:right;">
+			<b>Tanggal : <?php echo $tanggal ?></b>
 		</td>
 	</tr>
 </table>
-	<div style=overflow:auto;height:300px; id="LimitTab">
+	<div id="LimitTab">
 		<div id="TableLaporanSPK" style=overflow:auto; class='CssTblLaporan' >
-			<table border='0px' id="tablesorter" class="draggable">
+			<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
 				<thead><tr>
 				<th>Tanggal</th>
 				<th>No DO</th>
@@ -24,7 +24,7 @@
 				<th>Nama Barang</th>
 				
 				<th>Qty</th>
-				<th>Total</th>
+				<th style='text-align:center;'>Total</th>
 				<th>Satuan</th>
 				</tr></thead>
 				
@@ -48,7 +48,7 @@
 							<td>$row->Nama $row->Ukuran</td>
 							
 							<td align='right'>$row->Qty</td>
-							<td align='right'>$duit</td>
+							<td style='text-align:right;'>$duit</td>
 							<td>$row->Satuan1</td>
 						</tr>";
 						$no_so=$row->No_Do;

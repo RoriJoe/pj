@@ -80,7 +80,7 @@ sj_h.No_Sj=sj_d.No_Sj where sj_d.Kode_Brg='' and sj_h.Tgl between '' and ''
 order by Tgl,saw */
 		$q = $this->db->query("
 		
-SELECT Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar
+	SELECT barang.Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM(bpb_d.Qty1) as terima,SUM(sj_d.Qty1) as keluar
 		
     from barang 
 	
@@ -88,8 +88,9 @@ SELECT Kode,saw_h.Tgl as tglsaw, Nama, Ukuran, Nama2,Satuan1,QtySaw1 as SAW, SUM
 	LEFT OUTER JOIN saw_h ON saw_d.No_Saw = saw_h.No_Saw
     LEFT OUTER JOIN bpb_d ON barang.Kode = bpb_d.Kode_brg
     LEFT OUTER JOIN sj_d ON barang.Kode = sj_d.Kode_brg
-    where Kode between '$barang1' and '$barang2'
-    group by barang.Kode;");
+    where barang.Kode between '$barang1' and '$barang2'
+    group by barang.Kode
+    ");
 				return $q->result();
 		
 	}

@@ -122,13 +122,12 @@ jQuery(document).ready(function(){
 var filter ="";
 //GET POPUP Barang
 function getBarang(){
-    var x = $('input:radio[name=optionsRadios]:checked').val();
-    var y = $('input:radio[name=optionsRadios]:checked').attr('ukuran');
-    var z = $('input:radio[name=optionsRadios]:checked').attr('nama');
-    
-    var row = filter;
-    
-    $('#barang'+row).val(x);  
+    var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
+    var a = filter;
+
+            $('#barang'+a).val(id);   
+
+    $('#myModal').modal('hide');
 }
 
 function getDetail(filterID){

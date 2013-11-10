@@ -3,20 +3,19 @@
 <div class="table CSSTabel table-list2">
 <label id="lab1"><b>Laporan Surat Jalan</b></label>
 
-<table>
+<table width="100%;">
 	<tr>
-		<td width="80%">
+		<td width="70%">
 			
 			<div><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
-		<td width="20%">
-			<div><b>Tanggal : <?php echo $tanggal ?></b></div>
-			
+		<td width="30%" style="text-align:right;">
+			<b>Tanggal : <?php echo $tanggal ?></b>		
 		</td>
 	</tr>
 </table>
-	<div style=overflow:auto;height:300px; id="LimitTab">
-		<table border='0px' id="tablesorter" class="draggable">
+	<div id="LimitTab">
+		<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
 			<thead><tr>
 			<th>No SJ</th>
 			<th>No SO</th>

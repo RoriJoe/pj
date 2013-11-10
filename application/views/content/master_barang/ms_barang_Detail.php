@@ -14,8 +14,8 @@
             <td nama='$row->Nama'>$row->Nama $row->Ukuran</td>
             <td>
                 <div class='btn-group'>
-                    <a class='btn popup btn-small' style='padding: 2px 6px;' kode='$row->Kode'><i class='icon-pencil'></i></a>
-                    <a class='btn delete btn-small' kode='$row->Kode' nama='$row->Nama' style='padding: 2px 6px;'><i class='icon-trash'></i></a>
+                    <a class='btn popup' style='padding: 0px 3px;' kode='$row->Kode'><i class='icon-pencil'></i></a>
+                    <a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 0px 3px;'><i class='icon-trash'></i></a>
                 </div>
             </td>
         </tr>";
@@ -38,6 +38,47 @@ $('.popup').click(function(){
 
     retrieveForm(id);
     jQuery(".hide-con").show();
+});
+
+$(".delete").click(function(){
+    PlaySound('beep');
+    var id = $(this).attr("kode");
+    var pr = $(this).attr("nama");
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode: <b>"+id+"</b><br/>Nama Barang : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
+        buttons: {
+            main: {
+                label: "Batal",
+                className: "pull-left"
+            },
+            danger: {
+                label: "Hapus",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/ms_barang/delete",
+                        data :{id:id},
+                        success: function(msg){
+                            if(msg=="gagal"){
+                                bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
+                            }
+                            else{
+                                bootstrap_alert.success('<b>Sukses!</b> Data '+ pr +' telah dihapus');
+                                $('#formID').each(function(){
+                                    this.reset();
+                                });
+                                autogen();
+                                loadListBarang();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
 });
 
 var oTable = $('#tb1').dataTable( {

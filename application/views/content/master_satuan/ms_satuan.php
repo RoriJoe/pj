@@ -1,5 +1,5 @@
 <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
         <!--//***MAIN FORM-->
         <div class="bar" title="Show/Hide Form">
             <p>Form Satuan <i id="icon" class='icon-chevron-down icon-white'></i></p>
@@ -9,7 +9,7 @@
         <form id="formID">
             <table>
                 <tr>
-                    <td>Kode Satuan</td>
+                    <td>Kode</td>
                     <td>
                         <input type='text' class="span-form75 validate[required,maxSize[10]]" maxlength="10" 
                         id='kd' name='kd'>
@@ -33,7 +33,7 @@
         <div id="konfirmasi" class="sukses"></div>
         </div>
     </div>
-    <div class="offset5 span3">
+    <div class="offset6 span3">
         <div id="hasil"></div>
     </div>
 </div>

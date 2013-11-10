@@ -572,6 +572,7 @@ $("#delete").click(function(){
         buttons: {
             main: {
                 label: "Batal",
+                className: "pull-left"
             },
             danger: {
                 label: "Hapus",

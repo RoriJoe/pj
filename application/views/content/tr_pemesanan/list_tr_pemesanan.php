@@ -37,7 +37,7 @@ $('#tb_detail tr').click(function (e) {
     });
     
 var oTable = $('#tbLsPO').dataTable( {
-    "sScrollY": "380px",
+    "sScrollY": "400px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem

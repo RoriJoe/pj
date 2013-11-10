@@ -57,7 +57,7 @@
             </table>
         </form>
         <div id="hasil2"></div>
-        <div id="totalBox" style="float: right; margin-right: -35px; visibility:hidden;">
+        <div id="totalBox" style="float: right; margin-right: -47px; visibility:hidden;">
                 <table>
                 <tr>
                     <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
@@ -565,6 +565,7 @@ $("#delete").click(function(){
         buttons: {
             main: {
                 label: "Batal",
+                className: "pull-left"
             },
             danger: {
                 label: "Hapus",

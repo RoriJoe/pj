@@ -347,46 +347,6 @@ $("#save").click(function(){
 	}
 });
 
-$(".delete").click(function(){
-    PlaySound('beep');
-    var id = $(this).attr("kode");
-    var pr = $(this).attr("nama");
-    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
-    bootbox.dialog({
-        message: "Kode: <b>"+id+"</b><br/>Nama Barang : <b>"+pr+"</b>",
-        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
-        buttons: {
-            main: {
-                label: "Batal",
-            },
-            danger: {
-                label: "Hapus",
-                className: "btn-danger",
-                callback: function() {
-                    $.ajax({
-                        type:'POST',
-                        url: "<?php echo base_url();?>index.php/ms_barang/delete",
-                        data :{id:id},
-                        success: function(msg){
-                            if(msg=="gagal"){
-                                bootstrap_alert.warning('<b>Gagal!</b> Telah terjadi kesalahan');
-                            }
-                            else{
-                                bootstrap_alert.success('<b>Sukses!</b> Data '+ pr +' telah dihapus');
-                                $('#formID').each(function(){
-                                    this.reset();
-                                });
-                                autogen();
-                                loadListBarang();
-                            }
-                        }
-                    });
-                }
-            }
-        }
-    });
-});
-
 function setSelectedIndex(s, valsearch)
 {
 // Loop through all the items in drop down list

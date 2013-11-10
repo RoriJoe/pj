@@ -79,7 +79,7 @@
     });
     
 var oTable = $('#tb2').dataTable( {
-    "sScrollY": "380px",
+    "sScrollY": "400px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem

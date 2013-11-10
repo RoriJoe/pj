@@ -75,7 +75,7 @@
 
             <div id="hasil2"></div>
 
-            <div style="float: right;margin-right: -20px;">
+            <div style="float: right;margin-right: -15px;">
                 <table>
                     <tr>
                         <td width="50px">
@@ -814,6 +814,7 @@ $("#delete").click(function(){
         buttons: {
             main: {
                 label: "Batal",
+                className: "pull-left"
             },
             danger: {
                 label: "Hapus",

@@ -70,11 +70,11 @@
                 <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
                 <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
                 <button id="cancel" class="btn" type="reset">Cancel</button>
+                <button id="delete" class="btn" type="submit">Delete</button>
                 <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i> Print</button>
 
                 <div  class="pull-right">
                 <button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SJ</button>
-                <button id="delete" class="btn" type="submit">Delete</button>
                 </div>
             </div>
         </div>
@@ -628,6 +628,7 @@ $("#delete").click(function(){
         buttons: {
             main: {
                 label: "Batal",
+                className: "pull-left"
             },
             danger: {
                 label: "Hapus",
