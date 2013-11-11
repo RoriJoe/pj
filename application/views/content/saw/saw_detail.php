@@ -27,7 +27,7 @@
         <td>
             <input type='text' name='qtyd' id='qty_brg$i'  
             onkeypress='validAct($i)' maxlength='5' 
-            class='validate[required] span2' 
+            class='validate[required] span2' value = '$row->QtySaw1' 
             style='width:45px;padding: 2px 3px;' />
         </td>
         <td>

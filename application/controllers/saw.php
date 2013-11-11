@@ -57,14 +57,20 @@
 
         function qtyBarang(){
             $id=$this->input->post('id');
-            $data['hasil']=$this->saw_model->get_qtybarang();
+            $data['hasil']=$this->saw_model->get_qtybarang($id);
             $data['kode']=$id;
             $this->load->view("content/saw/saw_detail",$data);
         }
 
         function noqtyBarang(){
             $id=$this->input->post('id');
-            $data['hasil']=$this->saw_model->get_noqtybarang();
+            $data['hasil']=$this->saw_model->get_noqtybarang($id);
+            $data['kode']=$id;
+            $this->load->view("content/saw/saw_detail",$data);
+        }
+        function all(){
+            $id=$this->input->post('id');
+            $data['hasil']=$this->saw_model->get_allbarang($id);
             $data['kode']=$id;
             $this->load->view("content/saw/saw_detail",$data);
         }
@@ -89,8 +95,8 @@
                 $arrKode=$this->input->post('_arrKd_brg');
                 $arrQty=$this->input->post('_arrQty');
                 $arrKet=$this->input->post('_arrKet');
-                $totalRow=$this->input->post('totalRow');
-                for($i=0;$i<$totalRow;$i++){
+                $arrData=$this->input->post('arrData');
+                for($i=0;$i<$arrData;$i++){
                     $datadet= array(
                         'No_Saw'=>$a,
                         'Kd_Brg'=>$arrKode[$i],
@@ -98,7 +104,7 @@
                     );
                     $this->saw_model->insert_det($datadet);
                 }
-				for($i=0;$i<$totalRow;$i++){
+				for($i=0;$i<$arrData;$i++){
                     $this->saw_model->update_brg($arrKode[$i],$arrQty[$i]);
                 }
 				
@@ -109,14 +115,57 @@
                 );
                 
                 $in = $this->saw_model->update($data,$a);
+
+                //DETAIL 
+                $arrKode=$this->input->post('_arrKd_brg');
+                $arrQty=$this->input->post('_arrQty');
+                $arrKet=$this->input->post('_arrKet');
+                $arrData=$this->input->post('arrData');
+                $datadet= array(
+                    'No_Saw'=>$a,
+                    'Kd_Brg'=>$arrKode,
+                    'QtySaw1'=>$arrQty
+                );
+                $this->saw_model->update_det($datadet,$a);
+
+                for($i=0;$i<$arrData;$i++){
+                    $this->saw_model->update_brg($arrKode[$i],$arrQty[$i]);
+                }
             }
-                if($in == "ok")
-                {
-                    echo "ok";
+            else if ($modes == "edit2"){
+                $data= array(
+                    'Tgl'=>$b,
+                    'Kd_Gudang'=>$c,
+                );
+                
+                $in = $this->saw_model->update($data,$a);
+
+                //DETAIL 
+                $arrKode=$this->input->post('_arrKd_brg');
+                $arrQty=$this->input->post('_arrQty');
+                $arrKet=$this->input->post('_arrKet');
+                $arrData=$this->input->post('arrData');
+                for($i=0;$i<$arrData;$i++){
+                    $datadet= array(
+                        'No_Saw'=>$a,
+                        'Kd_Brg'=>$arrKode[$i],
+                        'QtySaw1'=>$arrQty[$i]
+                    );
+                    $this->saw_model->insert_det($datadet);
                 }
-                else{
-                    echo "gagal";
+                for($i=0;$i<$arrData;$i++){
+                    $this->saw_model->update_brg($arrKode[$i],$arrQty[$i]);
                 }
+            }
+
+
+            if($in == "ok")
+            {
+                echo "ok";
+            }
+            else{
+                echo "gagal";
+            }
         }
 
         function delete()
@@ -128,7 +177,7 @@
         }
         
         //save update
-        /*
+        
         function update()
         {
             $a=$this->input->post('noSaw');
@@ -151,8 +200,8 @@
             $arrKode=$this->input->post('_arrKd_brg');
             $arrQty=$this->input->post('_arrQty');
             $arrKet=$this->input->post('_arrKet');
-            $totalRow=$this->input->post('totalRow');
-            for($i=0;$i<$totalRow;$i++){
+            $arrData=$this->input->post('arrData');
+            for($i=0;$i<$arrData;$i++){
                 $datadet= array(
                     'Qty1'=>$arrQty[$i],
                     'Keterangan'=>$arrKet[$i]
@@ -167,5 +216,5 @@
             else{
                 echo "gagal";
             }
-        }*/
+        }
     }

@@ -200,7 +200,7 @@
                     'Harga'=>$arrHarga,
                     'Jumlah'=>$arrJumlah,
                     'Keterangan'=>$arrKet,
-					'QtyTemp'=>$arrQty[$i]
+					'QtyTemp'=>$arrQty
                 );
             $this->tr_do_model->updateDo_det($datadet,$so);
 			

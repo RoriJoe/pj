@@ -48,6 +48,15 @@
 
                 <button id="print" class="btn" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i> Print</button>
                 <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
+
+                <div class="btn-group dropup pull-right" id="selList">
+                    <button class="btn primary">Filter By Qty</button>
+                    <button class="btn primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="#" onclick="qtyBarang()">Barang Dengan Qty</a></li>
+                      <li><a href="#" onclick="noqtyBarang()">Barang Tanpa Qty</a></li>
+                    </ul>
+              </div>
             </div>
         </div>
     </div>
@@ -101,6 +110,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$( "#_tgl" ).datepicker( "setDate", new Date());
+    document.getElementById('selList').style.visibility = 'hidden';
     listSaw();
     autogen();
     validation();	
@@ -117,7 +127,7 @@ function autogen(){
             $('#noSaw').val(hh);
         }
     });
-
+    document.getElementById('loadBtn').style.visibility = 'visible';
     detailSaw();
 }
 function listGudang(){
@@ -228,6 +238,7 @@ function addBarang(){
 
 function qtyBarang(){ 
     var id = $('#noSaw').val();
+    $('#save').attr('mode','edit');
     $.ajax({ 
         type:'POST',
         url: "<?php echo base_url();?>index.php/saw/qtyBarang",
@@ -241,9 +252,23 @@ function qtyBarang(){
 
 function noqtyBarang(){ 
     var id = $('#noSaw').val();
+    $('#save').attr('mode','edit2');
     $.ajax({ 
         type:'POST',
         url: "<?php echo base_url();?>index.php/saw/noqtyBarang",
+        data :{id:id},
+        success:
+        function(hh){
+           $('#detail').html(hh);
+        }
+    });
+}
+
+function allBarang(){ 
+    var id = $('#noSaw').val();
+    $.ajax({ 
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/saw/all",
         data :{id:id},
         success:
         function(hh){
@@ -346,7 +371,7 @@ $('#print').click(function () {
 
 //Save Click
 $("#save").click(function(){
-    var oTable = $('#tb3').dataTable();
+    //var oTable = $('#tb3').dataTable();
     var totalRow = oTable.fnGetData().length;
 
     var _mode = $('#save').attr("mode");
@@ -358,17 +383,21 @@ $("#save").click(function(){
     var _arrKd_brg = new Array();
     var _arrQty = new Array();
     
-    for(var i=1;i<=totalRow;i++){
-        var a = $('#kode_brg'+i).val();
+    for(var i=1;i<=10;i++){
         var b = $('#qty_brg'+i).val();
-
-        if(b != 0 || b != ""){
-            _arrKd_brg[i-1] = a;
+        if(b === '')
+        {
+            
+        }
+        else{
+            _arrKd_brg[i-1] = $('#kode_brg'+i).val();
             _arrQty[i-1] = b;
         }
     }
-    alert(_arrQty.length);
-    if(_arrKd_brg.length > 0){
+
+    var arrData = _arrQty.length;
+
+    if(_arrKd_brg.length != 0){
         if(_mode == "add") //add mode
         {
             if(_gd == 0){
@@ -380,7 +409,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/saw/insert/add",
                 data :{noSaw:noSaw,_tgl:_tgl,_gd:_gd,
-                        _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, totalRow:totalRow
+                        _arrKd_brg:_arrKd_brg, _arrQty:_arrQty, arrData:arrData
                 },
 
                 success:
@@ -418,7 +447,7 @@ $("#save").click(function(){
                 type:'POST',
                 url: "<?php echo base_url();?>index.php/saw/insert/edit",
                 data :{noSaw:noSaw,_tgl:_tgl,_gd:_gd,
-                        _arrKd_brg:_arrKd_brg, _arrQty:_arrQty,totalRow:totalRow
+                        _arrKd_brg:_arrKd_brg, _arrQty:_arrQty,arrData:arrData
                 },
 
                 success:
@@ -443,8 +472,47 @@ $("#save").click(function(){
             }
         }
 
-    }else{
+        else if(_mode == "edit2")
+        { 
+            if(_gd == 0){
+                bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
+            }
+            else 
+            if($("#formID").validationEngine('validate'))
+            {
+                $.ajax({
+                type:'POST',
+                url: "<?php echo base_url();?>index.php/saw/insert/edit2",
+                data :{noSaw:noSaw,_tgl:_tgl,_gd:_gd,
+                        _arrKd_brg:_arrKd_brg, _arrQty:_arrQty,arrData:arrData
+                },
+
+                success:
+                function(msg)
+                {
+                    if(msg == "ok")
+                    {
+                        bootstrap_alert.success('<b>Sukses</b> Update Pendataan Stok Opname '+noSaw+' berhasil dilakukan');
+                        $('#formID').each(function(){
+                                this.reset();
+                        });
+                        autogen();
+                        listSaw();
+                        detailSaw();
+                        resetForm();
+                    }
+                    else{
+                        bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
+                    }
+                }
+                });
+            }
+        }
+    }
+    else
+    {
         bootstrap_alert.warning('<b>Gagal</b> Detail Qty Barang belum di isi');
+        return false;
     }
 });
 
