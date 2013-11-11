@@ -55,7 +55,7 @@
                         <ul class="dropdown-menu">
                             <li><a class = "ajax" href="tr_invoice">Invoice</a></li>
                             <li class="menu-border-bottom"><a tabindex="-1" class = "ajax" href="tr_terima_bayar">Terima Tagihan</a></li>
-                            <li class="menu-border-bottom"><a tabindex="-1" class = "ajax">Pembayaran</a></li>
+                            <li class="menu-border-bottom"><a tabindex="-1" class = "ajax" href="tr_pembayaran">Pembayaran</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu"><a tabindex="-1">Akuntansi</a>
