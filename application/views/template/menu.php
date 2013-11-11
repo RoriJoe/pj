@@ -22,6 +22,7 @@
                     <li><a class = "ajax" href="ms_pelanggan">Pelanggan</a></li>
                     <li><a class = "ajax" href="ms_supplier">Supplier</a></li>
                     <li><a class = "ajax" href="ms_bank">Bank</a></li> 
+                    <li><a class = "ajax" href="ms_perkiraan">Perkiraan</a></li> 
                     <li class="dropdown-submenu">
                         <a tabindex="-1">Persediaan</a>
                         <ul class="dropdown-menu">

@@ -25,9 +25,9 @@
             $row->Satuan1
         </td>
         <td>
-            <input type='text' name='Nama' id='qty_brg$i'  
+            <input type='text' name='qtyd' id='qty_brg$i'  
             onkeypress='validAct($i)' maxlength='5' 
-            class='validate[required] span2' 
+            class='validate[required] span2' value = '$row->QtySaw1' 
             style='width:45px;padding: 2px 3px;' />
         </td>
         <td>
@@ -117,10 +117,11 @@ var oTable = $('#tb3').dataTable( {
     "sScrollXInner": "100%", //overflow dalem
     "bPaginate": true,
     "bAutoWidth": false,
+    "bSort" : false,
     "bLengthChange": true,
     "aaSorting": [[ 1, "asc" ]],
     "oLanguage": {
-         "sSearch": "",
+         "sSearch": "Search",
          "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"

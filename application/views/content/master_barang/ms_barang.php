@@ -151,8 +151,6 @@ function autogen(){
 });
  
 $("#cac").click(function(){
-	$('#hasilsaw').html("");
-   autogen();
    $('#formID').each(function(){
 		this.reset();
 	});

@@ -1,7 +1,7 @@
 <div class="table table-hover CSSTabel table-list">
     <table id="tb1">
         <thead>
-            <th>Kode Saw</th>
+            <th>Kode Trans</th>
             <th>Gudang</th>
         </thead>
 
@@ -35,8 +35,9 @@ $('#tb1 tr').click(function (e) {
         $('#kd_gd').val($(this).attr("kd_gud"));
         $('#gud').val($(this).attr("nm_gud"));
         $('#_tgl').val($(this).attr("tgl"));
-
-        detailSaw();
+        document.getElementById('selList').style.visibility = 'visible';
+        document.getElementById('loadBtn').style.visibility = 'hidden';
+        qtyBarang();
     });
     
 var oTable = $('#tb1').dataTable( {
