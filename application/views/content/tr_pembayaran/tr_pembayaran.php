@@ -2,13 +2,13 @@
     <div class="span9">
         <!--Main Form-->
         <div class="bar" title="Show/Hide Form">
-            <p>Form Terima Tagihan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+            <p>Form Pembayaran <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
         <div id="konten" class="hide-con master-border">
             <form id="formID">
                 <table>
                     <tr>
-                        <td>No Terima</td>
+                        <td>No Pembayaran</td>
                         <td>
                             <input  type='text' 
                                     class="validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" 
@@ -16,13 +16,13 @@
                                     style="width: 120px;text-transform: uppercase;" disabled="disabled">
                         </td>
 
-                        <td>Pelanggan</td>
+                        <td>Supplier</td>
                         <td>
                             <input type="hidden" id="kd_plg" />
                             <div class="input-append money" style="margin-bottom:0px;">
                              <input type='text' class="span2" disabled="disabled"
                                 maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                            <a href="#modalPelanggan" style="margin-bottom:2px;" id="f_plg" role="button" class="btn padding-filter" title="Search Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                            <a href="#modalSupplier" style="margin-bottom:2px;" id="f_plg" role="button" class="btn padding-filter" title="Search Supplier" data-toggle="modal" onclick="listSupplier()"><i class="icon-search"></i></a>
                             </div>
                         </td>
 
@@ -82,18 +82,20 @@
     <button class="btn btn-primary" onclick="getSO()" data-dismiss="modal" aria-hidden="true">Done</button>
   </div>
 </div>
-<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">List Pelanggan</h3>
-	  </div>
-	  <div class="modal-body">
-		<div id="list_pelanggan"></div>
-	  </div>
-	  <div class="modal-footer">
-		<a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
-	  </div>
+
+<div id="modalSupplier" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Supplier</h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_supplier"></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
+  </div>
 </div>
+
 <div id="modalNewPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -123,7 +125,7 @@ $( "#_tgl1" ).datepicker( "setDate", new Date());
     list_terima_bayar();
     autogen();
     validation();
-    detail_SO();
+    detail_PO();
 	detail_pembayaran();
 	detail_invoice()
     //barAnimation();
@@ -135,7 +137,7 @@ $( "#_tgl1" ).datepicker( "setDate", new Date());
 function list_terima_bayar(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_terima_bayar/index",
+    url: "<?php echo base_url();?>index.php/tr_pembayaran/index",
     data :{},
     success:
     function(hh){
@@ -148,7 +150,7 @@ function autogen(){
     $('#delete').attr('disabled', true);
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_terima_bayar/auto_gen",
+    url: "<?php echo base_url();?>index.php/tr_pembayaran/auto_gen",
     data :{},
     success:
         function(hh){
@@ -157,26 +159,28 @@ function autogen(){
     });
 }
 
-function addPelanggan(){
-    $('#modalPelanggan').modal('hide');
+
+
+function addSupplier(){
+    $('#modalSupplier').modal('hide');
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_pelanggan/popPelanggan",
+    url: "<?php echo base_url();?>index.php/ms_supplier/popSupplier",
     data :{},
     success:
     function(hh){
-        $('#add_pelanggan').html(hh);
+        $('#add_supplier').html(hh);
     }
     });  
 } 
-function listPelanggan(){
+function listSupplier(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_terima_bayar/view_inv_pelanggan",
+    url: "<?php echo base_url();?>index.php/tr_pembayaran/view_supplier",
     data :{},
     success:
     function(hh){
-        $('#list_pelanggan').html(hh);
+        $('#list_supplier').html(hh);
     }
     });   
 }
@@ -209,11 +213,11 @@ function lookup_pelanggan(){
         },
     });
 }
-function detail_SO(){
+function detail_PO(){
     var no = $('#no_terima').val();
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_terima_bayar/Detail_SO",
+        url: "<?php echo base_url();?>index.php/tr_pembayaran/Detail_PO",
         data :{no:no},
         success:
         function(hh){
@@ -226,7 +230,7 @@ function detail_pembayaran(){
     var no = $('#no_terima').val();
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_terima_bayar/Detail_bayar",
+        url: "<?php echo base_url();?>index.php/tr_pembayaran/Detail_bayar",
         data :{no:no},
         success:
         function(hh){
@@ -240,7 +244,7 @@ function detail_invoice(){
     var no = $('#no_terima').val();
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_terima_bayar/Detail_invo",
+        url: "<?php echo base_url();?>index.php/tr_pembayaran/Detail_invo",
         data :{no:no},
         success:
         function(hh){
@@ -262,11 +266,12 @@ function list_SO(){
     }
     });   
 }
-//GET POPUP pelanggan
-function getPelanggan(){
+
+
+function getSupplier(){
+	
     var x = $('input:radio[name=optionsRadios]:checked').val();
     var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
-    var t = $('input:radio[name=optionsRadios]:checked').attr('term');
     $('#_pn').val(x);
     $('#kd_plg').val(k);
     //$('#terms').val(t);
@@ -275,6 +280,7 @@ function getPelanggan(){
 		$("tbody#itemlist tr").remove();
 	}
 	addInvoice();
+    
 }
 
 function get_invoice_list($user_id,$row){
@@ -285,7 +291,7 @@ function get_invoice_list($user_id,$row){
     $.ajax({
         type:'POST',
         async: false,
-        url: "<?php echo base_url();?>tr_terima_bayar/invoice_call",
+        url: "<?php echo base_url();?>tr_pembayaran/po_call",
         data:{id:id,ro:ro},
         dataType: "html",
 
@@ -301,7 +307,7 @@ function displayResult(selTag,row)
     var invoice=selTag.options[selTag.selectedIndex].text;
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_terima_bayar/ambil_invoice",
+        url: "<?php echo base_url();?>index.php/tr_pembayaran/ambil_invoice",
         data :{invoice:invoice},
         success:
         function(hh){
@@ -321,7 +327,7 @@ function reset_form(){
         this.reset();
     });
     autogen();
-    detail_SO();
+    detail_PO();
 	detail_pembayaran();
 	detail_invoice();
     $('#total1').val('');
@@ -393,7 +399,7 @@ $("#save").click(function(){
         {
             $.ajax({
             type:'POST',
-            url: "<?php echo base_url();?>index.php/tr_terima_bayar/save/add",
+            url: "<?php echo base_url();?>index.php/tr_pembayaran/save/add",
             data :{id:id,_tgl:_tgl,kode_plg:kode_plg,totInv:totInv,totByr:totByr,
 			baris1:baris1,baris2:baris2,baris3:baris3,arrInvoice:arrInvoice,
 			 arrNbayar:arrNbayar,arrNinvo:arrNinvo,arrJenisB:arrJenisB,arrNilaiB:arrNilaiB,arrJenis:arrJenis,arrBank1:arrBank1,arrNil:arrNil,
@@ -404,26 +410,26 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Data Penerimaan Tagihan '+id+' berhasil ditambahkan');
+                    bootstrap_alert.success('<b>Sukses!</b> Data Pembayaran '+id+' berhasil ditambahkan');
                     reset_form();
                     list_terima_bayar();
                 }
                 else{
-                    bootstrap_alert.warning('<b>Gagal!</b> Kode Penerimaan Tagihan sudah ada');
+                    bootstrap_alert.warning('<b>Gagal!</b> Kode Pembayaran sudah ada');
                 }
             }
             });
         }
         else
         {
-            bootstrap_alert.warning('<b>Gagal!</b> Pilih Nomor SO & Pastikan Semua Field Terisi');
+            bootstrap_alert.warning('<b>Gagal!</b> Pilih Supplier & Pastikan Semua Field Terisi');
         }             
     }else if(mode == "edit"){ //Edit mode
         if($("#formID").validationEngine('validate'))
         {
             $.ajax({
             type:'POST',
-            url: "<?php echo base_url();?>index.php/tr_terima_bayar/save/edit",
+            url: "<?php echo base_url();?>index.php/tr_pembayaran/save/edit",
             data :{id:id,_tgl:_tgl,so:so,term:term},
 
             success:
@@ -431,7 +437,7 @@ $("#save").click(function(){
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('<b>Sukses!</b> Update Penerimaan Tagihan '+id+' berhasil dilakukan');
+                    bootstrap_alert.success('<b>Sukses!</b> Update Pembayaran '+id+' berhasil dilakukan');
                     reset_form();
                     list_terima_bayar();
                 }
@@ -448,25 +454,10 @@ $("#save").click(function(){
 $("#delete").click(function(){
     var id = $('#no_terima').val();
 	var tgl = $('#_tgl1').val();
-    /* $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/tr_terima_bayar/delete",
-        data :{id:id},
-        success:
-        function(msg)
-        {
-            if(msg == "ok")
-            {
-                bootstrap_alert.success('<b>Sukses!</b> Data telah dihapus');
-                reset_form();
-                list_terima_bayar();
-            }
-        }
-    });
-	 */
+    
 	
 	bootbox.dialog({
-        message: "No Terima: <b>"+id+"</b><br/>Tanggal No_Terima : <b>"+tgl+"</b>",
+        message: "No Pembayaran: <b>"+id+"</b><br/>Tanggal Pembayaran : <b>"+tgl+"</b>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {
@@ -479,7 +470,7 @@ $("#delete").click(function(){
                 callback: function() {
                     $.ajax({
 						type:'POST',
-						url: "<?php echo base_url();?>index.php/tr_terima_bayar/delete",
+						url: "<?php echo base_url();?>index.php/tr_pembayaran/delete",
 						data :{id:id},
 						success:
 						function(msg)

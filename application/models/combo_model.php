@@ -95,4 +95,8 @@
             $q=$this->db->query("select Kode from terima_bayar order by Kode desc limit 1");
             return $q->result();
         }
+		function get_pembayaran(){
+            $q=$this->db->query("select Kode from pembayaran order by Kode desc limit 1");
+            return $q->result();
+        }
 	}

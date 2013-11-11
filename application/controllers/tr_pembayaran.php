@@ -1,14 +1,14 @@
 <?php
-    class Tr_terima_bayar extends CI_Controller{
+    class Tr_pembayaran extends CI_Controller{
         function __construct(){
             parent::__construct();
             #load library dan helper yang dibutuhkan
-            $this->load->model('tr_terima_bayar_model');
+            $this->load->model('tr_pembayaran_model');
         }
 
         function index(){
-            $data['hasil']=$this->tr_terima_bayar_model->get_list();
-            $this->load->view('content/tr_terima_bayar/list_terima_bayar', $data);
+            $data['hasil']=$this->tr_pembayaran_model->get_list();
+            $this->load->view('content/tr_pembayaran/list_pembayaran', $data);
         }
 
         #Untuk auto generate
@@ -18,7 +18,7 @@
             $ang="";
             $temp = "";
             $this->load->model("combo_model");
-            $ag=$this->combo_model->get_terimabyr();
+            $ag=$this->combo_model->get_pembayaran();
                 foreach ($ag as $rr)
                 {
                     $temp=$rr->Kode;
@@ -50,31 +50,31 @@
             }
             echo $temp;
         }
-        function Detail_SO(){ //viewdo utk tabel detail DO
-        	$this->load->model('tr_terima_bayar_model');
+        function Detail_PO(){ //viewdo utk tabel detail DO
+        	$this->load->model('tr_pembayaran_model');
            $no=$this->input->post('no');
 
-           $data['hasil']=$this->tr_terima_bayar_model->get_detail_invo($no);
+           $data['hasil']=$this->tr_pembayaran_model->get_detail_po($no);
             $data['kode']=$no; 
-            $this->load->view("content/tr_terima_bayar/detail_terima_bayar",$data);
+            $this->load->view("content/tr_pembayaran/detail_pembayaran",$data);
         }
 		
 		function Detail_bayar(){ //viewdo utk tabel detail DO
-        	$this->load->model('tr_terima_bayar_model');
+        	$this->load->model('tr_pembayaran_model');
            $no=$this->input->post('no');
 
-           $data['hasil']=$this->tr_terima_bayar_model->get_detail_bayar($no);
+           $data['hasil']=$this->tr_pembayaran_model->get_detail_bayar($no);
             $data['kode']=$no; 
-            $this->load->view("content/tr_terima_bayar/detail_terima_byr1",$data);
+            $this->load->view("content/tr_pembayaran/detail_pembayaran1",$data);
         }
 		
 		function Detail_invo(){ //viewdo utk tabel detail DO
-        	$this->load->model('tr_terima_bayar_model');
+        	$this->load->model('tr_pembayaran_model');
            $no=$this->input->post('no');
 
-           $data['hasil']=$this->tr_terima_bayar_model->get_detail_invoic($no);
+           $data['hasil']=$this->tr_pembayaran_model->get_detail_purc($no);
             $data['kode']=$no; 
-            $this->load->view("content/tr_terima_bayar/detail_terima_byr2",$data);
+            $this->load->view("content/tr_pembayaran/detail_pembayaran2",$data);
         }
         //SAVE ADD NEW TRIGGER
         function save($modes)
@@ -114,25 +114,25 @@
             //ADD TO ARRAY FOR SEND TO MODEL
             $data1= array(
                 'Kode'      =>$id,
-                'Kode_plg'   =>$kode_plg,
+                'Kode_supplier'   =>$kode_plg,
                 'Tgl'    	=>$_tgl
             );
 			
 			
 			
             if($modes=="add"){
-                $in = $this->tr_terima_bayar_model->insert($data1,$id);
+                $in = $this->tr_pembayaran_model->insert($data1,$id);
 				
 				//insert detail
 				for($i=0;$i<$baris1;$i++){
 				$data= array(
 					'Kode'   =>$id,
-					'NoInvoice' =>$arrInvoice[$i],
-					'NilaiInvoice'    	=>$arrNinvo[$i],
+					'No_po' =>$arrInvoice[$i],
+					'NilaiPo'    	=>$arrNinvo[$i],
 					'NilaiBayar'    =>$arrNbayar[$i],
 					'Total'=>$totInv
 				);
-				$this->tr_terima_bayar_model->insert_det1($data);
+				$this->tr_pembayaran_model->insert_det1($data);
 			}
 			
 			for($i=0;$i<$baris2;$i++){
@@ -142,7 +142,7 @@
 					'Nilai'    =>$arrNilaiB[$i],
 					'Total'  =>$totByr  
 				);
-				$this->tr_terima_bayar_model->insert_det2($data2);
+				$this->tr_pembayaran_model->insert_det2($data2);
 			}
 			
 			for($i=0;$i<$baris3;$i++){
@@ -164,7 +164,7 @@
 					'TerimaBank'    =>$arrBank2[$i],
 					'TerimaRek'    =>$arrReken2[$i]
 				);
-				$this->tr_terima_bayar_model->insert_det3($data3);
+				$this->tr_pembayaran_model->insert_det3($data3);
 			}
 				
                 if($in == "ok")
@@ -175,7 +175,7 @@
                     echo "gagal";
                 }
             }else if($modes=="edit"){
-                $in = $this->tr_terima_bayar_model->update($data2,$id);
+                $in = $this->tr_pembayaran_model->update($data2,$id);
                 if($in == "ok")
                 {
                     echo "ok";
@@ -190,17 +190,17 @@
         function delete()
         {
             $po=$this->input->post('id');
-            $r = $this->tr_terima_bayar_model->delete($po);
-			$this->tr_terima_bayar_model->delete_d($po);
-			$this->tr_terima_bayar_model->delete_d2($po);
-			$this->tr_terima_bayar_model->delete_d3($po);
+            $r = $this->tr_pembayaran_model->delete($po);
+			$this->tr_pembayaran_model->delete_d($po);
+			$this->tr_pembayaran_model->delete_d2($po);
+			$this->tr_pembayaran_model->delete_d3($po);
             echo $r;
         }
 
-		function invoice_call(){
+		function po_call(){
             $id = $this->input->post('id');
 			 $ro = $this->input->post('ro');
-            $query = $this->tr_terima_bayar_model->get_invoice_list($id);
+            $query = $this->tr_pembayaran_model->get_po_list($id);
 
             $final['']='No Invoice';
             foreach ($query as $a) 
@@ -213,21 +213,21 @@
 		function ambil_invoice(){
             $temp="";
             $invoice=$this->input->post('invoice');
-            $this->load->model("tr_terima_bayar_model");
-            $tm = $this->tr_terima_bayar_model->get_invo($invoice);
+            $this->load->model("tr_pembayaran_model");
+            $tm = $this->tr_pembayaran_model->get_invo($invoice);
 
             foreach ($tm as $rr)
             {
-                $temp=$rr->Kode."|".$rr->Kode_plg."|".$rr->Tgl."|".$rr->Grand;
+                $temp=$rr->Kode."|".$rr->Kode_supplier."|".$rr->Tgl_po."|".$rr->Total;
             }
             echo $temp;
         }
 		
-		function view_inv_pelanggan(){
+		function view_supplier(){
 
-            $data['hasil']=$this->tr_terima_bayar_model->get_list_inv();
+            $data['hasil']=$this->tr_pembayaran_model->get_list_po();
             //load view
-            $this->load->view('content/list/list_pelanggan',$data);
+            $this->load->view('content/list/list_supplier',$data);
         }
 		
 		
