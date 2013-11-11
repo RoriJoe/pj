@@ -87,6 +87,11 @@
             $this->template->display('content/master_gudang/ms_gudang', $data);
         }
 
+        function ms_perkiraan(){
+            $data['judul']="Master Perkiraan";
+            $this->template->display('content/master_perkiraan/perkiraan', $data);
+        }
+
         function ms_bank(){
         	$data['list_tipe']=$this->combo_model->list_tipe();
         	$data['judul']="Master Bank";
