@@ -18,26 +18,30 @@
 		<div id="TableLaporanSPK" style=overflow:auto; class='CssTblLaporan' >
 			<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
 				<thead><tr>
+				<th>No SO</th>
 				<th>Tanggal</th>
-				<th>No DO</th>
 				<th>Nama Pelanggan</th>
 				<th>Nama Barang</th>
 				
 				<th>Qty</th>
-				<th style='text-align:center;'>Total</th>
+				<th style='text-align:center;'>Jumlah</th>
+				<th>Sub-Total</th>
 				<th>Satuan</th>
 				</tr></thead>
 				
 				<?php
-					$no_so="";$tgl="";$plg="";
+					$no_so="";$tgl="";$plg="";$gtot=0;
 					foreach($hasil2 as $row)
 					{$originalDate1 = $row->Tgl;
 					$dmy1 = date("d-m-Y", strtotime($originalDate1));
-					$duit=number_format($row->grandttl);
+					$duit=number_format($row->Jumlah);
 					if($no_so != $row->No_Do){
 						$no_so=$row->No_Do;$tgl=$dmy1;$plg=$row->NP;
+						$duit2=number_format($row->grandttl);
+						$gtot+=$row->grandttl;
 					}else{
 						$no_so="";$tgl="";$plg="";
+						$duit2="";
 					}
 						echo
 						"<tr>
@@ -49,12 +53,15 @@
 							
 							<td align='right'>$row->Qty</td>
 							<td style='text-align:right;'>$duit</td>
+							<td style='text-align:right;'>$duit2</td>
 							<td>$row->Satuan1</td>
 						</tr>";
 						$no_so=$row->No_Do;
 					}
 						?>
 			</table>
+			<div style=" margin-right: 60px; margin-top: 5px;height: 20px;float: right;"><?php echo number_format($gtot); ?></label></div>
+			<div style=" margin-right: 60px;margin-top: 5px;height: 20px;float: right;"><label><b>Grand Total<b></label></div>
 		</div>
 	</div>
 	<!--</div>-->
