@@ -29,6 +29,17 @@
             $q = $this->db->query("select Kode,Ukuran,Nama,Satuan1,QtyOp from barang");
             return $q->result();
         }
+
+        function get_qtybarang($id){
+            $q = $this->db->query("SELECT saw_d.*,
+                barang.Nama, barang.Ukuran, barang.Satuan1
+                FROM saw_d
+                LEFT OUTER JOIN barang
+                ON saw_d.Kd_Brg = barang.Kode
+                WHERE No_Saw = '$id'");
+            return $q->result();
+        }
+
         function insert($data,$kode)
         {
             $rr=$this->db->query("select * from saw_h where No_Saw = '$kode' LIMIT 1");

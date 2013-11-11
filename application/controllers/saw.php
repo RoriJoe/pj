@@ -51,10 +51,21 @@
         }
 		
 		function addBarang(){
-            
-
             $data['hasil']=$this->saw_model->get_barang();
-            //$data['kode']=$id;
+            $this->load->view("content/saw/saw_detail",$data);
+        }
+
+        function qtyBarang(){
+            $id=$this->input->post('id');
+            $data['hasil']=$this->saw_model->get_qtybarang();
+            $data['kode']=$id;
+            $this->load->view("content/saw/saw_detail",$data);
+        }
+
+        function noqtyBarang(){
+            $id=$this->input->post('id');
+            $data['hasil']=$this->saw_model->get_noqtybarang();
+            $data['kode']=$id;
             $this->load->view("content/saw/saw_detail",$data);
         }
 		
