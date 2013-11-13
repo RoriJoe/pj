@@ -32,7 +32,7 @@ $("#view").click(function(){
     table();
 });
 
-$("#print").click(function(){
+/* $("#print").click(function(){
 	var d = new Date();
 	var curr_date = d.getDate();
 	var curr_month = d.getMonth() + 1; //Months are zero based
@@ -54,7 +54,7 @@ $('#lab1').text("");
 	mywindow.close();
 
 	return true;
-});
+}); */
 function table(){
 
 	var sel = $('input[name="optionsRadios"]:checked').val();
@@ -77,7 +77,7 @@ function table(){
     	<!--//***MAIN FORM-->
 		<form action="<?php echo base_url();?>report/print_report_os" method="post" target="_blank">
 		<div class="bar">
-		    <p>Laporan Outstanding Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
+		    <p>Laporan Outstanding Sales Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
 		</div>
 		<div id="konten" class="hide-con master-border">
 			<div class="pull-left">
@@ -88,8 +88,8 @@ function table(){
 			</div>
 			<div style="clear: both;"></div>
 			<div style="margin-top: 10px">
-				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
-				<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">-->	
+				<!--<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	-->	
+				<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">
 				<input role="button" type="button" class="btn"  id="view" value="Preview">	
 			</div>
 		</div>

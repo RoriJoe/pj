@@ -244,21 +244,48 @@
 			$this->load->model('report_model'); //edit!!
 			//$this->load->helper('pdfexport_helper.php');
 
-			$radio = $this->input->post("optionsRadios");
+			$radio = $this->input->post("optionsRadios1");
 			if($radio=="Batas"){
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
 			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
-			}else{ $tgl=""; $tgl2=""; }
+			$plg1=$this->input->post('plg1');
+			$plg2=$this->input->post('plg2');
+			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2="";}
 
 			$data['periode']=$radio;
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Delivery_Order - ". date('dmY');
-			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2);
+			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2,$plg1,$plg2);
 			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
 			$templateView  = $this->load->view('content/print_do',$data,TRUE);
+			//exportMeAsMPDF($templateView,$data['filename']);    
+			create_pdf($templateView, $data['filename']); //Create pdf  
+		}
+		
+		function print_report_po(){
+			$this->load->model('report_model'); //edit!!
+			//$this->load->helper('pdfexport_helper.php');
+
+			$radio = $this->input->post("optionsRadios1");
+			if($radio=="Batas"){
+			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+
+			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
+			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$plg1=$this->input->post('plg1');
+			$plg2=$this->input->post('plg2');
+			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2="";}
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			$data['jam'] = date('H:i:s');
+			$data['filename'] = "Report_Purchase_Order - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_po($radio,$tgl,$tgl2,$plg1,$plg2);
+			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
+			$templateView  = $this->load->view('content/print_po',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);    
 			create_pdf($templateView, $data['filename']); //Create pdf  
 		}
@@ -301,6 +328,24 @@
 			$data['hasil2']=$this->report_model->print_os();
 			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
 			$templateView  = $this->load->view('content/print_os',$data,TRUE);
+			//exportMeAsMPDF($templateView,$data['filename']);  
+			create_pdf($templateView, $data['filename']);                                                               
+		}
+		
+		function print_report_os_po(){
+			#Export Function goes here#
+			/*This Function is used for Exporting Pdf
+			* Any chnage in this fuction may cause unknown behaviour
+			*/
+			$this->load->model('report_model'); //edit!!
+			//$this->load->helper('pdfexport_helper.php');
+
+			$data['tanggal'] = date('d/m/Y');
+			$data['jam'] = date('H:i:s');
+			$data['filename'] = "Report_Outstanding_PO - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_os_po();
+			//$data['htmView'] = $this->load->view('content/print_sj',$data,TRUE);
+			$templateView  = $this->load->view('content/print_os_po',$data,TRUE);
 			//exportMeAsMPDF($templateView,$data['filename']);  
 			create_pdf($templateView, $data['filename']);                                                               
 		}
@@ -380,6 +425,32 @@
             $this->load->view('content/report_table_do',$data);
         }
 		
+		function table_po(){
+            //Get data dari model
+            //$data['hasil']=$this->tr_surat_jalan_model->get_paged_list();
+			$this->load->model('report_model'); //edit!!
+			//$this->load->helper('pdfexport_helper.php');
+			
+			$radio = $this->input->post("sel");
+			if($radio=="Batas"){
+			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+
+			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
+			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$plg1=$this->input->post('plg1');
+			$plg2=$this->input->post('plg2');
+			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			
+			
+			$data['hasil2']=$this->report_model->print_po($radio,$tgl,$tgl2,$plg1,$plg2);
+			
+            //load view
+            $this->load->view('content/report_table_po',$data);
+        }
+		
 		function table_sj(){
             //Get data dari model
             
@@ -442,5 +513,23 @@
 			
             //load view
             $this->load->view('content/report_table_os',$data);
+        }
+		
+		function table_os_po(){
+            //Get data dari model
+            
+			$this->load->model('report_model'); //edit!!
+
+			$radio = $this->input->post("sel");
+			
+
+			$data['periode']=$radio;
+			$data['tanggal'] = date('d/m/Y');
+			
+			
+			$data['hasil2']=$this->report_model->print_os_po();
+			
+            //load view
+            $this->load->view('content/report_table_os_po',$data);
         }
 	}

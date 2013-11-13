@@ -16,7 +16,7 @@ $("#view").click(function(){
     table();
 });
 
-$("#print").click(function(){
+/* $("#print").click(function(){
 	var d = new Date();
 	var curr_date = d.getDate();
 	var curr_month = d.getMonth() + 1; //Months are zero based
@@ -38,7 +38,7 @@ $('#lab1').text("");
 	mywindow.close();
 
 	return true;
-});
+}); */
 
 /*Tampilkan jQuery Tanggal*/
 $(function() {
@@ -108,7 +108,7 @@ function getPelanggan(){
       <!--//***MAIN FORM-->
       <form action="<?php echo base_url();?>report/print_report_do" method="post" target="_blank">
       <div class="bar" >
-          <p>Report Delivery Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
+          <p>Report Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
       </div>
 
       <div id="konten" class="hide-con master-border">
@@ -132,7 +132,7 @@ function getPelanggan(){
         <div id="range">
           <table>
             <tr>
-              <td colspan="3"><b>Tanggal Delivery Order Mulai</b></td>
+              <td colspan="3"><b>Tanggal Sales Order Mulai</b></td>
             </tr>
             <tr>
               <td>
@@ -168,7 +168,8 @@ function getPelanggan(){
           </table>
         </div>
         <div>
-          <input role="button" type="button" class="btn btn-primary"  id="print" value="Print"> 
+          <!--<input role="button" type="button" class="btn btn-primary"  id="print" value="Print"> -->
+		  <input role="button" type="submit" class="btn btn-primary"  value="Print">
           <input role="button" type="button" class="btn"  id="view" value="Preview">  
         </div>
       </div>

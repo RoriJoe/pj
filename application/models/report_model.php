@@ -34,6 +34,41 @@ class report_model extends CI_Model{
 	
 	}
 	
+	function print_po($radio,$tgl,$tgl2,$plg1,$plg2){
+
+			if($radio=="Semua"){
+			$q = $this->db->query("SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
+			FROM po_d
+			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+			");
+			return $q->result();
+			}else{
+			$q = $this->db->query("SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
+			FROM po_d
+			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+			where do_h.Tgl between ('$tgl') and ('$tgl2')
+			AND do_h.Kode_Plg between '$plg1' and '$plg2' ");
+			return $q->result();
+			}
+	
+	}
+	
+	function print_os_po(){ //Sementara
+		
+		$q = $this->db->query("SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,QtyTemp,Nilai
+			FROM po_d
+			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+		");
+				return $q->result();
+		
+	}
+	
 	function print_sj($radio,$tgl,$tgl2){
 		if($radio=="Semua"){
 		$q = $this->db->query("SELECT sj_h.No_Sj, sj_h.No_Do, pelanggan.Perusahaan as NP,sj_h.No_Mobil ,barang.Nama, Ukuran, sj_d.Qty1, Satuan1
@@ -135,7 +170,7 @@ sj.kirim as keluar
 	
 	function print_os(){ //Sementara
 		
-		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty, Satuan1,grandttl,do_d.Jumlah
+		$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty,QtyTemp, Satuan1,grandttl,do_d.Jumlah
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode

@@ -17,32 +17,62 @@
 <table class="table" width="100%" style="font-size: 11px">
 	<thead>
 		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
+			<th>No SO</th>
+			<th>Pelanggan</th>
 			<th>Tanggal</th>
-			<th>No DO</th>
-			<th>Nama Pelanggan</th>
-			<th>Nama Barang</th>
-			<th>Jenis Barang</th>
+			<th>Barang</th>
 			<th>Qty</th>
+			<th>Qty Kirim</th>
 			<th>Satuan</th>
+			<th style='text-align:center;'>Nilai</th>
 		</tr>
 	</thead>
 	<tbody>
-		<?php $s="";$d="";
-		foreach($hasil2 as $row)
-        {$dmy = date("d-m-Y", strtotime($row->Tgl));
-			if($dmy==$s||$d==$row->No_Do){
-				$dmy="";
-			}
-            echo
-            "<tr>
-				<td>$dmy</td>
-                <td>$row->No_Do</td>
-                <td>$row->NP</td>
-                <td>$row->Nama</td>
-				<td>$row->Ukuran</td>
-				<td align='right'>$row->Qty</td>
-				<td>$row->Satuan1</td>
-            </tr>";$s=$dmy;$d=$row->No_Do;
-        } ?>
+		<?php $no_so="";$tgl="";$plg="";$gtot=0;
+		$y=1;
+				foreach($hasil2 as $row)
+				{$originalDate1 = $row->Tgl;
+				$dmy1 = date("d-m-Y", strtotime($originalDate1));
+				$duit=number_format($row->Jumlah);
+				$bot=sizeof($hasil2);
+				if($no_so != $row->No_Do){
+					$no_so=$row->No_Do;$tgl=$dmy1;$plg=$row->NP;
+					
+					$gtot+=$row->grandttl;
+					if($y!=1){
+					$st=number_format($gx);
+						echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+					</tr>";
+					}
+				}else{
+					$no_so="";$tgl="";$plg="";
+					
+				}
+					echo
+					"<tr>
+						
+						<td>$no_so</td>
+						<td>$plg</td>
+						<td>$tgl</td>
+						<td>$row->Nama $row->Ukuran</td>
+						<td align='right'>$row->Qty</td>
+						<td align='right'>$row->QtyTemp</td>
+						<td>$row->Satuan1</td>
+						<td style='text-align:right;'>$duit</td>
+					</tr>";
+					$no_so=$row->No_Do;
+					$gx=$row->grandttl;
+				$y++;
+				
+				if($y==$bot+1){
+				$st=number_format($gx);
+					echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+				</tr>";
+				}
+				}
+				$g=number_format($gtot);
+			echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
+			</tr>";
+         ?>
 	</tbody>
 </table>
