@@ -73,13 +73,27 @@
 
             <li class="dropdown-submenu">
                 <a tabindex="-1" href="#"><i class="icon-book"></i> Laporan</a>
-                <ul class="dropdown-menu" style=" top: -80px; ">
-                  <li><a class="ajax" href="report_do">Delivery Order</a></li>
-                  <li><a class="ajax" href="report_sj">Surat Jalan</a></li>
-                  <li><a class="ajax" href="report_mutasi">Mutasi</a></li>
-                  <li><a class="ajax" href="report_os">Outstanding</a></li>
-                  <li><a class="ajax" href="report_penerimaan">Penerimaan</a></li>
-                  <li class="menu-border-bottom"><a class="ajax" href="report_ks">Kartu Stock</a></li>
+                <ul class="dropdown-menu" style="">
+                    <li class="dropdown-submenu"><a tabindex="-1">Penjualan</a>
+                       <ul class="dropdown-menu">
+                            <li><a class="ajax" href="report_do">Sales Order</a></li>
+                            <li><a class="ajax" href="report_os">Outstanding Order</a></li>
+                       </ul>
+                    </li>
+                    <li class="dropdown-submenu"><a tabindex="-1">Pembelian</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="ajax" href="report_po">Sales Order</a></li>
+                            <li><a class="ajax" href="report_os_po">Outstanding PO</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu"><a tabindex="-1">Persediaan</a>
+                        <ul class="dropdown-menu" style=" top: -80px; ">
+                            <li><a class="ajax" href="report_mutasi">Mutasi</a></li>
+                            <li class="menu-border-bottom"><a class="ajax" href="report_ks">Kartu Stock</a></li>
+                            <li><a class="ajax" href="report_penerimaan">Penerimaan</a></li>
+                            <li><a class="ajax" href="report_sj">Surat Jalan</a></li>
+                        </ul>
+                    </li>   
                 </ul>
             </li>
         <?php

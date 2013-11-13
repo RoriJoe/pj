@@ -159,6 +159,16 @@
 			$data['judul']="Report DO";
 			$this->template->display('content/report_do', $data);
 		}
+
+		function report_po(){
+			$data['judul']="Report PO";
+			$this->template->display('content/report_po', $data);
+		}
+
+		function report_os_po(){
+			$data['judul']="Report Outstanding PO";
+			$this->template->display('content/report_os_po', $data);
+		}
 		
 		function report_mutasi(){
 			$data['judul']="Report Mutasi";
@@ -166,7 +176,7 @@
 		}
 
 		function report_os(){
-			$data['judul']="Report os";
+			$data['judul']="Report Outstanding Order";
 			$this->template->display('content/report_os', $data);
 		}
 		
