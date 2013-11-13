@@ -82,7 +82,7 @@
                     </li>
                     <li class="dropdown-submenu"><a tabindex="-1">Pembelian</a>
                         <ul class="dropdown-menu">
-                            <li><a class="ajax" href="report_po">Sales Order</a></li>
+                            <li><a class="ajax" href="report_po">Purchase Order</a></li>
                             <li><a class="ajax" href="report_os_po">Outstanding PO</a></li>
                         </ul>
                     </li>
