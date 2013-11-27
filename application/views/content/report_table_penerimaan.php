@@ -8,7 +8,7 @@
 	<tr>
 		<td width="70%">
 			
-			<div><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
+			<div id="per"><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="30%" style="text-align:right;">
 			<b>Tanggal : <?php echo $tanggal ?></b>

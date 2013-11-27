@@ -5,14 +5,7 @@
     margin-left: 5px;"><b>Laporan Outstanding Purchase Order</b></label>
 
 <table width="100%;">
-	<tr>
-		<td width="70%">
-			<div><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
-		</td>
-		<td width="30%" style="text-align:right;">
-			<b>Tanggal : <?php echo $tanggal ?></b>
-		</td>
-	</tr>
+	
 </table>
 	<div id="LimitTab">
 		<div id="TableLaporanSPK" style=overflow:auto; class='CssTblLaporan' >
@@ -23,11 +16,10 @@
 				<th>Tgl PO</th>
 				<th>Tgl Kirim</th>
 				<th>Nama Barang</th>
-				<th>Qty</th>
-				<th>Qty Kirim</th>
+				<th>Pesan</th>
+				<th>Kirim</th>
+				<th>OS</th>
 				<th>Satuan</th>
-				<th style='text-align:center;'>Nilai</th>
-				
 				
 				</tr></thead>
 				
@@ -39,6 +31,7 @@
 					$originalDate2 = $row->Tgl_kirim;
 					$dmy2 = date("d-m-Y", strtotime($originalDate2));
 					$duit=number_format($row->Nilai);
+					$os=$row->Jumlah - $row->QtyTemp;
 					if($no_so != $row->Kode_po){
 						$no_so=$row->Kode_po;$tgl=$dmy1;$plg=$row->NP; $tgl2=$dmy2;
 						
@@ -57,8 +50,9 @@
 							<td>$row->Nama $row->Ukuran</td>
 							<td align='right'>$row->Jumlah</td>
 							<td align='right'>$row->QtyTemp</td>
+							<td align='right'>$os</td>
 							<td>$row->Satuan1</td>
-							<td style='text-align:right;'>$duit</td>
+							
 						</tr>";
 						$no_so=$row->Kode_po;
 					}

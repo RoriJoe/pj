@@ -78,7 +78,7 @@ function table(){
 function listPelanggan(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_pelanggan/viewPelanggan",
+    url: "<?php echo base_url();?>index.php/report/view_so_pelanggan",
     data :{},
     success:
     function(hh){

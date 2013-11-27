@@ -1,18 +1,23 @@
-<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
-<h2 align="center">MUTASI STOCK</h2><hr/>
+
 <table>
 	<tr>
 		<td width="80%">
+			<h2 style="margin: 0">PD. PELITA JAYA</h2>
 			
-			<div>PERIODE : <?php echo $periode; ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
-		<td width="20%">
-			<div>Tanggal : <?php echo $tanggal ?></div>
+		<td width="20%" rowspan="2">
+			Tanggal : <?php echo $tanggal ?>
 			<div>Jam : <?php echo $jam ?></div>
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 	</tr>
+	<tr>
+		<td width="80%">
+			<h3>LAPORAN MUTASI STOCK</h3><br/>
+		</td>
+		
+	</tr>
 </table>
-
 <hr/>
 <table class="table" width="100%" style="font-size: 11px">
 	<thead>

@@ -42,8 +42,7 @@
 						$gtot+=$row->Total;
 						if($y!=1){
 					$st=number_format($gx);
-						echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
-					</tr>";
+						
 					}
 					}else{
 						$no_so="";$tgl="";$plg="";
@@ -66,15 +65,10 @@
 						$gx=$row->Total;
 						$y++;
 				
-						if($y==$bot+1){
-						$st=number_format($gx);
-							echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
-						</tr>";
-						}
+						
 					}
 					$g=number_format($gtot);
-			echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
-			</tr>";
+			
 		
 				
          ?>

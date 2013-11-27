@@ -78,11 +78,11 @@ function table(){
 function listPelanggan(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_pelanggan/viewPelanggan",
+    url: "<?php echo base_url();?>index.php/report/view_po_supplier",
     data :{},
     success:
     function(hh){
-        $('#list_pelanggan').html(hh);
+        $('#list_supplier').html(hh);
     }
     });   
 } 
@@ -99,6 +99,15 @@ function getPelanggan(){
      
 	
     $('#_pn'+row).val(x);
+    $('#kd_plg'+row).val(k);
+    
+}
+
+function getSupplier(){
+    var x = $('input:radio[name=optionsRadios]:checked').val();
+    var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+	var row = filter;
+   $('#_pn'+row).val(x);
     $('#kd_plg'+row).val(k);
     
 }
@@ -143,7 +152,7 @@ function getPelanggan(){
             </tr>
             <tr>
               <td>
-                <b>Pelanggan Mulai</b>
+                <b>Supplier Mulai</b>
               </td>
             </tr>
             <tr>
@@ -151,7 +160,7 @@ function getPelanggan(){
                 <input type="hidden" id="kd_plg1" />
                 <div class="input-append">
                   <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn1" placeholder='Batas Awal' id='appendedInputButton' name='_pn1' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                  <a href="#modalPelanggan" id="f_plg" style="margin-bottom:4px;" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" onclick="getDetail(1)"><i class="icon-search"></i></a>
+                  <a href="#modalSupplier" id="f_plg" style="margin-bottom:4px;" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" onclick="getDetail(1)"><i class="icon-search"></i></a>
                 </div>
               </td>
             </tr>
@@ -161,7 +170,7 @@ function getPelanggan(){
                   <input type="hidden" id="kd_plg2" />
                   <input type='text' class="span2" disabled="disabled"
                             maxlength="20" id="_pn2" id='appendedInputButton' name='_pn2' placeholder='Batas Akhir' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                  <a href="#modalPelanggan" id="f_plg2" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="margin-bottom:4px;" onclick="getDetail(2)"><i class="icon-search"></i></a>
+                  <a href="#modalSupplier" id="f_plg2" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="margin-bottom:4px;" onclick="getDetail(2)"><i class="icon-search"></i></a>
                 </div>
               </td>
             </tr>
@@ -182,15 +191,16 @@ function getPelanggan(){
 </div>
 
 
-<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div id="modalSupplier" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">List Pelanggan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
+    <h3 id="myModalLabel">List Supplier</h3>
   </div>
   <div class="modal-body">
-    <div id="list_pelanggan"></div>
+    <div id="list_supplier"></div>
   </div>
   <div class="modal-footer">
-    <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
+    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
   </div>
 </div>

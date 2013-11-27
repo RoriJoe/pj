@@ -32,21 +32,21 @@ $("#view").click(function(){
     table();
 });
 
-/* $("#print").click(function(){
+$("#print").click(function(){
 	var d = new Date();
 	var curr_date = d.getDate();
 	var curr_month = d.getMonth() + 1; //Months are zero based
 	var curr_year = d.getFullYear();
 	var tgl = curr_date + "-" + curr_month + "-" + curr_year;
-$('#lab1').text("");
-    var data = $('#tabpreview').html();
+
+    var data = $('#LimitTab').html();
 	
 	var mywindow = window.open('', '', '');
-	mywindow.document.write('<title>Laporan Sales Order '+tgl+'</title>');
-	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td, .draggable th, .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;}</style>');
+	mywindow.document.write('<title>Laporan Outstanding Sales Order '+tgl+'</title>');
+	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td,.draggable th,  .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;}</style>');
 	
 	mywindow.document.write('');
-	mywindow.document.write('<center><h2>Laporan Sales Order</h2></center>');
+	mywindow.document.write('<table><tr><td width="70%"><h2 style="margin: 0">PD. PELITA JAYA</h2></td><td width="20%" >Tanggal : '+tgl+'</td></tr><tr><td ><h3>LAPORAN OUTSTANDING SALES ORDER</h3></td></tr></table>');
 	mywindow.document.write(data); 
 	
 
@@ -54,7 +54,7 @@ $('#lab1').text("");
 	mywindow.close();
 
 	return true;
-}); */
+});
 function table(){
 
 	var sel = $('input[name="optionsRadios"]:checked').val();
@@ -81,16 +81,16 @@ function table(){
 		</div>
 		<div id="konten" class="hide-con master-border">
 			<div class="pull-left">
-				<label class="radio">
+				<!--<label class="radio">
 		  		<input type="radio" name="optionsRadios" id="cetakAll" value="Semua" checked>
 		  			Cetak Semua
-				</label>
+				</label>-->
 			</div>
 			<div style="clear: both;"></div>
 			<div style="margin-top: 10px">
-				<!--<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	-->	
-				<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">
-				<input role="button" type="button" class="btn"  id="view" value="Preview">	
+				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+				<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">
+				<input role="button" type="button" class="btn"  id="view" value="Preview">	-->	
 			</div>
 		</div>
 		</form>

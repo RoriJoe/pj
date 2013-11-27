@@ -50,8 +50,8 @@ class report_model extends CI_Model{
 			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
 			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
 			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
-			where do_h.Tgl between ('$tgl') and ('$tgl2')
-			AND do_h.Kode_Plg between '$plg1' and '$plg2' ");
+			where Tgl_po between ('$tgl') and ('$tgl2')
+			AND po_h.Kode_supplier between '$plg1' and '$plg2' ");
 			return $q->result();
 			}
 	
@@ -196,6 +196,28 @@ sj.kirim as keluar
 	function print_master_gudang(){
 		$q = $this->db->query("SELECT * from gudang ");
 		return $q->result();
+	}
+	
+	function get_so_plg()
+        {
+            $query = $this->db->query("
+                SELECT A.*
+                FROM pelanggan A
+                WHERE A.Kode IN (SELECT Kode_Plg FROM do_h)
+                ");
+
+            return $query->result();
+        }
+		
+	function get_po_supplier()
+	{
+		$query = $this->db->query("
+			SELECT A.*
+			FROM supplier A
+			WHERE A.Kode IN (SELECT Kode_supplier FROM po_h)
+			");
+
+		return $query->result();
 	}
 	
 }

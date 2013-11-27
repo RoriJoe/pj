@@ -31,7 +31,7 @@ $(function() {
 function listBarang(){
     $.ajax({
     type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
+    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang2",
     data :{},
     success:
     function(hh){

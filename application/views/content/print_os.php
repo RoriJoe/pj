@@ -1,10 +1,10 @@
 <h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
-<h2 align="center">LAPORAN TOTAL OUTSTANDING ORDER</h2><hr/>
+<h2 align="center">LAPORAN OUTSTANDING SALES ORDER</h2><hr/>
 <table>
 	<tr>
 		<td width="80%">
 			
-			<div>PERIODE : </div> <!--ambil berdasarkan input radio dari user -->
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="20%">
 			<div>Tanggal : <?php echo $tanggal ?></div>
@@ -21,10 +21,11 @@
 			<th>Pelanggan</th>
 			<th>Tanggal</th>
 			<th>Barang</th>
-			<th>Qty</th>
-			<th>Qty Kirim</th>
+			<th>Pesan</th>
+			<th>Kirim</th>
+			<th>OS</th>
 			<th>Satuan</th>
-			<th style='text-align:center;'>Nilai</th>
+			
 		</tr>
 	</thead>
 	<tbody>
@@ -35,15 +36,12 @@
 				$dmy1 = date("d-m-Y", strtotime($originalDate1));
 				$duit=number_format($row->Jumlah);
 				$bot=sizeof($hasil2);
+				$os=$row->Qty-$row->QtyTemp;
 				if($no_so != $row->No_Do){
 					$no_so=$row->No_Do;$tgl=$dmy1;$plg=$row->NP;
 					
 					$gtot+=$row->grandttl;
-					if($y!=1){
-					$st=number_format($gx);
-						echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
-					</tr>";
-					}
+					
 				}else{
 					$no_so="";$tgl="";$plg="";
 					
@@ -57,22 +55,18 @@
 						<td>$row->Nama $row->Ukuran</td>
 						<td align='right'>$row->Qty</td>
 						<td align='right'>$row->QtyTemp</td>
+						<td align='right'>$os</td>
 						<td>$row->Satuan1</td>
-						<td style='text-align:right;'>$duit</td>
+						
 					</tr>";
 					$no_so=$row->No_Do;
 					$gx=$row->grandttl;
 				$y++;
 				
-				if($y==$bot+1){
-				$st=number_format($gx);
-					echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
-				</tr>";
-				}
+				
 				}
 				$g=number_format($gtot);
-			echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
-			</tr>";
+		
          ?>
 	</tbody>
 </table>

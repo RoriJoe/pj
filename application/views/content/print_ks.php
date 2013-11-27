@@ -1,18 +1,22 @@
-<h1 style="margin: 0" align="center">PD. PELITA JAYA</h1>
-<h2 align="center">KARTU STOCK</h2><hr/>
 <table>
 	<tr>
 		<td width="80%">
+			<h2 style="margin: 0">PD. PELITA JAYA</h2>
 			
-			<div>PERIODE : </div>
 		</td>
-		<td width="20%">
-			<div>Tanggal : <?php echo $tanggal ?></div>
+		<td width="20%" rowspan="2">
+			Tanggal : <?php echo $tanggal ?>
 			<div>Jam : <?php echo $jam ?></div>
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 	</tr>
+	<tr>
+		<td width="80%">
+			<h3>LAPORAN KARTU STOCK</h3><br/>
+		</td>
+		
+	</tr>
 </table>
-
 <hr/>
 <?php foreach($hasil2 as $row)
         {$terima =$row->terima;

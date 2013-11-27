@@ -7,7 +7,7 @@
 	<tr>
 		<td width="70%">
 			
-			<div><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
+			<div id="per"><b>PERIODE : <?php echo $periode ?></b></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		<td width="30%" style="text-align:right;">
 			<b>Tanggal : <?php echo $tanggal ?></b>		
@@ -19,33 +19,35 @@
 			<thead><tr>
 			<th>No SJ</th>
 			<th>No SO</th>
-			<th>Pelanggan</th>
-			<th>Kendaraan</th>
 			<th>Nama Barang</th>
+			<th>Kendaraan</th>
+			
+			<th>Pelanggan</th>
 			<th>Jenis</th>
 			<th>Qty</th>
 			<th>Satuan</th>
 			</tr></thead>
 			
 			<?php
-				$no_sj="";$plg="";
+				$no_sj="";$plg="";$no_so="";
 				foreach($hasil2 as $row)
 				{
 				//$originalDate1 = $row->Tgl_Po;
 				//$dmy1 = date("d-m-Y", strtotime($originalDate1));
 				
 				if($no_sj != $row->No_Sj){
-					$no_sj=$row->No_Sj;$plg=$row->NP;
+					$no_sj=$row->No_Sj;$plg=$row->NP;$no_so="$row->No_Do";
 				}else{
-					$no_sj="";$plg="";
+					$no_sj="";$plg="";$no_so="";
 				}
 					echo
 					"<tr>
 						<td>$no_sj</td>
-						<td>$row->No_Do</td>
-						<td>$plg</td>
-						<td>$row->No_Mobil</td>
+						<td>$no_so</td>
 						<td>$row->Nama</td>
+						<td>$row->No_Mobil</td>
+						
+						<td>$plg</td>
 						<td>$row->Ukuran</td>
 						<td align='right'>$row->Qty1</td>
 						<td>$row->Satuan1</td>

@@ -226,7 +226,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			}else{ $tgl=""; $tgl2=""; }
 
 			$data['periode']=$radio;
@@ -249,7 +249,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			$plg1=$this->input->post('plg1');
 			$plg2=$this->input->post('plg2');
 			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2="";}
@@ -274,7 +274,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			$plg1=$this->input->post('plg1');
 			$plg2=$this->input->post('plg2');
 			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2="";}
@@ -321,7 +321,8 @@
 			*/
 			$this->load->model('report_model'); //edit!!
 			//$this->load->helper('pdfexport_helper.php');
-
+			
+			$data['periode']="Semua";
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Outstanding - ". date('dmY');
@@ -339,7 +340,8 @@
 			*/
 			$this->load->model('report_model'); //edit!!
 			//$this->load->helper('pdfexport_helper.php');
-
+			
+			$data['periode']="Semua";
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Outstanding_PO - ". date('dmY');
@@ -363,7 +365,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			}else{ $tgl=""; $tgl2=""; }
 
 			$data['periode']=$radio;
@@ -388,7 +390,8 @@
 			$barang2 = $this->input->post("barang2");
 			$tgl = $this->input->post("_tgl");
 			$tgl2 = $this->input->post("_tgl2");
-			$data['asd']= $barang1.$barang2;
+			$data['periode']= $tgl." - ".$tgl2;
+			$data['barang']= $barang1." - ".$barang2;
 			$data['tanggal'] = date('d/m/Y');
 			$data['jam'] = date('H:i:s');
 			$data['filename'] = "Report_Kartu_Stock - ". date('dmY');
@@ -410,7 +413,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			$plg1=$this->input->post('plg1');
 			$plg2=$this->input->post('plg2');
 			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
@@ -436,7 +439,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			$plg1=$this->input->post('plg1');
 			$plg2=$this->input->post('plg2');
 			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
@@ -461,7 +464,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			}else{ $tgl=""; $tgl2=""; }
 
 			$data['periode']=$radio;
@@ -484,7 +487,7 @@
 			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
 
 			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $radio." ( ".$this->input->post('_tgl')." - ".$this->input->post('_tgl2')." )";
+			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
 			}else{ $tgl=""; $tgl2=""; }
 
 			$data['periode']=$radio;
@@ -531,5 +534,20 @@
 			
             //load view
             $this->load->view('content/report_table_os_po',$data);
+        }
+		
+		function view_so_pelanggan(){
+			$this->load->model('report_model');
+            $data['hasil']=$this->report_model->get_so_plg();
+            //load view
+            $this->load->view('content/list/list_pelanggan',$data);
+        }
+		
+		function view_po_supplier(){
+			$this->load->model('report_model');
+            $data['hasil']=$this->report_model->get_po_supplier();
+            //load view
+			 $this->load->view('content/list/list_supplier',$data);
+            
         }
 	}
