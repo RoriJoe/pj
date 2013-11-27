@@ -170,6 +170,7 @@ $("#saveSupplier").click(function(){
                 {
                 	$('#sup').val(pr);
     				$('#kd_sup').val(kd);
+                    $('#limk').val($('#lk').val());
                     bootstrap_alert.success('Data <b>'+kd+' - '+pr+'</b> berhasil ditambahkan');
                     $('#formSupplier').each(function(){
                         this.reset();

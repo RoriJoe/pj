@@ -9,9 +9,9 @@
 
                 <div class="field-wrap">
                     Nomor SJ
-                    <input type='text' class="validate[required]" id='sj' name='sj' style="width: 85px;margin-left:5px;">
+                    <input type='text' class="validate[required]" id='sj' name='sj' style="width: 110px;margin-left:5px;">
                 </div>
-                <div class="field-wrap" style=" margin-left: 20px; ">
+                <div class="field-wrap">
                     Pelanggan
                     <input type="hidden" id="kd_plg" />
                     <div class="input-append money" style="margin-bottom:0;">
@@ -20,9 +20,9 @@
                     <a href="#modalPelanggan" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                     </div>
                 </div>
-                <div class="field-wrap" style=" margin-left: 16px; ">
+                <div class="field-wrap" style=" margin-left: 5px; ">
                     Tgl Kirim
-                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;margin-left: 10px;" value="<?php echo date('d-m-Y');?>">
+                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;" value="<?php echo date('d-m-Y');?>">
                 </div>
                 <div class="field-wrap" style=" margin-left: 5px; ">
                     Gudang
@@ -51,7 +51,7 @@
                         <input type="checkbox" id="ambil" name="ambil" onclick="change()" style=" float: none; "> Ambil Sendiri
                     </label>
                 </div>
-                <div class="field-wrap" style=" margin-left: 25px; ">
+                <div class="field-wrap" style=" margin-left: 10px; ">
                     Nomor Mobil
                     <div id="mobil" style="display:inline-block;">
                         <select style="width: 170px;" id='_mbl' name='_mbl'>

@@ -15,14 +15,29 @@
                 <div class="field-wrap">
                     Tanggal PO
                     <input  type='text' 
-                        id='_tgl1' name='_tgl1' value='<?php echo date('d-m-Y');?>' style="width: 80px; margin-right: 20px;" >
+                        id='_tgl1' name='_tgl1' value='<?php echo date('d-m-Y');?>' style="width: 80px; margin-right: 10px;margin-left: 10px;" >
                 </div>
-                <div class="field-wrap">
+                <!--<div class="field-wrap">
                     Permintaan
                     <select name="permintaan" class="validate[required]" id="permintaan" style="width: 140px;">
                         <option value="">- Pilih -</option>
                         <option value="Tidak Ada">Tidak Ada</option>
                     </select>
+                </div>-->
+                <div class="field-wrap">
+                    Supplier
+                    <input type="hidden" id="kd_sup" />
+                    <div class="input-append money" style="margin-bottom: 0;">
+                        <input  type='text' class="validate[required,maxSize[30], minSize[2]] span2" maxlength="30" 
+                                id="sup" id='appendedInputButton' name='sup' 
+                                style="width: 135px; margin-bottom:8px;" 
+                                onclick="lookup_supplier()">
+
+                        <a  href="#modalSupplier" role="button" 
+                            class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" 
+                            title="Filter Supplier" 
+                            onclick="listSupplier()"><i class="icon-search"></i></a>     
+                    </div>
                 </div>
                 <div class="field-wrap">
                     Urgent
@@ -40,7 +55,7 @@
                         <input  type='text' placeholder="Gudang" 
                             class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
                             id="gud" id='appendedInputButton' name='gud'
-                            style="width: 125px;margin-bottom:8px;"
+                            style="width: 115px;margin-left:10px;margin-bottom:8px;"
                             onclick="lookup_gudang()">
 
                         <a  href="#modalGudang" id="filterGud" role="button" class="btn padding-filter" 
@@ -52,24 +67,15 @@
                     Tanggal Kirim
                     <input  type='text' class="" id='_tgl2' name='_tgl2' style="width: 80px; margin-right: 9px;">
                 </div>
-                
                 <div class="field-wrap">
-                    Supplier
-                    <input type="hidden" id="kd_sup" />
-                    <div class="input-append money" style="margin-bottom: 0;">
-                        <input  type='text' class="validate[required,maxSize[30], minSize[2]] span2" maxlength="30" 
-                                id="sup" id='appendedInputButton' name='sup' 
-                                style="width: 135px; margin-bottom:8px;" 
-                                onclick="lookup_supplier()">
-
-                        <a  href="#modalSupplier" role="button" 
-                            class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" 
-                            title="Filter Supplier" 
-                            onclick="listSupplier()"><i class="icon-search"></i></a>     
+                    Limit
+                    <div class="input-prepend input-append money" style="margin-left: 20px;">
+                      <span class="add-on custom-add-on">Rp</span>
+                      <input class="span2" id='limk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='limk' style="width: 135px;text-align:right;" onkeyup="formatAngka(this,'.')" disabled>
                     </div>
-                    <a id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</a>
                 </div>
-                
+                <a id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()">Add Barang</a>
+
                 <input type="hidden" id="kode_p" name="kode_p"/>
             </form>
 
@@ -542,9 +548,10 @@ function tampilDetailPO(){
 function getSupplier(){
     var x = $('input:radio[name=optionsRadios]:checked').val();
     var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+    var z = $('input:radio[name=optionsRadios]:checked').attr('lk');
     $('#sup').val(x);
     $('#kd_sup').val(k);
-    
+    $('#limk').val(z);
 }
 //GET POPUP Gudang
 function getGudang(){

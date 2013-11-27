@@ -7,12 +7,13 @@
     <?php
     foreach($hasil as $row)
     {
+        $limit = number_format($row->Limit_Kredit,0,",",".");
         echo "<tr>
         <td>$row->Kode</td>
         <td>$row->Nama</td>
         <td>$row->Perusahaan</td>
         <td>$row->Alamat1</td>
-        <td><input type='radio' name='optionsRadios' id='optionsPelanggan' kd='$row->Kode' nama='$row->Nama' value='$row->Perusahaan'></td>
+        <td><input type='radio' name='optionsRadios' id='optionsPelanggan' kd='$row->Kode' nama='$row->Nama' value='$row->Perusahaan' lk='$limit'></td>
         </tr>
         ";
     }   ?>

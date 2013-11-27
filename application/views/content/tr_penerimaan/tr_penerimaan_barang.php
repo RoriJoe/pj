@@ -10,10 +10,10 @@
             <div class="field-wrap">
                 Nomor BPB
                 <input type='text' 
-                class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                maxlength="20" id='_bpb' name='_bpb'/>
+                class="upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
+                maxlength="20" style="width:112px;" id='_bpb' name='_bpb'/>
             </div>
-            <div class="field-wrap" style=" margin-left: 5px; ">
+            <div class="field-wrap" style="">
                 Gudang
                 <input type="hidden" class="validate[required]" id="kd_gd" />
                 <div class="input-append money" style="margin-bottom: 0px;">
