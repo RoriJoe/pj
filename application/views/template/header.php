@@ -45,6 +45,6 @@ $date = date("d F Y, H:i");
     </div>
     <div id="tgl">
         <span id='ct' style="margin-right: 5px;"></span> | <!-- code php -->
-        Welcome, <?php echo $this->session->userdata('Nama'); ?> |
+        <i class="icon-user icon-white"></i> Welcome, <a href="user" title="Click to Edit Profile" style="color:red;"><?php echo $account->firstname; ?> </a>|
     </div>
 </div>   

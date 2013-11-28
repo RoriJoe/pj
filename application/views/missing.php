@@ -12,9 +12,9 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Access Denied</h1>
-        <p>Anda Tidak Memiliki Hak Akses untuk Mengakses Halaman Ini</p>
-        <p><input type="button" class="btn btn-large btn-primary" onclick="history.go(-1);" value="Return Back"></p>
+        <h1>Page Not Found</h1>
+        <p>Halaman yang anda tuju tidak ditemukan :(</p>
+        <p><?php echo anchor('', 'Go to home', array('class' => 'button')); ?></p>
       </div>
 
       <hr>

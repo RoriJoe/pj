@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td>Nama Perkiraan</td>
-                    <td><input type="text" id="NamaPer" class="validate[required]"  name="NamaPer" style="width:200px;"/> </td>
+                    <td><input type="text" id="NamaPer" class="validate[required]" maxlength="50" name="NamaPer" style="width:200px;"/> </td>
                 </tr>
                 <tr>
                   <td>Level</td>

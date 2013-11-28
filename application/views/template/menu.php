@@ -1,9 +1,10 @@
-<?php 
-    $image = $this->session->userdata("image");
- ?>
     <div class="side-scroll">
         <div style="width: 100%; margin-bottom: 5px; margin-top: 10px; text-align: center;">
-            <img src="<?php echo base_url();?>images/<?php echo $image ?>" id="pp" class="img-rounded"/>
+            <?php if($account->picture == null): ?>
+                <img src="<?php echo base_url();?>resource/img/default-person.png" id="pp" class="img-rounded"/>
+            <?php else: ?>
+                <img src="<?php echo base_url();?>resource/user/profile/<?php echo $account->picture; ?>" id="pp" class="img-rounded"/>
+            <?php endif; ?>
         </div>
     <div class="sidebar">
         <div style="background-color: #B4B4B4;height: 20px;width: 15px;">
@@ -96,7 +97,13 @@
                     </li>   
                 </ul>
             </li>
-        <?php
+            <li class="dropdown-submenu"><a tabindex="-1" href="#"><i class="icon-wrench"></i>Maintenance</a>
+                <ul class="dropdown-menu" style=" top: -22px; ">
+                  <li><a class="ajax" href="saw">Stock Opname</a></li>
+                  <li><a class="" href="user">User Management</a></li>
+                </ul>
+            </li>
+        <!--<?php
             if($this->session->userdata('level') == 1): ?>
             <li class="dropdown-submenu"><a tabindex="-1" href="#"><i class="icon-wrench"></i>Maintenance</a>
                 <ul class="dropdown-menu" style=" top: -22px; ">
@@ -104,7 +111,7 @@
                   <li><a class="ajax" href="user">Create Password</a></li>
                 </ul>
             </li>
-        <?php endif; ?>
+        <?php endif; ?>-->
             <li><a href="logout"><i class="icon-off"></i>Logout</a></li>
           </ul>
         </div>
