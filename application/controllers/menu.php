@@ -4,11 +4,11 @@
 		{
 			parent :: __construct();
 			//$this->is_logged_in();
-           	$this->load->helper(array('account/ssl', 'url'));
+           	$this->load->helper(array('account/ssl'));
 			$this->load->library(array('account/authentication', 'account/authorization','template','form_validation'));
 			$this->load->model(array('account/account_model'));
 
-            $this->load->helper('url');
+            //$this->load->helper('url');
             $this->load->model('combo_model');
 
             if (!$this->authentication->is_signed_in()) redirect('');
@@ -205,7 +205,7 @@
 	        $this->template->display('content/password/password', $data);*/
 	    }
 
-	    function upload(){
+	    /*function upload(){
 	        $this->load->model('user_model');
 
 	        $username = $this->input->post('users2');
@@ -241,7 +241,7 @@
 	            $data['img'] = base_url().'/images/'.$file_data['file_name'];
 	            $this->template->display('content/password/password', $data);
 	        }
-	    }
+	    }*/
         
         function logout()
         {

@@ -8,7 +8,7 @@
 
             #load library dan helper yang dibutuhkan
             $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
+            //$this->load->helper(array('form','url'));
             $this->load->model('tr_surat_jalan_model');
         }
 

@@ -2,12 +2,13 @@
 	class Login extends CI_CONTROLLER {
             function __construct(){
             parent::__construct();
-            $this->load->model('login_model');
+            
             $this->load->library('template');
             $this->load->library("authex");
             
-            $this->load->helper('url');  
-
+            //$this->load->helper('url');  
+            $this->load->model('login_model');
+            
 			if($this->authex->logged_in())
 	        {
 	            //get the user info

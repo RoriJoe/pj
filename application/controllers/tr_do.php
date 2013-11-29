@@ -5,16 +5,13 @@
 
             #load library dan helper yang dibutuhkan
             $this->load->library(array('table','form_validation'));
-            $this->load->helper(array('form','url'));
+            //$this->load->helper(array('form','url'));
             $this->load->model('tr_do_model');
         }
 
         //Get Data untuk table Detail
         function index(){
-            //request data table
             $data['hasil']=$this->tr_do_model->get_paged_list();
-
-            //load view
             $this->load->view('content/SO/tr_do_Detail', $data);
         }
 

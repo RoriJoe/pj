@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>User Management - Pelita Jaya</title>
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />

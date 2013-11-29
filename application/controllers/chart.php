@@ -10,7 +10,7 @@ class Chart extends CI_Controller {
 	function index()
 	{
 
-		$this->load->helper('url');
+		//$this->load->helper('url');
 		$this->load->library('id_chart/id_chart');
 		$chart['c1'] = $this->id_chart->chart_embed('test',800,250,site_url('chart/example1'),base_url());
 		$chart['c2'] = $this->id_chart->chart_embed('test2',800,250,site_url('chart/example2'),base_url());

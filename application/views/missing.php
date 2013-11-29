@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title><?php echo $judul;?></title>
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />

@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
     <title>Pelita Jaya - Login</title>
-
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/todc-bootstrap.css" />
