@@ -6,6 +6,7 @@
             
             #load library dan helper yang dibutuhkan
             $this->load->model('ms_pelanggan_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
 
         //Get Data untuk table Detail 

@@ -25,20 +25,26 @@
 
 <script>
 $('#tb1 tr').click(function (e) {
-        $('#delete').attr('disabled', false);
-        $("#noSaw").attr('disabled',true);
+    $('#delete').attr('disabled', false);
+    $("#noSaw").attr('disabled',true);
+
+    <?php if ($this->authorization->is_permitted('update_stock')) : ?>
+        $('#add').attr('mode','edit');
         $('#save').attr('mode','edit');
-        $('#cancel').attr('disabled',false);
-        $('#save').attr('disabled',false);
-        
-        $('#noSaw').val($(this).attr("no_Saw"));
-        $('#kd_gd').val($(this).attr("kd_gud"));
-        $('#gud').val($(this).attr("nm_gud"));
-        $('#_tgl').val($(this).attr("tgl"));
-        document.getElementById('selList').style.visibility = 'visible';
-        document.getElementById('loadBtn').style.visibility = 'hidden';
-        qtyBarang();
-    });
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
+
+    $('#cancel').attr('disabled',false);
+    
+    $('#noSaw').val($(this).attr("no_Saw"));
+    $('#kd_gd').val($(this).attr("kd_gud"));
+    $('#gud').val($(this).attr("nm_gud"));
+    $('#_tgl').val($(this).attr("tgl"));
+    document.getElementById('selList').style.visibility = 'visible';
+    document.getElementById('loadBtn').style.visibility = 'hidden';
+    qtyBarang();
+});
     
 var oTable = $('#tb1').dataTable( {
     "sScrollY": "380px",

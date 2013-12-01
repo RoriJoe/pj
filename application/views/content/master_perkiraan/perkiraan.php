@@ -97,11 +97,19 @@
                 <tr>
                     <td colspan="2" align="center">
                         <div class="field-wrap action-group">
-                        <input type="hidden" id="flagaction"/>
+                            <input type="hidden" id="flagaction"/>
 
-                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                        <button id="cac" class="btn" type="reset">Cancel</button>
-                        <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Gudang"><i class="icon-print"></i> Print</button>
+                            <?php if ($this->authorization->is_permitted('create_perkiraan') == true && $this->authorization->is_permitted('update_perkiraan') == false) : ?>
+                                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                            <?php elseif($this->authorization->is_permitted('update_perkiraan') == true && $this->authorization->is_permitted('create_perkiraan') == false): ?>
+                                <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                            <?php elseif($this->authorization->is_permitted('update_perkiraan') == true && $this->authorization->is_permitted('create_perkiraan') == true): ?>
+                                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                            <?php endif; ?>
+                                <button id="cac" class="btn" type="reset">Cancel</button>
+                            <?php if ($this->authorization->is_permitted('print_perkiraan')) : ?>
+                                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar perkiraan"><i class="icon-print"></i> Print</button>
+                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>
@@ -126,6 +134,19 @@ $(document).ready(function(){
     barAnimation();
     $("#flagaction").val(1);
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_perkiraan') == true && $this->authorization->is_permitted('update_perkiraan') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_perkiraan') == true && $this->authorization->is_permitted('create_perkiraan') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 function load_list(){
 $.ajax({
@@ -162,6 +183,7 @@ $("#cac").click(function(){
     $('#formID').each(function(){
         this.reset();
     });
+    cekauthorization();
 });
 
 $(function() {

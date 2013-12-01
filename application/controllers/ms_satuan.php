@@ -4,6 +4,7 @@
             parent::__construct();
 
             $this->load->model('ms_satuan_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
         function index(){
             //request data table

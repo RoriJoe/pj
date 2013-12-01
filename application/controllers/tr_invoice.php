@@ -4,6 +4,7 @@
             parent::__construct();
             #load library dan helper yang dibutuhkan
             $this->load->model('tr_invoice_model');
+            $this->load->library(array('account/authorization'));
         }
 
         function index(){

@@ -40,6 +40,7 @@ jQuery("#formID").validationEngine(
     });
 }
 
+
 function key(){
  $('button[type="submit"]').attr('disabled','disabled');
  $('input[type="text"]').keyup(function() {

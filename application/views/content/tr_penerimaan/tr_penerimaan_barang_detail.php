@@ -66,9 +66,14 @@
         }
 
         setSelectedIndex(document.getElementById("po"),kd_po);
- 
-        $('#save').attr('mode','edit');
-        $('#save').attr('disabled',false);
+        
+        <?php if ($this->authorization->is_permitted('update_penerimaan')) : ?>
+            $('#add').attr('mode','edit');
+            $('#save').attr('mode','edit');
+        <?php else: ?>
+            $("#save").attr('disabled',true);
+        <?php endif; ?>
+
         $('#po').attr('disabled',true);
         $('#cancel').attr('disabled',false);
         $('#add').attr('disabled',true);

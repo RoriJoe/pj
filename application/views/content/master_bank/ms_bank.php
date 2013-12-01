@@ -11,13 +11,13 @@
                 <tr>
                     <td>Kode</td>
                     <td>
-                        <input type='text' class="span-form75 upper-form validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd'>
+                        <input type='text' class="form100 upper-form validate[required,maxSize[5], minSize[2]],custom[onlyLetterNumber]" maxlength="5" id='_kd' name='_kd'>
                     </td>
                     <td>
                         Alamat
                     </td>
                     <td rowspan="2">
-                        <textarea rows="3" class="validate[required,maxSize[100]]" maxlength="100" id='_al' name='_al' style="resize:none; width:150px; margin-left: 10px;"></textarea>
+                        <textarea rows="3" class="validate[required,maxSize[100]]" maxlength="100" id='_al' name='_al' style="resize:none; width:130px;"></textarea>
                     </td>
                     <td rowspan="2">
                         <a href="#myModal" role="button" class="btn" data-toggle="modal" id="rek" style="margin-left:10px;">Tambah Rekening</a>
@@ -26,15 +26,23 @@
                 <tr>
                     <td>Nama</td>
                     <td style="vertical-align: bottom;">
-                        <input type='text' class="span-form170 validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm'>
+                        <input type='text' class="form125 validate[required,maxSize[50], minSize[3],custom[onlyLetterNumber]]" maxlength="50" id='_nm' name='_nm'>
                     </td>
                </tr>       
             </table>
         </form>
             <div id="detail"></div>
             <div style="margin-top: 10px; text-align:center;">
-                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <button id="cancel" class="btn" type="reset">Cancel</button>
+                <div class="field-wrap action-group">
+                    <?php if ($this->authorization->is_permitted('create_bank') == true && $this->authorization->is_permitted('update_bank') == false) : ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php elseif($this->authorization->is_permitted('update_bank') == true && $this->authorization->is_permitted('create_bank') == false): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                    <?php elseif($this->authorization->is_permitted('update_bank') == true && $this->authorization->is_permitted('create_bank') == true): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php endif; ?>
+                        <button id="cancel" class="btn" type="reset">Cancel</button>
+                </div>
             </div>
             <div id="konfirmasi" class="sukses"></div>
         </div>
@@ -131,8 +139,21 @@ $(document).ready(function(){
 	detailBank();
 	barAnimation();
     validation();
-    key();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_bank') == true && $this->authorization->is_permitted('update_bank') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_bank') == true && $this->authorization->is_permitted('create_bank') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
+
 //load Side Table
 function loadListBank(){
     $.ajax({
@@ -203,9 +224,9 @@ $("#cancel").click(function(){
         this.reset();
     });
     detailBank();
-    $("#_kd").attr('disabled',false);
-     $('button[type="submit"]').attr('disabled','disabled');
+    cekauthorization();
     document.getElementById('rek').style.visibility = 'visible';
+    $("#_kd").attr('disabled',false);
 });
 
 $("#save").click(function(){

@@ -169,7 +169,9 @@ function getPelanggan(){
         </div>
         <div>
           <!--<input role="button" type="button" class="btn btn-primary"  id="print" value="Print"> -->
-		  <input role="button" type="submit" class="btn btn-primary"  value="Print">
+          <?php if ($this->authorization->is_permitted('print_report_sales')) : ?>
+		        <input role="button" type="submit" class="btn btn-primary"  value="Print">
+          <?php endif;?>
           <input role="button" type="button" class="btn"  id="view" value="Preview">  
         </div>
       </div>

@@ -5,6 +5,7 @@
             parent::__construct();
 
             $this->load->model('ms_bank_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
 
         //Get Data untuk table Detail

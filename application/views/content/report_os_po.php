@@ -89,7 +89,9 @@ function table(){
 			</div>
 			<div style="clear: both;"></div>
 			<div style="margin-top: 10px">
+			<?php if ($this->authorization->is_permitted('print_report_ospo')) : ?>
 				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+			<?php endif; ?>
 				<!--<input role="button" type="submit" class="btn btn-primary"  id="submit" value="Print">
 				<input role="button" type="button" class="btn"  id="view" value="Preview">	-->	
 			</div>

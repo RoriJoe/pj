@@ -7,19 +7,20 @@
     </thead>
 
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
+    <?php foreach($hasil as $row):?>
+    <?php
         echo "<tr>
             <td>$row->Kode</td>
             <td nama='$row->Nama'>$row->Nama $row->Ukuran</td>
             <td>
                 <div class='btn-group'>
-                    <a class='btn popup' style='padding: 0px 3px;' kode='$row->Kode'><i class='icon-pencil'></i></a>
-                    <a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 0px 3px;'><i class='icon-trash'></i></a>
-                </div>
+                    <a class='btn popup' style='padding: 0px 3px;' kode='$row->Kode'><i class='icon-pencil'></i></a>"?>
+                    <?php if ($this->authorization->is_permitted('delete_barang')) : ?>
+                        <?php echo"<a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>"?>
+                    <?php endif;?>
             </td>
-        </tr>";
-    } ?>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
 </div>
@@ -27,14 +28,17 @@
 <script>
    //Edit TRIGGER
 $('.popup').click(function(){
-    key();
     $("#_kd").attr('disabled',true);
-    $('#save').attr('mode','edit');
-    $("#save").attr('disabled',false);
     
     var id = $(this).attr("kode"); //atribut sebagai identifier data row
 	
 	$('#_kd').val(id);
+
+    <?php if ($this->authorization->is_permitted('update_barang')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
 
     retrieveForm(id);
     jQuery(".hide-con").show();

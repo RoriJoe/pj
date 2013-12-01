@@ -61,12 +61,12 @@ function visibleEdit() {
     for(i=1; i<rowCount; i++){
         if(kirim > 0){
             $('#edit'+i).hide();
-            document.getElementById('save').disabled = true;
+            $('#save').attr('disabled',true);
         }
         else
         {
             $('#edit'+i).show();
-            document.getElementById('save').disabled = false;
+            $('#save').attr('disabled',false);
         }
     }
     

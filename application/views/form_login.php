@@ -60,14 +60,14 @@
                   </div>
               </div>
 
-              <div class="control-group">
+              <!--<div class="control-group">
                 <div class="controls">
                   <label class="checkbox">
                     <?php echo form_checkbox(array('name' => 'sign_in_remember', 'id' => 'sign_in_remember', 'value' => 'checked', 'checked' => $this->input->post('sign_in_remember'),)); ?>
                     <?php echo 'Remember Me'; ?>
                   </label>
                 </div>
-              </div>
+              </div>-->
 
               <div>
                 <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-lock"></i> '.'Sign In')); ?>

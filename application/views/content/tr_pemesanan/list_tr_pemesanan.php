@@ -27,12 +27,17 @@ $('#tb_detail tr').click(function (e) {
 
         //$('#add').attr('mode','edit');
         $("#po").attr('disabled',true);
-        $('#save').attr('mode','edit');
-        $('#save').attr('disabled',false);
         $('#delete').attr('disabled', false);
         $('#cancel').attr('disabled',false);
         $('#add').attr('disabled',true);
         document.getElementById('add').style.visibility = 'hidden'; 
+
+        <?php if ($this->authorization->is_permitted('update_po')) : ?>
+            $('#add').attr('mode','edit');
+            $('#save').attr('mode','edit');
+        <?php else: ?>
+            $("#save").attr('disabled',true);
+        <?php endif; ?>
         jQuery(".hide-con").show();
     });
     

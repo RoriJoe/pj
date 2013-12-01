@@ -2,15 +2,7 @@
 <html>
 <head>
   <title>User Management - Pelita Jaya</title>
-  <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-  
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-  <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+  <?php echo $this->load->view('template/head_import'); ?>   
 </head>
 <body>
 
@@ -119,6 +111,32 @@
             </span>
           <?php endif; ?>
         </div>
+      </div>
+
+      <div class="control-group <?php echo (form_error('users_phone')) ? 'error' : ''; ?>">
+          <label class="control-label" for="users_phone"><?php echo 'Telp / HP' ?></label>
+
+          <div class="controls">
+          <?php echo form_input(array('name' => 'users_phone', 'id' => 'users_phone', 'value' => set_value('users_phone') ? set_value('users_phone') : (isset($update_account_details->phone) ? $update_account_details->phone : ''), 'maxlength' => 15)); ?>
+          <?php if (form_error('users_phone')) : ?>
+              <span class="help-inline">
+                <?php echo form_error('users_phone'); ?>
+              </span>
+          <?php endif; ?>
+          </div>
+      </div>
+
+      <div class="control-group <?php echo (form_error('users_address')) ? 'error' : ''; ?>">
+          <label class="control-label" for="users_address"><?php echo 'Alamat' ?></label>
+
+          <div class="controls">
+          <?php echo form_textarea(array('name' => 'users_address','row'=>'3', 'style'=>'height:50px', 'id' => 'users_address', 'value' => set_value('users_address') ? set_value('users_address') : (isset($update_account_details->address) ? $update_account_details->address : ''), 'maxlength' => 80)); ?>
+          <?php if (form_error('users_address')) : ?>
+              <span class="help-inline">
+                <?php echo form_error('users_address'); ?>
+              </span>
+          <?php endif; ?>
+          </div>
       </div>
 
       <div class="control-group">

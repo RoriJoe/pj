@@ -3,6 +3,7 @@
         function __construct(){
             parent::__construct();
             $this->load->model('ms_supplier_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
 
         //Get Data untuk table Detail 

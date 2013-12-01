@@ -24,8 +24,9 @@
                 </div>
             </div>
             <div class="field-wrap" style=" margin-left: 5px; ">
-                Tgl BPB
-                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
+                No Reff Supplier
+                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[5]],custom[onlyNumberSp]" 
+                        maxlength="25" id='_ref' name='_ref' onclick="disableAlpha('_ref')" style=" width: 150px; " />
             </div>
             <br/>
             <div class="field-wrap">
@@ -39,10 +40,10 @@
                     maxlength="30" id="_sp" id='appendedInputButton' name='_sp' style="width: 158px;" readonly="true">
             </div>
             <div class="field-wrap" style=" margin-left: 5px; ">
-                No Reff Supplier
-                <input type='text' class="span-form170 validate[required,maxSize[25], minSize[5]],custom[onlyNumberSp]" 
-                        maxlength="25" id='_ref' name='_ref' onclick="disableAlpha('_ref')" style=" width: 150px; " />
+                Tgl BPB
+                <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
             </div>
+            <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Add Barang</button>
             <div class="field-wrap"></div>
             <div class="field-wrap"></div>
             <div class="field-wrap"></div>
@@ -54,11 +55,21 @@
             <div id="konfirmasi" class="sukses"></div>
 
             <div style="margin-top: 10px;"> 
-                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-                <button id="delete" class="btn" type="submit">Delete</button>
-                <button id="cancel" class="btn" type="submit">Cancel</button>
-                <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Barang</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i> Print</button>   
+                <?php if ($this->authorization->is_permitted('create_penerimaan') == true && $this->authorization->is_permitted('update_penerimaan') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_penerimaan') == true && $this->authorization->is_permitted('create_penerimaan') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_penerimaan') == true && $this->authorization->is_permitted('create_penerimaan') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_penerimaan')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
+                <button id="cancel" class="btn">Cancel</button>
+                <?php if ($this->authorization->is_permitted('print_penerimaan')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Penerimaan Barang"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -77,7 +88,9 @@
     <div id="list_gudang"></div>
   </div>
   <div class="modal-footer">
+  <?php if ($this->authorization->is_permitted('create_gudang')) : ?>
     <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+  <?php endif; ?>
   </div>
 </div>
 
@@ -136,11 +149,23 @@ $(document).ready(function(){
     listBPB();
     validation();
     barAnimation();
-    tampilDetailBPB();
-    key_tr(); 
+    tampilDetailBPB(); 
     autogen();
     get_po_list();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_penerimaan') == true && $this->authorization->is_permitted('update_penerimaan') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_penerimaan') == true && $this->authorization->is_permitted('create_penerimaan') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 //Tampilkan Table yg disamping Via AJAX
 function listBPB(){
@@ -157,7 +182,6 @@ function listBPB(){
 
 //Auto Generate
 function autogen(){
-    $('#add').attr('disabled',true);
     $('#cancel').attr('disabled',false);
     $('#delete').attr('disabled',true);
     $('#po').attr('disabled',false);
@@ -386,7 +410,7 @@ function resetForm(){
     tampilDetailBPB();
     get_po_list();
     document.getElementById('add').style.visibility = 'visible';
-    $('#save').attr('mode','add');
+    cekauthorization();
     $('#po').attr('disabled',false);
 }
 //Cancel
@@ -504,7 +528,7 @@ $("#save").click(function(){
 					tampilDetailBPB();
 					autogen();
                     get_po_list();
-					$('#save').attr('mode','add');
+					cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Penerimaan '+_bpb+' sudah ada');
@@ -545,7 +569,7 @@ $("#save").click(function(){
                     listBPB();
 					tampilDetailBPB();
 					autogen();
-					$('#save').attr('mode','add');
+					cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan');
@@ -594,7 +618,7 @@ $("#delete").click(function(){
                                listBPB();
                                tampilDetailBPB();
                                autogen();
-                               $('#save').attr('mode','add');
+                               cekauthorization();
                             }
                         }
                     });

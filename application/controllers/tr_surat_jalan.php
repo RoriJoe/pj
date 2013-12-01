@@ -10,6 +10,7 @@
             $this->load->library(array('table','form_validation'));
             //$this->load->helper(array('form','url'));
             $this->load->model('tr_surat_jalan_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
 
         #Fungsi untuk table samping

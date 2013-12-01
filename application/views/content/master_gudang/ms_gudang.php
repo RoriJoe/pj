@@ -8,42 +8,42 @@
         <div id="konten" class="hide-con master-border">
 
         <form id="formID">
-                <div class="field-wrap">
-                    Kode
-                    <input type='text' class="span-form75 upper-form validate[required,maxSize[22], minSize[5]],custom[onlyLetterNumber]]" maxlength="22" 
-                    id='kd' name='kd'>
-                </div>
-                <div class="field-wrap">
-                    Nama
-                    <input type='text' class="validate[required, maxSize[30], minSize[3]]" maxlength="30" 
-                    id='nm' name='nm' style=" width: 170px; ">
-                </div>
-
-                <div class="field-wrap">
-                    Alamat
-                    <textarea rows="2" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:170px; height: 60px; margin-left: 0px; margin-right: 10px"></textarea>
-                </div>
-
-                <div class="field-wrap">
-                    Kota
-                    <input type='text' class="validate[required, maxSize[15], minSize[3]]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;" onclick="disableNum('kt')">
-                </div>
-
-                <div class="field-wrap">
-                    Telp
-                    <input type='text' placeholder="Telp 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' onclick="disableAlpha('tl1')" style=" margin-left: 17px; ">
-                    <input type='text' placeholder="Telp 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
-                </div>
-
-                <div class="field-wrap">
-                    Fax
-                    <input type='text' placeholder="Fax 1" class="telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx1' name='fx1' onclick="disableAlpha('fx1')" style="margin-left:19px;">
-                    <input type='text' placeholder="Fax 2" class="telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')">
-                </div><br/>
+            <table class="form-tb">
+                <tr>
+                    <td>Kode</td>
+                    <td><input type='text' maxlength="22" id='kd' name='kd' class="form125 upper-form validate[required,maxSize[22], minSize[5]],custom[onlyLetterNumber]]"></td>
+                    <td>Nama</td>
+                    <td><input type='text' class="form150 validate[required, maxSize[30], minSize[3]]" maxlength="30" id='nm' name='nm'></td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td><textarea rows="2" class="validate[required]" maxlength="30" id='al' name='al' style="resize:none; width:125px; height: 60px; margin-left: 0px; margin-right: 10px"></textarea></td>
+                    <td>Kota</td>
+                    <td><input type='text' class="form70 validate[required, maxSize[15], minSize[3]]]" maxlength="15" id='kt' name='kt' onclick="disableNum('kt')"></td>
+                </tr>
+                <tr>
+                    <td>Telp</td>
+                    <td><input type='text' placeholder="Telp 1" class="form150 telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl1' name='tl1' onclick="disableAlpha('tl1')" ></td>
+                    <td colspan="2"><input type='text' placeholder="Telp 2" class="form150 telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')"></td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td><input type='text' placeholder="Fax 1" class="form150 telp validate[required, maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx1' name='fx1' onclick="disableAlpha('fx1')"></td>
+                    <td colspan="2"><input type='text' placeholder="Fax 2" class="form150 telp validate[maxSize[15], minSize[5]],custom[phone]]" maxlength="15" id='fx2' name='fx2' value="" onclick="disableAlpha('fx2')"></td>
+                </tr>
+            </table>
                 <div class="field-wrap action-group">
+                    <?php if ($this->authorization->is_permitted('create_gudang') == true && $this->authorization->is_permitted('update_gudang') == false) : ?>
                         <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php elseif($this->authorization->is_permitted('update_gudang') == true && $this->authorization->is_permitted('create_gudang') == false): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                    <?php elseif($this->authorization->is_permitted('update_gudang') == true && $this->authorization->is_permitted('create_gudang') == true): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php endif; ?>
                         <button id="cac" class="btn" type="reset">Cancel</button>
+                    <?php if ($this->authorization->is_permitted('print_gudang')) : ?>
                         <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Gudang"><i class="icon-print"></i> Print</button>
+                    <?php endif; ?>
                 </div>
         </form>
         <!--**NOTIFICATION AREA**-->
@@ -64,7 +64,6 @@ $(document).ready(function(){
     autogen();
     barAnimation();
     validation();
-    key();
 });
 
 function load_list(){
@@ -79,11 +78,22 @@ $.ajax({
 });
 }
 
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_gudang') == true && $this->authorization->is_permitted('update_gudang') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_gudang') == true && $this->authorization->is_permitted('create_gudang') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
+
 function autogen(){
     $("#kd").attr('disabled',false);
-    $('#save').attr('mode','add');
-    $('button[type="submit"]').attr('disabled','disabled');
-    
+       
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/ms_gudang/auto_gen",
@@ -144,7 +154,8 @@ $("#kt").keypress(function(e){
 });
 
 $("#cac").click(function(){
-   $('#formID').each(function(){
+    cekauthorization();
+    $('#formID').each(function(){
         this.reset();
     });
     autogen();
@@ -181,17 +192,9 @@ $("#save").click(function(){
                     $('#formID').each(function(){
                         this.reset();
                     });
-                    $.ajax({
-                    type:'POST',
-                    url: "<?php echo base_url();?>index.php/ms_gudang/index",  //REFRESH TABLE DETAIL WITH CONTROLLER
-                    data :{},
-                    success:
-                    function(hh){
-                        $('#hasil').html(hh);
-                    }
-                    });
+                    load_list();
                     autogen();
-                    $('#save').attr('mode','add');
+                    cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
@@ -217,17 +220,9 @@ $("#save").click(function(){
                     $('#formID').each(function(){
                         this.reset();
                     });        
-                    $.ajax({
-                    type:'POST',
-                    url: "<?php echo base_url();?>index.php/ms_gudang/index",
-                    data :{},
-                    success: 
-                    function(hh){                
-                        $('#hasil').html(hh);            
-                    }
-                    }); 
+                    load_list();
                     autogen();
-                    $('#save').attr('mode','add');   
+                    cekauthorization();  
                 }                
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Terjadi Kesalahan');

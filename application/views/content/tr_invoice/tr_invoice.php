@@ -27,28 +27,27 @@
                     <td>
                         <input type="hidden" id="kd_plg" />
                         <div class="input-append money" style="margin-bottom:0;">
-                         <input type='text' class="span2" 
-                            maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 124px;" readonly="true">
-                        <a href="#modalPelanggan" style="margin-bottom:3px;" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                         <input type='text' class="span2" maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 124px;" readonly="true">
+                            <a href="#modalPelanggan" style="margin-bottom:3px;" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                         </div>
                     </td>
-               </tr>
-               
-               <tr>
                     <td>Nomor SJ</td>
                     <td>
                         <div id="no_sj">
                         </div>
                     </td>
-
-                    <td colspan="2">Term
+               </tr>
+               
+               <tr>
+                    <td>Term</td>
+                    <td>
                         <input  type='text' 
                                 class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
                                 style="width: 30px;"> Hari
                     </td>
 
                     <td>Alamat</td>
-                    <td>
+                    <td colspan="3">
                         <textarea rows="3" class="validate[required]" id='al' name='al' 
                             style="resize:none; width:135px;" disabled="disabled">
                         </textarea>
@@ -97,10 +96,21 @@
                 </table>
             </div>
         <div>
-            <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-            <button id="delete" class="btn">Delete</button>
+            <?php if ($this->authorization->is_permitted('create_invoice') == true && $this->authorization->is_permitted('update_invoice') == false) : ?>
+                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+            <?php elseif($this->authorization->is_permitted('update_invoice') == true && $this->authorization->is_permitted('create_invoice') == false): ?>
+                <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+            <?php elseif($this->authorization->is_permitted('update_invoice') == true && $this->authorization->is_permitted('create_invoice') == true): ?>
+                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+            <?php endif; ?>
+
+            <?php if ($this->authorization->is_permitted('delete_invoice')) : ?>
+                <button id="delete" class="btn">Delete</button>
+            <?php endif; ?>
             <button id="cancel" class="btn">Cancel</button>
-            <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i> Print</button>
+            <?php if ($this->authorization->is_permitted('print_invoice')) : ?>
+                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+            <?php endif; ?>
         </div>
         <div id="konfirmasi" class="sukses"></div>
         </div>
@@ -137,6 +147,19 @@ $(document).ready(function(){
     displayResult();
     get_sj_list();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_invoice') == true && $this->authorization->is_permitted('update_invoice') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_invoice') == true && $this->authorization->is_permitted('create_invoice') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 function list_invoice(){
     $.ajax({
@@ -404,7 +427,7 @@ function reset_form(){
     show_sj('reset');
     $('#total1').val('');
     $('#total').val('');
-    $('#save').attr('mode','add');
+    cekauthorization();
     document.getElementById('totalBox').style.visibility = 'hidden';
     document.getElementById('f_plg').style.visibility = 'visible';
 }

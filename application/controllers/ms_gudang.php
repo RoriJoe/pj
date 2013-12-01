@@ -2,11 +2,8 @@
     class Ms_gudang extends CI_Controller{
         function __construct(){
             parent::__construct();
-
-            #load library dan helper yang dibutuhkan
-            #$this->load->library(array('table','form_validation'));
-            #$this->load->helper(array('form','url'));
             $this->load->model('ms_gudang_model');
+            $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
         }
         function index(){
             //request data table

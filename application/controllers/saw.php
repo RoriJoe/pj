@@ -6,6 +6,7 @@
 			
             #load library dan helper yang dibutuhkan
             $this->load->model('saw_model');
+            $this->load->library(array('account/authorization'));
         }
 
         //List

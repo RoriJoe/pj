@@ -40,7 +40,7 @@ class Authentication {
 	 */
 	function sign_in($account_id, $remember = FALSE)
 	{
-		$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
+		//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
 
 		$this->CI->session->set_userdata('account_id', $account_id);
 

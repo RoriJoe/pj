@@ -10,6 +10,7 @@
             $this->load->library(array('table','form_validation'));
             //$this->load->helper(array('form','url'));
             $this->load->model('tr_penerimaan_barang_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
 		
 		//Get Data untuk table Detail

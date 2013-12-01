@@ -114,10 +114,21 @@
             </div>
             <div id="konfirmasi" class="sukses"></div>
             <div class="field-wrap">
-                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-                <button id="delete" class="btn">Delete</button>
+                <?php if ($this->authorization->is_permitted('create_po') == true && $this->authorization->is_permitted('update_po') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_po') == true && $this->authorization->is_permitted('create_po') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_po') == true && $this->authorization->is_permitted('create_po') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_po')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
                 <button id="cancel" class="btn">Cancel</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+                <?php if ($this->authorization->is_permitted('print_po')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Pemesanan / Purchase Order"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -141,7 +152,9 @@
     <div id="list_supplier"></div>
   </div>
   <div class="modal-footer">
-    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
+    <?php if ($this->authorization->is_permitted('create_supplier')) : ?>
+        <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -154,7 +167,9 @@
     <div id="list_gudang"></div>
   </div>
   <div class="modal-footer">
-    <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+    <?php if ($this->authorization->is_permitted('create_gudang')) : ?>
+        <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -211,8 +226,21 @@ $(document).ready(function() {
     barAnimation();
     tampilDetailPO();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_po') == true && $this->authorization->is_permitted('update_po') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_po') == true && $this->authorization->is_permitted('create_po') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
+
 function autogen(){
-    $('#add').attr('mode','new');
     $('#add').attr('disabled', false);
     $('#delete').attr('disabled', true);
     $("#po").attr('disabled',false);
@@ -680,7 +708,7 @@ $("#cancel").click(function(){
     });
     autogen();
     tampilDetailPO();
-    $('#save').attr('mode','add');
+    cekauthorization();
     document.getElementById('add').style.visibility = 'visible';
 });
 
@@ -757,7 +785,7 @@ $("#save").click(function(){
                     listPO();
                     tampilDetailPO();
                     autogen();
-                    $('#save').attr('mode','add');
+                    cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Kode Pemesanan sudah ada');
@@ -797,7 +825,7 @@ $("#save").click(function(){
                     listPO();
                     tampilDetailPO();
                     autogen();
-                    $('#save').attr('mode','add');
+                    cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Terjadi Kesalahan');
@@ -844,7 +872,7 @@ $("#delete").click(function(){
 		                   listPO();
 		                   tampilDetailPO();
 		                   autogen();
-		                   $('#save').attr('mode','add');
+		                   cekauthorization();
 		                }
 		            }
 		            });

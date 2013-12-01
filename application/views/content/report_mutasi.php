@@ -92,7 +92,9 @@ function listBarang(){
             </div>
 
             <div style="margin-top: 10px">
+            <?php if ($this->authorization->is_permitted('print_report_mutasi')) : ?>
                 <input role="button" type="submit" class="btn btn-primary"  value="Print">
+            <?php endif; ?>
             </div>
         </div>
         </form>

@@ -11,20 +11,26 @@
                 <tr>
                     <td>Kode</td>
                     <td>
-                        <input type='text' class="span-form75 validate[required,maxSize[10]]" maxlength="10" 
+                        <input type='text' class="form100 validate[required,maxSize[10]]" maxlength="10" 
                         id='kd' name='kd'>
                     </td>         
                 </tr>
                 <tr>
                     <td>Satuan</td>
                     <td>
-                        <input type='text' class="span-form170 validate[required, maxSize[10]]" maxlength="10" 
+                        <input type='text' class="form150 validate[required, maxSize[10]]" maxlength="10" 
                         id='nm' name='nm'>
                     </td>
                 </tr>
             </table>
             <div class="field-wrap action-group">
-                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php if ($this->authorization->is_permitted('create_satuan') == true && $this->authorization->is_permitted('update_satuan') == false) : ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == false): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == true): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php endif; ?>
                     <button id="cac" class="btn" type="reset">Cancel</button>
             </div>
             
@@ -44,8 +50,20 @@ $(document).ready(function(){
     load_list();
     barAnimation();
     validation();
-    key();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_satuan') == true && $this->authorization->is_permitted('update_satuan') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 function load_list(){
     $.ajax({
@@ -77,6 +95,7 @@ $("#cac").click(function(){
         this.reset();
     });
     $("#kd").attr('disabled',false);
+    cekauthorization();
 });
 
 $("#save").click(function(){
@@ -104,7 +123,7 @@ $("#save").click(function(){
                         this.reset();
                     });
                     load_list();
-                    $('#save').attr('mode','add');
+                    cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
@@ -131,7 +150,7 @@ $("#save").click(function(){
                         this.reset();
                     });        
                     load_list();
-                    $('#save').attr('mode','add');   
+                    cekauthorization(); 
                 }                
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Terjadi Kesalahan');

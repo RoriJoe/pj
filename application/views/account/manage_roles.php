@@ -2,16 +2,7 @@
 <html>
 <head>
     <title>User Management - Pelita Jaya</title>
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-    
-    
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+    <?php echo $this->load->view('template/head_import'); ?>    
 </head>
 <body>
 
@@ -26,22 +17,22 @@
 
     <div class="span10">
 
-      <h2><?php echo lang('roles_page_name'); ?></h2>
+      <h2><?php echo 'Manage Roles' ?></h2>
 
-      <div class="well">
-        <?php echo lang('roles_page_description'); ?>
+      <div class="alert alert-info" style="margin-bottom: 5px;">
+        <?php echo 'Gunakan untuk mengelola <b>Role</b> user dan tentukan <b>Hak Akses</b> untuk tiap Role' ?>
       </div>
 
-      <table class="table table-condensed table-hover">
+      <table class="table table-hover CSSTable" id="tbrole" style="margin-bottom:0px;">
         <thead>
           <tr>
             <th>#</th>
-            <th><?php echo lang('roles_column_role'); ?></th>
-            <th><?php echo lang('roles_column_users'); ?></th>
-            <th><?php echo lang('roles_permission'); ?></th>
+            <th><?php echo 'Role' ?></th>
+            <th><?php echo 'User' ?></th>
+            <th><?php echo 'Jumlah Hak Akses' ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_roles') ): ?>
-                <?php echo anchor('account/manage_roles/save', lang('website_create'), 'class="btn btn-primary btn-small"'); ?>
+                <?php echo anchor('account/manage_roles/save', 'Create', 'class="btn btn-primary"'); ?>
               <?php endif; ?>
             </th>
           </tr>
@@ -53,7 +44,7 @@
               <td>
                 <?php echo $role['name']; ?>
                 <?php if( $role['is_disabled'] ): ?>
-                  <span class="label label-important"><?php echo lang('roles_banned'); ?></span>
+                  <span class="label label-important"><?php echo 'Banned'; ?></span>
                 <?php endif; ?>
               </td>
               <td>
@@ -67,16 +58,12 @@
                 <?php if( count($role['perm_list']) == 0 ) : ?>
                   <span class="label">No Permissions</span>
                 <?php else : ?>
-                  <ul class="inline">
-                    <?php foreach( $role['perm_list'] as $itm ) : ?>
-                      <li><?php echo anchor('account/manage_permissions/save/'.$itm['id'], $itm['key'], 'title="'.$itm['title'].'"'); ?></li>
-                    <?php endforeach; ?>
-                  </ul>
+                  <span class="label label-info"><?php echo count($role['perm_list']); ?> Permissions</span>
                 <?php endif; ?>
               </td>
               <td>
                 <?php if( $this->authorization->is_permitted('update_roles') ): ?>
-                  <?php echo anchor('account/manage_roles/save/'.$role['id'], lang('website_update'), 'class="btn btn-small"'); ?>
+                  <?php echo anchor('account/manage_roles/save/'.$role['id'], 'Update', 'class="btn"'); ?>
                 <?php endif; ?>
               </td>
             </tr>
@@ -90,5 +77,25 @@
 
 <?php echo $this->load->view('template/footer'); ?>
 
+<script type="text/javascript">
+  var oTable = $('#tbrole').dataTable( {
+    "sScrollY": "200px",
+    "sScrollYInner": "110%",
+    "sScrollX": "100%", //panjang width
+    "sScrollXInner": "100%", //overflow dalem
+    "bPaginate": false,
+    "bLengthChange": false,
+    "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "Search Role",
+         "sLengthMenu": "",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
+    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+} );
+</script>
+
+</script>
 </body>
 </html>

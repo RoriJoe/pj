@@ -7,8 +7,8 @@
     </thead>
     
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
+    <?php foreach($hasil as $row):?>
+    <?php
         echo "<tr>
             <td>$row->Kode_satuan</td>
             <td>$row->Value</td>
@@ -17,11 +17,13 @@
                 <a class='btn popup list-edit'
                     kode='$row->Kode_satuan'
                     satuan='$row->Value'
-                ><i class='icon-pencil'></i></a>
-             <a class='btn delete list-edit' name='$row->Kode_satuan' nama='$row->Value'><i class='icon-trash'></i></a></div>
+                ><i class='icon-pencil'></i></a>"?>
+            <?php if ($this->authorization->is_permitted('delete_satuan')) : ?>
+                <?php echo"<a class='btn delete list-edit' name='$row->Kode_satuan' nama='$row->Value'><i class='icon-trash'></i></a></div>"?>
+            <?php endif; ?>
             </td>
-        </tr>";
-    } ?>
+        </tr>
+    <?php endforeach; ?>
 
     </tbody>    
 </table>
@@ -37,8 +39,11 @@ $('.popup').click(function(){
     $('#kd').val(kd);
     $('#nm').val(nm);
     
-    $('#save').attr('mode','edit');  
-    key();
+    <?php if ($this->authorization->is_permitted('update_satuan')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
     jQuery(".hide-con").show(); 
 });
 

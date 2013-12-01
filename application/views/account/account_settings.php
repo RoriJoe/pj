@@ -2,16 +2,7 @@
 <html>
 <head>
     <title>User Management - Pelita Jaya</title>
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-    
-    
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+    <?php echo $this->load->view('template/head_import'); ?>  
 </head>
 <body>
 
@@ -34,8 +25,6 @@
 	<?php } ?>
 
 <h2><?php echo 'Account Settings'; ?></h2>
-
-<div class="alert alert-info"><?php echo 'Silahkan isi data diri anda dengan sebenar-benarnya.'?></div>
 
 <?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 
@@ -87,12 +76,27 @@
     </div>
 </div>
 
+<div class="control-group <?php echo (form_error('settings_phone')) ? 'error' : ''; ?>">
+    <label class="control-label" for="settings_phone"><?php echo 'Handphone'; ?></label>
+
+    <div class="controls">
+        <?php echo form_input(array('name' => 'settings_phone','style' => 'width:160px;', 'id' => 'settings_phone', 'value' => set_value('settings_phone') ? set_value('settings_phone') : (isset($account_details->phone) ? $account_details->phone : ''), 'maxlength' => 15)); ?>
+        <?php if (form_error('settings_phone'))
+    {
+        ?>
+        <span class="help-inline">
+                    <?php echo form_error('settings_phone'); ?>
+                    </span>
+        <?php } ?>
+    </div>
+</div>
+
 <div class="control-group <?php echo isset($settings_dob_error) ? 'error' : ''; ?>">
     <label class="control-label" for="settings_dateofbirth"><?php echo 'Tanggal Lahir'; ?></label>
 
     <div class="controls">
 		<?php $m = $this->input->post('settings_dob_month') ? $this->input->post('settings_dob_month') : (isset($account_details->dob_month) ? $account_details->dob_month : ''); ?>
-        <select name="settings_dob_month" class="input-small">
+        <select name="settings_dob_month" class="input-small" style="width:105px;">
             <option value=""><?php echo 'Bulan' ?></option>
             <option value="1"<?php if ($m == 1) echo ' selected="selected"'; ?>><?php echo 'Januari'; ?></option>
             <option value="2"<?php if ($m == 2) echo ' selected="selected"'; ?>><?php echo 'Februari'; ?></option>
@@ -108,14 +112,14 @@
             <option value="12"<?php if ($m == 12) echo ' selected="selected"'; ?>><?php echo 'Desember' ?></option>
         </select>
 		<?php $d = $this->input->post('settings_dob_day') ? $this->input->post('settings_dob_day') : (isset($account_details->dob_day) ? $account_details->dob_day : ''); ?>
-        <select name="settings_dob_day" class="input-small">
+        <select name="settings_dob_day" class="input-small" style="width:60px;">
             <option value="" selected="selected"><?php echo 'Hari' ?></option>
 			<?php for ($i = 1; $i < 32; $i ++) : ?>
             <option value="<?php echo $i; ?>"<?php if ($d == $i) echo ' selected="selected"'; ?>><?php echo $i; ?></option>
 			<?php endfor; ?>
         </select>
 		<?php $y = $this->input->post('settings_dob_year') ? $this->input->post('settings_dob_year') : (isset($account_details->dob_year) ? $account_details->dob_year : ''); ?>
-        <select name="settings_dob_year" class="input-small">
+        <select name="settings_dob_year" class="input-small" style="width:70px;">
             <option value=""><?php echo 'Tahun' ?></option>
 			<?php $year = mdate('%Y', now()); for ($i = $year; $i > 1930; $i --) : ?>
             <option value="<?php echo $i; ?>"<?php if ($y == $i) echo ' selected="selected"'; ?>><?php echo $i; ?></option>
@@ -173,11 +177,14 @@
 		<?php } ?>
     </div>
 </div>
-
-<div class="form-actions">
-    <button type="submit" class="btn btn-small btn-primary"><?php echo 'Save' ?></button>
-    <button type="reset" class="btn btn-small">Cancel</button>
-</div>
+<?php if( $this->authorization->is_permitted('update_setting') ): ?>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-small btn-primary"><?php echo 'Save' ?></button>
+        <button type="reset" class="btn btn-small">Cancel</button>
+    </div>
+<?php else: ?>
+    <div class="alert alert-info"><?php echo '<b>View Mode.</b> Anda tidak memiliki hak akses untuk mengganti informasi akun user, hubungi <b>Admin</b> untuk perubahan informasi Akun.' ?></div>
+<?php endif; ?>
 
 
 <?php echo form_close(); ?>

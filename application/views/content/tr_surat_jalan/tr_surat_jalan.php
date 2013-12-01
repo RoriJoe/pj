@@ -68,10 +68,21 @@
 
             <div style="margin-top: 10px;">
                 <!--<button id="show" class="btn btn-info popup3" type="button">Show Product</button>-->
-                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-                <button id="cancel" class="btn" type="reset">Cancel</button>
-                <button id="delete" class="btn" type="submit">Delete</button>
-                <button id="print" class="btn" data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i> Print</button>
+                <?php if ($this->authorization->is_permitted('create_surat_jalan') == true && $this->authorization->is_permitted('update_surat_jalan') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_surat_jalan') == true && $this->authorization->is_permitted('create_surat_jalan') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_surat_jalan') == true && $this->authorization->is_permitted('create_surat_jalan') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_surat_jalan')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
+                <button id="cancel" class="btn">Cancel</button>
+                <?php if ($this->authorization->is_permitted('print_surat_jalan')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Surat Jalan"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
 
                 <div  class="pull-right">
                 <button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SJ</button>
@@ -115,18 +126,31 @@
 var flag=0;
 
 jQuery(document).ready(function() {
-$( "#_tgl" ).datepicker( "setDate", new Date());
+    $( "#_tgl" ).datepicker( "setDate", new Date());
     listSJ();
-    listBarang();
     autogen();
     validation();
     barAnimation();
+    get_so_list();
+    change();
+    listBarang();
     $("#po").attr('disabled',true);
     $("#pn").attr('disabled',true);
-    get_so_list();
     document.getElementById("ambil").checked=true;
-    change();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_surat_jalan') == true && $this->authorization->is_permitted('update_surat_jalan') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_surat_jalan') == true && $this->authorization->is_permitted('create_surat_jalan') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 $(function() {
     $( "#_tgl").datepicker({
@@ -146,12 +170,14 @@ function addBarang(){
 }
 
 function resetForm(){
-    document.getElementById('save').style.visibility = 'visible';
-    document.getElementById('print').style.visibility = 'visible';
+    //document.getElementById('save').style.visibility = 'visible';
+    //document.getElementById('print').style.visibility = 'visible';
+    //$("#save").attr('disabled',true);
+    $("#print").attr('disabled',false);
     document.getElementById('batal').style.visibility = 'hidden';
     document.getElementById('f_plg').style.visibility = 'visible';
 
-    $('#save').attr('mode','add');
+    cekauthorization();
     $('#save').attr('disabled',false);
     $('#delete').attr('disabled',true);
     $('#_do').attr('disabled',false);
@@ -166,9 +192,8 @@ function resetForm(){
 //Auto Generate
 function autogen(){
     $('#sj').attr('disabled',false);
-    $('#save').attr('mode','add');
     $('#delete').attr('disabled',true);
-
+    cekauthorization();
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_surat_jalan/ang",
@@ -179,8 +204,6 @@ function autogen(){
         }
     });
 }
-
-
 
 function listSJ(){
     $.ajax({
@@ -426,13 +449,17 @@ function cek_kirim(){
 function cek_batal(){
     var id = $('#_do').val();
     if(id === "(BATAL)"){
-        document.getElementById('save').style.visibility = 'hidden';
+        //document.getElementById('save').style.visibility = 'hidden';
         document.getElementById('batal').style.visibility = 'hidden';
-        document.getElementById('print').style.visibility = 'hidden';
+        //document.getElementById('print').style.visibility = 'hidden';
+        $("#save").attr('disabled',false);
+        $("#print").attr('disabled',false);
     }else{
         document.getElementById('batal').style.visibility = 'visible';
-        document.getElementById('save').style.visibility = 'visible';
-        document.getElementById('print').style.visibility = 'visible';
+        //document.getElementById('save').style.visibility = 'visible';
+        //document.getElementById('print').style.visibility = 'visible';
+        $("#save").attr('disabled',true);
+        $("#print").attr('disabled',true);
     }
 }
 
@@ -495,7 +522,7 @@ $("#cancel").click(function(){
 			with(win.document)
 			{
 			  open();
-			   win.document.title="Surat Jalan "+tgl;
+              win.document.title="Surat Jalan "+tgl;
 			  write(msg);
 			  close();
               win.print();

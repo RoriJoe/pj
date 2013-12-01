@@ -3,6 +3,7 @@
         function __construct(){
             parent::__construct();
             $this->load->model('ms_perkiraan_model');
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
         function index(){
             $data['hasil']=$this->ms_perkiraan_model->get_paged_list();
