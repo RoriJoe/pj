@@ -19,19 +19,26 @@
 
 <script type="text/javascript">
 $('#tb2 tbody tr').click(function (e) {
-    $('#delete').attr('disabled', false);
-    $("#_so").attr('disabled',true);
-    
     var id = $(this).attr("_no_do"); 
     $('#_so').val(id);
+    $("#_so").attr('disabled',true);
 	
     retrieveForm(id);
     tampilDetailSO();
-    $('#add').attr('mode','edit');
-    $('#save').attr('mode','edit');
-    $('#cancel').attr('disabled',false);
+    
     document.getElementById('add').style.visibility = 'hidden';
     document.getElementById('f_plg').style.visibility = 'hidden';
+
+    <?php if ($this->authorization->is_permitted('update_so')) : ?>
+        $('#add').attr('mode','edit');
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
+
+    $('#delete').attr('disabled', false);
+    $('#cancel').attr('disabled',false);
+
     jQuery(".hide-con").show();
 });
     

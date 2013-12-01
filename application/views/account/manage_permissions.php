@@ -2,16 +2,7 @@
 <html>
 <head>
     <title>User Management - Pelita Jaya</title>
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-    
-    
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+    <?php echo $this->load->view('template/head_import'); ?>
 </head>
 <body>
 
@@ -26,22 +17,22 @@
 
     <div class="span10">
 
-      <h2><?php echo lang('permissions_page_name'); ?></h2>
+      <h2><?php echo 'Manage Permission' ?></h2>
 
-      <div class="well">
-        <?php echo lang('permissions_page_description'); ?>
+      <div class="alert alert-info" style="margin-bottom: 5px;">
+        <?php echo 'Gunakan untuk mengelola Hak akses user' ?>
       </div>
 
-      <table class="table table-condensed table-hover">
+      <table class="table table-hover CSSTable" id="tbpermission" style="margin-bottom:0px;">
         <thead>
           <tr>
             <th>#</th>
-            <th><?php echo lang('permissions_column_permission'); ?></th>
-            <th><?php echo lang('permissions_description'); ?></th>
-            <th><?php echo lang('permissions_column_inroles'); ?></th>
+            <th><?php echo 'Key Permission'; ?></th>
+            <th><?php echo 'Deskripsi'; ?></th>
+            <th><?php echo 'In Roles'; ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_users') ): ?>
-                <a href="account/manage_permissions/save" class="btn btn-primary btn-small">Create<a>
+                <a href="<?php echo base_url();?>account/manage_permissions/save" class="btn btn-primary">Create<a>
               <?php endif; ?>
             </th>
           </tr>
@@ -70,7 +61,7 @@
               </td>
               <td>
                 <?php if( $this->authorization->is_permitted('update_permissions') ): ?>
-                  <?php echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"'); ?>
+                  <?php echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn"'); ?>
                 <?php endif; ?>
               </td>
             </tr>
@@ -84,5 +75,23 @@
 
 <?php echo $this->load->view('template/footer'); ?>
 
+<script type="text/javascript">
+  var oTable = $('#tbpermission').dataTable( {
+    "sScrollY": "400px",
+    "sScrollYInner": "110%",
+    "sScrollX": "100%", //panjang width
+    "sScrollXInner": "100%", //overflow dalem
+    "bPaginate": false,
+    "bLengthChange": false,
+    "aaSorting": [[ 4, "desc" ]],
+    "oLanguage": {
+         "sSearch": "Search",
+         "sLengthMenu": "",
+         "sEmptyTable": "Tidak ada data tersedia",
+         "sZeroRecords": "Data tidak ditemukan"
+       },
+    "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
+} );
+</script>
 </body>
 </html>

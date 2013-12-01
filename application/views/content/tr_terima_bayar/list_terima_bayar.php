@@ -44,13 +44,16 @@ $('#tbl_list tbody tr').click(function (e) {
     $('#_pn').val(nama);
 
     
-    $('#save').attr('mode','edit');
+    <?php if ($this->authorization->is_permitted('update_tagihan')) : ?>
+        $('#add').attr('mode','edit');
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
+
 	detail_pembayaran();
 	detail_invoice();
     detail_SO();
-	
-	
-	
 });
 
 

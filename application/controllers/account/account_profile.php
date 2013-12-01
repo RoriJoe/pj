@@ -67,9 +67,6 @@ class Account_profile extends CI_Controller {
 			switch( $this->input->post('pic_selection') )
 			{
 				case "gravatar":
-
-					//$this->account_details_model->update($data['account']->id, array('picture' => $data['gravatar']));
-					//redirect( current_url() );
 					
 				break;
 				

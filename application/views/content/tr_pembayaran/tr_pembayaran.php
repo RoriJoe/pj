@@ -51,13 +51,24 @@
             <div id="konfirmasi" class="sukses"></div>
 
             <div>
-                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-                <button id="delete" class="btn">Delete</button>
+                <?php if ($this->authorization->is_permitted('create_bayar') == true && $this->authorization->is_permitted('update_bayar') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_bayar') == true && $this->authorization->is_permitted('create_bayar') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_bayar') == true && $this->authorization->is_permitted('create_bayar') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_bayar')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
                 <button id="cancel" class="btn">Cancel</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Print Invoice"><i class="icon-print"></i> Print</button>
+                <?php if ($this->authorization->is_permitted('print_bayar')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Pembayaran"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
+
                 <a href='#'id="addBank" mode="new" class="btn" title="Tambah JenisBank" onclick="addBank()" style="margin-left:30px;"><i class="icon-plus"></i> Bank</a>
                 <input type="hidden" id="kdban" />
-
             </div>
         </div>
     </div>
@@ -91,19 +102,6 @@
   <div class="modal-body">
     <div id="list_supplier"></div>
   </div>
-  <div class="modal-footer">
-    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
-  </div>
-</div>
-
-<div id="modalNewPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Tambah Pelanggan</h3>
-  </div>
-  <div class="modal-body">
-    <div id="add_pelanggan"></div>
-  </div>
 </div>
 
 <!--Le Script-->
@@ -133,6 +131,19 @@ $( "#_tgl1" ).datepicker( "setDate", new Date());
 	document.getElementById('add2').style.visibility = 'hidden'; */
 	document.getElementById('addBank').style.visibility = 'hidden'; 
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_bayar') == true && $this->authorization->is_permitted('update_bayar') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_bayar') == true && $this->authorization->is_permitted('create_bayar') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 function list_terima_bayar(){
     $.ajax({
@@ -332,7 +343,7 @@ function reset_form(){
 	detail_invoice();
     $('#total1').val('');
     $('#total').val('');
-    $('#save').attr('mode','add');
+    cekauthorization();
 }
 //Cancel
 $("#cancel").click(function(){

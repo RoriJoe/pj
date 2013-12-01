@@ -140,31 +140,35 @@ class Manage_users extends CI_Controller {
       array(
         array(
           'field' => 'users_username',
-          'label' => 'lang:profile_username',
+          'label' => 'Username',
           'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]'),
         array(
           'field' => 'users_email', 
-          'label' => 'lang:settings_email', 
+          'label' => 'Email', 
           'rules' => 'trim|required|valid_email|max_length[160]'), 
         array(
           'field' => 'users_fullname', 
-          'label' => 'lang:settings_fullname', 
+          'label' => 'Nama Lengkap', 
           'rules' => 'trim|max_length[160]'), 
         array(
           'field' => 'users_firstname', 
-          'label' => 'lang:settings_firstname', 
+          'label' => 'Nama Depan', 
           'rules' => 'trim|max_length[80]'), 
         array(
           'field' => 'users_lastname', 
-          'label' => 'lang:settings_lastname', 
+          'label' => 'Nama Belakang', 
           'rules' => 'trim|max_length[80]'),
         array(
+          'field' => 'users_phone', 
+          'label' => 'Nomor Handphone', 
+          'rules' => 'trim|max_length[15]|numeric'),
+        array(
           'field' => 'users_new_password', 
-          'label' => 'lang:password_new_password', 
+          'label' => 'Password', 
           'rules' => 'trim|'.($is_new?'required':'optional').'|min_length[6]'),
         array(
           'field' => 'users_retype_new_password', 
-          'label' => 'lang:password_retype_new_password', 
+          'label' => 'Konfirmasi Password', 
           'rules' => 'trim|'.($is_new?'required':'optional').'|matches[users_new_password]')
       ));
 
@@ -179,12 +183,12 @@ class Manage_users extends CI_Controller {
       // if this is a new user, just check if it's been taken already.
       if ( (! empty($id) && strtolower($this->input->post('users_email', TRUE)) != strtolower($data['update_account']->email) && $email_taken) || (empty($id) && $email_taken) )
       {
-        $data['users_email_error'] = lang('settings_email_exist');
+        $data['users_email_error'] = 'Email telah digunakan';
       }
       // Check if user name is taken
       elseif ( (! empty($id) && strtolower($this->input->post('users_username', TRUE)) != strtolower($data['update_account']->username) && $username_taken) || (empty($id) && $username_taken) )
       {
-        $data['users_username_error'] = lang('sign_up_username_taken');
+        $data['users_username_error'] = 'Username sudah digunakan';
       }
       else
       {
@@ -233,6 +237,7 @@ class Manage_users extends CI_Controller {
         $attributes['fullname'] = $this->input->post('users_fullname', TRUE) ? $this->input->post('users_fullname', TRUE) : NULL;
         $attributes['firstname'] = $this->input->post('users_firstname', TRUE) ? $this->input->post('users_firstname', TRUE) : NULL;
         $attributes['lastname'] = $this->input->post('users_lastname', TRUE) ? $this->input->post('users_lastname', TRUE) : NULL;
+        $attributes['phone'] = $this->input->post('users_phone', TRUE) ? $this->input->post('users_phone', TRUE) : NULL;
         $this->account_details_model->update($id, $attributes);
 
         // Apply roles

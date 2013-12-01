@@ -1,4 +1,4 @@
-<ul class="nav nav-list">
+<ul class="nav nav-list" >
   <li class="nav-header">Account Info</li>
   <li class="<?php echo ($current == 'account_profile') ? 'active' : ''; ?>"><?php echo anchor('account/account_profile', 'Manage Profile'); ?></li>
   

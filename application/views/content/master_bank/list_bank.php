@@ -7,9 +7,9 @@
     </thead>
 
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
-        echo "<tr>
+    <?php foreach($hasil as $row):?>
+
+    <?php echo "<tr>
             <td>$row->kode_bank</td>
             <td>$row->nama_bank</td>
             <td>
@@ -18,12 +18,14 @@
                             kode='$row->kode_bank'
                             nama='$row->nama_bank'
                             alamat='$row->alamat'
-                    ><i class='icon-pencil'></i></a>
-                    <a class='btn delete list-edit' kode='$row->kode_bank' nama='$row->nama_bank'><i class='icon-trash'></i></a>
-                </div>
+                    ><i class='icon-pencil'></i></a>"?>
+                <?php if ($this->authorization->is_permitted('delete_bank')) : ?>
+                    <?php echo"<a class='btn delete list-edit' kode='$row->kode_bank' nama='$row->nama_bank'><i class='icon-trash'></i></a>
+                    </div>"?>
+                <?php endif; ?>
             </td>
-        </tr>";
-    } ?>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
 </div>
@@ -39,11 +41,14 @@ $('.edit').click(function(){
     $('#_al').val(alamat);
     
     $("#_kd").attr('disabled',true);
-    $('#save').attr('mode','edit');
+    <?php if ($this->authorization->is_permitted('update_bank')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
 
     detailBank();
     document.getElementById('rek').style.visibility = 'hidden';
-    key();
     jQuery(".hide-con").show();
 });
 

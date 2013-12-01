@@ -42,11 +42,22 @@
             <div id="konfirmasi" class="sukses"></div>
 
             <div style="margin-top: 10px;"> 
-                <button id="save" mode="add" class="btn btn-primary" type="submit">Save</button>
-                <button id="delete" class="btn" type="submit">Delete</button>
-                <button id="cancel" class="btn" type="submit">Cancel</button>
+                <?php if ($this->authorization->is_permitted('create_stock') == true && $this->authorization->is_permitted('update_stock') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_stock') == true && $this->authorization->is_permitted('create_stock') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_stock') == true && $this->authorization->is_permitted('create_stock') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
 
-                <button id="print" class="btn" data-toggle="tooltip" title="Print Penerimaan Barang"><i class="icon-print"></i> Print</button>
+                <?php if ($this->authorization->is_permitted('delete_stock')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
+                <button id="cancel" class="btn">Cancel</button>
+                <?php if ($this->authorization->is_permitted('print_stock')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Stock Opname"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
+
                 <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
 
                 <div class="btn-group dropup pull-right" id="selList">
@@ -74,7 +85,9 @@
     <div id="list_gudang"></div>
   </div>
   <div class="modal-footer">
-    <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+    <?php if ($this->authorization->is_permitted('create_gudang')) : ?>
+        <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+    <?php endif;?>
   </div>
 </div>
 
@@ -116,6 +129,19 @@ $(document).ready(function(){
     validation();	
     resetForm();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_stock') == true && $this->authorization->is_permitted('update_stock') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_stock') == true && $this->authorization->is_permitted('create_stock') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
 
 function autogen(){
     $.ajax({
@@ -294,7 +320,7 @@ function resetForm(){
     $( "#_tgl" ).datepicker( "setDate", new Date());
     $('#delete').attr('disabled', true);
     $("#noSaw").attr('disabled',false);
-    $('#save').attr('mode','add');
+    cekauthorization();
     $('#cancel').attr('disabled',false);
     $('#save').attr('disabled',false);
 }

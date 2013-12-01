@@ -47,7 +47,43 @@ class Account_settings extends CI_Controller {
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
-		$this->form_validation->set_rules(array(array('field' => 'settings_email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|max_length[160]'), array('field' => 'settings_fullname', 'label' => 'Nama Lengkap', 'rules' => 'trim|max_length[160]'), array('field' => 'settings_firstname', 'label' => 'Nama Depan', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_lastname', 'label' => 'Nama Belakang', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_address', 'label' => 'Alamat', 'rules' => 'trim|max_length[200]'), array('field' => 'settings_postalcode', 'label' => 'Kode Pos', 'rules' => 'trim|max_length[40]')));
+		$this->form_validation->set_rules(array
+			(array(
+				'field' => 'settings_email', 
+				'label' => 'Email', 
+				'rules' => 'trim|required|valid_email|max_length[160]'
+				), 
+			array(
+				'field' => 'settings_fullname', 
+				'label' => 'Nama Lengkap', 
+				'rules' => 'trim|max_length[160]'
+				), 
+			array(
+				'field' => 'settings_firstname', 
+				'label' => 'Nama Depan', 
+				'rules' => 'trim|max_length[80]'
+				), 
+			array(
+				'field' => 'settings_lastname', 
+				'label' => 'Nama Belakang', 
+				'rules' => 'trim|max_length[80]'
+				), 
+			array(
+				'field' => 'settings_phone', 
+				'label' => 'Handphone', 
+				'rules' => 'trim|max_length[15]'
+				),
+			array(
+				'field' => 'settings_address', 
+				'label' => 'Alamat', 
+				'rules' => 'trim|max_length[200]'
+				), 
+			array(
+				'field' => 'settings_postalcode', 
+				'label' => 'Kode Pos', 
+				'rules' => 'trim|max_length[40]'
+				)
+			));
 
 		// Run form validation
 		if ($this->form_validation->run())
@@ -75,6 +111,7 @@ class Account_settings extends CI_Controller {
 				$attributes['fullname'] = $this->input->post('settings_fullname', TRUE) ? $this->input->post('settings_fullname', TRUE) : NULL;
 				$attributes['firstname'] = $this->input->post('settings_firstname', TRUE) ? $this->input->post('settings_firstname', TRUE) : NULL;
 				$attributes['lastname'] = $this->input->post('settings_lastname', TRUE) ? $this->input->post('settings_lastname', TRUE) : NULL;
+				$attributes['phone'] = $this->input->post('settings_phone', TRUE) ? $this->input->post('settings_phone', TRUE) : NULL;
 				$attributes['address'] = $this->input->post('settings_address', TRUE) ? $this->input->post('settings_address', TRUE) : NULL;
 				$attributes['gender'] = $this->input->post('settings_gender', TRUE) ? $this->input->post('settings_gender', TRUE) : NULL;
 				$attributes['postalcode'] = $this->input->post('settings_postalcode', TRUE) ? $this->input->post('settings_postalcode', TRUE) : NULL;

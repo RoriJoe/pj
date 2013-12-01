@@ -105,7 +105,9 @@ $("#print").click(function(){
 				<input type="text" id="_tgl" name="_tgl" style="width: 65px;" value="<?php echo date('01-m-Y');?>"/> s/d <input type="text" id="_tgl2" name="_tgl2" style="width: 65px;" value="<?php echo date('d-m-Y');?>"/>
 			</div>
 			<div style="margin-top: 10px;">
+			<?php if ($this->authorization->is_permitted('print_report_terima')) : ?>
 				<input role="button" type="button" class="btn btn-primary"  id="print" value="Print">	
+			<?php endif; ?>
 				<!--<input role="button" type="submit" class="btn btn-primary"  value="Print">-->
 				<input role="button" type="button" class="btn"  id="view" value="Preview">	
 				

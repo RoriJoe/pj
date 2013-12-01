@@ -9,20 +9,21 @@
     </thead>
     
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
-        echo "<tr>
+    <?php foreach($hasil as $row):?>
+        <?php echo "<tr>
             <td>$row->nomoraccount</td>
             <td>$row->namaaccount</td>
             <td>$row->type</td>
             <td>$row->level</td>
             <td>
             <div class='btn-group'>
-                <a class='btn popup' style='padding: 0px 3px;'kode='$row->nomoraccount'><i class='icon-pencil'></i></a>
-                <a class='btn delete' name='$row->nomoraccount' nama='$row->namaaccount' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>
+                <a class='btn popup' style='padding: 0px 3px;'kode='$row->nomoraccount'><i class='icon-pencil'></i></a>"?>
+            <?php if ($this->authorization->is_permitted('delete_perkiraan')) : ?>
+                <?php echo"<a class='btn delete' name='$row->nomoraccount' nama='$row->namaaccount' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>"?>
+            <?php endif; ?>
             </td>
-        </tr>";
-    } ?>
+        </tr>
+    <?php endforeach; ?>
 
     </tbody>    
 </table>
@@ -36,7 +37,11 @@ $('.popup').click(function(){
     $('#NoAccount').val(kd);
 
     
-    $('#save').attr('mode','edit');  
+    <?php if ($this->authorization->is_permitted('update_perkiraan')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
     retrieveForm(kd);
     jQuery(".hide-con").show(); 
 });

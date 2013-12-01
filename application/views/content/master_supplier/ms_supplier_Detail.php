@@ -7,10 +7,10 @@
     </thead>
     
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
-        $limit = number_format($row->Limit_Kredit,0,",",".");
-        echo "<tr>
+    <?php foreach($hasil as $row):?>
+        <?php 
+            $limit = number_format($row->Limit_Kredit,0,",",".");
+            echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Perusahaan</td>
             <td>
@@ -27,12 +27,13 @@
                     fax='$row->Fax1'
                     fax1='$row->Fax2'
                     limit='$limit'
-             ><i class='icon-pencil'></i></a>
-             <a class='btn delete list-edit' name='$row->Kode' pr='$row->Perusahaan'><i class='icon-trash'></i></a></div>
-            </div>
+             ><i class='icon-pencil'></i></a>"?>
+             <?php if ($this->authorization->is_permitted('delete_supplier')) : ?>
+                <?php echo"<a class='btn delete list-edit' name='$row->Kode' pr='$row->Perusahaan'><i class='icon-trash'></i></a></div>"?>
+            <?php endif;?>
             </td>
-        </tr>";
-    } ?>
+        </tr>
+    <?php endforeach; ?>
     </tbody>    
 </table>
 </div>
@@ -66,8 +67,11 @@ $('.edit').click(function(){
     $('#fx1').val(fx);
     $('#fx2').val(fx1);
     
-    $('#save').attr('mode','edit');
-    key();
+    <?php if ($this->authorization->is_permitted('update_supplier')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
     jQuery(".hide-con").show();
 });
 

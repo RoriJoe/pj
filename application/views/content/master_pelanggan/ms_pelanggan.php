@@ -9,25 +9,25 @@
         <form id="formID">
             <table>
                 <tr>
-                    <td style="width:70px">Kode</td>
-                    <td><input type='text' class="validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]] upper-form" maxlength="20" id='kd' name='kd'
-                        style="width:95px;">
-                    </td>
-                    <td style="width:100px">Perusahaan</td>
+                    <td>Kode</td>
                     <td>
-                        <input type='text' class="validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr' style="width: 125px;">
+                        <input type='text' class="form125 validate[required,maxSize[20], minSize[3]],custom[onlyLetterNumber]] upper-form" maxlength="20" id='kd' name='kd'>
+                    </td>
+                    <td>Perusahaan</td>
+                    <td>
+                        <input type='text' class="form150 validate[required,maxSize[50], minSize[2]]]" maxlength="50" id='pr' name='pr'>
                     </td>
                 </tr>
                 <tr>
                     <td>NPWP</td>
-                    <td style="padding-right:10px;">
-                        <input type='text' class="validate[required]" maxlength="25" id='np' name='np' onclick="disableAlpha('np')" style="width:135px; margin-left:0;">
+                    <td>
+                        <input type='text' class="form125 validate[required]" maxlength="25" id='np' name='np' onclick="disableAlpha('np')">
                     </td>
                     <td>
                         Contact Person
                     </td>
                     <td>
-                        <input type='text' class="validate[required, maxSize[25], minSize[3]],custom[onlyLetterSp]]" maxlength="25" id='cp' name='cp' onclick="disableNum('cp')" style="width: 125px;">
+                        <input type='text' class="form150 validate[required, maxSize[25], minSize[3]],custom[onlyLetterSp]]" maxlength="25" id='cp' name='cp' onclick="disableNum('cp')">
                     </td>
                 </tr>
                 <tr>
@@ -35,51 +35,75 @@
                     <td>
                         <div class="input-prepend" style="margin-bottom: 0; display:inline-block;">
                           <span class="add-on" style="padding: 4px;margin-bottom:5px;">Rp</span>
-                          <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 125px; text-align:right" onkeyup="formatAngka(this,'.')" >
+                          <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 115px; text-align:right" onkeyup="formatAngka(this,'.')" >
                         </div>
                     </td>
-                    <td colspan="2">Terms
-                        <input  type='text' 
-                            class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' 
-                            style="width: 30px;margin-left: 1px;"> Hari
+                    <td rowspan="3" colspan="2">
+                        <table>
+                            <tr>
+                                <td>Terms</td>
+                                <td>
+                                    <input  type='text' class="validate[required,custom[onlyNumberSp]]" maxlength="4" id='term' name='term' style="width: 30px;margin-left: 1px;"> Hari
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kota</td>
+                                <td>
+                                    <input type='text' class="form100 validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kode Pos</td>
+                                <td>
+                                    <input type='text' class="validate[required, maxSize[5], minSize[5]],custom[onlyNumberSp]]" maxlength="5" id='kp' name='kp' style="width: 60px;" onclick="disableAlpha('kp')">
+                                </td>
+                            </tr>
+                        </table>
                     </td>
+                    
                 </tr>
                 <tr>
                     <td rowspan="2">Alamat</td>
                     <td rowspan="2">
-                        <textarea rows="3" class="validate[required]" id='al' name='al' style="resize:none; width:135px;"></textarea>
+                        <textarea rows="3" class="validate[required]" id='al' name='al' style="resize:none; width:125px;"></textarea>
                     </td>
-                    <td colspan="2">Kota
-                        <input type='text' class="validate[required, maxSize[15], minSize[3]],custom[onlyLetterSp]]" maxlength="15" id='kt' name='kt' style="width: 80px; margin-left: 10px;">
-                    </td>
+                    
                 </tr>
                 <tr>
-                    <td colspan="2">Kode Pos
-                        <input type='text' class="validate[required, maxSize[5], minSize[5]],custom[onlyNumberSp]]" maxlength="5" id='kp' name='kp' style="width: 60px;" onclick="disableAlpha('kp')">
-                    </td>
+                    
                 </tr>
                 <tr>
                     <td>
                         Telp
                     </td>
                     <td colspan="3">
-                        <input type='text' placeholder="Telp 1" class="validate[required, minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')" style="width:110px;">
-                        <input type='text' placeholder="Telp 2" class="validate[minSize[5]],custom[phone]]" maxlength="20" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')" style="width:110px;">
-                        <input type='text' placeholder="Telp 3" class="validate[minSize[5]],custom[phone]]" maxlength="20" id='tl3' name='tl3' value="" onclick="disableAlpha('tl3')" style="width:110px;">
+                        <input type='text' placeholder="Telp 1" class="form120 validate[required, minSize[5]],custom[phone]]" maxlength="20" id='tl1' name='tl1' onclick="disableAlpha('tl1')">
+                        <input type='text' placeholder="Telp 2" class="form120 validate[minSize[5]],custom[phone]]" maxlength="20" id='tl2' name='tl2' value="" onclick="disableAlpha('tl2')">
+                        <input type='text' placeholder="Telp 3" class="form120 validate[minSize[5]],custom[phone]]" maxlength="20" id='tl3' name='tl3' value="" onclick="disableAlpha('tl3')">
                     </td>
                 </tr>
                 <tr>
                     <td>Fax</td>
                     <td colspan="3">
-                        <input type='text' placeholder="Fax 1" class="validate[required, minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')" style="width:110px;">
-                        <input type='text' placeholder="Fax 2" class="validate[minSize[5]],custom[phone]]" id='fx2' maxlength="20" name='fx2' value=""  onclick="disableAlpha('fx2')" style="width:110px;">
+                        <input type='text' placeholder="Fax 1" class="form120 validate[required, minSize[5]],custom[phone]]" maxlength="20" id='fx1' name='fx1' onclick="disableAlpha('fx1')">
+                        <input type='text' placeholder="Fax 2" class="form120 validate[minSize[5]],custom[phone]]" id='fx2' maxlength="20" name='fx2' value=""  onclick="disableAlpha('fx2')">
                     </td>
                 </tr>
             </table>
             <div class="field-wrap action-group">
-                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <button id="cencel" class="btn" type="reset">Cancel</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Pelanggan"><i class="icon-print"></i> Print</button>
+                <div class="field-wrap action-group">
+                    <?php if ($this->authorization->is_permitted('create_pelanggan') == true && $this->authorization->is_permitted('update_pelanggan') == false) : ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php elseif($this->authorization->is_permitted('update_pelanggan') == true && $this->authorization->is_permitted('create_pelanggan') == false): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                    <?php elseif($this->authorization->is_permitted('update_pelanggan') == true && $this->authorization->is_permitted('create_pelanggan') == true): ?>
+                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                    <?php endif; ?>
+                        <button id="cac" class="btn" type="reset">Cancel</button>
+                    <?php if ($this->authorization->is_permitted('print_pelanggan')) : ?>
+                        <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Daftar Pelanggan"><i class="icon-print"></i> Print</button>
+                    <?php endif; ?>
+                </div>
             </div>
         </form>
         <div id="konfirmasi" class="sukses"></div>
@@ -112,13 +136,23 @@ $(document).ready(function()
     autogen();
     barAnimation();
     validation();
-    key();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_pelanggan') == true && $this->authorization->is_permitted('update_pelanggan') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_pelanggan') == true && $this->authorization->is_permitted('create_pelanggan') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
     
 function autogen(){
     $("#kd").attr('disabled',false);
-    $('#save').attr('mode','add');
-    $('button[type="submit"]').attr('disabled','disabled');
     
     $.ajax({
     type:'POST',
@@ -130,6 +164,7 @@ function autogen(){
         }
     });
 }
+
 function formatAngka(objek, separator) {
   a = objek.value;
   b = a.replace(/[^\d]/g,"");
@@ -159,10 +194,7 @@ function conv(input){
     }
     input.value = x1 + x2;
 }
-</script>
 
-
-<script type="text/javascript">
 //buat print
 $("#print").click(function(){
 $.ajax({
@@ -225,12 +257,13 @@ $("#kt").keypress(function(e){
    } 
 });
 
-$("#cencel").click(function(){
-   autogen();
+$("#cac").click(function(){
     $('#formID').each(function(){
         this.reset();
     });
+    autogen();
     $("#kd").attr('disabled',false);
+    cekauthorization();
 });
 
 function retext(){  
@@ -290,8 +323,8 @@ $("#save").click(function(){
                         $('#hasil').html(hh);
                     }
                     });
+                    cekauthorization();
                     autogen();
-                    $('#save').attr('mode','add');
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal Menambahkan</b> Data sudah ada');
@@ -328,8 +361,8 @@ $("#save").click(function(){
                         $('#hasil').html(hh);
                     }
                     });
+                    cekauthorization();
                     autogen();
-                    $('#save').attr('mode','add');
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal Edit</b> Terjadi Kesalahan');

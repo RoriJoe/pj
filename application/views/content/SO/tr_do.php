@@ -6,51 +6,53 @@
         </div>
         <div id="konten" class="hide-con master-border" style="height: 360px;">
         <form id="formID">
-            <div class="field-wrap">
-                Nomor SO
-                <input type='text' class="span-form75 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" 
-                    maxlength="20" id='_so' name='_so'/>
-            </div>
-            <div class="field-wrap">
-                Nomor PO
-                <input type='text' class="validate[custom[onlyLetterNumber]]" 
-                    maxlength="20" id='_po' name='_po' style='width: 120px;'> 
-                <input type='text' class="validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2' 
-                    style="width: 80px;"/>
-            </div>
-            <div class="field-wrap" style="margin-left:10px;">
-                Sales
-                <select name="_sl" class="validate[required]" id="_sl" style="width: 148px; margin-right: 20px;">
-                    <?php
-                    foreach ($list_sales as $isi)
-                    {
-                        echo "<option ";
-                        echo "value = '".$isi->Nama."'>".$isi->Nama."</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <br/>
-            <div class="field-wrap">
-                Tanggal SO
-                <input type='text' class="validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>"
-                    style="width: 80px; margin-right: 20px;"/>
-            </div>
-            <div class="field-wrap">
-                Pelanggan
-                <input type="hidden" id="kd_plg" />
-                    <div class="input-append money" style="margin-bottom:0px;">
-                     <input type='text' class="span2" disabled="disabled"
-                        maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                    <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
-                    </div>
-            </div>
-            <div class="field-wrap" style="margin-left:20px;">
-                Terms
-                <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px;" maxlength="3" id='terms' name='terms'/> Hari
-                <a href='#'id="add" mode="new" class="btn" title="Tambah Barang" onclick="addBarang()" style="margin-left:48px;"><i class="icon-plus"></i> Barang</a>
-            </div>
-            <br/>
+            <table>
+                <tr>
+                    <td>Nomor SO</td>
+                    <td>
+                        <input type='text' class="form100 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_so' name='_so'/>
+                    </td>
+                    <td>Tgl SO</td>
+                    <td>
+                        <input type='text' class="form70 validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>" />
+                    </td>
+                    <td>Pelanggan</td>
+                    <td>
+                        <input type="hidden" id="kd_plg" />
+                        <div class="input-append money" style="margin-bottom:0px;">
+                            <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                            <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                        </div>
+                    </td>
+                    <td>Terms</td>
+                    <td>
+                        <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px;" maxlength="3" id='terms' name='terms'/> Hari
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nomor PO</td>
+                    <td>
+                        <input type='text' class="form100 validate[custom[onlyLetterNumber]]" maxlength="20" id='_po' name='_po'>
+                    </td>
+                    <td>Tgl PO</td>
+                    <td>
+                        <input type='text' class="form70 validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2'/>
+                    </td>
+                    <td>Sales</td>
+                    <td>
+                        <select name="_sl" class="validate[required]" id="_sl" style="width: 160px;">
+                            <?php
+                            foreach ($list_sales as $isi)
+                            {
+                                echo "<option ";
+                                echo "value = '".$isi->Nama."'>".$isi->Nama."</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                    <td colspan="2"><a href='#'id="add" mode="new" class="btn" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i>Add Barang</a></td>
+                </tr>
+            </table>
         </form>
 
         <div id="hasil2" style="height: 170px;"></div>
@@ -96,10 +98,21 @@
             </div>
 
             <div class="field-wrap">
-                <button id="save" mode="add" class="btn btn-primary">Save</button>
-                <button id="delete" class="btn">Delete</button>
+                <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_so')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
                 <button id="cancel" class="btn">Cancel</button>
-                <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+                <?php if ($this->authorization->is_permitted('print_so')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
             </div>
             <!--**NOTIFICATION AREA**-->
             <div id="konfirmasi" class="sukses"></div>
@@ -121,7 +134,9 @@
     <div id="list_pelanggan"></div>
   </div>
   <div class="modal-footer">
-    <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
+    <?php if ($this->authorization->is_permitted('create_pelanggan')) : ?>
+        <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -157,13 +172,27 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function(){
-    listBarang();
     listSO();
     tampilDetailSO();
     autogen();
     validation()
     barAnimation();
+    listBarang();
 });
+
+function cekauthorization(){
+    <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
+        $('#save').attr('mode','add');
+        $("#save").attr('disabled',false);
+    <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == false): ?>
+         $('#save').attr('mode','edit');
+         $("#save").attr('disabled',false);
+    <?php else: ?>
+         $('#save').attr('mode','add');
+         $("#save").attr('disabled',false);
+    <?php endif; ?>
+}
+
 
 /*Tampilkan jQuery Tanggal*/
 $(function() {
@@ -234,8 +263,6 @@ $("#_po").keypress(function(e){
        bootstrap_alert.info('Maksimum Kode 20 Karakter');
    } 
 });
-
-
 
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
@@ -355,8 +382,6 @@ for (i = 0; i< s.options.length; i++)
 return;
 }
 
-
-
 //Table Pelanggan
 function listPelanggan(){
     $.ajax({
@@ -455,7 +480,7 @@ $("#cancel").click(function(){
     autogen();
     tampilDetailSO();
     $('#_so').attr('disabled', false);
-    $('#save').attr('mode','add');
+    cekauthorization();
     document.getElementById('add').style.visibility = 'visible';
 });
 
@@ -607,7 +632,7 @@ $("#save").click(function(){
                     listSO();
 					tampilDetailSO();
 					autogen();
-					$('#save').attr('mode','add');
+					cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal Menambahkan</b> Kode Sales Order sudah ada');
@@ -644,7 +669,7 @@ $("#save").click(function(){
                     listSO();
 					tampilDetailSO();
 					autogen();
-					$('#save').attr('mode','add');
+					cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal</b> Terjadi Kesalahan Kode SO Sudah Ada');
@@ -694,7 +719,7 @@ $("#delete").click(function(){
                                listSO();
                                tampilDetailSO();
                                autogen();
-                               $('#save').attr('mode','add');
+                               cekauthorization();
                             }
                         }
                     });

@@ -178,7 +178,9 @@ function getSupplier(){
         </div>
         <div>
           <!--<input role="button" type="button" class="btn btn-primary"  id="print" value="Print"> -->
-		  <input role="button" type="submit" class="btn btn-primary"  value="Print">
+          <?php if ($this->authorization->is_permitted('print_report_purchase')) : ?>
+		        <input role="button" type="submit" class="btn btn-primary"  value="Print">
+          <?php endif;?>
           <input role="button" type="button" class="btn"  id="view" value="Preview">  
         </div>
       </div>
@@ -199,8 +201,5 @@ function getSupplier(){
   </div>
   <div class="modal-body">
     <div id="list_supplier"></div>
-  </div>
-  <div class="modal-footer">
-    <a href="#modalNewSupplier" role="button" class="btn btn-info" data-toggle="modal" onclick="addSupplier()">Add Supplier</a>
   </div>
 </div>

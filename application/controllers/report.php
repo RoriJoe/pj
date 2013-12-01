@@ -5,7 +5,7 @@
 	        parent::__construct();
 	
 	        #load library dan helper yang dibutuhkan
-	        $this->load->library(array('table','form_validation'));
+	        $this->load->library(array('table','form_validation','account/authorization'));
 	        $this->load->helper(array('form','url'));
 	        $this->load->helper(array('my_pdf'));   //  Load helper
 	    }

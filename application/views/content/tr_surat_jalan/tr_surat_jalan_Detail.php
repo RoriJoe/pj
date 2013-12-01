@@ -30,18 +30,25 @@ $('#tb1 tbody tr').click(function (e) {
     $('#_do').attr('disabled',true);
     $('#pn').attr('disabled',true);
     
-    $('#save').attr('mode','edit');
-    $('#cancel').attr('disabled',false);
-    $('#delete').attr('disabled',false);
-    
     document.getElementById('f_plg').style.visibility = 'hidden';
 
     $('#sj').val(sj);
     show_so("view");
-    getFormSj(sj);
     loadDetailSJ();
+    getFormSj(sj);
     cek_batal();
     cek_kirim();
+
+    <?php if ($this->authorization->is_permitted('update_surat_jalan')) : ?>
+        $('#add').attr('mode','edit');
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
+
+    $('#cancel').attr('disabled',false);
+    $('#delete').attr('disabled',false);
+
     jQuery(".hide-con").show();
 });
 

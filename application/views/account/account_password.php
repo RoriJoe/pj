@@ -2,15 +2,7 @@
 <html>
 <head>
     <title>User Management - Pelita Jaya</title>
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-    
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-    <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+    <?php echo $this->load->view('template/head_import'); ?>
 </head>
 <body>
 
@@ -32,7 +24,7 @@
 
             <h2>Change Password</h2>
 
-            <div class="well">
+            <div class="well" style="margin-bottom:0px;">
 				<p>Untuk menjaga keamanan akun anda, kami <b>sangat</b> menyarankan untuk menggunakan kata kunci yang kompleks dimana...</p>
                 1. Terdiri paling sedikit 8 karakter
                 <br/>2. Menggunakan kombinasi huruf besar dan kecil

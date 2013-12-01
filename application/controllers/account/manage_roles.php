@@ -109,7 +109,7 @@ class Manage_roles extends CI_Controller {
     }
 
     // Set action type (create or update role)
-    $data['action'] = 'create';
+    $data['action'] = 'Create';
 
     // Get all the permissions
     $data['permissions'] = $this->acl_permission_model->get();
@@ -122,7 +122,7 @@ class Manage_roles extends CI_Controller {
     {
       $data['role'] = $this->acl_role_model->get_by_id($id);
       $data['role_permissions'] = $this->rel_role_permission_model->get_by_role_id($id);
-      $data['action'] = 'update';
+      $data['action'] = 'Update';
       $data['is_system'] = ($data['role']->is_system == 1);
     }
 
@@ -135,11 +135,11 @@ class Manage_roles extends CI_Controller {
       array(
         array(
           'field' => 'role_name',
-          'label' => 'lang:roles_name',
+          'label' => 'Role Name',
           'rules' => 'trim|required|max_length[80]'),
         array(
           'field' => 'role_description',
-          'label' => 'lang:roles_description',
+          'label' => 'Role Description',
           'rules' => 'trim|max_length[160]')
       ));
 

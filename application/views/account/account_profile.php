@@ -2,15 +2,7 @@
 <html>
 <head>
 	<title>User Management - Pelita Jaya</title>
-	<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/plusstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css" />
-	
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
-	<script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-   	<script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>    
+	<?php echo $this->load->view('template/head_import'); ?>
 </head>
 <body>
 
@@ -34,7 +26,7 @@
 
             <h2><?php echo 'Manage Profile' ?></h2>
 
-            <div class="alert alert-info"><?php echo 'Atur username yang akan digunakan untuk login beserta Profile Picture yang akan ditampilkan di menu' ?></div>
+            <div class="alert alert-info"><?php echo 'Atur username yang akan digunakan untuk <b>Login</b> beserta Profile Picture yang akan ditampilkan di <b>Menu</b>' ?></div>
 
 			<?php echo form_open_multipart(uri_string(), 'class="form-horizontal"'); ?>
 			<?php echo form_fieldset(); ?>

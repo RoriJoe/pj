@@ -7,18 +7,18 @@
     </thead>
 
     <tbody id="tb_detail">
-    <?php foreach($hasil as $row)
-    {
-        $limit = number_format($row->Limit_Kredit,0,",",".");
-        echo "<tr>
+    <?php foreach($hasil as $row):?>
+        <?php
+            $limit = number_format($row->Limit_Kredit,0,",",".");
+            echo "<tr>
             <td>$row->Kode</td>
             <td>$row->Perusahaan</td>
             <td>
-			<div class='btn-group'>
-			 <a class='btn edit list-edit'
-			        kode='$row->Kode'
-			        nama='$row->Nama'
-			        nama1='$row->Nama1'
+                <div class='btn-group'>
+                <a class='btn edit list-edit'
+                    kode='$row->Kode'
+                    nama='$row->Nama'
+                    nama1='$row->Nama1'
                     perusahaan='$row->Perusahaan'
                     alamat='$row->Alamat1'
                     kota='$row->Kota'
@@ -31,12 +31,14 @@
                     npwp='$row->NPWP'
                     limit='$limit'
                     lama='$row->Lama'
-			 ><i class='icon-pencil'></i></a>
+                ><i class='icon-pencil'></i></a>"?>
+        <?php if ($this->authorization->is_permitted('delete_pelanggan')) : ?>
+            <?php echo"<a class='btn delete' name='$row->Kode' pr='$row->Perusahaan' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>" ?>
+        <?php endif; ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
 
-			 <a class='btn delete' name='$row->Kode' pr='$row->Perusahaan' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>
-            </td>
-        </tr>";
-    } ?>
     </tbody>
 </table>
 </div>
@@ -75,9 +77,12 @@ $('.edit').click(function(){
     $('#fx2').val(fx1);
     $('#lk').val(limit);
     $('#term').val(lama);
-    
-    $('#save').attr('mode','edit');
-    key();
+
+    <?php if ($this->authorization->is_permitted('update_pelanggan')) : ?>
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
     jQuery(".hide-con").show();
 });
 

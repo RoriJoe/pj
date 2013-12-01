@@ -29,7 +29,13 @@ $('#tbl_list tr').click(function (e) {
     $('#no_invo').val(id);
     show_sj("view");
     getFormInvoice(id);
-    $('#save').attr('mode','edit');
+
+    <?php if ($this->authorization->is_permitted('update_invoice')) : ?>
+        $('#add').attr('mode','edit');
+        $('#save').attr('mode','edit');
+    <?php else: ?>
+        $("#save").attr('disabled',true);
+    <?php endif; ?>
     jQuery(".hide-con").show();
 });
 
