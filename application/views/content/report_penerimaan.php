@@ -66,10 +66,10 @@ $("#print").click(function(){
 	
 	
 	mywindow.document.write('<title>Laporan Penerimaan Barang '+tgl+'</title>');
-	mywindow.document.write('<style>.draggable , .tableLap{border-width: 0 0 1px 1px;border-spacing: 0;border-collapse: collapse;border-style: solid;}.draggable td, .tableLap td, .draggable th, .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;border-style: solid;}</style>');
+	mywindow.document.write('<style>.draggable th,  .tableLap th{margin: 0;padding: 2px;border-width: 1px 1px 0 0;background: #C5C5C5;}</style>');
 	
 	mywindow.document.write('');
-	mywindow.document.write('<table><tr><td width="70%"><h2 style="margin: 0">PD. PELITA JAYA</h2></td><td width="20%">Tanggal : '+tgl+'</td></tr><tr><td ><h3>LAPORAN PENERIMAAN BARANG</h3></td><td width="20%">'+per+'</td></tr></table>');
+	mywindow.document.write('<table><tr><td width="70%"><h2 style="margin: 0">PD. PELITA JAYA</h2></td><td width="20%">Tanggal : '+tgl+'</td></tr><tr><td ><b>LAPORAN PENERIMAAN BARANG</b></td><td width="20%">Halaman : 1</td></tr><tr><td >'+per+'</td><td width="20%"></td></tr></table>');
 
 	mywindow.document.write(data);
 	

@@ -15,7 +15,7 @@
 				<th>Supplier</th>
 				<th>Tgl PO</th>
 				<th>Tgl Kirim</th>
-				<th>Nama Barang</th>
+				<th>Barang</th>
 				<th>Pesan</th>
 				<th>Kirim</th>
 				<th>OS</th>

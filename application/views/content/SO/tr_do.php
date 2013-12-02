@@ -58,6 +58,7 @@
         <div id="hasil2" style="height: 170px;"></div>
 
             <div style="float: right; margin-right: 75px;">
+			
                 <table>
                 <tr>
                     <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
@@ -96,7 +97,9 @@
                 </tr>      
                 </table>
             </div>
-
+			<div  class="pull-right">
+                <button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SO</button>
+                </div>
             <div class="field-wrap">
                 <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
                     <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
@@ -302,6 +305,7 @@ function retrieveForm(idSO){
             $('#ppnT').val(accounting.formatMoney(total_ppn, "",0,"."));
             $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
             $('#granT').val(accounting.formatMoney(msg.Grand, "",0,"."));
+			cek_batal();
         }
     }); 
 }
@@ -482,6 +486,7 @@ $("#cancel").click(function(){
     $('#_so').attr('disabled', false);
     cekauthorization();
     document.getElementById('add').style.visibility = 'visible';
+	document.getElementById('batal').style.visibility = 'hidden';
 });
 
 function addRow() {
@@ -728,4 +733,76 @@ $("#delete").click(function(){
         }
     });
 });
+function cek_batal(){
+    var id = $('#_po').val();
+    if(id == "(BATAL)"){
+        
+        document.getElementById('batal').style.visibility = 'hidden';
+        document.getElementById('print').style.visibility = 'hidden';
+		document.getElementById('save').style.visibility = 'hidden'; 
+    }else{
+        document.getElementById('batal').style.visibility = 'visible';
+       document.getElementById('save').style.visibility = 'visible';
+        document.getElementById('print').style.visibility = 'visible';
+    }
+}
+
+$("#batal").click(function(){
+    var sj = $('#_so').val();
+    var so = "(BATAL)";
+
+    PlaySound('beep');
+    var id = $('#_so').val();
+    var pr = $('#_tgl').val();
+	
+	//buat balikin qty
+	var arrKode = new Array();
+    var arrQty = new Array();
+	
+    var table = document.getElementById('tb_detail');
+    var totalRow = table.rows.length;
+    for(var i=1;i<=totalRow;i++){
+		arrKode[i-1] = $('#kode_brg'+i).val();
+		arrQty[i-1] = $('#qty_brg'+i).val();
+	}
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode SO: <b>"+id+"</b><br/>Tanggal SO : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin membatalkan Sales Order Berikut?",
+        buttons: {
+            main: {
+                label: "Kembali",
+            },
+            danger: {
+                label: "Batalkan SO",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/tr_do/update3",
+                        data :{sj:sj,so:so,arrKode:arrKode,arrQty:arrQty,totalRow:totalRow},
+
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {    
+							
+                                bootstrap_alert.success('<b>Sukses</b> Sales Order '+sj+' telah dibatalkan');
+								$('#formID').each(function(){
+									this.reset();
+								});
+								listSO();
+								tampilDetailSO();
+								autogen();
+
+                            }
+							
+                        }
+                    });
+                }
+            }
+        }
+    });
+ });    
 </script>

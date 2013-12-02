@@ -116,7 +116,8 @@
                 'Discount'  =>$disc,
                 'Dpp'       =>$dpp,
                 'Ppn'       =>$ppn,
-                'Grand'     =>$grant
+                'Grand'     =>$grant,
+				'Temp'		=>$grant
             );
 
             $data2= array(
@@ -129,7 +130,8 @@
                 'Discount'  =>$disc,
                 'Dpp'       =>$dpp,
                 'Ppn'       =>$ppn,
-                'Grand'     =>$grant
+                'Grand'     =>$grant,
+				'Temp'		=>$grant
             );
 
             if($modes=="add"){
@@ -160,5 +162,17 @@
             $r = $this->tr_invoice_model->delete($po);
             echo $r;
         }        
+		
+		function update3()
+        {
+            $invo=$this->input->post('sj');
+            $sj=$this->input->post('so');
 
+			
+            $data= array(
+                    'Kode_SJ'=>$sj
+            );
+            $q = $this->tr_invoice_model->updateBatal($data,$invo);
+            echo $q;
+        }
     }

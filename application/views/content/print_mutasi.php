@@ -5,15 +5,21 @@
 			<h2 style="margin: 0">PD. PELITA JAYA</h2>
 			
 		</td>
-		<td width="20%" rowspan="2">
+		<td width="20%" rowspan="3">
 			Tanggal : <?php echo $tanggal ?>
 			<div>Jam : <?php echo $jam ?></div>
-			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
+			<div>Halaman : 1</div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 	</tr>
 	<tr>
 		<td width="80%">
 			<h3>LAPORAN MUTASI STOCK</h3><br/>
+		</td>
+		
+	</tr>
+	<tr>
+		<td width="80%">
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		
 	</tr>

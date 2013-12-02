@@ -111,7 +111,8 @@
             <?php if ($this->authorization->is_permitted('print_invoice')) : ?>
                 <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
             <?php endif; ?>
-        </div>
+			<button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal Invoice</button>     
+		</div>
         <div id="konfirmasi" class="sukses"></div>
         </div>
     </div>
@@ -414,6 +415,7 @@ function getFormInvoice(IDsj){
             $('#ppnT').val(accounting.formatMoney(total_ppn, "",0,"."));
             $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
             $('#granT').val(accounting.formatMoney(msg.Grand, "",0,"."));
+			cek_batal();
         }
     });
 }
@@ -614,4 +616,66 @@ $("#delete").click(function(){
         }
     });
 });
+
+function cek_batal(){
+    var id = $('#_sj').val();
+    if(id == "(BATAL)"){
+        
+        document.getElementById('batal').style.visibility = 'hidden';
+        document.getElementById('print').style.visibility = 'hidden';
+		document.getElementById('save').style.visibility = 'hidden'; 
+    }else{
+        document.getElementById('batal').style.visibility = 'visible';
+       document.getElementById('save').style.visibility = 'visible';
+        document.getElementById('print').style.visibility = 'visible';
+    }
+}
+
+$("#batal").click(function(){
+    var sj = $('#no_invo').val();
+    var so = "(BATAL)";
+
+    PlaySound('beep');
+    var id = $('#no_invo').val();
+    var pr = $('#_tgl1').val();
+	
+	
+	
+    //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
+    bootbox.dialog({
+        message: "Kode Invoice: <b>"+id+"</b><br/>Tanggal Invoice : <b>"+pr+"</b>",
+        title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin membatalkan Invoice Berikut?",
+        buttons: {
+            main: {
+                label: "Kembali",
+            },
+            danger: {
+                label: "Batalkan Invoice",
+                className: "btn-danger",
+                callback: function() {
+                    $.ajax({
+                        type:'POST',
+                        url: "<?php echo base_url();?>index.php/tr_invoice/update3",
+                        data :{sj:sj,so:so},
+
+                        success:
+                        function(msg)
+                        {
+                            if(msg == "ok")
+                            {    
+							
+                    
+                                bootstrap_alert.success('<b>Sukses</b> Invoice '+sj+' telah dibatalkan');
+								reset_form();
+								list_invoice();
+
+                            }
+							
+                        }
+                    });
+                }
+            }
+        }
+    });
+ });  
 </script>

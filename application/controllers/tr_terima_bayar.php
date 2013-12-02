@@ -219,7 +219,7 @@
 
             foreach ($tm as $rr)
             {
-                $temp=$rr->Kode."|".$rr->Kode_plg."|".$rr->Tgl."|".$rr->Grand;
+                $temp=$rr->Kode."|".$rr->Kode_plg."|".$rr->Tgl."|".$rr->Grand."|".$rr->Temp;
             }
             echo $temp;
         }

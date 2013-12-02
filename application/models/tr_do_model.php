@@ -111,7 +111,24 @@
                 $data['rek']++;
             }
         }
+		
+		function update_brg2($arrKode,$arrQty){//kalo batal
+			
+			$this->db->set('Qty1', "Qty1 + '$arrQty'", FALSE);
+			$where = "Kode = '$arrKode' ;";
+			
+			$this->db->where($where);
+			$this->db->update('barang');
 
+		}
+		//model untuk batal
+        function updateBatal($data, $so)
+        {
+            $this->db->where('No_Do',$so);
+            $this->db->update('do_h', $data);
+            return "ok";
+        }
+		
 		function delete($so)
         {
             $this->db->where('No_Do',$so);

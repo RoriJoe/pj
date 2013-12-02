@@ -448,7 +448,7 @@ function cek_kirim(){
 
 function cek_batal(){
     var id = $('#_do').val();
-    if(id === "(BATAL)"){
+    if(id == "(BATAL)"){
         //document.getElementById('save').style.visibility = 'hidden';
         document.getElementById('batal').style.visibility = 'hidden';
         //document.getElementById('print').style.visibility = 'hidden';
@@ -696,6 +696,17 @@ $("#delete").click(function(){
     PlaySound('beep');
     var id = $('#sj').val();
     var pr = $('#_tgl').val();
+	
+	 var kd_brg = new Array();
+    var qty = new Array();
+   
+    var table = document.getElementById('tb_detail');
+    var totaltx = table.rows.length-1;
+    for(var i=1;i<=totaltx;i++){
+        kd_brg[i-1] = $('#kode_brg'+i).val();
+       
+        qty[i-1] = $('#qty'+i).val();
+	}
     //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
         message: "Kode SJ: <b>"+id+"</b><br/>Tanggal SJ : <b>"+pr+"</b>",
@@ -711,7 +722,7 @@ $("#delete").click(function(){
                     $.ajax({
                         type:'POST',
                         url: "<?php echo base_url();?>index.php/tr_surat_jalan/update3",
-                        data :{sj:sj,so:so},
+                        data :{sj:sj,so:so,kd_brg:kd_brg,qty:qty,totaltx:totaltx},
 
                         success:
                         function(msg)

@@ -196,7 +196,7 @@
             $query = $this->db->query("
                 SELECT A.No_Do
 				FROM do_h A left outer join do_d ON A.No_Do=do_d.No_Do
-				WHERE A.Kode_Plg = '$id' AND QtyTemp>0
+				WHERE A.Kode_Plg = '$id' AND QtyTemp>0 AND No_Po not like '(BATAL)'
                 ");
 
             return $query->result();
@@ -206,7 +206,7 @@
             $query = $this->db->query("
                 SELECT A.No_Sj
                 FROM sj_h A
-                WHERE A.Kode_Plg = '$id' AND A.No_Sj NOT IN (SELECT Kode_SJ FROM invoice)
+                WHERE A.Kode_Plg = '$id' AND A.No_Sj NOT IN (SELECT Kode_SJ FROM invoice) AND No_Do not like '(BATAL)'
                 ");
 
             return $query->result();

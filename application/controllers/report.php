@@ -175,6 +175,14 @@
 		}
 		
 		//MASTER 
+		function print_stokop(){
+			$this->load->model('report_model');
+			$data['tanggal'] = date('d/m/Y');
+			$data['filename'] = "Daftar Stock Opname - ". date('dmY');
+			$data['hasil2']=$this->report_model->print_master_barang();
+			$templateView  = $this->load->view('content/print_stokopname',$data);
+			      
+		}
 		
 		function print_master_barang(){
 			$this->load->model('report_model');

@@ -24,6 +24,7 @@ $('#tb2 tbody tr').click(function (e) {
     $("#_so").attr('disabled',true);
 	
     retrieveForm(id);
+	
     tampilDetailSO();
     
     document.getElementById('add').style.visibility = 'hidden';
@@ -40,6 +41,7 @@ $('#tb2 tbody tr').click(function (e) {
     $('#cancel').attr('disabled',false);
 
     jQuery(".hide-con").show();
+	
 });
     
 var oTable = $('#tb2').dataTable( {

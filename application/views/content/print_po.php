@@ -5,15 +5,21 @@
 			<h2 style="margin: 0">PD. PELITA JAYA</h2>
 			
 		</td>
-		<td width="20%" rowspan="2">
+		<td width="20%" rowspan="3">
 			Tanggal : <?php echo $tanggal ?>
 			<div>Jam : <?php echo $jam ?></div>
-			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
+			<div>Halaman : 1</div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 	</tr>
 	<tr>
 		<td width="80%">
 			<h3>LAPORAN PURCHASE ORDER</h3><br/>
+		</td>
+		
+	</tr>
+	<tr>
+		<td width="80%">
+			<div>PERIODE : <?php echo $periode ?></div> <!--ambil berdasarkan input radio dari user -->
 		</td>
 		
 	</tr>
@@ -48,7 +54,7 @@
 						$gtot+=$row->Total;
 						if($y!=1){
 					$st=number_format($gx);
-						echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+						echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
 					</tr>";
 					}
 					}else{
@@ -74,12 +80,12 @@
 				
 						if($y==$bot+1){
 						$st=number_format($gx);
-							echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+							echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
 						</tr>";
 						}
 					}
 					$g=number_format($gtot);
-			echo "<tr style='background: #C5C5C5; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
+			echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
 			</tr>";
 		
 				

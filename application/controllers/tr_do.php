@@ -210,6 +210,24 @@
                 echo "gagal";
             }
         }
+		
+		function update3()
+        {
+            $so=$this->input->post('sj');
+            $po=$this->input->post('so');
+
+			$arrKode=$this->input->post('arrKode');
+			$arrQty=$this->input->post('arrQty');
+			 $totalRow=$this->input->post('totalRow');
+			 for($i=0;$i<$totalRow;$i++){
+                $this->tr_do_model->update_brg2($arrKode[$i],$arrQty[$i]);//buat kembaliin qty
+            }
+            $data= array(
+                    'No_Po'=>$po
+            );
+            $q = $this->tr_do_model->updateBatal($data,$so);
+            echo $q;
+        }
         //save delete
         function delete()
         {

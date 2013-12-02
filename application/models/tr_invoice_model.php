@@ -84,4 +84,12 @@
             $query=$this->db->get('invoice');
             return $query->result_array();
         }
+		
+		//model untuk batal
+        function updateBatal($data, $invo)
+        {
+            $this->db->where('Kode',$invo);
+            $this->db->update('invoice', $data);
+            return "ok";
+        }
     }
