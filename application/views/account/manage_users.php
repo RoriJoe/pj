@@ -27,7 +27,6 @@
         <table class="table table-hover CSSTable">
           <thead>
             <tr>
-              <th>#</th>
               <th><?php echo 'Username' ?></th>
               <th><?php echo 'Email' ?></th>
               <th><?php echo 'Nama Depan' ?></th>
@@ -43,7 +42,6 @@
 
             <?php foreach( $all_accounts as $acc ) : ?>
               <tr>
-                <td><?php echo $acc['id']; ?></td>
                 <td>
                   <?php echo $acc['username']; ?>
                   <?php if( $acc['is_banned'] ): ?>
