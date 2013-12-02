@@ -26,12 +26,12 @@
       <?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 
       <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#role" data-toggle="tab">Role Info</a></li>
-        <li class=""><a href="#permission" data-toggle="tab">Permission</a></li>
+        <li class=""><a href="#role" data-toggle="tab">Role Info</a></li>
+        <li class="active"><a href="#permission" data-toggle="tab">Permission</a></li>
       </ul>
 
       <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="role">
+        <div class="tab-pane fade" id="role">
           <div class="control-group <?php echo (form_error('role_name') || isset($role_name_error)) ? 'error' : ''; ?>">
           <label class="control-label" for="role_name"><?php echo 'Nama'; ?></label>
 
@@ -71,7 +71,7 @@
               </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="permission">
+        <div class="tab-pane fade active in" id="permission">
         <table class="table table-bordered um" style="width:40%;display: inline-block;vertical-align: top;margin-left:20px;">
           <thead>
             <tr>

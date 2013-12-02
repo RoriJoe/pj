@@ -11,7 +11,7 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h2><?php echo 'Anda telah keluar dari Pelita Jaya' ?></h2>
+        <h2><?php echo 'Anda telah keluar dari Aplikasi' ?></h2>
         <p><?php echo anchor('', 'Home', array('class' => 'btn btn-primary')); ?></p>
       </div>
 		<hr/>
