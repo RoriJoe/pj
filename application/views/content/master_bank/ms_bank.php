@@ -107,16 +107,17 @@
        <tr>
             <td>No Perkiraan</td>
             <td>
-                <select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
+				<div id="noperkiraan"></div>
+                <!--<select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
                 <option value="">- Pilih -</option>
                 <?php
-                foreach ($list_perkiraan as $isi)
+               /*  foreach ($list_perkiraan as $isi)
                 {
                     echo "<option ";
                     echo "value = '".$isi->value."'>".$isi->value."</option>";
-                }
+                } */
                 ?>
-                </select>
+                </select>-->
             </td>
        </tr>      
     </table>
@@ -137,6 +138,8 @@ loadListBank();
 
 $(document).ready(function(){
 	detailBank();
+	get_perkiraan_list();
+	
 	barAnimation();
     validation();
 });
@@ -362,4 +365,24 @@ function addCombo() {
         });
     }
 }
+
+function get_perkiraan_list(){
+   
+	//var ro = $row;
+    //console.log(id);
+
+    $.ajax({
+        type:'POST',
+        async: false,
+        url: "<?php echo base_url();?>ms_bank/perkiraan_call",
+        data:{},
+        dataType: "html",
+
+        success: function(data){
+            $('#noperkiraan').html(data);
+        }
+    });
+}
+
+
 </script>
