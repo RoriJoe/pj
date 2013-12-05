@@ -73,7 +73,7 @@
                 <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-lock"></i> '.'Sign In')); ?>
               </div>
 
-              <p><a href="#myModal" role="button" class="" data-toggle="modal">Forgot passowrd</a><br/>
+              <p><a href="#myModal" role="button" class="" data-toggle="modal">Forgot password</a><br/>
           <?php echo form_fieldset_close(); ?>
           <?php echo form_close(); ?>
       </div>              
