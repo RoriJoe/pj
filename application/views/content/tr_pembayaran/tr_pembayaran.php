@@ -324,7 +324,7 @@ function displayResult(selTag,row)
         function(hh){
             data=hh.split("|");
             //tampilDetailDO();
-            $('#ninvo'+row).val(accounting.formatMoney(data[3], "",0,"."));
+            $('#ninvo'+row).val(accounting.formatMoney(data[4], "",0,"."));
 			
 			document.getElementById('add2').style.visibility = 'visible';
         }

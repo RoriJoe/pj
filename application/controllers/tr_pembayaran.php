@@ -134,7 +134,11 @@
 					'Total'=>$totInv
 				);
 				$this->tr_pembayaran_model->insert_det1($data);
-			}
+				}
+				for($i=0;$i<$baris1;$i++){
+					
+					$this->tr_pembayaran_model->update_po($arrInvoice[$i],$arrNbayar[$i]);
+				}
 			
 			for($i=0;$i<$baris2;$i++){
 				$data2= array(
@@ -203,7 +207,7 @@
 			 $ro = $this->input->post('ro');
             $query = $this->tr_pembayaran_model->get_po_list($id);
 
-            $final['']='No Invoice';
+            $final['']='No PO';
             foreach ($query as $a) 
             {
                 $final[$a->Kode] = $a->Kode;
@@ -219,7 +223,7 @@
 
             foreach ($tm as $rr)
             {
-                $temp=$rr->Kode."|".$rr->Kode_supplier."|".$rr->Tgl_po."|".$rr->Total;
+                $temp=$rr->Kode."|".$rr->Kode_supplier."|".$rr->Tgl_po."|".$rr->Total."|".$rr->Temp;
             }
             echo $temp;
         }
