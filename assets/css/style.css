@@ -51,9 +51,9 @@
 /* --------------------------- ini utk menubar atas bagian nama user ---------------------------------------------------- */
 #tgl{
 	color:#FFF;
-	font-weight:bold;
-	padding-top:12px;
-	padding-right:10px;
+	/*font-weight:bold;*/
+	padding-top:10px;
+	padding-right:5px;
 	/*border-left:2px #000000 groove;*/
 	float:right;
 }

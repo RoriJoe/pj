@@ -28,7 +28,7 @@ $config['sign_up_auto_sign_in'] 		= TRUE;
 | Sign Out
 |--------------------------------------------------------------------------
 */
-$config['sign_out_view_enabled'] 		= TRUE;
+$config['sign_out_view_enabled'] 		= FALSE;
 
 /*
 |--------------------------------------------------------------------------

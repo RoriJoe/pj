@@ -45,6 +45,7 @@ $date = date("d F Y, H:i");
     </div>
     <div id="tgl">
         <span id='ct' style="margin-right: 5px;"></span> | <!-- code php -->
-        <i class="icon-user icon-white"></i> Welcome, <a href="user" title="Click to Edit Profile" style="color:red;"><?php echo $account->firstname; ?> </a>|
+        Welcome, <a href="user" title="Click to Edit Profile" style="color:red;"><?php echo $account->firstname; ?> <?php echo $account->lastname; ?> </a>|
+        <a href="logout" class="btn btn-danger btn-mini" title="Logout User" style=""><i class="icon-user icon-white icon-off"></i> Logout</a>
     </div>
 </div>   
