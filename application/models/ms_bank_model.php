@@ -26,7 +26,7 @@
 		function get_perkiraan_list(){
             $query = $this->db->query("
                 SELECT *
-                FROM perkiraan where level='3'
+                FROM perkiraan where level='3' and nomoraccount like '1.2%'
                
                 ");
 
