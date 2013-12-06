@@ -122,6 +122,7 @@ function editRow(row){
 
 $("tbody#itemlist").on("click","#hapus",function(){
     $(this).parent().parent().parent().remove();
+    getTotal();
 });
 
 function deleteRowSO(row) {
