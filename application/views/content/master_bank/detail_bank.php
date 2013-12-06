@@ -8,7 +8,7 @@
         <th width="20%">No Perkiraan</th>
     </thead>
 
-    <tbody id="itemlist tb_detail">
+    <tbody id="itemlist">
     <?php
     $i=1;
     foreach($hasil as $row)
@@ -72,7 +72,7 @@ function addRow() {
     var itemname = $("#_an").val();
     var itemprice = $("#_tipe").val();
     var itemqty = $("#_cab").val();
-    var itemper = $("#_no_perk").val();
+    var itemper = $("#perk").val();
 
     var items = "";
     if(itemcode != "" && itemname != "" && itemprice!="" && itemqty !="")
@@ -101,12 +101,13 @@ function addRow() {
                 $('#myModal').modal('hide');
             }
         }
+		$("#perk").val('');
     }
     else
     {
         bootstrap_alert.info2('No rekening, Nama, Cabang, & Tipe Harus diisi');
     }
-}
+} 
 
 function checkList(val){
     var cb = true;

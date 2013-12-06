@@ -22,6 +22,16 @@
             ");
             return $q->result();
         }
+		
+		function get_perkiraan_list(){
+            $query = $this->db->query("
+                SELECT *
+                FROM perkiraan where level='3'
+               
+                ");
+
+            return $query->result();
+        }
 
         function get_detail($id){
             $this->db->select('kode_bank, no_rekening, atas_nama, tipe, cabang, no_perkiraan');

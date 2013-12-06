@@ -107,4 +107,18 @@
                 echo "gagal";
             }
         }
+		
+		function perkiraan_call(){
+            
+			 //$ro = $this->input->post('ro');
+            $query = $this->ms_bank_model->get_perkiraan_list();
+
+            $final['']='-- No Perkiraan --';
+            foreach ($query as $a) 
+            {
+                $final[$a->nomoraccount] = $a->namaaccount;
+            }
+
+            echo form_dropdown('perk',$final,'1',"id='perk' style='width:155px;'");
+        }
     }

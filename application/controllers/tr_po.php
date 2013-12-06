@@ -141,7 +141,8 @@
                 'Nama_proyek'   =>$proy,
                 'DPP'           =>$dpp,
                 'PPN'           =>$ppn,
-                'Total'         =>$to
+                'Total'         =>$to,
+				'Temp'         =>$to
             );
 
             $data2= array(
@@ -155,7 +156,8 @@
                 'Nama_proyek'   =>$proy,
                 'DPP'           =>$dpp,
                 'PPN'           =>$ppn,
-                'Total'         =>$to
+                'Total'         =>$to,
+				'Temp'         =>$to
             );
 
             if($modes=="add"){

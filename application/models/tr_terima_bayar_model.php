@@ -90,7 +90,7 @@
             $query = $this->db->query("
                 SELECT *
                 FROM invoice
-                WHERE Kode_Plg = '$id' 
+                WHERE Kode_Plg = '$id' and Temp > 0
                 ");
 
             return $query->result();
@@ -162,4 +162,14 @@
                 ");
             return $query->result();
         }
+		
+		function update_invo($id,$total){
+			
+			$this->db->set('Temp', "Temp - '$total'", FALSE);
+			$where = "Kode = '$id' ;";
+			
+			$this->db->where($where);
+			$this->db->update('invoice');
+
+		}
     }

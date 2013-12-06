@@ -87,7 +87,7 @@
             $query = $this->db->query("
                 SELECT *
                 FROM po_h
-                WHERE Kode_supplier = '$id' 
+                WHERE Kode_supplier = '$id' and Temp > 0
                 ");
 
             return $query->result();
@@ -159,4 +159,14 @@
                 ");
             return $query->result();
         }
+		
+		function update_po($id,$total){
+			
+			$this->db->set('Temp', "Temp - '$total'", FALSE);
+			$where = "Kode = '$id' ;";
+			
+			$this->db->where($where);
+			$this->db->update('po_h');
+
+		}
     }

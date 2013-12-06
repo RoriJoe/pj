@@ -135,6 +135,11 @@
 				);
 				$this->tr_terima_bayar_model->insert_det1($data);
 			}
+			for($i=0;$i<$baris1;$i++){
+				
+				$this->tr_terima_bayar_model->update_invo($arrInvoice[$i],$arrNbayar[$i]);
+			}
+			
 			
 			for($i=0;$i<$baris2;$i++){
 				$data2= array(
