@@ -97,9 +97,6 @@
                 </tr>      
                 </table>
             </div>
-			<div  class="pull-right">
-                <button id="batal" class="btn btn-danger" style="visibility:hidden;"><i class="icon-remove-circle icon-white"></i> Batal SO</button>
-                </div>
             <div class="field-wrap">
                 <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
                     <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
@@ -116,6 +113,7 @@
                 <?php if ($this->authorization->is_permitted('print_so')) : ?>
                     <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
                 <?php endif; ?>
+                <button id="batal" class="btn btn-danger" style="visibility:hidden;">Batal SO</button>
             </div>
             <!--**NOTIFICATION AREA**-->
             <div id="konfirmasi" class="sukses"></div>
@@ -193,6 +191,10 @@ function cekauthorization(){
     <?php else: ?>
          $('#save').attr('mode','add');
          $("#save").attr('disabled',false);
+    <?php endif; ?>
+
+    <?php if ($this->authorization->is_permitted('print_so') == true) : ?>
+        $("#print").attr('disabled',false);
     <?php endif; ?>
 }
 
@@ -736,14 +738,15 @@ $("#delete").click(function(){
 function cek_batal(){
     var id = $('#_po').val();
     if(id == "(BATAL)"){
-        
         document.getElementById('batal').style.visibility = 'hidden';
-        document.getElementById('print').style.visibility = 'hidden';
-		document.getElementById('save').style.visibility = 'hidden'; 
+        $("#save").attr('disabled',true);
+        $("#print").attr('disabled',true);
+        $("#_po").attr('disabled',true);
     }else{
         document.getElementById('batal').style.visibility = 'visible';
-       document.getElementById('save').style.visibility = 'visible';
-        document.getElementById('print').style.visibility = 'visible';
+        $("#save").attr('disabled',false);
+        $("#print").attr('disabled',false);
+        $("#_po").attr('disabled',false);
     }
 }
 

@@ -150,6 +150,10 @@ function cekauthorization(){
          $('#save').attr('mode','add');
          $("#save").attr('disabled',false);
     <?php endif; ?>
+
+    <?php if ($this->authorization->is_permitted('print_surat_jalan') == true) : ?>
+        $("#print").attr('disabled',false);
+    <?php endif; ?>
 }
 
 $(function() {
@@ -449,17 +453,13 @@ function cek_kirim(){
 function cek_batal(){
     var id = $('#_do').val();
     if(id == "(BATAL)"){
-        //document.getElementById('save').style.visibility = 'hidden';
         document.getElementById('batal').style.visibility = 'hidden';
-        //document.getElementById('print').style.visibility = 'hidden';
-        $("#save").attr('disabled',false);
-        $("#print").attr('disabled',false);
-    }else{
-        document.getElementById('batal').style.visibility = 'visible';
-        //document.getElementById('save').style.visibility = 'visible';
-        //document.getElementById('print').style.visibility = 'visible';
         $("#save").attr('disabled',true);
         $("#print").attr('disabled',true);
+    }else{
+        document.getElementById('batal').style.visibility = 'visible';
+        $("#save").attr('disabled',false);
+        $("#print").attr('disabled',false);
     }
 }
 
