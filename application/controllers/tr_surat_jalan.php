@@ -175,6 +175,10 @@
 			 for($i=0;$i<$totaltx;$i++){
                 $this->tr_surat_jalan_model->update_brg2($kd_brg[$i],$qty[$i]);
             }
+			for($i=0;$i<$totaltx;$i++){
+                $this->tr_surat_jalan_model->update_qtytemp2($kd_brg[$i],$qty[$i]);
+            }
+			
             $data= array(
                     'No_Do'=>$_do
             );

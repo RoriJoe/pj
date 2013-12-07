@@ -112,6 +112,15 @@
 			$this->db->update('barang');
 
 		}
+		
+		function update_qtytemp2($kdbrg,$qty){//SAVE utk kembaliin stok TEMP di SO BATAL
+			
+			$this->db->set('QtyTemp', "QtyTemp + '$qty'", FALSE);
+			$where = "Kode_Brg = '$kdbrg' ;";
+			$this->db->where($where);
+			$this->db->update('do_d');
+
+		}
         //model untuk delete
         function delete($sj)
         {
