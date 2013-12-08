@@ -1171,3 +1171,20 @@ list-style: none;
 .form125{
     width: 125px;
 }
+#tableemploy thead th {
+    background-color: #C24F4F;
+    color: #fff;
+}
+#tableemploy input, select{
+    margin:0;
+}
+#ViewJurnal hr{
+    border-top: 1px solid #BBBBBB;
+}
+.navbar-inner{
+    border-radius: 0px;
+}
+.FieldDK{
+    min-width: 80px;
+    text-align: right !important;
+}
