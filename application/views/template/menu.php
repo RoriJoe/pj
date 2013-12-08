@@ -102,12 +102,22 @@
                     <?php endif; ?>
 
                     <li class="dropdown-submenu"><a tabindex="-1">Akuntansi</a>
-                        <ul class="dropdown-menu" style=" top: -110px; ">
-                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Jurnal</label></li>
-                            <li><a class = "ajax" href="">Cetak Transaksi Jurnal</a></li>
-                            <li><a class = "ajax" href="">Cetak Buku Besar</a></li>
-                            <li><a class = "ajax" href="">Cetak Rugi Laba</a></li>
-                            <li class="menu-border-bottom"><a class = "ul-divider ajax" href="">Cetak Neraca</a></li>
+                        <ul class="dropdown-menu" style=" top: -330px; ">
+                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi & Keuangan</label></li>
+                            <li><a class = "" href="setting_neraca">Setting Neraca</a></li>
+                            <li><a class = "" href="setting_laba_rugi">Setting Laba Rugi</a></li>
+                            <li><a class = "" href="mappingperkiraan">Mapping Perkiraan</a></li>
+                            <li><a class = "" href="settingmapping">Setting Mapping</a></li>
+                            <li class="menu-border-bottom"><a class = "ul-divider " href="tutuptahun">Tutup Tahun</a></li>
+
+                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi</label></li>
+                            <li class="menu-border-bottom"><a class = "ul-divider " href="<?php echo base_url(); ?>akun/jurnal">Jurnal</a></li>
+
+                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Cetak</label></li>
+                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetakjurnal">Transaksi Jurnal</a></li>
+                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetakbukubesar">Buku Besar</a></li>
+                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetaklabarugi">Rugi Laba</a></li>
+                            <li class="menu-border-bottom"><a class = "ul-divider " href="<?php echo base_url(); ?>akun/cetakneraca">Neraca</a></li>
                         </ul>
                     </li>
                 </ul>

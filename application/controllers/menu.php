@@ -242,6 +242,16 @@
 	            $this->template->display('content/password/password', $data);
 	        }
 	    }*/
+
+	    function setting_neraca(){
+        	redirect('akun/settingneraca');
+        }
+        function setting_laba_rugi(){
+        	redirect('akun/settingrugilaba');
+        }
+        function settingmapping(){
+        	redirect('akun/settingmapping');
+        }
         
         function logout()
         {
