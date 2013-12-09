@@ -70,4 +70,9 @@
             $this->db->delete($this->table_name);
             return "ok";
         }
+		
+		function getPop(){
+			$rs=$this->db->query("select nomoraccount,type,namaaccount,saldo,level from perkiraan ");
+			return $rs->result();
+		}
     }

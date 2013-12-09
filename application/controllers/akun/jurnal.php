@@ -247,5 +247,7 @@
 			$id=$this->generateid("");
 			echo '<input type=hidden value="'.$id.'" id="NewId"/><table class="table table-bordered" style="margin-bottom:0px;" id="tabledetilindoor"><thead><tr><th>No Perkiraan</th><th>Nama Perkiraan</th><th>Keterangan</th><th>Debit</th><th>Kredit</th><th class=action >Action</th></tr></thead><tr id="row0"><td align=center><input type="text"  style="width:100px;cursor:pointer;" class="NoAk" name="NoAk[]" id="NoAk0" readonly /></td><td align=center><input type="text"  style="width:140px;cursor:pointer;" id="NNoAk0" class="NoAk" readonly /></td><td><textarea style="width:120px;height:30px;font-size:11px; resize:none;" class="ket" name="ket[]" id="ket0" ></textarea></td><td align=right><input type="text"  style="width:100px;text-align:right;" class="Db" name="Db[]" id="Db0" onclick="DisDK(0,this.id)" /></td><td align=right><input type="text" style="width:100px;text-align:right;"  class="Kr" id="Kr0" name="Kr[]" onclick="DisDK(1,this.id)" /></td><td class=action><a id="row0" class="linkdel">Delete</a></td></tr></table><table border=0><tr><td width=410px; style=text-align:center;>Balance</td><td width=97px style="text-align:right" ><label id="TDb" >0</label></td><td width=98px style="text-align:right"><label id="TKr" >0</label></td><td width=35px class=action></td></tr></table>';
 		}
+		
+		
 	}
 ?>

@@ -3,14 +3,14 @@
 <head>
 	<title>Setting Neraca - Pelita Jaya</title>
 	<?php echo $this->load->view('template/head_import'); ?>
-
+	<link href="<?php echo base_url().'assets/css/jquerydatepick.css'; ?>" type="text/css" rel="stylesheet" />
     <script src="<?php echo base_url().'javascript/javascriptpelangan.js'; ?>" language="javascript"></script>    
     <script src="<?php echo base_url().'javascript/sorttable.js'; ?>"></script>
     <script src="<?php echo base_url().'javascript/jquery.alerts.js'; ?>" type="text/javascript"></script>    
     <script src="<?php echo base_url().'javascript/jquery.ui.draggable.js'; ?>" type="text/javascript"></script>
     <script src="<?php echo base_url().'javascript/jquery.validity.js'; ?>" language="javascript"></script>
 	<script src="<?php echo base_url().'javascript/jquerydatepick.js'; ?>" language="javascript"></script>
-
+	
 	<script>
 		var rowcount=0;
 		function EnableTxt(Flag){
@@ -27,10 +27,15 @@
 			}
 		}
 		function begin(){
-			$("#Tgl").datepick({dateFormat: 'dd-mm-yyyy'});
+			$("#Tgl").datepick({dateFormat: 'dd-mm-yyyy'
+			
+			});
+			
 		}
+		
 		$(document).ready(function(){
 			begin();
+			
 			var byser=$("#filterby").val();
 			$(".action").css("display","none");
 			 EnableTxt(1);
@@ -90,6 +95,7 @@
 			});
 			
 			$("#NoAk").live('click', function(){
+			
 				byser=$('#filterby').val();
 				valser=$('#valsearch').val();
 				var by="";
@@ -283,7 +289,8 @@
 		});
 
 		$(".NoAk").live('click', function(){
-			 idxpop=0;
+			
+			idxpop=0;
 			 poptemprowid="";
 			 poptemprownama="";
 			 tempopby="";
@@ -357,7 +364,7 @@
 		});
 		
 		$("#linkadd").live('click', function(){	rowcount=parseInt(rowcount);
-				$("#tabledetilindoor").append("<tr id='row"+(rowcount+1)+"'><td align='left' valign='top'><input type='text'  style='width:100px;cursor:pointer;' class='NoAk' id='NoAk"+(rowcount+1)+"' name='NoAk[]'/></td><td align=center><input type='text'  style='width:140px;cursor:pointer' id='NNoAk"+(rowcount+1)+"' readonly class=NoAk /></td><td align='center' valign='top'><textarea wrap='soft'  style='width:270px;height:30px;font-size:11px; resize:none;' class='ket' name='ket[]' id='ket"+(rowcount+1)+"' ></textarea></td><td align='center' valign='top'><input type='text'  style='width:100px;text-align:right;' class='Db' name='Db[]' id='Db"+(rowcount+1)+"' onclick='DisDK(0,this.id)' /></td> <td align='right' valign='top'><input type='text' style='width:100px;text-align:right;'  class='Kr' name='Kr[]' id='Kr"+(rowcount+1)+"' onclick='DisDK(1,this.id)' /></td><td><a id='row"+(rowcount+1)+"' class='linkdel'>Delete</a></td></tr>");	
+				$("#tabledetilindoor").append("<tr id='row"+(rowcount+1)+"'><td align='left' valign='top'><input type='text'  style='width:74px;cursor:pointer;' class='NoAk' id='NoAk"+(rowcount+1)+"' name='NoAk[]'/><a href='#modalPelanggan' id='f_plg' role='button' class='btn' title='Search Perkiraan' data-toggle='modal' style='padding: 0px 5px;margin-bottom: 8px;' onclick='listPerkiraan("+(rowcount+1)+")'><i class='icon-search'></i></a></td><td align=center><input type='text'  style='width:140px;cursor:pointer' id='NNoAk"+(rowcount+1)+"' readonly class=NoAk /></td><td align='center' valign='top'><textarea wrap='soft'  style='width:270px;height:30px;font-size:11px; resize:none;' class='ket' name='ket[]' id='ket"+(rowcount+1)+"' ></textarea></td><td align='center' valign='top'><input type='text'  style='width:100px;text-align:right;' class='Db' name='Db[]' id='Db"+(rowcount+1)+"' onclick='DisDK(0,this.id)' /></td> <td align='right' valign='top'><input type='text' style='width:100px;text-align:right;'  class='Kr' name='Kr[]' id='Kr"+(rowcount+1)+"' onclick='DisDK(1,this.id)' /></td><td><a id='row"+(rowcount+1)+"' class='linkdel'>Delete</a></td></tr>");	
 				rowcount++;
 				if(rowcount %2==1){
 					$('#ket'+(rowcount)+'').val($('#ket'+(rowcount-1)+'').val());
@@ -455,6 +462,43 @@
 	        mywindow.close();
 			EnableTxt(1);
 		}
+		var filter="";
+		//Table Pelanggan
+		function listPerkiraan(row){
+		 filter = row;
+			$.ajax({
+			type:'POST',
+			url: "<?php echo base_url();?>index.php/ms_perkiraan/view_Perkiraan",
+			data :{},
+			success:
+			function(hh){
+				$('#list_pelanggan').html(hh);
+				
+			}
+			});   
+		}
+		
+		function addPelanggan(){
+			$('#modalPelanggan').modal('hide');
+			$.ajax({
+			type:'POST',
+			url: "<?php echo base_url();?>index.php/ms_pelanggan/popPelanggan",
+			data :{},
+			success:
+			function(hh){
+				$('#add_pelanggan').html(hh);
+			}
+			});  
+		} 
+		
+		function getPerkiraan(){
+			var x = $('input:radio[name=optionsRadios]:checked').val();
+			var k = $('input:radio[name=optionsRadios]:checked').attr('kd');
+			var t = $('input:radio[name=optionsRadios]:checked').attr('term');
+			$('#NNoAk'+filter).val(x);
+			$('#NoAk'+filter).val(k);
+			$('#terms').val(t);
+		}
 	</script>	
 </head>
 
@@ -528,7 +572,9 @@
 										</tr>
 									</thead>
 									<tr id='row0'>
-										<td align=center><input type='text'  style='width:100px;cursor:pointer;' class='NoAk' name='NoAk[]' id="NoAk0" readonly /></td>
+										<td align=center><input type='text'  style='width:100px;cursor:pointer;' class='NoAk' name='NoAk[]' id="NoAk0" readonly />
+										<a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Perkiraan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPerkiraan()"><i class="icon-search"></i></a>
+                  </td>
 										<td align=center><input type='text'  style='width:140px;background-color:rgb(240,240,240);' id="NNoAk0" class='NoAk' readonly /></td>
 										<td><textarea style='width:120px;height:30px;font-size:11px; resize:none;' class='ket' name='ket[]' id="ket0"></textarea></td>
 										<td align=right><input type='text'  style='width:100px;text-align:right;' class='Db' name='Db[]' id="Db0" onclick="DisDK(0,this.id)" /></td>
@@ -562,7 +608,20 @@
 		</div>
     </div>
 </div>
-
+<div id="modalPelanggan" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">List Perkiraan <input type="text" id="SearchPelanggan" placeholder="Search"></h3>
+  </div>
+  <div class="modal-body">
+    <div id="list_pelanggan"></div>
+  </div>
+  <div class="modal-footer">
+   
+     <!--  <a href="#modalNewPelanggan" role="button" class="btn btn-info" data-toggle="modal" onclick="addPelanggan()">Create Pelanggan</a>
+    -->
+  </div>
+</div>
 <?php echo $this->load->view('template/footer'); ?>
 </body>
 </html>

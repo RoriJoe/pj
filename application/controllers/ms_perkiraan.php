@@ -119,4 +119,13 @@
             $r = $this->ms_perkiraan_model->delete($id);
             echo $r;
         }
+		
+		function view_Perkiraan(){
+           //request data table
+		   	
+            $data['hasil']=$this->ms_perkiraan_model->getPop();
+            //load view
+            $this->load->view('content/list/list_perkiraan',$data); 
+			
+        }
     }
