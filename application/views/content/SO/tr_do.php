@@ -20,7 +20,7 @@
                     <td>
                         <input type="hidden" id="kd_plg" />
                         <div class="input-append money" style="margin-bottom:0px;">
-                            <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                            <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;height: 24px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
                             <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
                         </div>
                     </td>

@@ -9,10 +9,13 @@
 		}
 
 		function index(){
-			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-			$data['Lvl2']=array(); $data['Lvl3']=array(); 
 			$rs=$this->msettingneraca->getlevelperkiraan();
+
+			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+			$data['Lvl2']=array(); 
+			$data['Lvl3']=array();
 			$data['lvlctk']=$this->msettingneraca->getlevelcetak('1');
+
 			if($rs){
 				foreach($rs->result() as $row){
 					if($row->level==2)
@@ -21,6 +24,7 @@
 						array_push($data['Lvl3'],$row->nomoraccount);
 				}
 			}
+			
 			$this->load->view('akun/settingneraca', $data);
 		}
 

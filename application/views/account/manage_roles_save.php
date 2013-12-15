@@ -630,6 +630,7 @@
                 <?php endif; ?>
               <?php endforeach; ?>
             </tr>
+            <!--
             <tr>
               <td>Transaksi Jurnal</td>
               <?php foreach( $permissions as $perm ) : ?>
@@ -725,7 +726,7 @@
                       </td>
                 <?php endif; ?>
               <?php endforeach; ?>
-            </tr>
+            </tr>-->
           </tbody>
         </table>
         

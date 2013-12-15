@@ -30,7 +30,7 @@
                     <div class="input-append money" style="margin-bottom: 0;">
                         <input  type='text' class="validate[required,maxSize[30], minSize[2]] span2" maxlength="30" 
                                 id="sup" id='appendedInputButton' name='sup' 
-                                style="width: 135px; margin-bottom:8px;" 
+                                style="width: 135px; margin-bottom:8px;height: 24px;" 
                                 onclick="lookup_supplier()">
 
                         <a  href="#modalSupplier" role="button" 
@@ -55,7 +55,7 @@
                         <input  type='text' placeholder="Gudang" 
                             class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
                             id="gud" id='appendedInputButton' name='gud'
-                            style="width: 115px;margin-left:10px;margin-bottom:8px;"
+                            style="width: 115px;margin-left:10px;margin-bottom:8px;height: 24px;"
                             onclick="lookup_gudang()">
 
                         <a  href="#modalGudang" id="filterGud" role="button" class="btn padding-filter" 
@@ -71,7 +71,7 @@
                     Limit
                     <div class="input-prepend input-append money" style="margin-left: 20px;">
                       <span class="add-on custom-add-on">Rp</span>
-                      <input class="span2" id='limk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='limk' style="width: 135px;text-align:right;" onkeyup="formatAngka(this,'.')" disabled>
+                      <input class="span2" id='limk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='limk' style="width: 135px;text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" disabled>
                     </div>
                 </div>
                 <a id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()">Add Barang</a>
