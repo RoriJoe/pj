@@ -9,7 +9,11 @@
 			return $rs;
 		}
 		function getsettinglabarugi(){
-			$rs=$this->db->query("select SN.tempnamaaccount,level,dari,sampai,SN.cetak,namaaccount,SN.nomoraccount,operator from settinglabarugi SN left join perkiraan P on SN.nomoraccount = P.nomoraccount ");
+			$rs=$this->db->query("
+				select SN.tempnamaaccount,level,dari,sampai,SN.cetak,namaaccount,SN.nomoraccount,operator 
+				from settinglabarugi SN 
+				left join perkiraan P on SN.nomoraccount = P.nomoraccount 
+			");
 			if($rs->num_rows >0)
 				return $rs;
 			else
@@ -70,7 +74,16 @@
 					$T = $Hrs->sampai;
 				}
 			}
-			$rs=$this->db->query("select saldo ,SUM(debit) as debit, SUM(kredit) as kredit from perkiraan P left join detailjurnal DJ on P.nomoraccount = DJ.nomoraccount left join jurnal J on J.novoucher=DJ.novoucher where  P.nomoraccount between '$F' and '$T' and (YEAR(tanggal)='$Thn' or YEAR(tanggalsaldoawal)='$Thn')");
+
+			$rs=$this->db->query("
+				select saldo ,SUM(debit) as debit, SUM(kredit) as kredit 
+				from perkiraan P 
+				left join detailjurnal DJ on P.nomoraccount = DJ.nomoraccount 
+				left join jurnal J on J.novoucher=DJ.novoucher 
+				where  P.nomoraccount between '$F' and '$T' and (YEAR(tanggal)='$Thn' 
+					or YEAR(tanggalsaldoawal)='$Thn')
+			");
+			
 			return $rs->result();
 		}
 		function GetSaldoJurnalSrc($No,$Thn,$SThn,$Bln,$SBln,$Sub){
@@ -219,8 +232,7 @@
 			if($rs->num_rows >0)
 				return $rs->result();
 			else
-				return false;
-		
+				return false;	
 		}
 		
 	}

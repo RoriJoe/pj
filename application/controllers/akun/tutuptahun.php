@@ -15,6 +15,7 @@
 			$data['akumulasi']=$this->mtutuptahun->getakumulasi();
 			$this->load->view("akun/tutuptahun",$data);
 		}
+
 		function getcombo(){
 			$this->load->model("akun/mtutuptahun");
 			$Comboper=$this->mtutuptahun->GetComboper();
@@ -33,11 +34,10 @@
 			echo "</select></td><td><a id='row".$_POST['rowcount']."' class='linkdel' href='#'><u>Delete</u></a></td></tr>";
 		}
 		
-		
 		function save(){
-		 	  $i=0;
+		 	$i=0;
 			$this->load->model("akun/mtutuptahun");
-			 $this->mtutuptahun->resetpernol();
+			$this->mtutuptahun->resetpernol();
 			$this->mtutuptahun->savehistory($_POST['tahun']);
 			foreach($_POST['minreset'] as $min){
 				$this->mtutuptahun->savesetnol($min,$_POST['maxreset'][$i],$_POST['tahun']);
@@ -51,87 +51,70 @@
 			//panggil fungsi dengan memberi parameter untuk koneksi dan nama file untuk backup
 			$this->backup_tables("localhost","root","","wahana",$file);
 		}
-		
-		
-		
-		
-		
-		function backup_tables($host,$user,$pass,$name,$nama_file,$tables = '*')
-{
-	//untuk koneksi database
-	$link = mysql_connect($host,$user,$pass);
-	mysql_select_db($name,$link);
-	
-	if($tables == '*')
-	{
-		$tables = array();
-		$result = mysql_query('SHOW TABLES');
-		while($row = mysql_fetch_row($result))
-		{
-			$tables[] = $row[0];
-		}
-	}else{
-		//jika hanya table-table tertentu
-		$tables = is_array($tables) ? $tables : explode(',',$tables);
-	}
-	
-	//looping dulu ah
-	foreach($tables as $table)
-	{
-		$result = mysql_query('SELECT * FROM '.$table);
-		$num_fields = mysql_num_fields($result);
-		
-		//menyisipkan query drop table untuk nanti hapus table yang lama
-		$return= 'DROP TABLE '.$table.';';
-		$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
-		$return.= "\n\n".$row2[1].";\n\n";
-		
-		for ($i = 0; $i < $num_fields; $i++) 
-		{
-			while($row = mysql_fetch_row($result))
+			
+		function backup_tables($host,$user,$pass,$name,$nama_file,$tables = '*'){
+			//untuk koneksi database
+			$link = mysql_connect($host,$user,$pass);
+			mysql_select_db($name,$link);
+			
+			if($tables == '*')
 			{
-				//menyisipkan query Insert. untuk nanti memasukan data yang lama ketable yang baru dibuat. so toy mode : ON
-				$return.= 'INSERT INTO '.$table.' VALUES(';
-				for($j=0; $j<$num_fields; $j++) 
+				$tables = array();
+				$result = mysql_query('SHOW TABLES');
+				while($row = mysql_fetch_row($result))
 				{
-					//akan menelusuri setiap baris query didalam
-					$row[$j] = addslashes($row[$j]);
-					//$row[$j] = reg_replace("\n","\\n",$row[$j]);
-					if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
-					if ($j<($num_fields-1)) { $return.= ','; }
+					$tables[] = $row[0];
 				}
-				$return.= ");\n";
+			}else{
+				//jika hanya table-table tertentu
+				$tables = is_array($tables) ? $tables : explode(',',$tables);
 			}
+			
+			//looping dulu ah
+			foreach($tables as $table)
+			{
+				$result = mysql_query('SELECT * FROM '.$table);
+				$num_fields = mysql_num_fields($result);
+				
+				//menyisipkan query drop table untuk nanti hapus table yang lama
+				$return= 'DROP TABLE '.$table.';';
+				$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+				$return.= "\n\n".$row2[1].";\n\n";
+				
+				for ($i = 0; $i < $num_fields; $i++) 
+				{
+					while($row = mysql_fetch_row($result))
+					{
+						//menyisipkan query Insert. untuk nanti memasukan data yang lama ketable yang baru dibuat. so toy mode : ON
+						$return.= 'INSERT INTO '.$table.' VALUES(';
+						for($j=0; $j<$num_fields; $j++) 
+						{
+							//akan menelusuri setiap baris query didalam
+							$row[$j] = addslashes($row[$j]);
+							//$row[$j] = reg_replace("\n","\\n",$row[$j]);
+							if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+							if ($j<($num_fields-1)) { $return.= ','; }
+						}
+						$return.= ");\n";
+					}
+				}
+				$return.="\n\n\n";
+			}
+			
+			//simpan file di folder yang anda tentukan sendiri. kalo saya sech folder "DATA"
+			$nama_file;
+			
+			$handle = fopen('./assets/'.$nama_file,'w+');
+			fwrite($handle,$return);
+			fclose($handle);
 		}
-		$return.="\n\n\n";
-	}
-	
-	//simpan file di folder yang anda tentukan sendiri. kalo saya sech folder "DATA"
-	$nama_file;
-	
-	$handle = fopen('./asset/'.$nama_file,'w+');
-	fwrite($handle,$return);
-	fclose($handle);
-}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		function BatalTutup(){
 			$this->load->model("akun/mtutuptahun");
 			$_POST['tahun'];
 			$this->mtutuptahun->marktutuptahun($_POST['tahun'],0);
 		}
+
 		function LabaRugi(){
 			$this->load->model("akun/msettingrugilaba");
 			$levelcetak = $this->msettingrugilaba->getlevelcetak('1');
@@ -188,15 +171,5 @@
 				}
 				return $hasil;
 			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		}		
 	}
-?>

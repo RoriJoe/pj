@@ -176,7 +176,7 @@ jQuery(document).ready(function(){
     listSO();
     tampilDetailSO();
     autogen();
-    validation()
+    validation();
     barAnimation();
     listBarang();
 });

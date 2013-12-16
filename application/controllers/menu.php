@@ -252,6 +252,9 @@
         function settingmapping(){
         	redirect('akun/settingmapping');
         }
+        function tutuptahun(){
+        	redirect('akun/tutuptahun');
+        }
         
         function logout()
         {

@@ -4,6 +4,7 @@
 		function __construct(){
 			parent::__construct();
 		}
+
 		function getalllistsearch($limit,$offset){
 			$rs=$this->db->query("select namaaccount,nomoraccount,level from perkiraan where level <=3 limit $offset,$limit");
 			return $rs;
@@ -87,9 +88,6 @@
 			return $rs->result();
 		}
 		
-		
-		
-		
 		function SearchSaldoJurnal($No,$Thn,$Bln,$Sub){
 			$rs=$this->db->query("select dari,sampai from settingneraca where nomoraccount = '$No'");
 			$F="";$T="";
@@ -102,6 +100,7 @@
 			$rs=$this->db->query("select saldo ,SUM(debit) as debit, SUM(kredit) as kredit from perkiraan P left join detailjurnal DJ on P.nomoraccount = DJ.nomoraccount join jurnal J on J.novoucher=DJ.novoucher where substring(P.nomoraccount,1,$Sub)='$No' and YEAR(tanggal)='$Thn' and P.nomoraccount between '$F' and '$T'");
 			return $rs->result();
 		}
+
 		function SaveSettingNer($No,$Nama,$F,$T,$Ctk){
 			$this->db->query("insert into settingneraca (nomoraccount,tempnamaaccount,dari,sampai,cetak) values('$No','$Nama','$F','$T','$Ctk')");
 		}
@@ -118,7 +117,6 @@
 			}
 			else
 				return false;
-		
 		}
 		
 		function UpdateSettingNer($kd,$val){
@@ -140,7 +138,6 @@
 					$this->db->query("insert settinglevel values('$no','$val')");
 		}
 		
-		
 		function getlevelcetak($No){
 			$rs=$this->db->query("select level from settinglevel where nomorlevel='$No'");
 			if($rs->num_rows() > 0){
@@ -150,14 +147,5 @@
 			}
 			else
 				return false;
-		
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
-?>

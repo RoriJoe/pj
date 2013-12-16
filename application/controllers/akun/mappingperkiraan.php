@@ -17,13 +17,16 @@
 			$data['Combo']=$this->mmappingperkiraan->GetJenis();
 			$this->load->view("akun/mappingperkiraan",$data);
 		}
+
 		function Tgl($tgl){
 			$Tgl = strtotime($tgl); 
 			return date('d F Y', $Tgl);
 		}
-		 function Uang($uang){
+
+		function Uang($uang){
 			return $in_rp =number_format($uang, 0, '.', '.');
-		 }
+		}
+
 		function getlistdata(){
 			if($_POST){
 				$this->load->model("akun/mmappingperkiraan");
@@ -33,7 +36,6 @@
 				}
 			}
 		}
-		
 		
 		function getselect(){ 
 			if($_POST){
@@ -46,6 +48,7 @@
 				}
 			}
 		}
+
 		function pagination(){    
 		 	if($_POST){
 				$this->load->model("akun/mmappingperkiraan");
@@ -160,6 +163,7 @@
 				}
 			}
 		}
+
 		function GetTabMapPer(){
 			$this->load->model("akun/mmappingperkiraan");
 			$Data=$this->mmappingperkiraan->GetTableMap($_POST['kode']);
@@ -201,6 +205,7 @@
 			}
 			echo '<script>rowcount="'.$i.'";</script>';
 		}
+
 		function deleteheader(){
 			if($_POST){
 				echo $_POST['kode'];
@@ -208,6 +213,7 @@
 				$this->mmappingperkiraan->deletedetail($_POST['kode']);
 			}
 		}
+
 		function SaveMap(){
 			$this->load->model("akun/mmappingperkiraan");	
 			$flagaction = $_POST['flagaction'];
@@ -229,8 +235,8 @@
 					$this->mmappingperkiraan->SetCetak($id,$Hfield);
 				}
 			} */
-			
 		}
+
 		function GetNmTab(){
 			if($_POST){
 				$this->load->model("akun/mmappingperkiraan");
@@ -243,6 +249,7 @@
 				echo '</select>';
 			}
 		}
+
 		function GetAttr(){
 			if($_POST){
 				$this->load->model("akun/mmappingperkiraan");
@@ -252,9 +259,10 @@
 				}
 			}
 		}
+
 		function GetTipe(){
-		$this->load->model("akun/mmappingperkiraan");
-		$tipe=$this->mmappingperkiraan->GetTipe($_POST['id']);
+			$this->load->model("akun/mmappingperkiraan");
+			$tipe=$this->mmappingperkiraan->GetTipe($_POST['id']);
 			if($tipe){
 				echo ' Tipe : <select id="TipeTran" name="TipeTran" >';
 					foreach($tipe as $Htipe){
@@ -272,13 +280,17 @@
 						</tr>
 					</thead>
 					<tr id="row0">
-						<td align=center><input type="text" kode=0  style="width:100px;cursor:pointer;" class="NoAk" name="NoAk[]" id="NoAk0" readonly /></td>
-						<td align=center><input type="text" kode=0  style="width:200px;cursor:pointer;" id="NNoAk0" class="NoAk" readonly /></td>
+						<td align=center>
+                            <input type="text" kode=0 class="span2 NoAk" id="NoAk0" id="appendedInputButton" name="NoAk[]" style=width:100px;cursor:pointer;margin-bottom:8px;height: 24px;" title="click to show list" readonly/>
+                        </td>
+						<td align=center>
+                            <input type="text" kode=0 class="span2 NoAk" id="NNoAk0" id="appendedInputButton" style=width:200px;margin-bottom:8px;cursor:pointer;height: 24px;" title="click to show list" readonly/>
+						</td>
 						<td><input  style=width:15px; value="0" name="DK0" type="radio" checked ></input></td>
 						<td><input  style=width:15px; value="1" name="DK0" type="radio" ></td>
-						<td><div id="ListAtt0"><select disabled><option value="">-- pilih --</option></select></div></td>
+						<td><div id="ListAtt0"><select><option value="">-- pilih --</option></select></div></td>
 						<td><div id="Attr0"></div></td>
-						<td class=action ><a id="row0" class="linkdel">Delete</a></td>
+						<td class=action><a id="row0" class="linkdel" style="cursor:pointer">Delete</a></td>
 					</tr>
 					
 				</table>';
