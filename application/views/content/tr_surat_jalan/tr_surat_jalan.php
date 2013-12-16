@@ -16,7 +16,7 @@
                     <input type="hidden" id="kd_plg" />
                     <div class="input-append money" style="margin-bottom:0;">
                      <input type='text' class="span2" 
-                        maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 115px;margin-bottom:8px;">
+                        maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 115px;margin-bottom:8px;height: 24px;">
                     <a href="#modalPelanggan" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                     </div>
                 </div>

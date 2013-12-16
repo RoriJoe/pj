@@ -1175,11 +1175,15 @@ list-style: none;
     background-color: #C24F4F;
     color: #fff;
 }
+#tableemploy tr{
+    height: 0;
+}
 #tableemploy input, select{
     margin:0;
 }
 #ViewJurnal hr{
     border-top: 1px solid #BBBBBB;
+    margin: 0px;
 }
 .navbar-inner{
     border-radius: 0px;

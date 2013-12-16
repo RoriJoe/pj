@@ -60,7 +60,7 @@
     </script>
 </head>
 
-<body style="overflow-y: scroll; background-image:url('../assets/img/bg.png');">
+<body style="background-image:url('../assets/img/bg.png');">
 <div id="overlay"></div>
 <div id="wrapper">
     <div id="inner-wrap">
@@ -68,13 +68,13 @@
         <div id="header">
             <?php echo $_header; ?>
         </div>
-        <div id="container" style="margin-top:45px;margin-right: 10px;">
+        <div id="container">
             <div class="row-fluid">
                 <div class="span2">
                     <?php echo $_side_menu; ?>
                 </div>
                 <!-- Content -->
-                <div class="span10" style=" margin-top: 10px; ">
+                <div class="span10" style=" margin-top: 10px; padding-right: 20px;">
                     <div id="contentFull">
                         <?php echo $_content; ?>
                     </div>

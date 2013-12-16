@@ -14,8 +14,7 @@
 		}
 
 		private $limit=2;
-		function generateid($hurufD)//generate id
-		{	
+		function generateid($hurufD){
 			$this->load->model("akun/mjurnal");
 			$generate=$this->mjurnal->generateid("jurnal","novoucher");
 			
@@ -63,15 +62,28 @@
 			$Tgl = strtotime($tgl); 
 			return date('d F Y', $Tgl);
 		}
-		 function Uang($uang){
+		function Uang($uang){
 			return $in_rp =number_format($uang, 0, '.', '.');
-		 }
+		}
 		function getlistdata(){
 			if($_POST){
 				$this->load->model("akun/mjurnal");
 				$rs=$this->mjurnal->getalllistsearch($_POST['byser'],$_POST['valser'],$_POST['limit'],$_POST['offset']);
 				foreach($rs->result() as $row){
-					echo "<tr><td>$row->novoucher</td><td>$row->kodekaryawan</td><td>$row->tanggal</td><td style='text-align:center;'><a id='$row->novoucher' class='imgupdate btn'><i class='icon-pencil'></i></a><a id='$row->novoucher' class='imgdelete btn'><i class='icon-trash'></i></a></td></tr>";
+					echo "
+					<tr>
+						<td>$row->novoucher</td>
+						<td>$row->kodekaryawan</td>
+						<td>$row->tanggal</td>
+						<td style='text-align:center;'>
+							<a id='$row->novoucher' class='imgupdate btn'>
+								<i class='icon-pencil'></i>
+							</a>
+							<a id='$row->novoucher' class='imgdelete btn'>
+								<i class='icon-trash'></i>
+							</a>
+						</td>
+					</tr>";
 				}
 			}
 		}
@@ -84,12 +96,12 @@
 			$Kr = $_POST['Kr'];
 			$flagaction = $_POST['flagaction'];
 				if($flagaction==1){
-					 $this->mjurnal->saveheader($id,$_POST['Tgl'],$this->session->userdata('wahanalogrole'));
+					 $this->mjurnal->saveheader($id,$_POST['Tgl'],$this->session->userdata('account_id'));
 					for($i=0; $i<count($NoAk); $i++){
 						$this->mjurnal->savedetail($id,$NoAk[$i],$ket[$i],$Db[$i],$Kr[$i]);
 					} 
 				}else if($flagaction==2){
-					$this->mjurnal->Updateheader($_POST['NoVo'],$_POST['Tgl'],$this->session->userdata('wahanalogrole'));
+					$this->mjurnal->Updateheader($_POST['NoVo'],$_POST['Tgl'],$this->session->userdata('account_id'));
 					$this->mjurnal->deletedetail($_POST['NoVo']);
 					for($j=0; $j<count($NoAk); $j++){
 						$this->mjurnal->savedetail($_POST['NoVo'],$NoAk[$j],$ket[$j],$Db[$j],$Kr[$j]);
@@ -230,11 +242,13 @@
 				}
 			}
 		}
+
 		function GetTablejurnal(){
 			$this->load->model("akun/mjurnal");
 			$Data['Data']=$this->mjurnal->GetTableJurnal($_POST['kode']);
-			$this->load->view('AjaxTableJurnal',$Data);
+			$this->load->view('akun/AjaxTableJurnal',$Data);
 		}
+
 		function deleteheader(){
 			if($_POST){
 				$this->load->model("akun/mjurnal");
@@ -245,9 +259,51 @@
 		
 		function NewTablejurnal(){
 			$id=$this->generateid("");
-			echo '<input type=hidden value="'.$id.'" id="NewId"/><table class="table table-bordered" style="margin-bottom:0px;" id="tabledetilindoor"><thead><tr><th>No Perkiraan</th><th>Nama Perkiraan</th><th>Keterangan</th><th>Debit</th><th>Kredit</th><th class=action >Action</th></tr></thead><tr id="row0"><td align=center><input type="text"  style="width:100px;cursor:pointer;" class="NoAk" name="NoAk[]" id="NoAk0" readonly /></td><td align=center><input type="text"  style="width:140px;cursor:pointer;" id="NNoAk0" class="NoAk" readonly /></td><td><textarea style="width:120px;height:30px;font-size:11px; resize:none;" class="ket" name="ket[]" id="ket0" ></textarea></td><td align=right><input type="text"  style="width:100px;text-align:right;" class="Db" name="Db[]" id="Db0" onclick="DisDK(0,this.id)" /></td><td align=right><input type="text" style="width:100px;text-align:right;"  class="Kr" id="Kr0" name="Kr[]" onclick="DisDK(1,this.id)" /></td><td class=action><a id="row0" class="linkdel">Delete</a></td></tr></table><table border=0><tr><td width=410px; style=text-align:center;>Balance</td><td width=97px style="text-align:right" ><label id="TDb" >0</label></td><td width=98px style="text-align:right"><label id="TKr" >0</label></td><td width=35px class=action></td></tr></table>';
+			echo '
+				<input type=hidden value="'.$id.'" id="NewId"/>
+				<table class="table table-bordered" style="margin-bottom:0px;" id="tabledetilindoor" style="margin-bottom:0px;">
+					<thead>
+						<tr>
+							<th>No Perkiraan</th>
+							<th>Nama Perkiraan</th>
+							<th>Keterangan</th>
+							<th>Debit</th>
+							<th>Kredit</th>
+							<th class=action>Action</th>
+						</tr>
+					</thead>
+						<tr id="row0">
+							<td align=center>
+								<input type="text"  style="width:100px;cursor:pointer;" class="NoAk" name="NoAk[]" id="NoAk0" readonly />
+							</td>
+							<td align=center>
+								<input type="text"  style="width:140px;cursor:pointer;" id="NNoAk0" class="NoAk" readonly />
+							</td>
+							<td>
+								<textarea style="width:120px;height:30px;font-size:11px; resize:none;" class="ket" name="ket[]" id="ket0" ></textarea>
+							</td>
+							<td align=right>
+								<input type="text"  style="width:100px;text-align:right;" class="Db" name="Db[]" id="Db0" onclick="DisDK(0,this.id)" />
+							</td>
+							<td align=right>
+								<input type="text" style="width:100px;text-align:right;"  class="Kr" id="Kr0" name="Kr[]" onclick="DisDK(1,this.id)" />
+							</td>
+							<td class=action>
+								<a id="row0" class="linkdel" style="cursor:pointer;">Delete</a>
+							</td>
+						</tr>
+					</table>
+					<table border=0>
+						<tr>
+							<td width=410px; style=text-align:center;>Balance</td>
+							<td width=97px style="text-align:right" >
+								<label id="TDb" >0</label>
+							</td>
+							<td width=98px style="text-align:right">
+								<label id="TKr" >0</label>
+							</td>
+							<td width=35px class=action></td>
+						</tr>
+					</table>';
 		}
-		
-		
 	}
-?>

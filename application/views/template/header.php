@@ -34,18 +34,17 @@ $date = date("d F Y, H:i");
         </div>    
     </div>
 </div>
-<div id="opt" align="right" style="float:right">
-        <!--<div class="breadcrumb flat breadcrumb-margin-top">
-            <a href="#">Home</a>
-            <a href="#" class="active">Master Barang</a>
-        </div>-->
-
-    <div style="float: left; margin-left: 20px; margin-top: 10px; color:#fff;">
-        <!--<?php echo set_breadcrumb(); ?>-->
-    </div>
-    <div id="tgl">
-        <span id='ct' style="margin-right: 5px;"></span> | <!-- code php -->
-        Welcome, <a href="user" title="Click to Edit Profile" style="color:red;"><?php echo $account->firstname; ?> <?php echo $account->lastname; ?> </a>|
-        <a href="logout" class="btn btn-danger btn-mini" title="Logout User" style=""><i class="icon-user icon-white icon-off"></i> Logout</a>
-    </div>
-</div>   
+<div class="navbar navbar-inverse" style="margin-bottom:0px;">
+  <div class="navbar-inner">
+    <ul class="nav pull-right">
+        <li><a id='ct' style="margin-right: 5px;"></a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Pengaturan User"><?php echo $account->firstname; ?> <?php echo $account->lastname; ?> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="<?php echo base_url(); ?>menu/user">User Profile</a></li>
+                <li><a href="<?php echo base_url(); ?>menu/logout">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </div>
+</div> 

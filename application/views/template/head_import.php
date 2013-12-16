@@ -7,4 +7,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.0.min.js" ></script>
 <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.format.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>   
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>  
+<script type='text/javascript' src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>   
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>

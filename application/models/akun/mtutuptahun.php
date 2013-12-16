@@ -40,12 +40,12 @@
 		function marktutuptahun($tahun,$flg){
 			$rss = array();
 			$tables = $this->db->query("SELECT table_name FROM INFORMATION_SCHEMA.TABLES
-			tab WHERE table_schema = 'wahana'")->result();
-			foreach($tables as $Htables){
-				$rs = $this->db->query("SELECT TABLE_NAME
-				FROM INFORMATION_SCHEMA.COLUMNS
-				WHERE table_name =  '$Htables->table_name'
-				AND COLUMN_NAME ='tutuptahun'")->result_array();
+				tab WHERE table_schema = 'db_pelita'")->result();
+				foreach($tables as $Htables){
+					$rs = $this->db->query("SELECT TABLE_NAME
+					FROM INFORMATION_SCHEMA.COLUMNS
+					WHERE table_name =  '$Htables->table_name'
+					AND COLUMN_NAME ='tutuptahun'")->result_array();
 				if($rs)
 					array_push($rss,$Htables->table_name);
 			}

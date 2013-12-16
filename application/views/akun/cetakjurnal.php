@@ -2,19 +2,24 @@
 <html>
 <head>
 	<title>Cetak Jurnal - Pelita Jaya</title>
+
 	<?php echo $this->load->view('template/head_import'); ?>
-	<script src="<?php echo base_url().'javascript/javascriptpelangan.js'; ?>" language="javascript"></script>    
-    <script src="<?php echo base_url().'javascript/sorttable.js'; ?>"></script>
+
+	<link href="<?php echo base_url().'assets/css/jquerydatepick.css'; ?>" type="text/css" rel="stylesheet" />
+	<link href="<?php echo base_url().'assets/css/jquery.validity.css'; ?>" type="text/css" rel="stylesheet" />
+
+    <script src="<?php echo base_url().'javascript/javascriptpelangan.js'; ?>" language="javascript"></script>    
+    <!--<script src="<?php echo base_url().'javascript/sorttable.js'; ?>"></script>
     <script src="<?php echo base_url().'javascript/jquery.alerts.js'; ?>" type="text/javascript"></script>    
-    <script src="<?php echo base_url().'javascript/jquery.ui.draggable.js'; ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url().'javascript/jquery.ui.draggable.js'; ?>" type="text/javascript"></script>-->
     <script src="<?php echo base_url().'javascript/jquery.validity.js'; ?>" language="javascript"></script>
 	<script src="<?php echo base_url().'javascript/jquerydatepick.js'; ?>" language="javascript"></script>
 
 	<script>
 		function begin(){
-				$("#TglAwl").datepick({dateFormat: 'dd MM yyyy'});
-				$("#TglAkhr").datepick({dateFormat: 'dd MM yyyy'});
-			}
+			$("#TglAwl").datepick({dateFormat: 'dd MM yyyy'});
+			$("#TglAkhr").datepick({dateFormat: 'dd MM yyyy'});
+		}
 		$(this).ready(function(){
 			begin();
 			$("#Cari").live('click', function(){
@@ -36,12 +41,12 @@
 			
 			$("#Print").live('click', function(){
 					
-			var data = $('#TableCJurnal').html();
-			var mywindow = window.open('', 'PrintJurnal', 'height=700,width=950');
-			mywindow.document.write('<html><head><style>.sortable{border-width: 0 0 1px 1px;border-spacing:0;border-collapse: collapse;border-style: solid;}.Bold{font-weight:bold;}.FieldDK{min-width:80px; text-align:right;} table{border: 0.5px solid #000000;}</style></head><body>');
-			mywindow.document.write('<center>Laporan Tansaksi Jurnal<hr size="3" width=250px/>');
-			mywindow.document.write('Periode : '+$('#TglAwl').val()+' s/d '+$('#TglAkhr').val()+'');
-			mywindow.document.write('</center></br>');
+				var data = $('#TableCJurnal').html();
+				var mywindow = window.open('', 'PrintJurnal', 'height=700,width=950');
+				mywindow.document.write('<html><head><style>.sortable{border-width: 0 0 1px 1px;border-spacing:0;border-collapse: collapse;border-style: solid;}.Bold{font-weight:bold;}.FieldDK{min-width:80px; text-align:right;} table{border: 0.5px solid #000000;}</style></head><body>');
+				mywindow.document.write('<center>Laporan Tansaksi Jurnal<hr size="3" width=250px/>');
+				mywindow.document.write('Periode : '+$('#TglAwl').val()+' s/d '+$('#TglAkhr').val()+'');
+				mywindow.document.write('</center></br>');
 				$.ajax({
 					type: "POST",
 					data:{TglAkhr:$('#TglAkhr').val(),TglAwl:$('#TglAwl').val(),NoVo1:$('#NoVo1').val(),NoVo2:$('#NoVo2').val()},
@@ -122,7 +127,7 @@
 						return date('d F Y', strtotime($date));
 					}
 					$TV=""; $i=0; $TtDb=0; $TtKr=0; $GTtKr=0; $GTtDb=0; $j=1; $NV="";
-					echo '<b>Tanggal: </b><input type="text" id="Tgl" value="" class="input-medium" style="border: 0px solid #000000;background-color:rgb(240,240,240);height:18px;" readonly />';
+					echo '<b>Tanggal: </b><input type="text" id="Tgl" value="" class="input-medium" style="width: 100px;" readonly />';
 					echo '<table class="table table-bordered" id="tableemploy" style="margin-bottom:0">
 							<thead>
 								<tr>
@@ -136,7 +141,7 @@
 							if($TV!=$Hdata->tanggal && $i!=0){$j=1;
 							echo '<tr style="font-weight:bold" ><td colspan=5 style="text-align:center;" >Total</td><td class=FieldDK>'.Uang($TtDb).'</td><td class=FieldDK>'.Uang($TtKr).'</td></tr>
 								</table></br>
-								<b>Tanggal: </b> <input type="text" class="input-medium" value="'.GantiDate($Hdata->tanggal).'" style="border: 0px solid #000000;background-color:rgb(240,240,240)" readonly />
+								<b>Tanggal: </b> <input type="text" class="input-medium" value="'.GantiDate($Hdata->tanggal).'" style="width: 100px;" readonly />
 								<table class="table table-bordered" id="tableemploy" style="margin-bottom:0">
 									<thead>
 										<tr>
@@ -167,6 +172,9 @@
 				</div>
     		</div>
     	</div>
+    	<div id="loadingDiv">
+           <img src="<?php echo base_url();?>assets/img/ajax-loader.gif"/>
+        </div>
     </div>
 
     <?php echo $this->load->view('template/footer'); ?>

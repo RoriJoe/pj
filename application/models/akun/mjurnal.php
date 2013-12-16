@@ -72,7 +72,7 @@
 		}
 		
 		function updatener($NoAc,$NamaPer,$Level,$Type,$NilaiSaldo,$kode){
-			$rs=$this->db->query("update perkiraan set novoucher='$NoAc',namaaccount='$NamaPer',level='$Level',type='$Type',tanggalentry='".date("Y-m-d")."',kodekaryawan='".$this->session->userdata("wahanalogrole")."',saldo='$NilaiSaldo',tanggalsaldoawal='".date("Y-m-d")."' where nomoraccount='$kode'");
+			$rs=$this->db->query("update perkiraan set novoucher='$NoAc',namaaccount='$NamaPer',level='$Level',type='$Type',tanggalentry='".date("Y-m-d")."',kodekaryawan='".$this->session->userdata("account_id")."',saldo='$NilaiSaldo',tanggalsaldoawal='".date("Y-m-d")."' where nomoraccount='$kode'");
 		}
 		function generateid($from,$fieldname)
 		{
@@ -84,7 +84,7 @@
 			else return false;
 		}
 		function GetTableJurnal($kode){
-			$rs=$this->db->query("select DJ.nomoraccount,keterangan,debit,kredit,namaaccount from detailjurnal as DJ join perkiraan as P on DJ.nomoraccount=P.nomoraccount where novoucher='$kode' ORDER BY id");
+			$rs=$this->db->query("select DJ.nomoraccount,keterangan,debit,kredit,namaaccount from detailjurnal as DJ join perkiraan as P on DJ.nomoraccount=P.nomoraccount where novoucher='$kode'");
 			return $rs->result();
 		}
 		function GetDetailJurCtk(){
@@ -132,16 +132,4 @@
 			}else
 				return false;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-?>

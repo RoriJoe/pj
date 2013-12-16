@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 08, 2013 at 03:14 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Dec 16, 2013 at 06:34 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,218 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_pelita`
 --
+CREATE DATABASE IF NOT EXISTS `db_pelita` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_pelita`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account`
+--
+
+CREATE TABLE IF NOT EXISTS `account` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(24) DEFAULT NULL,
+  `email` varchar(160) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `createdon` datetime NOT NULL,
+  `lastsignedinon` datetime DEFAULT NULL,
+  `deletedon` datetime DEFAULT NULL,
+  `suspendedon` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `account`
+--
+
+INSERT INTO `account` (`id`, `username`, `email`, `password`, `createdon`, `lastsignedinon`, `deletedon`, `suspendedon`) VALUES
+(1, 'sip', 'echristiandy@gmail.com', '$2a$08$EpL7hUxE5B7CcYZK5s9fUODiqaHs35HFZjhw4bI1ofjhmiWmj2dY2', '2013-11-28 00:00:00', '2013-12-16 09:21:53', NULL, NULL),
+(11, 'edson', 'edson@gmail.com', '$2a$08$pOwMxz/XnpqfJwskHY/PQeSJp1W90GE4CrmeDeeHpqEFvUjxELEoK', '2013-11-28 19:42:58', '2013-11-28 19:57:40', NULL, NULL),
+(12, 'admin', 'admin@admin.com', '$2a$08$Vt0EO99XOd0bz3Dhie/klOfRDuAxkBeN4KLqy..AvSgIwUJIlKyMK', '2013-11-30 14:43:49', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_details`
+--
+
+CREATE TABLE IF NOT EXISTS `account_details` (
+  `account_id` bigint(20) unsigned NOT NULL,
+  `fullname` varchar(160) DEFAULT NULL,
+  `firstname` varchar(80) DEFAULT NULL,
+  `lastname` varchar(80) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `dateofbirth` date DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `postalcode` varchar(40) DEFAULT NULL,
+  `picture` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `account_details`
+--
+
+INSERT INTO `account_details` (`account_id`, `fullname`, `firstname`, `lastname`, `phone`, `dateofbirth`, `gender`, `address`, `postalcode`, `picture`) VALUES
+(1, NULL, 'Eddy', 'Christiandy', '085247956204', '1992-09-25', 'm', 'jl. Kaki Lima', '11510', NULL),
+(11, NULL, 'Edson', 'Colins', NULL, NULL, 'm', NULL, NULL, NULL),
+(12, NULL, 'admin', 'pelita', '123456789', NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acl_permission`
+--
+
+CREATE TABLE IF NOT EXISTS `acl_permission` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `suspendedon` datetime DEFAULT NULL,
+  `is_system` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `key` (`key`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=107 ;
+
+--
+-- Dumping data for table `acl_permission`
+--
+
+INSERT INTO `acl_permission` (`id`, `key`, `description`, `suspendedon`, `is_system`) VALUES
+(2, 'create_roles', 'Create new roles', NULL, 1),
+(3, 'retrieve_roles', 'View existing roles', NULL, 1),
+(4, 'update_roles', 'Update existing roles', NULL, 1),
+(5, 'delete_roles', 'Delete existing roles', NULL, 1),
+(6, 'create_permissions', 'Create new permissions', NULL, 1),
+(7, 'retrieve_permissions', 'View existing permissions', NULL, 1),
+(8, 'update_permissions', 'Update existing permissions', NULL, 1),
+(9, 'delete_permissions', 'Delete existing permissions', NULL, 1),
+(10, 'create_users', 'Create new users', NULL, 1),
+(11, 'retrieve_users', 'View existing users', NULL, 1),
+(12, 'update_users', 'Update existing users', NULL, 1),
+(13, 'delete_users', 'Delete existing users', NULL, 1),
+(14, 'ban_users', 'Ban and Unban existing users', NULL, 1),
+(15, 'update_setting', 'Update informasi setting user', NULL, 1),
+(16, 'access_gudang', 'View Gudang', NULL, 1),
+(17, 'create_gudang', 'Add New Gudang', NULL, 1),
+(18, 'update_gudang', 'Update Existing Gudang', NULL, 1),
+(19, 'delete_gudang', 'Delete Existing Gudang', NULL, 1),
+(20, 'print_gudang', 'Print Gudang', NULL, 1),
+(21, 'access_pelanggan', 'View Data Pelanggan', NULL, 1),
+(22, 'create_pelanggan', 'Create new Pelanggan', NULL, 1),
+(23, 'update_pelanggan', 'Update Existing Pelanggan', NULL, 1),
+(24, 'delete_pelanggan', 'Delete Existing pelanggan', NULL, 1),
+(25, 'print_pelanggan', 'Print Data Pelanggan', NULL, 1),
+(26, 'access_supplier', 'View Supplier Data', NULL, 1),
+(27, 'create_supplier', 'Create New Supplier', NULL, 1),
+(28, 'update_supplier', 'Update Existing Supplier', NULL, 1),
+(29, 'delete_supplier', 'Delete Existing Supplier', NULL, 1),
+(30, 'print_supplier', 'Print Supplier Data', NULL, 1),
+(31, 'access_bank', 'View bank Data', NULL, 1),
+(32, 'create_bank', 'Create New bank', NULL, 1),
+(33, 'update_bank', 'Update Existing bank', NULL, 1),
+(34, 'delete_bank', 'Delete Existing bank', NULL, 1),
+(35, 'print_bank', 'Print bank Data', NULL, 1),
+(36, 'access_perkiraan', 'View perkiraan Data', NULL, 1),
+(37, 'create_perkiraan', 'Create New perkiraan', NULL, 1),
+(38, 'update_perkiraan', 'Update Existing perkiraan', NULL, 1),
+(39, 'delete_perkiraan', 'Delete Existing perkiraan', NULL, 1),
+(40, 'print_perkiraan', 'Print Data Perkiraan', NULL, 1),
+(41, 'access_barang', 'View barang Data', NULL, 1),
+(42, 'create_barang', 'Create New barang', NULL, 1),
+(43, 'update_barang', 'Update Existing barang', NULL, 1),
+(44, 'delete_barang', 'Delete Existing barang', NULL, 1),
+(45, 'print_barang', 'Print Data barang', NULL, 1),
+(46, 'access_satuan', 'View satuan Data', NULL, 1),
+(47, 'create_satuan', 'Create New satuan', NULL, 1),
+(48, 'update_satuan', 'Update Existing satuan', NULL, 1),
+(49, 'delete_satuan', 'Delete Existing satuan', NULL, 1),
+(50, 'print_satuan', 'Print Data satuan', NULL, 1),
+(51, 'access_so', 'View Sales Order Data', NULL, 1),
+(52, 'create_so', 'Create New Sales Order', NULL, 1),
+(53, 'update_so', 'Update Existing Sales Order', NULL, 1),
+(54, 'delete_so', 'Delete Existing Sales Order', NULL, 1),
+(55, 'print_so', 'Print Data SO', NULL, 1),
+(56, 'access_po', 'View po Data', NULL, 1),
+(57, 'create_po', 'Create New po', NULL, 1),
+(58, 'update_po', 'Update Existing po', NULL, 1),
+(59, 'delete_po', 'Delete Existing po', NULL, 1),
+(60, 'print_po', 'Print Data po', NULL, 1),
+(61, 'access_penerimaan', 'View Penerimaan Data', NULL, 1),
+(62, 'create_penerimaan', 'Create New Penerimaan', NULL, 1),
+(63, 'update_penerimaan', 'Update Existing Penerimaan', NULL, 1),
+(64, 'delete_penerimaan', 'Delete Existing Penerimaan', NULL, 1),
+(65, 'print_penerimaan', 'Print Data Penerimaan Barang', NULL, 1),
+(66, 'access_invoice', 'View invoice Data', NULL, 1),
+(67, 'create_invoice', 'Create New invoice', NULL, 1),
+(68, 'update_invoice', 'Update Existing invoice', NULL, 1),
+(69, 'delete_invoice', 'Delete Existing invoice', NULL, 1),
+(70, 'print_invoice', 'Print Data invoice', NULL, 1),
+(71, 'access_tagihan', 'View Tagihan Data', NULL, 1),
+(72, 'create_tagihan', 'Create New Tagihan', NULL, 1),
+(73, 'update_tagihan', 'Update Existing Tagihan', NULL, 1),
+(74, 'delete_tagihan', 'Delete Existing Tagihan', NULL, 1),
+(75, 'print_tagihan', 'Print Data Tagihan', NULL, 1),
+(76, 'access_bayar', 'View Data Pembayaran', NULL, 1),
+(77, 'create_bayar', 'Create New Pembayaran', NULL, 1),
+(78, 'update_bayar', 'Update Existing Pembayaran', NULL, 1),
+(79, 'delete_bayar', 'Delete Existing Pembayaran', NULL, 1),
+(80, 'print_bayar', 'Print Data Pembayaran', NULL, 1),
+(81, 'access_report_sales', 'View Laporan Sales Order', NULL, 1),
+(82, 'print_report_sales', 'Print Laporan Sales Order', NULL, 1),
+(83, 'access_report_oso', 'View Laporan Outstanding Order', NULL, 1),
+(84, 'print_report_oso', 'Print Laporan Outstanding Order', NULL, 1),
+(85, 'access_report_purchase', 'View Laporan Purchase Order', NULL, 1),
+(86, 'print_report_purchase', 'Print Laporan Purchase Order', NULL, 1),
+(87, 'access_report_ospo', 'View Laporan Outstanding PO', NULL, 1),
+(88, 'print_report_ospo', 'Print Laporan Outstanding PO', NULL, 1),
+(89, 'access_report_mutasi', 'View Laporan Mutasi', NULL, 1),
+(90, 'print_report_mutasi', 'Print Laporan Mutasi', NULL, 1),
+(91, 'access_report_ks', 'View Laporan Kartu Stock', NULL, 1),
+(92, 'print_report_ks', 'Print Laporan Kartu Stock', NULL, 1),
+(93, 'access_report_terima', 'View Laporan Penerimaan', NULL, 1),
+(94, 'print_report_terima', 'Print Laporan Penerimaan', NULL, 1),
+(95, 'access_report_sj', 'View Laporan Surat Jalan', NULL, 1),
+(96, 'print_report_sj', 'Print Laporan Surat Jalan', NULL, 1),
+(97, 'access_stock', 'View Stock Data', NULL, 1),
+(98, 'create_stock', 'Create New Stock', NULL, 1),
+(99, 'update_stock', 'Update Existing Stock', NULL, 1),
+(100, 'delete_stock', 'Delete Existing Stock', NULL, 1),
+(101, 'print_stock', 'Print Data Stock', NULL, 1),
+(102, 'access_surat_jalan', 'View Surat Jalan Data', NULL, 1),
+(103, 'create_surat_jalan', 'Create New Surat Jalan', NULL, 1),
+(104, 'update_surat_jalan', 'Update Existing Surat Jalan', NULL, 1),
+(105, 'delete_surat_jalan', 'Delete Existing Surat Jalan', NULL, 1),
+(106, 'print_surat_jalan', 'Print Data Surat Jalan', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acl_role`
+--
+
+CREATE TABLE IF NOT EXISTS `acl_role` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `suspendedon` datetime DEFAULT NULL,
+  `is_system` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `role_name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `acl_role`
+--
+
+INSERT INTO `acl_role` (`id`, `name`, `description`, `suspendedon`, `is_system`) VALUES
+(1, 'Admin', 'Website Administrator', NULL, 1),
+(2, 'User', 'Website user', NULL, 0),
+(3, 'Sales', 'Role untuk sales', NULL, 0),
+(4, 'Marketing', 'Divisi Marketing', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -101,12 +313,12 @@ CREATE TABLE IF NOT EXISTS `barang` (
 --
 
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('18BP00512KS', '5 X 12', 'BETON POLOS', '18-KS', 'Batang', 0, 0, 30000, '0000-00-00', 2000, 30000, 0, 0),
-('18BP00812KS', '8 X 12', 'BETON POLOS', '18-KS', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('18BP01012KS', '10 X 12', 'BETON POLOS', '18-KS', 'Batang', 0, 0, 48075, '0000-00-00', 3205, 48075, 0, 0),
-('18BP01212KS', '12 X 12', 'BETON POLOS', '18-KS', 'Batang', 121, 71, 32145, '0000-00-00', 2143, 32145, 0, 0),
-('18BP01612KS', '16 X 12', 'BETON POLOS', '18-KS', 'Batang', 0, 0, 5824, '0000-00-00', 416, 5824, 0, 0),
-('18BP02212KS', '22 X 12', 'BETON POLOS', '18-KS', 'Batang', 24, 0, 8910, '0000-00-00', 594, 8910, 0, 0),
+('18BP00512KS', '5 X 12', 'BETON POLOS', '18-KS', 'Batang', 45, 45, 30000, '0000-00-00', 2000, 30000, 0, 0),
+('18BP00812KS', '8 X 12', 'BETON POLOS', '18-KS', 'Batang', 45, 45, 0, '0000-00-00', 0, 0, 0, 0),
+('18BP01012KS', '10 X 12', 'BETON POLOS', '18-KS', 'Batang', 56, 56, 48075, '0000-00-00', 3205, 48075, 0, 0),
+('18BP01212KS', '12 X 12', 'BETON POLOS', '18-KS', 'Batang', 211, 40, 32145, '0000-00-00', 2143, 32145, 0, 0),
+('18BP01612KS', '16 X 12', 'BETON POLOS', '18-KS', 'Batang', 22, 22, 5824, '0000-00-00', 416, 5824, 0, 0),
+('18BP02212KS', '22 X 12', 'BETON POLOS', '18-KS', 'Batang', 37, 13, 8910, '0000-00-00', 594, 8910, 0, 0),
 ('18BP0256KS', '25 X 6', 'BETON POLOS', '18-KS', 'Batang', 0, 0, 7875, '0000-00-00', 525, 7875, 0, 0),
 ('18BU01312KS', '13 X 12', 'BETON ULIR', '18-KS', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('18BU0256KS', '25 X 6', 'BETON ULIR', '18-KS', 'Batang', 0, 0, 15, '0000-00-00', 1, 15, 0, 0),
@@ -870,12 +1082,12 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0406', '40 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 950, '0000-00-00', 63, 950, 0, 0),
 ('AH0426', '42 X 6', 'ASS HITAM', '', 'Batang', 6, 0, 94, '0000-00-00', 6, 94, 0, 0),
 ('AH0436', '43 X 6', 'ASS HITAM', '', 'Batang', 7, 0, 48, '0000-00-00', 4, 48, 0, 0),
-('AH0446', '44 X 6', 'ASS HITAM', '', 'Batang', 5, -15, 0, '0000-00-00', 0, 0, 0, 0),
+('AH0446', '44 X 6', 'ASS HITAM', '', 'Batang', 20, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AH0456', '45 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 60, '0000-00-00', 0, 60, 0, 0),
 ('AH0466', '46 X 6', 'ASS HITAM', '', 'Batang', 7, 0, 119, '0000-00-00', 7, 119, 0, 0),
 ('AH0486', '48 X 6', 'ASS HITAM', '', 'Batang', 8, 0, 136, '0000-00-00', 8, 136, 0, 0),
-('AH0506', '50 X 6', 'ASS HITAM', '', 'Batang', 36, -16, 5127, '0000-00-00', 166, 5127, 0, 0),
-('AH0526', '52 X 6', 'ASS HITAM', '', 'Batang', 0, -11, 133, '0000-00-00', 37, 133, 0, 0),
+('AH0506', '50 X 6', 'ASS HITAM', '', 'Batang', 52, 10, 5127, '0000-00-00', 166, 5127, 0, 0),
+('AH0526', '52 X 6', 'ASS HITAM', '', 'Batang', 11, 0, 133, '0000-00-00', 37, 133, 0, 0),
 ('AH0536', '53 X 6', 'ASS HITAM', '', 'Batang', 3, 0, 163, '0000-00-00', 5, 163, 0, 0),
 ('AH0556', '55 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 420, '0000-00-00', 22, 420, 0, 0),
 ('AH0586', '58 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 3244, '0000-00-00', 179, 3244, 0, 0),
@@ -906,14 +1118,14 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0976', '97 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 376, '0000-00-00', 299, 376, 0, 0),
 ('AH097688', '97 X 6''88', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 278, 24, 0, 0),
 ('AH09845', '98 X 4''5', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 278, 24, 0, 0),
-('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 3, -19, 1446, '0000-00-00', 49, 1446, 0, 0),
-('AH1006', '100 X 6', 'ASS HITAM', '', 'Batang', 1, -15, 2086, '0000-00-00', 85, 2086, 0, 0),
+('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 6, -5, 1446, '0000-00-00', 49, 1446, 0, 0),
+('AH1006', '100 X 6', 'ASS HITAM', '', 'Batang', 16, 0, 2086, '0000-00-00', 85, 2086, 0, 0),
 ('AH1016', '101 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 164, '0000-00-00', 21, 164, 0, 0),
 ('AH1026', '102 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 651, '0000-00-00', 53, 651, 0, 0),
 ('AH1056', '105 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 125, '0000-00-00', 5, 125, 0, 0),
 ('AH1106', '110 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 89, '0000-00-00', 4, 89, 0, 0),
-('AH1126', '112 X 6', 'ASS HITAM', '', 'Batang', 5, -56, 50, '0000-00-00', 2, 50, 0, 0),
-('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 1, -28, 1000, '0000-00-00', 40, 1000, 0, 0),
+('AH1126', '112 X 6', 'ASS HITAM', '', 'Batang', 20, 4, 50, '0000-00-00', 2, 50, 0, 0),
+('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 8, 0, 1000, '0000-00-00', 40, 1000, 0, 0),
 ('AH1156', '115 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 175, '0000-00-00', 7, 175, 0, 0),
 ('AH1206', '120 X 6', 'ASS HITAM', '', 'Batang', 10, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AH1256', '125 X 6', 'ASS HITAM', '', 'Batang', 8, 0, 400, '0000-00-00', 16, 400, 0, 0),
@@ -927,7 +1139,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH3306', '330 X 6', 'ASS HITAM', '', 'Batang', 0, 0, 24, '0000-00-00', 1, 24, 0, 0),
 ('AH350094', '350 X 6100/ 9''4', 'ASS HITAM', '', 'Batang', 1, 0, 62, '0000-00-00', 4, 62, 0, 0),
 ('AH3501', '350 X 1MTR', 'ASS HITAM', '', 'Batang', 1, 0, 25, '0000-00-00', 1, 25, 0, 0),
-('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 2, 15, 63, '0000-00-00', 21, 63, 0, 0),
+('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 15, 30, 63, '0000-00-00', 21, 63, 0, 0),
 ('AP000126', '1/2" @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('AP000346', '3/4" (19MM) @6M', 'ASS PUTIH', '', 'Batang', 8, 0, 702, '0000-00-00', 102, 702, 0, 0),
 ('AP000386', '3/8" @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
@@ -966,8 +1178,6 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AP0456', '45MM @6M', 'ASS PUTIH', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('B1307001', '200x52', 'Pipa L', 'PL22', 'Batang', 5, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307002', '22x20', 'Plat', 'P22', 'Lembar', 0, 0, NULL, NULL, NULL, NULL, 0, 0),
-('B1307003', '25x25x25', 'Plat Segi Tiga', 'PST2', 'Meter', 55, -7, NULL, NULL, NULL, NULL, 0, 0),
-('B1307004', '15x12', 'Pipa Silinder X', 'PS15', 'Meter', 15, -7, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307005', '200 x 500', 'Besi Super', 'BS25', 'Roll', 25, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1307006', '400x500', 'Pipa Besi 3', 'Tes Data', 'Batang', 5235, 0, NULL, NULL, NULL, NULL, 0, 0),
 ('B1309001', '5 x 12', 'Beton Ulir', '18-KS', 'Inci', 0, 0, NULL, NULL, NULL, NULL, 0, 0),
@@ -1005,7 +1215,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('BU01312FITW', '13 X 12', 'B-ULIR', 'F.ITW', 'Batang', 0, 0, 8385, '0000-00-00', 240, 8385, 0, 0),
 ('BU01312KS', '13 X 12', 'B-ULIR', 'KS', 'Batang', 128, 0, 37887, '0000-00-00', 2248, 37887, 0, 0),
 ('BU01312KSI', '13 X 12', 'B-ULIR', 'KSI', 'Batang', 1449, 0, 0, '0000-00-00', 0, 0, 0, 0),
-('BU01312MS', '13 X 12', 'B-ULIR', 'MS', 'Batang', 700, -15, 0, '0000-00-00', 0, 0, 0, 0),
+('BU01312MS', '13 X 12', 'B-ULIR', 'MS', 'Batang', 700, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('BU01612KS', '16 X 12', 'B-ULIR', 'KS', 'Batang', 0, 0, 70708, '0000-00-00', 3072, 70708, 0, 0),
 ('BU01612KSF', '16 X 12', 'B-ULIR', 'KS-FULL', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('BU01612KSI', '16 X 12', 'B-ULIR', 'KSI', 'Batang', 454, 0, 4913, '0000-00-00', 788, 4913, 0, 0),
@@ -1095,11 +1305,11 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('HNS17524512', '175 X 245 X 12', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
 ('HNS19415012', '194 X 150 X 12', 'H BEAM', 'NS', 'Batang', 0, 0, 8, '0000-00-00', 0, 8, 0, 0),
 ('HNS2001508', '200 X 150 X 8', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
-('HNS24417512', '244 X 175 X 12', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0);
-INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
+('HNS24417512', '244 X 175 X 12', 'H BEAM', 'NS', 'Batang', 1, 0, 22, '0000-00-00', 1, 22, 0, 0),
 ('HNS30030010440', '300 X 300 X 10,440', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0),
 ('HNS300300106', '300 X 300 X 10,6', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0),
-('HNS30030011TD', '300 X 300 X 11', 'H BEAM', 'TD', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
+('HNS30030011TD', '300 X 300 X 11', 'H BEAM', 'TD', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0);
+INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
 ('HNS3003004TD', '300 X 300 X 4', 'H BEAM', 'NS-TD', 'Batang', 0, 0, 10, '0000-00-00', 2, 10, 0, 0),
 ('HNS30030054', '300 X 300 X 5,4', 'H BEAM', 'NS', 'Batang', 0, 0, 4, '0000-00-00', 1, 4, 0, 0),
 ('HNS39030012', '390 X 300 X 12', 'H BEAM', 'NS', 'Batang', 0, 0, 11, '0000-00-00', 7, 11, 0, 0),
@@ -1594,11 +1804,11 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PPH00366SSCH40', '3" (6) X 6', 'PIPA HITAM', 'SEAM LESS SCH40', 'Batang', 0, 0, 11595, '0000-00-00', 390, 11595, 0, 0),
 ('PPH0036776S', '3" (6''7/7) X 6', 'PIPA HITAM', 'SEAM LESS', 'Batang', 5, 0, 1281, '0000-00-00', 57, 1281, 0, 0),
 ('PPH004236', '4" (2''3) X 6', 'PIPA HITAM', '', 'Batang', 224, 0, 10332, '0000-00-00', 369, 10332, 0, 0),
-('PPH004296', '4" (2''5/2''8/2''9) X 6', 'PIPA HITAM', '', 'Batang', 182, 0, 21, '0000-00-00', 1, 21, 0, 0);
-INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
+('PPH004296', '4" (2''5/2''8/2''9) X 6', 'PIPA HITAM', '', 'Batang', 182, 0, 21, '0000-00-00', 1, 21, 0, 0),
 ('PPH004386', '4" (3''8) X 6', 'PIPA HITAM', '', 'Batang', 0, 0, 166, '0000-00-00', 8, 166, 0, 0),
 ('PPH004456', '4" (4''5) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 1, 0, 148, '0000-00-00', 16, 148, 0, 0),
-('PPH004566W', '4" (5/6) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 103, 0, 0, '0000-00-00', 0, 0, 0, 0),
+('PPH004566W', '4" (5/6) X 6', 'PIPA HITAM', 'WELDED', 'Batang', 103, 0, 0, '0000-00-00', 0, 0, 0, 0);
+INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
 ('PPH00466SSCH40', '4" (5''5/6) X 6', 'PIPA HITAM', 'SEAM LESS SCH40', 'Batang', 6, 0, 9093, '0000-00-00', 445, 9093, 0, 0),
 ('PPH0049106SSCH80', '4" (9/10) X 6', 'PIPA HITAM', 'SEAM LESS SCH80', 'Batang', 0, 0, 5342, '0000-00-00', 255, 5342, 0, 0),
 ('PPH005384576S', '5" (3''8/4) X 5,7/6', 'PIPA HITAM', 'SEAM LESS', 'Batang', 0, 0, 5153, '0000-00-00', 292, 5153, 0, 0),
@@ -1660,7 +1870,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PS0061006', '6 X 100 X 6', 'P-STRIP', '', 'Batang', 856, 0, 70161, '0000-00-00', 1799, 70161, 0, 0),
 ('PS006196', '6 X 19 X 6', 'P-STRIP', '', 'Batang', 0, 0, 0, '0000-00-00', 0, 0, 0, 0),
 ('PS0062006', '6 X 200 X 6', 'P-STRIP', '', 'Batang', 153, 0, 6084, '0000-00-00', 156, 6084, 0, 0),
-('PS006256', '6 X 25 X 6', 'P-STRIP', '', 'Batang', 5413, -5, 1560, '0000-00-00', 40, 1560, 0, 0),
+('PS006256', '6 X 25 X 6', 'P-STRIP', '', 'Batang', 5413, 0, 1560, '0000-00-00', 40, 1560, 0, 0),
 ('PS006326', '6 X 32 X 6', 'P-STRIP', '', 'Batang', 2796, 0, 72795, '0000-00-00', 1855, 72795, 0, 0),
 ('PS006386', '6 X 38 X 6', 'P-STRIP', '', 'Batang', 2339, 0, 34190, '0000-00-00', 1315, 34190, 0, 0),
 ('PS006506', '6 X 50 X 6', 'P-STRIP', '', 'Batang', 1488, 0, 0, '0000-00-00', 0, 0, 0, 0),
@@ -2093,16 +2303,7 @@ CREATE TABLE IF NOT EXISTS `bpb_d` (
   `Qty1` int(11) NOT NULL,
   `Keterangan` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`Kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
-
---
--- Dumping data for table `bpb_d`
---
-
-INSERT INTO `bpb_d` (`Kode`, `No_Bpb`, `Kode_brg`, `Qty1`, `Keterangan`) VALUES
-(12, '1311001', 'AHCAMPURAN', 15, ''),
-(13, '1311001', 'AH1005900', 15, ''),
-(14, '1311001', 'AH1126', 4, '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2117,15 +2318,33 @@ CREATE TABLE IF NOT EXISTS `bpb_h` (
   `Kode_Supp` varchar(25) NOT NULL,
   `Kode_Gudang` varchar(25) NOT NULL,
   `No_Po` varchar(25) NOT NULL,
+  `tutuptahun` varchar(200) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
   PRIMARY KEY (`No_Bpb`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `bpb_h`
+-- Table structure for table `ci_sessions`
 --
 
-INSERT INTO `bpb_h` (`No_Bpb`, `Tgl_Bpb`, `No_Reff`, `Kode_Supp`, `Kode_Gudang`, `No_Po`) VALUES
-('1311001', '2013-11-02', '123465', 'S1309002', 'G1307001', '1311001');
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`,`ip_address`,`user_agent`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('8db8650da4f8a793153d38d0b186f4c7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.41 Safari/537.36', 1387218613, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -2151,6 +2370,105 @@ INSERT INTO `currency` (`value`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detailjurnal`
+--
+
+CREATE TABLE IF NOT EXISTS `detailjurnal` (
+  `novoucher` varchar(7) NOT NULL,
+  `nomoraccount` varchar(10) NOT NULL,
+  `keterangan` text NOT NULL,
+  `debit` float NOT NULL DEFAULT '0',
+  `kredit` float NOT NULL DEFAULT '0',
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detailjurnal`
+--
+
+INSERT INTO `detailjurnal` (`novoucher`, `nomoraccount`, `keterangan`, `debit`, `kredit`, `time`) VALUES
+('1310001', '1.1.01', 'adsads', 2500000, 0, '02:15:44'),
+('1310001', '1.4.01', 'adsads', 0, 2500000, '02:15:44'),
+('1310002', '1.1.02', 'deposit', 6000000, 0, '00:00:00'),
+('1310002', '1.3.01', 'deposit tes', 0, 6000000, '00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailmapfield`
+--
+
+CREATE TABLE IF NOT EXISTS `detailmapfield` (
+  `idfield` int(11) NOT NULL AUTO_INCREMENT,
+  `idtab` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  PRIMARY KEY (`idfield`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=210 ;
+
+--
+-- Dumping data for table `detailmapfield`
+--
+
+INSERT INTO `detailmapfield` (`idfield`, `idtab`, `nama`) VALUES
+(206, 178, 'Total'),
+(209, 182, 'Term');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailmapperkiraan`
+--
+
+CREATE TABLE IF NOT EXISTS `detailmapperkiraan` (
+  `idfield` int(11) NOT NULL,
+  `nomoraccount` varchar(10) NOT NULL,
+  `debitkredit` tinyint(1) NOT NULL,
+  KEY `idtab` (`idfield`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detailmapperkiraan`
+--
+
+INSERT INTO `detailmapperkiraan` (`idfield`, `nomoraccount`, `debitkredit`) VALUES
+(0, '', 0),
+(0, '', 0),
+(0, '1.1.01', 0),
+(0, '1.6.01', 1),
+(0, '1.1.02', 0),
+(0, '1.1.01', 0),
+(0, '1.1.02', 0),
+(0, '1.6.02', 1),
+(0, '1.1.01', 0),
+(0, '1.2.02', 0),
+(0, '1.3.01', 1),
+(0, '1.1.01', 1),
+(0, '1.3.01', 0),
+(209, '1.3.01', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailmaptabel`
+--
+
+CREATE TABLE IF NOT EXISTS `detailmaptabel` (
+  `idtab` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
+  `namatabel` varchar(50) NOT NULL,
+  PRIMARY KEY (`idtab`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=184 ;
+
+--
+-- Dumping data for table `detailmaptabel`
+--
+
+INSERT INTO `detailmaptabel` (`idtab`, `id`, `namatabel`) VALUES
+(182, 20, 'invoice');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `do_d`
 --
 
@@ -2165,24 +2483,7 @@ CREATE TABLE IF NOT EXISTS `do_d` (
   `Keterangan` varchar(30) NOT NULL,
   `QtyTemp` int(11) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
-
---
--- Dumping data for table `do_d`
---
-
-INSERT INTO `do_d` (`No`, `No_Do`, `Kode_Brg`, `Qty`, `Harga`, `Jumlah`, `Status`, `Keterangan`, `QtyTemp`) VALUES
-(28, '1311001', 'AH1006', 15, 100000, 1500000, '', '', 0),
-(29, '1311001', 'AH1135538', 7, 200000, 1400000, '', '', 0),
-(30, '1311001', 'AH1126', 15, 1000000, 15000000, '', '', 0),
-(31, '1311002', 'AH0446', 15, 1000000, 15000000, '', '', 0),
-(32, '1311002', 'AH0506', 16, 2000000, 32000000, '', '#barang2', 0),
-(33, '1311002', 'AH0526', 11, 1000000, 11000000, '', '', 0),
-(34, '1311003', 'AH1005900', 10, 1000, 10000, '', '', 0),
-(35, '1311003', '', 0, 0, 0, '', '', 0),
-(36, '1311004', 'AHCAMPURAN', 13, 4000, 52000, '', '', 0),
-(37, '1311005', 'AH1005900', 3, 20000, 60000, '', 'w', 3),
-(38, '1311006', '18BP01212KS', 50, 30000, 1500000, '', '', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2207,17 +2508,24 @@ CREATE TABLE IF NOT EXISTS `do_h` (
   PRIMARY KEY (`No_Do`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `do_h`
+-- Table structure for table `friends`
 --
 
-INSERT INTO `do_h` (`No_Do`, `Tgl`, `No_Po`, `Tgl_Po`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Otorisasi`, `Total`, `discount`, `dpp`, `ppn`, `grandttl`) VALUES
-('1311001', '2013-11-01', 'PO123456', '2013-11-02', 'P1307009', '8', NULL, 'Eddy', 17900000, 1, 17721000, 2, 18075420),
-('1311002', '2013-11-01', '', NULL, 'P1307009', '8', NULL, 'Eddy', 58000000, 1, 57420000, 2, 58568400),
-('1311003', '2013-11-02', '', NULL, 'P1307009', '8', NULL, 'Eddy', 10000, 0, 10000, 0, 10000),
-('1311004', '2013-11-04', '', '2013-11-05', 'P1307009', '8', NULL, 'Edson', 52000, 5, 49400, 10, 54340),
-('1311005', '2013-11-08', '', NULL, 'P1309001', '8', NULL, 'Eddy', 60000, 5, 57000, 10, 62700),
-('1311006', '2013-11-08', '', NULL, 'P1309004', '8', NULL, 'Eddy', 1500000, 13, 1300000, 10, 1430000);
+CREATE TABLE IF NOT EXISTS `friends` (
+  `id` int(11) NOT NULL,
+  `friendID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`id`, `friendID`) VALUES
+(1, 2),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -2253,8 +2561,8 @@ INSERT INTO `gudang` (`Kode`, `Nama`, `Alamat`, `Alamat2`, `Kota`, `Telp`, `Mili
 ('G1309001', 'Gudang Satu', 'Jl. Satu', NULL, 'Satu', '085247956204', NULL, '575475675675', '085247956204', '085247956204', NULL, NULL, NULL, NULL),
 ('G1309002', 'Gudang Dua', 'Jl. Belok Dua', NULL, 'Jakarta', '02547778522', NULL, '', '155288254', '', NULL, NULL, NULL, NULL),
 ('G1309003', 'Gudang Tiga', 'Jl. Sepon', NULL, 'Sepon', '456123789', NULL, '', '456123789', '', NULL, NULL, NULL, NULL),
-('G1309004', 'Gudang Empat', 'Jl. Empat', NULL, 'Empat', '1234555', NULL, '', '1234444', '', NULL, NULL, NULL, NULL),
-('G1311001', 'Gudang Lites', 'Jl. Lite & BIte', NULL, 'Lite', '123456789', NULL, '', '123456789', '', NULL, NULL, NULL, NULL);
+('G1309004', 'Gudang Empat', 'Jl. Empat', NULL, 'Empats', '1234555', NULL, '', '1234444', '', NULL, NULL, NULL, NULL),
+('G1311001', 'Gudang Lites Bites', 'Jl. Lite & BIte', NULL, 'Lite', '123456789', NULL, '', '123456789', '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2274,6 +2582,8 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `Dpp` int(11) NOT NULL,
   `Ppn` int(11) NOT NULL,
   `Grand` decimal(15,0) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `tutuptahun` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`Kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2281,9 +2591,167 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 -- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`Kode`, `Kode_SJ`, `Kode_plg`, `Term`, `Tgl`, `Status`, `Total`, `Discount`, `Dpp`, `Ppn`, `Grand`) VALUES
-('1311001', '1311001', 'P1307009', 22, '2013-11-02', NULL, 16900000, 5, 16055000, 10, 17660500),
-('1311002', '1311003', 'P1307009', 22, '2013-11-07', NULL, 17900000, 0, 17900000, 0, 17900000);
+INSERT INTO `invoice` (`Kode`, `Kode_SJ`, `Kode_plg`, `Term`, `Tgl`, `Status`, `Total`, `Discount`, `Dpp`, `Ppn`, `Grand`, `tanggal`, `tutuptahun`) VALUES
+('1311001', '1311001', 'P1307009', 22, '2013-11-27', NULL, '30000000', 1, 29700000, 2, '30294000', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jurnal`
+--
+
+CREATE TABLE IF NOT EXISTS `jurnal` (
+  `novoucher` varchar(7) NOT NULL,
+  `tanggal` date NOT NULL,
+  `kodekaryawan` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jurnal`
+--
+
+INSERT INTO `jurnal` (`novoucher`, `tanggal`, `kodekaryawan`) VALUES
+('1310001', '2013-10-14', 'Adminpenju'),
+('1310002', '2012-10-14', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu`
+--
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `parentid` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `nama`, `parentid`) VALUES
+(0, 'bank', 2),
+(1, 'Home', 0),
+(2, 'Master', 0),
+(3, 'Penjualan', 0),
+(4, 'Pembelian', 0),
+(5, 'Produksi', 0),
+(6, 'Keuangan', 0),
+(7, 'Akuntansi', 0),
+(8, 'Karyawan', 2),
+(9, 'Pelanggan', 2),
+(10, 'Pembelian', 2),
+(11, 'Produksi', 2),
+(12, 'Akuntansi & Keuangan', 2),
+(13, 'Supplier', 10),
+(14, 'Outsource', 10),
+(15, 'Mesin', 11),
+(16, 'Bahan', 11),
+(17, 'Sales Order', 3),
+(18, 'Surat Perintah Kerja', 3),
+(19, 'Surat Jalan Indoor', 3),
+(20, 'Invoice', 3),
+(21, 'Report', 3),
+(22, 'Indoor', 17),
+(23, 'Ongkosan', 17),
+(26, 'Order Penjualan', 21),
+(27, 'Order Jasa', 21),
+(28, 'Outstanding Order Penjualan', 21),
+(29, 'Outstanding Order Jasa', 21),
+(30, 'Penjualan', 21),
+(31, 'Jasa', 21),
+(32, 'Purchase Order', 4),
+(33, 'SJ Retur Pembelian', 4),
+(34, 'Nota Retur Pembelian', 4),
+(35, 'Penerimaan Barang', 4),
+(36, 'Report', 4),
+(37, 'Bahan Baku', 32),
+(38, 'Jasa Outsourcing', 32),
+(39, 'Bahan Produksi', 32),
+(40, 'Bahan Baku', 33),
+(41, 'Jasa Outsourcing', 33),
+(42, 'Bahan Produksi', 33),
+(43, 'Bahan Baku', 34),
+(44, 'Jasa Outsourcing', 34),
+(45, 'Bahan Produksi', 34),
+(46, 'Bahan Baku', 35),
+(47, 'Jasa Outsourcing', 35),
+(48, 'Bahan Produksi', 35),
+(49, 'Pembelian Bahan Baku', 36),
+(50, 'Pembelian Outsourcing', 36),
+(51, 'Pembelian Bahan Produksi', 36),
+(52, 'Retur Pembelian Bahan Baku', 36),
+(53, 'Retur Pembelian Outsourcing', 36),
+(54, 'Retur Pembelian Bahan Produksi', 36),
+(55, 'Pemakaian Bahan Produksi', 5),
+(56, 'Produksi Per Mesin', 5),
+(57, 'Report', 5),
+(58, 'Indoor', 56),
+(59, 'Ongkosan', 56),
+(60, 'Produksi', 57),
+(61, 'Outstanding SPK Indoor', 57),
+(62, 'Outstanding SPK Ongkosan', 57),
+(63, 'Pemakaian Bahan Produksi', 57),
+(65, 'Penerimaan piutang ', 6),
+(66, 'Pembayaran Hutang', 6),
+(71, 'Akuntansi', 7),
+(72, 'Cetak', 7),
+(73, 'Jurnal', 71),
+(74, 'Transaksi Jurnal', 72),
+(75, 'Buku Besar', 72),
+(76, 'Laba Rugi', 72),
+(77, 'Neraca', 72),
+(78, 'Bank', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu1`
+--
+
+CREATE TABLE IF NOT EXISTS `menu1` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(15) NOT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu1`
+--
+
+INSERT INTO `menu1` (`id`, `menu`, `description`) VALUES
+(1, 'Master', NULL),
+(2, 'Transaksi', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu2`
+--
+
+CREATE TABLE IF NOT EXISTS `menu2` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(15) NOT NULL,
+  `root1` varchar(15) NOT NULL,
+  `desc` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu3`
+--
+
+CREATE TABLE IF NOT EXISTS `menu3` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(15) NOT NULL,
+  `root1` varchar(15) NOT NULL,
+  `root2` varchar(15) NOT NULL,
+  `desc` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2303,32 +2771,6 @@ CREATE TABLE IF NOT EXISTS `mobil` (
 
 INSERT INTO `mobil` (`No_mobil`, `Jenis`) VALUES
 ('B 0852 VXY', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `muser`
---
-
-CREATE TABLE IF NOT EXISTS `muser` (
-  `username` varchar(100) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `Nama` varchar(20) NOT NULL,
-  `Level` int(11) NOT NULL,
-  `Last_Login` timestamp NULL DEFAULT NULL,
-  `image` varchar(100) DEFAULT 'user.png',
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `muser`
---
-
-INSERT INTO `muser` (`username`, `password`, `Nama`, `Level`, `Last_Login`, `image`) VALUES
-('ada', '56d43845311fa224342668fc2c72fd97', 'ada', 1, '2013-11-08 06:44:10', 'ada.png'),
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 1, '2013-11-08 06:44:10', 'user.png'),
-('eddy', '5aa8fed9741d33c63868a87f1af05ab7', 'eddy', 2, '2013-11-08 06:44:10', 'eddy.jpg'),
-('sip', '06b15d3af713e318d123274a98d70bc9', 'Sip', 1, '2013-11-08 06:44:10', 'sip.png');
 
 -- --------------------------------------------------------
 
@@ -2386,12 +2828,195 @@ INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alam
 ('P1307007', 'Soedirman', NULL, 'MERDEKA PT.', 'Jl. Pondok Indah', NULL, 'Jakarta', '11525', '0852478566', '', '', '055248885', '', NULL, NULL, '52225774441', 41),
 ('P1307008', 'Tesla', NULL, 'Tesla Power', 'Jl. tesla', NULL, 'tes', '35555', '356346', '', '', '123456', '', NULL, NULL, '346346346', 23),
 ('P1307009', 'Bung Tomo', NULL, ' Bersatu Maju PT.', 'gsegseg', NULL, 'Bandung', '46333', '521353252', '', '', '634634', '', NULL, NULL, '35325', 22),
-('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '', '6285788555822', '', '02215877', '', 25000000, NULL, '487995577758852', 10),
+('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '0852474855', '6285788555822', '', '02215877', '', '25000000', NULL, '487995577758852', 10),
 ('P1309002', 'Kim Jong Kook', NULL, 'ABADI BARU YES', 'Jl. Gangnam No.35', NULL, 'Bekasi', '15400', '021-528444485', '', '', '021788588', '', NULL, NULL, '777858442000457', 14),
 ('P1309003', 'Sidoel Ha', NULL, 'SIDO TENGGELAM', 'Jl. Pajajaran', NULL, 'Bunyu', '11710', '258552282', '52588475552', '55847852566', '258547', '24470444', NULL, NULL, '4356463646463', 7),
-('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', 100000, NULL, '123456782', 25),
-('P1311001', 'Koraswadi', NULL, 'Kora-Kora CV.', 'Jl. Sungai Kora III', NULL, 'Jakarta', '11450', '123456789', '', '', '123456789', '', 25000000, NULL, '258147369', 50),
-('P1311002', 'Torino', NULL, 'Tori-Tori', 'Torino', NULL, 'Jakarta', '11540', '123456789', '', '', '132465789', '', 25000000, NULL, '123456789', 20);
+('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', '100000', NULL, '123456782', 25),
+('P1311001', 'Koraswadi', NULL, 'Kora-Kora CV.', 'Jl. Sungai Kora III', NULL, 'Jakarta', '11450', '123456789', '', '', '123456789', '', '25000000', NULL, '258147369', 50),
+('P1311002', 'Torino', NULL, 'Tori-Tori', 'Torino', NULL, 'Jakarta', '11540', '123456789', '', '', '132465789', '', '25000000', NULL, '123456789', 20),
+('P1312001', 'rhshrhrh', NULL, 'tes', 'fdhhrhr', NULL, 'rhdrhrd', '46346', '46346363', '', '', '43634634', '', '6346436346', NULL, '46347437', 64);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE IF NOT EXISTS `pembayaran` (
+  `Kode` varchar(111) NOT NULL,
+  `Kode_supplier` varchar(11) NOT NULL,
+  `Tgl` date NOT NULL,
+  PRIMARY KEY (`Kode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran_d`
+--
+
+CREATE TABLE IF NOT EXISTS `pembayaran_d` (
+  `Kode` varchar(11) NOT NULL,
+  `Jenis` varchar(14) NOT NULL,
+  `DariBank` varchar(14) NOT NULL,
+  `DariRek` varchar(14) NOT NULL,
+  `Ref` varchar(14) NOT NULL,
+  `TglGiro` date NOT NULL,
+  `TglCair` date NOT NULL,
+  `Nilai` int(11) NOT NULL,
+  `TerimaBank` varchar(14) NOT NULL,
+  `TerimaRek` varchar(14) NOT NULL,
+  PRIMARY KEY (`Kode`,`Jenis`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran_d2`
+--
+
+CREATE TABLE IF NOT EXISTS `pembayaran_d2` (
+  `Kode` varchar(11) NOT NULL,
+  `No_po` varchar(11) NOT NULL,
+  `NilaiPo` int(11) NOT NULL,
+  `NilaiBayar` int(11) NOT NULL,
+  `Total` int(11) NOT NULL,
+  PRIMARY KEY (`Kode`,`No_po`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran_d3`
+--
+
+CREATE TABLE IF NOT EXISTS `pembayaran_d3` (
+  `Kode` varchar(11) NOT NULL,
+  `Jenis` varchar(14) NOT NULL,
+  `Nilai` int(11) NOT NULL,
+  `Total` int(11) NOT NULL,
+  PRIMARY KEY (`Kode`,`Jenis`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perkiraan`
+--
+
+CREATE TABLE IF NOT EXISTS `perkiraan` (
+  `nomoraccount` varchar(10) NOT NULL,
+  `namaaccount` varchar(50) NOT NULL,
+  `level` tinyint(4) NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  `tanggalentry` date NOT NULL,
+  `kodekaryawan` varchar(10) DEFAULT NULL,
+  `tanggalsaldoawal` date NOT NULL,
+  `saldo` bigint(12) NOT NULL,
+  `tempnamaaccount` varchar(50) DEFAULT NULL,
+  `cetak` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nomoraccount`),
+  KEY `userid` (`kodekaryawan`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `perkiraan`
+--
+
+INSERT INTO `perkiraan` (`nomoraccount`, `namaaccount`, `level`, `type`, `tanggalentry`, `kodekaryawan`, `tanggalsaldoawal`, `saldo`, `tempnamaaccount`, `cetak`) VALUES
+('1', 'Aktiva', 1, 1, '2013-10-03', 'Admin001', '2013-09-26', 0, '', 1),
+('1.1', 'Kas', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.1.01', 'Kas Kecil', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.1.02', 'Kas Penerimaan Piutang', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.2', 'Bank', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.2.01', 'BCA 2873074990 a/n PT WBK', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.2.02', 'CIMB Niaga a/c 4320100465007 a/n PT WBK', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.2.03', 'CIMB Niaga a/c 4320100465003', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.2.04', 'Commenwealth 1049870911 a/n PT WBK', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.3', 'Deposito ', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.3.01', 'Deposito CIMB Niaga', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.4', 'Piutang Dagang', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.5', 'Persediaan', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.6', 'Pembayaran Dimuka', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.6.01', 'Uang Muka Pembelian', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.6.02', 'Asuransi Dibayar Dimuka', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9', 'Aktiva Tetap', 2, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('1.9.01', 'Tanah dan Bangunan', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.02', 'Mesin dan Perlengkapan', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.03', 'Inventaris ', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.04', 'Kendaraan', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.51', 'Ak. Peny. Bangunan', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.52', 'Ak. Peny. Mesin', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.53', 'Ak. Peny. Inventaris', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('1.9.54', 'Ak. Peny. Kendaraan', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2', 'Kewajiban', 1, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.1', 'Hutang Dagang', 2, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.1.01', 'Hutang Dagang', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.2', 'Penerimaan Uang Muka', 2, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.2.01', 'Uang Muka Penjualan', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.3', 'Hutang Bank', 2, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.3.01', 'Hutang KI CIMB Niaga', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.4', 'Hutang Leasing', 2, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.4.01', 'Hutang Leasing Mobil', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.4.02', 'Hutang Leasing Mesin SM 52 ', 3, 1, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.4.03', 'Hutang Leasing Mesin SM 74', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('2.9', 'Hutang Lain-Lain', 2, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('2.9.01', 'Hutang Lain - ', 3, 2, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('3', 'Modal Disetor', 1, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('3.1', 'Modal Disetor', 2, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('3.1.01', 'Modal Disetor ', 3, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('3.2', 'Laba Ditahan', 2, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('3.2.01', 'Laba Ditahan', 3, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('3.3', 'Laba Tahun Berjalan', 2, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 1),
+('3.3.01', 'Laba Tahun Berjalan', 3, 5, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('4', 'Pendapatan', 1, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('4.5.02', 'Diskon Penjualan', 3, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5', 'Harga Pokok Penjualan', 1, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.1.02', 'HPP Indoor - CTP', 3, 4, '2013-10-17', 'Salesman', '2013-10-13', 0, '', 0),
+('5.1.03', 'HPP Indoor - Ongkos Cetak', 3, 4, '2013-10-17', 'Salesman', '2013-10-13', 0, '', 0),
+('5.1.04', 'HPP Indoor - Finishing', 3, 4, '2013-10-17', 'Salesman', '2013-10-17', 0, '', 0),
+('5.2', 'Harga Pokok Penjualan Jasa', 2, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.01', 'HPP Jasa - Gaji Tenaga Kerja', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.02', 'HPP Jasa - Uang Makan TK', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.03', 'HPP Jasa - Lembur TK', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.04', 'HPP Jasa : Bahan Produksi', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.05', 'HPP Jasa - Listrik', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.06', 'HPP Jasa - Perbaikan Mesin', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('5.2.07', 'HPP Jasa - Penyusutan Mesin', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6', 'Biaya Operasional', 1, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.1', 'Biaya Penjualan', 2, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.1.01', 'Biaya Gaji Marketing', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.1.02', 'Biaya Komisi Marketing', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.1.03', 'Biaya Pengiriman Barang', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2', 'Biaya Umum ', 2, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.01', 'Biaya Gaji Adm', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.02', 'Biaya Uang Makan ', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.03', 'Biaya Telepon', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.04', 'Biaya Alat Tulis', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.05', 'Biaya Kebersihan dan Keamanan', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.06', 'Biaya Air Minum', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.07', 'Biaya Asuransi', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.08', 'Biaya Pajak', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.09', 'Biaya Keperluan Kantor', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.10', 'Biaya Pengobatan ', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.11', 'Biaya Perbaikan Kendaraan', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.12', 'Biaya Perbaikan Inventaris', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.13', 'Biaya Penyusutan Inventaris', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.14', 'Biaya Penyusutan Kendaraan', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.15', 'Biaya Perijinan', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.16', 'Biaya Pajak', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.2.40', 'Biaya Umum Lain-Lain', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.3', 'Biaya Keuangan', 2, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.3.01', 'Biaya Adm. Bank', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.3.02', 'Biaya Provisi Bank', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('6.3.03', 'Biaya Bunga', 3, 4, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('7', 'Pendapatan Diluar Usaha', 1, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('7.1', 'Pendapatan Diluar Usaha', 2, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('7.1.01', 'Pendapatan Bunga Bank', 3, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('7.1.59', 'Pendapatan Lain-Lain', 3, 3, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('9', 'Ayat Silang', 1, 6, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('9.9', 'Ayat Silang', 2, 6, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0),
+('9.9.99', 'Ayat Silang', 3, 6, '2013-10-13', 'Salesman', '2013-10-13', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -2407,18 +3032,9 @@ CREATE TABLE IF NOT EXISTS `po_d` (
   `Jumlah` int(11) NOT NULL,
   `Nilai` decimal(12,0) NOT NULL,
   `Keterangan` varchar(20) DEFAULT NULL,
+  `QtyTemp` int(11) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
-
---
--- Dumping data for table `po_d`
---
-
-INSERT INTO `po_d` (`No`, `Kode_po`, `Kode_barang`, `Harga`, `Jumlah`, `Nilai`, `Keterangan`) VALUES
-(12, 'PO1309007', 'B1307001', 19999, 2, 39998, NULL),
-(14, '1311001', 'AHCAMPURAN', 1000000, 15, 15000000, NULL),
-(15, '1311001', 'AH1005900', 200000, 15, 3000000, NULL),
-(16, '1311001', 'AH1126', 2000000, 4, 8000000, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2443,12 +3059,165 @@ CREATE TABLE IF NOT EXISTS `po_h` (
   PRIMARY KEY (`Kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `po_h`
+-- Table structure for table `rel_account_permission`
 --
 
-INSERT INTO `po_h` (`Kode`, `Tgl_po`, `Tgl_kirim`, `Permintaan`, `Currency`, `Urgent`, `Kode_supplier`, `Kode_gudang`, `Nama_proyek`, `DPP`, `PPN`, `Total`, `Counter`) VALUES
-('1311001', '2013-11-01', '1970-01-01', 'Tidak Ada', '0', 'Ya', 'S1309002', 'G1307001', '0', 26000000, 1, 26260000, 0);
+CREATE TABLE IF NOT EXISTS `rel_account_permission` (
+  `account_id` bigint(20) unsigned NOT NULL,
+  `permission_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`account_id`,`permission_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rel_account_role`
+--
+
+CREATE TABLE IF NOT EXISTS `rel_account_role` (
+  `account_id` bigint(20) unsigned NOT NULL,
+  `role_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`account_id`,`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `rel_account_role`
+--
+
+INSERT INTO `rel_account_role` (`account_id`, `role_id`) VALUES
+(1, 1),
+(11, 2),
+(12, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rel_role_permission`
+--
+
+CREATE TABLE IF NOT EXISTS `rel_role_permission` (
+  `role_id` bigint(20) unsigned NOT NULL,
+  `permission_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`role_id`,`permission_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `rel_role_permission`
+--
+
+INSERT INTO `rel_role_permission` (`role_id`, `permission_id`) VALUES
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20),
+(1, 21),
+(1, 22),
+(1, 23),
+(1, 24),
+(1, 25),
+(1, 26),
+(1, 27),
+(1, 28),
+(1, 29),
+(1, 30),
+(1, 31),
+(1, 32),
+(1, 33),
+(1, 34),
+(1, 35),
+(1, 36),
+(1, 37),
+(1, 38),
+(1, 39),
+(1, 40),
+(1, 41),
+(1, 42),
+(1, 43),
+(1, 44),
+(1, 45),
+(1, 46),
+(1, 47),
+(1, 48),
+(1, 49),
+(1, 50),
+(1, 51),
+(1, 52),
+(1, 53),
+(1, 54),
+(1, 55),
+(1, 56),
+(1, 57),
+(1, 58),
+(1, 59),
+(1, 60),
+(1, 61),
+(1, 62),
+(1, 63),
+(1, 64),
+(1, 65),
+(1, 66),
+(1, 67),
+(1, 68),
+(1, 69),
+(1, 70),
+(1, 71),
+(1, 72),
+(1, 73),
+(1, 74),
+(1, 75),
+(1, 76),
+(1, 77),
+(1, 78),
+(1, 79),
+(1, 80),
+(1, 81),
+(1, 82),
+(1, 83),
+(1, 84),
+(1, 85),
+(1, 86),
+(1, 87),
+(1, 88),
+(1, 89),
+(1, 90),
+(1, 91),
+(1, 92),
+(1, 93),
+(1, 94),
+(1, 95),
+(1, 96),
+(1, 97),
+(1, 98),
+(1, 99),
+(1, 100),
+(1, 101),
+(1, 102),
+(1, 103),
+(1, 104),
+(1, 105),
+(1, 106),
+(2, 3),
+(2, 7),
+(2, 11),
+(2, 15);
 
 -- --------------------------------------------------------
 
@@ -2502,46 +3271,12 @@ INSERT INTO `satuan` (`Kode_satuan`, `Value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `saw_d` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
   `No_Saw` varchar(7) NOT NULL,
   `Kd_Brg` varchar(22) NOT NULL,
-  `QtySaw1` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saw_d`
---
-
-INSERT INTO `saw_d` (`No_Saw`, `Kd_Brg`, `QtySaw1`) VALUES
-('0504013', 'B1309006', 5),
-('0504014', 'B1309002', 40),
-('0504013', 'B1309004', 20),
-('0504014', 'B1309005', 10),
-('1310001', 'aaaaa', 23),
-('1310001', 'B1307001', 12),
-('1310001', 'B1307002', 13),
-('1310001', 'B1307003', 0),
-('1310001', 'B1307004', 0),
-('1310001', 'B1307005', 0),
-('1310001', 'B1307006', 0),
-('1310001', 'B1309001', 0),
-('1310001', 'B1309002', 0),
-('1310001', 'B1309003', 0),
-('1310001', 'B1309004', 0),
-('1310001', 'B1309005', 0),
-('1310001', 'B1309006', 0),
-('1310002', 'aaaaa', 5),
-('1310002', 'B1307001', -10),
-('1310002', 'B1307002', 2),
-('1310002', 'B1307003', -9),
-('1310002', 'B1307004', -20),
-('1310002', 'B1307005', -10),
-('1310002', 'B1307006', -15),
-('1310002', 'B1309001', 0),
-('1310002', 'B1309002', 0),
-('1310002', 'B1309003', 0),
-('1310002', 'B1309004', 0),
-('1310002', 'B1309005', 0),
-('1310002', 'B1309006', 0);
+  `QtySaw1` int(11) NOT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2556,15 +3291,143 @@ CREATE TABLE IF NOT EXISTS `saw_h` (
   PRIMARY KEY (`No_Saw`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `saw_h`
+-- Table structure for table `settinglabarugi`
 --
 
-INSERT INTO `saw_h` (`No_Saw`, `Tgl`, `Kd_Gudang`) VALUES
-('0504013', '2013-10-23', 'G1307001'),
-('0504014', '2013-10-25', 'G1307001'),
-('1310001', '2013-10-24', 'G1309004'),
-('1310002', '2013-10-25', 'G1309001');
+CREATE TABLE IF NOT EXISTS `settinglabarugi` (
+  `nomoraccount` varchar(10) NOT NULL,
+  `tempnamaaccount` varchar(50) NOT NULL,
+  `dari` varchar(10) NOT NULL,
+  `sampai` varchar(10) NOT NULL,
+  `cetak` tinyint(1) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operator` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3277 ;
+
+--
+-- Dumping data for table `settinglabarugi`
+--
+
+INSERT INTO `settinglabarugi` (`nomoraccount`, `tempnamaaccount`, `dari`, `sampai`, `cetak`, `id`, `operator`) VALUES
+('1', 'Aktiva', '', '', 1, 3240, 0),
+('1.1', 'Kas', '1.1.01', '1.1.02', 1, 3241, 0),
+('1.2', 'Bank', '1.2.01', '1.2.04', 1, 3242, 0),
+('1.3', 'Deposito ', '1.3.01', '1.3.01', 1, 3243, 0),
+('1.4', 'Piutang Dagang', '', '', 1, 3244, 0),
+('1.5', 'Persediaan', '', '', 1, 3245, 0),
+('1.6', 'Pembayaran Dimuka', '1.6.01', '1.6.02', 1, 3246, 0),
+('1.9', 'Aktiva Tetap', '1.9.01', '1.9.54', 1, 3247, 0),
+('L1', 'Total Aktiva', '', '', 1, 3248, 0),
+('2', 'Kewajiban', '', '', 1, 3249, 0),
+('2.1', 'Hutang Dagang', '2.1.01', '2.1.01', 1, 3250, 0),
+('2.2', 'Penerimaan Uang Muka', '2.2.01', '2.2.01', 1, 3251, 0),
+('2.3', 'Hutang Bank', '2.3.01', '2.3.01', 1, 3252, 0),
+('2.4', 'Hutang Leasing', '2.4.01', '2.4.03', 1, 3253, 0),
+('2.9', 'Hutang Lain-Lain', '2.9.01', '2.9.01', 1, 3254, 0),
+('L1', 'Total Kewajiban', '', '', 1, 3255, 0),
+('3', 'Modal Disetor', '', '', 1, 3256, 0),
+('3.1', 'Modal Disetor', '3.1.01', '3.1.01', 1, 3257, 0),
+('3.2', 'Laba Ditahan', '3.2.01', '3.2.01', 1, 3258, 0),
+('3.3', 'Laba Tahun Berjalan', '3.3.01', '3.3.01', 1, 3259, 0),
+('L1', 'Total Modal Disetor', '', '', 1, 3260, 0),
+('4', 'Pendapatan', '', '', 1, 3261, 0),
+('L1', 'Total Pendapatan', '', '', 1, 3262, 0),
+('5', 'Harga Pokok Penjualan', '', '', 1, 3263, 0),
+('5.2', 'Harga Pokok Penjualan Jasa', '5.2.01', '5.2.07', 1, 3264, 0),
+('L1', 'Total Harga Pokok Penjualan', '', '', 1, 3265, 0),
+('6', 'Biaya Operasional', '', '', 1, 3266, 0),
+('6.1', 'Biaya Penjualan', '6.1.01', '6.1.03', 1, 3267, 0),
+('6.2', 'Biaya Umum ', '6.2.01', '6.2.40', 1, 3268, 0),
+('6.3', 'Biaya Keuangan', '6.3.01', '6.3.03', 1, 3269, 0),
+('L1', 'Total Biaya Operasional', '', '', 1, 3270, 0),
+('7', 'Pendapatan Diluar Usaha', '', '', 1, 3271, 0),
+('7.1', 'Pendapatan Diluar Usaha', '7.1.01', '7.1.59', 1, 3272, 0),
+('L1', 'Total Pendapatan Diluar Usaha', '', '', 1, 3273, 0),
+('9', 'Ayat Silang', '', '', 1, 3274, 0),
+('9.9', 'Ayat Silang', '9.9.99', '9.9.99', 1, 3275, 0),
+('', 'Total Ayat Silang', '', '', 1, 3276, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settinglevel`
+--
+
+CREATE TABLE IF NOT EXISTS `settinglevel` (
+  `nomorlevel` tinyint(1) NOT NULL,
+  `level` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `settinglevel`
+--
+
+INSERT INTO `settinglevel` (`nomorlevel`, `level`) VALUES
+(1, 3),
+(2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settingneraca`
+--
+
+CREATE TABLE IF NOT EXISTS `settingneraca` (
+  `nomoraccount` varchar(10) NOT NULL,
+  `tempnamaaccount` varchar(50) NOT NULL,
+  `dari` varchar(10) NOT NULL,
+  `sampai` varchar(10) NOT NULL,
+  `cetak` tinyint(1) NOT NULL,
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=227 ;
+
+--
+-- Dumping data for table `settingneraca`
+--
+
+INSERT INTO `settingneraca` (`nomoraccount`, `tempnamaaccount`, `dari`, `sampai`, `cetak`, `id`) VALUES
+('1', 'Aktiva', '', '', 1, 190),
+('1.1', 'Kas', '1.1.01', '1.1.02', 1, 191),
+('1.2', 'Bank', '1.2.01', '1.2.04', 1, 192),
+('1.3', 'Deposito ', '1.3.01', '1.3.01', 1, 193),
+('1.4', 'Piutang Dagang', '', '', 1, 194),
+('1.5', 'Persediaan', '', '', 1, 195),
+('1.6', 'Pembayaran Dimuka', '1.6.01', '1.6.02', 1, 196),
+('1.9', 'Aktiva Tetap', '1.9.01', '1.9.54', 1, 197),
+('', 'Total Aktiva', '', '', 1, 198),
+('2', 'Kewajiban', '', '', 1, 199),
+('2.1', 'Hutang Dagang', '2.1.01', '2.1.01', 1, 200),
+('2.2', 'Penerimaan Uang Muka', '2.2.01', '2.2.01', 1, 201),
+('2.3', 'Hutang Bank', '2.3.01', '2.3.01', 1, 202),
+('2.4', 'Hutang Leasing', '2.4.01', '2.4.03', 1, 203),
+('2.9', 'Hutang Lain-Lain', '2.9.01', '2.9.01', 1, 204),
+('', 'Total Kewajiban', '', '', 1, 205),
+('3', 'Modal Disetor', '', '', 1, 206),
+('3.1', 'Modal Disetor', '3.1.01', '3.1.01', 1, 207),
+('3.2', 'Laba Ditahan', '3.2.01', '3.2.01', 1, 208),
+('3.3', 'Laba Tahun Berjalan', '3.3.01', '3.3.01', 1, 209),
+('', 'Total Modal Disetor', '', '', 1, 210),
+('4', 'Pendapatan', '', '', 1, 211),
+('', 'Total Pendapatan', '', '', 1, 212),
+('5', 'Harga Pokok Penjualan', '', '', 1, 213),
+('5.2', 'Harga Pokok Penjualan Jasa', '5.2.01', '5.2.07', 1, 214),
+('', 'Total Harga Pokok Penjualan', '', '', 1, 215),
+('6', 'Biaya Operasional', '', '', 1, 216),
+('6.1', 'Biaya Penjualan', '6.1.01', '6.1.03', 1, 217),
+('6.2', 'Biaya Umum ', '6.2.01', '6.2.40', 1, 218),
+('6.3', 'Biaya Keuangan', '6.3.01', '6.3.03', 1, 219),
+('', 'Total Biaya Operasional', '', '', 1, 220),
+('7', 'Pendapatan Diluar Usaha', '', '', 1, 221),
+('7.1', 'Pendapatan Diluar Usaha', '7.1.01', '7.1.59', 1, 222),
+('', 'Total Pendapatan Diluar Usaha', '', '', 1, 223),
+('9', 'Ayat Silang', '', '', 1, 224),
+('9.9', 'Ayat Silang', '9.9.99', '9.9.99', 1, 225),
+('', 'Total Ayat Silang', '', '', 1, 226);
 
 -- --------------------------------------------------------
 
@@ -2582,26 +3445,7 @@ CREATE TABLE IF NOT EXISTS `sj_d` (
   `Status` varchar(1) NOT NULL,
   `Keterangan` varchar(30) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
-
---
--- Dumping data for table `sj_d`
---
-
-INSERT INTO `sj_d` (`No`, `No_Sj`, `Kode_Brg`, `Barang`, `Barang_SJ`, `Qty1`, `Status`, `Keterangan`) VALUES
-(52, '1311001', 'BP01012GG', 'B- POLOS 10 X 12', 'AH1006', 5, '', ''),
-(53, '1311001', 'AH1135538', 'ASS HITAM 113 X 5/5''38', 'AH1135538', 7, '', ''),
-(54, '1311001', 'AH1126', 'ASS HITAM 112 X 6', 'AH1126', 15, '', ''),
-(55, '1311002', 'AH0446', 'ASS HITAM 44 X 6', 'AH0446', 15, '', ''),
-(56, '1311002', 'AH0506', 'ASS HITAM 50 X 6', 'AH0506', 16, '', '#barang2'),
-(57, '1311002', 'AH0526', 'ASS HITAM 52 X 6', 'AH0526', 11, '', ''),
-(58, '1311003', 'AH1006', 'ASS HITAM 100 X 6', 'AH1006', 15, '', ''),
-(59, '1311003', 'AH1135538', 'ASS HITAM 113 X 5/5''38', 'AH1135538', 7, '', ''),
-(60, '1311003', 'AH1126', 'ASS HITAM 112 X 6', 'AH1126', 15, '', ''),
-(61, '1311004', 'AH1005900', 'ASS HITAM 100 X 5900', 'AH1005900', 5, '', ''),
-(62, '1311004', '', ' ', '', 0, '', ''),
-(69, '1311005', '18BP01212KS', 'BETON POLOS 12 X 12', '18BP01212KS', 31, '', ''),
-(70, '1311006', '18BP01212KS', 'BETON POLOS 12 X 12', '18BP01212KS', 19, '', '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2621,18 +3465,6 @@ CREATE TABLE IF NOT EXISTS `sj_h` (
   `Keterangan` varchar(20) NOT NULL,
   PRIMARY KEY (`No_Sj`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sj_h`
---
-
-INSERT INTO `sj_h` (`No_Sj`, `Tgl`, `No_Do`, `No_Po`, `No_Mobil`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Keterangan`) VALUES
-('1311001', '2013-11-01', '(BATAL)', 'PO123456', 'B 0852 VXY', 'P1307009', 'G1309002', 2, 'Pelita'),
-('1311002', '2013-11-02', '1311002', '', '11111', 'P1307009', 'G1307002', 0, 'Ambil Sendiri'),
-('1311003', '2013-11-02', '1311001', 'PO123456', '111', 'P1307009', 'G1307001', 0, 'Ambil Sendiri'),
-('1311004', '2013-11-02', '1311003', '', 'B 0852 VXY', 'P1307009', 'G1307002', 0, 'Pelita'),
-('1311005', '2013-11-08', '1311006', '', 'aa222a', 'P1309004', 'G1307001', 0, 'Ambil Sendiri'),
-('1311006', '2013-11-08', '1311006', '', 'b1234a', 'P1309004', 'G1307001', 0, 'Ambil Sendiri');
 
 -- --------------------------------------------------------
 
@@ -2682,14 +3514,14 @@ CREATE TABLE IF NOT EXISTS `supplier` (
 --
 
 INSERT INTO `supplier` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit_Kredit`) VALUES
-('S1307001', 'Tony Stark', NULL, 'Stark Company', 'Jl. Alabama', NULL, 'Tangerang', '085247956204', '', '', '0221 25884', '', 100000000),
-('S1307002', 'Cockie', NULL, 'Hammer PT.', 'Jl. Kelma', NULL, 'Bandung', '08522257', '', '', '08547782', '', 0),
-('S1307003', 'Arifin', NULL, 'Olala PT.', 'Gedung Energy', NULL, 'Jakarta', '3523362366', '', '', '0552 478855', '', 25000),
-('S1309001', 'AFRO', NULL, 'AFRO PACIFIC INDAH STEEL', 'P.Jayakarta No.35', NULL, 'Jakarta', '628 6885 5524', '', '', '02158887', '', 6588558),
-('S1309002', 'Ha Dong Hoon', NULL, ' HAHA PT.', 'Jl. Gangnam', NULL, 'Seoul', '0852577752', '', '', '021587745', '', 20000),
-('S1309003', 'Turan Boss', NULL, ' TURBO CV.', 'Jl. Speeds', NULL, 'Sebatik', '789456123', '', '', '789456123', '', 20000),
-('S1309004', 'Grahams', NULL, 'Graham Bell CV.', 'Jl. Liku', NULL, 'Leavis', '12345679', '', '', '123456', '', 999999999999),
-('S1311001', 'Tovan Wahyudi', NULL, 'Angin Topan PT.', 'Jl. Pantoloan IV No.15', NULL, 'Bekasi', '789456123', '123456789', '', '11223345', '', 200000000);
+('S1307001', 'Tony Stark', NULL, 'Stark Company', 'Jl. Alabama', NULL, 'Tangerang', '085247956204', '', '', '0221 25884', '', '100000000'),
+('S1307002', 'Cockie', NULL, 'Hammer PT.', 'Jl. Kelma', NULL, 'Bandung', '08522257', '', '', '08547782', '', '0'),
+('S1307003', 'Arifin', NULL, 'Olala PT.', 'Gedung Energy', NULL, 'Jakarta', '3523362366', '', '', '0552 478855', '', '25000'),
+('S1309001', 'AFRO', NULL, 'AFRO PACIFIC INDAH STEEL', 'P.Jayakarta No.35', NULL, 'Jakarta', '628 6885 5524', '', '', '02158887', '', '6588558'),
+('S1309002', 'Ha Dong Hoon', NULL, ' HAHA PT.', 'Jl. Gangnam', NULL, 'Seoul', '0852577752', '', '', '021587745', '', '20000'),
+('S1309003', 'Turan Boss', NULL, ' TURBO CV.', 'Jl. Speeds', NULL, 'Sebatik', '789456123', '', '', '789456123', '', '20000'),
+('S1309004', 'Grahams', NULL, 'Graham Bell CV.', 'Jl. Liku', NULL, 'Leavis', '12345679', '', '', '123456', '', '999999999999'),
+('S1311001', 'Tovan Wahyudi', NULL, 'Angin Topan PT.', 'Jl. Pantoloan IV No.15', NULL, 'Bekasi', '789456123', '123456789', '', '11223345', '', '200000000');
 
 -- --------------------------------------------------------
 
@@ -2703,15 +3535,6 @@ CREATE TABLE IF NOT EXISTS `terima_bayar` (
   `Tgl` date NOT NULL,
   PRIMARY KEY (`Kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `terima_bayar`
---
-
-INSERT INTO `terima_bayar` (`Kode`, `Kode_plg`, `Tgl`) VALUES
-('1311008', 'P1307009', '2013-11-02'),
-('1311009', 'P1307009', '2013-11-02'),
-('1311010', 'P1307009', '2013-11-02');
 
 -- --------------------------------------------------------
 
@@ -2733,17 +3556,6 @@ CREATE TABLE IF NOT EXISTS `terima_byr_d` (
   PRIMARY KEY (`Kode`,`Jenis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `terima_byr_d`
---
-
-INSERT INTO `terima_byr_d` (`Kode`, `Jenis`, `DariBank`, `DariRek`, `Ref`, `TglGiro`, `TglCair`, `Nilai`, `TerimaBank`, `TerimaRek`) VALUES
-('1311008', 'Cek', 'CIMB', '23455222', '1234141', '2013-11-06', '2013-11-09', 15000000, 'CIMB', '725852825'),
-('1311009', 'Giro', 'BCA', '12123123', '324234', '2013-11-19', '2013-11-27', 6000000, 'BCA', '54234232'),
-('1311009', 'Transfer', 'CIMB', '52342342', '1231', NULL, NULL, 1000000, 'Mandiri', '22331122'),
-('1311010', 'Cek', 'CIMB', '111', '223', '2013-11-18', '2013-11-17', 10000000, 'BCA', '54234232'),
-('1311010', 'Transfer', 'BCA', '11', '22', '0000-00-00', '0000-00-00', 7000000, 'BCA', '54234232');
-
 -- --------------------------------------------------------
 
 --
@@ -2759,15 +3571,6 @@ CREATE TABLE IF NOT EXISTS `terima_byr_d2` (
   PRIMARY KEY (`Kode`,`NoInvoice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `terima_byr_d2`
---
-
-INSERT INTO `terima_byr_d2` (`Kode`, `NoInvoice`, `NilaiInvoice`, `NilaiBayar`, `Total`) VALUES
-('1311008', '1311001', 17660500, 17000000, 17000000),
-('1311009', '1311001', 17660500, 14000000, 14000000),
-('1311010', '1311001', 17660500, 17660500, 17660500);
-
 -- --------------------------------------------------------
 
 --
@@ -2781,18 +3584,6 @@ CREATE TABLE IF NOT EXISTS `terima_byr_d3` (
   `Total` int(11) NOT NULL,
   PRIMARY KEY (`Kode`,`Jenis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `terima_byr_d3`
---
-
-INSERT INTO `terima_byr_d3` (`Kode`, `Jenis`, `Nilai`, `Total`) VALUES
-('1311008', 'Bank', 15000000, 17000000),
-('1311008', 'Tunai', 2000000, 17000000),
-('1311009', 'Bank', 7000000, 14000000),
-('1311009', 'Tunai', 7000000, 14000000),
-('1311010', 'Bank', 17000000, 17660500),
-('1311010', 'Tunai', 660500, 17660500);
 
 -- --------------------------------------------------------
 
@@ -2813,6 +3604,1381 @@ CREATE TABLE IF NOT EXISTS `tipe_rekening` (
 INSERT INTO `tipe_rekening` (`No`, `value`) VALUES
 (1, 'Tabungan'),
 (2, 'Giro');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tt_akumulasilaba`
+--
+
+CREATE TABLE IF NOT EXISTS `tt_akumulasilaba` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nomoraccount` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `tt_akumulasilaba`
+--
+
+INSERT INTO `tt_akumulasilaba` (`id`, `nomoraccount`) VALUES
+(25, '3.2.01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tt_historitutuptahun`
+--
+
+CREATE TABLE IF NOT EXISTS `tt_historitutuptahun` (
+  `nomoraccount` varchar(10) NOT NULL,
+  `saldo` bigint(20) NOT NULL,
+  `tahun` int(4) NOT NULL,
+  `tipe` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tt_historitutuptahun`
+--
+
+INSERT INTO `tt_historitutuptahun` (`nomoraccount`, `saldo`, `tahun`, `tipe`) VALUES
+('1', 0, 2012, 0),
+('1.1', 0, 2012, 0),
+('1.1.01', 5000000, 2012, 0),
+('1.1.02', 8000000, 2012, 0),
+('1.2', 0, 2012, 0),
+('1.2.01', 8000000, 2012, 0),
+('1.2.02', 0, 2012, 0),
+('1.2.03', 0, 2012, 0),
+('1.2.04', 0, 2012, 0),
+('1.3', 0, 2012, 0),
+('1.3.01', 0, 2012, 0),
+('1.4', 0, 2012, 0),
+('1.4.01', 0, 2012, 0),
+('1.4.02', 0, 2012, 0),
+('1.5', 0, 2012, 0),
+('1.5.01', 0, 2012, 0),
+('1.5.02', 0, 2012, 0),
+('1.6', 0, 2012, 0),
+('1.6.01', 0, 2012, 0),
+('1.6.02', 0, 2012, 0),
+('1.9', 0, 2012, 0),
+('1.9.01', 0, 2012, 0),
+('1.9.02', 0, 2012, 0),
+('1.9.03', 0, 2012, 0),
+('1.9.04', 0, 2012, 0),
+('1.9.51', 0, 2012, 0),
+('1.9.52', 0, 2012, 0),
+('1.9.53', 0, 2012, 0),
+('1.9.54', 0, 2012, 0),
+('2', 0, 2012, 0),
+('2.1', 0, 2012, 0),
+('2.1.01', 0, 2012, 0),
+('2.2', 0, 2012, 0),
+('2.2.01', 0, 2012, 0),
+('2.3', 0, 2012, 0),
+('2.3.01', 0, 2012, 0),
+('2.4', 0, 2012, 0),
+('2.4.01', 0, 2012, 0),
+('2.4.02', 0, 2012, 0),
+('2.4.03', 0, 2012, 0),
+('2.9', 0, 2012, 0),
+('2.9.01', 0, 2012, 0),
+('3', 0, 2012, 0),
+('3.1', 0, 2012, 0),
+('3.1.01', 0, 2012, 0),
+('3.2', 0, 2012, 0),
+('3.2.01', 1800000, 2012, 0),
+('3.3', 0, 2012, 0),
+('3.3.01', 0, 2012, 0),
+('4', 0, 2012, 0),
+('4.1', 0, 2012, 0),
+('4.1.01', 5000000, 2012, 0),
+('4.2', 0, 2012, 0),
+('4.2.01', 0, 2012, 0),
+('4.2.02', 0, 2012, 0),
+('4.2.03', 0, 2012, 0),
+('4.2.04', 0, 2012, 0),
+('4.2.05', 0, 2012, 0),
+('4.5', 0, 2012, 0),
+('4.5.01', 0, 2012, 0),
+('4.5.02', 0, 2012, 0),
+('5', 0, 2012, 0),
+('5.1', 0, 2012, 0),
+('5.1.01', 3000000, 2012, 0),
+('5.1.02', 0, 2012, 0),
+('5.1.03', 0, 2012, 0),
+('5.2', 0, 2012, 0),
+('5.2.01', 0, 2012, 0),
+('5.2.02', 0, 2012, 0),
+('5.2.03', 0, 2012, 0),
+('5.2.04', 0, 2012, 0),
+('5.2.05', 0, 2012, 0),
+('5.2.06', 0, 2012, 0),
+('5.2.07', 0, 2012, 0),
+('6', 0, 2012, 0),
+('6.1', 0, 2012, 0),
+('6.1.01', 500000, 2012, 0),
+('6.1.02', 0, 2012, 0),
+('6.1.03', 0, 2012, 0),
+('6.1.04', 0, 2012, 0),
+('6.1.05', 0, 2012, 0),
+('6.2', 0, 2012, 0),
+('6.2.01', 0, 2012, 0),
+('6.2.02', 0, 2012, 0),
+('6.2.03', 0, 2012, 0),
+('6.2.04', 0, 2012, 0),
+('6.2.05', 0, 2012, 0),
+('6.2.06', 0, 2012, 0),
+('6.2.07', 0, 2012, 0),
+('6.2.08', 0, 2012, 0),
+('6.2.09', 0, 2012, 0),
+('6.2.10', 0, 2012, 0),
+('6.2.11', 0, 2012, 0),
+('6.2.12', 0, 2012, 0),
+('6.2.13', 0, 2012, 0),
+('6.2.14', 0, 2012, 0),
+('6.2.15', 0, 2012, 0),
+('6.2.16', 0, 2012, 0),
+('6.2.17', 0, 2012, 0),
+('6.2.40', 0, 2012, 0),
+('6.3', 0, 2012, 0),
+('6.3.01', 0, 2012, 0),
+('6.3.02', 0, 2012, 0),
+('6.3.03', 0, 2012, 0),
+('7', 0, 2012, 0),
+('7.1', 0, 2012, 0),
+('7.1.01', 300000, 2012, 0),
+('7.1.59', 0, 2012, 0),
+('9', 0, 2012, 0),
+('9.9', 0, 2012, 0),
+('9.9.99', 0, 2012, 0),
+('3.2.01', 1800000, 2012, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 5000000, 2013, 0),
+('1.1.02', 8000000, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.4.01', 0, 2013, 0),
+('1.4.02', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.5.01', 0, 2013, 0),
+('1.5.02', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 1800000, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.1', 0, 2013, 0),
+('4.1.01', 5000000, 2013, 0),
+('4.2', 0, 2013, 0),
+('4.2.01', 0, 2013, 0),
+('4.2.02', 0, 2013, 0),
+('4.2.03', 0, 2013, 0),
+('4.2.04', 0, 2013, 0),
+('4.2.05', 0, 2013, 0),
+('4.5', 0, 2013, 0),
+('4.5.01', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1', 0, 2013, 0),
+('5.1.01', 3000000, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 500000, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.1.04', 0, 2013, 0),
+('6.1.05', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.17', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 300000, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 4300000, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 5000000, 2013, 0),
+('1.1.02', 8000000, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.4.01', 0, 2013, 0),
+('1.4.02', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.5.01', 0, 2013, 0),
+('1.5.02', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 4300000, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.1', 0, 2013, 0),
+('4.1.01', 5000000, 2013, 0),
+('4.2', 0, 2013, 0),
+('4.2.01', 0, 2013, 0),
+('4.2.02', 0, 2013, 0),
+('4.2.03', 0, 2013, 0),
+('4.2.04', 0, 2013, 0),
+('4.2.05', 0, 2013, 0),
+('4.5', 0, 2013, 0),
+('4.5.01', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1', 0, 2013, 0),
+('5.1.01', 3000000, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 500000, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.1.04', 0, 2013, 0),
+('6.1.05', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.17', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 300000, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 4300000, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 5000000, 2013, 0),
+('1.1.02', 8000000, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.4.01', 0, 2013, 0),
+('1.4.02', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.5.01', 0, 2013, 0),
+('1.5.02', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 4300000, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.1', 0, 2013, 0),
+('4.1.01', 5000000, 2013, 0),
+('4.2', 0, 2013, 0),
+('4.2.01', 0, 2013, 0),
+('4.2.02', 0, 2013, 0),
+('4.2.03', 0, 2013, 0),
+('4.2.04', 0, 2013, 0),
+('4.2.05', 0, 2013, 0),
+('4.5', 0, 2013, 0),
+('4.5.01', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1', 0, 2013, 0),
+('5.1.01', 3000000, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 500000, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.1.04', 0, 2013, 0),
+('6.1.05', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.17', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 300000, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 4300000, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1),
+('1', 0, 2013, 0),
+('1.1', 0, 2013, 0),
+('1.1.01', 0, 2013, 0),
+('1.1.02', 0, 2013, 0),
+('1.2', 0, 2013, 0),
+('1.2.01', 0, 2013, 0),
+('1.2.02', 0, 2013, 0),
+('1.2.03', 0, 2013, 0),
+('1.2.04', 0, 2013, 0),
+('1.3', 0, 2013, 0),
+('1.3.01', 0, 2013, 0),
+('1.4', 0, 2013, 0),
+('1.5', 0, 2013, 0),
+('1.6', 0, 2013, 0),
+('1.6.01', 0, 2013, 0),
+('1.6.02', 0, 2013, 0),
+('1.9', 0, 2013, 0),
+('1.9.01', 0, 2013, 0),
+('1.9.02', 0, 2013, 0),
+('1.9.03', 0, 2013, 0),
+('1.9.04', 0, 2013, 0),
+('1.9.51', 0, 2013, 0),
+('1.9.52', 0, 2013, 0),
+('1.9.53', 0, 2013, 0),
+('1.9.54', 0, 2013, 0),
+('2', 0, 2013, 0),
+('2.1', 0, 2013, 0),
+('2.1.01', 0, 2013, 0),
+('2.2', 0, 2013, 0),
+('2.2.01', 0, 2013, 0),
+('2.3', 0, 2013, 0),
+('2.3.01', 0, 2013, 0),
+('2.4', 0, 2013, 0),
+('2.4.01', 0, 2013, 0),
+('2.4.02', 0, 2013, 0),
+('2.4.03', 0, 2013, 0),
+('2.9', 0, 2013, 0),
+('2.9.01', 0, 2013, 0),
+('3', 0, 2013, 0),
+('3.1', 0, 2013, 0),
+('3.1.01', 0, 2013, 0),
+('3.2', 0, 2013, 0),
+('3.2.01', 0, 2013, 0),
+('3.3', 0, 2013, 0),
+('3.3.01', 0, 2013, 0),
+('4', 0, 2013, 0),
+('4.5.02', 0, 2013, 0),
+('5', 0, 2013, 0),
+('5.1.02', 0, 2013, 0),
+('5.1.03', 0, 2013, 0),
+('5.1.04', 0, 2013, 0),
+('5.2', 0, 2013, 0),
+('5.2.01', 0, 2013, 0),
+('5.2.02', 0, 2013, 0),
+('5.2.03', 0, 2013, 0),
+('5.2.04', 0, 2013, 0),
+('5.2.05', 0, 2013, 0),
+('5.2.06', 0, 2013, 0),
+('5.2.07', 0, 2013, 0),
+('6', 0, 2013, 0),
+('6.1', 0, 2013, 0),
+('6.1.01', 0, 2013, 0),
+('6.1.02', 0, 2013, 0),
+('6.1.03', 0, 2013, 0),
+('6.2', 0, 2013, 0),
+('6.2.01', 0, 2013, 0),
+('6.2.02', 0, 2013, 0),
+('6.2.03', 0, 2013, 0),
+('6.2.04', 0, 2013, 0),
+('6.2.05', 0, 2013, 0),
+('6.2.06', 0, 2013, 0),
+('6.2.07', 0, 2013, 0),
+('6.2.08', 0, 2013, 0),
+('6.2.09', 0, 2013, 0),
+('6.2.10', 0, 2013, 0),
+('6.2.11', 0, 2013, 0),
+('6.2.12', 0, 2013, 0),
+('6.2.13', 0, 2013, 0),
+('6.2.14', 0, 2013, 0),
+('6.2.15', 0, 2013, 0),
+('6.2.16', 0, 2013, 0),
+('6.2.40', 0, 2013, 0),
+('6.3', 0, 2013, 0),
+('6.3.01', 0, 2013, 0),
+('6.3.02', 0, 2013, 0),
+('6.3.03', 0, 2013, 0),
+('7', 0, 2013, 0),
+('7.1', 0, 2013, 0),
+('7.1.01', 0, 2013, 0),
+('7.1.59', 0, 2013, 0),
+('9', 0, 2013, 0),
+('9.9', 0, 2013, 0),
+('9.9.99', 0, 2013, 0),
+('3.2.01', 0, 2013, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tt_resetperkiraan`
+--
+
+CREATE TABLE IF NOT EXISTS `tt_resetperkiraan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dari` varchar(10) NOT NULL,
+  `sampai` varchar(10) NOT NULL,
+  `tahun` int(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+
+--
+-- Dumping data for table `tt_resetperkiraan`
+--
+
+INSERT INTO `tt_resetperkiraan` (`id`, `dari`, `sampai`, `tahun`) VALUES
+(43, '1.1.01', '5.2.06', 0);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pembayaran_d`
+--
+ALTER TABLE `pembayaran_d`
+  ADD CONSTRAINT `pembayaran_d_ibfk_1` FOREIGN KEY (`Kode`) REFERENCES `pembayaran` (`Kode`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pembayaran_d2`
+--
+ALTER TABLE `pembayaran_d2`
+  ADD CONSTRAINT `pembayaran_d2_ibfk_1` FOREIGN KEY (`Kode`) REFERENCES `pembayaran` (`Kode`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pembayaran_d3`
+--
+ALTER TABLE `pembayaran_d3`
+  ADD CONSTRAINT `pembayaran_d3_ibfk_1` FOREIGN KEY (`Kode`) REFERENCES `pembayaran` (`Kode`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

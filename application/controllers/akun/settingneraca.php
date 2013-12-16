@@ -9,10 +9,13 @@
 		}
 
 		function index(){
-			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-			$data['Lvl2']=array(); $data['Lvl3']=array(); 
 			$rs=$this->msettingneraca->getlevelperkiraan();
+
+			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+			$data['Lvl2']=array(); 
+			$data['Lvl3']=array();
 			$data['lvlctk']=$this->msettingneraca->getlevelcetak('1');
+
 			if($rs){
 				foreach($rs->result() as $row){
 					if($row->level==2)
@@ -21,6 +24,7 @@
 						array_push($data['Lvl3'],$row->nomoraccount);
 				}
 			}
+
 			$this->load->view('akun/settingneraca', $data);
 		}
 
@@ -29,6 +33,7 @@
 			$this->msettingneraca->ResSettingNerCetak();
 			$this->getlistdata();
 		}
+
 		function SaveSettingNer(){
 			if($_POST){
 				$this->load->model("akun/msettingneraca");
@@ -36,12 +41,11 @@
 				$this->msettingneraca->updatelevel('1',$_POST['BatasCtk']);
 				$i=0;
 				foreach($_POST['Cetak'] as $id){
-						$this->msettingneraca->SaveSettingNer($_POST['NoAk'.$id],$_POST['Nm'.$id],$_POST['From'.$id],$_POST['To'.$id],'1');
+					$this->msettingneraca->SaveSettingNer($_POST['NoAk'.$id],$_POST['Nm'.$id],$_POST['From'.$id],$_POST['To'.$id],'1');
 				}
 				
 			}
 		}
-		
 		
 		function getlistdata(){
 			if($_POST){
@@ -50,6 +54,7 @@
 					$this->msettingneraca->updatelevel('1',$_POST['BatasCtk']);
 					$this->msettingneraca->ResSettingNerCetak();
 				}
+
 				$levelcetak = $this->msettingneraca->getlevelcetak('1');
 				if(!$levelcetak){
 					echo '<tr><td colspan=5>Silahkan Klik Save Untuk Menyimpan Level Cetak Terlebih Dahulu</td></tr>';
@@ -207,7 +212,17 @@
 				return false;
 			}
 			if($_POST){
-				$rs=$this->msettingneraca->getsettingneraca();$nml1=""; $nml2=""; $Ctotal=0; $Ltotal=0; $Vtotal=0; $CGtotal=0; $LGtotal=0; $VGtotal=0; $fttl=0;
+				$rs=$this->msettingneraca->getsettingneraca();
+				$nml1=""; 
+				$nml2=""; 
+				$Ctotal=0; 
+				$Ltotal=0; 
+				$Vtotal=0; 
+				$CGtotal=0; 
+				$LGtotal=0; 
+				$VGtotal=0; 
+				$fttl=0;
+				
 				if ($rs==false){
 					return false;
 				}
@@ -326,7 +341,8 @@
 					return '('.$in_rp.')';
 				else
 					return $in_rp;
-		 }
+		}
+
 		function UpdateNamaPer(){
 		
 			echo 'asdfsafd';

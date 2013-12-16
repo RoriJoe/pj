@@ -33,14 +33,14 @@
                     <td>
                         <div class="input-prepend input-append money">
                           <span class="add-on custom-add-on">Rp</span>
-                          <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hb' style="width: 113px; text-align:right;" onkeyup="formatAngka(this,'.')" >
+                          <input class="span2" id='hb' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hb' style="width: 113px; text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" >
                         </div>
                     </td>
                     <td>Harga Jual</td>
                     <td>
                         <div class="input-prepend input-append money">
                           <span class="add-on custom-add-on">Rp</span>
-                          <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hj' style="width: 107px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                          <input class="span2" id='hj' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='hj' style="width: 107px;text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" >
                         </div>
                     </td>
                 </tr>

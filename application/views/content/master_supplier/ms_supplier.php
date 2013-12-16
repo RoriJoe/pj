@@ -27,7 +27,7 @@
                     <td>
                         <div class="input-prepend input-append money">
                           <span class="add-on custom-add-on">Rp</span>
-                          <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 138px;text-align:right;" onkeyup="formatAngka(this,'.')" >
+                          <input class="span2" id='lk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 138px;text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" >
                         </div>
                     </td>
                 </tr>

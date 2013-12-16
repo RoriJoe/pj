@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cetak Jurnal - Pelita Jaya</title>
+	<title>Cetak Buku Besar - Pelita Jaya</title>
 	<?php echo $this->load->view('template/head_import'); ?>
-	<script src="<?php echo base_url().'javascript/javascriptpelangan.js'; ?>" language="javascript"></script>    
-    <script src="<?php echo base_url().'javascript/sorttable.js'; ?>"></script>
+	
+	<link href="<?php echo base_url().'assets/css/jquerydatepick.css'; ?>" type="text/css" rel="stylesheet" />
+	<link href="<?php echo base_url().'assets/css/jquery.validity.css'; ?>" type="text/css" rel="stylesheet" />
+
+    <script src="<?php echo base_url().'javascript/javascriptpelangan.js'; ?>" language="javascript"></script>    
+    <!--<script src="<?php echo base_url().'javascript/sorttable.js'; ?>"></script>
     <script src="<?php echo base_url().'javascript/jquery.alerts.js'; ?>" type="text/javascript"></script>    
-    <script src="<?php echo base_url().'javascript/jquery.ui.draggable.js'; ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url().'javascript/jquery.ui.draggable.js'; ?>" type="text/javascript"></script>-->
     <script src="<?php echo base_url().'javascript/jquery.validity.js'; ?>" language="javascript"></script>
 	<script src="<?php echo base_url().'javascript/jquerydatepick.js'; ?>" language="javascript"></script>
 
@@ -15,6 +19,7 @@
 			$("#TglAwl").datepick({dateFormat: 'dd MM yyyy'});
 			$("#TglAkhr").datepick({dateFormat: 'dd MM yyyy'});
 		}
+
 		$(this).ready(function(){
 			begin();
 			$("#Cari").live('click', function(){
@@ -23,12 +28,9 @@
 					data:{TglAkhr:$('#TglAkhr').val(),TglAwl:$('#TglAwl').val(),NoVo1:$('#NoVo1').val(),NoVo2:$('#NoVo2').val()},
 					url: "<?php echo base_url(); ?>akun/CetakBukuBesar/CariBukuBesar",
 					cache: false,
-					beforeSend: function() {
-							$("div#loading").css("display","block");
-						},
 						success: function(msg){
 							$("#FormBukuBesar").html(msg);
-							$("div#loading").css("display","none");	
+							
 						}
 				});
 				
@@ -47,9 +49,6 @@
 					data:{TglAkhr:$('#TglAkhr').val(),TglAwl:$('#TglAwl').val()},
 					url: "<?php echo base_url(); ?>akun/cetakbukubesar/CariBukuBesar",
 					cache: false,
-					beforeSend: function() {
-							$("div#loading").css("display","block");
-						},
 						success: function(msg){
 							mywindow.document.write(msg);
 							$("div#loading").css("display","none");
@@ -120,6 +119,9 @@
     			<div id="FormBukuBesar"></div>
     		</div>
     	</div>
+    	<div id="loadingDiv">
+           <img src="<?php echo base_url();?>assets/img/ajax-loader.gif"/>
+        </div> 
     </div>
     
     <?php echo $this->load->view('template/footer'); ?>
@@ -131,12 +133,8 @@ $.ajax({
 	data:{TglAkhr:$('#TglAkhr').val(),TglAwl:$('#TglAwl').val(),NoVo1:$('#NoVo1').val(),NoVo2:$('#NoVo2').val()},
 	url: "<?php echo base_url(); ?>akun/CetakBukuBesar/CariBukuBesar",
 	cache: false,
-	beforeSend: function() {
-			$("div#loading").css("display","block");
-		},
 		success: function(msg){
 			$("#FormBukuBesar").html(msg);
-			$("div#loading").css("display","none");	
 		}
 });
 </script>

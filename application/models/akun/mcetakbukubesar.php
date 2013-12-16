@@ -11,7 +11,13 @@
 			$TglAwlb = date('Y-m-d', $Tgla);
 			$TglAkhrb = date('Y-m-d', $Tglb);
 		
-			$rs=$this->db->query("(select P.nomoraccount,namaaccount,saldo,debit,kredit,keterangan,tanggal,tanggalsaldoawal from perkiraan P join detailjurnal DJ on P.nomoraccount=DJ.nomoraccount join jurnal J on DJ.novoucher=J.novoucher where level=(select max(level) from perkiraan) and saldo<>0 and tanggal between '$TglAwlb' and '$TglAkhrb' and J.novoucher between '$NoVo1' and '$NoVo2')");
+			$rs=$this->db->query("
+				(select P.nomoraccount,namaaccount,saldo,debit,kredit,keterangan,tanggal,tanggalsaldoawal from perkiraan P 
+					join detailjurnal DJ on P.nomoraccount=DJ.nomoraccount 
+					join jurnal J on DJ.novoucher=J.novoucher 
+					where level=(select max(level) from perkiraan) 
+				and saldo<>0 and tanggal between '$TglAwlb' 
+				and '$TglAkhrb' and J.novoucher between '$NoVo1' and '$NoVo2')");
 			return $rs->result();
 		}
 		function GetTable($kode){
@@ -64,17 +70,4 @@
 			else
 				return false;
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	}
-	
-?>

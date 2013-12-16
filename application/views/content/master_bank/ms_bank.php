@@ -107,7 +107,7 @@
        <tr>
             <td>No Perkiraan</td>
             <td>
-				<div id="noperkiraan"></div>
+				<div id="noperkiraan" style="margin-left:10px;"></div>
                 <!--<select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
                 <option value="">- Pilih -</option>
                 <?php

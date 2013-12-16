@@ -20,11 +20,12 @@
 			$data['ComboMax']=$this->mcetakbukubesar->GetMMJurnal("MAX");
 			$this->load->view("akun/cetakbukubesar",$data);
 		}
+
 		function CariBukuBesar(){
 			$this->load->model("akun/mcetakbukubesar");
 			$BukuBesar=$this->mcetakbukubesar->SearchBukuBesar($_POST['TglAwl'],$_POST['TglAkhr'],$_POST['NoVo1'],$_POST['NoVo2']);
 			
-		echo'<b>Perkiraan : <label id="nomorP" style="display:none;"></label> - <label id="namaP" style="display:none;"></label></b>
+			echo'<b>Perkiraan : <label id="nomorP" style="display:none;"></label> - <label id="namaP" style="display:none;"></label></b>
 			<table class="table table-bordered"  id="tabledetilindoor" style="min-width:100%; margin-bottom:0px;"">
 			<tr>
 				<th width=20px;>No</th><th width=90px;>Tanggal</th><th width=180px;>Deskripsi</th><th width=90px; >Debit</th><th width=90px;>Kredit</th><th width=90px;>Saldo</th>
@@ -98,17 +99,20 @@
 			}
 			echo'</table>';
 		}
+
 		function PrintJurnal(){
 			$this->load->model("akun/mcetakbukubesar");
 			$data['Jurnal']=$this->mcetakbukubesar->SearchDetailJurCtk($_POST['TglAwl'],$_POST['TglAkhr'],$_POST['NoVo1'],$_POST['NoVo2']);
 			$this->load->view("akun/PrintJurnal",$data);
 		}
+
 		function Uang($uang){
 			if(!$uang)
 				return 0;
 			else
 				return $in_rp =number_format($uang, 0, '.', '.');
-		 }
+		}
+
 		function GantiDate($date){
 			if(!$date)
 				return "";

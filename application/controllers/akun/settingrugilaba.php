@@ -1,8 +1,7 @@
 <?php
 	class settingrugilaba extends CI_Controller {
 		
-		function __construct()
-		{
+		function __construct(){
 			parent::__construct();
 			$this->load->library(array('account/authorization', 'form_validation'));
 			$this->load->model(array('account/account_model', 'akun/msettingneraca'));
@@ -25,11 +24,13 @@
 			
 			$this->load->view("akun/settingrugilaba",$data);
 		}
+
 		function Reset(){
 			$this->load->model("akun/msettingrugilaba");
 			$this->msettingrugilaba->ResSettingNerCetak();
 			$this->getlistdata();
 		}
+
 		function SaveSettingNer(){
 			if($_POST){
 				$this->load->model("akun/msettingrugilaba");
@@ -41,6 +42,7 @@
 				}
 			}
 		}
+
 		function getlistdata(){
 			if($_POST){
 				$this->load->model("akun/msettingrugilaba");
@@ -55,7 +57,18 @@
 				}
 				
 				$this->load->model("akun/msettingrugilaba");
-				$rs=$this->msettingrugilaba->getsettinglabarugi(); $a=0; $b=0; $j=0; $i=0; $nml1=""; $nml2=""; $flag=0; $no2=""; $no=""; $tempno=""; $Flg=0;
+				$rs=$this->msettingrugilaba->getsettinglabarugi(); 
+				$a=0; 
+				$b=0;
+				$j=0; 
+				$i=0; 
+				$nml1=""; 
+				$nml2=""; 
+				$flag=0; 
+				$no2=""; 
+				$no=""; 
+				$tempno=""; 
+				$Flg=0;
 				if ($rs==false){
 					$rs=$this->msettingrugilaba->getperkiraan();
 				}
@@ -76,6 +89,7 @@
 								$no2=""; $flag++;
 							}
 						}
+
 						if($a==$Hrs->level && $i!=0 && $Hrs->level!=$levelcetak-1){ $i=0;
 						
 							if($tempno != "L1" && $tempno != "L2" && $tempno != "L0"){
@@ -84,9 +98,11 @@
 								else
 									echo '<tr><td><input  type=checkbox name="Cetak[]" value="'.$flag.'" id="T'.$no.'" hidden /></td><td><input type="hidden" value="L1" name="NoAk'.$flag.'"; /><input type=text value="Total '.$nml1.'" name="Nm'.$flag.'" ></input ></td>'.str_repeat("<td></td>", 3).'</tr>';
 							}
-						$no=""; $flag++;
+							$no=""; $flag++;
 						}
+
 						$tempno=$Hrs->nomoraccount;
+
 						if($tempno=="L1" || $tempno=="L0"){
 							$Flg++;
 						}
@@ -98,7 +114,8 @@
 								$nml1=$Hrs->namaaccount;
 							}
 							$no=$Hrs->nomoraccount;
-						}else if($Hrs->level==2){
+						}
+						else if($Hrs->level==2){
 							if($Hrs->tempnamaaccount){
 								$nml2=$Hrs->tempnamaaccount;
 							}else{
@@ -145,9 +162,9 @@
 									echo 'H';
 								}else{
 									if($Flg>1){ 
-										echo '<input type="button" id="N'.$j.'" value="New" class="butformemploy" onclick=AddRows("'.$flag.'","N'.($j).'"); />';
+										echo '<input type="button" id="N'.$j.'" value="New" class="butformemploy btn" onclick=AddRows("'.$flag.'","N'.($j).'"); />';
 										if($Hrs->nomoraccount == "L2"){
-											echo '<input type="button" class="btn" id="" value="Del" class="butformemploy" onclick=DelRows("'.$flag.'","N'.($j-1).'"); />';
+											echo '<input type="button" class="btn" id="" value="Del" class="butformemploy btn" onclick=DelRows("'.$flag.'","N'.($j-1).'"); />';
 											echo '<script>document.getElementById("N'.($j-1).'").hidden="hidden";</script>';
 											echo '<script>document.getElementById("N'.($j).'").hidden="hidden";</script>';
 										}
@@ -228,8 +245,17 @@
 				return false;
 			}
 			if($_POST){
-				$rs=$this->msettingrugilaba->getsettinglabarugi();$nml1=""; $nml2=""; $Ctotal=0; $Ltotal=0; $CGtotal=0; $LGtotal=0; $VGtotal=0;  $fttl=0;
+				$rs=$this->msettingrugilaba->getsettinglabarugi();
+				$nml1=""; 
+				$nml2=""; 
+				$Ctotal=0; 
+				$Ltotal=0; 
+				$CGtotal=0; 
+				$LGtotal=0; 
+				$VGtotal=0;  
+				$fttl=0;
 				$CTllL2=array(); $LTllL2=array(); $VTllL2=array(); $CTtl2=0; $LTtl2=0;
+
 				if ($rs==false){
 					return false;
 				}
@@ -412,7 +438,5 @@
 					return '('.$in_rp.')';
 				else
 					return $in_rp;
-		 }
-	
-}
-?>
+		}	
+	}

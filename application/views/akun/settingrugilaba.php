@@ -2,114 +2,9 @@
 <html>
 <head>
 	<title>Setting Neraca - Pelita Jaya</title>
-	<?php echo $this->load->view('template/head_import'); ?>
 
-	<script>
-		$(document).ready(function(){
-			var byser=$("#filterby").val();
-			var valser="";
-			var limit=8;
-			$("div#loading").css("display","none");
-			
-			$.ajax({
-					type: "POST",	   
-					url: "<?php echo base_url(); ?>akun/settingrugilaba/ViewJurnal",
-					data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
-					cache: false,
-					success: function(msg){
-						$("#ViewJurnal > tbody").html(msg);
-						$("div#loading").css("display","none");						
-					}
-			});
-			
-			$.ajax({
-					type: "POST",	   
-					url: "<?php echo base_url(); ?>akun/settingrugilaba/getlistdata",
-					data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
-					cache: false,
-					
-					success: function(msg){
-							$("#tableemploy > tbody").html(msg);
-							$("div#loading").css("display","none");
-														
-					}
-			});
-			$("#btncancel").click(function(){
-				window.location.href="<?php echo base_url(); ?>akun/settingrugilaba/index/";
-			});
-			
-			$("#reset").click(function(){
-				$.ajax({
-					type: "POST",	   
-					url: "<?php echo base_url(); ?>akun/settingrugilaba/Reset",
-					data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
-					cache: false,
-					
-					success: function(msg){
-						$("#tableemploy > tbody").html(msg);
-						$("#ViewJurnal > tbody").html("");
-						$("div#loading").css("display","none");
-					}
-				});
-				
-			});
-			
-			
-			$("#checkall:checkbox").click(function(){
-				if($(this).attr("checked")){
-					$('input:checkbox').attr('checked','checked');
-					$('input:checkbox').removeAttr('disabled','disabled');
-				}
-				else{
-					$('input:checkbox').removeAttr('checked');
-					$('input:checkbox').attr('disabled','disabled');
-					$('#checkall').removeAttr('disabled','disabled');
-			   }
-			});
-			
-			$("#BatasCtk").change(function(){
-				$.ajax({
-					type: "POST",	   
-					url: "<?php echo base_url(); ?>akun/settingrugilaba/getlistdata",
-					data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit+"&BatasCtk="+$(this).val(),
-					cache: false,
-					
-					success: function(msg){
-						$("#tableemploy > tbody").html(msg);
-						$("div#loading").css("display","none");						
-					}
-				});
-			});
-		});
-		$('#btnsave').live('click', function(){
-			$.ajax({
-				type: 'POST',
-				url: "<?php echo base_url(); ?>akun/settingrugilaba/SaveSettingNer",
-				data: $("#FormSettingNer").serialize(),
-				
-				success: function(msg) { //alert(msg);
-					$("div#loading").css("display","none");
-					window.location.href="<?php echo base_url(); ?>akun/settingrugilaba/index/";
-				}
-			}) 		
-		});
-	
-		function AddRows(flag,id1){
-			id=flag+1;
-			$('#tableemploy #'+flag).after('<tr id="NN'+id+'"><td><input type=checkbox name="Cetak[]" value="'+id+'" id="" checked hidden /></td><td><input type="hidden" value="L2" name="NoAk'+id+'"; /><input type=text style=width:150px; value="" name="Nm'+id+'" /></td><td> <input type="button" id="" value="Del" class="butformemploy" style="width:38px;height:20px;" onclick=DelRows("NN'+id+'","N'+id1+'"); /> </td><td colspan=2 align=center><input type=radio name="'+id+'" value="1" checked >+</input>&nbsp;&nbsp;<input type=radio value="2" name="'+id+'" >-</input></td></tr>');
-			document.getElementById(id1).hidden="hidden";
-			id++;
-		}
-		function DelRows(flag,no){
-			var b = no.substr(1);
-			$("#tableemploy > tbody #"+flag).remove();
-			var a = document.getElementById(no);
-			var aa = document.getElementById(b);
-			if(a){a.hidden="";}
-			if(aa){aa.hidden="";}
-		}
-		
-	</script>	
+	<?php echo $this->load->view('template/head_import'); ?>	
+
 </head>
 
 <body>
@@ -119,7 +14,7 @@
 	<div class="container" style="margin-bottom:20px;">
 	    <div class="row">
 	    	<div class="span5">
-	    		<h3>List</h3>
+	    		<h4>List</h4>
 	    		<div>
 	    			<form id="FormSettingNer" >
 						Cetak Sampai Level
@@ -140,7 +35,7 @@
 							</table>
 						</div>
 						<!--<div id="divpagging"></div>-->
-						<div class="form-actions" style="text-align:right">
+						<div class="form-actions" style="text-align:right; padding-right:10px;">
 							<input type="button"  value="Reset" class="btn" id="reset" name="btncancel"/>
 						<input type="button"  value="Cancel" class="btn" id="btncancel" name="btncancel"/>
 						<input type="button"  value="Save" class="btn btn-primary" id="btnsave" name="btnsave"/>
@@ -149,7 +44,7 @@
 	    		</div>
 	    	</div>
 	    	<div class="span7">
-	    		<h3>View Setting Laba Rugi</h3>
+	    		<h4>View Setting Laba Rugi</h4>
 
 	    		<div style=height:400px;overflow:auto; class="well">
 					<table id="ViewJurnal" style="width:95%;">
@@ -166,6 +61,9 @@
 				</div>
 	    	</div>
 	    </div>
+	    <div id="loadingDiv">
+           <img src="<?php echo base_url();?>assets/img/ajax-loader.gif"/>
+        </div> 
 	</div>
 
 	<?php echo $this->load->view('template/footer'); ?>
@@ -173,6 +71,110 @@
 </body>
 
 <script>
+	$(document).ready(function(){
+
+		var byser=$("#filterby").val();
+		var valser="";
+		var limit=8
+		
+		$.ajax({
+				type: "POST",	   
+				url: "<?php echo base_url(); ?>akun/settingrugilaba/ViewJurnal",
+				data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
+				cache: false,
+				success: function(msg){
+					$("#ViewJurnal > tbody").html(msg);	
+				}
+		});
+		
+		$.ajax({
+				type: "POST",	   
+				url: "<?php echo base_url(); ?>akun/settingrugilaba/getlistdata",
+				data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
+				cache: false,
+				success: function(msg){
+						$("#tableemploy > tbody").html(msg);
+	
+													
+				}
+		});
+
+		$("#btncancel").click(function(){
+			window.location.href="<?php echo base_url(); ?>akun/settingrugilaba/index/";
+		});
+		
+		$("#reset").click(function(){
+			$.ajax({
+				type: "POST",	   
+				url: "<?php echo base_url(); ?>akun/settingrugilaba/Reset",
+				data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit,
+				cache: false,
+				
+				success: function(msg){
+					$("#tableemploy > tbody").html(msg);
+					$("#ViewJurnal > tbody").html("");
+
+				}
+			});
+			
+		});
+		
+		$("#checkall:checkbox").click(function(){
+			if($(this).attr("checked")){
+				$('input:checkbox').attr('checked','checked');
+				$('input:checkbox').removeAttr('disabled','disabled');
+			}
+			else{
+				$('input:checkbox').removeAttr('checked');
+				$('input:checkbox').attr('disabled','disabled');
+				$('#checkall').removeAttr('disabled','disabled');
+		   }
+		});
+		
+		$("#BatasCtk").change(function(){
+			$.ajax({
+				type: "POST",	   
+				url: "<?php echo base_url(); ?>akun/settingrugilaba/getlistdata",
+				data: "byser="+byser+"&valser="+valser+"&offset="+0+"&limit="+limit+"&BatasCtk="+$(this).val(),
+				cache: false,
+				
+				success: function(msg){
+					$("#tableemploy > tbody").html(msg);
+						
+				}
+			});
+		});
+	});
+
+	$('#btnsave').live('click', function(){
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo base_url(); ?>akun/settingrugilaba/SaveSettingNer",
+			data: $("#FormSettingNer").serialize(),
+			
+			success: function(msg) { //alert(msg);
+				window.location.href="<?php echo base_url(); ?>akun/settingrugilaba/index/";
+			}
+		}) 		
+	});
+
+	function AddRows(flag,id1){
+		id=flag+1;
+		$('#tableemploy #'+flag).after('<tr id="NN'+id+'"><td><input type=checkbox name="Cetak[]" value="'+id+'" id="" checked hidden /></td><td><input type="hidden" value="L2" name="NoAk'+id+'"; /><input type=text style=width:150px; value="" name="Nm'+id+'" /></td><td> <input type="button" id="" value="Del" class="butformemploy btn" style="width:42px;" onclick=DelRows("NN'+id+'","N'+id1+'"); /> </td><td colspan=2 align=center><input type=radio name="'+id+'" value="1" checked >+</input>&nbsp;&nbsp;<input type=radio value="2" name="'+id+'" >-</input></td></tr>');
+		document.getElementById(id1).hidden="hidden";
+		id++;
+	}
+
+	function DelRows(flag,no){
+		var b = no.substr(1);
+		$("#tableemploy > tbody #"+flag).remove();
+		var a = document.getElementById(no);
+		var aa = document.getElementById(b);
+		if(a){a.hidden="";}
+		if(aa){aa.hidden="";}
+	}
+		
+
 	var Lvl2 = <?php echo json_encode($Lvl2); ?>;
 	var Lvl3 = <?php echo json_encode($Lvl3); ?>;
 	function Centang(val,lvl){ //alert(lvl);

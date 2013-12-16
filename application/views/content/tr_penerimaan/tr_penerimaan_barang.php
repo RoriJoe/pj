@@ -19,7 +19,7 @@
                 <div class="input-append money" style="margin-bottom: 0px;">
                  <input type='text' class="validate[required] span2" 
                     maxlength="30" id="_gd" id='appendedInputButton' name='_gd' 
-                    style="width: 134px; margin-bottom:8px;" onclick="lookup_gudang()"/>
+                    style="width: 134px; margin-bottom:8px;height: 24px;" onclick="lookup_gudang()"/>
                 <a href="#modalGudang" role="button" class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" onclick="listGudang()"><i class="icon-search"></i></a>
                 </div>
             </div>

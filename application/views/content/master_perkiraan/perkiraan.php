@@ -90,7 +90,7 @@
                     <td>
                         <div class="input-prepend" style="margin-bottom: 0; display:inline-block;">
                           <span class="add-on" style="padding: 4px;margin-bottom:5px;">Rp</span>
-                          <input class="span2" id='NilaiSaldo' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 125px; text-align:right" onkeyup="formatAngka(this,'.')" >
+                          <input class="span2" id='NilaiSaldo' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='lk' style="width: 125px; text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" >
                         </div>
                     </td>
                 </tr>

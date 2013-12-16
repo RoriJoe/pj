@@ -17,11 +17,29 @@ $date = date("d F Y, H:i");
         document.getElementById('ct').innerHTML = x1;
         tt=display_c();
  }
+
+  window.onload = display_ct;
+
+  $(document).ready(function($){
+      //INITILIZE LOADING GIF ON AJAX CALL
+      $('#loadingDiv').hide()  // hide it initially
+      .ajaxStart(function() {
+          $(this).show();
+      })
+      .ajaxStop(function() {
+          $(this).hide();
+      });
+  });
 </script>
 
-<script>
-    window.onload = display_ct;
-</script>
+<style>
+  #loadingDiv {
+    top: 155px;
+    position: absolute;
+    margin-left: 0px;
+    right: 50px;
+  }
+</style>
 <!-- header image -->
 <div id="headerImg">
     <div class="box-logo" style="width: 400px;height: 75px;float: left;margin-left: 12px;margin-top: 2px; font-family: verdana; color: white; ">
