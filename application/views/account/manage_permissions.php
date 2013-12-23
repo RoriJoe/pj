@@ -77,7 +77,7 @@
 
 <script type="text/javascript">
   var oTable = $('#tbpermission').dataTable( {
-    "sScrollY": "400px",
+    "sScrollY": "320px",
     "sScrollYInner": "110%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem

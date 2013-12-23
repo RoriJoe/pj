@@ -473,7 +473,7 @@
 					<div id="formdata">
 	                	<h4>Form Mapping Jurnal</h4><div id="konfirmasi" class="sukses"></div>
 						
-						<div class="well" style="height: 370px;overflow-y: auto;">
+						<div class="well" style="height: 370px;overflow-y: auto; margin-bottom:5px;">
 							<table border=0>
 								<tr>
 									<td>Jenis Transaksi</td>

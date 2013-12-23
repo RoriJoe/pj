@@ -20,7 +20,7 @@
 	    			<form id="FormSettingNer" >
 						Cetak Sampai Level <?php echo form_dropdown('BatasCtk',array('2'=>'2','3'=>'3','4'=>'4'),$lvlctk,'id="BatasCtk"');?>
 
-						<div  style=height:400px;overflow:auto;>
+						<div  style=height:360px;overflow:auto;>
 							<table id="tableemploy" class="table table-bordered">
 							<thead>
 								<tr>
@@ -48,7 +48,7 @@
 	    	<div class="span7">
 	    		<h4>View Setting Neraca</h4>
 
-	    		<div style=height:400px;overflow:auto; class="well">
+	    		<div style=height:380px;overflow:auto; class="well">
 	    			<table id="ViewJurnal" style="width:95%;">
 						<thead>
 							<tr>
