@@ -16,7 +16,6 @@
 
 	<script>
 		var rowcount=0;
-
 		function EnableTxt(Flag){
 			if(Flag==1){
 				$(".NoAk").attr("disabled","disabled");
@@ -154,7 +153,7 @@
 			
 			$('#tableemploy tr .imgupdate').live('click', function(){
 				EnableTxt(0);
-				showbutton();
+				showbutton(true);
 				$('#linkadd').show();
 				$('#btnprint').hide();
 				$("#flagaction").val(2);
@@ -206,7 +205,7 @@
 			});
 			
 			$("#btnnewpel").live('click', function(){
-				showbutton();
+				showbutton(true);
 				$("#ListAtt > tbody").html("");
 				$("#jenis").val(0);
 				$("#Tipe").html("");
@@ -217,6 +216,7 @@
 				$(".action").css("display", "");
 				$("#Tgl").removeAttr("disabled","disabled");
 				$("#flagaction").val(1);
+
 				$.ajax({
 					type: "POST",	   
 					url: "<?php echo base_url(); ?>akun/mappingperkiraan/NewTablejurnal",
@@ -471,7 +471,7 @@
             	
 				<div class="span7">
 					<div id="formdata">
-	                	<h4>Form Mapping Jurnal</h4><div id="konfirmasi" class="sukses"></div>
+	                	<h4>Form Mapping Perkiraan</h4><div id="konfirmasi" class="sukses"></div>
 						
 						<div class="well" style="height: 370px;overflow-y: auto; margin-bottom:5px;">
 							<table border=0>
