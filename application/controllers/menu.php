@@ -16,10 +16,11 @@
 
 		function home()
 	    {
-	        $this->load->library('id_chart/id_chart');
-	        $data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
-	        $data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
+	        //$this->load->library('id_chart/id_chart');
+	        //$data['c1'] = $this->id_chart->chart_embed('test',720,200,site_url('menu/example1'),base_url());
+	        //$data['c2'] = $this->id_chart->chart_embed('test4',240,230,site_url('menu/example4'),base_url());
 	        
+
 	        $username = $this->session->userdata('username');
 	        $data['judul']="Welcome";
 	        $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
