@@ -177,7 +177,7 @@
 	
 	$(document).ready(function(){
 		begin();
-		
+		$("#btnsave").attr('disabled',true);
 		var byser=$("#filterby").val();
 		$(".action").css("display","none");
 		 EnableTxt(1);
@@ -575,6 +575,8 @@
 			$('#'+id+'').removeAttr('readonly','readonly');
 			HtgKr();
 		}
+		
+		
 	}
 	
 	$('.Kr').live('keyup', function(e) {
@@ -590,6 +592,13 @@
 			}
 		}
 		$("#TDb").text(ToUang(TDb));
+		
+		var d = $("#TDb").text();
+		var k = $("#TKr").text();
+		if(d==k){
+			$("#btnsave").attr('disabled',false);
+		}else{ $("#btnsave").attr('disabled',true);}
+		
 	}
 	function HtgKr(){ 
 		var TKr=0;
@@ -599,6 +608,12 @@
 			}
 		}
 		$("#TKr").text(ToUang(TKr));
+		
+		var d = $("#TDb").text();
+		var k = $("#TKr").text();
+		if(d==k){
+			$("#btnsave").attr('disabled',false);
+		}else{ $("#btnsave").attr('disabled',true);}
 	}
 	function Print(){
 		EnableTxt(0);
