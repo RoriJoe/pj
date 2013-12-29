@@ -70,7 +70,7 @@
         </div>
         <div id="container">
             <div class="row-fluid">
-                <div class="span2">
+                <div class="span2 hidden-phone">
                     <?php echo $_side_menu; ?>
                 </div>
                 <!-- Content -->

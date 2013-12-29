@@ -141,7 +141,7 @@
 									<td><label type="text" id="RAtttabel4" /></td>
 								</tr>
 								<tr>
-		                        	<td colspan="3" align="center">
+		                        	<td colspan="3">
 		                        		<div class="form-actions">
 		                        			<input type="button"  value="Save" class="btn btn-primary" id="btnsave" style="width:80px;height:25px;" name="btnsave"/>
 		                                	<input type="button"  value="Cancel" class="btn" id="btncancel" style="width:80px;height:25px;" name="btncancel"/>

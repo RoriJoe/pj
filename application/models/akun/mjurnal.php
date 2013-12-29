@@ -8,7 +8,7 @@
 		}
 		
 		function getalllistsearch($by,$val,$limit,$offset){
-			$rs=$this->db->query("select novoucher,tanggal,kodekaryawan from jurnal where $by like '%$val%' limit $offset,$limit");
+			$rs=$this->db->query("select novoucher,tanggal,kodekaryawan from jurnal where $by like '%$val%' ORDER BY novoucher DESC limit $offset,$limit");
 			return $rs;
 		}
 		

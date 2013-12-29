@@ -68,10 +68,12 @@ function showbutton(){
 	$("#btnsave").show();
 	$("#btncancel").show();
 	$(".imgplus").show();
+	document.getElementById('btnnewpel').style.visibility = 'hidden';
 }
 
 function hidebutton(){
 	$("#btnsave").hide();
 	$("#btncancel").hide();
 	$(".imgplus").hide();
+	document.getElementById('btnnewpel').style.visibility = 'visible';
 }
