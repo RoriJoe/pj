@@ -27,30 +27,6 @@
 	        $this->template->display('content/welcome_message', $data);
 	    }
 
-		function example1()
-		{
-
-			$this->load->library('id_chart/id_chart');
-			for ($i=1;$i<30;$i++)
-			$data[] = array('label'=>'data '.$i, 'value'=>rand(1,300));
-			echo $this->id_chart->set_chart('line')
-							->set_data($data)
-							->set_vertical()
-							->render();
-		}
-		function example4()
-		{
-
-		$this->load->helper('url');
-		$this->load->library('id_chart/id_chart');
-		for ($i=1;$i<6;$i++)
-			$data[] = array('label'=>'data '.$i, 'value'=>rand(20,300));
-
-		echo $this->id_chart->set_chart('pie')
-							->set_data($data)
-							//->set_radius(20)
-							->render();
-		}
 
         /*----Respon Click Side Menu----*/
 

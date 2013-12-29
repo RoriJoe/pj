@@ -31,7 +31,6 @@ body{
 
 a, a:visited {
 	outline:none;
-	color:#1c4f64;
 }
 
 a:hover{
@@ -49,13 +48,10 @@ section, footer, header{
 
 
 #placeholder {
-	width: 580px;
 	border: 1px solid #CDCDCD;
-	padding: 20px;
 	border-radius: 3px;
 	background-color: white;
 	margin-bottom: 15px;
-	position: relative;
 	box-shadow: 1px 1px 2px #EEE, 0 -3px 5px #F3F3F3 inset;
 }
 
@@ -130,4 +126,11 @@ footer a i{
 footer a i b{
 	color:#c92020;
 	font-weight: normal;
+}
+
+.bar-dash{
+	padding: 5px;
+	background-color: #D3D3D3;
+	color: #636363;
+	font-weight: bold;
 }
