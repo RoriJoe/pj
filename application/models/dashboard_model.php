@@ -107,10 +107,10 @@
 		function get_keuangan(){ //Sementara
 		
 			$q = $this->db->query("
-				SELECT ROUND(invoiceavg) as invAvg
+				SELECT ROUND(invoiceavg) as invAvg, ROUND(AVG(terimabyrTotal)) as terbayarAvg
 				FROM 
 				(
-				    SELECT AVG(A.Grand) AS invoiceavg, A.Grand
+				    SELECT AVG(A.Grand) AS invoiceavg, A.Grand, (sum(A.Grand) - SUM(A.Temp)) as terimabyrTotal
 				    FROM invoice A
 				)inner_query
 			");
@@ -121,7 +121,7 @@
 		function get_total_keuangan(){ //Sementara
 		
 			$q = $this->db->query("
-				SELECT SUM(Grand) AS invoiceTotal
+				SELECT SUM(Grand) AS invoiceTotal, (SUM(Grand) - SUM(Temp)) AS terbayarTotal 
 				FROM invoice
 			");
 			

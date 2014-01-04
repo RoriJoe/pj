@@ -190,7 +190,7 @@
 
                 j = new JustGage({
                     id: "tagihan", 
-                    value: 50, 
+                    value: parseInt(msg.terkirim), 
                     min: 0,
                     max: 100000000,
                     title: "Terima Tagihan",

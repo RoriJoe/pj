@@ -56,6 +56,7 @@
 			// Build a new array with the data
 			foreach ($results as $value) {
 				$data['pesan'] = $value->invAvg;
+				$data['terkirim'] = $value->terbayarAvg;
 			}
 
 			echo json_encode($data);
@@ -68,6 +69,7 @@
 			// Build a new array with the data
 			foreach ($results as $value) {
 				$data['pesan'] = $value->invoiceTotal;
+				$data['terkirim'] = $value->terbayarTotal;
 			}
 
 			echo json_encode($data);
