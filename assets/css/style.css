@@ -675,31 +675,7 @@ border-bottom: 3px solid #964545;
     margin-top: 65px;
     margin-bottom: 105px;
 }
-.login-image{
-    position: relative;
-right: 175px;
-width: 590px;
-height: 240px;
-float: left;
-    -webkit-transition: right .3s ease-in-out;
-    -moz-transition: right .3s ease-in-out;
-    -o-transition: right .3s ease-in-out;
-    -ms-transition: right .3s ease-in-out;
-    transition: right .3s ease-in-out;
-}
-.login-form-wrap{
-position: relative;
-margin: 0 0 0 -230px;
-left: 88px;
-float: right;
 
-background-color: #F5F5F5;
-    -webkit-transition: left 1s ease-in-out;
-    -moz-transition: left 1s ease-in-out;
-    -o-transition: left 1s ease-in-out;
-    -ms-transition: left 1s ease-in-out;
-    transition: left 1s ease-in-out;
-}
 .front-login label{
     font-size: 20px;
 }
@@ -787,14 +763,8 @@ box-sizing: border-box;
 
 
 .div-judul{
-    float: left;
-    top: -230px;
-    left: 0px;
-    position: relative;
-    z-index: 2;
-    width: 367px;
-    background-color: rgba(172, 0, 0, 0.74);
-    padding: 10px;
+background-color: rgba(172, 0, 0, 0.74);
+padding: 10px;
 }
 .div-judul p{
     font-size: 28px;

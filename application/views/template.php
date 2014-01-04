@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title><?php echo $judul; ?></title>
+    
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
     <!--CSS AREA-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/base/jquery-ui.css" />
