@@ -12,8 +12,8 @@
 </style>
 <h2 style="margin: 0">PD. PELITA JAYA</h2>
 Pangeran Jaya Karta No.30, Jakarta Pusat
-			<h2 align="center">PEMBELIAN/PO</h2><hr/>
-<table>
+<h2 align="center">PEMBELIAN/PO</h2><hr/>
+<table cellpadding="2">
 	<tr>
 		<td colspan=4>
 			
@@ -22,28 +22,28 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		
 	</tr>
 	<tr>
-		<td width="30%">Nomor PO : </td>
-		<td width="25%"><?php echo $po; ?></td>
-		<td width="30%">Permintaan : </td>
-		<td><?php echo $permintaan; ?></td>
+		<td>Nomor PO </td>
+		<td width="140px">: <?php echo $po; ?></td>
+		<td>Permintaan </td>
+		<td width="140px">: <?php echo $permintaan; ?></td>
 	</tr>
 	<tr>
-		<td>Tanggal PO : </td>
-		<td><?php echo $_tgl1; ?></td>
-		<td>Currency : </td>
-		<td><?php echo $cur; ?></td>
+		<td>Tanggal PO </td>
+		<td>: <?php echo $_tgl1; ?></td>
+		<td>Currency </td>
+		<td>: <?php echo $cur; ?></td>
 	</tr>
 	<tr>
 		<td>Tanggal Kirim </td>
-		<td><?php echo $_tgl2; ?></td>
+		<td>: <?php echo $_tgl2; ?></td>
 		<td>Urgent </td>
-		<td><?php echo $urg; ?></td>
+		<td>: <?php echo $urg; ?></td>
 	</tr>
 	<tr>
 		<td>Kirim Ke </td>
-		<td><?php echo $kd_gud.$proy; ?></td>
+		<td>: <?php echo $kd_gud.$proy; ?></td>
 		<td>Supplier </td>
-		<td><?php echo $kd_sup; ?></td>
+		<td>: <?php echo $kd_sup; ?></td>
 	</tr>
 </table>
 <br/>

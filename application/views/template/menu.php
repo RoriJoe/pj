@@ -1,19 +1,17 @@
-    <div class="side-scroll">
-        <div style="width: 100%; margin-bottom: 5px; margin-top: 10px; text-align: center;">
-            <?php if($account->picture == null): ?>
-                <img src="<?php echo base_url();?>resource/img/default-person.png" id="pp" class="img-rounded"/>
-            <?php else: ?>
-                <img src="<?php echo base_url();?>resource/user/profile/<?php echo $account->picture; ?>" id="pp" class="img-rounded"/>
-            <?php endif; ?>
-        </div>
+<div class="side-scroll">
+    <div style="width: 100%; margin-bottom: 5px; margin-top: 10px; text-align: center;">
+        <?php if($account->picture == null): ?>
+            <img src="<?php echo base_url();?>resource/img/default-person.png" id="pp" class="img-rounded"/>
+        <?php else: ?>
+            <img src="<?php echo base_url();?>resource/user/profile/<?php echo $account->picture; ?>" id="pp" class="img-rounded"/>
+        <?php endif; ?>
+    </div>
+
     <div class="sidebar">
-        <div style="background-color: #B4B4B4;height: 20px;width: 15px;">
-            <a href="#" id="red" title="Slide Up / Down"><i class="icon-resize-vertical"></i></a>
-        </div>
-        <span id="titleA">APPLICATION LIST</span>
+        <span id="titleA"><strong>APPLICATION LIST</strong></span>
 
         <div class="dropdown clearfix">
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: static; margin-bottom: 5px;">
+          <ul class="dropdown-menu nav-side" role="menu" aria-labelledby="dropdownMenu">
             <li><a class = "" href="home"><i class="icon-home"></i>Home</a></li>
             
             <?php if ($this->authorization->is_permitted( array('access_gudang', 'access_pelanggan', 'access_supplier', 'access_bank', 'access_barang', 'access_perkiraan', 'access_satuan') )) : ?>
@@ -204,25 +202,4 @@
           </ul>
         </div>
     </div>
-
-    <script>
-    var toggle = true;
-    $("div.sidebar").css("top", "0px");
-    $('#red').click(function() {
-        if (toggle === true) {
-            $("div.sidebar").css("z-index", "3");
-            $("div.sidebar").animate({
-                "top": "-=162px"
-            }, "slow");
-            toggle = false;
-        }
-        else {
-            $("div.sidebar").animate({
-                "top": "+=162px"
-            }, "slow");
-            toggle = true;
-        }
-    });
-    </script>
-    <!--End Of Side Menu-->
 </div>

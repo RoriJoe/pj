@@ -1,5 +1,5 @@
-<div class="table CSSTabel">
-<table>
+<div class="CSSTabel">
+<table class="table">
     <thead>
         <th width="17%">Kode Barang</th>
         <th width="20%">Nama Barang</th>
@@ -10,7 +10,7 @@
         <th width="15%">Action</th>
     </thead>
 </table>
-<div class="table CSSTabel" style="overflow-y:scroll;height:160px;">
+<div class="table CSSTabel" style="overflow-y:scroll;min-height:160px;max-height:275px;margin-bottom:10px">
 	<table id="tb_detail">
 	    <tbody id="itemlist">
 	    <?php
@@ -46,9 +46,9 @@
 	            <input type='text' name='jumlah' class='validate[required]' id='jumlah_brg$i' style='width:95px;text-align:right;' value='$jumlah_nilai' disabled='true'/>
 	        </td>
 	        <td width='15%'>
-	        <div class='btn-group' style='margin-bottom:0;'>
+	        <div class='btn-group' style='text-align:center'>
 	            <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil' ></i></a>
-	            <a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
+	            <a class='btn' id='' title='Unabled Delete Detail Data' disabled><i class='icon-trash'></i></a>
 	        </div>
 	        </td>
 	        </tr>
@@ -79,6 +79,15 @@ function editRow(row){
         document.getElementById('icon'+row).className='icon-ok';
         document.getElementById('harga_brg'+row).disabled=false;
         document.getElementById("qty_brg"+row).focus();
+
+        if(_mode == "add"){
+            document.getElementById('icon'+row).title='Tambah Barang Lagi';
+            document.getElementById('icon'+row).className='icon-plus';
+        }else{
+            document.getElementById('icon'+row).title='Selesai Edit';
+            document.getElementById('icon'+row).className='icon-ok';
+        }
+
         return false;
     }
     else{

@@ -1,5 +1,5 @@
-<div class="table table-hover CSSTabel table-list">
-<table id="tb1" style="width: 100%;">
+<div class="CSSTabel table-list">
+<table id="tb1" class="table table-hover">
     <thead>
         <th width="30%">Kode</th>
         <th width="60%">Nama</th>
@@ -35,6 +35,10 @@
 </div>
 
 <script>
+$('#tb1 tbody tr').dblclick(function (e) {
+    $(this).find('td .popup').click();
+});
+
 $('.popup').click(function(){
     $("#kd").attr('disabled',true);
         
@@ -70,7 +74,8 @@ $(".delete").click(function(){
     var id = $(this).attr("name");
     var pr = $(this).attr("nama");
     bootbox.dialog({
-        message: "Kode: <b>"+id+"</b><br/>Nama Gudang : <b>"+pr+"</b>",
+
+        message: "<table><tr><td>Kode </td><td>: <b>"+id+"</b></td></tr><tr><td>Nama Gudang </td><td>: <b>"+pr+"</b></td></tr></table>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {

@@ -16,7 +16,7 @@
     {
         $namaSJ = htmlentities($row->Barang_SJ);	
         $ukuran = htmlentities($row->Nama.' '.$row->Ukuran);    
-       echo "<tr>
+        echo "<tr>
         <td>
             <div class='input-append' style='margin-bottom:0;'>
                 <input type='text' class='validate[required] span2' id='kode_brg$i' id='appendedInputButton' name='kode_brg[]' style='width:100px' value='$row->Kode_Brg' disabled='true'/>

@@ -1,6 +1,21 @@
 @charset "utf-8";
+html{
+    height: 100%;
+}
+body{
+    /*background-image: url(../img/bg.png);*/
+    background-color: #F7F7F7;;
+}
+
+@media (max-width: 767px){
+    .navbar {
+    margin-left: -20px;
+    margin-right: -20px;
+    }
+}
+
 .row-fluid [class*="span"] {
-    min-height: 23px;
+    /*min-height: 23px;*/
 }
 .logp{
 	width:70px;
@@ -123,15 +138,6 @@
 #download a:hover {
     font-size:20px;
 }
-/* ------------------------------------------ ini syntax untuk bagian footer ----------------------------------------*/
-
-#footer{
-	height:100%;
-}
-
-
-
-/* ----------------------------------------- ini untuk bagian content footer ----------------------------------------*/
 
 #footerContent{
     height:20px;
@@ -147,7 +153,6 @@
 
 .sidebar{
     height:auto;
-    padding:2px;
     margin:auto;
     position:relative;
 }
@@ -172,7 +177,7 @@
     background:#fff;
 
     /*border:1px solid gray;*/
-    box-shadow: 0px 0px 1px #636363;-moz-box-shadow:0px 0px 1px #636363;-webkit-box-shadow:0px 0px 1px #636363;
+    box-shadow: 0px 0px 1px #636363;-moz-box-shadow:0px 0px 1px #9B9B9B;-webkit-box-shadow: 0px 0px 1px #9B9B9B;
     padding: 4px 14px;
     /*display:block;
     text-decoration: none;
@@ -366,97 +371,41 @@ border-bottom: 3px solid #964545;
 }
 
 .CSStabel {
-
 	margin:0px;padding:0px;
-
 	width:100% !important;
-
-	/*box-shadow: 10px 10px 5px #888888;
-
-	/*border:1px solid #000000;*/
-
-	/*-moz-border-radius-bottomleft:0px;
-
-	-webkit-border-bottom-left-radius:0px;
-
-	border-bottom-left-radius:0px;
-
-
-
-	-moz-border-radius-bottomright:0px;
-
-	-webkit-border-bottom-right-radius:0px;
-
-	border-bottom-right-radius:0px;
-
-
-
-	-moz-border-radius-topright:0px;
-
-	-webkit-border-top-right-radius:0px;
-
-	border-top-right-radius:0px;
-
-
-
-	-moz-border-radius-topleft:0px;
-
-	-webkit-border-top-left-radius:0px;
-
-	border-top-left-radius:0px;*/
-
-
-
-}.CSSTabel table{
-
+}
+.CSSTabel table{
     width: 100%;
-	/*height:100%;*/
-    /*border-radius:4px;
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-
-    border:1px silver solid;
-	margin:0px auto;
-    padding:0px;*/
 }
 .CSSTabel tr:last-child td:last-child {
 	-moz-border-radius-bottomright:0px;
 	-webkit-border-bottom-right-radius:0px;
 	border-bottom-right-radius:0px;
 }
-
-
-
 .CSSTabel table tr:first-child td:first-child {
 	-moz-border-radius-topleft:0px;
 	-webkit-border-top-left-radius:0px;
 	border-top-left-radius:0px;
 }
-
-
-
 .CSSTabel table tr:first-child td:last-child {
-
 	-moz-border-radius-topright:0px;
-
 	-webkit-border-top-right-radius:0px;
-
 	border-top-right-radius:0px;
 }
-
-
-
 .CSSTabel tr:last-child td:first-child{
 	-moz-border-radius-bottomleft:0px;
-
 	-webkit-border-bottom-left-radius:0px;
-
 	border-bottom-left-radius:0px;
 }
-.CSSTabel tr:nth-child(odd){ background-color:#f1f1f1; }
+.CSSTabel tr:nth-child(odd){ 
+    background-color:#f1f1f1; 
+}
 
 /*--Untuk Mengtur Warna BG table--*/
-.CSSTabel tr:nth-child(even)    { background-color:#fff; }
+.CSSTabel tr:nth-child(even)    
+{ 
+    background-color:#fff; 
+}
 
 .CSSTabel tr:last-child td{
 	border-width:0px 1px 0px 0px;
@@ -467,13 +416,16 @@ border-bottom: 3px solid #964545;
 .CSSTabel tr:last-child td:last-child{
 	border-width:0px 0px 0px 0px;
 }
-.CSSTabel th{background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+.CSSTabel th{
+    background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
 	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,#003f7f);
     color:white;
 }
 
-.CSSTabel th:hover{cursor:pointer;}
+.CSSTabel th:hover{
+    *cursor:default;
+}
 
 .CSSTabel tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
@@ -603,26 +555,16 @@ border-bottom: 3px solid #964545;
     content: '';
     position: absolute;
     top: 0;
-    right: -18px; /*half of square's length*/
-    /*same dimension as the line-height of .breadcrumb a */
+    right: -18px;
     width: 36px;
     height: 36px;
-    /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
-    length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
-    if diagonal required = 1; length = 1/1.414 = 0.707*/
     transform: scale(0.707) rotate(45deg);
-    /*we need to prevent the arrows from getting buried under the next link*/
     z-index: 1;
-    /*background same as links but the gradient will be rotated to compensate with the transform applied*/
     background: #666;
     background: linear-gradient(135deg, #666, #333);
-    /*stylish arrow design using box shadow*/
     box-shadow:
         2px -2px 0 2px rgba(0, 0, 0, 0.4),
         3px -3px 0 2px rgba(255, 255, 255, 0.1);
-    /*
-        5px - for rounded arrows and
-        50px - to prevent hover glitches on the border created using shadows*/
     border-radius: 0 5px 0 50px;
 }
 /*we dont need an arrow after the last link*/
@@ -815,7 +757,8 @@ padding: 10px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: #fff;
-    box-shadow: 0 1px 1px #B8B8B8;
+    /*box-shadow: 0 1px 1px #B8B8B8;*/
+    border: 1px solid #E0E0E0;
 }
 
 .content-login{
@@ -846,12 +789,10 @@ padding: 10px;
     padding: 5px;
 }
 .table-list{
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 0px;
+    padding: 5px;
     background-color: #fff;
-    box-shadow: 0px 1px 1px #9C9C9C;
+    /*box-shadow: 0px 1px 1px #9C9C9C;*/
+    border: 1px solid #E0E0E0;
 }
 
 .table-list2{
@@ -945,11 +886,11 @@ tr{
     height: 200px;
 }
 .table-fluid{
-float: right;
-position: relative;
-padding: 6px;
-background-color: #fff;
-box-shadow: 0px 1px 1px #9C9C9C;
+    float: right;
+    position: relative;
+    padding: 6px;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px #9C9C9C;
 }
 .bar-fluid{
     background: #C24F4F;
@@ -957,24 +898,26 @@ box-shadow: 0px 1px 1px #9C9C9C;
     padding: 2px;
 }
 .hide-con-fluid{
-margin-bottom: 40px;
-padding-bottom: 10px;
-padding-top: 10px;
-padding-left: 10px;
-background-color: #fff;
-box-shadow: 0 1px 1px #B8B8B8;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px #B8B8B8;
 }
 .bar-fluid p{
-margin-left: 5px;
-margin-top: 0px;
-font-weight: bold;
-color: #fff;
+    margin-left: 5px;
+    margin-top: 0px;
+    font-weight: bold;
+    color: #fff;
 }
 
 .side-scroll{
     background: #fff;
     padding: 5px;
-    box-shadow: 1px 1px 1px #B8B8B8;
+    /*box-shadow: 1px 1px 1px #B8B8B8;*/
+    border-right: 1px solid #E0E0E0;
+    height:490px;
 }
 
 .sidebar ul li ul a.head-ul{
@@ -1161,4 +1104,113 @@ list-style: none;
 .FieldDK{
     min-width: 80px;
     text-align: right !important;
+}
+
+/*LOADING*/
+.pace {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 25px;
+  border: 2px solid #f2373c;
+  background-color: #fff;
+}
+
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+
+  -webkit-transition: width 1s ease-in-out 1s linear;
+  -moz-transition: width 1s ease-in-out 1s linear;
+  -ms-transition: width 1s ease-in-out 1s linear;
+  -o-transition: width 1s ease-in-out 1s linear;
+  transition: width 1s ease-in-out 1s linear;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  max-width: 190px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 15px;
+  font-size: 12px;
+  background: #f2373c;
+  color: #f2373c;
+  line-height: 60px;
+  font-weight: bold;
+  font-family:  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.pace .pace-progress:after {
+  content: attr(data-progress-text);
+  display: inline-block;
+}
+
+.pace.pace-inactive {
+  display: none;
+}
+.nav-side{
+    display: block; position: static; margin-bottom: 5px; box-shadow:none;border:0;
+}
+.filter-bar{
+    margin-bottom: 10px;
+border: 1px solid #A8A8A8;
+background-color: #5A5A5A;
+color: #FFF;
+}
+
+.table{
+    margin-bottom: 0;
+}
+.dataTables_paginate .paginate_active{
+    background-color: #F06A6A !important;
+}
+
+@media (max-width: 767px){
+    .modal.fade.in {
+        top: 10% !important;
+    }
+}
+.table-no-border td{
+    border-top: 0;
 }

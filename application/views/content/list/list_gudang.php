@@ -1,7 +1,7 @@
 <div class="table table-hover CSSTabel">
 <table id="tb4">
     <thead>
-        <th>Kode</th><th>Nama</th><th>Alamat</th><th>Kota</th><th>Telp</th><th>Select</th>
+        <th>Kode</th><th>Nama</th><th>Alamat</th><th>Kota</th><th>Select</th>
     </thead>
     <tbody id="item_gudang">
     <?php
@@ -12,7 +12,6 @@
         <td>$row->Nama</td>
         <td>$row->Alamat</td>
         <td>$row->Kota</td>
-        <td>$row->Telp</td>
         <td><input type='radio' name='optionsRadios' id='optionsPelanggan' kd='$row->Kode' nama='$row->Nama' value='$row->Nama'></td>
         </tr>
         ";

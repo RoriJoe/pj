@@ -4,7 +4,7 @@
         <div class="bar" title="Show/Hide Form">
             <p>Form Surat Jalan <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
             <form id="formID">
 
                 <div class="field-wrap">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="field-wrap" style=" margin-left: 5px; ">
                     Tgl Kirim
-                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;" value="<?php echo date('d-m-Y');?>">
+                    <input type='text' class="validate[required]" id='_tgl' name='_tgl' style="width: 70px;" value="">
                 </div>
                 <div class="field-wrap" style=" margin-left: 5px; ">
                     Gudang
@@ -51,7 +51,7 @@
                         <input type="checkbox" id="ambil" name="ambil" onclick="change()" style=" float: none; "> Ambil Sendiri
                     </label>
                 </div>
-                <div class="field-wrap" style=" margin-left: 10px; ">
+                <div class="field-wrap" style=" margin-left: 13px; ">
                     Nomor Mobil
                     <div id="mobil" style="display:inline-block;">
                         <select style="width: 170px;" id='_mbl' name='_mbl'>
@@ -126,7 +126,6 @@
 var flag=0;
 
 jQuery(document).ready(function() {
-    $( "#_tgl" ).datepicker( "setDate", new Date());
     listSJ();
     autogen();
     validation();
@@ -136,7 +135,7 @@ jQuery(document).ready(function() {
     listBarang();
     $("#po").attr('disabled',true);
     $("#pn").attr('disabled',true);
-    document.getElementById("ambil").checked=true;
+    document.getElementById("ambil").checked=false;
 });
 
 function cekauthorization(){
@@ -155,17 +154,6 @@ function cekauthorization(){
         $("#print").attr('disabled',false);
     <?php endif; ?>
 }
-
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-});
-
 
 function addBarang(){
     editRow(row);
@@ -189,7 +177,7 @@ function resetForm(){
 
     $('#kirim').val(0);
     show_so("reset");
-    document.getElementById("ambil").checked=true;
+    document.getElementById("ambil").checked=false;
     change();
 }
 
@@ -207,6 +195,17 @@ function autogen(){
             $('#sj').val(hh);
         }
     });
+
+    $("#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });
+
+    $( "#_tgl").datepicker('setValue', new Date());
 }
 
 function listSJ(){
@@ -383,6 +382,7 @@ function getFormSj(IDsj){
 
 function get_mobil_list(){
     $.ajax({
+        type:'GET',
         async: false,
         url: "<?php echo base_url();?>tr_surat_jalan/mobil_call",
         dataType: "html",
@@ -417,7 +417,7 @@ function show_so(mode){
 
     if(mode=="view"){
         _div.removeChild(_text);
-        var s= "<input type='text' name='_do' id='_do' style='width:106px' readonly='true'>";
+        var s= "<input type='text' name='_do' id='_do' style='width:111px' readonly='true'>";
         _div.innerHTML=s;
     }
     else
@@ -478,13 +478,17 @@ $("#cancel").click(function(){
 	var sj = $('#sj').val();
     var _tgl = $('#_tgl').val();
     var _do = $('#_do').val();
-    var gg = $('#gg').val();
+    //var gg = $('#gg').val();
     var pn = $('#pn').val();
     var po = $('#po').val();
     var ot = $('#ot').val();
     var mbl = $('#_mbl').val();
     var kirim = $('#kirim').val();
     var count = parseInt(kirim)+1;
+
+    var salestSelect = document.getElementById("gg");
+    var gg = salestSelect.options[salestSelect.selectedIndex].text;
+    
 	
 	var kd_brg = new Array();
     var nama = new Array();

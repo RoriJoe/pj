@@ -35,7 +35,7 @@ $('input:radio[name="optionsRadios"]').change(function(){
 });
 
 var lTable = $('#popListPelanggan').dataTable( {
-        "aaSorting": [[ 1, "asc" ]],
+        "aaSorting": [[ 0, "asc" ]],
         "bScrollCollapse": true,
         "bPaginate": true,
         "bAutoWidth": true,

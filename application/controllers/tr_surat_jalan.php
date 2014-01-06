@@ -269,7 +269,7 @@
                 $final[$a->No_Do] = $a->No_Do;
             }
 
-            echo form_dropdown('_do',$final,'1','id="_do" onchange="displayResult(this)"');
+            echo form_dropdown('_do',$final,'1','id="_do" onchange="displayResult(this)" style=" width: 125px; "');
         }
 
         function view_sj_pelanggan(){
@@ -301,7 +301,7 @@
                 $final[$a->No_mobil] = $a->No_mobil;
             }
 
-            echo form_dropdown('_mbl',$final,'1','id="_mbl" style=" width: 120px; "');
+            echo form_dropdown('_mbl',$final,'1','id="_mbl" style=" width: 125px; "');
         }
 
 		function cek_kirim(){

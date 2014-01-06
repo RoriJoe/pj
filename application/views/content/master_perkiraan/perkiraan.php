@@ -5,7 +5,7 @@
             <p>Form Perkiraan <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con">
 
         <form id="formID">
             <table width="100%">

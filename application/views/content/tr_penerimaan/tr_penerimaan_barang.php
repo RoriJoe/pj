@@ -5,7 +5,7 @@
             <p>Form Pendataan Penerimaan Barang <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
         <form id="formID">
             <div class="field-wrap">
                 Nomor BPB
@@ -43,11 +43,7 @@
                 Tgl BPB
                 <input type='text' id='_tgl' name='_tgl' style="width: 80px;margin-left: 10px; margin-right: 20px;" >
             </div>
-            <button id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i> Add Barang</button>
-            <div class="field-wrap"></div>
-            <div class="field-wrap"></div>
-            <div class="field-wrap"></div>
-            <div class="field-wrap"></div>
+            <button id="add" mode="new" class="btn btn-success" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()">Add Barang</button>
         </form>
 
             <div id="hasil2"></div>
@@ -134,17 +130,7 @@
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script>
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
 $(document).ready(function(){
-    $( "#_tgl" ).datepicker( "setDate", new Date());
     listBarang();
     listBPB();
     validation();
@@ -195,6 +181,16 @@ function autogen(){
             $('#_bpb').val(hh);
         }
     });
+
+    $("#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });
+    $( "#_tgl").datepicker('setValue', new Date());
 }
 
 //Tampilkan SO sesuai pelanggan
@@ -421,8 +417,8 @@ $("#cancel").click(function(){
  $("#print").click(function(){
 		var _bpb = $('#_bpb').val();
         var _tgl = $('#_tgl').val();
-        var _gd = $('#kd_gd').val();
-        var _sp = $('#kd_sp').val();
+        var _gd = $('#_gd').val();
+        var _sp = $('#_sp').val();
         var _ref = $('#_ref').val();
 
 		var table = document.getElementById('tb_detail');

@@ -4,7 +4,7 @@
         <div class="bar">
             <p>Form Pendataan Stock Opname <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con" style="max-height:430px;height:430px;">
             <form id="formID">
                 <table>
                     <tr>
@@ -18,7 +18,7 @@
                         <td>Tgl Pendataan</td>
                         <td>
                             <input type='text' class="validate[required,custom[date]]" id='_tgl' name='_tgl' 
-                            style="width: 80px;margin-left: 10px; margin-right: 20px;" value="<?php echo date('d-m-Y');?>">
+                            style="width: 80px;margin-left: 10px; margin-right: 20px;" value="">
                         </td>
                    </tr>
                    <tr>
@@ -29,7 +29,7 @@
                              <input type='text' class="validate[required,maxSize[25], minSize[5]] span2" 
                                 maxlength="30" id="gud" id='appendedInputButton' name='_gd' 
                                 style="width: 135px; margin-left: 10px;" onclick="lookup_gudang()"/>
-                            <a href="#modalGudang" style="margin-bottom:2px;" role="button" class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" onclick="listGudang()"><i class="icon-filter"></i></a>
+                            <a href="#modalGudang" style="margin-bottom:5px;" role="button" class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" onclick="listGudang()"><i class="icon-filter"></i></a>
                               
                             </div>
                         </td>
@@ -122,7 +122,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$( "#_tgl" ).datepicker( "setDate", new Date());
     document.getElementById('selList').style.visibility = 'hidden';
     listSaw();
     autogen();
@@ -155,6 +154,17 @@ function autogen(){
     });
     document.getElementById('loadBtn').style.visibility = 'visible';
     detailSaw();
+
+    $("#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    }); 
+
+    $( "#_tgl").datepicker('setValue', new Date()); 
 }
 function listGudang(){
     $.ajax({
@@ -224,15 +234,6 @@ function lookup_gudang(){
         },
     });
 }
-
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-});
 
 function key(){
 $('input[type="text"]').keyup(function() {

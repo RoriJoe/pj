@@ -79,8 +79,7 @@ $(document).ready(function(){
 function autogenPelanggan(){
     $("#kd").attr('disabled',false);
     $('#save').attr('mode','add');
-    $('button[type="submit"]').attr('disabled','disabled');
-    
+
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/ms_pelanggan/auto_gen",

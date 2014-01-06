@@ -36,14 +36,14 @@
 		function insertperkiraan($NoAc,$NamaPer,$Level,$Type,$NilaiSaldo,$Tgl){
 			$Tglb = strtotime($Tgl);
 			$TglSaldoAwl = date('Y-m-d', $Tglb);
-			$rs=$this->db->query("insert into perkiraan values('$NoAc','$NamaPer','$Level','$Type','".date("Y-m-d")."','".$this->session->userdata('wahanalogrole')."','$TglSaldoAwl','$NilaiSaldo')");
+			$rs=$this->db->query("insert into perkiraan values('$NoAc','$NamaPer','$Level','$Type','".date("Y-m-d")."','".$this->session->userdata('account_id')."','$TglSaldoAwl','$NilaiSaldo')");
 			
 		}
 		
 		function updateperkiraan($NoAc,$NamaPer,$Level,$Type,$NilaiSaldo,$kode,$Tgl){
 			$Tglb = strtotime($Tgl);
 			$TglSaldoAwl = date('Y-m-d', $Tglb);
-			$rs=$this->db->query("update perkiraan set nomoraccount='$NoAc',namaaccount='$NamaPer',level='$Level',type='$Type',tanggalentry='".date("Y-m-d")."',kodekaryawan='".$this->session->userdata("wahanalogrole")."',saldo='$NilaiSaldo',tanggalsaldoawal='$TglSaldoAwl' where nomoraccount='$kode'");
+			$rs=$this->db->query("update perkiraan set nomoraccount='$NoAc',namaaccount='$NamaPer',level='$Level',type='$Type',tanggalentry='".date("Y-m-d")."',kodekaryawan='".$this->session->userdata("account_id")."',saldo='$NilaiSaldo',tanggalsaldoawal='$TglSaldoAwl' where nomoraccount='$kode'");
 		}
 		
 		function CekAcc($val){

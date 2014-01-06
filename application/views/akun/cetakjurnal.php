@@ -17,8 +17,25 @@
 
 	<script>
 		function begin(){
-			$("#TglAwl").datepick({dateFormat: 'dd MM yyyy'});
-			$("#TglAkhr").datepick({dateFormat: 'dd MM yyyy'});
+			$("#TglAwl").datepicker({
+		        changeMonth: true,
+		        changeYear: true,
+		        format: "dd-mm-yyyy",
+		        todayBtn: "linked",
+		        language: "id",
+		        autoclose: true
+		    }); 
+		    $("#TglAkhr").datepicker({
+		        changeMonth: true,
+		        changeYear: true,
+		        format: "dd-mm-yyyy",
+		        todayBtn: "linked",
+		        language: "id",
+		        autoclose: true
+		    });  
+
+		    $( "#TglAwl").datepicker('setValue', new Date()); 
+		    $( "#TglAkhr").datepicker('setValue', new Date()); 
 		}
 		$(this).ready(function(){
 			begin();
@@ -28,12 +45,8 @@
 					data:{TglAkhr:$('#TglAkhr').val(),TglAwl:$('#TglAwl').val(),NoVo1:$('#NoVo1').val(),NoVo2:$('#NoVo2').val()},
 					url: "<?php echo base_url(); ?>akun/cetakjurnal/CariJurnal",
 					cache: false,
-					beforeSend: function() {
-							$("div#loading").css("display","block");
-						},
 						success: function(msg){
 							$("#TableCJurnal").html(msg);
-							$("div#loading").css("display","none");	
 						}
 				});
 				
@@ -76,7 +89,7 @@
     			<h4>Batas Percetakan</h4>
 				<table border=0>
 					<tr>
-						<td>Tanggal</td><td>: <input type="text" id="TglAwl" style=width:95px;cursor:pointer; readonly value="<?php echo $TglAwl?>" /></td><td>s/d</td><td><input type="text" style=width:95px;cursor:pointer; id="TglAkhr" value="<?php echo $TglAkhr?>" readonly /></td>
+						<td>Tanggal</td><td>: <input type="text" id="TglAwl" style=width:95px;cursor:pointer; readonly value="" /></td><td>s/d</td><td><input type="text" style=width:95px;cursor:pointer; id="TglAkhr" value="" readonly /></td>
 					</tr>
 					<tr><td>No Voucher</td>
 						<td>: 

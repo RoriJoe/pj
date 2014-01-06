@@ -22,26 +22,26 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		</td>
 	</tr>
 	<tr>
-		<td width="30%">Nomor SJ : </td>
-		<td width="25%"><?php echo $sj; ?></td>
-		<td width="30%">Tgl Kirim : </td>
-		<td><?php echo $_tgl; ?></td>
+		<td>Nomor SJ </td>
+		<td width="120px">: <?php echo $sj; ?></td>
+		<td>Tgl Kirim </td>
+		<td width="120px">: <?php echo $_tgl; ?></td>
 	</tr>
 	<tr>
-		<td width="30%">Nomor SO : </td>
-		<td width="25%"><?php echo $_do; ?></td>
-		<td width="30%">Gudang : </td>
-		<td><?php echo $gg; ?></td>
+		<td>Nomor SO </td>
+		<td>: <?php echo $_do; ?></td>
+		<td>Gudang </td>
+		<td>: <?php echo $gg; ?></td>
 	</tr>
 	<tr>
-		<td width="30%">Pelanggan : </td>
-		<td width="25%"><?php echo $pn; ?></td>
-		<td width="30%">No PO : </td>
-		<td><?php echo $po; ?></td>
+		<td>Pelanggan </td>
+		<td>: <?php echo $pn; ?></td>
+		<td>No PO </td>
+		<td>: <?php echo $po; ?></td>
 	</tr>
 	<tr>
-		<td width="30%">Nomor Mobil : </td>
-		<td width="25%"><?php echo $mbl; ?></td>
+		<td>Nomor Mobil </td>
+		<td>: <?php echo $mbl; ?></td>
 		
 	</tr>
 </table>

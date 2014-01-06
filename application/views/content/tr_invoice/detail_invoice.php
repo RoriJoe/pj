@@ -1,5 +1,5 @@
-<div class="table CSSTabel" style="margin-bottom:5px;">
-<table id="tb_detail">
+<div class="CSSTabel" style="margin-bottom:5px;">
+<table id="tb_detail" class="table">
     <thead>
         <th width="10%">Kode</th>
         <th width="30%">Nama Barang</th>
@@ -49,7 +49,7 @@
 
 <script type="text/javascript">
 var oTable = $('#tb_detail').dataTable( {
-    "sScrollY": "130px",
+    "sScrollY": "200px",
     "sScrollYInner": "100%",
     "bPaginate": false,
     "bLengthChange": false,

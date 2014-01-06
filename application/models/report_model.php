@@ -8,53 +8,77 @@ class report_model extends CI_Model{
 	function print_do($radio,$tgl,$tgl2,$plg1,$plg2){
 	
 /*SELECT do_h.*,
-			pelanggan.Nama
-			FROM do_h
-			LEFT OUTER JOIN pelanggan
-			ON do_h.Kode_Plg = pelanggan.Kode*/
-			
-			if($radio=="Semua"){
-			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty,do_d.Jumlah, Satuan1,Tgl,grandttl
+		pelanggan.Nama
+		FROM do_h
+		LEFT OUTER JOIN pelanggan
+		ON do_h.Kode_Plg = pelanggan.Kode*/
+		
+		if($radio=="Semua"){
+			$q = $this->db->query("
+			SELECT do_d.No_Do, do_h.No_Po, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty,do_d.Jumlah, Satuan1,Tgl,grandttl
 			FROM do_d
 			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
 			LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
 			");
 			return $q->result();
+		}else{
+			if ($radio=="all") {
+				$q = $this->db->query("
+					SELECT do_d.No_Do, do_h.No_Po,do_h.Kode_Plg, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty,do_d.Jumlah, Satuan1,Tgl,grandttl
+					FROM do_d
+					LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
+					LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
+					LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
+					WHERE do_h.Tgl >= '$tgl' AND do_h.Tgl <= '$tgl2' AND do_h.Kode_Plg BETWEEN '$plg1' AND '$plg2'
+				");
 			}else{
-			$q = $this->db->query("SELECT do_d.No_Do, do_h.No_Po, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty,do_d.Jumlah, Satuan1,Tgl,grandttl
-			FROM do_d
-			LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
-			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
-			LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
-			where do_h.Tgl between ('$tgl') and ('$tgl2')
-			AND do_h.Kode_Plg between '$plg1' and '$plg2' ");
-			return $q->result();
+				$q = $this->db->query("
+					SELECT do_d.No_Do, do_h.No_Po,do_h.Kode_Plg, pelanggan.Perusahaan as NP, barang.Nama, Ukuran, Qty,do_d.Jumlah, Satuan1,Tgl,grandttl
+					FROM do_d
+					LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
+					LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
+					LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
+					WHERE do_h.Tgl >= '$tgl' AND do_h.Tgl <= '$tgl2'
+				");
 			}
-	
+			return $q->result();
+		}
 	}
 	
 	function print_po($radio,$tgl,$tgl2,$plg1,$plg2){
 
-			if($radio=="Semua"){
-			$q = $this->db->query("SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
-			FROM po_d
-			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
-			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
-			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+		if($radio=="Semua"){
+			$q = $this->db->query("
+				SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
+				FROM po_d
+				LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+				LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+				LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
 			");
 			return $q->result();
+		}else{
+			if ($radio=="all") {
+				$q = $this->db->query("
+					SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
+					FROM po_d
+					LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+					LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+					LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+					WHERE Tgl_po >= '$tgl' AND Tgl_po <= '$tgl2' AND po_h.Kode_supplier BETWEEN '$plg1' AND '$plg2'
+				");
 			}else{
-			$q = $this->db->query("SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
-			FROM po_d
-			LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
-			LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
-			LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
-			where Tgl_po between ('$tgl') and ('$tgl2')
-			AND po_h.Kode_supplier between '$plg1' and '$plg2' ");
-			return $q->result();
+				$q = $this->db->query("
+					SELECT po_d.Kode_po, supplier.Perusahaan as NP, barang.Nama, Ukuran, po_d.Jumlah, Satuan1,Tgl_po,Tgl_kirim,Total,Nilai
+					FROM po_d
+					LEFT OUTER JOIN po_h ON po_d.Kode_po = po_h.Kode
+					LEFT OUTER JOIN supplier ON po_h.Kode_supplier = supplier.Kode
+					LEFT OUTER JOIN barang ON po_d.Kode_barang = barang.Kode
+					WHERE Tgl_po >= '$tgl' AND Tgl_po <= '$tgl2'
+				");
 			}
-	
+			return $q->result();
+		}
 	}
 	
 	function print_os_po(){ //Sementara
@@ -132,40 +156,37 @@ order by Tgl,saw */
 	
 	function print_mutasi($barang1,$barang2,$tgl,$tgl2){ 
 		
-		$q = $this->db->query("SELECT Kode, Nama, Ukuran, Nama2,Satuan1,
-SAW.saldoawal as saw,
-bpb.terima as terima,
-sj.kirim as keluar
-
-		
-    from barang 
-	LEFT outer JOIN 
-        ( Select a.Kd_Brg,SUM(a.QtySaw1) as saldoawal
-        from saw_d as a
-        Inner JOIN saw_h as b ON a.No_Saw=b.No_Saw
-        where (b.Tgl between '$tgl' and '$tgl2')
-        group by a.Kd_Brg
-        ) as SAW ON barang.Kode = SAW.Kd_Brg
-        LEFT outer JOIN
-        (Select a.Kode_brg,SUM(a.Qty1) as terima
-        from bpb_d as a
-        INNER JOIN bpb_h as b ON a.No_Bpb=b.No_Bpb
-        where (b.Tgl_Bpb between '$tgl' and '$tgl2')
-        group by a.Kode_brg
-        ) as bpb ON barang.Kode = bpb.Kode_brg
-    	LEFT Outer Join
-    	(Select a.Kode_Brg,SUM(a.Qty1) as kirim
-        from sj_d as a
-        INNER JOIN sj_h as b ON a.No_Sj=b.No_Sj
-        where (b.Tgl between '$tgl' and '$tgl2')
-        group by a.Kode_Brg
-        ) as sj ON barang.Kode = sj.Kode_Brg
-        
-   
-    where Kode between '$barang1' and '$barang2'
-    order by barang.Kode;");
-				return $q->result();
-		
+		$q = $this->db->query("
+			SELECT Kode, Nama, Ukuran, Nama2,Satuan1,SAW.saldoawal as saw,bpb.terima as terima,sj.kirim as keluar
+			from barang 
+			LEFT outer JOIN 
+        		( 
+        			Select a.Kd_Brg,SUM(a.QtySaw1) as saldoawal
+        			from saw_d as a
+        			Inner JOIN saw_h as b ON a.No_Saw=b.No_Saw
+        			where (b.Tgl between '$tgl' and '$tgl2')
+       				group by a.Kd_Brg
+        		) as SAW ON barang.Kode = SAW.Kd_Brg
+        	LEFT outer JOIN
+        		(
+        			Select a.Kode_brg,SUM(a.Qty1) as terima
+        			from bpb_d as a
+        			INNER JOIN bpb_h as b ON a.No_Bpb=b.No_Bpb
+			        where (b.Tgl_Bpb between '$tgl' and '$tgl2')
+        			group by a.Kode_brg
+        		) as bpb ON barang.Kode = bpb.Kode_brg
+    		LEFT Outer Join
+    			(
+    				Select a.Kode_Brg,SUM(a.Qty1) as kirim
+        			from sj_d as a
+        			INNER JOIN sj_h as b ON a.No_Sj=b.No_Sj
+        			where (b.Tgl between '$tgl' and '$tgl2')
+        			group by a.Kode_Brg
+        		) as sj ON barang.Kode = sj.Kode_Brg
+    		where Kode between '$barang1' and '$barang2'
+    		order by barang.Kode;
+    	");
+		return $q->result();
 	}
 	
 	function print_os(){ //Sementara

@@ -14,18 +14,25 @@ $(document).ready(function() {
 
 /*Tampilkan jQuery Tanggal*/
 $(function() {
-    $( "#_tgl").datepicker({
+    $("#_tgl").datepicker({
         changeMonth: true,
         changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
-    $( "#_tgl2").datepicker({
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    }); 
+    $("#_tgl2").datepicker({
         changeMonth: true,
         changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind"
-    });
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });  
+
+    $( "#_tgl").datepicker('setValue', new Date()); 
+    $( "#_tgl2").datepicker('setValue', new Date());
 });
 
 function table(){

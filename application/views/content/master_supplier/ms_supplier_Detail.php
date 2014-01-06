@@ -40,6 +40,10 @@
 
 <script>
 //Edit TRIGGER 
+$('#tb1 tbody tr').dblclick(function (e) {
+    $(this).find('td .edit').click();
+});
+
 $('.edit').click(function(){ 
     $("#kd").attr('disabled',true);
        
@@ -81,7 +85,7 @@ $(".delete").click(function(){
     var pr = $(this).attr("pr");
     //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
-        message: "Kode: <b>"+id+"</b><br/>Supplier : <b>"+pr+"</b>",
+        message: "<table><tr><td>Kode </td><td>: <b>"+id+"</b></td></tr><tr><td>Nama Supplier </td><td>: <b>"+pr+"</b></td></tr></table>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {

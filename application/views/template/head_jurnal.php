@@ -23,12 +23,12 @@ $date = date("d F Y, H:i");
   $(document).ready(function($){
       //INITILIZE LOADING GIF ON AJAX CALL
       $('#loadingDiv').hide()  // hide it initially
-      .ajaxStart(function() {
+      /*.ajaxStart(function() {
           $(this).show();
       })
       .ajaxStop(function() {
           $(this).hide();
-      });
+      });*/
   });
 </script>
 
@@ -41,7 +41,7 @@ $date = date("d F Y, H:i");
   }
 </style>
 <!-- header image -->
-<div id="headerImg">
+<div id="headerImg" class="visible-desktop">
     <div class="box-logo" style="width: 400px;height: 75px;float: left;margin-left: 12px;margin-top: 2px; font-family: verdana; color: white; ">
         <div class="img-logo" style="float: left;height: 90px;">
             <img src="<?php echo base_url();?>assets/img/ptik.png"/>

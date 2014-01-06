@@ -4,7 +4,7 @@
 		<tr>
         	<th style="vertical-align:middle;">Pembayaran</th>
 			<th style=" text-align: right; padding:0">
-				<a href='#'id="add2" mode="new" class="btn btn-mini" title="Tambah Pembayaran" onclick="addBayar()"><i class="icon-plus"></i>Pembayaran</a> 
+				<a href='#'id="add2" mode="new" class="btn btn-mini btn-success" title="Tambah Pembayaran" onclick="addBayar()">Pembayaran</a> 
 			</th>
 		</tr>
 		<tr>

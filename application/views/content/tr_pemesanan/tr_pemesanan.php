@@ -4,7 +4,7 @@
         <div class="bar" title="Show/Hide Form">
             <p>Form Pemesanan / PO <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con master-border" style="height: 335px;">
+        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
             <form id="formID">
 
                 <div class="field-wrap">
@@ -15,7 +15,7 @@
                 <div class="field-wrap">
                     Tanggal PO
                     <input  type='text' 
-                        id='_tgl1' name='_tgl1' value='<?php echo date('d-m-Y');?>' style="width: 80px; margin-right: 10px;margin-left: 10px;" >
+                        id='_tgl1' name='_tgl1' value='' style="width: 80px; margin-right: 10px;margin-left: 10px;" >
                 </div>
                 <!--<div class="field-wrap">
                     Permintaan
@@ -31,7 +31,7 @@
                         <input  type='text' class="validate[required,maxSize[30], minSize[2]] span2" maxlength="30" 
                                 id="sup" id='appendedInputButton' name='sup' 
                                 style="width: 135px; margin-bottom:8px;height: 24px;" 
-                                onclick="lookup_supplier()">
+                                onclick="lookup_supplier()" readonly>
 
                         <a  href="#modalSupplier" role="button" 
                             class="btn padding-filter" data-toggle="modal" data-toggle="tooltip" 
@@ -56,7 +56,7 @@
                             class="validate[required,maxSize[20], minSize[2]] span2" maxlength="20" 
                             id="gud" id='appendedInputButton' name='gud'
                             style="width: 115px;margin-left:10px;margin-bottom:8px;height: 24px;"
-                            onclick="lookup_gudang()">
+                            onclick="lookup_gudang()" readonly>
 
                         <a  href="#modalGudang" id="filterGud" role="button" class="btn padding-filter" 
                             data-toggle="modal" data-toggle="tooltip" title="Filter Gudang" 
@@ -74,7 +74,7 @@
                       <input class="span2" id='limk' id="appendedPrependedInput" type='text' class="validate[required]" maxlength="15" name='limk' style="width: 135px;text-align:right;height: 24px;" onkeyup="formatAngka(this,'.')" disabled>
                     </div>
                 </div>
-                <a id="add" mode="new" class="btn" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()">Add Barang</a>
+                <a id="add" mode="new" class="btn btn-success" data-toggle="tooltip" title="Tambah Barang" onclick="addBarang()">Add Barang</a>
 
                 <input type="hidden" id="kode_p" name="kode_p"/>
             </form>
@@ -112,7 +112,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="konfirmasi" class="sukses"></div>
+
             <div class="field-wrap">
                 <?php if ($this->authorization->is_permitted('create_po') == true && $this->authorization->is_permitted('update_po') == false) : ?>
                     <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
@@ -130,6 +130,9 @@
                     <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Pemesanan / Purchase Order"><i class="icon-print"></i> Print</button>
                 <?php endif; ?>
             </div>
+
+            <div id="konfirmasi" class="sukses"></div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
@@ -137,8 +140,6 @@
         <div id="listPO"></div>
     </div>
 </div>
-
-
 
 <!-- 
     Modal 
@@ -225,6 +226,15 @@ $(document).ready(function() {
     validation()
     barAnimation();
     tampilDetailPO();
+
+    $( "#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });
 });
 
 function cekauthorization(){
@@ -251,7 +261,8 @@ function autogen(){
     $("#ppnT").val("");
     
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async: true,
     url: "<?php echo base_url();?>index.php/tr_po/auto_gen",
     data :{},
     success:
@@ -259,32 +270,25 @@ function autogen(){
             $('#po').val(hh);
         }
     });
-}
 
-$(function() {
+
     $( "#_tgl1").datepicker({
         changeMonth: true,
         changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-        
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
     });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        setDate: new Date()
-    });
-    
-});
+    $( "#_tgl1").datepicker('setValue', new Date());
+}
 
 
 function addGudang(){
     $('#modalGudang').modal('hide');
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async:true,
     url: "<?php echo base_url();?>index.php/ms_gudang/popGudang",
     data :{},
     success:
@@ -297,13 +301,14 @@ function addGudang(){
 function addSupplier(){
     $('#modalSupplier').modal('hide');
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_supplier/popSupplier",
-    data :{},
-    success:
-    function(hh){
-        $('#add_supplier').html(hh);
-    }
+        type:'GET',
+        async:true,
+        url: "<?php echo base_url();?>index.php/ms_supplier/popSupplier",
+        data :{},
+        success:
+        function(hh){
+            $('#add_supplier').html(hh);
+        }
     });  
 } 
 
@@ -326,6 +331,7 @@ function retrieveForm(idPO){
 	        $('#dpp').val(accounting.formatMoney(msg.Dpp, "",0,"."));
 	        $('#ppn').val(msg.Ppn);
 	        $('#kirim').val(msg.Counter);
+            $('#limk').val(accounting.formatMoney(msg.Limit, "",0,"."));
 
 	        var total_PPN = msg.Dpp*msg.Ppn/100;
 	        $('#ppnT').val(accounting.formatMoney(total_PPN, "",0,"."));
@@ -351,9 +357,11 @@ function listPO(){
     data :{},
     success:
     function(hh){
-        $('#listPO').html(hh);
-    }
+            $('#listPO').html(hh);
+        }
     });
+
+    $( "#_tgl").datepicker('setValue', new Date());
 }
 
 function formatAngka(objek, separator) {
@@ -392,7 +400,7 @@ function cek_kirim(){
 	var po = $('#po').val();
     var _tgl1 = $('#_tgl1').val();
     var _tgl2 = $('#_tgl2').val();
-    var kd_gud = $('#kd_gud').val();
+    var kd_gud = $('#gud').val();
     var proy = $('#proy').val();
     var permintaan = $('#permintaan').val();
     var cur = $('#cur').val();
@@ -425,39 +433,37 @@ function cek_kirim(){
     }
 	
 	$.ajax({
-	        type:'POST',
-	        url: "<?php echo base_url();?>index.php/report/print_transaksi_po",
-	        data :{ po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,count:count,
-	                dpp:dpp,ppn:ppn,to:to,
-                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,arrNamabrg:arrNamabrg,
-					arrSatuan:arrSatuan
-	        },
-	
-	        success:
-	        function(msg)
-	        {	
-				var d = new Date();
-				var curr_date = d.getDate();
-				var curr_month = d.getMonth() + 1; //Months are zero based
-				var curr_year = d.getFullYear();
-				var tgl = curr_date + "-" + curr_month + "-" + curr_year;
-				var win=window.open('');
-				with(win.document)
-				{
-				  open();
-				  win.document.title="Purchase Order "+tgl;
-				  write(msg);
-				  close();
-                  win.print();
-				}
-				cek_kirim();
-	        }
-	     });
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/report/print_transaksi_po",
+        data :{ po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,count:count,
+                dpp:dpp,ppn:ppn,to:to,
+                arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,arrNamabrg:arrNamabrg,
+				arrSatuan:arrSatuan
+        },
+
+        success:
+        function(msg)
+        {	
+			var d = new Date();
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth() + 1; //Months are zero based
+			var curr_year = d.getFullYear();
+			var tgl = curr_date + "-" + curr_month + "-" + curr_year;
+			var win=window.open('');
+			with(win.document)
+			{
+			  open();
+			  win.document.title="Purchase Order "+tgl;
+			  write(msg);
+			  close();
+              win.print();
+			}
+			cek_kirim();
+        }
+     });
 }); 
 
-
-
-//Suggestion Supplier
+/*//Suggestion Supplier
 function lookup_supplier(){
     $("#sup").autocomplete({
     minLength: 1,
@@ -517,7 +523,7 @@ function lookup_gudang(){
             $("#gud").validationEngine('showPrompt', 'Data Gudang Tersedia', 'pass');
         },
     });
-}
+}*/
 
 //Table Supplier
 function listSupplier(){
@@ -624,26 +630,6 @@ function getBarang(){
     }  
 }
     
-//Radion Button response
-/*
-function radioRespons(){
-    if(document.getElementById('optionsRadios1').checked){
-        $('#gud').attr('disabled', false);
-        $('#filterGud').attr('disabled', false);
-        $('#proy').attr('disabled', true);
-        $('#proy').val("");
-    }else{
-        $('#gud').attr('disabled', true);
-        $('#filterGud').attr('disabled', true);
-        $('#proy').attr('disabled', false);
-        $('#gud').val("");
-        $('#kd_gud').val("");
-    }
-}
-
-/*
- * Add Currency
- */
 function addCombo() {
     var cur = $('#txtCombo').val();
     if(cur !="")
@@ -725,6 +711,7 @@ $("#save").click(function(){
     var proy = $('#proy').val();
     var permintaan = $('#permintaan').val();
     var cur = $('#cur').val();
+    var limk = $('#limk').val();
     var urg = $('#urg').val();
     var kd_sup = $('#kd_sup').val();
 
@@ -752,12 +739,7 @@ $("#save").click(function(){
       var sDate = new Date(StartDate);
 
     if(mode == "add"){ //add mode
-        /*if($('#gud').val() != ""){
-            if(kd_sup == 0){
-                bootstrap_alert.warning('<b>Gagal!</b> Data Gudang Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
-            }
-        }
-        else */if(kd_sup == 0){
+        if(kd_sup == 0){
             bootstrap_alert.warning('<b>Gagal!</b> Data Supplier Tidak Ditemukan Silahkan Cek Kembali Inputan Anda');
         }
         else if(StartDate!= '' && StartDate!= '' && sDate> eDate)
@@ -770,7 +752,7 @@ $("#save").click(function(){
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_po/save/add",
             data :{po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,dpp:dpp,ppn:ppn,to:to,
-                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow
+                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,limk:limk
             },
 
             success:
@@ -810,7 +792,7 @@ $("#save").click(function(){
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_po/save/edit",
             data :{po:po,_tgl1:_tgl1,_tgl2:_tgl2,kd_gud:kd_gud,proy:proy,permintaan:permintaan,cur:cur,urg:urg,kd_sup:kd_sup,dpp:dpp,ppn:ppn,to:to,
-                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow
+                    arrKode:arrKode,arrHarga:arrHarga,arrJumlah:arrJumlah,arrNilai:arrNilai,totalRow:totalRow,limk:limk
             },
 
             success:

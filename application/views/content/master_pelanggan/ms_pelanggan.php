@@ -1,11 +1,11 @@
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span7">
         <!--//***MAIN FORM-->
         <div class="bar" title="Show/Hide Form">
             <p>Form Pelanggan <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con">
         <form id="formID">
             <table>
                 <tr>
@@ -111,7 +111,7 @@
         <!--//***END MAIN FROM-->
     </div>
 
-    <div class="offset3 span3">
+    <div class="offset1 span4">
         <div id="hasil"></div>
     </div>
 </div>

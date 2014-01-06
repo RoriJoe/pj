@@ -111,21 +111,23 @@ function validAct(row){
 }
 
 var oTable = $('#tb3').dataTable( {
-    "sScrollY": "200px",
+    "aaSorting": [[ 1, "asc" ]],
+    "sScrollY": "250px",
     "sScrollYInner": "100%",
     "sScrollX": "100%", //panjang width
     "sScrollXInner": "100%", //overflow dalem
+    "bScrollCollapse": true,
     "bPaginate": true,
     "bAutoWidth": false,
-    "bSort" : false,
     "bLengthChange": true,
-    "aaSorting": [[ 1, "asc" ]],
+    
     "oLanguage": {
          "sSearch": "Search",
          "sLengthMenu": " _MENU_ ",
          "sEmptyTable": "Tidak ada data tersedia",
          "sZeroRecords": "Data tidak ditemukan"
        },
+    "bDeferRender": true,
     "sPaginationType": "full_numbers",
     "bInfo": false//Showing 1 to 1 of 1 entries (filtered from 7 total entries)
 } );

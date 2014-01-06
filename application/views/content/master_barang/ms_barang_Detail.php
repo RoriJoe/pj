@@ -1,5 +1,5 @@
-<div class="table table-hover CSSTabel table-list" style="width:98%;">
-<table id="tb1" style="width: 100%;">
+<div class="CSSTabel table-list" style="width:98%;">
+<table id="tb1" class="table table-hover">
     <thead>
         <th width="20%">Kode</th>
         <th width="70%">Nama</th>
@@ -16,7 +16,7 @@
                 <div class='btn-group'>
                     <a class='btn popup' style='padding: 0px 3px;' kode='$row->Kode'><i class='icon-pencil'></i></a>"?>
                     <?php if ($this->authorization->is_permitted('delete_barang')) : ?>
-                        <?php echo"<a class='btn delete' kode='$row->Kode' nama='$row->Nama' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>"?>
+                        <?php echo"<a class='btn delete' kode='$row->Kode' nama='$row->Nama $row->Ukuran' style='padding: 0px 3px;'><i class='icon-trash'></i></a></div>"?>
                     <?php endif;?>
             </td>
         </tr>
@@ -27,6 +27,10 @@
 
 <script>
    //Edit TRIGGER
+$('#tb1 tbody tr').dblclick(function (e) {
+    $(this).find('td .popup').click();
+});
+
 $('.popup').click(function(){
     $("#_kd").attr('disabled',true);
     
@@ -50,7 +54,7 @@ $(".delete").click(function(){
     var pr = $(this).attr("nama");
     //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
-        message: "Kode: <b>"+id+"</b><br/>Nama Barang : <b>"+pr+"</b>",
+        message: "<table><tr><td>Kode </td><td>: <b>"+id+"</b></td></tr><tr><td>Nama Barang </td><td>: <b>"+pr+"</b></td></tr></table>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {

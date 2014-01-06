@@ -1,11 +1,10 @@
 <?
-$date = date("d F Y, H:i");
+    $date = date("d F Y, H:i");
 ?>
-<!--<img width ="100%" height="70px" src="<?php echo base_url();?>system/images/header/2.jpg">-->
 <script type="text/javascript">
     function display_c(){
-    var refresh=1000; // Refresh rate in milli seconds
-    mytime=setTimeout('display_ct()',refresh)
+        var refresh=1000; // Refresh rate in milli seconds
+        mytime=setTimeout('display_ct()',refresh)
     }
 
     function display_ct() {
@@ -16,14 +15,13 @@ $date = date("d F Y, H:i");
         //var x1=x.toLocaleString();// changing the display to UTC string
         document.getElementById('ct').innerHTML = x1;
         tt=display_c();
- }
-</script>
+    }
 
-<script>
     window.onload = display_ct;
 </script>
+
 <!-- header image -->
-<div id="headerImg">
+<div id="headerImg" class="visible-desktop">
     <div class="box-logo" style="width: 400px;height: 75px;float: left;margin-left: 12px;margin-top: 2px; font-family: verdana; color: white; ">
         <div class="img-logo" style="float: left;height: 90px;">
             <img src="<?php echo base_url();?>assets/img/ptik.png"/>
@@ -34,8 +32,13 @@ $date = date("d F Y, H:i");
         </div>    
     </div>
 </div>
+
 <div class="navbar navbar-inverse" style="margin-bottom:0px;">
   <div class="navbar-inner">
+    <div id="loadingD" class="hidden-phone pull-left">
+        <img src="<?php echo base_url();?>assets/img/ajax-loader.gif"/>
+    </div> 
+    <a class="brand visible-phone" href="#">Pelita Jaya</a>
     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -43,8 +46,8 @@ $date = date("d F Y, H:i");
     </a>
 
     <ul class="nav pull-right">
-        <li><a id='ct' style="margin-right: 5px;"></a></li>
-        <li class="dropdown">
+        <li class="hidden-phone"><a id='ct' style="margin-right: 5px;"></a></li>
+        <li class="dropdown hidden-phone">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Pengaturan User"><?php echo $account->firstname; ?> <?php echo $account->lastname; ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="<?php echo base_url(); ?>menu/user">User Profile</a></li>

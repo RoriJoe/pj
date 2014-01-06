@@ -9,32 +9,25 @@
 </style>
 <h2 style="margin: 0">PD. PELITA JAYA</h2>
 Pangeran Jaya Karta No.30, Jakarta Pusat
-			<h2 align="center">SALES ORDER</h2><hr/>
-<table>
+<h2 align="center">SALES ORDER</h2><hr/>
+<table cellpadding="2">
 	<tr>
-		<td colspan=4>
-			
-			
-		</td>
-		
+		<td>Nomor SO </td>
+		<td width="120px">: <?php echo $so; ?></td>
+		<td>Nomor PO </td>
+		<td>: <?php echo $po; ?></td>
 	</tr>
 	<tr>
-		<td width="30%">Nomor SO : </td>
-		<td width="25%"><?php echo $so; ?></td>
-		<td width="30%">Nomor PO : </td>
-		<td><?php echo $po; ?></td>
-	</tr>
-	<tr>
-		<td>Tanggal SO : </td>
-		<td><?php echo $tglSo; ?></td>
-		<td>Tanggal PO : </td>
-		<td><?php echo $tglPo; ?></td>
+		<td>Tanggal SO </td>
+		<td>: <?php echo $tglSo; ?></td>
+		<td>Tanggal PO </td>
+		<td>: <?php echo $tglPo; ?></td>
 	</tr>
 	<tr>
 		<td>Pelanggan </td>
-		<td><?php echo $pl; ?></td>
+		<td width="120px">: <?php echo $pl; ?></td>
 		<td>Sales </td>
-		<td><?php echo $sl; ?></td>
+		<td>: <?php echo $sl; ?></td>
 	</tr>
 	
 </table>
@@ -71,23 +64,23 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 <br/>
 <table>
 	<tr>
-			<td>Total : </td>
-			<td><?php echo $to; ?></td>
+			<td>Total </td>
+			<td>: <?php echo $to; ?></td>
 	</tr>
 	<tr>
-			<td>Discount : </td>
-			<td><?php echo $disc." % ".$discT; ?></td>
+			<td>Discount </td>
+			<td>: <?php echo $disc." % ".$discT; ?></td>
 	</tr>
 	<tr>
-			<td>DPP : </td>
-			<td><?php echo $dpp; ?></td>
+			<td>DPP </td>
+			<td>: <?php echo $dpp; ?></td>
 	</tr>
 	<tr>
-			<td>PPN : </td>
-			<td><?php echo $ppn." % ".$ppnT; ?></td>
+			<td>PPN </td>
+			<td>: <?php echo $ppn." % ".$ppnT; ?></td>
 	</tr>
 	<tr>
-			<td>Grand Total : </td>
-			<td><?php echo $grant; ?></td>
+			<td>Grand Total </td>
+			<td>: <?php echo $grant; ?></td>
 	</tr>
 </table>

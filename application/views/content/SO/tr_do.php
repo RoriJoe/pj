@@ -4,61 +4,81 @@
         <div class="bar" title="Show/Hide Form">
             <p>Form Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con master-border" style="height: 360px;">
-        <form id="formID">
-            <table>
-                <tr>
-                    <td>Nomor SO</td>
-                    <td>
-                        <input type='text' class="form100 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_so' name='_so'/>
-                    </td>
-                    <td>Tgl SO</td>
-                    <td>
-                        <input type='text' class="form70 validate[custom[date]]"  id='_tgl' name='_tgl' value="<?php echo date('d-m-Y');?>" />
-                    </td>
-                    <td>Pelanggan</td>
-                    <td>
-                        <input type="hidden" id="kd_plg" />
-                        <div class="input-append money" style="margin-bottom:0px;">
-                            <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;margin-bottom:8px;height: 24px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                            <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 8px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
-                        </div>
-                    </td>
-                    <td>Terms</td>
-                    <td>
-                        <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px;" maxlength="3" id='terms' name='terms'/> Hari
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nomor PO</td>
-                    <td>
-                        <input type='text' class="form100 validate[custom[onlyLetterNumber]]" maxlength="20" id='_po' name='_po'>
-                    </td>
-                    <td>Tgl PO</td>
-                    <td>
-                        <input type='text' class="form70 validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2'/>
-                    </td>
-                    <td>Sales</td>
-                    <td>
-                        <select name="_sl" class="validate[required]" id="_sl" style="width: 160px;">
-                            <?php
-                            foreach ($list_sales as $isi)
-                            {
-                                echo "<option ";
-                                echo "value = '".$isi->Nama."'>".$isi->Nama."</option>";
-                            }
-                            ?>
-                        </select>
-                    </td>
-                    <td colspan="2"><a href='#'id="add" mode="new" class="btn" title="Tambah Barang" onclick="addBarang()"><i class="icon-plus"></i>Add Barang</a></td>
-                </tr>
-            </table>
-        </form>
+        <div id="konten" class="hide-con">
+            <form id="formID">
+                <table class="table table-no-border">
+                    <tr>
+                        <td>Nomor SO</td>
+                        <td>
+                            <input type='text' class="form100 upper-form validate[required,maxSize[20], minSize[5]],custom[onlyLetterNumber]" maxlength="20" id='_so' name='_so'/>
+                        </td>
+                        <td>Tgl SO</td>
+                        <td>
+                            <input type='text' class="form70 validate[custom[date]]"  id='_tgl' name='_tgl' value="" />
+                        </td>
+                        <td>Pelanggan</td>
+                        <td>
+                            <input type="hidden" id="kd_plg" />
+                            <div class="input-append money" style="margin-bottom:0px;">
+                                <input type='text' class="span2" disabled="disabled" maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 135px;height: 24px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
+                                <a href="#modalPelanggan" id="f_plg" role="button" class="btn" title="Search Pelanggan" data-toggle="modal" style="padding: 0px 5px;margin-bottom: 4px;" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                            </div>
+                        </td>
+                        <td>Terms</td>
+                        <td>
+                            <input type='text' class="validate[required,maxSize[3],custom[onlyNumberSp]]" style="width:40px;" maxlength="3" id='terms' name='terms'/> Hari
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nomor PO</td>
+                        <td>
+                            <input type='text' class="form100 validate[custom[onlyLetterNumber]]" maxlength="20" id='_po' name='_po'>
+                        </td>
+                        <td>Tgl PO</td>
+                        <td>
+                            <input type='text' class="form70 validate[custom[date]]" placeholder="Tgl PO" id='_tgl2' name='_tgl2'/>
+                        </td>
+                        <td>Sales</td>
+                        <td>
+                            <select name="_sl" class="validate[required]" id="_sl" style="width: 160px;">
+                                <?php
+                                foreach ($list_sales as $isi)
+                                {
+                                    echo "<option ";
+                                    echo "value = '".$isi->account_id."'>".$isi->firstname."</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                        <td colspan="2"><a href='#'id="add" mode="new" class="btn btn-success" title="Tambah Barang" onclick="addBarang()">Add Barang</a></td>
+                    </tr>
+                </table>
+            </form>
 
-        <div id="hasil2" style="height: 170px;"></div>
+            <div id="hasil2"></div>
+            
+            <div class="field-wrap">
+                <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == false): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
+                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == true): ?>
+                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <?php endif; ?>
+
+                <?php if ($this->authorization->is_permitted('delete_so')) : ?>
+                    <button id="delete" class="btn">Delete</button>
+                <?php endif; ?>
+                <button id="cancel" class="btn">Cancel</button>
+                <?php if ($this->authorization->is_permitted('print_so')) : ?>
+                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
+                <?php endif; ?>
+                <button id="batal" class="btn btn-danger" style="visibility:hidden;">Batal SO</button>
+                <h3 id="batal-status" style="visibility:hidden; color:#F00;">[BATAL]</h3>
+            </div>
 
             <div style="float: right; margin-right: 75px;">
-			
+            
                 <table>
                 <tr>
                     <td><label style="float: left; margin-right: 10px;"><b>Total</b> </label>
@@ -97,26 +117,9 @@
                 </tr>      
                 </table>
             </div>
-            <div class="field-wrap">
-                <?php if ($this->authorization->is_permitted('create_so') == true && $this->authorization->is_permitted('update_so') == false) : ?>
-                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == false): ?>
-                    <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
-                <?php elseif($this->authorization->is_permitted('update_so') == true && $this->authorization->is_permitted('create_so') == true): ?>
-                    <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                <?php endif; ?>
-
-                <?php if ($this->authorization->is_permitted('delete_so')) : ?>
-                    <button id="delete" class="btn">Delete</button>
-                <?php endif; ?>
-                <button id="cancel" class="btn">Cancel</button>
-                <?php if ($this->authorization->is_permitted('print_so')) : ?>
-                    <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Sales Order"><i class="icon-print"></i> Print</button>
-                <?php endif; ?>
-                <button id="batal" class="btn btn-danger" style="visibility:hidden;">Batal SO</button>
-            </div>
             <!--**NOTIFICATION AREA**-->
             <div id="konfirmasi" class="sukses"></div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
@@ -179,6 +182,15 @@ jQuery(document).ready(function(){
     validation();
     barAnimation();
     listBarang();
+
+    $("#_tgl2").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });
 });
 
 function cekauthorization(){
@@ -197,24 +209,6 @@ function cekauthorization(){
         $("#print").attr('disabled',false);
     <?php endif; ?>
 }
-
-
-/*Tampilkan jQuery Tanggal*/
-$(function() {
-    $( "#_tgl").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-        defaultDate: new Date()
-    });
-    $( "#_tgl2").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
 
 function formatAngka(objek, separator) {
   a = objek.value;
@@ -245,7 +239,8 @@ function addBarang(){
 function addPelanggan(){
     $('#modalPelanggan').modal('hide');
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async: true,
     url: "<?php echo base_url();?>index.php/ms_pelanggan/popPelanggan",
     data :{},
     success:
@@ -272,7 +267,8 @@ $("#_po").keypress(function(e){
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async:true,
     url: "<?php echo base_url();?>index.php/tr_do/index",
     data :{},
     success:
@@ -281,10 +277,12 @@ function listSO(){
     }
     });
 }
+
 function retrieveForm(idSO){
     var id = idSO;
     $.ajax({
         type:'POST',
+        async:true,
         url: "<?php echo base_url();?>index.php/tr_do/retrieveForm",
         data :{id:id},
         dataType: 'json',
@@ -329,7 +327,8 @@ function autogen(){
     $('#granT').val("");
 
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async:true,
     url: "<?php echo base_url();?>index.php/tr_do/auto_gen",
     data :{},
     success:
@@ -339,7 +338,18 @@ function autogen(){
             var a = '<?php echo $user;?>';
             setSelectedIndex(document.getElementById("_sl"),a);
         }
-    });    
+    }); 
+
+    $("#_tgl").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });  
+
+    $( "#_tgl").datepicker('setValue', new Date()); 
 }
 
 //Suggestion Pelanggan
@@ -373,25 +383,25 @@ function lookup_pelanggan(){
     });
 }
 
-function setSelectedIndex(s, valsearch)
-{
-// Loop through all the items in drop down list
-for (i = 0; i< s.options.length; i++)
-{ 
-    if (s.options[i].value == valsearch)
-    {
-        // Item is found. Set its property and exit
-        s.options[i].selected = true;
-        break;
+function setSelectedIndex(s, valsearch){
+    // Loop through all the items in drop down list
+    for (i = 0; i< s.options.length; i++)
+    { 
+        if (s.options[i].value == valsearch)
+        {
+            // Item is found. Set its property and exit
+            s.options[i].selected = true;
+            break;
+        }
     }
-}
-return;
+    return;
 }
 
 //Table Pelanggan
 function listPelanggan(){
     $.ajax({
-    type:'POST',
+    type:'GET',
+    async:true,
     url: "<?php echo base_url();?>index.php/ms_pelanggan/viewPelanggan",
     data :{},
     success:
@@ -404,7 +414,8 @@ function listPelanggan(){
 //Table Barang
 function listBarang(){
     $.ajax({
-        type:'POST',
+        type:'GET',
+        async:true,
         url: "<?php echo base_url();?>index.php/ms_barang/viewBarang",
         data :{},
         success:
@@ -442,10 +453,6 @@ function getPelanggan(){
 //GET POPUP Barang
 function getBarang(){
     var id = $('input:radio[name=optionsRadiosBarang]:checked').val();
-    /*var y = $('input:radio[name=optionsRadiosBarang]:checked').attr('satuan');
-    var z = $('input:radio[name=optionsRadiosBarang]:checked').attr('nama');
-    var o = $('input:radio[name=optionsRadiosBarang]:checked').attr('harga');
-    var p = $('input:radio[name=optionsRadiosBarang]:checked').attr('ukuran');*/
     
     var row = filter;
     var arrs = document.getElementsByName('kode_brgd');
@@ -463,13 +470,15 @@ function getBarang(){
     } else {
         $.ajax({
             type:'POST',
+            async:true,
             url: "<?php echo base_url();?>index.php/ms_barang/getSelectedRadio",
             data :{id:id},
             dataType: 'json',
             success:
             function(msg){
                 $('#kode_brg'+row).val(id);
-                $('#last_qty'+row).val(msg.Qty_Jual);
+                $('#cur_qty'+row).val(msg.Qty_Jual);
+                $('#last_qty'+row).val(0);
                 $('#satuan_brg'+row).val(msg.Satuan); 
                 $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
                 $('#harga_brg'+row).val(msg.Harga); 
@@ -486,9 +495,12 @@ $("#cancel").click(function(){
     autogen();
     tampilDetailSO();
     $('#_so').attr('disabled', false);
+    $('#_po').attr('disabled', false);
     cekauthorization();
     document.getElementById('add').style.visibility = 'visible';
 	document.getElementById('batal').style.visibility = 'hidden';
+    document.getElementById('batal-status').style.visibility = 'hidden';
+    $( "#_tgl").datepicker('setValue', new Date());
 });
 
 function addRow() {
@@ -498,26 +510,29 @@ function addRow() {
     items += "<tr>";
     items += "<td width='15%'><div class='input-append'><input type='text' class='span2' id='kode_brg"+$count+"' onkeypress='validAct("+$count+")' maxlength='20' id='appendedInputButton' name='kode_brgd' style='width:87px' disabled='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brg"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
     items += "<td width='22%'><div class='input-append'><input type='text' name='nama_brg' class='validate[required]' id='nama_brg"+$count+"' style='width:130px' readonly='true'/><a href='#modalBarang' onclick='getDetail("+$count+")' id='f_brgs"+$count+"' role='button' class='btn detail-append' data-toggle='modal' style='visibility: hidden;'><i class='icon-filter'></i></a></div></td>";
-    items += "<td width='8%'><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:40px;text-align:right;' disabled='true' autofocus/></td>";
+    items += "<td width='8%'><input type='hidden' id='cur_qty"+$count+"'/><input type='hidden' id='last_qty"+$count+"'/><input type='text' name='qty_brg' onkeypress='validAct("+$count+")' maxlength='5' class='validate[required]' id='qty_brg"+$count+"' style='width:40px;text-align:right;' disabled='true' autofocus/></td>";
     items += "<td width='15%'><input type='text' name='harga_brg' onkeypress='validAct("+$count+")' maxlength='15' class='validate[required]' id='harga_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='jumlah' class='validate[required]' id='jumlah_brg"+$count+"' style='width:88px;text-align:right;' disabled='true'/></td>";
     items += "<td width='15%'><input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg"+$count+"' style='width:88px' disabled='true'/></td>";
-    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
+    items += "<td width='10%'><div class='btn-group' style='margin-bottom:0;'><a class='btn' id='edit"+$count+"' href='#' onclick='editRow("+$count+")'><i id='icon"+$count+"' class='icon-pencil'></i></a><a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a></div></td></tr>";
 
     $("#itemlist").append(items);
 }
 
 //BUAT PRINT
 $("#print").click(function(){
-//deklarasi variable
+    //deklarasi variable
     var so = $('#_so').val();
     var tglSo = $('#_tgl').val();
     var po = $('#_po').val();
     var tglPo = $('#_tgl2').val();
     var pl = $('#kd_plg').val();
-    var sl = $('#_sl').val();
+    //var sl = $('#_sl').val();
     var to = $('#total').val();
     var term = $('#terms').val();
+
+    var salestSelect = document.getElementById("_sl");
+    var sl = salestSelect.options[salestSelect.selectedIndex].text;
 	
 	var disc = $('#disc').val();
 	var dpp = $('#dpp').val();
@@ -548,8 +563,9 @@ $("#print").click(function(){
     }   
     
     
-$.ajax({
+    $.ajax({
         type:'POST',
+        async:true,
         url: "<?php echo base_url();?>index.php/report/print_transaksi_so",
         data :{ so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,ppnT:ppnT,discT:discT, term:term,
                     arrNama:arrNama,arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
@@ -572,7 +588,7 @@ $.ajax({
             }
             win.print();
         }
-     });
+    });
 });
 
 //Save Click
@@ -597,6 +613,7 @@ $("#save").click(function(){
 
     var arrKode = new Array();
     var arrQty = new Array();
+    var arrReQty = new Array();
 	var arrSatuan = new Array();
     var arrHarga = new Array();
     var arrJumlah = new Array();
@@ -607,6 +624,7 @@ $("#save").click(function(){
     for(var i=1;i<=totalRow;i++){
 		arrKode[i-1] = $('#kode_brg'+i).val();
 		arrQty[i-1] = $('#qty_brg'+i).val();
+        arrReQty[i-1] = (parseInt($('#cur_qty'+i).val()) + parseInt($('#last_qty'+i).val())) - parseInt($('#qty_brg'+i).val());
 		arrSatuan[i-1] = $('#satuan_brg'+i).val();
 		arrHarga[i-1] = $('#harga_brg'+i).val().replace(/\./g, "");
 		arrJumlah[i-1] = $('#jumlah_brg'+i).val().replace(/\./g, "");
@@ -624,7 +642,7 @@ $("#save").click(function(){
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_do/insert",
             data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,disc:disc,dpp:dpp,ppn:ppn,grant:grant,term:term,
-                    arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
+                    arrKode:arrKode, arrQty:arrQty, arrReQty:arrReQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
             },
 
             success:
@@ -636,9 +654,11 @@ $("#save").click(function(){
 					$('#formID').each(function(){
 						this.reset();
 					});
+                    $( "#_tgl").datepicker('setValue', new Date());
                     listSO();
 					tampilDetailSO();
 					autogen();
+                    listBarang();
 					cekauthorization();
                 }
                 else{
@@ -661,7 +681,7 @@ $("#save").click(function(){
             type:'POST',
             url: "<?php echo base_url();?>index.php/tr_do/update",
             data :{so:so,tglSo:tglSo,po:po,tglPo:tglPo,pl:pl,sl:sl,to:to,term:term, disc:disc,dpp:dpp,ppn:ppn,grant:grant,
-                    arrKode:arrKode, arrQty:arrQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
+                    arrKode:arrKode, arrQty:arrQty, arrReQty:arrReQty, arrSatuan:arrSatuan, arrHarga:arrHarga, arrJumlah:arrJumlah, arrKet:arrKet,totalRow:totalRow
             },
 
             success:
@@ -673,9 +693,11 @@ $("#save").click(function(){
                     $('#formID').each(function(){
                             this.reset();
                     });
+                    $( "#_tgl").datepicker('setValue', new Date());
                     listSO();
 					tampilDetailSO();
 					autogen();
+                    listBarang();
 					cekauthorization();
                 }
                 else{
@@ -723,10 +745,12 @@ $("#delete").click(function(){
                                 $('#formID').each(function(){
                                     this.reset();
                                 });
-                               listSO();
-                               tampilDetailSO();
-                               autogen();
-                               cekauthorization();
+                                $( "#_tgl").datepicker('setValue', new Date());
+                                listSO();
+                                tampilDetailSO();
+                                autogen();
+                                listBarang();
+                                cekauthorization();
                             }
                         }
                     });
@@ -735,15 +759,18 @@ $("#delete").click(function(){
         }
     });
 });
+
 function cek_batal(){
     var id = $('#_po').val();
     if(id == "(BATAL)"){
         document.getElementById('batal').style.visibility = 'hidden';
+        document.getElementById('batal-status').style.visibility = 'visible';
         $("#save").attr('disabled',true);
         $("#print").attr('disabled',true);
         $("#_po").attr('disabled',true);
     }else{
         document.getElementById('batal').style.visibility = 'visible';
+        document.getElementById('batal-status').style.visibility = 'hidden';
         $("#save").attr('disabled',false);
         $("#print").attr('disabled',false);
         $("#_po").attr('disabled',false);
@@ -798,7 +825,7 @@ $("#batal").click(function(){
 								listSO();
 								tampilDetailSO();
 								autogen();
-
+                                listBarang();
                             }
 							
                         }
@@ -808,4 +835,5 @@ $("#batal").click(function(){
         }
     });
  });    
+
 </script>

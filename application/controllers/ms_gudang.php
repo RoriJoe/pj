@@ -3,7 +3,7 @@
         function __construct(){
             parent::__construct();
             $this->load->model('ms_gudang_model');
-            $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
+            $this->load->library(array('account/authentication', 'account/authorization'));
         }
         function index(){
             //request data table

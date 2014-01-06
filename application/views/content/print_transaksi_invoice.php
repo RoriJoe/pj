@@ -19,22 +19,22 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		
 	</tr>
 	<tr>
-		<td width="30%">Nomor Invoice : </td>
-		<td width="25%"><?php echo $id; ?></td>
-		<td width="30%">Pelanggan : </td>
-		<td><?php echo $plg; ?></td>
+		<td>Nomor Invoice </td>
+		<td width="140px">: <?php echo $id; ?></td>
+		<td>Pelanggan </td>
+		<td>: <?php echo $plg; ?></td>
 	</tr>
 	<tr>
-		<td>Tanggal : </td>
-		<td><?php echo $_tgl; ?></td>
-		<td>Nomor SJ: </td>
-		<td><?php echo $so; ?></td>
+		<td>Tanggal </td>
+		<td>: <?php echo $_tgl; ?></td>
+		<td>Nomor SJ </td>
+		<td>: <?php echo $so; ?></td>
 	</tr>
 	<tr>
 		<td>Term </td>
-		<td><?php echo $term; ?></td>
+		<td>: <?php echo $term; ?> Hari</td>
 		<td>Alamat </td>
-		<td><?php echo $to; ?></td>
+		<td>: <?php echo $to; ?></td>
 	</tr>
 	
 </table>
@@ -75,23 +75,23 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 <br/>
 <table>
 	<tr>
-			<td>Total : </td>
-			<td><?php echo $to; ?></td>
+			<td>Total </td>
+			<td>: <?php echo $to; ?></td>
 	</tr>
 	<tr>
-			<td>Discount : </td>
-			<td><?php echo $disc." % ".$discT; ?></td>
+			<td>Discount </td>
+			<td>: <?php echo $disc." % ".$discT; ?></td>
 	</tr>
 	<tr>
-			<td>DPP : </td>
-			<td><?php echo $dpp; ?></td>
+			<td>DPP </td>
+			<td>: <?php echo $dpp; ?></td>
 	</tr>
 	<tr>
-			<td>PPN : </td>
-			<td><?php echo $ppn." % ".$ppnT; ?></td>
+			<td>PPN </td>
+			<td>: <?php echo $ppn." % ".$ppnT; ?></td>
 	</tr>
 	<tr>
-			<td>Grand Total : </td>
-			<td><?php echo $grant; ?></td>
+			<td>Grand Total </td>
+			<td>: <?php echo $grant; ?></td>
 	</tr>
 </table>

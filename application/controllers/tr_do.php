@@ -187,6 +187,7 @@
 			//DETAIL SO
 			$arrKode=$this->input->post('arrKode');
 			$arrQty=$this->input->post('arrQty');
+            $arrReQty=$this->input->post('arrReQty');
 			$arrSatuan=$this->input->post('arrSatuan');
 			$arrHarga=$this->input->post('arrHarga');
 			$arrJumlah=$this->input->post('arrJumlah');
@@ -201,7 +202,12 @@
 					'QtyTemp'=>$arrQty
                 );
             $this->tr_do_model->updateDo_det($datadet,$so);
-			
+            //$this->tr_do_model->delete_update_det($datadet,$so);
+
+			for($i=0;$i<$totalRow;$i++){
+                $this->tr_do_model->update_qty_brg($arrKode[$i],$arrReQty[$i]);//buat kembaliin qty saat perubahan update
+            }
+
 			if($in == "ok")
             {
                 echo "ok";
@@ -218,8 +224,8 @@
 
 			$arrKode=$this->input->post('arrKode');
 			$arrQty=$this->input->post('arrQty');
-			 $totalRow=$this->input->post('totalRow');
-			 for($i=0;$i<$totalRow;$i++){
+			$totalRow=$this->input->post('totalRow');
+			for($i=0;$i<$totalRow;$i++){
                 $this->tr_do_model->update_brg2($arrKode[$i],$arrQty[$i]);//buat kembaliin qty
             }
             $data= array(

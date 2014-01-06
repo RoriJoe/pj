@@ -10,7 +10,7 @@
         <th width="10%">Action</th>
     </thead>
 </table>
-<div class="" style="overflow-y:scroll;height:140px;">
+<div class="" style="overflow-y:scroll;height:225px;">
     <table class="table" id="tb_detail">
         <tbody id="itemlist">
         <?php
@@ -48,10 +48,10 @@
             <td width='15%'>
                 <input type='text' name='keterangan' class='validate[required]' maxlength='22' id='keterangan_brg$i' style='width:93px' value='$row->Keterangan' disabled='true'/>
             </td>
-            <td width='10%'>
+            <td width='10%' style='text-align:center'>
             <div class='btn-group' style='margin-bottom:0;'>
-                <a class='btn' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
-                <a class='btn' id='hapus' href='javascript:void(0);'><i class='icon-trash'></i></a>
+                <a class='btn' id='edit$i' href='#' onclick='editRow($i)'><i id='icon$i' class='icon-pencil'></i></a>
+                <a class='btn' id='' title='Unabled Delete Saved Detail Data' disabled><i class='icon-trash'></i></a>
             </div>
             </td>
             </tr>
@@ -90,10 +90,17 @@ function editRow(row){
         document.getElementById('f_brg'+row).style.visibility = 'visible';
         document.getElementById('f_brgs'+row).style.visibility = 'visible';
         document.getElementById('qty_brg'+row).disabled=false;
-        document.getElementById('icon'+row).className='icon-ok';
         document.getElementById('harga_brg'+row).disabled=false;
         document.getElementById('keterangan_brg'+row).disabled=false;
         document.getElementById("qty_brg"+row).focus();
+
+        if(_mode == "add"){
+            document.getElementById('icon'+row).title='Tambah Barang Lagi';
+            document.getElementById('icon'+row).className='icon-plus';
+        }else{
+            document.getElementById('icon'+row).title='Selesai Edit';
+            document.getElementById('icon'+row).className='icon-ok';
+        }
         return false;
     }
     else{
@@ -109,6 +116,7 @@ function editRow(row){
             document.getElementById('f_brgs'+row).style.visibility = 'hidden';
             document.getElementById('qty_brg'+row).disabled=true;
             document.getElementById('icon'+row).className='icon-pencil';
+            document.getElementById('icon'+row).title='Edit Detail';
             document.getElementById('harga_brg'+row).disabled=true;
             document.getElementById('keterangan_brg'+row).disabled=true;
             
@@ -146,6 +154,7 @@ function deleteRowSO(row) {
 function getDetail(row){
     filter = row;
 }
+
 temp=0;
 
 function validAct(row){
@@ -178,10 +187,13 @@ function validAct(row){
     $('#qty_brg'+row).bind('textchange', function (event){
         var q = $(this).val();
         var h = document.getElementById('harga_brg'+row).value.replace(/\./g, "");
-        var qty_before = $('#last_qty'+row).val();
+        var qty_before = parseInt($('#last_qty'+row).val());
+        var qty_available = parseInt($('#cur_qty'+row).val());
+        qty_now = qty_before + qty_available;
 
-        if(q > parseInt(qty_before)){
-            bootstrap_alert.warning("Persediaan Penjualan untuk Barang ini Max. "+qty_before);
+        if(q > parseInt(qty_now)){
+            bootstrap_alert.warning("Persediaan Penjualan untuk Barang ini Max. "+qty_now);
+            $('#qty_brg'+row).val("");
         } else{
             hasil = q*h;
             $('#jumlah_brg'+row).val(accounting.formatMoney(hasil, "",0,".")); 
@@ -275,16 +287,8 @@ $('#discT').bind('textchange', function (event){
 
 function hitungPPN(){
     $('#ppn').bind('textchange', function (event){    
-        //disableAlpha('ppn');
         var dpp = $("#dpp").val().replace(/\./g, "");
-
         var h = $(this).val();
-        /* if(temp != 0){
-            var q = temp;
-        } else if(total2 != 0){
-            var q = total2;
-        }
-         */
         ppn = dpp*h/100;
 
         var grant = dpp-0+ppn;

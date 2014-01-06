@@ -53,7 +53,7 @@ $(".delete").click(function(){
     var pr = $(this).attr("nama");
     //var r=confirm("Anda yakin ingin menghapus data "+id+" ?");
     bootbox.dialog({
-        message: "Kode Satuan: <b>"+id+"</b><br/>Nama Satuan : <b>"+pr+"</b>",
+        message: "<table><tr><td>Kode </td><td>: <b>"+id+"</b></td></tr><tr><td>Nama Satuan </td><td>: <b>"+pr+"</b></td></tr></table>",
         title: "<img src='<?php echo base_url();?>/assets/img/warning-icon.svg' class='warning-icon'/> Yakin ingin menghapus Data Berikut?",
         buttons: {
             main: {

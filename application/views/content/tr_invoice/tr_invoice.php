@@ -5,7 +5,7 @@
             <p>Form Inovice <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
-        <div id="konten" class="hide-con master-border" style=" height: 370px; ">
+        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
         <form id="formID">
             <table>
                 <tr>
@@ -20,7 +20,7 @@
                     <td>Tanggal</td>
                     <td>
                         <input  type='text' placeholder='dd-mm-yyyy'
-                                class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                                class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="" 
                                 style="width: 80px; margin-right: 12px;">
                     </td>
                     <td>Pelanggan</td>
@@ -28,7 +28,7 @@
                         <input type="hidden" id="kd_plg" />
                         <div class="input-append money" style="margin-bottom:0;">
                          <input type='text' class="span2" maxlength="20" id="pn" id='appendedInputButton' name='pn' style="width: 124px;" readonly="true">
-                            <a href="#modalPelanggan" style="margin-bottom:3px;" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                            <a href="#modalPelanggan" style="margin-bottom:4px;" role="button" class="btn padding-filter" id="f_plg" title="Filter Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                         </div>
                     </td>
                     <td>Nomor SJ</td>
@@ -140,11 +140,9 @@
 <script type="text/javascript">
     //load function here
 $(document).ready(function(){
-    $( "#_tgl1" ).datepicker( "setDate", new Date());
     list_invoice();
     autogen();
     validation();
-    //barAnimation();
     displayResult();
     get_sj_list();
 });
@@ -185,16 +183,18 @@ function autogen(){
             $('#no_invo').val(hh);
         }
     });
-}
 
-$(function() {
-    $( "#_tgl1").datepicker({
+    $("#_tgl1").datepicker({
         changeMonth: true,
         changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });  
+
+    $( "#_tgl1").datepicker('setValue', new Date()); 
+}
 
 
 function displayResult(selTag)

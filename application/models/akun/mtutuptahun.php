@@ -5,14 +5,18 @@
 			parent::__construct();
 		}
 		function GetComboper(){
-			$rs = $this->db->query('select nomoraccount,namaaccount from perkiraan where level = (select max(level) from perkiraan)');
+			$rs = $this->db->query("
+				select nomoraccount,namaaccount 
+				from perkiraan 
+				where level = (select max(level) from perkiraan)
+			");
 			return $rs->result();
 		}
 		function getresetper(){
-		 return $this->db->get("tt_resetperkiraan")->result();
+		 	return $this->db->get("tt_resetperkiraan")->result();
 		}
 		function getakumulasi(){
-		 return $this->db->get("tt_akumulasilaba")->result();
+		 	return $this->db->get("tt_akumulasilaba")->result();
 		}
 		
 		function savesetnol($min,$max,$tahun){
@@ -56,17 +60,3 @@
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-?>

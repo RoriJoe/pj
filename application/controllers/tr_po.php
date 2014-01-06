@@ -75,7 +75,8 @@
                 $final['Counter'] = $row->Counter;
                 $final['Total'] = $row->Total;
                 $final['Dpp'] = $row->DPP;
-                $final['Ppn'] = $row->PPN;        
+                $final['Ppn'] = $row->PPN; 
+                $final['Limit'] = $row->Limit_Kredit;        
             }
             echo json_encode($final);
         }
@@ -114,7 +115,7 @@
 
             $tgl2 = '';
             if ($tglPo != ''){
-                $tgl2 = date('Y-m-d', strtotime($this->input->post('tglPo')));
+                $tgl2 = date('Y-m-d', strtotime($tglPo));
             }else{
                 $tgl2 = $myvar;
             }

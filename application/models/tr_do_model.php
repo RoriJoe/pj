@@ -111,6 +111,15 @@
                 $data['rek']++;
             }
         }
+
+        function update_qty_brg($arrKode,$arrReQty){
+            
+            $this->db->set('Qty1', "'$arrReQty'", FALSE);
+            $where = "Kode = '$arrKode' ;";
+            
+            $this->db->where($where);
+            $this->db->update('barang');
+        }
 		
 		function update_brg2($arrKode,$arrQty){//kalo batal
 			
@@ -140,6 +149,14 @@
             $this->db->where('No_Do',$so);
             $this->db->delete('do_d');
             //return "ok";
+        }
+
+        function delete_update_det($datadet,$kode){
+            $q = $this->db->query("
+                DELETE FROM do_d
+                WHERE No_Do = '$kode' AND Kode_Brg NOT IN ('".join("','", $datadet['Kode_Brg'])."')
+            ");
+            return $query->result(); 
         }
         function view(){
             $this->db->select('A.No_Do, A.Tgl, A.Total, A.Kode_Plg, B.Perusahaan, B.Alamat1');

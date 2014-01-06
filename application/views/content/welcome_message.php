@@ -2,101 +2,102 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/chart/css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/chart/css/daterangepicker.css" />
 
-<div id="content" class="row" style="margin-left:0px;">
+<div id="content" class="row-fluid">
     <div class="span7">
-        <div class="row" style="margin-left:10px;">
-            <div class="bar-dash">
-                <span>Grafik Penjualan
-                    <form class="form-horizontal" style="display:inline-block">
-                      <fieldset>
-                        <div class="input-prepend">
-                          <span class="add-on"><i class="icon-calendar"></i></span>
-                          <input type="text" name="range" id="range" style="width:150px; margin-bottom:0px;" />
-                        </div>
-                      </fieldset>
-                    </form>
-                </span>
-                <a  id="tes" 
-                    class="btn" 
-                    tittle="Filter" 
-                    data-toggle="button" 
-                    data-html="true" 
-                    data-placement="bottom"
-                    rel="popover"
-                    data-content="
-                        <select style='width:100%; margin-bottom:10px;' id='select-filters' onchange='filterOpt()'>
-                          <option value='year'>By Year</option>
-                          <option value='month'>By Month</option>
-                          <option value='rev_great'>Revenue Is Greater Than</option>
-                          <option value='rev_less'>Revenue Is Less Than</option>
-                        </select>
-                        <input type='text' id='fieldFilter'  style='width:145px;visibility:hidden;' placeholder='Rupiah'>
-                        <div class='clearfix'></div>
-                        <button class='btn btn-mini btn-success' onclick='applyFilter()'>Apply</button>
-                        <button class='btn btn-mini' onclick='loadChart()'>Clear</button>
-                    ">
+        <div class="bar-dash filter-bar" style="margin-bottom:20px;">
+            <span>Filter Date
+                <form class="form-horizontal" style="display:inline-block">
+                  <fieldset>
+                    <div class="input-prepend">
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                      <input type="text" name="range" id="range" style="width:150px; margin-bottom:0px;" />
+                    </div>
+                  </fieldset>
+                </form>
+            </span>
+        </div>
 
-                    <i class='icon-filter'></i> Filter
-                </a>
-            </div>
-            <div id="placeholder" style="margin-bottom:0">
-                <figure id="chart"></figure>
-            </div>
-            <div class="bar-dash" style="margin-bottom:15px;">
-                <a href="javascript:ajaxLoadFilter('','year')" id="breadYear" style="visibility:hidden">All Year</a>
-                <a href="" id="breadMonth" style="visibility:hidden">> Year</a>
-            </div>
+        <div class="bar-dash">
+            <span>Grafik Penjualan</span>
+            <a  id="tes" 
+                class="btn pull-right" 
+                tittle="Filter" 
+                data-toggle="button" 
+                data-html="true" 
+                data-placement="bottom"
+                rel="popover"
+                data-content="
+                    <select style='width:100%; margin-bottom:10px;' id='select-filters' onchange='filterOpt()'>
+                      <option value='year'>By Year</option>
+                      <option value='month'>By Month</option>
+                      <option value='rev_great'>Revenue Is Greater Than</option>
+                      <option value='rev_less'>Revenue Is Less Than</option>
+                    </select>
+                    <input type='text' id='fieldFilter'  style='width:145px;visibility:hidden;' placeholder='Rupiah'>
+                    <div class='clearfix'></div>
+                    <button class='btn btn-mini btn-success' onclick='applyFilter()'>Apply</button>
+                    <button class='btn btn-mini' onclick='loadChart()'>Clear</button>
+                ">
+
+                <i class='icon-filter'></i> Filter
+            </a>
+        </div>
+        <div id="placeholder" style="margin-bottom:0">
+            <figure id="chart"></figure>
+        </div>
+        <div class="bar-dash" style="margin-bottom:15px;">
+            <a href="javascript:ajaxLoadFilter('','year')" id="breadYear" style="visibility:hidden">All Year</a>
+            <a href="" id="breadMonth" style="visibility:hidden">> Year</a>
         </div>
     </div>
+
     <div class="span5">
         <div class="row-fluid">
             <div class="span12">
-                <div class="row-fluid">
-                    <div class="bar-dash">
-                        <span>Outstanding</span>
-                        <div class="dropdown" style="float:right;">
-                            <a class="dropdown-toggle btn" id="drop5" role="button" data-toggle="dropdown" href="#"><i class="icon-filter"></i></a>
-                            <ul id="menu2" class="dropdown-menu pull-right" role="menu" aria-labelledby="drop5">
-                              <li><a tabindex="-1" href="#" id="avg_os">Average</a></li>
-                              <li><a tabindex="-1" href="#" id="total_os">Total</a></li>
-                            </ul>
-                        </div>
+                <div class="bar-dash">
+                    <span>Outstanding</span>
+                    <div class="dropdown pull-right">
+                        <a class="dropdown-toggle btn" id="drop5" role="button" data-toggle="dropdown" href="#"><i class="icon-filter"></i></a>
+                        <ul id="menu2" class="dropdown-menu pull-right" role="menu" aria-labelledby="drop5">
+                          <li><a tabindex="-1" href="#" id="avg_os">Average</a></li>
+                          <li><a tabindex="-1" href="#" id="total_os">Total</a></li>
+                        </ul>
                     </div>
+                </div>
 
-                    <div id="placeholder">
+                <div id="placeholder">
+                    <div class="row-fluid">
                         <div class="span6">
-                            <div id="pemesanan" style="width:220px; height:140px;"></div>
+                            <div id="pemesanan" style="height:150px;"></div>
                         </div>
                         <div class="span6">
-                            <div id="kirim" style="width:220px; height:140px"></div>
+                            <div id="kirim" style="height:150px;"></div>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
             
             <div class="span12" style="margin-left:0px;">
-                <div class="row-fluid">
-                    <div class="bar-dash">
-                        <span>Keuangan</span>
-                        <div class="dropdown" style="float:right;">
-                            <a class="dropdown-toggle btn" id="drop5" role="button" data-toggle="dropdown" href="#"><i class="icon-filter"></i></a>
-                            <ul id="menu2" class="dropdown-menu pull-right" role="menu" aria-labelledby="drop5">
-                              <li><a tabindex="-1" href="#" id="avg_keuangan">Average</a></li>
-                              <li><a tabindex="-1" href="#" id="total_keuangan">Total</a></li>
-                            </ul>
-                        </div>
+                <div class="bar-dash">
+                    <span>Keuangan</span>
+                    <div class="dropdown" style="float:right;">
+                        <a class="dropdown-toggle btn" id="drop5" role="button" data-toggle="dropdown" href="#"><i class="icon-filter"></i></a>
+                        <ul id="menu2" class="dropdown-menu pull-right" role="menu" aria-labelledby="drop5">
+                          <li><a tabindex="-1" href="#" id="avg_keuangan">Average</a></li>
+                          <li><a tabindex="-1" href="#" id="total_keuangan">Total</a></li>
+                        </ul>
                     </div>
+                </div>
 
-                    <div id="placeholder">
-                        <div class="span6">
-                            <div id="invoice" style="width:220px; height:140px"></div>
-                        </div>
-                        <div class="span6">
-                            <div id="tagihan" style="width:220px; height:140px"></div>
-                        </div>
-                        <div class="clearfix"></div>
+                <div id="placeholder">
+                    <div class="span6">
+                        <div id="invoice"  style="height:150px;"></div>
                     </div>
+                    <div class="span6">
+                        <div id="tagihan"  style="height:150px;"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -105,7 +106,7 @@
 
 <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="myModalLabel">Detail</h3>
   </div>
   <div class="modal-body">
@@ -156,7 +157,8 @@
                     min: 0,
                     max: 100,
                     title: "Pemesanan",
-                    label: "Qty"
+                    label: "",
+                    relativeGaugeSize: true
                 }); 
 
                 h = new JustGage({
@@ -165,7 +167,8 @@
                     min: 0,
                     max: 100,
                     title: "Terkirim",
-                    label: "Qty"
+                    label: "",
+                    relativeGaugeSize: true
                 });  
             }
         }); 
@@ -185,7 +188,8 @@
                     title: "Invoice",
                     label: "Rupiah",
                     showMinMax: false,
-                    formatNumber: true
+                    formatNumber: true,
+                    relativeGaugeSize: true
                 }); 
 
                 j = new JustGage({
@@ -196,7 +200,8 @@
                     title: "Terima Tagihan",
                     label: "Rupiah",
                     showMinMax: false,
-                    formatNumber: true
+                    formatNumber: true,
+                    relativeGaugeSize: true
                 });  
             }
         });    
@@ -329,7 +334,7 @@
                 });
                 
                 chart.setData({
-                    "xScale" : "linear",
+                    "xScale" : "time",
                     "yScale" : "linear",
                     "main" : [{
                         className : ".stats",
@@ -569,7 +574,7 @@
         }
 
         // Set the default dates
-        var startDate   = Date.create().addDays(-6),    // 7 days ago
+        var startDate   = Date.create().addDays(-29),    // 7 days ago
             endDate     = Date.create();                // today
 
         var range = $('#range');

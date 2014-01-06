@@ -107,8 +107,17 @@
 			//$this->load->helper('pdfexport_helper.php');
 			
 			$data['so']=$this->input->post('so');
-            $data['tglSo']=date('d-m-Y', strtotime($this->input->post('tglSo')));
-			$data['tglPo']=date('d-m-Y', strtotime($this->input->post('tglPo')));
+			$date_so = $this->input->post('tglSo');
+			$date_po = $this->input->post('tglPo');
+
+            $data['tglSo']=date('d-M-Y', strtotime($date_so));
+			
+			if($date_po == ""){
+				$data['tglPo']= "-";
+			}else{
+				$data['tglPo']=date('d-M-Y', strtotime($date_po));
+			}
+
             $data['po']=$this->input->post('po');
             $data['pl']=$this->input->post('pl');
             $data['sl']=$this->input->post('sl');
@@ -116,7 +125,7 @@
 			
 			$data['disc']=$this->input->post('disc');
             $data['discT']=$this->input->post('discT');
-			 $data['dpp']=$this->input->post('dpp');
+			$data['dpp']=$this->input->post('dpp');
             $data['ppnT']=$this->input->post('ppnT');
             $data['ppn']=$this->input->post('ppn');
             $data['grant']=$this->input->post('grant');
@@ -254,13 +263,17 @@
 
 			$radio = $this->input->post("optionsRadios1");
 			if($radio=="Batas"){
-			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
 
-			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
-			$plg1=$this->input->post('plg1');
-			$plg2=$this->input->post('plg2');
-			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2="";}
+				$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
+				$plg1=$this->input->post('plg1');
+				$plg2=$this->input->post('plg2');
+			}
+			else
+			{ 
+				$tgl=""; $tgl2=""; $plg1=""; $plg2="";
+			}
 
 			$data['periode']=$radio;
 			$data['tanggal'] = date('d/m/Y');
@@ -417,20 +430,32 @@
 			//$this->load->helper('pdfexport_helper.php');
 			
 			$radio = $this->input->post("sel");
+			$option = "";
 			if($radio=="Batas"){
-			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
 
-			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
-			$plg1=$this->input->post('plg1');
-			$plg2=$this->input->post('plg2');
-			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
+				$plg1=$this->input->post('plg1');
+				$plg2=$this->input->post('plg2');
+
+				if ($plg1 == "" || $plg2 == "") {
+					$option = "noPlg";
+				}else{
+					$option = "all";
+				}
+
+				$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
+				
+			}else{
+			 	$tgl=""; $tgl2=""; $plg1=""; $plg2=""; 
+			 	$option = "Semua";
+			}
 
 			$data['periode']=$radio;
 			$data['tanggal'] = date('d/m/Y');
 			
 			
-			$data['hasil2']=$this->report_model->print_do($radio,$tgl,$tgl2,$plg1,$plg2);
+			$data['hasil2']=$this->report_model->print_do($option,$tgl,$tgl2,$plg1,$plg2);
 			
             //load view
             $this->load->view('content/report_table_do',$data);
@@ -443,20 +468,32 @@
 			//$this->load->helper('pdfexport_helper.php');
 			
 			$radio = $this->input->post("sel");
+			$option = "";
 			if($radio=="Batas"){
-			$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl=date('Y-m-d', strtotime($this->input->post('_tgl')));
+				$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
 
-			$tgl2=date('Y-m-d', strtotime($this->input->post('_tgl2')));
-			$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
-			$plg1=$this->input->post('plg1');
-			$plg2=$this->input->post('plg2');
-			}else{ $tgl=""; $tgl2=""; $plg1=""; $plg2=""; }
+				$plg1=$this->input->post('plg1');
+				$plg2=$this->input->post('plg2');
+
+				if ($plg1 == "" || $plg2 == "") {
+					$option = "noPlg";
+				}else{
+					$option = "all";
+				}
+
+				$radio = $this->input->post('_tgl')." - ".$this->input->post('_tgl2');
+				
+			}else{ 
+				$tgl=""; $tgl2=""; $plg1=""; $plg2=""; 
+				$option = "Semua";
+			}
 
 			$data['periode']=$radio;
 			$data['tanggal'] = date('d/m/Y');
 			
 			
-			$data['hasil2']=$this->report_model->print_po($radio,$tgl,$tgl2,$plg1,$plg2);
+			$data['hasil2']=$this->report_model->print_po($option,$tgl,$tgl2,$plg1,$plg2);
 			
             //load view
             $this->load->view('content/report_table_po',$data);

@@ -10,7 +10,8 @@
 
         function get_paged_list()
         {
-            $q = $this->db->query("SELECT po_h.Kode, po_h.Tgl_po,
+            $q = $this->db->query("
+                SELECT po_h.Kode, po_h.Tgl_po,
                 supplier.Perusahaan
                 FROM po_h
                 LEFT OUTER JOIN supplier
@@ -21,8 +22,9 @@
         }
 
         function get_h_po($id){
-            $q = $this->db->query("SELECT po_h.*,
-                supplier.Perusahaan, gudang.Nama
+            $q = $this->db->query("
+                SELECT po_h.*,
+                supplier.Perusahaan,supplier.Limit_Kredit, gudang.Nama
                 FROM po_h
                 LEFT OUTER JOIN supplier
                 ON po_h.Kode_supplier = supplier.Kode

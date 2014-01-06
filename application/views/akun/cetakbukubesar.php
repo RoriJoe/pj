@@ -16,8 +16,25 @@
 
 	<script>
 		function begin(){
-			$("#TglAwl").datepick({dateFormat: 'dd MM yyyy'});
-			$("#TglAkhr").datepick({dateFormat: 'dd MM yyyy'});
+			$("#TglAwl").datepicker({
+		        changeMonth: true,
+		        changeYear: true,
+		        format: "dd-mm-yyyy",
+		        todayBtn: "linked",
+		        language: "id",
+		        autoclose: true
+		    }); 
+		    $("#TglAkhr").datepicker({
+		        changeMonth: true,
+		        changeYear: true,
+		        format: "dd-mm-yyyy",
+		        todayBtn: "linked",
+		        language: "id",
+		        autoclose: true
+		    });  
+
+		    $( "#TglAwl").datepicker('setValue', new Date()); 
+		    $( "#TglAkhr").datepicker('setValue', new Date());
 		}
 
 		$(this).ready(function(){

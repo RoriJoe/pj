@@ -14,7 +14,7 @@
 Pangeran Jaya Karta No.30, Jakarta Pusat
 			<h2 align="center">PENERIMAAN BARANG</h2>
 			<hr/>
-<table>
+<table cellspacing="2">
 	<tr>
 		<td colspan=4>
 			
@@ -23,21 +23,21 @@ Pangeran Jaya Karta No.30, Jakarta Pusat
 		
 	</tr>
 	<tr>
-		<td width="30%">Nomor BPB : </td>
-		<td width="25%"><?php echo $_bpb; ?></td>
-		<td width="30%">Gudang : </td>
-		<td><?php echo $_gd; ?></td>
-	</tr>
-	<tr>
-		<td>Supplier : </td>
-		<td><?php echo $_sp; ?></td>
-		<td>Nomor Reff : </td>
-		<td><?php echo $_ref; ?></td>
-	</tr>
-	<tr>
+		<td>Nomor BPB </td>
+		<td width="140px">: <?php echo $_bpb; ?></td>
 		<td>Tanggal BPB </td>
-		<td><?php echo $_tgl; ?></td>
+		<td>: <?php echo $_tgl; ?></td>
 		
+	</tr>
+	<tr>
+		<td>Supplier </td>
+		<td>: <?php echo $_sp; ?></td>
+		<td>Nomor Reff </td>
+		<td>: <?php echo $_ref; ?></td>
+	</tr>
+	<tr>
+		<td>Gudang </td>
+		<td>: <?php echo $_gd; ?></td>
 	</tr>
 	
 </table>

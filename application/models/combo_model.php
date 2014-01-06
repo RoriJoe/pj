@@ -11,8 +11,13 @@
             return $query->result();
         }
         function list_sales(){
-            $this->db->select('Nama');
-            $query = $this->db->get('sales');
+            $query = $this->db->query("
+                SELECT A.account_id, A.firstname
+                FROM account_details A
+                JOIN rel_account_role B ON B.account_id = A.account_id
+                JOIN acl_role C ON C.id = B.role_id
+                WHERE C.name = 'Sales'
+                ");
             return $query->result();
         }
         

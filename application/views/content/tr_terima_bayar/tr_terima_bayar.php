@@ -4,7 +4,7 @@
         <div class="bar" title="Show/Hide Form">
             <p>Form Terima Tagihan <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con master-border">
+        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
             <form id="formID">
                 <table>
                     <tr>
@@ -22,14 +22,14 @@
                             <div class="input-append money" style="margin-bottom:0px;">
                              <input type='text' class="span2" disabled="disabled"
                                 maxlength="20" id="_pn" id='appendedInputButton' name='_pn' style="width: 148px;" onclick="lookup_pelanggan()" onkeydown="lookup_pelanggan()"/>
-                            <a href="#modalPelanggan" style="margin-bottom:2px;" id="f_plg" role="button" class="btn padding-filter" title="Search Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
+                            <a href="#modalPelanggan" style="margin-bottom:5px;" id="f_plg" role="button" class="btn padding-filter" title="Search Pelanggan" data-toggle="modal" onclick="listPelanggan()"><i class="icon-search"></i></a>
                             </div>
                         </td>
 
                         <td>Tanggal</td>
                         <td>
                             <input  type='text' placeholder='dd-mm-yyyy'
-                                    class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="<?php echo date('d-m-Y');?>" 
+                                    class="validate[required,custom[date]]" id='_tgl1' name='_tgl1' value="" 
                                     style="width: 80px; margin-right: 20px;">
                         </td> 
                    </tr>   
@@ -118,17 +118,8 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/myscript.js"></script>
 
 <script type="text/javascript">
-$(function() {
-    $( "#_tgl1").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "dd-mm-yy",
-        showAnim: "blind",
-    });
-});
     //load function here
 $(document).ready(function(){
-    $( "#_tgl1" ).datepicker( "setDate", new Date());
     list_terima_bayar();
     autogen();
     validation();
@@ -174,6 +165,16 @@ function autogen(){
             $('#no_terima').val(hh);
         }
     });
+
+    $("#_tgl1").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true
+    });
+    $( "#_tgl1").datepicker('setValue', new Date());
 }
 
 function addPelanggan(){

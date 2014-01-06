@@ -70,11 +70,13 @@
 				$this->load->model("akun/mjurnal");
 				$rs=$this->mjurnal->getalllistsearch($_POST['byser'],$_POST['valser'],$_POST['limit'],$_POST['offset']);
 				foreach($rs->result() as $row){
+					$originalDate1 = $row->tanggal;
+            		$dmy1 = date("d-m-Y", strtotime($originalDate1));
 					echo "
 					<tr>
 						<td>$row->novoucher</td>
 						<td>$row->kodekaryawan</td>
-						<td>$row->tanggal</td>
+						<td>$dmy1</td>
 						<td style='text-align:center;'>
 							<a id='$row->novoucher' class='imgupdate btn'>
 								<i class='icon-pencil'></i>
@@ -237,7 +239,7 @@
 				$rs=$this->mjurnal->getselect($kode);
 				foreach($rs->result() as $row){
 					$Tgl = strtotime($row->tanggal); 
-					$TglAwl = date('d F Y', $Tgl);
+					$TglAwl = date('d-m-Y', $Tgl);
 					echo $row->novoucher."#".$row->kodekaryawan."#".$TglAwl;
 				}
 			}
