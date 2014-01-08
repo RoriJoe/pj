@@ -4,7 +4,7 @@
         <div class="bar" title="Show/Hide Form">
             <p>Form Pemesanan / PO <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
-        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
+        <div id="konten" class="hide-con" style="max-height:440px;height:440px;">
             <form id="formID">
 
                 <div class="field-wrap">

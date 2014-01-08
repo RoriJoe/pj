@@ -5,7 +5,7 @@
             <p>Form Inovice <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
-        <div id="konten" class="hide-con" style="max-height:450px;height:450px;">
+        <div id="konten" class="hide-con" style="max-height:440px;height:440px;">
         <form id="formID">
             <table>
                 <tr>
