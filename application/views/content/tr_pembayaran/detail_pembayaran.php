@@ -1,4 +1,4 @@
-<div class="table CSSTabel" style="overflow: auto; height: 170px; max-height:235px; margin-bottom:5px;">
+<div class="table CSSTabel" style="overflow: auto; height: 170px; max-height:230px; margin-bottom:5px;">
 <table id="tb_detail">
     <thead>
 	<tr>

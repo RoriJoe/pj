@@ -49,7 +49,7 @@
 
 <script type="text/javascript">
 var oTable = $('#tb_detail').dataTable( {
-    "sScrollY": "200px",
+    "sScrollY": "190px",
     "sScrollYInner": "100%",
     "bPaginate": false,
     "bLengthChange": false,

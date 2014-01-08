@@ -9,7 +9,7 @@
         <th width="10%">Action</th>
     </thead>
 </table>
-<div class="table CSSTabel" style="overflow-y:scroll;min-height:210px; max-height:400px;">
+<div class="table CSSTabel" style="overflow-y:scroll;min-height:200px; max-height:380px;">
     <table id="tb_detail">
         <tbody id="itemlist">
         <?php
