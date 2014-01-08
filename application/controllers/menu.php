@@ -15,7 +15,7 @@
 	    {
 	        $data['judul']="Welcome";
 	        $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-	        $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+
 	        $this->template->display('content/welcome_message', $data);
 	    }
 
@@ -23,13 +23,11 @@
 			$data['list_satuan']=$this->combo_model->list_satuan();
             $data['judul']="Master Barang";
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-            $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $this->template->display('content/master_barang/ms_barang', $data);
         }
 
         function ms_pelanggan(){
             $data['judul']="Master Pelanggan";
-            $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $this->template->display('content/master_pelanggan/ms_pelanggan', $data);
         }
@@ -37,20 +35,23 @@
         function ms_supplier(){
             $data['judul']="Master Supplier";
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-            $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $this->template->display('content/master_supplier/ms_supplier', $data);
         }
 
         function ms_satuan(){
             $data['judul']="Master Satuan";
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+            $this->template->display('content/master_mobil/ms_satuan', $data);
+        }
+
+        function ms_mobil(){
+            $data['judul']="Master Mobil";
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-            $this->template->display('content/master_satuan/ms_satuan', $data);
+            $this->template->display('content/master_mobil/ms_mobil', $data);
         }
 
         function ms_gudang(){
             $data['judul']="Master Gudang";
-            $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
             $this->template->display('content/master_gudang/ms_gudang', $data);
         }

@@ -143,14 +143,18 @@ function cekauthorization(){
 }
 
 function list_terima_bayar(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/tr_terima_bayar/index",
-    data :{},
-    success:
-    function(hh){
-        $('#list_terima_bayar').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/tr_terima_bayar/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#list_terima_bayar').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);  
+        }
     });
 }
 

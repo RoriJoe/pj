@@ -209,13 +209,17 @@ function autogen(){
 }
 
 function listSJ(){
+    $('#loadingDiv').show()
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>tr_surat_jalan/index",
     data :{},
     success:
     function(hh){
-        $('#list').html(hh);
+        setTimeout(function () {
+            $('#list').html(hh);
+            $('#loadingDiv').hide()
+        }, 1500);
     }
     });
 }

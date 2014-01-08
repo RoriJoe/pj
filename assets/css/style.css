@@ -3,161 +3,73 @@ html{
     height: 100%;
 }
 body{
-    /*background-image: url(../img/bg.png);*/
     background-color: #F7F7F7;;
 }
-
 @media (max-width: 767px){
     .navbar {
-    margin-left: -20px;
-    margin-right: -20px;
+        margin-left: -20px;
+        margin-right: -20px;
     }
 }
-
-.row-fluid [class*="span"] {
-    /*min-height: 23px;*/
-}
-.logp{
-	width:70px;
-	height:auto;
-}
-.sukses{
-	color:green;
-}
-.gagal{
-	color:red;
-}
 #wrapper{
-	margin:auto;	
-	background-color:transparent /*#eee*/;
-	height:100%;
+    margin:auto;	
+    background-color:transparent;
+    height:100%;
 }
 #inner-wrap{
-	margin:auto;
+    margin:auto;
     height:100%;
 }
 #headerImg{
-    background-color: rgba(189, 30, 30, 0.94) /*143c5a*/;
+    background-color: rgba(189, 30, 30, 0.94);
     height:85px;
     background-size:100% 100%;
     text-align: center;
     background-image: url(../img/header.png);
 }
-
 #headerImg img{
-	width:100px;
-	height:100%;
-	background-size:100% 100%;
+    width:100px;
+    height:100%;
+    background-size:100% 100%;
 }
-
 /* --------------------------- ini untuk menubar di atas (termasuk logout dan nama user)----------------------------------*/
 #opt{
-
-	height:40px;
-	width:100%;
-	background-color: rgba(0, 0, 0, 0.82);/*#143c5a;*/
-    /*border-top: 1px solid rgb(53, 94, 131);
-    border-bottom: 1px solid rgb(11, 36, 63);*/
+    height:40px;
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.82);
     z-index: 100;
     padding-right: 3px;;
-    /*box-shadow: 0 2px 4px #A0A0A0;*/
-
 }
 /* --------------------------- ini utk menubar atas bagian nama user ---------------------------------------------------- */
 #tgl{
-	color:#FFF;
-	/*font-weight:bold;*/
-	padding-top:10px;
-	padding-right:5px;
-	/*border-left:2px #000000 groove;*/
-	float:right;
+    color:#FFF;
+    padding-top:10px;
+    padding-right:5px;
+    float:right;
 }
-/* --------------------------------- left bar meliputi jabatan user, foto, dan menu utama --------------------------------*/
-#leftBar{
-	width:200px;
-	float:left;
-	/*border-right:1px solid black;*/
-	/*background-color:#f6f6f6;*/
-	position:relative;
-    height:100%;
-    top:-10px;
-}
-
-/* --------------------------------- right bar meliputi ----*/
-
-#rightBar{
-	width:auto;
-	margin-left:200px;
-	height:auto;
-    margin-right: 10px;
-    margin-top: 50px;
-	/*border-left:1px solid black;*/
-}
-/* ----------------------------- ini area untuk foto user -------------------------------------------------------------------*/
-#pictureImage{
-
-	margin-left:20px;
-
-	margin-right:20px;
-
-	/*border:1px solid #000;
-
-    border-radius:4px;-moz-border-radius:4px;
-
-    */
-	height:160px;
-
-	padding-left:2px;
-
-	padding-top:10px;
-}
-
-
-
 /* ------------------------------ ini untuk mengatur lebar dan panjang foto user -----------------------------------------*/
 #pp{
     width:117px;
     border: 1px solid #D6D6D6;
     padding: 3px;
 }
-
-
-
 /* ----------------------------- top bar digunakan untuk menulis BINUS application dan last login ------------------------*/
-
 #topBar{
-        height:50px;
-    /*border-bottom:1px solid #000000;*/
+    height:50px;
 }
-
-
-#download {
-	background-image:url('1.png');
-	background-repeat:no-repeat;
-}
-#download a:hover {
-    font-size:20px;
-}
-
 #footerContent{
     height:20px;
     background-color:#DFDFDF;/*#143c5a;*/
     bottom: 0;
     width: 100%;
     position: fixed;
-	z-index:100;
+    z-index:100;
 }
-
-
-/*--- Mengatur Bagian Tulisan Application List*/
-
 .sidebar{
     height:auto;
     margin:auto;
     position:relative;
 }
-
-
 /*------------------ Untuk Mengatur bagian UL seperti Class Finance dan Grade--------------------*/
 .sidebar ul{
     list-style: none;
@@ -165,77 +77,54 @@ body{
     padding:0;
     width:99%;
 }
-
 .sidebar ul li{
     margin:0;
     padding:0;
 }
-
 /* ---------------------- Ini untuk bagian navigation kanan Seperti Class Finance Grade-------------------------------------*/
 .sidebar ul li a{
-
     background:#fff;
-
-    /*border:1px solid gray;*/
     box-shadow: 0px 0px 1px #636363;-moz-box-shadow:0px 0px 1px #9B9B9B;-webkit-box-shadow: 0px 0px 1px #9B9B9B;
     padding: 4px 14px;
-    /*display:block;
-    text-decoration: none;
-    font-weight: 400;*/
-
 }
-
 /* ---------------------- Ini untuk bagian isi dari navigation kriri -------------------------------------*/
 .sidebar ul li ul a{
     /*background:#3C3C3C;*/
     background: #F3F3F3;
     border:1px #c6c6c6;
     padding-left: 15px;
-    color:#3333;
+    color: #3333;
     display:block;
-
     text-decoration: none;
     font-weight: normal;
 }
-
-
 /*--------Untuk mengatur Hover pada Bagian UL sepert Class Finance dan Grade-------*/
 .sidebar ul li a:hover{
-    background-color: #143c5a/*CEE1FF*/;
-    background-color: #E6E6E6/*CEE1FF*/;
+    background-color: #143c5a;
+    background-color: #E6E6E6;
 }
-
 /*----Untuk Mengatur Hover Ketika Sudah di Klik-----*/
 .sidebar ul li a:active {
-
 }
-
-
 /*-- Untuk Mengatur Hover pada Bagian LI dalam seperti Class Schedulle dan Absent---*/
 .sidebar ul li ul a:hover{
-    background-color: #505050/*CEE1FF*/;
+    background-color: #505050;
     color: white;
 }
-
 /*-- Untuk Mengatur Hover pada Bagian LI dalam seperti Class Schedulle dan Absent ketika sedang di klik---*/
 .sidebar ul li ul a:active {
 }
-
 .sidebar ul li ul{
-
     display:none;
-
 }
-
-
 /*-------------------------------------Untuk Mengatur tulisan APPLICATION LIST----------------------------------------------------*/
 #titleA{
-padding: 2px;
-text-align: center;
-display: block;
-background-color: #C24F4F;
-color: #fff;
-border-bottom: 3px solid #964545;
+    padding: 2px;
+    text-align: center;
+    display: block;
+    background-color: #C24F4F;
+    color: #fff;
+    border-bottom: 3px solid #964545;
 }
 #aboutMe{
     padding-top:18px;
@@ -243,372 +132,182 @@ border-bottom: 3px solid #964545;
     padding-bottom:13px;
     /*border-bottom:1px solid black;*/
 }
-
-
 #text{
     padding-top:35px;
     font-family:Calibri;
     color:#939698;
     font-size:13px;
 }
-
 /*----------------Mengatur Content pada Nama----------*/
 #nameMe{
-
-	font-size:24px;
-
-	display:block;
-
-	margin-bottom:-7px;
-
-	color:#0f3b5b;
-
-	text-transform:capitalize;
+    font-size:24px;
+    display:block;
+    margin-bottom:-7px;
+    color:#0f3b5b;
+    text-transform:capitalize;
     font-weight:800;
     font-family:Calibri;
 }
-
-
-
 #aboutMeContent{
-
-	/*border-bottom:1px solid black;*/
-
-	height:100px;
-
+    /*border-bottom:1px solid black;*/
+    height:100px;
 }
-
-
-
 #submenuBar{
-
-	/*border-bottom:1px solid black;*/
+    /*border-bottom:1px solid black;*/
     font-family:Calibri;
-	padding:5px 0px 5px 15px;
-
+    padding:5px 0px 5px 15px;
 }
-
-
-
 #quote{
-
-	font-size:25px;
+    font-size:25px;
     color:#0f3b5b;
     margin-left:5px;
 }
-
-
-
 #quote:hover{
-
-	text-shadow:0px 0px 8px #ffb31c;
-
-	cursor: default;
-
+    text-shadow:0px 0px 8px #ffb31c;
+    cursor: default;
 }
-
 #judul{
-
-	font-size:55px;
-	text-align:left;
+    font-size:55px;
+    text-align:left;
     color:#fff;
     font-family: sans-serif;
     font-weight: bold;
 }
-
-
-
-#judul:hover{
-
-	/*text-shadow:0px 0px 5px #8b4513;
-
-	cursor: default;       */
-
-}
-
-
-
-#contentFull{
-
-	/*padding-left:25px;
-
-	margin-top:10px;
-
-	padding-bottom:20px;
-
-	height:auto;*/
-}
-
-
-
 .opt2 a{
-
-	text-decoration:none;
-
-	font-family:Calibri;
-
-	text-align:center;
-
-	color:#000;
-
+    text-decoration:none;
+    font-family:Calibri;
+    text-align:center;
+    color:#000;
 }
-
-
 #logout{
-	display:block;
-	width:auto;
-	text-align:center;
-	margin-top:-2px;
-	padding-bottom:3px;
+    display:block;
+    width:auto;
+    text-align:center;
+    margin-top:-2px;
+    padding-bottom:3px;
 }
-
 #logout a{
-	color:white;
+    color:white;
 }
-
 #logout a:hover{
-	color:black;
+    color:black;
 }
-
 .CSStabel {
-	margin:0px;padding:0px;
-	width:100% !important;
+    margin:0px;padding:0px;
+    width:100% !important;
 }
 .CSSTabel table{
     width: 100%;
 }
 .CSSTabel tr:last-child td:last-child {
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
 }
 .CSSTabel table tr:first-child td:first-child {
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
 }
 .CSSTabel table tr:first-child td:last-child {
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
 }
 .CSSTabel tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
 }
 .CSSTabel tr:nth-child(odd){ 
     background-color:#f1f1f1; 
 }
-
 /*--Untuk Mengtur Warna BG table--*/
 .CSSTabel tr:nth-child(even)    
 { 
     background-color:#fff; 
 }
-
 .CSSTabel tr:last-child td{
-	border-width:0px 1px 0px 0px;
+    border-width:0px 1px 0px 0px;
 }
 .CSSTabel tr td:last-child{
-	border-width:0px 0px 1px 0px;
+    border-width:0px 0px 1px 0px;
 }
 .CSSTabel tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
+    border-width:0px 0px 0px 0px;
 }
 .CSSTabel th{
     background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
-	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,#003f7f);
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,#003f7f);
     color:white;
 }
-
 .CSSTabel th:hover{
     *cursor:default;
 }
-
 .CSSTabel tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
+    border-width:0px 0px 1px 0px;
 }
 .CSSTabel tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
+    border-width:0px 0px 1px 1px;
 }
 .CSSTabel .paginate_button{
     color: #fff;
     border-radius: 0px;
     border:0px;
 }
-
 .CSSTabel thead{
     text-align:left;
 }
-
 .CSSTabel table{
     border: 0px;
 }
 .CSSTabel th{
-   background: #C24F4F !important;
+    background: #C24F4F !important;
 }
-
 .CSSTabel .dataTables_length{
     float: left;
     margin-right: 40px;
 }
-
 /*tambahan*/
 #overlay{
-   width:9999px;
-   height:9999px;
-   background-color: rgba(0,0,0,0.6);
-   position: fixed;
-   display:none;
-   z-index: 99998;
+    width:9999px;
+    height:9999px;
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    display:none;
+    z-index: 99998;
 }
 #waiting{
-   width:9999px;
-   height:9999px;
-   background-color: rgba(0,0,0,0.6);
-   position: fixed;
-   display:none;
-   z-index: 99997;
+    width:9999px;
+    height:9999px;
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    display:none;
+    z-index: 99997;
 }
 #image{
-	display:none;
-	position: fixed;
+    display:none;
+    position: fixed;
 }
-
 /*CSS TABLE paging*/
 .dataTables_paginate{
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     background-color: #C24F4F;
 }
 .dataTables_paginate a{
-	margin-right: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-	/*border: thin solid;
-	border-radius: 5px;*/
-	color: #fff;
-	cursor: pointer;
-	width:auto;
-	height:auto;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+    cursor: pointer;
+    width:auto;
+    height:auto;
 }
 #table_length{
-	display: none;
+    display: none;
 }
-
-/*-----------------------------BreadCrumb----------------------*/
-.breadcrumb {
-    /*centering*/
-    display: inline-block;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
-    overflow: hidden;
-    border-radius: 3px;
-    margin-left:20px;
-    /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
-    counter-reset: flag;
-    font-family:Verdana, Geneva, sans-serif;
-    text-align:center;
-    float:left;
-}
-
-.breadcrumb a {
-    text-decoration: none;
-    outline: none;
-    display: block;
-    float: left;
-    font-size: 12px;
-    line-height: 36px;
-    color: white;
-    /*need more margin on the left of links to accomodate the numbers*/
-    padding: 0 10px 0 60px;
-    background: #666;
-    background: linear-gradient(#666, #333);
-    position: relative;
-}
-/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
-.breadcrumb a:first-child {
-    padding-left: 46px;
-    border-radius: 3px 0 0 3px; /*to match with the parent's radius*/
-}
-.breadcrumb a:first-child:before {
-    left: 14px;
-}
-.breadcrumb a:last-child {
-    border-radius: 0 3px 3px 0; /*this was to prevent glitches on hover*/
-    padding-right: 20px;
-}
-
-/*hover/active styles*/
-.breadcrumb a.active, .breadcrumb a:hover{
-    background: #333;
-    background: linear-gradient(#333, #000);
-}
-.breadcrumb a.active:after, .breadcrumb a:hover:after {
-    background: #333;
-    background: linear-gradient(135deg, #333, #000);
-}
-
-/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
-.breadcrumb a:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -18px;
-    width: 36px;
-    height: 36px;
-    transform: scale(0.707) rotate(45deg);
-    z-index: 1;
-    background: #666;
-    background: linear-gradient(135deg, #666, #333);
-    box-shadow:
-        2px -2px 0 2px rgba(0, 0, 0, 0.4),
-        3px -3px 0 2px rgba(255, 255, 255, 0.1);
-    border-radius: 0 5px 0 50px;
-}
-/*we dont need an arrow after the last link*/
-.breadcrumb a:last-child:after {
-    content: none;
-}
-/*we will use the :before element to show numbers*/
-.breadcrumb a:before {
-    content: counter(flag);
-    counter-increment: flag;
-    /*some styles now*/
-    border-radius: 100%;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    margin: 8px 0;
-    position: absolute;
-    top: 0;
-    left: 30px;
-    background: #444;
-    background: linear-gradient(#444, #222);
-    font-weight: bold;
-}
-
-
-.flat a, .flat a:after {
-    background: white;
-    color: black;
-    transition: all 0.5s;
-}
-.flat a:before {
-    background: white;
-    box-shadow: 0 0 0 1px #ccc;
-}
-.flat a:hover, .flat a.active,
-.flat a:hover:after, .flat a.active:after{
-    background: #9EEB62;
-}
-.breadcrumb-margin-top{
-    margin-top: 2px;
-}
-
-/*--------------------------------*/
-
 /*Login Style*/
 .login-box{
     width: 700px;
@@ -617,7 +316,6 @@ border-bottom: 3px solid #964545;
     margin-top: 65px;
     margin-bottom: 105px;
 }
-
 .front-login label{
     font-size: 20px;
 }
@@ -634,13 +332,12 @@ border-bottom: 3px solid #964545;
 }
 .login-front{
     padding-left: 35px;
-padding-right: 35px;
-margin-bottom: 35px;
+    padding-right: 35px;
+    margin-bottom: 35px;
 }
 .register-front{
-margin-left: 10px;
+    margin-left: 10px;
 }
-
 .login-left{
     float: left;
     margin-right: 30px;
@@ -648,7 +345,6 @@ margin-left: 10px;
 .login-right{
     float: right;
 }
-
 .login-box .loginbtn{
     border-radius: 5px;
     font-size: 16px;
@@ -670,43 +366,37 @@ margin-left: 10px;
     padding: 10px;
 }
 .signin {
-width: 335px;
-margin: 0 auto;
+    width: 335px;
+    margin: 0 auto;
 }
 .signin-box {
-padding: 20px 25px 15px;
-background: #f1f1f1;
-border: 1px solid #e5e5e5;
+    padding: 20px 25px 15px;
+    background: #f1f1f1;
+    border: 1px solid #e5e5e5;
 }
-
 .signin-box h2 {
-font-size: 20px;
-line-height: 17px;
-height: 16px;
-margin: 0 0 19px;
+    font-size: 20px;
+    line-height: 17px;
+    height: 16px;
+    margin: 0 0 19px;
 }
-
 .signin-box ul {
-list-style: none;
-line-height: 17px;
-margin: 0;
-padding: 0;
+    list-style: none;
+    line-height: 17px;
+    margin: 0;
+    padding: 0;
 }
-
 .signin-box input[type=text], .signin-box input[type=password] {
-width: 100%;
-font-size: 15px;
-color: black;
-line-height: normal;
-height: 32px;
-margin: 0 0 20px;
-box-sizing: border-box;
+    width: 100%;
+    font-size: 15px;
+    line-height: normal;
+    height: 32px;
+    margin: 0 0 20px;
+    box-sizing: border-box;
 }
-
-
 .div-judul{
-background-color: rgba(172, 0, 0, 0.74);
-padding: 10px;
+    background-color: rgba(172, 0, 0, 0.74);
+    padding: 10px;
 }
 .div-judul p{
     font-size: 28px;
@@ -714,7 +404,6 @@ padding: 10px;
     font-family: verdana;
     color: white;
 }
-
 .div-judul-login{
     float: left;
     left: 1px;
@@ -728,15 +417,13 @@ padding: 10px;
     padding-left: 20px;
     font-family: verdana;
     color: white;
-	margin: 30px;
+    margin: 30px;
 }
-
 .bar{
     background: #C24F4F;
     /*width: 73%;*/
     height: 19px;
     padding: 2px;
-
 }
 .bar2{
     width: 64%;
@@ -747,24 +434,18 @@ padding: 10px;
     font-weight: bold;
     color: #fff;
 }
-
 .hide-con{
-    /*width: 71%;*/
-    /*float: left;*/
     margin-bottom: 40px;
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: #fff;
-    /*box-shadow: 0 1px 1px #B8B8B8;*/
     border: 1px solid #E0E0E0;
 }
-
 .content-login{
     border-top:0px;
 }
-
 #popup-wrapper{
     border-radius:0px;
     margin-bottom: 2px;
@@ -777,7 +458,6 @@ padding: 10px;
     border-radius:0px;
     margin-bottom: 2px;
 }
-
 .tb-barang{
     width: 28%;
     float: right;
@@ -794,18 +474,15 @@ padding: 10px;
     /*box-shadow: 0px 1px 1px #9C9C9C;*/
     border: 1px solid #E0E0E0;
 }
-
 .table-list2{
     position: relative;
 }
-
 .master-border{
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-right-color: rgb(202, 202, 202);
-	padding-right: 13px
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(202, 202, 202);
+    padding-right: 13px
 }
-
 select,textarea, input[type="text"],
 input[type="password"], input[type="datetime"],
 input[type="datetime-local"], input[type="date"],
@@ -815,68 +492,58 @@ input[type="search"], input[type="tel"], input[type="color"],
 .uneditable-input {
     margin-bottom: 4px;
 }
-
 select, input[type="file"] {
     height: 24px;
 }
-
 form {
     margin: 0;
 }
-
 tr{
     height: 20px;
 }
-
 .table th, .table td {
     padding: 3px;
     line-height: 15px;
 }
-
 #tb_detail td {
     padding: 0px;
     padding-top: 2px;
 }
-
 .btn-tbl{
     padding: 2px;
 }
 .btn-tbl:hover{
     box-shadow:0;
 }
-
 #form-ms{
     width: 170px; margin-left: 10px; margin-right: 20px;
 }
-
 #ct{
-	color: #A8A8A8;
+    color: #A8A8A8;
 }
-
 .bar-span{
-	background-color: #696969;
-	width: 100%;
-	padding: 5px;
-	color: #F1F1F1;
-	font-weight: bold;
-	margin-left: 0;
+    background-color: #696969;
+    width: 100%;
+    padding: 5px;
+    color: #F1F1F1;
+    font-weight: bold;
+    margin-left: 0;
 }
 .bar-info{
-	margin-bottom: 7px;
-	color: #FFFF3F;
-	font-weight: normal;
-	padding: 6px;
-	border: 3px solid #B3B3B3;
-	background-color: #424242;
+    margin-bottom: 7px;
+    color: #FFFF3F;
+    font-weight: normal;
+    padding: 6px;
+    border: 3px solid #B3B3B3;
+    background-color: #424242;
 }
 .content-span{
-	background-color: #FFF;
-	width: 100%;
-	padding: 5px;
-	box-shadow: 0px 1px 1px #9C9C9C;
-	margin-left: 0 !important;
+    background-color: #FFF;
+    width: 100%;
+    padding: 5px;
+    box-shadow: 0px 1px 1px #9C9C9C;
+    margin-left: 0 !important;
 }
-
 #test embed{
     width: 100%;
     height: 200px;
@@ -911,7 +578,6 @@ tr{
     font-weight: bold;
     color: #fff;
 }
-
 .side-scroll{
     background: #fff;
     padding: 5px;
@@ -919,21 +585,18 @@ tr{
     border-right: 1px solid #E0E0E0;
     height:490px;
 }
-
 .sidebar ul li ul a.head-ul{
-border-bottom: 2px solid #fff;
-font-weight: bold;
-color: #B4B4B4;
+    border-bottom: 2px solid #fff;
+    font-weight: bold;
+    color: #B4B4B4;
 }
-
 .sidebar ul li ul a.ul-divider{
     border-bottom: 2px solid #fff;
 }
-
 #loadingDiv{
-top: 200px;
-position: absolute;
-margin-left: 300px;
+    top: 200px;
+    position: absolute;
+    margin-left: 300px;
 }
 .dataTables_filter input {width: 120px; }
 .warning-icon{
@@ -972,7 +635,6 @@ margin-left: 300px;
     background-color: #fff;
     box-shadow: 0 1px 1px #B8B8B8;
 }
-
 .menu-border-bottom{
     border-bottom: 1px solid #fff;
 }
@@ -983,11 +645,9 @@ margin-left: 300px;
 .input-append{
     margin-bottom: 0px !important;
 }
-
 .table-width{
     width: 100%;
 }
-
 .field-wrap{
     width: auto;
     display: inline-block !important;
@@ -997,15 +657,12 @@ margin-left: 300px;
     text-align: center;
     margin-top: 5px;
 }
-
 .dropdown-menu li > a [class^="icon-"],
 .dropdown-menu li > a [class*=" icon-"] {
-  margin-left: 0px;
+    margin-left: 0px;
 }
-
 .dropdown-submenu:hover > .dropdown-menu .dropdown-menu { display: none; }
 .dropdown-submenu:hover .dropdown-submenu:hover > .dropdown-menu { display: block; }
-
 .money{
     margin-bottom: 0; display:inline-block;
 }
@@ -1019,7 +676,6 @@ margin-left: 300px;
     text-transform: none;
     font-size: 12px;
 }
-
 .tb_detail tr:nth-child(odd) {
     background-color: #fff;
 }
@@ -1035,7 +691,6 @@ margin-left: 300px;
 .padding-filter{
     padding: 0px 5px;margin-bottom: 8px;
 }
-
 #tb-invoice thead th{
     padding: 1px;
     vertical-align: middle;
@@ -1049,17 +704,16 @@ margin-left: 300px;
     margin-bottom: 5px;
 }
 .form-actions {
-padding: 10px 0px 10px;
-margin-top: 0px;
-margin-bottom: 20px;
-background-color: #f5f5f5;
-border-top: 1px solid #e5e5e5;
+    padding: 10px 0px 10px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
 }
 ul.inline, ol.inline {
-margin-left: 0;
-list-style: none;
+    margin-left: 0;
+    list-style: none;
 }
-
 .um th{
     width: 80px;
 }
@@ -1105,107 +759,102 @@ list-style: none;
     min-width: 80px;
     text-align: right !important;
 }
-
 /*LOADING*/
 .pace {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
-
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-
   -webkit-pointer-events: none;
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+}
 
-  z-index: 2000;
-  position: fixed;
-  margin: auto;
-  top: 12px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 200px;
-  height: 25px;
-  border: 2px solid #f2373c;
-  background-color: #fff;
+.pace-inactive {
+  display: none;
 }
 
 .pace .pace-progress {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
-
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-
-  -webkit-transition: width 1s ease-in-out 1s linear;
-  -moz-transition: width 1s ease-in-out 1s linear;
-  -ms-transition: width 1s ease-in-out 1s linear;
-  -o-transition: width 1s ease-in-out 1s linear;
-  transition: width 1s ease-in-out 1s linear;
-
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-
-  max-width: 190px;
+  background: #ffffff;
   position: fixed;
   z-index: 2000;
+  top: 0;
+  left: 0;
+  height: 2px;
+
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+  transition: width 1s;
+}
+
+.pace .pace-progress-inner {
   display: block;
   position: absolute;
-  left: 3px;
-  top: 3px;
-  height: 15px;
-  font-size: 12px;
-  background: #f2373c;
-  color: #f2373c;
-  line-height: 60px;
-  font-weight: bold;
-  font-family:  Helvetica, Arial, "Lucida Grande", sans-serif;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
 }
 
-.pace .pace-progress:after {
-  content: attr(data-progress-text);
-  display: inline-block;
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 15px;
+  right: 15px;
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-radius: 10px;
+  -webkit-animation: pace-spinner 400ms linear infinite;
+  -moz-animation: pace-spinner 400ms linear infinite;
+  -ms-animation: pace-spinner 400ms linear infinite;
+  -o-animation: pace-spinner 400ms linear infinite;
+  animation: pace-spinner 400ms linear infinite;
 }
 
-.pace.pace-inactive {
-  display: none;
+@-webkit-keyframes pace-spinner {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes pace-spinner {
+  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-o-keyframes pace-spinner {
+  0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-ms-keyframes pace-spinner {
+  0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes pace-spinner {
+  0% { transform: rotate(0deg); transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 .nav-side{
     display: block; position: static; margin-bottom: 5px; box-shadow:none;border:0;
 }
 .filter-bar{
     margin-bottom: 10px;
-border: 1px solid #A8A8A8;
-background-color: #5A5A5A;
-color: #FFF;
+    border: 1px solid #A8A8A8;
+    background-color: #5A5A5A;
+    color: #FFF;
 }
-
 .table{
     margin-bottom: 0;
 }
 .dataTables_paginate .paginate_active{
     background-color: #F06A6A !important;
 }
-
 @media (max-width: 767px){
     .modal.fade.in {
         top: 10% !important;

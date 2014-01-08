@@ -94,30 +94,31 @@
 			$this->db->update('barang');
 
 		}
-		function update_qtytemp($kdbrg,$qty){//SAVE utk kurangin stok TEMP di SO
+		function update_qtytemp($kdbrg,$qty,$do){//SAVE utk kurangin stok TEMP di SO
 			
 			$this->db->set('QtyTemp', "QtyTemp - '$qty'", FALSE);
-			$where = "Kode_Brg = '$kdbrg' ;";
+			$where = "Kode_Brg = '$kdbrg'";
 			$this->db->where($where);
+            $this->db->where('No_Do',$do);
 			$this->db->update('do_d');
-
 		}
 		
 		function update_brg2($kdbrg,$qty){//kalo batal
 			
 			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
-			$where = "Kode = '$kdbrg' ;";
+			$where = "Kode = '$kdbrg'";
 			
 			$this->db->where($where);
 			$this->db->update('barang');
 
 		}
 		
-		function update_qtytemp2($kdbrg,$qty){//SAVE utk kembaliin stok TEMP di SO BATAL
+		function update_qtytemp2($kdbrg,$qty,$do){//SAVE utk kembaliin stok TEMP di SO BATAL
 			
 			$this->db->set('QtyTemp', "QtyTemp + '$qty'", FALSE);
-			$where = "Kode_Brg = '$kdbrg' ;";
+			$where = "Kode_Brg = '$kdbrg'";
 			$this->db->where($where);
+            $this->db->where('No_Do',$do);
 			$this->db->update('do_d');
 
 		}
@@ -181,7 +182,12 @@
             $query = $this->db->query("
                 SELECT A.*
                 FROM pelanggan A
-                WHERE A.Kode IN (SELECT Kode_Plg FROM do_h)
+                WHERE A.Kode 
+                IN (SELECT Kode_Plg 
+                    FROM do_h
+                    WHERE do_h.No_Do 
+                    NOT IN (SELECT No_Do FROM sj_h)
+                    )
                 ");
 
             return $query->result();

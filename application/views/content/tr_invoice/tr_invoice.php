@@ -161,13 +161,17 @@ function cekauthorization(){
 }
 
 function list_invoice(){
+    $('#loadingDiv').show()
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_invoice/index",
     data :{},
     success:
     function(hh){
-        $('#list_invoice').html(hh);
+        setTimeout(function () {
+            $('#list_invoice').html(hh);
+            $('#loadingDiv').hide()
+        }, 1500);
     }
     });
 }

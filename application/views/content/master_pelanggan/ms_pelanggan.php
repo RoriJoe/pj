@@ -124,13 +124,17 @@
  */
 $(document).ready(function() 
 {
+    $('#loadingDiv').show()
     $.ajax({
         type:'POST',
         url: "<?php echo base_url();?>index.php/ms_pelanggan/index",
         data :{},
         success:
         function(hh){
-            $('#hasil').html(hh);
+            setTimeout(function () {
+                $('#hasil').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
         }
     });
     autogen();

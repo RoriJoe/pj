@@ -14,7 +14,7 @@
     {
         echo "<tr>
         <td>
-            <input type='hidden' class='span2' style='width:120px;padding: 2px 3px;' id='kode_brg$i' name='kode_brgd' value='$row->Kode' disabled='disabled'/>
+            <input type='hidden' class='span2 kd_brg' style='width:120px;padding: 2px 3px;' id='kode_brg$i' name='kode_brgd' value='$row->Kode' disabled='disabled'/>
             $row->Kode
         </td>
         
@@ -25,9 +25,9 @@
             $row->Satuan1
         </td>
         <td>
-            <input type='text' name='qtyd' id='qty_brg$i'  
+            <input type='text' name='qtyd' id='qty_brg$i'
             onkeypress='validAct($i)' maxlength='5' 
-            class='validate[required] span2' value = '$row->QtySaw1' 
+            class='validate[required] span2 qtyb' value = '$row->QtySaw1' 
             style='width:45px;padding: 2px 3px;' />
         </td>
         <td>
@@ -102,8 +102,8 @@ function validAct(row){
     }(foo.value), false);
 	
 	$('#qty_brg'+row).bind('textchange', function (event){
-        var q = $(this).val();
-        var h = $("#qtyop"+row).text();
+        var q = parseInt($(this).val());
+        var h = parseInt($("#qtyop"+row).val());
         hasil = q-h;
        $('#selisih'+row).val(hasil); 
        
@@ -120,6 +120,7 @@ var oTable = $('#tb3').dataTable( {
     "bPaginate": true,
     "bAutoWidth": false,
     "bLengthChange": true,
+    "bSortable": false,
     
     "oLanguage": {
          "sSearch": "Search",
