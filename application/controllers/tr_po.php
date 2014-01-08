@@ -180,12 +180,9 @@
                         'Nilai'         =>$arrNilai[$i]
                     );
                     $this->tr_po_model->insertPo_det($datadet,$po);
+                    $this->tr_po_model->update_brg($arrKode[$i],$arrJumlah[$i]);//update stok jual
                 }
-                //update stok jual
-				for($i=0;$i<$totalRow;$i++){
-                    $this->tr_po_model->update_brg($arrKode[$i],$arrJumlah[$i]);
-                }
-
+                
                 if($in == "ok")
                 {
                     echo "ok";

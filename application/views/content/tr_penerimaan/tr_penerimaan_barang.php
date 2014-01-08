@@ -155,13 +155,17 @@ function cekauthorization(){
 
 //Tampilkan Table yg disamping Via AJAX
 function listBPB(){
+    $('#loadingDiv').show()
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_penerimaan_barang/index",
     data :{},
     success:
     function(hh){
-        $('#hasil').html(hh);
+        setTimeout(function () {
+            $('#hasil').html(hh);
+            $('#loadingDiv').hide()
+        }, 1500);
     }
     });
 } 

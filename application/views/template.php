@@ -14,7 +14,7 @@
     <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/datepicker/bootstrap-datepicker.js" ></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/datepicker/bootstrap-datepicker.id.js" ></script>
-    <!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/loading/pace.min.js" ></script>-->
+    <script data-pace-options='{ "ajax": false }' type="text/javascript" src="<?php echo base_url();?>assets/js/loading/pace.min.js" ></script>
     <script type='text/javascript' src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>  
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/validation/validationEngine.jquery.css"/>
@@ -26,24 +26,23 @@
 
     <!--Initialize Java Script-->
     <script type="text/javascript">
-        $(document).ready(function($){
+    $(function(){
             //Load ajax Content
             $('.ajax').click(function(e){
                 e.preventDefault();
                 $.get($(this).attr('href'),function(Res){
-                $('#contentFull').html(Res);
+                    $('#contentFull').html(Res);
                 });
             })
             
             //INITILIZE LOADING GIF ON AJAX CALL
-            $('#loadingD').hide()  // hide it initially
-            .ajaxStart(function() {
+            $('#loadingDiv').hide()  // hide it initially
+            /*.ajaxStart(function() {
                 $(this).show();
             })
             .ajaxStop(function() {
                 $(this).hide();
-            })
-
+            })*/
         });
 
         function PlaySound(soundObj) {
@@ -55,7 +54,7 @@
 </head>
 
 <body>
-    
+
     <div id="overlay"></div>
 
     <div id="info"></div>
@@ -74,18 +73,18 @@
                 <div id="contentFull">
                     <?php echo $_content; ?>
                 </div>
-                <!--<div id="loadingDiv">
-                   <img src="<?php echo base_url();?>assets/img/ajax-loader.gif"/>
-                </div>      --> 
-            </div>
-        </div>
-    </div>
+                <div id="loadingDiv" style="top:40%; left:45%; margin-left:0;z-index:99999">
+                   <img src="<?php echo base_url();?>assets/img/anigif.gif"/>
+               </div>
+           </div>
+       </div>
+   </div>
 
-    <div id="footer">
-        <?php echo $_footer; ?>
-    </div>
+   <div id="footer">
+    <?php echo $_footer; ?>
+</div>
 
-    <audio src="<?php echo base_url();?>assets/alert.mp3"  id="beep" />
+<audio src="<?php echo base_url();?>assets/alert.mp3"  id="beep" />
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.textchange.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script><!--JS Sorting-->
     <!--JS VALIDATION-->

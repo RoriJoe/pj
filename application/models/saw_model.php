@@ -26,7 +26,11 @@
         }
 		
 		function get_barang(){
-            $q = $this->db->query("select Kode,Ukuran,Nama,Satuan1,QtyOp,'' AS QtySaw1 from barang");
+            $q = $this->db->query("
+                select Kode,Ukuran,Nama,Satuan1,QtyOp,'' AS QtySaw1 
+                from barang 
+                ORDER BY CONCAT(Nama, Ukuran) ASC
+            ");
             return $q->result();
         }
 
@@ -38,7 +42,8 @@
                 UNION 
                 SELECT saw_d.No_Saw, barang.Kode, saw_d.QtySaw1,barang.Nama, barang.Ukuran, barang.Satuan1, barang.QtyOp
                 FROM saw_d
-                RIGHT JOIN barang ON saw_d.Kd_Brg = barang.Kode");
+                RIGHT JOIN barang ON saw_d.Kd_Brg = barang.Kode
+                ");
             return $q->result();
         }
 
@@ -104,6 +109,7 @@
 
 			$this->db->set('Qty1', "Qty1 + '$qty'", FALSE);
 			$this->db->set('QtyOp', "QtyOp + '$qty'", FALSE);
+            //$this->db->set('Tgl_Saw', $tgl, FALSE);
 			$where = "Kode = '$kdbrg' ;";
 			
 			$this->db->where($where);

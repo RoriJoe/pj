@@ -98,17 +98,9 @@
                     'Qty1'=>$qty[$i],
                     'Keterangan'=>$ktr[$i]
                 );
-                $this->tr_surat_jalan_model->insertSj_det($datadet,$sj);
-				
-                
-            }
-			for($i=0;$i<$totaltx;$i++){
-                $this->tr_surat_jalan_model->update_brg($kd_brg[$i],$qty[$i]);
-				
-            }
-			
-			for($i=0;$i<$totaltx;$i++){
-                $this->tr_surat_jalan_model->update_qtytemp($kd_brg[$i],$qty[$i]);
+                $this->tr_surat_jalan_model->insertSj_det($datadet,$sj);   
+                $this->tr_surat_jalan_model->update_brg($kd_brg[$i],$qty[$i]); 
+                $this->tr_surat_jalan_model->update_qtytemp($kd_brg[$i],$qty[$i],$_do);            
             }
 			
             if($in == "ok")
@@ -174,13 +166,10 @@
 			 $totaltx=$this->input->post('totaltx');
 			 for($i=0;$i<$totaltx;$i++){
                 $this->tr_surat_jalan_model->update_brg2($kd_brg[$i],$qty[$i]);
+                $this->tr_surat_jalan_model->update_qtytemp2($kd_brg[$i],$qty[$i],$_do);
             }
-			for($i=0;$i<$totaltx;$i++){
-                $this->tr_surat_jalan_model->update_qtytemp2($kd_brg[$i],$qty[$i]);
-            }
-			
             $data= array(
-                    'No_Do'=>$_do
+                'No_Do'=>$_do
             );
             $q = $this->tr_surat_jalan_model->updateBatal($data,$sj);
             echo $q;

@@ -1,0 +1,308 @@
+/*-------------------------
+  Simple reset
+--------------------------*/
+
+
+*{
+  margin:0;
+  padding:0;
+}
+
+/*----------------------------
+  The Chart
+-----------------------------*/
+
+
+#placeholder {
+  border: 1px solid #CDCDCD;
+  background-color: white;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 2px #EEE, 0 -3px 5px #F3F3F3 inset;
+}
+
+
+#chart{
+  width: 98%;
+  height: 300px;
+  padding: 5px;
+}
+#example1{
+  width: 98%;
+  height: 100px;
+  padding: 5px;
+}
+
+.ex-tooltip{
+  position: absolute;
+  background: #EEE;
+  border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px;
+  box-shadow: 0 1px 3px black;
+  box-shadow: 0 1px 3px black;
+  border-collapse: separate;
+  display: none;
+}
+
+
+.bar-dash{
+  padding: 5px;
+  background-color: #D3D3D3;
+  color: #636363;
+  font-weight: bold;
+}
+
+.xchart .axis text {
+  font-size: 10px;
+}
+#headerImg{
+    background-color: rgba(189, 30, 30, 0.94);
+    height:85px;
+    background-size:100% 100%;
+    text-align: center;
+    background-image: url(../img/header.png);
+}
+@media (max-width: 767px){
+    .navbar {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+}
+#headerImg img{
+    width:100px;
+    height:100%;
+    background-size:100% 100%;
+}
+.navbar-inner{
+    border-radius: 0px;
+}
+#footerContent{
+    height:20px;
+    background-color:#DFDFDF;/*#143c5a;*/
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    z-index:100;
+}
+.pace {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 25px;
+  border: 2px solid #d20000;
+  background-color: #fff;
+}
+
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+
+  -webkit-transition: width 1s ease-in-out 1s linear;
+  -moz-transition: width 1s ease-in-out 1s linear;
+  -ms-transition: width 1s ease-in-out 1s linear;
+  -o-transition: width 1s ease-in-out 1s linear;
+  transition: width 1s ease-in-out 1s linear;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  max-width: 190px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 15px;
+  font-size: 12px;
+  background: #d20000;
+  color: #d20000;
+  line-height: 60px;
+  font-weight: bold;
+  font-family:  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.pace .pace-progress:after {
+  content: attr(data-progress-text);
+  display: inline-block;
+}
+
+.pace.pace-inactive {
+  display: none;
+}
+
+.text-center{
+  text-align: center;
+}
+.row-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#list-date{
+  margin-bottom:0;
+}
+.stat p{
+  font-weight: bold;
+  font-size: 14px;
+}
+.stat #val{
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.CSStabel {
+    margin:0px;padding:0px;
+    width:100% !important;
+}
+.CSSTabel table{
+    width: 100%;
+}
+.CSSTabel tr:last-child td:last-child {
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+.CSSTabel table tr:first-child td:first-child {
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}
+.CSSTabel table tr:first-child td:last-child {
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+}
+.CSSTabel tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+.CSSTabel tr:nth-child(odd){ 
+    background-color:#f1f1f1; 
+}
+/*--Untuk Mengtur Warna BG table--*/
+.CSSTabel tr:nth-child(even)    
+{ 
+    background-color:#fff; 
+}
+.CSSTabel tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}
+.CSSTabel tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTabel tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTabel th{
+    background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,#003f7f);
+    color:white;
+}
+.CSSTabel th:hover{
+    *cursor:default;
+}
+.CSSTabel tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTabel tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+.CSSTabel .paginate_button{
+    color: #fff;
+    border-radius: 0px;
+    border:0px;
+}
+.CSSTabel thead{
+    text-align:left;
+}
+.CSSTabel table{
+    border: 0px;
+}
+.CSSTabel th{
+    background: #C24F4F !important;
+}
+.CSSTabel .dataTables_length{
+    float: left;
+    margin-right: 40px;
+}
+/*tambahan*/
+#overlay{
+    width:9999px;
+    height:9999px;
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    display:none;
+    z-index: 99998;
+}
+#waiting{
+    width:9999px;
+    height:9999px;
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    display:none;
+    z-index: 99997;
+}
+#image{
+    display:none;
+    position: fixed;
+}
+/*CSS TABLE paging*/
+.dataTables_paginate{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #C24F4F;
+}
+.dataTables_paginate a{
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+    cursor: pointer;
+    width:auto;
+    height:auto;
+}
+#table_length{
+    display: none;
+}
+.val-mini{
+  font-size: 25px !important;
+  margin-top: 40px;
+}

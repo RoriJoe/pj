@@ -139,14 +139,18 @@ function cekauthorization(){
 
 //load Side Table
 function loadListBarang(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#hasil').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
+        }
     });
 }
 

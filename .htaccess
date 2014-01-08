@@ -28,7 +28,54 @@
     <IfModule !mod_rewrite.c>
         # If we don't have mod_rewrite installed, all 404's
         # can be sent to index.php, and everything works as normal.
-        # Submitted by: ElliotHaughin
+        # Submitted by: Eddy Christiandy
 
     ErrorDocument 404 /index.php
 </IfModule> 
+
+# Set up caching on media files for 1 year (forever?)
+#<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+#ExpiresDefault A29030400
+#Header append Cache-Control "public"
+#</FilesMatch>
+#
+## Set up caching on media files for 1 week
+#<FilesMatch "\.(gif|jpg|jpeg|png|swf)$">
+#ExpiresDefault A604800
+#Header append Cache-Control "public"
+#</FilesMatch>
+#
+## Set up 2 Hour caching on commonly updated files
+#<FilesMatch "\.(xml|txt|html|js|css)$">
+#ExpiresDefault A7200
+#Header append Cache-Control "proxy-revalidate"
+#</FilesMatch>
+#
+## Force no caching for dynamic files
+#<FilesMatch "\.(php|cgi|pl|htm)$">
+#ExpiresActive Off
+#Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+#Header set Pragma "no-cache"
+#</FilesMatch>
+##Caching 
+
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault A300
+     
+    # Expires after 1 month
+    ExpiresByType image/gif A2592000
+    ExpiresByType image/png A2592000
+    ExpiresByType image/jpg A2592000
+    ExpiresByType image/x-icon A2592000
+    ExpiresByType application/x-javascript A2592000
+    #ExpiresByType text/plain A2592000
+
+    <FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+    ExpiresDefault A29030400
+    Header append Cache-Control "public"
+    </FilesMatch>
+     
+    # Expires after 1 day
+    #ExpiresByType text/css A86400
+</ifModule>

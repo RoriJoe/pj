@@ -351,13 +351,17 @@ function addBarang(){
 }
 
 function listPO(){
+    $('#loadingDiv').show()
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/tr_po/index",
     data :{},
     success:
     function(hh){
-            $('#listPO').html(hh);
+            setTimeout(function () {
+                $('#listPO').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
         }
     });
 
@@ -624,7 +628,7 @@ function getBarang(){
                 $('#kode_brg'+row).val(id);
                 $('#satuan_brg'+row).val(msg.Satuan); 
                 $('#keterangan_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
-                $('#harga_brg'+row).val(msg.Harga); 
+                $('#harga_brg'+row).val(accounting.formatMoney(msg.Harga, "",0,".")); 
             }
         }); 
     }  

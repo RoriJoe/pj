@@ -266,15 +266,19 @@ $("#_po").keypress(function(e){
 
 //Tampilkan Table yg disamping Via AJAX
 function listSO(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'GET',
-    async:true,
-    url: "<?php echo base_url();?>index.php/tr_do/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
+        type:'GET',
+        async:true,
+        url: "<?php echo base_url();?>index.php/tr_do/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#hasil').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
+        }
     });
 }
 
@@ -481,7 +485,7 @@ function getBarang(){
                 $('#last_qty'+row).val(0);
                 $('#satuan_brg'+row).val(msg.Satuan); 
                 $('#nama_brg'+row).val(msg.Nama +" "+msg.Ukuran); 
-                $('#harga_brg'+row).val(msg.Harga); 
+                $('#harga_brg'+row).val(accounting.formatMoney(msg.Harga, "",0,".")); 
             }
         }); 
     }  

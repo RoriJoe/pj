@@ -38,14 +38,20 @@
                         <a tabindex="-1">Persediaan</a>
                         <ul class="dropdown-menu">
                             <?php if ($this->authorization->is_permitted('access_barang')) : ?>
-                                <li><a tabindex="-1" class = "ajax" href="ms_barang">Barang</a></li>
+                                <li><a tabindex="" class = "ajax" href="ms_barang">Barang</a></li>
                             <?php endif; ?>
                             <?php if ($this->authorization->is_permitted('access_satuan')) : ?>
                                 <li class="menu-border-bottom"><a class = "ajax" href="ms_satuan">Satuan</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
-                    <?php endif; ?>                   
+                    <?php endif; ?>  
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1">Lain-Lain</a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" class = "ajax" href="ms_mobil">Mobil</a></li>
+                        </ul>
+                    </li>                  
                 </ul>
             </li>
             <?php endif; ?>

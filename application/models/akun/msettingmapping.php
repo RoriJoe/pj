@@ -151,3 +151,4 @@
 			$rs=$this->db->query("
 				insert into detailmapfield (idtab,nama) values((select max(idtab) from detailmaptabel),'$nama')");	
 		}
+	}

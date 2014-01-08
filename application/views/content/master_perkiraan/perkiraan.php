@@ -149,15 +149,19 @@ function cekauthorization(){
 }
 
 function load_list(){
-$.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_perkiraan/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
-    }
-});
+    $('#loadingDiv').show()
+    $.ajax({
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_perkiraan/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#hasil').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
+        }
+    });
 }
 
 function retrieveForm(myID){

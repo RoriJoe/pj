@@ -106,13 +106,17 @@ function cekauthorization(){
 }
 
 function loadList(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_supplier/index",
-    data :{},
-    success:
-    function(hh){
-        $('#hasil').html(hh);
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_supplier/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#hasil').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
         }
     });
 }

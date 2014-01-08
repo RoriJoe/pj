@@ -58,7 +58,7 @@
                     <button id="print" class="btn"  data-toggle="tooltip" title="Cetak Stock Opname"><i class="icon-print"></i> Print</button>
                 <?php endif; ?>
 
-                <a id="loadBtn" class="btn btn-warning" data-loading-text="Loading...">Load Barang</a>
+                <a id="loadBtn" class="btn btn-success" title="Load List Barang">Load Barang</a>
 
                 <div class="btn-group dropup pull-right" id="selList">
                     <button class="btn primary">Filter By Qty</button>
@@ -86,7 +86,7 @@
   </div>
   <div class="modal-footer">
     <?php if ($this->authorization->is_permitted('create_gudang')) : ?>
-        <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" onclick="addGudang()">Add Gudang</a>
+        <a href="#modalNewGudang" role="button" class="btn btn-info" data-toggle="modal" readonly>Add Gudang</a>
     <?php endif;?>
   </div>
 </div>
@@ -202,7 +202,7 @@ function listBarang(){
     }
     });   
 }
-
+/*
 function lookup_gudang(){
     $("#gud").autocomplete({
     minLength: 1,
@@ -234,7 +234,7 @@ function lookup_gudang(){
         },
     });
 }
-
+*/
 function key(){
 $('input[type="text"]').keyup(function() {
     if($(this).val() != '') {
@@ -251,14 +251,18 @@ $('input[type="text"]').keyup(function() {
 }
 
 function addBarang(){
-    
+    $('#loadingDiv').show()
     $.ajax({ 
-        type:'POST',
+        type:'GET',
+        async:true,
         url: "<?php echo base_url();?>index.php/saw/addBarang",
         data :{},
         success:
         function(hh){
-           $('#detail').html(hh);
+            setTimeout(function () {
+                $('#detail').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500); 
         }
     });
 }
@@ -266,13 +270,17 @@ function addBarang(){
 function qtyBarang(){ 
     var id = $('#noSaw').val();
     $('#save').attr('mode','edit');
+    $('#loadingDiv').show()
     $.ajax({ 
         type:'POST',
         url: "<?php echo base_url();?>index.php/saw/qtyBarang",
         data :{id:id},
         success:
         function(hh){
-           $('#detail').html(hh);
+            setTimeout(function () {
+                $('#detail').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500); 
         }
     });
 }
@@ -280,26 +288,34 @@ function qtyBarang(){
 function noqtyBarang(){ 
     var id = $('#noSaw').val();
     $('#save').attr('mode','edit2');
+    $('#loadingDiv').show()
     $.ajax({ 
         type:'POST',
         url: "<?php echo base_url();?>index.php/saw/noqtyBarang",
         data :{id:id},
         success:
         function(hh){
-           $('#detail').html(hh);
+            setTimeout(function () {
+                $('#detail').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500); 
         }
     });
 }
 
 function allBarang(){ 
     var id = $('#noSaw').val();
+    $('#loadingDiv').show()
     $.ajax({ 
         type:'POST',
         url: "<?php echo base_url();?>index.php/saw/all",
         data :{id:id},
         success:
         function(hh){
-           $('#detail').html(hh);
+            setTimeout(function () {
+                $('#detail').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500); 
         }
     });
 }
@@ -326,19 +342,22 @@ function resetForm(){
     $('#save').attr('disabled',false);
 }
 
-$('#loadBtn')
-.click(function () {
-    loadBarang();
+$('#loadBtn').click(function () {
+    addBarang();
 });
 
 function listSaw(){
+    $('#loadingDiv').show()
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/saw/index",
     data :{},
     success:
     function(hh){
-        $('#list').html(hh);
+        setTimeout(function () {
+            $('#list').html(hh);
+            $('#loadingDiv').hide()
+        }, 1500); 
     }
     });
 }
@@ -398,29 +417,39 @@ $("#cancel").click(function(){
 $("#save").click(function(){
     //var oTable = $('#tb3').dataTable();
     var totalRow = oTable.fnGetData().length;
-
+    //alert(totalRow);
     var _mode = $('#save').attr("mode");
     
     var noSaw = $('#noSaw').val();
     var _tgl = $('#_tgl').val();
     var _gd = $('#kd_gd').val();
-
+    
     var _arrKd_brg = new Array();
     var _arrQty = new Array();
-    
-    for(var i=1;i<=10;i++){
+
+    /*for(var i=1;i<=totalRow;i++){
         var b = $('#qty_brg'+i).val();
-        if(b === '')
+        if(b !== '')
         {
-            
-        }
-        else{
             _arrKd_brg[i-1] = $('#kode_brg'+i).val();
             _arrQty[i-1] = b;
         }
-    }
+    }*/
+    //alert(_arrQty.length);
+    var aTrs = oTable.fnGetNodes();
 
+    $(aTrs, this).each(function() {
+        var qtys = $('.qtyb',this).val();
+        var kode_brg = $('.kd_brg',this).val();
+        
+        if(qtys != ""){
+            _arrKd_brg.push( kode_brg );
+            _arrQty.push( qtys );
+        }
+    });                  
     var arrData = _arrQty.length;
+    //console.log(_arrKd_brg);
+    //console.log(_arrQty);
 
     if(_arrKd_brg.length != 0){
         if(_mode == "add") //add mode

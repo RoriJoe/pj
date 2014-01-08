@@ -141,6 +141,7 @@ function validAct(row){
         var qty_before = $("#last_qty"+row).val();
         if(q > parseInt(qty_before)){
             bootstrap_alert.warning("Qty tidak boleh lebih besar dari Qty di SO");
+            $("#qty"+row).val('');
             $('#save').attr('disabled',true);
         } else{
             $('#save').attr('disabled',false);

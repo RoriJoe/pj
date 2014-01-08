@@ -2,38 +2,25 @@
     <div class="span3">
         <!--//***MAIN FORM-->
         <div class="bar" title="Show/Hide Form">
-            <p>Form Satuan <i id="icon" class='icon-chevron-down icon-white'></i></p>
+            <p>Form Mobil <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
         <div id="konten" class="hide-con">
         <form id="formID">
             <table>
                 <tr>
-                    <td>Kode</td>
+                    <td>No Mobil</td>
                     <td>
+                        <input type="hidden" id="kdTemp">
                         <input type='text' class="form100 validate[required,maxSize[10]]" maxlength="10" 
                         id='kd' name='kd'>
                     </td>         
                 </tr>
-                <tr>
-                    <td>Satuan</td>
-                    <td>
-                        <input type='text' class="form150 validate[required, maxSize[10]]" maxlength="10" 
-                        id='nm' name='nm'>
-                    </td>
-                </tr>
             </table>
             <div class="field-wrap action-group">
-                    <?php if ($this->authorization->is_permitted('create_satuan') == true && $this->authorization->is_permitted('update_satuan') == false) : ?>
-                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == false): ?>
-                        <button id="save" class="btn btn-primary" type="submit" mode="edit">Update</button>
-                    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == true): ?>
-                        <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
-                    <?php endif; ?>
-                    <button id="cac" class="btn" type="reset">Cancel</button>
+                <button id="save" class="btn btn-primary" type="submit" mode="add">Save</button>
+                <button id="cac" class="btn" type="reset">Cancel</button>
             </div>
-            
         </form>
         <!--**NOTIFICATION AREA**-->
         <div id="konfirmasi" class="sukses"></div>
@@ -52,24 +39,12 @@ $(document).ready(function(){
     validation();
 });
 
-function cekauthorization(){
-    <?php if ($this->authorization->is_permitted('create_satuan') == true && $this->authorization->is_permitted('update_satuan') == false) : ?>
-        $('#save').attr('mode','add');
-        $("#save").attr('disabled',false);
-    <?php elseif($this->authorization->is_permitted('update_satuan') == true && $this->authorization->is_permitted('create_satuan') == false): ?>
-         $('#save').attr('mode','edit');
-         $("#save").attr('disabled',false);
-    <?php else: ?>
-         $('#save').attr('mode','add');
-         $("#save").attr('disabled',false);
-    <?php endif; ?>
-}
-
 function load_list(){
+    $('#save').attr('mode','add');
     $('#loadingDiv').show()
     $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_satuan/index",
+        url: "<?php echo base_url();?>index.php/ms_mobil/index",
         data :{},
         success:
         function(hh){
@@ -84,13 +59,7 @@ function load_list(){
 $("#kd").keypress(function(e){
    var userVal = $("#kd").val();
    if(userVal.length == 10){
-       bootstrap_alert.info('Maksimum Kode 10');
-   } 
-});
-$("#nm").keypress(function(e){
-   var userVal = $("#nm").val();
-   if(userVal.length == 10){
-       bootstrap_alert.info('Maksimum Karakter 10');
+       bootstrap_alert.info('Maksimum Nomor Mobil 10');
    } 
 });
 
@@ -99,7 +68,7 @@ $("#cac").click(function(){
         this.reset();
     });
     $("#kd").attr('disabled',false);
-    cekauthorization();
+    $('#save').attr('mode','add');
 });
 
 $("#save").click(function(){
@@ -107,27 +76,26 @@ $("#save").click(function(){
     
     //DECLARE VARIABLE
     var kd = $('#kd').val();
-    var nm = $('#nm').val();
+    var kdTemp = $('#kdTemp').val();
     
     if(mode == "add"){
         if($("#formID").validationEngine('validate'))
         {
         $.ajax({
         type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_satuan/insert", //SEND TO CONTROLLER
-        data :{kd:kd,nm:nm},
+        url: "<?php echo base_url();?>index.php/ms_mobil/insert", //SEND TO CONTROLLER
+        data :{kd:kd},
 
         success:
             function(msg) //GET MESSEGE FROM INSERT MODEL
             {
                 if(msg == "ok")
                 {
-                    bootstrap_alert.success('Data <b>'+kd+' - '+nm+'</b> berhasil ditambahkan');
+                    bootstrap_alert.success('Nomor Mobil <b>'+kd+'</b> berhasil ditambahkan');
                     $('#formID').each(function(){
                         this.reset();
                     });
                     load_list();
-                    cekauthorization();
                 }
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Data sudah ada');
@@ -143,18 +111,17 @@ $("#save").click(function(){
         {
             $.ajax({
             type:'POST',
-            url: "<?php echo base_url();?>index.php/ms_satuan/update",
-            data :{kd:kd,nm:nm},
+            url: "<?php echo base_url();?>index.php/ms_mobil/update",
+            data :{kd:kd, kdTemp:kdTemp},
             success: 
             function(msg){                
                 if(msg=="ok")
                 {
-                    bootstrap_alert.success('Data <b>'+kd+' - '+nm+'</b> Berhasil diperbarui');
+                    bootstrap_alert.success('Nomor Mobil <b>'+kd+'</b> Berhasil diperbarui');
                     $('#formID').each(function(){
                         this.reset();
                     });        
                     load_list();
-                    cekauthorization(); 
                 }                
                 else{
                     bootstrap_alert.warning('<b>Gagal!</b> Terjadi Kesalahan');

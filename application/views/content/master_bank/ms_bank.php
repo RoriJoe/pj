@@ -159,14 +159,18 @@ function cekauthorization(){
 
 //load Side Table
 function loadListBank(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>ms_bank/index",
-    data :{},
-    success:
-    function(hh){
-        $('#list').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>ms_bank/index",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#list').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
+        }
     });
 }
 
