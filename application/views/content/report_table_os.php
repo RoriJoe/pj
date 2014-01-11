@@ -1,36 +1,33 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/js/dragtable.js';?>" ></script>
+<style>
+	th {
+		background: #C24F4F !important;
+		color: #fff;
+	}
+	th, td {
+		padding: 3px;
+		line-height: 15px;
+	}
+	tr:nth-child(odd) {
+		background-color: #E7E7E7;;
+	}
+</style>
 
-<div class="table CSSTabel table-list2">
 <label id="lab1"style="
     margin-left: 5px;"><b>Laporan Outstanding Sales Order</b></label>
-<!--
-<table width="100%;">
-	<tr>
-		<td width="70%">
-			<div><b>PERIODE : Semua</b></div> 
-		</td>
-		<td width="30%" style="text-align:right;">
-			<b>Tanggal : <?php //echo $tanggal ?></b>
-		</td>
-	</tr>
-</table>-->
+
 	<div id="LimitTab">
 		
-			<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
+			<table id="tablesorter" class="draggable" style="width:100%;font-size:11px;border-collapse:collapse;" border="1" cellpadding="3">
 				<thead><tr>
-				<th>No SO</th>
-				<th>Nama Pelanggan</th>
-				
-				
+					<th>No SO</th>
+					<th>Nama Pelanggan</th>
 					<th>Pesan</th>
-				
-				
-			
-				<th>Nama Barang</th>
-				<th>Tanggal</th>
-				<th>Kirim</th>
-				<th>OS</th>
-				<th>Satuan</th>
+					<th>Nama Barang</th>
+					<th>Tanggal</th>
+					<th>Kirim</th>
+					<th>OS</th>
+					<th>Satuan</th>
 				</tr>
 				</thead>
 				
@@ -76,6 +73,4 @@
 			
 		
 	</div>
-	<!--</div>-->
-</div>
 				

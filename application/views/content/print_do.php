@@ -27,7 +27,7 @@
 </table>
 
 <hr/>
-<table class="table" width="100%" style="font-size: 11px">
+<table class="table" cellpadding="3" border="1" width="100%" style="font-size: 11px;border-collapse:collapse;">
 	<thead>
 		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
 			<th>No SO</th>
@@ -54,7 +54,7 @@
 				
 				if($y!=1){
 				$st=number_format($gx);
-					echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+					echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Sub Total</b></td><td  align='right'>$st</td>
 				</tr>";
 				}
 			}else{
@@ -80,12 +80,12 @@
 				
 				if($y==$bot+1){
 				$st=number_format($gx);
-					echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Sub Total</b></td><td  align='right' colspan='2'>$st</td>
+					echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Sub Total</b></td><td  align='right'>$st</td>
 				</tr>";
 				}
 			}
 			$g=number_format($gtot);
-			echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='6' align='center'><b>Grand Total</b></td><td  align='right' colspan='2'>$g</td>
+			echo "<tr style='background: #F1F1F1; border-bottom: 1px solid #000'><td colspan='7' align='center'><b>Grand Total</b></td><td  align='right'>$g</td>
 			</tr>";
 			
 		          ?>

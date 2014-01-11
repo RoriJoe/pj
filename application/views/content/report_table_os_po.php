@@ -1,15 +1,24 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/js/dragtable.js';?>" ></script>
+<style>
+	th {
+		background: #C24F4F !important;
+		color: #fff;
+	}
+	.mytable th, td {
+		padding: 3px;
+		line-height: 15px;
+	}
+	.mytable tr:nth-child(odd) {
+		background-color: #E7E7E7;;
+	}
+</style>
 
-<div class="table CSSTabel table-list2">
 <label id="lab1"style="
     margin-left: 5px;"><b>Laporan Outstanding Purchase Order</b></label>
 
-<table width="100%;">
-	
-</table>
 	<div id="LimitTab">
 		<div id="TableLaporanSPK" style=overflow:auto; class='CssTblLaporan' >
-			<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
+			<table border='1' id="tablesorter" class="mytable draggable" style="width:100%;font-size:11px;border-collapse:collapse;">
 				<thead><tr>
 				<th>No PO</th>
 				<th>Supplier</th>
@@ -61,6 +70,4 @@
 			
 		</div>
 	</div>
-	<!--</div>-->
-</div>
 				

@@ -1,5 +1,7 @@
 <script>
 $(document).ready(function() {
+    listBarang();
+
 	$("#range").hide();
 
     $("#cetakBatas").click(function() {
@@ -36,14 +38,18 @@ $(function() {
 
 //Table Barang
 function listBarang(){
+    $('#loadingDiv').show()
     $.ajax({
-    type:'POST',
-    url: "<?php echo base_url();?>index.php/ms_barang/viewBarang2",
-    data :{},
-    success:
-    function(hh){
-        $('#list_barang').html(hh);
-    }
+        type:'POST',
+        url: "<?php echo base_url();?>index.php/ms_barang/viewBarang2",
+        data :{},
+        success:
+        function(hh){
+            setTimeout(function () {
+                $('#list_barang').html(hh);
+                $('#loadingDiv').hide()
+            }, 1500);
+        }
     });   
 }
 </script>
@@ -124,7 +130,6 @@ function listBarang(){
 </div>
 
 <script>
-listBarang();
 var filter ="";
 //GET POPUP Barang
 function getBarang(){

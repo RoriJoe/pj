@@ -1,6 +1,18 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/js/dragtable.js';?>" ></script>
+<style>
+	th {
+		background: #C24F4F !important;
+		color: #fff;
+	}
+	.mytable th, td {
+		padding: 3px;
+		line-height: 15px;
+	}
+	.mytable tr:nth-child(odd) {
+		background-color: #E7E7E7;;
+	}
+</style>
 
-<div class="table CSSTabel table-list2">
 <label id="lab1"><b>Laporan Surat Jalan</b></label>
 
 <table width="100%;">
@@ -14,49 +26,47 @@
 		</td>
 	</tr>
 </table>
-	<div id="LimitTab">
-		<table border='0px' id="tablesorter" class="draggable" style="width:100%;font-size:11px;">
-			<thead><tr>
-			<th>No SJ</th>
-			<th>No SO</th>
-			<th>Nama Barang</th>
-			<th>Kendaraan</th>
+<div id="LimitTab">
+	<table border='1' id="tablesorter" class="mytable draggable" style="width:100%;font-size:11px;border-collapse:collapse;">
+		<thead><tr>
+		<th>No SJ</th>
+		<th>No SO</th>
+		<th>Nama Barang</th>
+		<th>Kendaraan</th>
+		
+		<th>Pelanggan</th>
+		<th>Jenis</th>
+		<th>Qty</th>
+		<th>Satuan</th>
+		</tr></thead>
+		
+		<?php
+			$no_sj="";$plg="";$no_so="";
+			foreach($hasil2 as $row)
+			{
+			//$originalDate1 = $row->Tgl_Po;
+			//$dmy1 = date("d-m-Y", strtotime($originalDate1));
 			
-			<th>Pelanggan</th>
-			<th>Jenis</th>
-			<th>Qty</th>
-			<th>Satuan</th>
-			</tr></thead>
-			
-			<?php
+			if($no_sj != $row->No_Sj){
+				$no_sj=$row->No_Sj;$plg=$row->NP;$no_so="$row->No_Do";
+			}else{
 				$no_sj="";$plg="";$no_so="";
-				foreach($hasil2 as $row)
-				{
-				//$originalDate1 = $row->Tgl_Po;
-				//$dmy1 = date("d-m-Y", strtotime($originalDate1));
-				
-				if($no_sj != $row->No_Sj){
-					$no_sj=$row->No_Sj;$plg=$row->NP;$no_so="$row->No_Do";
-				}else{
-					$no_sj="";$plg="";$no_so="";
-				}
-					echo
-					"<tr>
-						<td>$no_sj</td>
-						<td>$no_so</td>
-						<td>$row->Nama</td>
-						<td>$row->No_Mobil</td>
-						
-						<td>$plg</td>
-						<td>$row->Ukuran</td>
-						<td align='right'>$row->Qty1</td>
-						<td>$row->Satuan1</td>
-					</tr>";
-					$no_sj=$row->No_Sj;
-				}
-					?>
-		</table>
-	</div>
-<!--</div>-->
+			}
+				echo
+				"<tr>
+					<td>$no_sj</td>
+					<td>$no_so</td>
+					<td>$row->Nama</td>
+					<td>$row->No_Mobil</td>
+					
+					<td>$plg</td>
+					<td>$row->Ukuran</td>
+					<td align='right'>$row->Qty1</td>
+					<td>$row->Satuan1</td>
+				</tr>";
+				$no_sj=$row->No_Sj;
+			}
+				?>
+	</table>
 </div>
 				

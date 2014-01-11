@@ -93,7 +93,7 @@ function getPelanggan(){
       <!--//***MAIN FORM-->
       <form action="<?php echo base_url();?>report/print_report_do" method="post" target="_blank">
       <div class="bar" >
-          <p>Report Sales Order <i id="icon" class='icon-chevron-down icon-white'></i></p>
+          <p>Report Sales Order</p>
       </div>
 
       <div id="konten" class="hide-con master-border">

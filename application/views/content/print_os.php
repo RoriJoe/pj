@@ -14,9 +14,9 @@
 </table>
 
 <hr/>
-<table class="table" width="100%" style="font-size: 11px">
+<table class="table" border="1" cellpadding="3" width="100%" style="font-size: 11px;border-collapse:collapse;">
 	<thead>
-		<tr style="background: #C5C5C5; border-bottom: 1px solid #000">
+		<tr style="background: #C5C5C5;">
 			<th>No SO</th>
 			<th>Pelanggan</th>
 			<th>Tanggal</th>

@@ -78,7 +78,7 @@ function table(){
     	<!--//***MAIN FORM-->
 		<form action="<?php echo base_url();?>report/print_report_os" method="post" target="_blank">
 		<div class="bar">
-		    <p>Laporan Outstanding Sales Order<i id="icon" class='icon-chevron-down icon-white'></i></p>
+		    <p>Laporan Outstanding Sales Order</p>
 		</div>
 		<div id="konten" class="hide-con master-border">
 			<div class="pull-left">
