@@ -41,7 +41,7 @@
                             <div class="row-margin">
                                 <div id="drop-date" class="pull-left">
                                     <select name="" id="list-date" onchange="filterAll()" disabled>
-                                        <option value="">-Select Date Option-</option>
+                                        <option value="">-Select Year-</option>
                                     </select>
                                 </div>
                                 <!--<div id="btn-filter" class="pull-right">
@@ -162,7 +162,7 @@
 </body>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
 <!-- xcharts includes -->
-<script src="<?php echo base_url();?>assets/js/chart/js/d3.v2.js"></script>
+<script src="<?php echo base_url();?>assets/js/chart/js/d3.v2.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/chart/xcharts.min.js"></script>
 
 <!-- The daterange picker bootstrap plugin -->
@@ -172,55 +172,44 @@
 <script>
     jQuery(document).ready(function(){
         loadChart();  
-
     });
 
+    //CUSTOM FUNCTION//
     $(':not(#anything)').on('click', function (e) {
         $('#tes').each(function () {
-            //the 'is' for buttons that trigger popups
-            //the 'has' for icons and other elements within a button that triggers a popup
             if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                 $(this).popover('hide');
                 return;
             }
         });
     });
-
-    var filterMode = '';
     function change(option) {
         var _dateOpt = option;
         var _div = document.getElementById('drop-date');
         var _text = document.getElementById('list-date');
         var _textCus = document.getElementById('list-dateCus');
 
-        if(option == 'year' || option == 'month'){
-            if(option == 'year'){
-                filterMode = 'year';
-            }else{
-                filterMode = 'month';
-            }
+        if(option == 'year'){ //year selected
             $("#range").attr('disabled',true);
             $("#filter-submit").attr('disabled',false);
             $.ajax({
                 type:'POST',
                 url: "<?php echo base_url();?>dashboard/date_call",
-                data :{_dateOpt:_dateOpt},
+                data :{option:option},
                 dataType: "html",
                 success: function(data){
                     $('#drop-date').html(data);
                 }
             });
-        }else if(option == 'custom'){
+        }else if(option == 'custom'){ //custom selected
             $("#list-date").attr('disabled',true);
             $("#range").attr('disabled',false);
-            $("#filter-submit").attr('disabled',true);
-        }else{
+        }else{ //default selected
             $("#range").attr('disabled',true);
             $("#list-date").attr('disabled',true);
             loadChart();
         }
     }
-
     function filterAll(){
         var myVal = $('#list-date').val();
         var myMode = 'year';
@@ -232,7 +221,6 @@
             ajaxLoadFilter('','year');
         }
     }
-
     var pemisah_ribuan = '.';
     function pemisahRibuan(str){
         str = str.toString();   // konversi ke string
@@ -245,7 +233,7 @@
 
         while (status){
             p_sisa = p_sisa - 3;
-                    // ambil 3 nilai terakhir, simpan di array
+            // ambil 3 nilai terakhir, simpan di array
             arr.push(str.substr(p_sisa, 3));
             if ((p_sisa - 3) < 0) status = false;
         }
@@ -255,8 +243,35 @@
             // Gabungkan dengan pemisah ribuan
             return arr.reverse().join(pemisah_ribuan);          
     }
+    function getmax(initval){
+        var newVal;
+        if(initval >= 0 && initval <=100){
+            newVal = 100;
+        }else if(initval > 100 && initval <= 1000){
+            newVal = 1000;
+        }else if(initval > 1000 && initval <= 10000){
+            newVal = 10000;
+        }else if(initval > 10000 && initval <= 100000){
+            newVal = 100000;
+        }else if(initval > 100000 && initval <= 1000000){
+            newVal = 1000000;
+        }else if(initval > 1000000 && initval <= 100000000){
+            newVal = 100000000;
+        }else if(initval > 100000000 && initval <= 1000000000){
+            newVal = 1000000000;
+        }else if(initval > 1000000000 && initval <= 10000000000){
+            newVal = 10000000000;
+        }else if(initval > 10000000000 && initval <= 100000000000){
+            newVal = 100000000000;
+        }else{
+            newVal = 100;
+        }
 
+        return newVal;
+    }
+    //END OF CUSTOM FUNCTION//
 
+    //HIGHCHART VARIABLE CHART//
     Highcharts.setOptions({
         credits: {
             enabled: false
@@ -465,7 +480,7 @@
         // the value axis
         yAxis: {
             min: 0,
-            max: 200,
+            max: 0,
             
             minorTickInterval: 'auto',
             minorTickWidth: 1,
@@ -513,7 +528,7 @@
         // the value axis
         yAxis: {
             min: 0,
-            max: 200,
+            max: 0,
             
             minorTickInterval: 'auto',
             minorTickWidth: 1,
@@ -538,8 +553,9 @@
 
         series: [{}]
     }
+    //END OF HIGHCHART VARIABLE CHART//
 
-    /*DEFAULT CHART ON LOAD PAGE + CUSTOM RANGE CHART*/
+    /*DEFAULT CHART ON LOAD PAGE*/
     function loadChart() {
         if($("#bread:has(a.breads)").length > 0){
             var elem = document.getElementById("breadsID");
@@ -555,8 +571,6 @@
         range.val(startDate.format('{MM}/{dd}/{yyyy}') + ' - ' + endDate.format('{MM}/{dd}/{yyyy}'));
         // Load chart
         ajaxLoadChart(startDate,endDate);
-        ajaxLoadAvgOs(startDate,endDate);
-        ajaxLoadAvgUnit(startDate,endDate);
         loadGauge(startDate,endDate,'');
         
         range.daterangepicker({
@@ -571,8 +585,6 @@
             }
             },function(start, end){
                 ajaxLoadChart(start, end);  
-                ajaxLoadAvgOs(start, end);
-                ajaxLoadAvgUnit(start, end);
                 loadGauge(start, end,'');
         });
         
@@ -664,22 +676,38 @@
         }
     }
 
-    function ajaxLoadAvgOs(startDate,endDate) {
+    //CUSTOM GAUGE & BAR
+    function loadGauge(startDate,endDate,year){
+        //empty data on update
         $("#container").empty();
+        $("#container2").empty();
         miniColumn.series = [];
+        miniColumnSO.series = [];
 
-        if(!startDate || !endDate){
-            var chart1 = new Highcharts.Chart(miniColumn);
-            document.getElementById("val1").innerHTML = 'Rp -';
-            return;
+        $("#container3").empty();
+        $("#container4").empty();
+        $("#container5").empty();
+        $("#container6").empty();
+        gaugePemesanan.series = [];
+        gaugeTerkirim.series = [];
+        gaugeInvoice.series = [];
+        gaugeTerima.series = [];
+
+        var startD = '';
+        var endD = '';
+
+        if(year == ''){
+            startD = startDate.format('{yyyy}-{MM}-{dd}');
+            endD = endDate.format('{yyyy}-{MM}-{dd}');
         }
 
         $.ajax({
             type:'POST',
             url:"<?php echo base_url();?>dashboard/custom_avg_so",
             data:{
-                start:  startDate.format('{yyyy}-{MM}-{dd}'),
-                end:    endDate.format('{yyyy}-{MM}-{dd}')
+                start:  startD,
+                end:    endD,
+                year:   year
             },
             dataType:'json',
             success:
@@ -691,7 +719,6 @@
                         name: this.label,
                         data: [parseInt(this.value)]
                     })
-
                     avg_so.push(parseInt(this.value))
                 });
 
@@ -702,31 +729,18 @@
                 }
                 var avg = sum/avg_so.length;
 
-                //var chart1 = new Highcharts.Chart(miniColumnSO);
-
-                //var myChart = new Highcharts.Chart(miniColumn);
                 myChart = $('#container').highcharts(miniColumn);
                 document.getElementById("val1").innerHTML = 'Rp '+pemisahRibuan(Math.round(avg));
             }
         });
-    }
-
-    function ajaxLoadAvgUnit(startDate,endDate) {
-        $("#container2").empty();
-        miniColumnSO.series = [];
-
-        if(!startDate || !endDate){
-            chart2 = new Highcharts.Chart(miniColumnSO);
-            document.getElementById("val2").innerHTML = '-';
-            return;
-        }
 
         $.ajax({
             type:'POST',
             url:"<?php echo base_url();?>dashboard/custom_avg_unit",
             data:{
-                start:  startDate.format('{yyyy}-{MM}-{dd}'),
-                end:    endDate.format('{yyyy}-{MM}-{dd}')
+                start:  startD,
+                end:    endD,
+                year:   year
             },
             dataType:'json',
             success:
@@ -748,33 +762,72 @@
                     sum += parseInt(unit_so[i]);
                 }
                 var unit = sum/unit_so.length;
-                console.log(unit_so);
+
                 myChart = $('#container2').highcharts(miniColumnSO);
                 document.getElementById("val2").innerHTML = unit;
             }
         });
-    }
 
-    /*AVERAGE SALES ORDER*/
-    function get_Avg_So(date){
-        var mydate = date;
         $.ajax({
             type:'POST',
-            url:"<?php echo base_url();?>dashboard/dashboard_penjualan",
-            data:{mydate:mydate},
+            url: "<?php echo base_url();?>dashboard/dashboard_total_os",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:    year
+            },
             dataType:'json',
             success:
-            function(data) {
-                var set = [];
-                $.each(data, function() {
-                    miniColumnSO.series.push({
-                        name: this.label,
-                        data: [parseInt(this.value)]
-                    })
-                });
-                var chart1 = new Highcharts.Chart(miniColumnSO);
+            function(msg){
+                gaugePemesanan.series.push({
+                    name: 'pemesanan',
+                    data: [parseInt(msg.pesan)],
+                }) 
+                myGaugePemesanan = $('#container3').highcharts(gaugePemesanan);
+
+                gaugeTerkirim.series.push({
+                    name: 'Terkirim',
+                    data: [parseInt(msg.terkirim)],
+                }) 
+                myGaugeTerkirim = $('#container4').highcharts(gaugeTerkirim);
             }
-        });
+        }); 
+
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>dashboard/dashboard_total_keuangan",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:    year
+            },
+            dataType:'json',
+            success:
+            function(msg){
+                gaugeInvoice.series.push({
+                    name: 'Invoice',
+                    data: [parseInt(msg.pesan)],
+                })
+
+                gaugeTerima.series.push({
+                    name: 'Terima Pembayaran',
+                    data: [parseInt(msg.terkirim)],
+                })  
+
+                var myGaugeInvoice = new Highcharts.Chart(gaugeInvoice);
+                myGaugeInvoice.yAxis[0].update({         
+                    min:0,
+                    max:getmax(parseInt(msg.pesan))
+                });
+
+                var myGaugeTerima = new Highcharts.Chart(gaugeTerima);
+                myGaugeTerima.yAxis[0].update({         
+                    min:0,
+                    max:getmax(parseInt(msg.terkirim))
+                });
+                console.log(msg.terkirim);
+            }
+        }); 
     }
 
     /*FILTER PENJUALAN*/
@@ -1023,18 +1076,10 @@
             tickHintX: 9, // How many ticks to show horizontally
 
             dataFormatX : function(x) {
-                
-                // This turns converts the timestamps coming from
-                // ajax.php into a proper JavaScript Date object
-                
                 return Date.create(x);
             },
 
             tickFormatX : function(x) {
-                
-                // Provide formatting for the x-axis tick labels.
-                // This uses sugar's format method of the date object. 
-
                 return x.format('{MM}/{dd}');
             },
             
@@ -1058,9 +1103,6 @@
                 listDetail(d.x.format('{yyyy}-{MM}-{dd}'));
             }
         };
-
-        // Create a new xChart instance, passing the type
-        // of chart a data set and the options object
         
         var chart = new xChart('line-dotted', data, '#chart' , opts);
         // Otherwise, issue an AJAX request
@@ -1099,89 +1141,6 @@
     End of drill down Penjualan
     */
 
-    function loadGauge(startDate,endDate,year){
-        //var myYear = year;
-        $("#container3").empty();
-        gaugePemesanan.series = [];
-        $("#container4").empty();
-        gaugeTerkirim.series = [];
-        $("#container5").empty();
-        gaugeInvoice.series = [];
-        $("#container6").empty();
-        gaugeTerima.series = [];
-
-        var startD = '';
-        var endD = '';
-
-        if(year == ''){
-            startD = startDate.format('{yyyy}-{MM}-{dd}');
-            endD = endDate.format('{yyyy}-{MM}-{dd}');
-        }
-
-
-        $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>dashboard/dashboard_total_os",
-            data :{
-                start:  startD,
-                end:    endD,
-                year:    year
-            },
-            dataType:'json',
-            success:
-            function(msg){
-                gaugePemesanan.series.push({
-                    name: 'pemesanan',
-                    data: [parseInt(msg.pesan)],
-                }) 
-                myGaugePemesanan = $('#container3').highcharts(gaugePemesanan);
-
-                gaugeTerkirim.series.push({
-                    name: 'Terkirim',
-                    data: [parseInt(msg.terkirim)],
-                }) 
-                myGaugeTerkirim = $('#container4').highcharts(gaugeTerkirim);
-            }
-        }); 
-
-        $.ajax({
-            type:'POST',
-            url: "<?php echo base_url();?>dashboard/dashboard_total_keuangan",
-            data :{
-                start:  startD,
-                end:    endD,
-                year:    year
-            },
-            dataType:'json',
-            success:
-            function(msg){
-                gaugeInvoice.series.push({
-                    name: 'Invoice',
-                    data: [parseInt(msg.pesan)],
-                })
-
-                gaugeTerima.series.push({
-                    name: 'Terima Pembayaran',
-                    data: [parseInt(msg.terkirim)],
-                })  
-
-                //myGaugeInvoice = $('#container5').highcharts(gaugeInvoice);
-                var myGaugeInvoice = new Highcharts.Chart(gaugeInvoice);
-                myGaugeInvoice.yAxis[0].update({         
-                    min:0,
-                    max:getmax(parseInt(msg.pesan))
-                });
-
-                var myGaugeTerima = new Highcharts.Chart(gaugeTerima);
-                myGaugeTerima.yAxis[0].update({         
-                    min:0,
-                    max:getmax(parseInt(msg.pesan))
-                });
-            }
-        }); 
-    }
-
-
     //Table
     function listDetail(date){
         $.ajax({
@@ -1196,29 +1155,26 @@
         });   
     }
 
-    function getmax(initval){
-        var newVal;
-        if(initval > 100 && initval <= 1000){
-            newVal = 1000;
-        }else if(initval > 1000 && initval <= 10000){
-            newVal = 10000;
-        }else if(initval > 10000 && initval <= 100000){
-            newVal = 100000;
-        }else if(initval > 100000 && initval <= 1000000){
-            newVal = 1000000;
-        }else if(initval > 1000000 && initval <= 100000000){
-            newVal = 100000000;
-        }else if(initval > 100000000 && initval <= 1000000000){
-            newVal = 1000000000;
-        }else if(initval > 1000000000 && initval <= 10000000000){
-            newVal = 10000000000;
-        }else if(initval > 10000000000 && initval <= 100000000000){
-            newVal = 100000000000;
-        }else{
-            newVal = 100;
-        }
-
-        return newVal;
-    }
+    /*AVERAGE SALES ORDER
+    function get_Avg_So(date){
+        var mydate = date;
+        $.ajax({
+            type:'POST',
+            url:"<?php echo base_url();?>dashboard/dashboard_penjualan",
+            data:{mydate:mydate},
+            dataType:'json',
+            success:
+            function(data) {
+                var set = [];
+                $.each(data, function() {
+                    miniColumnSO.series.push({
+                        name: this.label,
+                        data: [parseInt(this.value)]
+                    })
+                });
+                var chart1 = new Highcharts.Chart(miniColumnSO);
+            }
+        });
+    }*/
 </script>
 </html>

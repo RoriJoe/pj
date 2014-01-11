@@ -27,9 +27,7 @@
 
 	    function dashboard_avg_os(){
 	    	$data = array();
-
 			$results = $this->dashboard_model->get_os();
-			// Build a new array with the data
 			foreach ($results as $value) {
 				$data['pesan'] = $value->pemesananAvg;
 				$data['terkirim'] = $value->terkirimAvg;
@@ -51,6 +49,22 @@
 			echo json_encode($data);
 	    }
 
+	    function dashboard_total_os(){
+	    	$year = $this->input->post('year');
+            $start = $this->input->post('start');
+            $end = $this->input->post('end');
+           
+	    	$data = array();
+
+			$results = $this->dashboard_model->get_total_os($start,$end,$year);
+			// Build a new array with the data
+			foreach ($results as $value) {
+				$data['pesan'] = $value->pemesananTotal;
+				$data['terkirim'] = $value->terkirimTotal;
+			}
+			echo json_encode($data);
+	    }
+
 	    function dashboard_total_keuangan(){
 	    	$year = $this->input->post('year');
             $start = $this->input->post('start');
@@ -68,24 +82,60 @@
 			echo json_encode($data);
 	    }
 
-	    function dashboard_total_os(){
-	    	$year = $this->input->post('year');
+        //**Advance dashboard**/
+        function advance(){
+        	$data['judul']="Dashboard Insight Pelita Jaya";
+	        $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+        	$this->load->view('dashboard_full', $data);
+        }
+
+        function date_call(){
+        	$date = $this->input->post('_dateOpt');
+        	$query = $this->dashboard_model->get_date_list($date);
+
+            $final['']='-- Select '.$date.' --';
+            foreach ($query as $a) 
+            {
+                $final[$a->myOpt] = $a->myOptTxt;
+            }
+
+            echo form_dropdown('list-date',$final,'0','id="list-date" onchange="filterAll()"');
+        }
+
+        function custom_avg_so(){
+        	$year = $this->input->post('year');
             $start = $this->input->post('start');
             $end = $this->input->post('end');
-           
-	    	$data = array();
 
-			$results = $this->dashboard_model->get_total_os($start,$end,$year);
-			// Build a new array with the data
-			foreach ($results as $value) {
-				$data['pesan'] = $value->pemesananTotal;
-				$data['terkirim'] = $value->terkirimTotal;
+			$data = array();
+			$results1 = $this->dashboard_model->get_penjualan_last($start,$end,$year);
+
+			foreach ($results1 as $key => $value) {
+				$data[$key]['label'] = $value->Tgl;
+				$data[$key]['value'] = $value->grandttl;
 			}
-
 			echo json_encode($data);
-	    }
+        }
 
-	    function dashboard_penjualan_filter(){
+        function custom_avg_unit(){
+        	$year = $this->input->post('year');
+            $start = $this->input->post('start');
+            $end = $this->input->post('end');
+
+			$data = array();
+			$results1 = $this->dashboard_model->get_penjualan_unit($start,$end,$year);
+			//$results2 = $this->dashboard_model->get_penjualan_avg($start, $end);
+
+			foreach ($results1 as $key => $value) {
+				$data[$key]['label'] = $value->Tgl;
+				$data[$key]['value'] = $value->unit;
+				$data[$key]['value_avg'] = $value->unit_avg;
+			}
+			echo json_encode($data);
+        }
+        //**End**//
+
+        function dashboard_penjualan_filter(){
 	    	$filter = $this->input->post('filter');
 	    	$column = $this->input->post('column');
 
@@ -128,7 +178,6 @@
 			$data = array();
 
 			$results = $this->dashboard_model->get_drill_day($year, $month);
-			// Build a new array with the data
 			foreach ($results as $key => $value) {
 				$data[$key]['label'] = $value->Tgl;
 				$data[$key]['value'] = $value->grandttl;
@@ -141,56 +190,5 @@
 	    	$date = $this->input->post('date');
             $data['hasil']=$this->dashboard_model->get_detail_penjualan($date);
             $this->load->view('content/list/dashboard_detail', $data);
-        }
-
-        function advance(){
-        	$data['judul']="Dashboard Insight Pelita Jaya";
-	        $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-        	$this->load->view('dashboard_full', $data);
-        }
-
-        function date_call(){
-        	$date = $this->input->post('_dateOpt');
-        	$query = $this->dashboard_model->get_date_list($date);
-
-            $final['']='-- Select '.$date.' --';
-            foreach ($query as $a) 
-            {
-                $final[$a->myOpt] = $a->myOptTxt;
-            }
-
-            echo form_dropdown('list-date',$final,'0','id="list-date" onchange="filterAll()"');
-        }
-
-        function custom_avg_so(){
-        	//test
-	        $start = $this->input->post('start');
-			$end = $this->input->post('end');
-			$data = array();
-
-			$results1 = $this->dashboard_model->get_penjualan_last($start, $end);
-			//$results2 = $this->dashboard_model->get_penjualan_avg($start, $end);
-			// Build a new array with the data
-			foreach ($results1 as $key => $value) {
-				$data[$key]['label'] = $value->Tgl;
-				$data[$key]['value'] = $value->grandttl;
-			}
-			echo json_encode($data);
-        }
-        function custom_avg_unit(){
-        	//test
-	        $start = $this->input->post('start');
-			$end = $this->input->post('end');
-			$data = array();
-
-			$results1 = $this->dashboard_model->get_penjualan_unit($start, $end);
-			//$results2 = $this->dashboard_model->get_penjualan_avg($start, $end);
-			// Build a new array with the data
-			foreach ($results1 as $key => $value) {
-				$data[$key]['label'] = $value->Tgl;
-				$data[$key]['value'] = $value->unit;
-				$data[$key]['value_avg'] = $value->unit_avg;
-			}
-			echo json_encode($data);
         }
     }

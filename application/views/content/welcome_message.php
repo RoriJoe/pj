@@ -41,7 +41,6 @@
                     <input type='text' id='fieldFilter'  style='width:145px;visibility:hidden;' placeholder='Rupiah'>
                     <div class='clearfix'></div>
                     <button class='btn btn-mini btn-success' onclick='applyFilter()'>Apply</button>
-                    <button class='btn btn-mini' onclick='loadChart()'>Clear</button>
                 ">
 
                 <i class='icon-filter'></i> Filter

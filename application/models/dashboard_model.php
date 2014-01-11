@@ -80,7 +80,20 @@
 			return $query->result();
 		}
 
-		function get_os(){ //Sementara
+		function get_detail_penjualan($date){
+
+            $this->db->select('A.No_Do, A.Tgl, A.grandttl, B.Perusahaan');
+			$this->db->from('do_h A');
+			$this->db->join('pelanggan B', 'B.Kode = A.Kode_Plg', 'LEFT');
+			$this->db->where('A.Tgl =', $date);
+			$this->db->order_by("A.Tgl", "desc");
+
+			$q = $this->db->get();
+            return $q->result();
+        }
+
+		/*Gauge*/
+		function get_os(){
 		
 			$q = $this->db->query("
 				SELECT ROUND(AVG(C.tes),2) AS pemesananAvg, ROUND(A.pesan / B.kirim, 2) AS terkirimAvg
@@ -93,17 +106,19 @@
 			return $q->result();
 		}
 
-/*		function get_total_os(){ //Sementara
+		function get_keuangan(){
 		
 			$q = $this->db->query("
-				SELECT A.pesan AS pemesananTotal, B.kirim AS terkirimTotal
+				SELECT ROUND(invoiceavg) as invAvg, ROUND(AVG(terimabyrTotal)) as terbayarAvg
 				FROM 
-					(SELECT COUNT(QtyTemp) AS pesan FROM do_d) AS A, 
-					(SELECT COUNT(QtyTemp) AS kirim FROM do_d WHERE QtyTemp = 0 OR QtyTemp NOT LIKE Qty) AS B
+				(
+				    SELECT AVG(A.Grand) AS invoiceavg, A.Grand, (sum(A.Grand) - SUM(A.Temp)) as terimabyrTotal
+				    FROM invoice A
+				)inner_query
 			");
 			
 			return $q->result();
-		}*/
+		}
 
 		function get_total_os($start,$end,$year){
 			if(!$year){
@@ -147,112 +162,76 @@
 			return $q->result();
 		}
 
-		function get_keuangan(){ //Sementara
-		
-			$q = $this->db->query("
-				SELECT ROUND(invoiceavg) as invAvg, ROUND(AVG(terimabyrTotal)) as terbayarAvg
-				FROM 
-				(
-				    SELECT AVG(A.Grand) AS invoiceavg, A.Grand, (sum(A.Grand) - SUM(A.Temp)) as terimabyrTotal
-				    FROM invoice A
-				)inner_query
-			");
-			
-			return $q->result();
-		}
-
-/*		function get_total_keuangan(){ //Sementara
-		
-			$q = $this->db->query("
-				SELECT SUM(Grand) AS invoiceTotal, (SUM(Grand) - SUM(Temp)) AS terbayarTotal 
-				FROM invoice
-			");
-			
-			return $q->result();
-		}*/
-
 		function get_total_keuangan($start,$end,$year){
 			if(!$year){
 				$q = $this->db->query("
-					SELECT SUM(Grand) AS invoiceTotal, (SUM(Grand) - SUM(Temp)) AS terbayarTotal 
+					SELECT IFNULL(SUM(Grand), 0) AS invoiceTotal, IFNULL((SUM(Grand) - SUM(Temp)),0) AS terbayarTotal  
 					FROM invoice
 					WHERE Tgl >= '$start' AND Tgl <= '$end'
 				");
 			}else{
 				$q = $this->db->query("
-					SELECT SUM(Grand) AS invoiceTotal, (SUM(Grand) - SUM(Temp)) AS terbayarTotal 
+					SELECT IFNULL(SUM(Grand), 0) AS invoiceTotal, IFNULL((SUM(Grand) - SUM(Temp)),0) AS terbayarTotal  
 					FROM invoice
 					WHERE YEAR(Tgl) = '$year'
 				");
 			}
-			
-			
 			return $q->result();
 		}
 
-		function get_detail_penjualan($date)
-        {
-
-            $this->db->select('A.No_Do, A.Tgl, A.grandttl, B.Perusahaan');
-			$this->db->from('do_h A');
-			$this->db->join('pelanggan B', 'B.Kode = A.Kode_Plg', 'LEFT');
-			$this->db->where('A.Tgl =', $date);
-			$this->db->order_by("A.Tgl", "desc");
-
-			$q = $this->db->get();
-            return $q->result();
-        }
-
-
+        /*Advance only*/
         function get_date_list($opt){
-        	if($opt == 'year'){
-        		$query = $this->db->query("
-	                SELECT YEAR (Tgl) AS myOpt, YEAR (Tgl) AS myOptTxt
-				    FROM do_h
-				    GROUP BY YEAR (Tgl)
-                ");
-        	}else if($opt == 'month'){
-        		$query = $this->db->query("
-	                SELECT MONTH (Tgl) AS myOpt, MONTHNAME (Tgl) AS myOptTxt
-				    FROM do_h
-				    GROUP BY MONTH (Tgl)
-                ");
-        	}
-
+    		$query = $this->db->query("
+                SELECT YEAR (Tgl) AS myOpt, YEAR (Tgl) AS myOptTxt
+			    FROM do_h
+			    GROUP BY YEAR (Tgl)
+            ");
             return $query->result();
         }
 
-        function get_penjualan_last($start, $end){
-        	$q = $this->db->query("
-				SELECT Tgl, grandttl
-				FROM do_h
-				WHERE Tgl >= '$start' AND Tgl <= '$end'
-				ORDER BY Tgl DESC
-			");
-			
+        function get_penjualan_last($start,$end,$year){
+        	if(!$year){
+        		$q = $this->db->query("
+					SELECT Tgl, grandttl
+					FROM do_h
+					WHERE Tgl >= '$start' AND Tgl <= '$end'
+					ORDER BY Tgl ASC
+					LIMIT 0,10
+				");
+        	}else{
+        		$q = $this->db->query("
+					SELECT Tgl, grandttl
+					FROM do_h
+					WHERE YEAR(Tgl) = '$year'
+					ORDER BY Tgl ASC
+					LIMIT 0,10
+				");
+        	}
+        	
 			return $q->result();
 		}
 
-/*		function get_penjualan_avg($start, $end){
-        	$q = $this->db->query("
-				SELECT ROUND(AVG (grandttl)) AS Avg
-				FROM do_h
-				WHERE Tgl >= '2013-12-1' AND Tgl <= '2014-1-10'
-			");
-			
-			return $q->result();
-		}*/
+		function get_penjualan_unit($start,$end,$year){
+			if(!$year){
+				$q = $this->db->query("
+					SELECT A.Tgl,SUM(B.Qty) AS unit, ROUND(AVG(B.Qty)) AS unit_avg
+					FROM do_h A
+					JOIN do_d B ON B.No_Do = A.No_Do
+					WHERE Tgl >= '$start' AND Tgl <= '$end'
+					GROUP BY A.Tgl
+					ORDER BY Tgl ASC
+				");
+			}else{
+				$q = $this->db->query("
+					SELECT A.Tgl,SUM(B.Qty) AS unit, ROUND(AVG(B.Qty)) AS unit_avg
+					FROM do_h A
+					JOIN do_d B ON B.No_Do = A.No_Do
+					WHERE YEAR(Tgl) = '$year'
+					GROUP BY A.Tgl
+					ORDER BY Tgl ASC
+				");
+			}
 
-		function get_penjualan_unit($start, $end){
-        	$q = $this->db->query("
-				SELECT A.Tgl,SUM(B.Qty) AS unit, ROUND(AVG(B.Qty)) AS unit_avg
-				FROM do_h A
-				JOIN do_d B ON B.No_Do = A.No_Do
-				WHERE Tgl >= '$start' AND Tgl <= '$end'
-				GROUP BY A.Tgl
-				ORDER BY Tgl DESC
-			");
-			
 			return $q->result();
 		}
 	}
