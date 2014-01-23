@@ -11,6 +11,14 @@
             if (!$this->authentication->is_signed_in()) redirect('');
 		}
 
+        function index()
+        {
+            $data['judul']="Welcome";
+            $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+
+            $this->template->display('content/welcome_message', $data);
+        }
+
 		function home()
 	    {
 	        $data['judul']="Welcome";
@@ -41,7 +49,7 @@
         function ms_satuan(){
             $data['judul']="Master Satuan";
             $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-            $this->template->display('content/master_mobil/ms_satuan', $data);
+            $this->template->display('content/master_satuan/ms_satuan', $data);
         }
 
         function ms_mobil(){
