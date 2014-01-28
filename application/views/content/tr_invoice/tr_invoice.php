@@ -2,7 +2,7 @@
     <div class="span9">
         <!--Main Form-->
         <div class="bar">
-            <p>Form Inovice <i id="icon" class='icon-chevron-down icon-white'></i></p>
+            <p>Form Invoice <i id="icon" class='icon-chevron-down icon-white'></i></p>
         </div>
 
         <div id="konten" class="hide-con" style="max-height:440px;height:440px;">

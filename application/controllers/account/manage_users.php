@@ -219,7 +219,7 @@ class Manage_users extends CI_Controller {
           }
 
           // Check if the user should be suspended
-          if( $this->authorization->is_permitted('ban_users') ) 
+          /*if( $this->authorization->is_permitted('ban_users') ) 
           {
             if( $this->input->post('manage_user_ban', true) )
             {
@@ -228,6 +228,14 @@ class Manage_users extends CI_Controller {
             elseif( $this->input->post('manage_user_unban', true) )
             {
               $this->account_model->remove_suspended_datetime($id);
+            }
+          }*/
+
+          if( $this->authorization->is_permitted('ban_users') ) 
+          {
+            if( $this->input->post('manage_user_ban', true) )
+            {
+              $this->account_model->remove_user($id);
             }
           }
         }
@@ -238,6 +246,7 @@ class Manage_users extends CI_Controller {
         $attributes['firstname'] = $this->input->post('users_firstname', TRUE) ? $this->input->post('users_firstname', TRUE) : NULL;
         $attributes['lastname'] = $this->input->post('users_lastname', TRUE) ? $this->input->post('users_lastname', TRUE) : NULL;
         $attributes['phone'] = $this->input->post('users_phone', TRUE) ? $this->input->post('users_phone', TRUE) : NULL;
+        $attributes['address'] = $this->input->post('users_address', TRUE) ? $this->input->post('users_address', TRUE) : NULL;
         $this->account_details_model->update($id, $attributes);
 
         // Apply roles
@@ -294,6 +303,11 @@ class Manage_users extends CI_Controller {
   function email_check($email)
   {
     return $this->account_model->get_by_email($email) ? TRUE : FALSE;
+  }
+
+
+  function delete($id){
+
   }
 }
 

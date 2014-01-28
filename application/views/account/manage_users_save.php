@@ -169,13 +169,10 @@
       <div class="form-actions">
         <?php echo form_submit('manage_user_submit', 'Save', 'class="btn btn-primary"'); ?>
         <?php echo anchor('account/manage_users', 'Cancel', 'class="btn"'); ?>
-        <?php if( $this->authorization->is_permitted('ban_users') && $action == 'update' ): ?>
+
+       <?php if( $this->authorization->is_permitted('ban_users') && $action == 'update' ): ?>
           <span><?php echo '&nbsp;or&nbsp;';?></span>
-          <?php if( isset($update_account->suspendedon) ): ?>
-            <?php echo form_submit('manage_user_unban', 'Unban User', 'class="btn btn-danger"'); ?>
-          <?php else: ?>
-            <?php echo form_submit('manage_user_ban', 'Ban User', 'class="btn btn-danger"'); ?>
-          <?php endif; ?>
+            <?php echo form_submit('manage_user_ban', 'Delete', 'class="btn btn-danger"'); ?>
         <?php endif; ?>
       </div>
 

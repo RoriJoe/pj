@@ -41,6 +41,7 @@ class Account_details_model extends CI_Model {
 		if (isset($attributes['fullname'])) if (strlen($attributes['fullname']) > 160) $attributes['fullname'] = substr($attributes['fullname'], 0, 160);
 		if (isset($attributes['firstname'])) if (strlen($attributes['firstname']) > 80) $attributes['firstname'] = substr($attributes['firstname'], 0, 80);
 		if (isset($attributes['lastname'])) if (strlen($attributes['lastname']) > 80) $attributes['lastname'] = substr($attributes['lastname'], 0, 80);
+		if (isset($attributes['address'])) if (strlen($attributes['address']) > 160) $attributes['lastname'] = substr($attributes['address'], 0, 160);
 		if (isset($attributes['dateofbirth']))
 		{
 			$this->load->helper('date');

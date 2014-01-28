@@ -133,7 +133,7 @@
     <div id="list_detail_keuangan"></div>
   </div>
   <div class="modal-footer">
-    <span class="pull-left" style="background-color:#67C767">Terbayar</span>
+    <span class="pull-left" style="background-color:#67C767">Terima Tagihan</span>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>

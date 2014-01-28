@@ -252,6 +252,12 @@ class Account_model extends CI_Model {
 		$this->db->update('account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
 
+	function remove_user($account_id)
+	{
+		$this->db->where('id',$account_id);
+        $this->db->delete('account');
+	}
+
 }
 
 
