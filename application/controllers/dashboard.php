@@ -191,4 +191,21 @@
             $data['hasil']=$this->dashboard_model->get_detail_penjualan($date);
             $this->load->view('content/list/dashboard_detail', $data);
         }
+        function dashboard_detail_os(){
+	    	$year = $this->input->post('year');
+            $start = $this->input->post('start');
+            $end = $this->input->post('end');
+
+            $data['hasil2']=$this->dashboard_model->get_detail_os($year,$start,$end);
+            $this->load->view('content/list/os_detail', $data);
+        }
+
+        function dashboard_detail_keuangan(){
+	    	$year = $this->input->post('year');
+            $start = $this->input->post('start');
+            $end = $this->input->post('end');
+
+            $data['hasil2']=$this->dashboard_model->get_detail_keuangan($year,$start,$end);
+            $this->load->view('content/list/keuangan_detail', $data);
+        }
     }

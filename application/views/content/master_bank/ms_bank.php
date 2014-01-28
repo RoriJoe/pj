@@ -108,16 +108,6 @@
             <td>No Perkiraan</td>
             <td>
 				<div id="noperkiraan" style="margin-left:10px;"></div>
-                <!--<select name="_no_perk" class="validate[required]" id="_no_perk" style="margin-left: 10px; margin-right: 20px;">
-                <option value="">- Pilih -</option>
-                <?php
-               /*  foreach ($list_perkiraan as $isi)
-                {
-                    echo "<option ";
-                    echo "value = '".$isi->value."'>".$isi->value."</option>";
-                } */
-                ?>
-                </select>-->
             </td>
        </tr>      
     </table>
@@ -172,6 +162,7 @@ function loadListBank(){
             }, 1500);
         }
     });
+    $('#save').attr('mode','add');
 }
 
 function detailBank(){

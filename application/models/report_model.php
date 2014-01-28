@@ -197,7 +197,7 @@ order by Tgl,saw */
 			LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
 			LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
 		");
-				return $q->result();
+		return $q->result();
 		
 	}
 	

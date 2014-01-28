@@ -79,6 +79,7 @@ function load_list(){
             }, 1500);
         }
     });
+    $('#save').attr('mode','add');
 }
 
 $("#kd").keypress(function(e){

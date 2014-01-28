@@ -119,6 +119,7 @@ function loadList(){
             }, 1500);
         }
     });
+    $('#save').attr('mode','add');
 }
 
 //Auto Generate

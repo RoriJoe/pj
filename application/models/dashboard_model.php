@@ -234,4 +234,42 @@
 
 			return $q->result();
 		}
+
+		function get_detail_os($year,$start,$end){
+			if(!$year){
+				$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty,QtyTemp, Satuan1,grandttl,do_d.Jumlah
+					FROM do_d
+					LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
+					LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
+					LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
+					WHERE do_h.Tgl >= '$start' AND do_h.Tgl <= '$end'
+				");
+			}else{
+				$q = $this->db->query("SELECT do_d.No_Do, pelanggan.Perusahaan as NP, do_h.Tgl, barang.Nama, Ukuran, Qty,QtyTemp, Satuan1,grandttl,do_d.Jumlah
+					FROM do_d
+					LEFT OUTER JOIN do_h ON do_d.No_Do = do_h.No_Do
+					LEFT OUTER JOIN pelanggan ON do_h.Kode_Plg = pelanggan.Kode
+					LEFT OUTER JOIN barang ON do_d.Kode_Brg = barang.Kode
+					WHERE YEAR(do_h.Tgl) = '$year'
+				");
+			}
+			return $q->result();
+		}
+
+		function get_detail_keuangan($year,$start,$end){
+			if(!$year){
+				$q = $this->db->query("SELECT A.*, pelanggan.Perusahaan
+					FROM invoice A
+					LEFT OUTER JOIN pelanggan ON A.Kode_Plg = pelanggan.Kode
+					WHERE A.Tgl >= '$start' AND A.Tgl <= '$end'
+				");
+			}else{
+				$q = $this->db->query("SELECT A.*, pelanggan.Perusahaan
+					FROM invoice A
+					LEFT OUTER JOIN pelanggan ON A.Kode_Plg = pelanggan.Kode
+					WHERE YEAR(A.Tgl) = '$year'
+				");
+			}
+			return $q->result();
+		}
 	}

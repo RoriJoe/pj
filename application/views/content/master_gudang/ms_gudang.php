@@ -68,21 +68,22 @@
     });
 
     function load_list(){
-    $('#loadingDiv').show()
-    $.ajax({
-        type:'POST',
-        url: "<?php echo base_url();?>index.php/ms_gudang/index",
-        data :{},
-        success:
-        function(hh){
-            setTimeout(function () {
-                $('#hasil').html(hh);
-                $('#loadingDiv').hide()
-            }, 1500);
-            //var hashVal = 'MasterGudang';
-            //window.location.hash = '#' + hashVal;
-        }
-    });
+        $('#loadingDiv').show()
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>index.php/ms_gudang/index",
+            data :{},
+            success:
+            function(hh){
+                setTimeout(function () {
+                    $('#hasil').html(hh);
+                    $('#loadingDiv').hide()
+                }, 1500);
+                //var hashVal = 'MasterGudang';
+                //window.location.hash = '#' + hashVal;
+            }
+        });
+        $('#save').attr('mode','add');
     }
 
     function cekauthorization(){

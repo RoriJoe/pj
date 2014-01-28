@@ -863,3 +863,10 @@ ul.inline, ol.inline {
 .table-no-border td{
     border-top: 0;
 }
+.table tbody tr.success td {
+    background-color: #A9F5A6;
+}
+#tbos th{
+    background: #C24F4F !important;
+    color: #FFF;
+}

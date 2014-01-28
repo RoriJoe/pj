@@ -157,7 +157,7 @@ function cekauthorization(){
     
 function autogen(){
     $("#kd").attr('disabled',false);
-    
+    $('#save').attr('mode','add');
     $.ajax({
     type:'POST',
     url: "<?php echo base_url();?>index.php/ms_pelanggan/auto_gen",

@@ -264,6 +264,7 @@ $('#disc').bind('textchange', function (event){
     $("#dpp").val(accounting.formatMoney(dpp, "",0,"."));
     $('#ppn').val("");
     $('#ppnT').val("");
+    $("#granT").val(accounting.formatMoney(dpp, "",0,"."));
 }); 
 
 $('#discT').bind('textchange', function (event){    
@@ -281,6 +282,7 @@ $('#discT').bind('textchange', function (event){
         //$("#total2").val(q+hasil);  */
         $('#ppn').val("");
         $('#ppnT').val("");
+        $("#granT").val(accounting.formatMoney(dpp, "",0,"."));
         formatAngka(this,'.');
     });         
 }

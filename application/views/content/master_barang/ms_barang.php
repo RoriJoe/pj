@@ -152,6 +152,7 @@ function loadListBarang(){
             }, 1500);
         }
     });
+    $('#save').attr('mode','add');
 }
 
 function autogen(){

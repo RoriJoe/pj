@@ -61,40 +61,36 @@
                 <div class="bar-dash">
                     <span>Outstanding</span>
                 </div>
-
                 <div id="placeholder">
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div id="pemesanan" style="height:150px;"></div>
+                    <a href="#" title="Click To Show Detail" onclick="outstandingDetail()">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div id="pemesanan" style="height:150px;"></div>
+                            </div>
+                            <div class="span6">
+                                <div id="kirim" style="height:150px;"></div>
+                            </div>
                         </div>
-                        <div class="span6">
-                            <div id="kirim" style="height:150px;"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                    </a>
                 </div>
             </div>
             
             <div class="span12" style="margin-left:0px;">
                 <div class="bar-dash">
                     <span>Keuangan</span>
-                    <!--<div class="dropdown" style="float:right;">
-                        <a class="dropdown-toggle btn" id="drop5" role="button" data-toggle="dropdown" href="#"><i class="icon-filter"></i></a>
-                        <ul id="menu2" class="dropdown-menu pull-right" role="menu" aria-labelledby="drop5">
-                          <li><a tabindex="-1" href="#" id="avg_keuangan">Average</a></li>
-                          <li><a tabindex="-1" href="#" id="total_keuangan">Total</a></li>
-                        </ul>
-                    </div>-->
                 </div>
 
                 <div id="placeholder">
-                    <div class="span6">
-                        <div id="invoice"  style="height:150px;"></div>
-                    </div>
-                    <div class="span6">
-                        <div id="tagihan"  style="height:150px;"></div>
-                    </div>
-                    <div class="clearfix"></div>
+                    <a href="#" title="Click To Show Detail" onclick="keuanganDetail()">
+                        <div class="span6">
+                            <div id="invoice"  style="height:150px;"></div>
+                        </div>
+                        <div class="span6">
+                            <div id="tagihan"  style="height:150px;"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -110,6 +106,34 @@
     <div id="list_detail"></div>
   </div>
   <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<div class="modal hide fade" id="modalOutstanding" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel2">Detail</h3>
+  </div>
+  <div class="modal-body" style="height:400px">
+    <div id="list_detail_os"></div>
+  </div>
+  <div class="modal-footer">
+    <span class="pull-left" style="background-color:#67C767">Terkirim</span>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<div class="modal hide fade" id="modalKeuangan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel3">Detail</h3>
+  </div>
+  <div class="modal-body" style="height:400px">
+    <div id="list_detail_keuangan"></div>
+  </div>
+  <div class="modal-footer">
+    <span class="pull-left" style="background-color:#67C767">Terbayar</span>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
@@ -146,6 +170,10 @@
     });
 
     var pemisah_ribuan = '.';
+    var xdStart = '';
+    var xdEnd = '';
+    var xdYear = '';
+
     function pemisahRibuan(str){
         str = str.toString();   // konversi ke string
         var strleng = str.length;  // panjang string
@@ -200,8 +228,13 @@
         if(myVal != ''){
             ajaxLoadMonth(myVal);
             updateGauge('','',myVal);
+            xdStart = "";
+            xdEnd = "";
+            xdYear = myVal;
         }else{
+            var y = new Date();
             ajaxLoadFilter('','year');
+            xdYear = y.getFullYear();
         }
     }
 
@@ -240,6 +273,9 @@
         // Load chart
         ajaxLoadChart(startDate,endDate);
         loadGauge(startDate,endDate,'');
+        xdStart = startDate;
+        xdEnd = endDate;
+        xdYear = "";
         
         range.daterangepicker({
             
@@ -256,6 +292,9 @@
                 
                 ajaxLoadChart(start, end);  
                 updateGauge(start, end,'');
+                xdStart = start;
+                xdEnd = end;
+                xdYear = "";
         });
         
         // The tooltip shown over the chart
@@ -461,6 +500,9 @@
         if(year == ''){
             startD = startDate.format('{yyyy}-{MM}-{dd}');
             endD = endDate.format('{yyyy}-{MM}-{dd}');
+
+            xdStart = startDate.format('{yyyy}-{MM}-{dd}');
+            xdEnd = endDate.format('{yyyy}-{MM}-{dd}');
         }
 
         if(!startDate || !endDate){
@@ -468,6 +510,8 @@
             h.refresh(0); 
             i.refresh(0); 
             j.refresh(0); 
+            xdStart = "";
+            xdEnd = "";
         }
 
         $.ajax({
@@ -505,7 +549,7 @@
         });    
     }
 
-    //Table Barang
+    //Detail Table
     function listDetail(date){
         $.ajax({
             type:'POST',
@@ -517,6 +561,58 @@
                 document.getElementById('myModalLabel').innerHTML = 'Detail Penjualan '+date;
             }
         });   
+    }
+
+    function outstandingDetail(){
+        var startD = '';
+        var endD = '';
+
+        if(xdYear == ''){
+            startD = xdStart.format('{yyyy}-{MM}-{dd}');
+            endD = xdEnd.format('{yyyy}-{MM}-{dd}');
+        }
+        //alert(xdYear);
+        $('#modalOutstanding').modal('show');
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>dashboard/dashboard_detail_os",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:   xdYear,
+            },
+            success:
+            function(hh){
+                $('#list_detail_os').html(hh);
+                document.getElementById('myModalLabel2').innerHTML = 'Detail Outstanding Penjualan';
+            }
+        });
+    }
+
+    function keuanganDetail(){
+        var startD = '';
+        var endD = '';
+
+        if(xdYear == ''){
+            startD = xdStart.format('{yyyy}-{MM}-{dd}');
+            endD = xdEnd.format('{yyyy}-{MM}-{dd}');
+        }
+        //alert(xdYear);
+        $('#modalKeuangan').modal('show');
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>dashboard/dashboard_detail_keuangan",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:   xdYear,
+            },
+            success:
+            function(hh){
+                $('#list_detail_keuangan').html(hh);
+                document.getElementById('myModalLabel3').innerHTML = 'Detail Keuangan';
+            }
+        });
     }
 
     var g, h, i, j;
