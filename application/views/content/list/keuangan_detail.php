@@ -1,14 +1,14 @@
-<div style="height: 245px;">
-<table class="table table-bordered" id="tbos" cellpadding="5px">
+<div style="height: 400px; overflow-x:scroll">
+<table class="table table-bordered" id="tbos" cellpadding="5px" style="width:600px">
     <thead>
         <tr>
             <th>Kode Invoice</th>
             <th>Pelanggan</th>
             <th>Tanggal</th>
-            <th>Kode SJ</th>
             <th>Term</th>
             <th>Grand</th>
             <th>Terima</th>
+            <th>Sisa</th>
         </tr>
     </thead>
     <tbody>
@@ -21,16 +21,17 @@
             $duit=number_format($row->Grand);
             
             $terima=number_format($row->Grand - $row->Temp);
+            $sisa=number_format($row->Grand - $terima);
             if($terima != 0){
                 echo
                 "<tr class='success'>
                     <td>$row->Kode</td>
                     <td>$row->Perusahaan</td>
                     <td>$dmy1</td>
-                    <td>$row->Kode_SJ</td>
                     <td>$row->Term</td>
                     <td>$duit</td>    
-                    <td>$terima</td>                
+                    <td>$terima</td>
+                    <td>$sisa</td>                
                 </tr>";
                 
             }else{
@@ -39,10 +40,10 @@
                     <td>$row->Kode</td>
                     <td>$row->Perusahaan</td>
                     <td>$dmy1</td>
-                    <td>$row->Kode_SJ</td>
                     <td>$row->Term</td>
                     <td>$duit</td>    
-                    <td>$terima</td>                
+                    <td>$terima</td> 
+                    <td>$sisa</td>                
                 </tr>";
             }
         }

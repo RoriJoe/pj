@@ -24,11 +24,11 @@
     <div id="header">
         <?php echo $this->load->view('template/head'); ?>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="row">
-                    <div class="span3">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="row-fluid">
+                    <div class="span6">
                         <div class="bar-dash filter-bar">
                             <i class="icon-filter"></i> Filter Date Option
                         </div>
@@ -40,14 +40,10 @@
                             </div>
                             <div class="row-margin">
                                 <div id="drop-date" class="pull-left">
-                                    <select name="" id="list-date" onchange="filterAll()" disabled>
+                                    <select name="" id="list-date" onchange="filterYear()" disabled>
                                         <option value="">-Select Year-</option>
                                     </select>
                                 </div>
-                                <!--<div id="btn-filter" class="pull-right">
-                                    <button class="btn btn-primary" id="filter-submit" onclick="filterAll()">Filter</button>
-                                    <button class="btn" id="filter-clear" onclick="loadChart()">Clear</button>
-                                </div>-->
                                 <div class="clearfix"></div>
                             </div>
 
@@ -62,80 +58,98 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span4 offset1">
-                        <div class="well well-small">
-                            <div class="row-fluid  text-center stat">
-                                <div class="span6">
-                                    <div id="container" style="width:100%; height:150px;"></div>
+                    <div class="span6">
+                        <div class="row-fluid">
+                            <a href="javascript:detail_Penjualan('')" title="show table">
+                                <div class="span12 cover-bar cover-bar2">
+                                        <div class="pull-left">AVG <br/>Sales Order value</div>
+                                        <div class="pull-right"><span class="mini-box" id="val-info">Rp 31.496.690</span></div>
                                 </div>
-                                <div class="span6">
-                                    <p>Average Sales Order Value</p>
-                                    <p id="val1" class="val-mini"></p>
+                            </a>
+                            <a href="javascript:detail_Penjualan('')" title="show table">
+                                <div class="span12 cover-bar cover-bar2">
+                                    <div class="pull-left">AVG<br/>Qty / Sales Order</div>
+                                    <div class="pull-right"><span class="mini-box" id="qty-info">13</span></div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="span4">
-                        <div class="well well-small">
-                            <div class="row-fluid  text-center stat">
-                                <div class="span6">
-                                    <div id="container2" style="width:100%; height:150px;"></div>
-                                </div>
-                                <div class="span6">
-                                    <p>Average Qty / Sales Order</p>
-                                    <p id="val2" class="val-mini"></p>
+                    <div class="span12">
+                        <div class="bar-dash">
+                            <span>Grafik Penjualan</span> &dash; <span id="filter-stat">Per 30 Hari</span> 
+                            <span id="legend" style="visibility:hidden">(<span style="color:#0033FF;">Penjualan</span> - <span style="color:#00BE1E;">Pembelian</span>)</span>
+                            <a  id="tes" 
+                                class="btn pull-right" 
+                                tittle="Filter" 
+                                data-toggle="button" 
+                                data-html="true" 
+                                data-placement="bottom"
+                                rel="popover"
+                                data-content="
+                                    <select style='width:100%; margin-bottom:10px;' id='select-filters'>
+                                      <option value='rev_great'>Total Lebih Besar Dari</option>
+                                      <option value='rev_less'>Total Kurang Dari</option>
+                                    </select>
+                                    <input type='text' id='fieldFilter'  style='width:145px;' placeholder='Rupiah'>
+                                    <div class='clearfix'></div>
+                                    <button class='btn btn-mini btn-success' onclick='filterPenjualan()'>Apply</button>
+                                ">
+
+                                <i class='icon-filter'></i> Filter
+                            </a>
+                        </div>
+                        <div id="placeholder" style="margin-bottom:0">
+                            <figure id="chart"></figure>
+                        </div>
+                        <div class="bar-dash" style="margin-bottom:15px;">
+                            <div class="pull-left">
+                                <a href="javascript:filter_all_year('','year',0)" id="breadYear">All Year</a>
+                                <a href="" id="breadMonth" style="visibility:hidden">> Year</a>
+                            </div>
+                            <div class="pull-right">
+                                <div class="btn-group dropup">
+                                  <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Options
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu pull-right">
+                                    <a href="#modalCompare" data-toggle="modal"><i class="icon-retweet"></i> Compare Penjualan</a>
+                                    <a href="javascript:pembelian()"><i class="icon-adjust"></i> Compare with Pembelian</a>
+                                    <a href="javascript:detail_Penjualan('')" id="opsi"><i class="icon-th"></i> View Table</a>
+                                  </ul>
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="span6">
-                <div class="bar-dash">
-                    <span>Grafik Penjualan</span> &dash; <span id="filter-stat">Per 30 Hari</span>
-                    <a  id="tes" 
-                        class="btn pull-right" 
-                        tittle="Filter" 
-                        data-toggle="button" 
-                        data-html="true" 
-                        data-placement="bottom"
-                        rel="popover"
-                        data-content="
-                            <select style='width:100%; margin-bottom:10px;' id='select-filters' onchange='filterPenjualan()'>
-                              <option value='rev_great'>Revenue Is Greater Than</option>
-                              <option value='rev_less'>Revenue Is Less Than</option>
-                            </select>
-                            <input type='text' id='fieldFilter'  style='width:145px;' placeholder='Rupiah'>
-                            <div class='clearfix'></div>
-                            <button class='btn btn-mini btn-success' onclick='applyFilter()'>Apply</button>
-                            <button class='btn btn-mini' onclick='loadChart()'>Clear</button>
-                        ">
-
-                        <i class='icon-filter'></i> Filter
-                    </a>
-                </div>
-                <div id="placeholder" style="margin-bottom:0">
-                    <figure id="chart"></figure>
-                </div>
-                <div class="bar-dash" style="margin-bottom:15px;">
-                    <a href="javascript:ajaxLoadFilter('','year')" id="breadYear" style="visibility:hidden">All Year</a>
-                    <a href="" id="breadMonth" style="visibility:hidden">> Year</a>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="row">
-                    <div class="span3">
+                <div class="row-fluid">
+                    <div class="span6 gauges">
                         <div id="container3" style="width:100%; height:230px;"></div>
                     </div>
-                    <div class="span3">
+                    <div class="span6 gauges">
                         <div id="container4" style="width:100%; height:230px;"></div>
                     </div>
-                    <div class="span3">
+                    <div class="span12">
                         <div id="container5" style="width:100%; height:230px;"></div>
                     </div>
-                    <div class="span3">
-                        <div id="container6" style="width:100%; height:230px;"></div>
+                    <div class="span12 text-center">
+                        <div class="row-fluid">
+                            <div class="span4 well well-small">
+                            <p>Invoice</p>
+                            <p><span id="invoice-stat" class="card-text">Rp. 151.484.850</span> </p>
+                        </div>
+                        <div class="span4 well well-small">
+                            <p>Terima Pembayaran</p>
+                            <p><span id="terima-stat" class="card-text">-</span>-</p>
+                        </div>
+                        <div class="span4 well well-small">
+                            <p>Sisa Pembayaran</p>
+                            <p><span id="sisa-stat" class="card-text" style="color: #DB4E4E;">Rp. 151.484.850</span> </p>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,6 +171,34 @@
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         </div>
+    </div>
+
+    <div class="modal hide fade" id="modalOutstanding" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="myModalLabel2">Detail</h3>
+      </div>
+      <div class="modal-body" style="height:400px">
+        <div id="list_detail_os"></div>
+      </div>
+      <div class="modal-footer">
+        <span class="pull-left" style="background-color:#67C767">Terkirim</span>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="modalKeuangan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="myModalLabel3">Detail</h3>
+      </div>
+      <div class="modal-body" style="height:400px">
+        <div id="list_detail_keuangan"></div>
+      </div>
+      <div class="modal-footer">
+        <span class="pull-left" style="background-color:#67C767">Terima Tagihan</span>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
     </div>
 
 </body>
@@ -183,6 +225,12 @@
             }
         });
     });
+
+    var pemisah_ribuan = '.';
+    var xdStart = '';
+    var xdEnd = '';
+    var xdYear = '';
+
     function change(option) {
         var _dateOpt = option;
         var _div = document.getElementById('drop-date');
@@ -210,18 +258,24 @@
             loadChart();
         }
     }
-    function filterAll(){
+
+    function filterYear(){
         var myVal = $('#list-date').val();
         var myMode = 'year';
 
         if(myVal != ''){
-            ajaxLoadMonth(myVal);
+            filter_by_year(myVal);
             loadGauge('','',myVal);
+            xdStart = "";
+            xdEnd = "";
+            xdYear = myVal;
         }else{
-            ajaxLoadFilter('','year');
+            var y = new Date();
+            filter_all_year('','year');
+            xdYear = y.getFullYear();
         }
     }
-    var pemisah_ribuan = '.';
+    
     function pemisahRibuan(str){
         str = str.toString();   // konversi ke string
         var strleng = str.length;  // panjang string
@@ -243,6 +297,7 @@
             // Gabungkan dengan pemisah ribuan
             return arr.reverse().join(pemisah_ribuan);          
     }
+
     function getmax(initval){
         var newVal;
         if(initval >= 0 && initval <=100){
@@ -348,7 +403,7 @@
         },
         
         title: {
-            text: 'Outstanding Pemesanan'
+            text: 'Outstanding Barang Dipesan'
         },
         
         pane: {
@@ -394,7 +449,6 @@
                 color: '#DF5353' // red
             }]        
         },
-
         series: [{}]
     }
 
@@ -408,7 +462,7 @@
         },
         
         title: {
-            text: 'Outstanding Terkirim'
+            text: 'Outstanding Barang Dikirim'
         },
         
         pane: {
@@ -499,7 +553,7 @@
                 rotation: 'auto'
             },
             title: {
-                text: 'Rupiah'
+                text: '%'
             }    
         },
 
@@ -572,6 +626,9 @@
         // Load chart
         ajaxLoadChart(startDate,endDate);
         loadGauge(startDate,endDate,'');
+        xdStart = startDate;
+        xdEnd = endDate;
+        xdYear = "";
         
         range.daterangepicker({
             startDate: startDate,
@@ -586,6 +643,9 @@
             },function(start, end){
                 ajaxLoadChart(start, end);  
                 loadGauge(start, end,'');
+                xdStart = start;
+                xdEnd = end;
+                xdYear = "";
         });
         
         // The tooltip shown over the chart
@@ -787,7 +847,7 @@
 
                 gaugeTerkirim.series.push({
                     name: 'Terkirim',
-                    data: [parseInt(msg.terkirim)],
+                    data: [parseInt(msg.terkirim)]
                 }) 
                 myGaugeTerkirim = $('#container4').highcharts(gaugeTerkirim);
             }
@@ -804,44 +864,41 @@
             dataType:'json',
             success:
             function(msg){
+                var hitung = parseInt(msg.terkirim)/parseInt(msg.pesan)*100;
+                //alert(hitung);
                 gaugeInvoice.series.push({
                     name: 'Invoice',
-                    data: [parseInt(msg.pesan)],
+                    data: [hitung],
                 })
-
-                gaugeTerima.series.push({
-                    name: 'Terima Pembayaran',
-                    data: [parseInt(msg.terkirim)],
-                })  
 
                 var myGaugeInvoice = new Highcharts.Chart(gaugeInvoice);
                 myGaugeInvoice.yAxis[0].update({         
                     min:0,
-                    max:getmax(parseInt(msg.pesan))
+                    max:100
                 });
 
-                var myGaugeTerima = new Highcharts.Chart(gaugeTerima);
-                myGaugeTerima.yAxis[0].update({         
-                    min:0,
-                    max:getmax(parseInt(msg.terkirim))
-                });
+                document.getElementById("invoice-stat").innerHTML = "Rp. "+pemisahRibuan(msg.pesan);
+                document.getElementById("terima-stat").innerHTML = "Rp. "+pemisahRibuan(msg.terkirim);
+
+                var sisa = parseInt(msg.pesan)-parseInt(msg.terkirim);
+                document.getElementById("sisa-stat").innerHTML = "Rp. "+pemisahRibuan(sisa);
+
+                
                 console.log(msg.terkirim);
             }
         }); 
     }
 
     /*FILTER PENJUALAN*/
-    function applyFilter(){
+    function filterPenjualan(){
         var e = document.getElementById("select-filters");
         var strUser = e.options[e.selectedIndex].value;
         var filter = $('#fieldFilter').val();
 
-        ajaxLoadFilter(filter,strUser);
+        filter_all_year(filter,strUser);
     }
-    /*
-    DRILL DOWN PENJUALAN
-    */
-    function ajaxLoadFilter(filter,column) {
+
+    function filter_all_year(filter,column) {
         document.getElementById("filter-stat").innerHTML = 'By '+column +' '+filter;
         document.getElementById("breadYear").style.visibility = 'hidden';
         document.getElementById("breadMonth").style.visibility = 'hidden';
@@ -850,16 +907,7 @@
             topOffset = -32;
 
         var data;
-        if(column == "month"){
-            data = {
-                "xScale" : "time",
-                "yScale" : "linear",
-                "main" : [{
-                    className : ".statsMonth",
-                    "data" : []
-                }]
-            };
-        }else if(column == "rev_less"){
+        if(column == "rev_less"){
             data = {
                 "xScale" : "time",
                 "yScale" : "linear",
@@ -931,7 +979,7 @@
             },
 
             "click": function (d, i){
-                ajaxLoadMonth(d.x.format('{year}'));
+                filter_by_year(d.x.format('{year}'));
             }
         };
         
@@ -967,8 +1015,9 @@
         });
     }
     
-    function ajaxLoadMonth(year) {
-        // The tooltip shown over the chart
+    function filter_by_year(year) {
+        var month, date = "";
+        document.getElementById("filter-stat").innerHTML = 'By Year '+year;
         document.getElementById("breadMonth").style.visibility = 'hidden';
         var tt = $('<div class="ex-tooltip">').appendTo('body'),
             topOffset = -32;
@@ -1015,7 +1064,7 @@
             },
 
             "click": function (d, i){
-                ajaxLoadDay(d.x.format('{MM}'), d.x.format('{year}'));
+                detail_penjualan(d.x.format('{MM}'), d.x.format('{year}'));
             }
         };
 
@@ -1026,8 +1075,8 @@
         // Otherwise, issue an AJAX request
         $.ajax({
             type:'POST',
-            url:"<?php echo base_url();?>dashboard/dashboard_penjualan_month",
-            data:{year:year},
+            url:"<?php echo base_url();?>dashboard/dashboard_drill_penjualan",
+            data:{year:year,month:month,date:date},
             dataType:'json',
             success:
             function(data) {
@@ -1048,14 +1097,18 @@
                     }]
                 });
                 document.getElementById("breadYear").style.visibility = 'visible';
+                document.getElementById("breadMonth").style.visibility = 'visible';
+                document.getElementById('breadMonth').innerHTML = '> '+year;
+                document.getElementById('breadMonth').setAttribute('href', "javascript:filter_by_year('"+year+"')");
                 $('#tes').popover('hide'); 
-                document.getElementById('filter-stat').innerHTML = 'By Year';
             }
         });
     }
 
-    function ajaxLoadDay(month, year) {
+    function detail_penjualan(month, year) {
         // The tooltip shown over the chart
+        var date = "";
+        document.getElementById("filter-stat").innerHTML = 'By Year '+year+' - '+month;
         var tt = $('<div class="ex-tooltip">').appendTo('body'),
             topOffset = -32;
 
@@ -1108,8 +1161,8 @@
         // Otherwise, issue an AJAX request
         $.ajax({
             type:'POST',
-            url:"<?php echo base_url();?>dashboard/dashboard_day",
-            data:{year:year, month:month},
+            url:"<?php echo base_url();?>dashboard/dashboard_drill_penjualan",
+            data:{year:year,month:month,date:date},
             dataType:'json',
             success:
             function(data) {
@@ -1131,7 +1184,7 @@
                 });
                 document.getElementById("breadMonth").style.visibility = 'visible';
                 document.getElementById('breadMonth').innerHTML = '> '+year;
-                document.getElementById('breadMonth').setAttribute('href', "javascript:ajaxLoadMonth('"+year+"')");
+                document.getElementById('breadMonth').setAttribute('href', "javascript:filter_by_year('"+year+"')");
                 $('#tes').popover('hide'); 
             }
 
@@ -1143,10 +1196,11 @@
 
     //Table
     function listDetail(date){
+        var month,year = "";
         $.ajax({
             type:'POST',
-            url: "<?php echo base_url();?>index.php/dashboard/dashboard_detail_penjualan",
-            data :{date:date},
+            url: "<?php echo base_url();?>index.php/dashboard/dashboard_drill_penjualan",
+            data :{year:year,month:month,date:date},
             success:
             function(hh){
                 $('#list_detail').html(hh);
@@ -1155,26 +1209,56 @@
         });   
     }
 
-    /*AVERAGE SALES ORDER
-    function get_Avg_So(date){
-        var mydate = date;
+    function outstandingDetail(){
+        var startD = '';
+        var endD = '';
+
+        if(xdYear == ''){
+            startD = xdStart.format('{yyyy}-{MM}-{dd}');
+            endD = xdEnd.format('{yyyy}-{MM}-{dd}');
+        }
+        //alert(xdYear);
+        $('#modalOutstanding').modal('show');
         $.ajax({
             type:'POST',
-            url:"<?php echo base_url();?>dashboard/dashboard_penjualan",
-            data:{mydate:mydate},
-            dataType:'json',
+            url: "<?php echo base_url();?>dashboard/dashboard_detail_os",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:   xdYear,
+            },
             success:
-            function(data) {
-                var set = [];
-                $.each(data, function() {
-                    miniColumnSO.series.push({
-                        name: this.label,
-                        data: [parseInt(this.value)]
-                    })
-                });
-                var chart1 = new Highcharts.Chart(miniColumnSO);
+            function(hh){
+                $('#list_detail_os').html(hh);
+                document.getElementById('myModalLabel2').innerHTML = 'Detail Outstanding Penjualan';
             }
         });
-    }*/
+    }
+
+    function keuanganDetail(){
+        var startD = '';
+        var endD = '';
+
+        if(xdYear == ''){
+            startD = xdStart.format('{yyyy}-{MM}-{dd}');
+            endD = xdEnd.format('{yyyy}-{MM}-{dd}');
+        }
+        //alert(xdYear);
+        $('#modalKeuangan').modal('show');
+        $.ajax({
+            type:'POST',
+            url: "<?php echo base_url();?>dashboard/dashboard_detail_keuangan",
+            data :{
+                start:  startD,
+                end:    endD,
+                year:   xdYear,
+            },
+            success:
+            function(hh){
+                $('#list_detail_keuangan').html(hh);
+                document.getElementById('myModalLabel3').innerHTML = 'Detail Keuangan';
+            }
+        });
+    }
 </script>
 </html>

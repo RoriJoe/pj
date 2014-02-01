@@ -1,17 +1,17 @@
 <div class="CSSTabel" style="height: 245px;">
 <table id="tb5">
     <thead>
-        <th>Nomor SO</th><th>Tanggal</th><th>Pelanggan</th><th>Grand Total</th>
+        <th>Nomor SO</th><th>Tanggal</th><th>Pelanggan</th><th>Grand Total (Rp)</th>
     </thead>
     <tbody>
     <?php
     foreach($hasil as $row)
     {
-        $originalDate1 = $row->Tgl;
+        $originalDate1 = $row->Date;
         $dmy1 = date("d-m-Y", strtotime($originalDate1));
-        $total = number_format($row->grandttl,0,",",".");
+        $total = number_format($row->Total,0,",",".");
         echo "<tr>
-        <td>$row->No_Do</td>
+        <td>$row->No_So</td>
         <td>$dmy1</td>
         <td>$row->Perusahaan</td>
         <td>$total</td>
