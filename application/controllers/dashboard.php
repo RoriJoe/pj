@@ -55,9 +55,9 @@
 			$data1 = array();
 			$data2 = array();
 
-			if($compare != 0){
-				$results = $this->dashboard_model->get_penjualan_default($start, $end);
-				$results2 = $this->dashboard_model->get_pembelian_default($start, $end);
+			if($compare == 1){
+				$results = $this->dashboard_model->get_penjualan_default($start,$end,$compare);
+				$results2 = $this->dashboard_model->get_pembelian_default($start,$end,$compare);
 				foreach ($results as $key => $value) {
 					$data1[$key]['label'] = $value->Date;
 					$data1[$key]['value'] = $value->Total;
@@ -69,9 +69,8 @@
 
 				$data['line1'] = $data1;
 				$data['line2'] = $data2;
-
 			}else{
-				$results = $this->dashboard_model->get_penjualan_default($start, $end);
+				$results = $this->dashboard_model->get_penjualan_default($start,$end,$compare);
 				foreach ($results as $key => $value) {
 					$data[$key]['label'] = $value->Date;
 					$data[$key]['value'] = $value->Total;

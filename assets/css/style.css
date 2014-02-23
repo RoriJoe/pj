@@ -901,3 +901,16 @@ ul.inline, ol.inline {
     font-size: 20px;
     text-shadow: 0px 0px 3px #9ea6b3;
 }
+.tab-month{
+    padding-left: 30px;
+}
+.tab-day{
+    padding-left: 50px;
+}
+.tab-so{
+    padding-left: 80px;
+}
+.tab-value{
+    text-align: right;
+    padding-right: 20px;
+}

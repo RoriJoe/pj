@@ -61,12 +61,12 @@ class Account_settings extends CI_Controller {
 			array(
 				'field' => 'settings_firstname', 
 				'label' => 'Nama Depan', 
-				'rules' => 'trim|max_length[80]'
+				'rules' => 'trim|max_length[20]'
 				), 
 			array(
 				'field' => 'settings_lastname', 
 				'label' => 'Nama Belakang', 
-				'rules' => 'trim|max_length[80]'
+				'rules' => 'trim|max_length[20]'
 				), 
 			array(
 				'field' => 'settings_phone', 
@@ -81,7 +81,7 @@ class Account_settings extends CI_Controller {
 			array(
 				'field' => 'settings_postalcode', 
 				'label' => 'Kode Pos', 
-				'rules' => 'trim|max_length[40]'
+				'rules' => 'trim|max_length[5]'
 				)
 			));
 

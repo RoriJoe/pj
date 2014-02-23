@@ -77,16 +77,53 @@
 			return $q->result();
 		}
 		//NEW QUERY
-		function get_penjualan_default($start,$end){
-			$q = $this->db->query(
-				"SELECT A.Tgl AS Date, SUM(A.grandttl) AS Total
-				FROM do_h A
-				WHERE A.Tgl >= '$start' AND A.Tgl <= '$end'
-				GROUP BY A.Tgl
-				ORDER BY A.Tgl DESC
-				"
-			);
-			return $q->result();
+		function get_penjualan_default($start,$end,$compare){
+			if($compare == 2){
+				$q = $this->db->query(
+					"SELECT A.*
+					FROM
+					(
+					    SELECT B.Tgl AS Date,SUM(B.grandttl) AS Total
+					    FROM do_h B
+					    WHERE B.Tgl >= '$start' AND B.Tgl <= '$end'
+					    GROUP BY B.Tgl
+					) AS A
+					WHERE A.Total = 
+					(
+					    SELECT MAX(C.myTotal)
+					    FROM 
+					    (
+					        SELECT SUM(D.grandttl) AS myTotal
+					        FROM do_h D
+					        WHERE D.Tgl >= '$start' AND D.Tgl <= '$end'
+					        GROUP BY D.Tgl
+					    )AS C
+					)
+					OR
+					A.Total = 
+					(
+					    SELECT MIN(C.myTotal)
+					    FROM 
+					    (
+					        SELECT SUM(D.grandttl) AS myTotal
+					        FROM do_h D
+					        WHERE D.Tgl >= '$start' AND D.Tgl <= '$end'
+					        GROUP BY D.Tgl
+					    )AS C
+					)"
+				);
+				return $q->result();
+			}else{
+				$q = $this->db->query(
+					"SELECT A.Tgl AS Date, SUM(A.grandttl) AS Total
+					FROM do_h A
+					WHERE A.Tgl >= '$start' AND A.Tgl <= '$end'
+					GROUP BY A.Tgl
+					ORDER BY A.Tgl DESC
+					"
+				);
+				return $q->result();
+			}
 		}
 
 		function get_penjualan_revenue($mode,$value){

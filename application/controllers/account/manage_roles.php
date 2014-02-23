@@ -136,7 +136,7 @@ class Manage_roles extends CI_Controller {
         array(
           'field' => 'role_name',
           'label' => 'Role Name',
-          'rules' => 'trim|required|max_length[80]'),
+          'rules' => 'trim|required|max_length[20]'),
         array(
           'field' => 'role_description',
           'label' => 'Role Description',

@@ -20,7 +20,7 @@
                 </select>
             </div>
             <!--<?php echo base_url(); ?>dashboard/advance-->
-            <a href="alert('sedang dalam perbaikan')" id="tes2" class="btn btn-default pull-right"  rel="tooltip" data-placement="left" data-original-title="View Full Page Dashboard"><i class="icon-fullscreen"></i> </a>
+            <a href="" onclick="alert('sedang dalam perbaikan')" id="tes2" class="btn btn-default pull-right"  rel="tooltip" data-placement="left" data-original-title="View Full Page Dashboard"><i class="icon-fullscreen"></i> </a>
         </div>
         <a href="javascript:detail_Penjualan('')" title="show table"><div class="cover-bar cover-bar2" style="width:46%; float:left">
             <div class="pull-left">AVG <br/>Sales Order value</div>
@@ -71,6 +71,7 @@
                   <ul class="dropdown-menu pull-right">
                     <a href="#modalCompare" data-toggle="modal"><i class="icon-retweet"></i> Compare Penjualan</a>
                     <a href="javascript:pembelian()"><i class="icon-adjust"></i> Compare with Pembelian</a>
+                    <a href="javascript:minMax()"><i class="icon-signal"></i> View Min - Max Value</a>
                     <a href="javascript:detail_Penjualan('')" id="opsi"><i class="icon-th"></i> View Table</a>
                   </ul>
                 </div>
@@ -543,7 +544,7 @@
                 var set = [];
                 var set2 = [];
 
-                if(compare != 0){
+                if(compare == 1){
                     $.each(data.line1, function() {
                         set.push({
                             x : this.label,
@@ -992,23 +993,44 @@
                     document.getElementById("val-info").innerHTML = 'Rp '+pemisahRibuan(this.value);
                     document.getElementById("qty-info").innerHTML = pemisahRibuan(this.qty);
                 });
-
-                /*var set = [];
-                var avg_so = [];
-                var value = "";
-
-                /*var sum = 0;
-                for(var i = 0; i < avg_so.length; i++)
-                {
-                    sum += parseInt(avg_so[i]);
-                }
-                var avg = sum/avg_so.length;*/
-
-                //myChart = $('#container').highcharts(miniColumn);
-                
             }
         });
     }
+
+    /*function minMax(){
+        var start = "";
+        var end = "";
+        var year = "";
+        var month = "";
+        month = xdMonth;
+        year = xdYear;
+
+        if(xdYear == '' && xdStart != null && xdEnd != ''){
+            start = xdStart.format('{yyyy}-{MM}-{dd}');
+            end = xdEnd.format('{yyyy}-{MM}-{dd}');
+        }
+
+        $.ajax({
+            type:'POST',
+            url:"<?php echo base_url();?>dashboard/custom_avg_so",
+            data:{
+                start:start,
+                end:end,
+                year:year,
+                month:month
+            },
+            dataType:'json',
+            success:
+            function(data) {
+                
+                $.each(data, function() {
+                    //avg_so.push(parseInt(this.value))
+                    document.getElementById("val-info").innerHTML = 'Rp '+pemisahRibuan(this.value);
+                    document.getElementById("qty-info").innerHTML = pemisahRibuan(this.qty);
+                });
+            }
+        });
+    }*/
     /*End Filter Penjualan*/
 
     /*LOAD GAUGE*/
@@ -1625,6 +1647,20 @@
             filter_by_year(xdYear,1);
         }else{
             filter_all_year(filter,strUser,1);
+        }
+    }
+
+    function minMax(){
+        //alert("Tahun ="+xdYear+" Bulan ="+xdMonth+" TanggalMulai ="+xdStart+" filter="+filter+" string="+strUser);
+        document.getElementById("legend").style.visibility = 'visible';
+        if(xdStart != null && xdStart != ''){
+            ajaxLoadChart(startDate,endDate,2);
+        }else if(xdMonth != ""){
+            filter_by_month(xdMonth,xdYear,2);
+        }else if(xdYear != ""){
+            filter_by_year(xdYear,2);
+        }else{
+            filter_all_year(filter,strUser,2);
         }
     }
 

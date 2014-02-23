@@ -145,7 +145,7 @@ class Manage_users extends CI_Controller {
         array(
           'field' => 'users_email', 
           'label' => 'Email', 
-          'rules' => 'trim|required|valid_email|max_length[160]'), 
+          'rules' => 'trim|required|valid_email|max_length[45]'), 
         array(
           'field' => 'users_fullname', 
           'label' => 'Nama Lengkap', 
