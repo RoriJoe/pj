@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2014 at 04:07 PM
+-- Generation Time: Feb 26, 2014 at 03:55 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -16,6 +16,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- Database: `db_pelita`
+--
+CREATE DATABASE IF NOT EXISTS `db_pelita` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_pelita`;
 
 -- --------------------------------------------------------
 
@@ -34,17 +39,16 @@ CREATE TABLE IF NOT EXISTS `account` (
   `suspendedon` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`id`, `username`, `email`, `password`, `createdon`, `lastsignedinon`, `deletedon`, `suspendedon`) VALUES
-(1, 'sip', 'echristiandy@gmail.com', '$2a$08$EpL7hUxE5B7CcYZK5s9fUODiqaHs35HFZjhw4bI1ofjhmiWmj2dY2', '2013-11-28 00:00:00', '2014-01-08 07:43:02', NULL, NULL),
-(11, 'edson', 'edson@gmail.com', '$2a$08$pOwMxz/XnpqfJwskHY/PQeSJp1W90GE4CrmeDeeHpqEFvUjxELEoK', '2013-11-28 19:42:58', '2013-11-28 19:57:40', NULL, NULL),
-(12, 'admin', 'admin@admin.com', '$2a$08$Vt0EO99XOd0bz3Dhie/klOfRDuAxkBeN4KLqy..AvSgIwUJIlKyMK', '2013-11-30 14:43:49', NULL, NULL, NULL),
-(13, 'joyne', 'joyne@sisfo.com', '$2a$08$63vV5n.lz1GLzFw3J4WpjOwJH20lNGKrmjL6XRCGEyzVZOUqUKyp.', '2014-01-07 06:47:38', NULL, NULL, NULL);
+(1, 'sip', 'sip@gmail.com', '$2a$08$EpL7hUxE5B7CcYZK5s9fUODiqaHs35HFZjhw4bI1ofjhmiWmj2dY2', '2013-11-28 00:00:00', '2014-02-26 13:22:13', NULL, NULL),
+(18, 'eddy25', 'eddy.christiandy@outlook.com', '$2a$08$2YMq46Yk.A17lC2tn9Kl2OeMArV/vl/f3TYslhLkW97ZACO9LCofG', '2014-01-28 16:42:14', NULL, NULL, NULL),
+(20, 'joyne', 'joyne@sisfo.com', '$2a$08$V/Rn8j6h5Wdal1gCLnqr4Op0YHM0l9wZRSARSUFBnDEGhZD2y/DIS', '2014-01-31 10:09:23', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -71,10 +75,10 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 --
 
 INSERT INTO `account_details` (`account_id`, `fullname`, `firstname`, `lastname`, `phone`, `dateofbirth`, `gender`, `address`, `postalcode`, `picture`) VALUES
-(1, NULL, 'Sip', 'Admin', '085247956204', '1992-09-25', 'm', 'jl. Kaki Lima', '11510', NULL),
-(11, NULL, 'Edson', 'Colins', NULL, NULL, 'm', NULL, NULL, NULL),
-(13, NULL, 'Joyne', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, NULL, 'admin', 'pelita', '123456789', NULL, NULL, NULL, NULL, NULL);
+(1, NULL, 'Sip', 'Admin', '085247956204', '1992-09-25', 'm', 'jl. Kaki Lima3', '11510', NULL),
+(19, NULL, 'Eddy', 'Christiandy', '085247956204', NULL, NULL, 'Jl.Salam 3, No.35 / RT.04-006 / Sukabumi Utara - Kebon Jeruk / Jakarta', NULL, NULL),
+(18, NULL, 'Eddy', 'Christiandy', '085247956204', NULL, NULL, 'Jl.Salam 3, No.35 / RT.04-006 / Sukabumi Utara - Kebon Jeruk / Jakarta', NULL, NULL),
+(20, NULL, 'joyne', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `acl_permission` (
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `key` (`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=107 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=110 ;
 
 --
 -- Dumping data for table `acl_permission`
@@ -201,7 +205,10 @@ INSERT INTO `acl_permission` (`id`, `key`, `description`, `suspendedon`, `is_sys
 (103, 'create_surat_jalan', 'Create New Surat Jalan', NULL, 1),
 (104, 'update_surat_jalan', 'Update Existing Surat Jalan', NULL, 1),
 (105, 'delete_surat_jalan', 'Delete Existing Surat Jalan', NULL, 1),
-(106, 'print_surat_jalan', 'Print Data Surat Jalan', NULL, 1);
+(106, 'print_surat_jalan', 'Print Data Surat Jalan', NULL, 1),
+(107, 'access_dashboard', 'Halaman home yang menampilkan Dashboard EIS', NULL, 0),
+(108, 'access_akuntansi', 'Akses Ke Menu Akuntansi', NULL, 0),
+(109, 'access_settingAkuntansi', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -244,17 +251,16 @@ CREATE TABLE IF NOT EXISTS `bank_d` (
   `cabang` varchar(25) NOT NULL,
   `no_perkiraan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `bank_d`
 --
 
 INSERT INTO `bank_d` (`kode`, `kode_bank`, `no_rekening`, `atas_nama`, `tipe`, `cabang`, `no_perkiraan`) VALUES
-(13, '101', '725852825', 'Panda', 'Tabungan', 'Gunung Salak', '25855222'),
-(14, '105', '54234232', 'BUDI', 'Tabungan', 'Kebon jeruk', ''),
-(15, '107', '22331122', 'Adi', 'Giro', 'Kemanggisan', ''),
-(16, '107', '64534232', 'Emi', 'Tabungan', 'qwert', '');
+(19, '101', '101225558', 'Ana Pratiwi', 'Tabungan', 'Pal Merah Utama', '1.2.01'),
+(20, '102', '2355888002', 'Budi Santoso', 'Giro', 'Salam Raya', '1.2.03'),
+(21, '102', '23558880', 'Clement Syah', 'Tabungan', 'Salam III', '1.2.02');
 
 -- --------------------------------------------------------
 
@@ -278,9 +284,8 @@ CREATE TABLE IF NOT EXISTS `bank_h` (
 --
 
 INSERT INTO `bank_h` (`kode_bank`, `nama_bank`, `alamat`, `dibuat_oleh`, `tanggal_buat`, `diupdate_oleh`, `tanggal_update`) VALUES
-('101', 'CIMB', 'Jl. Sudirman', 'eddy', '2013-10-18 21:29:21', 'eddy', '2013-10-18 21:29:21'),
-('105', 'BCA', 'Kebon Jeruk', 'eddy', '2013-11-02 04:50:29', 'eddy', '2013-11-02 04:50:29'),
-('107', 'Mandiri', 'Kemanggisan', 'eddy', '2013-11-02 04:52:33', 'eddy', '2014-01-07 06:01:05');
+('101', 'BCA', 'Jl Pal Merah', 'eddy', '2014-01-28 10:12:40', 'eddy', '2014-01-28 10:12:40'),
+('102', 'Niaga', 'Jl Salam', 'eddy', '2014-01-28 10:14:23', 'eddy', '2014-01-28 10:14:23');
 
 -- --------------------------------------------------------
 
@@ -310,7 +315,6 @@ CREATE TABLE IF NOT EXISTS `barang` (
 --
 
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('18BP00512KS', '5 X 12', 'BETON POLOS', '18-KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18BP00812KS', '8 X 12', 'BETON POLOS', '18-KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18BP01012KS', '10 X 12', 'BETON POLOS', '18-KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18BP01212KS', '12 X 12', 'BETON POLOS', '18-KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -745,9 +749,9 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('18PK023520LN', '23 X 5 X 20', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18PK023620GDS', '23 X 6 X 20', 'P-KAPAL', '18-GDS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18PK023620LN', '23 X 6 X 20', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('18PK024520LN', '24 X 5 X 20', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
+('18PK024520LN', '24 X 5 X 20', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('18PK0245600LN', '24 X 5 X 6000', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('18PK0245600LN', '24 X 5 X 6000', 'P-KAPAL', '18-LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18PK024620GDS', '24 X 6 X 20', 'P-KAPAL', '18-GDS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18PK025520GDS', '25 X 5 X 20', 'P-KAPAL', '18-GDS-A36', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('18PK025520KS', '25 X 5 X 20', 'P-KAPAL', '18-KS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -1087,7 +1091,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0526', '52 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH0536', '53 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH0556', '55 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH0586', '58 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH0586', '58 X 6', 'ASS HITAM', '', 'Batang', 10, 10, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH0606', '60 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH0636', '63 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH065130NS', '65MM - - 130MM', 'ASS HITAM', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -1115,16 +1119,16 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH0976', '97 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH097688', '97 X 6''88', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH09845', '98 X 4''5', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 40, 47, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH1005900', '100 X 5900', 'ASS HITAM', 'SISA 5600 M', 'Batang', 25, 39, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1006', '100 X 6', 'ASS HITAM', '', 'Batang', 50, 50, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH1016', '101 X 6', 'ASS HITAM', '', 'Batang', 35, 35, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH1026', '102 X 6', 'ASS HITAM', '', 'Batang', 19, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH1016', '101 X 6', 'ASS HITAM', '', 'Batang', 40, 45, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH1026', '102 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1056', '105 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1106', '110 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1126', '112 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH1135538', '113 X 5/5''38', 'ASS HITAM', '', 'Batang', 15, 5, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1156', '115 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AH1206', '120 X 6', 'ASS HITAM', '', 'Batang', 45, 45, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AH1206', '120 X 6', 'ASS HITAM', '', 'Batang', 30, 45, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1256', '125 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1306', '130 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH1506', '150 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -1136,7 +1140,7 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('AH3306', '330 X 6', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH350094', '350 X 6100/ 9''4', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AH3501', '350 X 1MTR', 'ASS HITAM', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 30, 35, 20, '0000-00-00', 20, 20, 80000, 100000),
+('AHCAMPURAN', '', 'ASS HITAM', 'UKURAN CAMPUR', 'Batang', 25, 25, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AP000126', '1/2" @6M', 'ASS PUTIH', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AP000346', '3/4" (19MM) @6M', 'ASS PUTIH', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('AP000386', '3/8" @6M', 'ASS PUTIH', '', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -1202,9 +1206,9 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('BP01612KS', '16 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('BP01912KS', '19 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('BP02212KS', '22 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('BP02512KS', '25 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
+('BP02512KS', '25 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('BP03212KS', '32 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('BP03212KS', '32 X 12', 'B- POLOS', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('BU01012CS', '10 X 12', 'B-ULIR', 'CS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('BU01012HGF', '10 X 12', 'B-ULIR', 'HG FULL', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('BU01012KS', '10 X 12', 'B-ULIR', 'KS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -1663,9 +1667,9 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('PK010620LN', '10 X 6 X 20', 'PLAAT KAPAL', 'LN', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('PK011520GDS', '11 X 5 X 20', 'PLAAT KAPAL', 'GDS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('PK011520JPS', '11 X 5 X 20', 'PLAAT KAPAL', 'JPS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('PK011520TD', '11 X 5 X 20', 'PLAAT KAPAL', 'TD', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
+('PK011520TD', '11 X 5 X 20', 'PLAAT KAPAL', 'TD', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('PK0115620KS', '11,5 X 6 X 20', 'PLAAT KAPAL', 'KS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('PK0115620KS', '11,5 X 6 X 20', 'PLAAT KAPAL', 'KS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('PK011620GDS', '11 X 6 X 20', 'PLAAT KAPAL', 'GDS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('PK012520GDS', '12 X 5 X 20', 'PLAAT KAPAL', 'GDS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('PK012520JPS', '12 X 5 X 20', 'PLAAT KAPAL', 'JPS', 'Lembar', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -2127,9 +2131,9 @@ INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `Qty
 ('SKNS150150124', '150x150x12x4', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('SKNS150150129', '150x150x12x9', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('SKNS150150151', '150x150x15x1', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
-('SKNS1501501511', '150x150x15x11', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
+('SKNS1501501511', '150x150x15x11', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
+('SKNS150150152', '150x150x15x2', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000);
 INSERT INTO `barang` (`Kode`, `Ukuran`, `Nama`, `Nama2`, `Satuan1`, `Qty1`, `QtyOp`, `QtyGudang`, `Tgl_Saw`, `Saw`, `SawGudang`, `Harga_Beli`, `Harga_Jual`) VALUES
-('SKNS150150152', '150x150x15x2', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('SKNS150150157', '150x150x15x7', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('SKNS150150158', '150x150x15x8', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
 ('SKNS150150168', '150x150x16x8,3', 'SIKU', 'NS', 'Batang', 20, 20, 20, '0000-00-00', 20, 20, 80000, 100000),
@@ -2301,15 +2305,7 @@ CREATE TABLE IF NOT EXISTS `bpb_d` (
   `Qty1` int(11) NOT NULL,
   `Keterangan` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`Kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `bpb_d`
---
-
-INSERT INTO `bpb_d` (`Kode`, `No_Bpb`, `Kode_brg`, `Qty1`, `Keterangan`) VALUES
-(1, '1401001', 'AH1005900', 20, ''),
-(2, '1401001', 'AH1006', 10, '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2328,13 +2324,6 @@ CREATE TABLE IF NOT EXISTS `bpb_h` (
   `tanggal` date DEFAULT NULL,
   PRIMARY KEY (`No_Bpb`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bpb_h`
---
-
-INSERT INTO `bpb_h` (`No_Bpb`, `Tgl_Bpb`, `No_Reff`, `Kode_Supp`, `Kode_Gudang`, `No_Po`, `tutuptahun`, `tanggal`) VALUES
-('1401001', '2014-01-07', '123789456', 'S1307001', 'G1307002', '1401001', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2357,7 +2346,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('30bb0e6b569f0f726fa4a035a079116c', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.41 Safari/537.36', 1389196935, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}');
+('e6a513050cbf8cc4e799490f356951fe', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36', 1393429718, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -2496,25 +2485,23 @@ CREATE TABLE IF NOT EXISTS `do_d` (
   `Keterangan` varchar(30) NOT NULL,
   `QtyTemp` int(11) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `do_d`
 --
 
 INSERT INTO `do_d` (`No`, `No_Do`, `Kode_Brg`, `Qty`, `Harga`, `Jumlah`, `Status`, `Keterangan`, `QtyTemp`) VALUES
-(1, '1401001', 'AHCAMPURAN', 10, '100000', '1000000', '', 'tes', 0),
-(2, '1401001', 'AH1005900', 10, '200000', '2000000', '', '', 0),
-(3, '1401001', 'AH1006', 5, '100000', '500000', '', '', 0),
-(4, '1401002', 'AH1006', 10, '100000', '1000000', '', '', 10),
-(5, '1401002', 'AH1016', 5, '100000', '500000', '', '', 5),
-(6, '1401002', 'AHCAMPURAN', 5, '50000', '250000', '', '', 5),
-(7, '1401003', 'AH1005900', 3, '5000000', '15000000', '', 'updated', 3),
-(8, '1401004', 'AH1005900', 2, '500000', '1000000', '', '', 0),
-(9, '1401004', 'AH1016', 10, '100000', '1000000', '', '', 0),
-(10, '1401005', 'AH1005900', 10, '100000', '1000000', '', '', 10),
-(11, '1401005', 'AH1016', 15, '1000000', '15000000', '', '', 15),
-(12, '1401005', 'AH1026', 1, '100000', '100000', '', '', 1);
+(13, '1401001', 'AH0586', 10, '100000', '1000000', '', '', 0),
+(14, '1401001', 'AH1005900', 10, '100000', '1000000', '', '', 5),
+(15, '1401002', 'AHCAMPURAN', 5, '100000', '500000', '', '', 0),
+(16, '1401002', 'AH1005900', 5, '100000', '500000', '', '', 0),
+(17, '1401003', 'AH1005900', 5, '100000', '500000', '', '', 5),
+(18, '1401004', 'AH1135538', 15, '10000000', '150000000', '', '', 0),
+(19, '1401005', 'AH1006', 2, '100000', '200000', '', '', 2),
+(20, '1401005', 'AH1206', 5, '10000000', '50000000', '', '', 5),
+(21, '1401006', 'AH1006', 3, '1000000', '3000000', '', '', 3),
+(22, '1401006', 'AH1206', 10, '100000', '1000000', '', '', 10);
 
 -- --------------------------------------------------------
 
@@ -2545,12 +2532,47 @@ CREATE TABLE IF NOT EXISTS `do_h` (
 --
 
 INSERT INTO `do_h` (`No_Do`, `Tgl`, `No_Po`, `Tgl_Po`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Otorisasi`, `Total`, `discount`, `dpp`, `ppn`, `grandttl`, `Temp`) VALUES
-('1401001', '2014-01-07', '1401111', '2014-01-07', 'P1307001', '8', NULL, '11', '3500000', 1, 3465000, 0, '3465000', NULL),
-('1401002', '2014-01-07', '1412222', '2014-01-07', 'P1401002', '8', NULL, '11', '1750000', 2, 1715000, 1, '1732150', NULL),
-('1401003', '2014-01-07', '', NULL, 'P1307002', '8', NULL, '13', '15000000', 1, 14850000, 0, '14850000', NULL),
-('1401004', '2014-01-07', '1403111', '2014-01-08', 'P1307007', '8', NULL, '11', '2000000', 0, 2000000, 0, '2000000', NULL),
-('1401005', '2013-12-25', '1312251', '2013-12-26', 'P1401002', '8', NULL, '11', '16100000', 1, 15939000, 1, '16098390', NULL);
+('1401001', '2014-01-28', '2585222', '2014-01-28', 'P1309001', '8', NULL, '11', '2000000', 1, 1980000, 1, '1999800', NULL),
+('1401002', '2014-01-28', '154780V', NULL, 'P1401002', '8', NULL, '11', '1000000', 5, 950000, 1, '959500', NULL),
+('1401003', '2014-01-28', '', NULL, 'P1312001', '8', NULL, '11', '500000', 1, 495000, 1, '499950', NULL),
+('1401004', '2014-01-29', '1548484', '2014-01-29', 'ABA04', '8', NULL, '18', '150000000', 1, 148500000, 1, '149985000', NULL),
+('1401005', '2013-12-01', '5228855', '2014-01-31', 'ABA06', '8', NULL, '18', '50200000', 5, 47690000, 1, '48166900', NULL),
+('1401006', '2014-02-01', '26668844', '2014-02-01', 'ABA12', '8', NULL, '18', '4000000', 1, 3960000, 2, '4039200', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `fact_dashboard_os`
+--
+CREATE TABLE IF NOT EXISTS `fact_dashboard_os` (
+`No_So` varchar(20)
+,`Date` date
+,`Qty` int(11)
+,`QtyTemp` int(11)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `fact_dashboard_penjualan`
+--
+CREATE TABLE IF NOT EXISTS `fact_dashboard_penjualan` (
+`No_So` varchar(10)
+,`Total` decimal(15,0)
+,`Date` date
+,`Month` int(2)
+,`Year` int(4)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `fact_detaildashboard_penjualan`
+--
+CREATE TABLE IF NOT EXISTS `fact_detaildashboard_penjualan` (
+`No_So` varchar(10)
+,`Date` date
+,`Total` decimal(15,0)
+,`Perusahaan` varchar(50)
+);
 -- --------------------------------------------------------
 
 --
@@ -2618,7 +2640,8 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 --
 
 INSERT INTO `invoice` (`Kode`, `Kode_SJ`, `Kode_plg`, `Term`, `Tgl`, `Status`, `Total`, `Discount`, `Dpp`, `Ppn`, `Grand`, `tanggal`, `tutuptahun`, `Temp`) VALUES
-('1401001', '1401001', 'P1307001', 15, '2014-01-07', NULL, '3500000', 1, 3465000, 2, '3534300', NULL, NULL, '3534300');
+('1401001', '1401002', 'P1309001', 15, '2014-01-28', NULL, '1500000', 1, 1485000, 1, '1499850', NULL, NULL, '1499850'),
+('1401002', '1401003', 'ABA04', 30, '2014-01-29', NULL, '150000000', 1, 148500000, 1, '149985000', NULL, NULL, '149985000');
 
 -- --------------------------------------------------------
 
@@ -2799,24 +2822,520 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `KodeP`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit_Kredit`, `Piutang`, `NPWP`, `Lama`) VALUES
+('ABA03', 'Pelannggan', '', 'ABADI DIESEL/Bp.JONNY', 'Alamat', '', '_', '', '216259154', '', '', '', '', '0', '0', '', 0),
+('ABA04', 'Pelannggan', '', 'ABADI JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 30),
+('ABA05', 'Pelannggan', '', 'ABADI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABA06', 'Pelannggan', '', 'ABADI  KAPUK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 15),
+('ABA07', 'Pelannggan', '', 'ABADI TEKNIK', 'Alamat', '', '_', '', '216260982', '216260983', '', '216260984', '', '0', '0', '', 0),
+('ABA08', 'Pelannggan', '', 'ABADI  PALEMBANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABA09', 'Pelannggan', '', 'PT.ABADI BINTANG KREASI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABA10', 'Pelannggan', '', 'PT.ABAGUS CITRA ENGINEERING', 'Alamat', '', '_', '', '216191263', '216193213', '', '216193213', '', '0', '0', '', 0),
+('ABA11', 'Pelannggan', '', 'ABADI TEKNIK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABA12', 'Pelannggan', '', 'ABAGUS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 15),
+('ABC', 'Pelannggan', '', 'ABC TEHNIK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABD01', 'Pelannggan', '', 'PT.ABDI METAL', 'Alamat', '', '_', '', '218732601', '218732602', '218730650', '218732422', '', '0', '0', '', 0),
+('ABI', 'Pelannggan', '', 'ABIRAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABI1', 'Pelannggan', '', 'ABICAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABIRA', 'Pelannggan', '', 'ABIRAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ABRA', 'Pelannggan', '', 'PT.ABRA', 'Alamat', '', '_', '', '21491113', '214900556', '', '2146000026', '214600028', '0', '0', '', 0),
+('ACCUR', 'Pelannggan', '', 'ACCURA MULTI TEKNIK', 'Alamat', '', '_', '', '2155952728', '', '', '2155951762', '', '0', '0', '', 0),
+('ACS10', 'Pelannggan', '', 'PT.ACSET INDONUSA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ACTRA', 'Pelannggan', '', 'PT.ACTRA BUDI MANDIRI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AD01', 'Pelannggan', '', 'PT.ADJIWERNA SATIA', 'Alamat', '', '_', '', '217815078', '', '', '', '', '0', '0', '', 0),
+('AD02', 'Pelannggan', '', 'PT.ADJIDHARMAMAS TRITUNGGAL SAKTI', 'Alamat', '', '_', '', '216509514', '216511684', '', '216511021', '216510049', '0', '0', '', 0),
+('ADH', 'Pelannggan', '', 'ADHITA MELIATAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH01', 'Pelannggan', '', 'PT.ADHI KARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH02', 'Pelannggan', '', 'PT.ADHIJAYA COMPONENTINDO', 'Alamat', '', '_', '', '215661643', '215681471', '215522183', '', '', '0', '0', '', 0),
+('ADH03', 'Pelannggan', '', 'PT.ADHIKA MELIATAMA', 'Alamat', '', '_', '', '216198876', '', '', '', '', '0', '0', '', 0),
+('ADH04', 'Pelannggan', '', 'PT.ADHITAMA MULTINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH10', 'Pelannggan', '', 'ADHIKA MILIATAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH11', 'Pelannggan', '', 'PT.ADHI KARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH12', 'Pelannggan', '', 'PT.ADHIJAYA COMPONENTINDO', 'Alamat', '', '_', '', '215661643', '215681471', '', '215522183', '', '0', '0', '', 0),
+('ADH13', 'Pelannggan', '', 'PT.ADHIMULYA LOGAMINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH14', 'Pelannggan', '', 'PT.ADHITIA PUTRA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH15', 'Pelannggan', '', 'PT.ADHITAMA MULTINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH16', 'Pelannggan', '', 'PT.ADHI DHARMATAMA PERKASA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADH5', 'Pelannggan', '', 'PT.ADHI JAYANTI PERTIWI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI', 'Pelannggan', '', 'PT.ADIPROTEK ENVIRO DUNIA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI01', 'Pelannggan', '', 'PT.ADIYASA MERTANI/CASH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI02', 'Pelannggan', '', 'ADI SURYA', 'Alamat', '', '_', '', '218583147', '218567801', '', '218567383', '', '0', '0', '', 0),
+('ADI04', 'Pelannggan', '', 'PT.ADIGUNA TATASETYA', 'Alamat', '', '_', '', '213905121', '213905122', '215824675', '', '', '0', '0', '', 0),
+('ADI06', 'Pelannggan', '', 'ADIJAYA', 'Alamat', '', '_', '', '215641219', '', '', '', '', '0', '0', '', 0),
+('ADI07', 'Pelannggan', '', 'ADIJAYA SENTOSA', 'Alamat', '', '_', '', '214520405', '', '', '', '', '0', '0', '', 0),
+('ADI08', 'Pelannggan', '', 'PT.ADIKA CRAKA JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI09', 'Pelannggan', '', 'PT.ADIMARINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI10', 'Pelannggan', '', 'PT.ADIMAS SAKTI', 'Alamat', '', '_', '10730', '216019333', '216496333', '216298415', '216595039', '', '0', '0', '', 0),
+('ADI11', 'Pelannggan', '', 'PT.ADIMAS ISOLASITAMA', 'Alamat', '', '_', '10730', '216257888', '', '', '', '', '0', '0', '', 0),
+('ADI13', 'Pelannggan', '', 'ADI SURYA', 'Alamat', '', '_', '13120', '218583147', '218567801', '', '', '', '0', '0', '', 0),
+('ADI14', 'Pelannggan', '', 'PT.ADIGUNA TATASETYA', 'Alamat', '', '_', '', '213905121', '213905122', '215824675', '', '', '0', '0', '', 0),
+('ADI15', 'Pelannggan', '', 'ADIMAS. S', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI16', 'Pelannggan', '', 'PT.ADIKARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI17', 'Pelannggan', '', 'ADIGUNA S&E', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ADI18', 'Pelannggan', '', 'ADI SAKTI STEEL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AERO', 'Pelannggan', '', 'AERO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AF1', 'Pelannggan', '', 'AFAT', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AF2', 'Pelannggan', '', 'PT.AFRO PACIFIC INDAH S', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG', 'Pelannggan', '', 'CV.AGUNG KARYA INDAH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG01', 'Pelannggan', '', 'AGUNG GLORY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG02', 'Pelannggan', '', 'AGUNG TIGA', 'Alamat', '', '_', '11330', '6317559', '6316592', '', '6310706', '', '0', '0', '', 0),
+('AG03', 'Pelannggan', '', 'AGUNG MAS PRIMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG04', 'Pelannggan', '', 'AGRATAMA CIPTA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG05', 'Pelannggan', '', 'AGRIGON', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AG06', 'Pelannggan', '', 'AGUNG PERKASA REKAPRATAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AINIS', 'Pelannggan', '', 'AINIS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AIR01', 'Pelannggan', '', 'AIRLANGGA', 'Alamat', '', '_', '', '251654442', '251655202', '', '', '', '0', '0', '', 0),
+('AIR02', 'Pelannggan', '', 'AIRUDTG.PRIOK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AJI01', 'Pelannggan', '', 'PT.AJIGUNA JAYA MANDIRI', 'Alamat', '', '_', '', '218615281', '218604538', '', '', '', '0', '0', '', 0),
+('AKAR', 'Pelannggan', '', 'AKAR MESINDOTAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AKT01', 'Pelannggan', '', 'PT.AKTRA BUDI MANDIRI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL01', 'Pelannggan', '', 'PT.ALFIAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL02', 'Pelannggan', '', 'ALAS WAJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL03', 'Pelannggan', '', 'ALEXINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL04', 'Pelannggan', '', 'ALRINDO UTAMA/BPK.SAFEI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL05', 'Pelannggan', '', 'ALAM BANGUN CIPTASUKA BUMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AL06', 'Pelannggan', '', 'ALPINDOSUKABUMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALA25', 'Pelannggan', '', 'PT.ALAKASA INDUSTRINDO TBK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALA26', 'Pelannggan', '', 'PT.ALAM BERSEMI SENTOSA', 'Alamat', '', '_', '14450', '', '', '', '', '', '0', '0', '', 0),
+('ALA27', 'Pelannggan', '', 'PT.ALAS WAJA KENCANA', 'Alamat', '', '_', '', '214517022', '214526629', '', '', '', '0', '0', '', 0),
+('ALA28', 'Pelannggan', '', 'ALASKA TEKNIKJAKARTA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALBA', 'Pelannggan', '', 'PT.ALBA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALBOR', 'Pelannggan', '', 'PT.AL BORG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALC01', 'Pelannggan', '', 'PT.ALCA GRAHA PERKASA', 'Alamat', '', '_', '11650', '21553270', '215859763', '215640611', '', '', '0', '0', '', 0),
+('ALC02', 'Pelannggan', '', 'PT.ALCORINDO SEJAHTERA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALD01', 'Pelannggan', '', 'PT.ALDINA CITRA SUKSES', 'Alamat', '', '_', '10730', '216240549', '216240550', '', '', '', '0', '0', '', 0),
+('ALD02', 'Pelannggan', '', 'PT.ALDINDO SEMESTA', 'Alamat', '', '_', '', '216685389', '216616626', '', '', '', '0', '0', '', 0),
+('ALD03', 'Pelannggan', '', 'PT.ALDOTAMA PERMAI', 'Alamat', '', '_', '', '215985072', '215985073', '', '', '', '0', '0', '', 0),
+('ALF01', 'Pelannggan', '', 'PT.ALFA TEKNINDO PERDANA', 'Alamat', '', '_', '', '2163853030', '', '', '', '', '0', '0', '', 0),
+('ALF02', 'Pelannggan', '', 'PT.ALFROTAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALI01', 'Pelannggan', '', 'ALI STEEL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALI02', 'Pelannggan', '', 'PT.ALIDA CATUR SENTOSA', 'Alamat', '', '_', '', '216911237', '216911009', '', '', '', '0', '0', '', 0),
+('ALI03', 'Pelannggan', '', 'PT.ALIKUS MEGAH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALI04', 'Pelannggan', '', 'PT.ALISON JAYA SEMESTA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALI05', 'Pelannggan', '', 'ALIA', 'Alamat', '', '_', '', '28342565', '28359293', '', '', '', '0', '0', '', 0),
+('ALP01', 'Pelannggan', '', 'PT.ALPHA UTAMA MANDIRI', 'Alamat', '', '_', '', '214610035', '', '', '', '', '0', '0', '', 0),
+('ALP02', 'Pelannggan', '', 'PT.ALPINDO MITRA BAJA', 'Alamat', '', '_', '43152', '266215407', '266220262', '266215703', '', '', '0', '0', '', 0),
+('ALP03', 'Pelannggan', '', 'PT.ALPINE COOL UTAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALP04', 'Pelannggan', '', 'PT.ALPRO MANDIRI', 'Alamat', '', '_', '10250', '213921192', '213921191', '', '', '', '0', '0', '', 0),
+('ALS', 'Pelannggan', '', 'PT.ALSTHOMINDO', 'Alamat', '', '_', '', '216913071', '216913072', '', '', '', '0', '0', '', 0),
+('ALT01', 'Pelannggan', '', 'PT.ALTRAMAN', 'Alamat', '', '_', '', '215300974', '215303024', '', '', '', '0', '0', '', 0),
+('ALT02', 'Pelannggan', '', 'PT.ALTY CIPTA PERTIWI', 'Alamat', '', '_', '', '218507364', '', '', '', '', '0', '0', '', 0),
+('ALTRA', 'Pelannggan', '', 'ALTRAMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALU19', 'Pelannggan', '', 'PT.ALUMINDO PERKASA', 'Alamat', '', '_', '13920', '214608855', '214608856', '', '', '', '0', '0', '', 0),
+('ALU20', 'Pelannggan', '', 'PT.ALUMKO', 'Alamat', '', '_', '', '215802848', '215802847', '215802690', '', '', '0', '0', '', 0),
+('ALU21', 'Pelannggan', '', 'PT.ALUN KARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALU22', 'Pelannggan', '', 'PT.ALUN INDAH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALV01', 'Pelannggan', '', 'PT.ALVINDO CATUR SENTOSA', 'Alamat', '', '_', '', '216901921', '216901922', '', '', '', '0', '0', '', 0),
+('ALV02', 'Pelannggan', '', 'PT.ALVA LAFAL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ALV03', 'Pelannggan', '', 'PT.ALVINDO SAKTI PERKASA', 'Alamat', '', '_', '14430', '216902807', '216910510', '', '', '', '0', '0', '', 0),
+('ALV04', 'Pelannggan', '', 'ALVINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AM01', 'Pelannggan', '', 'PT.AMANAH MULIA SEJATI', 'Alamat', '', '_', '', '216508831', '216517034', '', '', '', '0', '0', '', 0),
+('AM02', 'Pelannggan', '', 'PT.AMARTA KARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AM03', 'Pelannggan', '', 'PT.AMARTA KARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AM04', 'Pelannggan', '', 'AMING TEKNIK', 'Alamat', '', '_', '14478', '215553951', '215553952', '', '', '', '0', '0', '', 0),
+('AM05', 'Pelannggan', '', 'AMID JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN01', 'Pelannggan', '', 'ANEKA TUNGGAL', 'Alamat', '', '_', '12510', '217891358', '', '', '', '', '0', '0', '', 0),
+('AN02', 'Pelannggan', '', 'PT.ANEKA BINA CITRA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN03', 'Pelannggan', '', 'PT.ANEKAFROZE CITRATAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN04', 'Pelannggan', '', 'PT.ANEKA JAYA SEJAHTEARA', 'Alamat', '', '_', '10730', '', '', '', '', '', '0', '0', '', 0),
+('AN05', 'Pelannggan', '', 'PT.ANEKA KREASI CAHAYA LOGAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN06', 'Pelannggan', '', 'ANEKA LOGAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN07', 'Pelannggan', '', 'PT.ANEKA STAR', 'Alamat', '', '_', '', '218753364', '218753372', '', '', '', '0', '0', '', 0),
+('AN08', 'Pelannggan', '', 'ANEKA TEKNIK', 'Alamat', '', '_', '', '216288048', '216288049', '216259630', '', '', '0', '0', '', 0),
+('AN09', 'Pelannggan', '', 'PT.ANEKA DJAKARTA IRON STEEL', 'Alamat', '', '_', '', '216930808', '216905903', '216925888', '', '', '0', '0', '', 0),
+('AN10', 'Pelannggan', '', 'ANUGRAH CAHAYA ABADI', 'Alamat', '', '_', '10430', '', '', '', '', '', '0', '0', '', 0),
+('AN11', 'Pelannggan', '', 'PT.ANDHIKA MELIATAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN12', 'Pelannggan', '', 'PT.ANDHI CHANDRA AUTOMOTIVE PRODUCTS TBK', 'Alamat', '', '_', '14440', '', '', '', '', '', '0', '0', '', 0),
+('AN13', 'Pelannggan', '', 'PT.ANDHIKA TJAKRA JAYA', 'Alamat', '', '_', '', '218410847', '218410846', '', '', '', '0', '0', '', 0),
+('AN14', 'Pelannggan', '', 'ANEKA BINA C', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN15', 'Pelannggan', '', 'ANEKA BAJA', 'Alamat', '', '_', '', '216292280', '8129345656', '', '', '', '0', '0', '', 0),
+('AN16', 'Pelannggan', '', 'PT.ANTAR SURYA AGUNG', 'Alamat', '', '_', '', '218313472', '218313477', '', '', '', '0', '0', '', 0),
+('AN17', 'Pelannggan', '', 'ANJAS INDRA SUSENA', 'Alamat', '', '_', '', '216900230', '811906608', '', '', '', '0', '0', '', 0),
+('AN18', 'Pelannggan', '', 'PT.ANUGRAH CITRAMANDIRI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN19', 'Pelannggan', '', 'ANDARAN TUA SEJATI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN20', 'Pelannggan', '', 'ANEKAPALEMBANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN21', 'Pelannggan', '', 'ANUGRAH PERDANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN23', 'Pelannggan', '', 'ANUGRAH CITRA MANDIRI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN24', 'Pelannggan', '', 'PT.ANUGRAH MESINDO ABADI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN25', 'Pelannggan', '', 'ANUGERAH TEKNIK PENDINGIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN26', 'Pelannggan', '', 'PT.ANEKA BANGUN PERSADA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN27', 'Pelannggan', '', 'PT.ANEKA KARYA CEMERLANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AN28', 'Pelannggan', '', 'PT.ANEKA ATLANTICINDO N', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANE01', 'Pelannggan', '', 'ANEKA TEHNIK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANE02', 'Pelannggan', '', 'ANEKA JAYA TEHNIK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANG01', 'Pelannggan', '', 'ANGITA DEMERLANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANG02', 'Pelannggan', '', 'ANGKASA PERINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANG03', 'Pelannggan', '', 'ANGKASAN BUANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANG04', 'Pelannggan', '', 'ANGKASA BUANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANTJO', 'Pelannggan', '', 'PT.ANTJOL IRON FACTORY', 'Alamat', '', '_', '', '216900355', '216929929', '', '', '', '0', '0', '', 0),
+('ANU01', 'Pelannggan', '', 'PT.ANUGERAH MITRA SEJATI', 'Alamat', '', '_', '12640', '', '', '', '', '', '0', '0', '', 0),
+('ANU02', 'Pelannggan', '', 'PT.ANUGERAH TEKNIK PERKASA', 'Alamat', '', '_', '14350', '', '', '', '', '', '0', '0', '', 0),
+('ANU03', 'Pelannggan', '', 'PT.ANUGERAH TEKNIK SENTOSA', 'Alamat', '', '_', '41361', '267600250', '', '', '', '', '0', '0', '', 0),
+('ANU04', 'Pelannggan', '', 'ANUGRAH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU05', 'Pelannggan', '', 'ANUGRAH ALAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU06', 'Pelannggan', '', 'ANUGRAH JAYA MANDIRI LOGAM', 'Alamat', '', '_', '', '214802756', '811898882', '', '', '', '0', '0', '', 0),
+('ANU07', 'Pelannggan', '', 'ANUGRAH KURNIA UTAMA', 'Alamat', '', '_', '', '216512932', '216511028', '', '216511446', '', '0', '0', '', 0),
+('ANU08', 'Pelannggan', '', 'ANUGERAH ALAM ABADI', 'Alamat', '', '_', '', '216520486', '216520431', '', '216502103', '', '0', '0', '', 0),
+('ANU09', 'Pelannggan', '', 'ANUGERAH REZEKI (RA RETNO ARIESTIANTY)', 'Alamat', '', '_', '14350', '', '', '', '', '', '0', '0', '', 0),
+('ANU10', 'Pelannggan', '', 'PT.ANUGRAH BANGUN SEMESTA', 'Alamat', '', '_', '', '218752087', '218755453', '', '218752087', '', '0', '0', '', 0),
+('ANU11', 'Pelannggan', '', 'PT.ANUGRAH MANDIRI MAKMUR SENTOSA', 'Alamat', '', '_', '', '216259326', '', '', '216259332', '', '0', '0', '', 0),
+('ANU12', 'Pelannggan', '', 'ANUGRAH MULYA LESTARI', 'Alamat', '', '_', '17144', '214503851', '', '', '', '', '0', '0', '', 0),
+('ANU13', 'Pelannggan', '', 'ANUGERAH', 'Alamat', '', '_', '', '561768918', '', '', '', '', '0', '0', '', 0),
+('ANU14', 'Pelannggan', '', 'PT.ANUGERAH BINAJAYA STEEL', 'Alamat', '', '_', '60161', '', '', '', '', '', '0', '0', '', 0),
+('ANU15', 'Pelannggan', '', 'PT.ANUGERAH MITRA SEJAHTERA', 'Alamat', '', '_', '16914', '218764437', '2187900603', '', '', '', '0', '0', '', 0),
+('ANU16', 'Pelannggan', '', 'ANUGERAH JAYA CEMERLANG', 'Alamat', '', '_', '41352', '', '', '', '', '', '0', '0', '', 0),
+('ANU17', 'Pelannggan', '', 'ANUGRAH MANDIRI.S', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU18', 'Pelannggan', '', 'ANUGRAH MANDIRI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU19', 'Pelannggan', '', 'ANUGRAH CITRA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU20', 'Pelannggan', '', 'ANUGRAH ABADI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU21', 'Pelannggan', '', 'ANUGERAH SEJATI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ANU22', 'Pelannggan', '', 'PT.ANOEGRAH STEELJAYA ABADI', 'Alamat', '', '_', '', '6010156', '', '', '', '', '0', '0', '', 0),
+('APART', 'Pelannggan', '', 'APARTEMEN PESONA BAHARI', 'Alamat', '', '_', '', '216014441', '216014442', '', '', '', '0', '0', '', 0),
+('APM', 'Pelannggan', '', 'PT.APM ARMADA AUTOPARTS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('APO01', 'Pelannggan', '', 'APOLLO', 'Alamat', '', '_', '10730', '216281900', '216280444', '', '216281900', '', '0', '0', '', 0),
+('APO03', 'Pelannggan', '', 'PT.APORA INDUSMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('Apr-01', 'Pelannggan', '', 'PT.APRILINDO SENTOSA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR01', 'Pelannggan', '', 'PT.ARAH CHAMPION STEEL', 'Alamat', '', '_', '', '216693727', '216614739', '', '216614739', '', '0', '0', '', 0),
+('AR02', 'Pelannggan', '', 'PT.ARAH CIPTA GRYA', 'Alamat', '', '_', '10250', '', '', '', '', '', '0', '0', '', 0),
+('AR03', 'Pelannggan', '', 'PT.ARBONTEX', 'Alamat', '', '_', '', '214608378', '', '', '', '', '0', '0', '', 0),
+('AR04', 'Pelannggan', '', 'PT.ARSIDIAN CIPTAMASSA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR05', 'Pelannggan', '', 'ARIFIN WAIIJAYA', 'Alamat', '', '_', '', '816974337', '', '', '215818658', '', '0', '0', '', 0),
+('AR06', 'Pelannggan', '', 'PT.ARINDO TECHNICAL SUPPLY', 'Alamat', '', '_', '', '216244992', '216011179', '', '', '', '0', '0', '', 0),
+('AR07', 'Pelannggan', '', 'ARINS MANDIRI TECHNIC', 'Alamat', '', '_', '11180', '216286053', '216288863', '', '216286053', '', '0', '0', '', 0),
+('AR08', 'Pelannggan', '', 'ARIA GRAHA', 'Alamat', '', '_', '', '721709783', '721709784', '', '721706320', '', '0', '0', '', 0),
+('AR09', 'Pelannggan', '', 'PT.ARMINDO JAYA LINES', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR10', 'Pelannggan', '', 'PT.ARMINDO UTAMA/Bp.RUDY', 'Alamat', '', '_', '', '214721063', '', '', '', '', '0', '0', '', 0),
+('AR11', 'Pelannggan', '', 'PT.ARTA BAJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR12', 'Pelannggan', '', 'PT.ARTERIA DAYA MULIA', 'Alamat', '', '_', '', '216692421', '216695339', '', '216696569', '216695993', '0', '0', '', 0),
+('AR13', 'Pelannggan', '', 'PT.ARTHA MAKMUR PERMAI/BU SUICING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR14', 'Pelannggan', '', 'PT.ARTHA TEKNINDO SUKMATAMA', 'Alamat', '', '_', '', '218250030', '218250029', '', '218250028', '', '0', '0', '', 0),
+('AR15', 'Pelannggan', '', 'PT.ARTOMORO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR16', 'Pelannggan', '', 'ARVID TEKNIK PRIMA', 'Alamat', '', '_', '17412', '', '', '', '', '', '0', '0', '', 0),
+('AR17', 'Pelannggan', '', 'PT.ARYA HUTAMA PUTRA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR18', 'Pelannggan', '', 'PT.ARWANA CERAMIC TILES', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR19', 'Pelannggan', '', 'ARYA RAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR20', 'Pelannggan', '', 'ARYAKELAPA GADING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR21', 'Pelannggan', '', 'ARTECH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR22', 'Pelannggan', '', 'ARJA', 'Alamat', '', '_', '', '561733667', '', '', '', '', '0', '0', '', 0),
+('AR23', 'Pelannggan', '', 'ARKHA JAYANTI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR24', 'Pelannggan', '', 'ARTA MIX', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR25', 'Pelannggan', '', 'ARIES DESIGN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR26', 'Pelannggan', '', 'PT.ARAFAH PADANG SEJATI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR27', 'Pelannggan', '', 'ARIFIN BURGUR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AR28', 'Pelannggan', '', 'PT.ARYA BOGA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ARU', 'Pelannggan', '', 'PT.ARUNA BHASWARA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AS01', 'Pelannggan', '', 'PT.ASRI SUM BER LANCAR', 'Alamat', '', '_', '', '216310489', '', '', '216314833', '', '0', '0', '', 0),
+('AS02', 'Pelannggan', '', 'PT.ASTINA PERMA INDAH', 'Alamat', '', '_', '', '216243425', '', '', '', '', '0', '0', '', 0),
+('AS03', 'Pelannggan', '', 'PT.ASTRA NISSAN DIESEL INDONESIA', 'Alamat', '', '_', '', '216507150', '', '', '216507150', '', '0', '0', '', 0),
+('AS04', 'Pelannggan', '', 'ASCO KEMASINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AS05', 'Pelannggan', '', 'ASSAB STEELS INDONESIA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASA01', 'Pelannggan', '', 'PT.ASALTA MANDIRI AGUNG', 'Alamat', '', '_', '', '251652768', '251652769', '', '218753727', '218751390', '0', '0', '', 0),
+('ASE01', 'Pelannggan', '', 'PT.ASEAN BAJA', 'Alamat', '', 'BEKASI BARAT', '', '218854968', '', '', '218854968', '', '0', '0', '', 0),
+('ASE02', 'Pelannggan', '', 'ASEAN BAJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI01', 'Pelannggan', '', 'ASIA PERMAICIBUBUR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI02', 'Pelannggan', '', 'ASIA STEEL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI03', 'Pelannggan', '', 'PT.ASIA JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI04', 'Pelannggan', '', 'ASIO BIMA PERSADA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI05', 'Pelannggan', '', 'ASIANA TECNOLOGIS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASI06', 'Pelannggan', '', 'PT.ASIA PRIMA CS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ASOKA', 'Pelannggan', '', 'PT.ASOKA PUTRA TEKNIK METALINDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ATAP', 'Pelannggan', '', 'ATAP SURYAWIJAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('ATS', 'Pelannggan', '', 'PT.A T SSUNTER', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AUT01', 'Pelannggan', '', 'PT.AUTOMAS CENTRA RADIATORINDO', 'Alamat', '', '_', '', '216286707', '216286708', '', '', '', '0', '0', '', 0),
+('AVI01', 'Pelannggan', '', 'AVION', 'Alamat', '', '_', '', '215601655', '215660281', '', '', '', '0', '0', '', 0),
+('AW01', 'Pelannggan', '', 'AWECO INDO STEELL PERKASA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('AWAL', 'Pelannggan', '', 'PT.AWAL PATURA KEMENANGAN', 'Alamat', '', '_', '10620', '', '', '', '', '', '0', '0', '', 0),
+('AYU', 'Pelannggan', '', 'AYUNG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('B', 'Pelannggan', '', 'BINA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA', 'Pelannggan', '', 'BAJA INDAH KERAWANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA01', 'Pelannggan', '', 'BAPAK ASWIN', 'Alamat', '', '_', '', '213858277', '216297789', '', '', '', '0', '0', '', 0),
+('BA02', 'Pelannggan', '', 'BAPAK ATIE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA03', 'Pelannggan', '', 'BAPAK ATIONG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA035', 'Pelannggan', '', 'BAPAK SUROSO/TEDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA04', 'Pelannggan', '', 'BAPAK AWANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA05', 'Pelannggan', '', 'BAPAK AWIE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA06', 'Pelannggan', '', 'BAPAK AYEN', 'Alamat', '', '_', '', '215455245', '216190356', '', '', '', '0', '0', '', 0),
+('BA07', 'Pelannggan', '', 'BAPAK BADANI', 'Alamat', '', '_', '', '2184995811', '', '', '', '', '0', '0', '', 0),
+('BA08', 'Pelannggan', '', 'BAPAK CHAN MANA', 'Alamat', '', '_', '', '73921057', '216545547', '', '', '', '0', '0', '', 0),
+('BA09', 'Pelannggan', '', 'BAPAK AHOK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA10', 'Pelannggan', '', 'BAPAK AMIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA100', 'Pelannggan', '', 'BAPAK EMIR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA101', 'Pelannggan', '', 'BAPAK YONG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA102', 'Pelannggan', '', 'BAPAK ROBIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA103', 'Pelannggan', '', 'BAPAK APING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA104', 'Pelannggan', '', 'BAPAK CENGKINJG ( U G A )', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA105', 'Pelannggan', '', 'BAPAK LEONARDO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA106', 'Pelannggan', '', 'BAPAK KAMAL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA107', 'Pelannggan', '', 'BAPAK DODI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA108', 'Pelannggan', '', 'BAPAK YONGKI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA109', 'Pelannggan', '', 'BAPAK BUNTORO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA11', 'Pelannggan', '', 'BAPAK ASEP (SINAR CIOMAS)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA110', 'Pelannggan', '', 'BAPAK WARDY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA111', 'Pelannggan', '', 'BAPAK FARID', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA112', 'Pelannggan', '', 'BAPAK UDIN/WAWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA113', 'Pelannggan', '', 'BAPAK BUNTIONG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA12', 'Pelannggan', '', 'BAPAK HOK GUAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA120', 'Pelannggan', '', 'BAPAK IMRON', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA121', 'Pelannggan', '', 'BAPAK OLEHSUKABUMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA122', 'Pelannggan', '', 'BAPAK AHUNG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA123', 'Pelannggan', '', 'BAPAK JANI/IBU SUSAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA124', 'Pelannggan', '', 'BAPAK ARIANTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA125', 'Pelannggan', '', 'BAPAK MARSONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA126', 'Pelannggan', '', 'BAPAK AABBOGOR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA127', 'Pelannggan', '', 'BAPAK R BILLY JUNAIDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA128', 'Pelannggan', '', 'BAPAK WAHANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA129', 'Pelannggan', '', 'BAPAK BOWO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA13', 'Pelannggan', '', 'BAPAK ASHARICIKAMPEK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA130', 'Pelannggan', '', 'BAPAK RICHARD', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA131', 'Pelannggan', '', 'BAPAK DWI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA132', 'Pelannggan', '', 'BPK BENYAMIN/BPK YONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA133', 'Pelannggan', '', 'BAPAK TEMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA134', 'Pelannggan', '', 'BAPAK ENDANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA135', 'Pelannggan', '', 'BAPAK INDRAWAN/LEONI FATA METAL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA136', 'Pelannggan', '', 'BAPAK WAHONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA137', 'Pelannggan', '', 'BAPAK JOHN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA138', 'Pelannggan', '', 'BAPAK IWANSMP NEGRI 1', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA139', 'Pelannggan', '', 'BAPAK ACENG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA14', 'Pelannggan', '', 'BAPAK ASIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA140', 'Pelannggan', '', 'BAPAK JONI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA141', 'Pelannggan', '', 'BAPAK RIMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA142', 'Pelannggan', '', 'BAPAK HERRY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA143', 'Pelannggan', '', 'BAPAK HANAFI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA144', 'Pelannggan', '', 'BAPAK TEDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA145', 'Pelannggan', '', 'BAPAK WARNO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA146', 'Pelannggan', '', 'BAPAK MARWISEXP CENDANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA147', 'Pelannggan', '', 'BAPAK ANDREAS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA148', 'Pelannggan', '', 'BAPAK GUNTORO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA149', 'Pelannggan', '', 'BAPAK SONY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA15', 'Pelannggan', '', 'BAPAK ASMUNI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA150', 'Pelannggan', '', 'BAPAK CECENG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA151', 'Pelannggan', '', 'BAPAK RONI/DAVID', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA152', 'Pelannggan', '', 'BAPAK CECENG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA153', 'Pelannggan', '', 'BAPAK KIKI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA154', 'Pelannggan', '', 'BAPAK PINEN/ANDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA155', 'Pelannggan', '', 'BAPAK WO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA156', 'Pelannggan', '', 'BAPAK VICTOR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA157', 'Pelannggan', '', 'BAPAK SAMUEL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA158', 'Pelannggan', '', 'BAPAK MULYADI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA159', 'Pelannggan', '', 'BAPAK FAIZAL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA16', 'Pelannggan', '', 'PAK DARMAN (CASH BAYAR DI GUDANG)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA160', 'Pelannggan', '', 'BAPAK TEK LIONG/GAYA MOTOR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA161', 'Pelannggan', '', 'BAPAK CU MING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA162', 'Pelannggan', '', 'BAPAK RONY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA163', 'Pelannggan', '', 'BAPAK EDY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA164', 'Pelannggan', '', 'BAPAK SYAIFUL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA165', 'Pelannggan', '', 'BAPAK SUROTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA166', 'Pelannggan', '', 'BAPAK LUTFICASH DI GUDANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA167', 'Pelannggan', '', 'BAPAK ABO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA168', 'Pelannggan', '', 'BAPAK KAMIR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA169', 'Pelannggan', '', 'BAPAK IWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA17', 'Pelannggan', '', 'BAPAK AAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA170', 'Pelannggan', '', 'BAPAK JINARDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA171', 'Pelannggan', '', 'BAPAK AKANG(ANTIK DISCOTIK)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA172', 'Pelannggan', '', 'BAPAK JEMI/TB CINERE JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA173', 'Pelannggan', '', 'BAPAK SUHADI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA174', 'Pelannggan', '', 'BAPAK KIRUN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA175', 'Pelannggan', '', 'BAPAK H.ARJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA176', 'Pelannggan', '', 'BAPAK WAGIMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA177', 'Pelannggan', '', 'BAPAK YANGGIE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA178', 'Pelannggan', '', 'BAPAK MAFUT', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA179', 'Pelannggan', '', 'BAPAK ALAY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA18', 'Pelannggan', '', 'BAPAK ABUN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA180', 'Pelannggan', '', 'BAPAK WAHYUDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA181', 'Pelannggan', '', 'BAPAK BAHRI/BAYU BUANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA182', 'Pelannggan', '', 'BAPAK HASAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA183', 'Pelannggan', '', 'BAPAK BAMBANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA184', 'Pelannggan', '', 'BAPAK AKION/PT.TRI SEJATI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA185', 'Pelannggan', '', 'BAPAK YOKE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA186', 'Pelannggan', '', 'BAPAK PARMIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA187', 'Pelannggan', '', 'BAPAK HIMAWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA188', 'Pelannggan', '', 'BAPAK SAFEI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA189', 'Pelannggan', '', 'BAPAK MANSYUR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA19', 'Pelannggan', '', 'BAPAK ACONG (N.P)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA190', 'Pelannggan', '', 'BAPAK JUNO I MUALIM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA191', 'Pelannggan', '', 'BAPAK YOSEF', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA192', 'Pelannggan', '', 'BAPAK SAEFULLOH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA193', 'Pelannggan', '', 'BAPAK JANI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA194', 'Pelannggan', '', 'BAPAK SETIWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA195', 'Pelannggan', '', 'BAPAK YUDO/ KRIS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA196', 'Pelannggan', '', 'BAPAK MAMI  CIAWI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA197', 'Pelannggan', '', 'BAPAK PARDEDE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA198', 'Pelannggan', '', 'BAPAK HERMAN WIJAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA199', 'Pelannggan', '', 'BAPAK ENDANG SURYANA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA20', 'Pelannggan', '', 'BAPAK ACUN/THOMAS', 'Alamat', '', '_', '', '215400244', '', '', '', '', '0', '0', '', 0),
+('BA200', 'Pelannggan', '', 'BAPAK SUPARDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA201', 'Pelannggan', '', 'BAPAK ANTON', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA202', 'Pelannggan', '', 'BAPAK JIMMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA203', 'Pelannggan', '', 'BAPAK EFENDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA204', 'Pelannggan', '', 'BAPAK WIMEN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA205', 'Pelannggan', '', 'BAPAK WILLIAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA206', 'Pelannggan', '', 'BAPAK AMING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA207', 'Pelannggan', '', 'BAPAK JOKO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA208', 'Pelannggan', '', 'BAPAK ANTON SIMAJUNTAK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA209', 'Pelannggan', '', 'BAPAK WIMEN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA21', 'Pelannggan', '', 'BAPAK ADAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA210', 'Pelannggan', '', 'BAPAK MARDJUKI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA211', 'Pelannggan', '', 'BAPAK FERRY SINAGA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA212', 'Pelannggan', '', 'BAPAK SANDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA213', 'Pelannggan', '', 'BAPAK NUR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA214', 'Pelannggan', '', 'BAPAK ASWAR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA215', 'Pelannggan', '', 'BAPAK SAIFUL ALI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA216', 'Pelannggan', '', 'BAPAK HARYANTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA217', 'Pelannggan', '', 'BAPAK RUSMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA218', 'Pelannggan', '', 'BAPAK SAIFULLOH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA219', 'Pelannggan', '', 'BAPAK FAUJI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA22', 'Pelannggan', '', 'BAPAK ADE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA220', 'Pelannggan', '', 'BAPAK DIRAJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA221', 'Pelannggan', '', 'BAPAK BENNY/SUBROTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA222', 'Pelannggan', '', 'BAPAK NUTAGALUNG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA223', 'Pelannggan', '', 'BAPAK LUKMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA224', 'Pelannggan', '', 'BAPAK SYARIEF/CASH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA225', 'Pelannggan', '', 'BAPAK. MARUI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA226', 'Pelannggan', '', 'BAPAK HARI HAMBALI(ADUL)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA227', 'Pelannggan', '', 'BAPAK ZAINI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA228', 'Pelannggan', '', 'BAPAK AKBAR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA229', 'Pelannggan', '', 'BAPAK AFIF', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA23', 'Pelannggan', '', 'BAPAK AHOK', 'Alamat', '', '_', '', '216506534', '216506540', '', '', '', '0', '0', '', 0),
+('BA230', 'Pelannggan', '', 'BAPAK JODI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA231', 'Pelannggan', '', 'BAPAK BOIM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA232', 'Pelannggan', '', 'BAPAK PETRUS', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA233', 'Pelannggan', '', 'BAPAK SUCIPTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA234', 'Pelannggan', '', 'BAPAK JARWONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA235', 'Pelannggan', '', 'BAPAK IKIAN/CASH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA236', 'Pelannggan', '', 'BAPAK MARTINO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA237', 'Pelannggan', '', 'BAPAK JEMMY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA238', 'Pelannggan', '', 'BAPAK RISDIANTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA239', 'Pelannggan', '', 'ISWANTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA24', 'Pelannggan', '', 'BAPAK AKIAT', 'Alamat', '', '_', '', '8111367777', '8129032482', '', '', '', '0', '0', '', 0),
+('BA240', 'Pelannggan', '', 'BAPAKSUPARLAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA241', 'Pelannggan', '', 'BAPAK YUNIAR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA25', 'Pelannggan', '', 'BAPAK AKON / KOSASIH', 'Alamat', '', '_', '', '215678065', '215676644', '816917692', '', '', '0', '0', '', 0),
+('BA26', 'Pelannggan', '', 'BAPAK  AKONG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA27', 'Pelannggan', '', 'BAPAK ALAMSYAH', 'Alamat', '', '_', '', '266223736', '', '', '', '', '0', '0', '', 0),
+('BA28', 'Pelannggan', '', 'BAPAK ALEX', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA29', 'Pelannggan', '', 'BAPAK ALEXCITEURUP', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA30', 'Pelannggan', '', 'BAPAK ALI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA31', 'Pelannggan', '', 'BAPAK APIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA32', 'Pelannggan', '', 'BAPAK ARDHY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA33', 'Pelannggan', '', 'BAPAK ARIFIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA34', 'Pelannggan', '', 'BAPAK ARYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA35', 'Pelannggan', '', 'BAPAK ASEN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA36', 'Pelannggan', '', 'BAPAK ASENG  KAPUK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA37', 'Pelannggan', '', 'BAPAK ASOEN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA38', 'Pelannggan', '', 'BAPAK ADI HALIM', 'Alamat', '', '_', '', '215801822', '', '', '', '', '0', '0', '', 0),
+('BA39', 'Pelannggan', '', 'BAPAK JOHAN (TINGTING)', 'Alamat', '', '_', '', '7690127', '4896112(R)', '', '', '', '0', '0', '', 0),
+('BA40', 'Pelannggan', '', 'BAPAK JHONNERY (BGKL LAS LISTRIK BERSAUDARA)', 'Alamat', '', '_', '', '82493343', '', '', '', '', '0', '0', '', 0),
+('BA41', 'Pelannggan', '', 'BAPAK LIM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA42', 'Pelannggan', '', 'BAPAK CHANDRA UTAMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA44', 'Pelannggan', '', 'BAPAK ROHADI HENDARSAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA45', 'Pelannggan', '', 'BAPAK DAYAT', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA46', 'Pelannggan', '', 'BAPAK DARWIN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA47', 'Pelannggan', '', 'BAPAK RUDY', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA48', 'Pelannggan', '', 'BAPAK RUDIYANTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA49', 'Pelannggan', '', 'BAPAK SAFEI', 'Alamat', '', 'JAKARTA', '', '6247413', '8111558868', '', '', '', '0', '0', '', 0),
+('BA50', 'Pelannggan', '', 'BAPAK NASIER', 'Alamat', '', '_', '', '8607941', '', '', '', '', '0', '0', '', 0),
+('BA51', 'Pelannggan', '', 'BAPAK YANTO / BPK HAMID', 'Alamat', '', '_', '', '87905206', '8161386205', '', '', '', '0', '0', '', 0),
+('BA52', 'Pelannggan', '', 'BAPAK YANTONG', 'Alamat', '', '_', '', '5330741', '', '', '', '', '0', '0', '', 0),
+('BA53', 'Pelannggan', '', 'BAPAK TASIMAN', 'Alamat', '', '_', '', '5516755', '', '', '', '', '0', '0', '', 0),
+('BA54', 'Pelannggan', '', 'BAPAK TEGUH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA55', 'Pelannggan', '', 'BAPAK TOTO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA56', 'Pelannggan', '', 'BAPAK TRISNO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA57', 'Pelannggan', '', 'BAPAK ASWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA58', 'Pelannggan', '', 'BAPAK YANI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA59', 'Pelannggan', '', 'BAPAK HENGKY', 'Alamat', '', '_', '', '6248937', '', '', '', '', '0', '0', '', 0),
+('BA60', 'Pelannggan', '', 'BAPAK HENDRA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA61', 'Pelannggan', '', 'BAPAK H.EDI KOSASIH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA62', 'Pelannggan', '', 'BAPAK JANGGIH', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA64', 'Pelannggan', '', 'BAPAK BENI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA65', 'Pelannggan', '', 'BAPAK DENI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA66', 'Pelannggan', '', 'BAPAK HARSONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA67', 'Pelannggan', '', 'BAPAK AHONG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA68', 'Pelannggan', '', 'BAPAK HARI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA69', 'Pelannggan', '', 'BAPAK TASIMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA70', 'Pelannggan', '', 'BAPAK MULYONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA71', 'Pelannggan', '', 'BAPAK KING KING', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA72', 'Pelannggan', '', 'BAPAK RAIMON', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA73', 'Pelannggan', '', 'BAPAK AFUK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA74', 'Pelannggan', '', 'BAPAK MULYONO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA75', 'Pelannggan', '', 'BAPAK DONI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA76', 'Pelannggan', '', 'BAPAK NASERI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA77', 'Pelannggan', '', 'BAPAK ANDRI SIDHARTA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA78', 'Pelannggan', '', 'BAPAK SIMAN (DUNIA EXPREESS)', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA79', 'Pelannggan', '', 'BAPAK RAIMOND', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA80', 'Pelannggan', '', 'BAPAK JIMMI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA81', 'Pelannggan', '', 'BAPAK SITUMEANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA82', 'Pelannggan', '', 'BAPAK DONI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA83', 'Pelannggan', '', 'BAPAK RAVI/IRWAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA84', 'Pelannggan', '', 'BAPAK AGUS SUHAILI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA85', 'Pelannggan', '', 'BAPAK LEO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA86', 'Pelannggan', '', 'BAPAK EKA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA87', 'Pelannggan', '', 'BAPAK SYUKUR', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA88', 'Pelannggan', '', 'BAPAK HERMAN', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA89', 'Pelannggan', '', 'BAPAK TAN LIE HOK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA90', 'Pelannggan', '', 'BAPAK ADAM / BUDI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA91', 'Pelannggan', '', 'BAPAK SLAMET', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0);
+INSERT INTO `pelanggan` (`Kode`, `Nama`, `Nama1`, `Perusahaan`, `Alamat1`, `Alamat2`, `Kota`, `KodeP`, `Telp`, `Telp1`, `Telp2`, `Fax1`, `Fax2`, `Limit_Kredit`, `Piutang`, `NPWP`, `Lama`) VALUES
+('BA92', 'Pelannggan', '', 'BAPAK SYAWAL  MULTI TERMINAL IND', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA93', 'Pelannggan', '', 'BAPAK LIE HOK', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA94', 'Pelannggan', '', 'BAPAK RENNO', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA95', 'Pelannggan', '', 'BAPAK KIAN NAM', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA96', 'Pelannggan', '', 'BAPAK GENDUT', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA97', 'Pelannggan', '', 'BAPAK AGUS SUHAILI', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA98', 'Pelannggan', '', 'BAPAK AGUNG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BA99', 'Pelannggan', '', 'BAPAK KEKE', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAG01', 'Pelannggan', '', 'BAGUS JAYA MANDIRI', 'Alamat', '', '_', '', '218708444', '8161874092', '', '', '', '0', '0', '', 0),
+('BAH01', 'Pelannggan', '', 'BAHTERA BAJASURABAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAH02', 'Pelannggan', '', 'BAHAGIA', 'Alamat', '', '_', '', '216320695', '', '', '', '', '0', '0', '', 0),
+('BAH03', 'Pelannggan', '', 'PT.BAHALAP', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ', 'Pelannggan', '', 'BAJA STEEL', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ01', 'Pelannggan', '', 'BAJA KENCANA', 'Alamat', '', '_', '11720', '215405559', '215416760', '', '', '', '0', '0', '', 0),
+('BAJ02', 'Pelannggan', '', 'PT.BAJAMANDIRI SEJAHTERAJAYA', 'Alamat', '', '_', '10730', '216012518', '216012513', '216498412', '', '', '0', '0', '', 0),
+('BAJ03', 'Pelannggan', '', 'PT.BAJA KHARISMA PERSADA NASIONAL', 'Alamat', '', '_', '11210', '216336262', '216247894', '', '', '', '0', '0', '', 0),
+('BAJ04', 'Pelannggan', '', 'PT.BAJAMARGA KHARISMAUTAMA(BMKU)', 'Alamat', '', '_', '14460', '215450178', '215450182', '', '', '', '0', '0', '', 0),
+('BAJ05', 'Pelannggan', '', 'PT.BAJAMARGA PRIMAPERSADA', 'Alamat', '', '_', '', '2188851133', '218854938', '', '', '', '0', '0', '', 0),
+('BAJ06', 'Pelannggan', '', 'BAJA MAS JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ07', 'Pelannggan', '', 'BAJA NAGA SURYA', 'Alamat', '', '_', '', '215515427', '215515428', '', '215515428', '', '0', '0', '', 0),
+('BAJ08', 'Pelannggan', '', 'PT.BAJA PERKASA MANDIRI', 'Alamat', '', '_', '', '219100379', '', '', '219100380', '', '0', '0', '', 0),
+('BAJ09', 'Pelannggan', '', 'PT.BAJAPRIMA INDOMAKMUR', 'Alamat', '', '_', '', '216330115', '', '', '', '', '0', '0', '', 0),
+('BAJ10', 'Pelannggan', '', 'PT.BAJASURYA INTIGRAHA', 'Alamat', '', '_', '14450', '216696085', '216604396', '216696203', '', '', '0', '0', '', 0),
+('BAJ11', 'Pelannggan', '', 'PT.BAJATAMA LESTARI', 'Alamat', '', '_', '', '215605268', '215605965', '', '', '', '0', '0', '', 0),
+('BAJ12', 'Pelannggan', '', 'PT.BAJA UTAMA WIRASTA INTI', 'Alamat', '', '_', '', '614523298', '', '', '614524164', '', '0', '0', '', 0),
+('BAJ13', 'Pelannggan', '', 'BAJA PRIMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ14', 'Pelannggan', '', 'PT.BAJA INTITERANG LESTARI', 'Alamat', '', '_', '10150', '2163863556', '216383558', '', '', '', '0', '0', '', 0),
+('BAJ15', 'Pelannggan', '', 'BAJA JAYA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ16', 'Pelannggan', '', 'PT.BAJA MARGA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ17', 'Pelannggan', '', 'BAJA MULIA PERKASA', 'Alamat', '', '_', '', '215451841', '', '', '', '', '0', '0', '', 0),
+('BAJ18', 'Pelannggan', '', 'PT.BAJA MARGA PRIMA PERSADA', 'Alamat', '', '_', '', '218851133', '', '', '218854938', '', '0', '0', '', 0),
+('BAJ19', 'Pelannggan', '', 'BAJA NAGATANGERANG', 'Alamat', '', '_', '', '215901734', '', '', '210000000', '', '0', '0', '', 0),
+('BAJ20', 'Pelannggan', '', 'BAJA GRIYA PERKASA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ21', 'Pelannggan', '', 'PT.BAJAMURNI KHARISMA PERSADA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ22', 'Pelannggan', '', 'BAJA BUANA AGUNG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ23', 'Pelannggan', '', 'PT.BANGUN BEJANA BAJA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ24', 'Pelannggan', '', 'BAJA KHARISMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ25', 'Pelannggan', '', 'BAJA BUANA AGUNG', 'Alamat', '', '_', '', '216199046', '216199004', '', '', '', '0', '0', '', 0),
+('BAJ26', 'Pelannggan', '', 'BAJA INDAH', 'Alamat', '', '_', '', '216193518', '', '', '', '', '0', '0', '', 0),
+('BAJ27', 'Pelannggan', '', 'BAJA JAYA CIKARANGLIPPO CIKARANG', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ28', 'Pelannggan', '', 'BAJA MULIA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ29', 'Pelannggan', '', 'BAJAINDO ERAPRIMA', 'Alamat', '', '_', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ30', 'Pelannggan', '', 'BAJA INTAN', 'Alamat', '', '_', '', '216193518', '216195125', '', '', '', '0', '0', '', 0),
+('BAJ31', 'Pelannggan', '', 'BAJA JAYA RAYA', 'Alamat', '', '_', '', '215504543', '216302375', '', '', '', '0', '0', '', 0),
+('BAJ32', 'Pelannggan', '', 'BAJA JAYA', 'Alamat', 'LIPPOCIKARANG', 'BEKASI', '17550', '218970662', '218970663', '', '', '', '0', '0', '', 0),
+('BAJ33', 'Pelannggan', '', 'BAJA MANDIRI', 'Alamat', '', '', '', '', '', '', '', '', '0', '0', '', 0),
+('BAJ34', 'Pelannggan', '', 'BAJA MAKMUR', 'Alamat', '', '', '', '215416726', '215405551', '', '', '', '0', '0', '', 0),
 ('P1307001', 'Tony', NULL, 'Stark', 'Jl. Alabama', NULL, 'Bekasi', '11475', '085247447', '0854444458', '-', '0551-8558', '-', NULL, NULL, '258 2587 57771', 15),
 ('P1307002', 'Agung', NULL, 'Sentosa', 'Jl. Merdeka', NULL, 'Tanggerang', '11758', '085552475', '-', '-', '0221-25475', '', NULL, NULL, '7878 47125 58815', 15),
-('P1307003', 'aggagwgw', NULL, 'OK JAJA PT.', 'hesh', NULL, 'hesh', 'seh', '535253', '', '', '123456', '', NULL, NULL, '6346464326', 0),
-('P1307004', 'tes', NULL, ' SEMPURNA PT.', 'tes', NULL, 'test', 'est', 'tes', '', '', 'tes', '', NULL, NULL, 'tes', 0),
-('P1307005', 'test', NULL, 'OKJAYA PT.', 'ets', NULL, 't', 'tes', 'te', '', '', 'tes', '', NULL, NULL, 'teds', 0),
-('P1307006', 'etws', NULL, 'SENTOSOS PT.', 'fgeg', NULL, 'geg', 'gwe', 'fgw', '', '', 'gfewg', '', NULL, NULL, 'bgegb', 0),
+('P1307003', 'aggagwgw', NULL, 'OK JAJA PT.', 'Tangerang Selatan', NULL, 'Tangerang', '11401', '535253', '', '', '123456', '', '0', NULL, '6346464326', 0),
 ('P1307007', 'Soedirman', NULL, 'MERDEKA PT.', 'Jl. Pondok Indah', NULL, 'Jakarta', '11525', '0852478566', '', '', '055248885', '', '1000000', NULL, '52225774441', 0),
-('P1307008', 'Tesla', NULL, 'Tesla Power', 'Jl. tesla', NULL, 'tes', '35555', '356346', '', '', '123456', '', NULL, NULL, '346346346', 0),
+('P1307008', 'Tesla', NULL, 'Tesla Power', 'Jl. tesla', NULL, 'Bekasi', '35555', '356346', '', '', '123456', '', '0', NULL, '346346346', 0),
 ('P1307009', 'Bung Tomo', NULL, ' Bersatu Maju PT.', 'Jl Sumatra', NULL, 'Bandung', '46333', '521353252', '', '', '634634', '', '0', NULL, '35325', 0),
-('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '0852474855', '6285788555822', '', '02215877', '', '25000000', NULL, '487995577758852', 0),
+('P1309001', 'Ogindo', NULL, 'OGINDO PRAKARSATAMA PT.', 'Jl. Ogindo', NULL, 'Bekasi', '13578', '0852474855', '6285788555822', '', '02215877', '', '25000000', NULL, '487995577758852', 15),
 ('P1309002', 'Kim Jong Kook', NULL, 'ABADI BARU YES', 'Jl. Gangnam No.35', NULL, 'Bekasi', '15400', '021-528444485', '', '', '021788588', '', NULL, NULL, '777858442000457', 0),
 ('P1309003', 'Sidoel Ha', NULL, 'SIDO TENGGELAM', 'Jl. Pajajaran', NULL, 'Bunyu', '11710', '258552282', '52588475552', '55847852566', '258547', '24470444', NULL, NULL, '4356463646463', 0),
 ('P1309004', 'Yoo Jaes', NULL, ' RUNNING PT.', 'Jl. Sudirman', NULL, 'Tarakan', '11510', '1234567890', '', '', '123456789', '', '100000', NULL, '123456782', 0),
 ('P1311001', 'Koraswadi', NULL, 'Kora-Kora CV.', 'Jl. Sungai Kora III', NULL, 'Jakarta', '11450', '123456789', '', '', '123456789', '', '25000000', NULL, '258147369', 0),
 ('P1311002', 'Torino', NULL, 'Tori-Tori', 'Torino', NULL, 'Jakarta', '11540', '123456789', '', '', '132465789', '', '25000000', NULL, '123456789', 0),
 ('P1312001', 'Pelanggan Kita', NULL, 'Pelanggan Test', 'Jl. Kalimantan', NULL, 'Jakarta', '11510', '12345656780', '', '', '43634634', '', '10000000', NULL, '46347437', 15),
-('P1401001', 'Modal Nekat', NULL, 'Pelanggan Modal', 'ewwewewegeg', NULL, 'gsegeges', '43643', '6443634634634', '', '', '645754747', '', '654363463463', NULL, '46634634', 0),
-('P1401002', 'Gembira Selalu', NULL, 'Soda Gembira', 'Jl Gembira', NULL, 'segegew', '56253', '35235325322', '', '', '5235235335', '', '3523523', NULL, '352323', 12);
+('P1401001', 'Modal Nekat', NULL, 'Pelanggan Modal', 'Jl.Sentosa Island', NULL, 'Bekasi', '43643', '6443634634634', '', '', '645754747', '', '654363463463', NULL, '46634634', 0),
+('P1401002', 'Gembira Selalu', NULL, 'Soda Gembira', 'Jl Gembira', NULL, 'Jakarta', '56253', '0215555700', '', '', '02215775', '', '3523523', NULL, '352323', 12);
 
 -- --------------------------------------------------------
 
@@ -3023,11 +3542,11 @@ CREATE TABLE IF NOT EXISTS `po_d` (
 --
 
 INSERT INTO `po_d` (`No`, `Kode_po`, `Kode_barang`, `Harga`, `Jumlah`, `Nilai`, `Keterangan`, `QtyTemp`) VALUES
-(1, '1401001', 'AH1005900', '100000', 10, '1000000', NULL, 0),
-(2, '1401001', 'AH1006', '1000000', 20, '20000000', NULL, 0),
-(3, '1401002', 'AH1005900', '100000', 10, '1000000', NULL, 0),
-(4, '1401002', 'AH1016', '100000', 20, '2000000', NULL, 0),
-(5, '1401002', '18BP01612KS', '100000', 10, '1000000', NULL, 0);
+(1, '1401001', 'AH1005900', '100000', 5, '500000', NULL, 0),
+(2, '1401001', 'AH1006', '200000', 5, '1000000', NULL, 0),
+(3, '1401002', 'AH1135538', '100000', 10, '1000000', NULL, 0),
+(4, '1401002', 'AH1026', '10000000', 1, '10000000', NULL, 0),
+(5, '1401002', 'AH1016', '100000', 5, '500000', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -3058,8 +3577,8 @@ CREATE TABLE IF NOT EXISTS `po_h` (
 --
 
 INSERT INTO `po_h` (`Kode`, `Tgl_po`, `Tgl_kirim`, `Permintaan`, `Currency`, `Urgent`, `Kode_supplier`, `Kode_gudang`, `Nama_proyek`, `DPP`, `PPN`, `Total`, `Counter`, `Temp`) VALUES
-('1401001', '2014-01-07', '2014-01-09', '0', '0', 'Tidak', 'S1307001', 'G1307002', '0', '21000000', 1, '21210000', 0, '21210000'),
-('1401002', '2014-01-07', '2014-01-08', '0', '0', 'Tidak', 'S1307003', 'G1309003', '0', '4000000', 1, '4040000', 0, '4040000');
+('1401001', '2014-01-28', '2014-01-28', '0', '0', 'Tidak', 'S1307002', 'G1307002', '0', '1500000', 10, '1650000', 0, '1650000'),
+('1401002', '2014-01-31', '2014-01-31', '0', '0', 'Tidak', 'S1309003', 'G1307001', '0', '11500000', 1, '11615000', 0, '11615000');
 
 -- --------------------------------------------------------
 
@@ -3091,15 +3610,12 @@ CREATE TABLE IF NOT EXISTS `rel_account_role` (
 
 INSERT INTO `rel_account_role` (`account_id`, `role_id`) VALUES
 (1, 1),
-(11, 1),
-(11, 2),
-(11, 3),
-(11, 4),
-(12, 3),
-(13, 1),
-(13, 2),
-(13, 3),
-(13, 4);
+(18, 1),
+(18, 2),
+(18, 3),
+(19, 2),
+(20, 1),
+(20, 3);
 
 -- --------------------------------------------------------
 
@@ -3223,6 +3739,9 @@ INSERT INTO `rel_role_permission` (`role_id`, `permission_id`) VALUES
 (1, 104),
 (1, 105),
 (1, 106),
+(1, 107),
+(1, 108),
+(1, 109),
 (2, 3),
 (2, 7),
 (2, 11),
@@ -3377,7 +3896,7 @@ CREATE TABLE IF NOT EXISTS `settinglevel` (
 --
 
 INSERT INTO `settinglevel` (`nomorlevel`, `level`) VALUES
-(1, 3),
+(1, 2),
 (2, 3);
 
 -- --------------------------------------------------------
@@ -3394,50 +3913,7 @@ CREATE TABLE IF NOT EXISTS `settingneraca` (
   `cetak` tinyint(1) NOT NULL,
   `id` int(2) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=301 ;
-
---
--- Dumping data for table `settingneraca`
---
-
-INSERT INTO `settingneraca` (`nomoraccount`, `tempnamaaccount`, `dari`, `sampai`, `cetak`, `id`) VALUES
-('1', 'Aktiva', '', '', 1, 264),
-('1.1', 'Kas', '1.1.01', '1.1.02', 1, 265),
-('1.2', 'Bank', '1.2.01', '1.2.04', 1, 266),
-('1.3', 'Deposito ', '1.3.01', '1.3.01', 1, 267),
-('1.4', 'Piutang Dagang', '', '', 1, 268),
-('1.5', 'Persediaan', '', '', 1, 269),
-('1.6', 'Pembayaran Dimuka', '1.6.01', '1.6.02', 1, 270),
-('1.9', 'Aktiva Tetap', '1.9.01', '1.9.54', 1, 271),
-('', 'Total Aktiva', '', '', 1, 272),
-('2', 'Kewajiban', '', '', 1, 273),
-('2.1', 'Hutang Dagang', '2.1.01', '2.1.01', 1, 274),
-('2.2', 'Penerimaan Uang Muka', '2.2.01', '2.2.01', 1, 275),
-('2.3', 'Hutang Bank', '2.3.01', '2.3.01', 1, 276),
-('2.4', 'Hutang Leasing', '2.4.01', '2.4.03', 1, 277),
-('2.9', 'Hutang Lain-Lain', '2.9.01', '2.9.01', 1, 278),
-('', 'Total Kewajiban', '', '', 1, 279),
-('3', 'Modal Disetor', '', '', 1, 280),
-('3.1', 'Modal Disetor', '3.1.01', '3.1.01', 1, 281),
-('3.2', 'Laba Ditahan', '3.2.01', '3.2.01', 1, 282),
-('3.3', 'Laba Tahun Berjalan', '3.3.01', '3.3.01', 1, 283),
-('', 'Total Modal Disetor', '', '', 1, 284),
-('4', 'Pendapatan', '', '', 1, 285),
-('', 'Total Pendapatan', '', '', 1, 286),
-('5', 'Harga Pokok Penjualan', '', '', 1, 287),
-('5.2', 'Harga Pokok Penjualan Jasa', '5.2.01', '5.2.07', 1, 288),
-('', 'Total Harga Pokok Penjualan', '', '', 1, 289),
-('6', 'Biaya Operasional', '', '', 1, 290),
-('6.1', 'Biaya Penjualan', '6.1.01', '6.1.03', 1, 291),
-('6.2', 'Biaya Umum ', '6.2.01', '6.2.40', 1, 292),
-('6.3', 'Biaya Keuangan', '6.3.01', '6.3.03', 1, 293),
-('', 'Total Biaya Operasional', '', '', 1, 294),
-('7', 'Pendapatan Diluar Usaha', '', '', 1, 295),
-('7.1', 'Pendapatan Diluar Usaha', '7.1.01', '7.1.59', 1, 296),
-('', 'Total Pendapatan Diluar Usaha', '', '', 1, 297),
-('9', 'Ayat Silang', '', '', 1, 298),
-('9.9', 'Ayat Silang', '9.9.99', '9.9.99', 1, 299),
-('', 'Total Ayat Silang', '', '', 1, 300);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3455,18 +3931,18 @@ CREATE TABLE IF NOT EXISTS `sj_d` (
   `Status` varchar(1) NOT NULL,
   `Keterangan` varchar(30) NOT NULL,
   PRIMARY KEY (`No`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `sj_d`
 --
 
 INSERT INTO `sj_d` (`No`, `No_Sj`, `Kode_Brg`, `Barang`, `Barang_SJ`, `Qty1`, `Status`, `Keterangan`) VALUES
-(1, '1401001', 'AHCAMPURAN', 'ASS HITAM ', 'AHCAMPURAN', 10, '', 'tes'),
-(2, '1401001', 'AH1005900', 'ASS HITAM 100 X 5900', 'AH1005900', 10, '', ''),
-(3, '1401001', 'AH1006', 'ASS HITAM 100 X 6', 'AH1006', 5, '', ''),
-(7, '1401002', 'AH1005900', 'ASS HITAM 100 X 5900', 'AH1005900', 2, '', ''),
-(8, '1401002', 'AH1016', 'ASS HITAM 101 X 6', 'AH1016', 10, '', '');
+(3, '1401001', 'AHCAMPURAN', 'ASS HITAM ', 'AHCAMPURAN', 5, '', ''),
+(4, '1401001', 'AH1005900', 'ASS HITAM 100 X 5900', 'AH1005900', 5, '', ''),
+(5, '1401002', 'AH0586', 'ASS HITAM 58 X 6', 'AH0586', 10, '', ''),
+(6, '1401002', 'AH1005900', 'ASS HITAM 100 X 5900', 'AH1005900', 5, '', ''),
+(7, '1401003', 'AH1135538', 'ASS HITAM 113 X 5/5''38', 'AH1135538', 15, '', '');
 
 -- --------------------------------------------------------
 
@@ -3492,8 +3968,9 @@ CREATE TABLE IF NOT EXISTS `sj_h` (
 --
 
 INSERT INTO `sj_h` (`No_Sj`, `Tgl`, `No_Do`, `No_Po`, `No_Mobil`, `Kode_Plg`, `Kode_Gudang`, `Kirim`, `Keterangan`) VALUES
-('1401001', '2014-01-07', '1401001', '1401111', 'B 0852 VXY', 'P1307001', 'G1307002', 0, 'Pelita'),
-('1401002', '2014-01-07', '1401004', '1403111', 'K L156 P', 'P1307007', 'G1307001', 0, 'Pelita');
+('1401001', '2014-01-28', '1401002', '154780V', 'K 5852 L', 'P1401002', 'G1307002', 0, 'Pelita'),
+('1401002', '2014-01-28', '1401001', '2585222', 'K L156 P', 'P1309001', 'G1309001', 0, 'Pelita'),
+('1401003', '2014-01-29', '1401004', '1548484', 'K L156 P', 'ABA04', 'G1307002', 0, 'Pelita');
 
 -- --------------------------------------------------------
 
@@ -4986,6 +5463,33 @@ CREATE TABLE IF NOT EXISTS `tt_resetperkiraan` (
 
 INSERT INTO `tt_resetperkiraan` (`id`, `dari`, `sampai`, `tahun`) VALUES
 (43, '1.1.01', '5.2.06', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `fact_dashboard_os`
+--
+DROP TABLE IF EXISTS `fact_dashboard_os`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_dashboard_os` AS select `a`.`No_Do` AS `No_So`,`b`.`Tgl` AS `Date`,`a`.`Qty` AS `Qty`,`a`.`QtyTemp` AS `QtyTemp` from (`do_d` `a` left join `do_h` `b` on((`b`.`No_Do` = `a`.`No_Do`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `fact_dashboard_penjualan`
+--
+DROP TABLE IF EXISTS `fact_dashboard_penjualan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_dashboard_penjualan` AS select `a`.`No_Do` AS `No_So`,`a`.`grandttl` AS `Total`,`a`.`Tgl` AS `Date`,month(`a`.`Tgl`) AS `Month`,year(`a`.`Tgl`) AS `Year` from `do_h` `a`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `fact_detaildashboard_penjualan`
+--
+DROP TABLE IF EXISTS `fact_detaildashboard_penjualan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_detaildashboard_penjualan` AS select `a`.`No_Do` AS `No_So`,`a`.`Tgl` AS `Date`,`a`.`grandttl` AS `Total`,`b`.`Perusahaan` AS `Perusahaan` from (`do_h` `a` left join `pelanggan` `b` on((`b`.`Kode` = `a`.`Kode_Plg`)));
 
 --
 -- Constraints for dumped tables
