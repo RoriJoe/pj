@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2014 at 03:55 PM
+-- Generation Time: Feb 26, 2014 at 04:01 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -2539,40 +2539,6 @@ INSERT INTO `do_h` (`No_Do`, `Tgl`, `No_Po`, `Tgl_Po`, `Kode_Plg`, `Kode_Gudang`
 ('1401005', '2013-12-01', '5228855', '2014-01-31', 'ABA06', '8', NULL, '18', '50200000', 5, 47690000, 1, '48166900', NULL),
 ('1401006', '2014-02-01', '26668844', '2014-02-01', 'ABA12', '8', NULL, '18', '4000000', 1, 3960000, 2, '4039200', NULL);
 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `fact_dashboard_os`
---
-CREATE TABLE IF NOT EXISTS `fact_dashboard_os` (
-`No_So` varchar(20)
-,`Date` date
-,`Qty` int(11)
-,`QtyTemp` int(11)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `fact_dashboard_penjualan`
---
-CREATE TABLE IF NOT EXISTS `fact_dashboard_penjualan` (
-`No_So` varchar(10)
-,`Total` decimal(15,0)
-,`Date` date
-,`Month` int(2)
-,`Year` int(4)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `fact_detaildashboard_penjualan`
---
-CREATE TABLE IF NOT EXISTS `fact_detaildashboard_penjualan` (
-`No_So` varchar(10)
-,`Date` date
-,`Total` decimal(15,0)
-,`Perusahaan` varchar(50)
-);
 -- --------------------------------------------------------
 
 --
@@ -5463,33 +5429,6 @@ CREATE TABLE IF NOT EXISTS `tt_resetperkiraan` (
 
 INSERT INTO `tt_resetperkiraan` (`id`, `dari`, `sampai`, `tahun`) VALUES
 (43, '1.1.01', '5.2.06', 0);
-
--- --------------------------------------------------------
-
---
--- Structure for view `fact_dashboard_os`
---
-DROP TABLE IF EXISTS `fact_dashboard_os`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_dashboard_os` AS select `a`.`No_Do` AS `No_So`,`b`.`Tgl` AS `Date`,`a`.`Qty` AS `Qty`,`a`.`QtyTemp` AS `QtyTemp` from (`do_d` `a` left join `do_h` `b` on((`b`.`No_Do` = `a`.`No_Do`)));
-
--- --------------------------------------------------------
-
---
--- Structure for view `fact_dashboard_penjualan`
---
-DROP TABLE IF EXISTS `fact_dashboard_penjualan`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_dashboard_penjualan` AS select `a`.`No_Do` AS `No_So`,`a`.`grandttl` AS `Total`,`a`.`Tgl` AS `Date`,month(`a`.`Tgl`) AS `Month`,year(`a`.`Tgl`) AS `Year` from `do_h` `a`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `fact_detaildashboard_penjualan`
---
-DROP TABLE IF EXISTS `fact_detaildashboard_penjualan`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fact_detaildashboard_penjualan` AS select `a`.`No_Do` AS `No_So`,`a`.`Tgl` AS `Date`,`a`.`grandttl` AS `Total`,`b`.`Perusahaan` AS `Perusahaan` from (`do_h` `a` left join `pelanggan` `b` on((`b`.`Kode` = `a`.`Kode_Plg`)));
 
 --
 -- Constraints for dumped tables
