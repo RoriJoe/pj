@@ -1,6 +1,6 @@
 <div class="CSSTabel" style="height: 245px;">
 <table id="tb5">
-    <tr style="background-color:#88C7FF;font-weight:bold">
+    <!--<tr style="background-color:#88C7FF;font-weight:bold">
         <td colspan="2">Row Label</td>
         <td class="tab-value">Grand Total</td>
     </tr>
@@ -75,8 +75,8 @@
                     <td class="tab-so">SO004</td>
                     <td>CV. Teguh Jaya</td>
                     <td class="tab-value">400.000</td>
-                </tr>
-    <!--<thead>
+                </tr>-->
+    <thead>
         <th>Nomor SO</th><th>Tanggal</th><th>Pelanggan</th><th>Grand Total (Rp)</th>
     </thead>
     <tbody>
@@ -94,10 +94,10 @@
         </tr>
         ";
     }   ?>
-    </tbody>-->
+    </tbody>
 </table>
 </div>
-<!--
+
 <script>
     var oTable = $('#tb5').dataTable( {
         //"sScrollY": "300px", //heighnya
@@ -108,4 +108,4 @@
         "sPaginationType": "full_numbers",
         "bInfo": false //Showing 1 to 1 of 1 entries (filtered from 7 total entries)
     } );
-</script>-->
+</script>

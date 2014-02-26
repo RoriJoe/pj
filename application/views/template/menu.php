@@ -106,20 +106,22 @@
                     <?php endif; ?>
                     
                     <li class="dropdown-submenu"><a tabindex="-1">Akuntansi</a>
-                        <ul class="dropdown-menu" style=" top: -200px; ">
-                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi & Keuangan</label></li>
-                            
+                        <?php if ($this->authorization->is_permitted('access_akuntansi')) : ?>
+                            <ul class="dropdown-menu" style=" top: -200px; ">
+                                <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi & Keuangan</label></li>
+                                
 
-                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi</label></li>
-                            <li class="menu-border-bottom"><a class = "ul-divider " href="<?php echo base_url(); ?>akun/jurnal">Jurnal</a></li>
+                                <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Akuntansi</label></li>
+                                <li class="menu-border-bottom"><a class = "ul-divider " href="<?php echo base_url(); ?>akun/jurnal">Jurnal</a></li>
 
-                            <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Cetak</label></li>
-                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetakjurnal">Transaksi Jurnal</a></li>
-                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetakbukubesar">Buku Besar</a></li>
-                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetaklabarugi">Rugi Laba</a></li>
-                            <li><a class = "" href="<?php echo base_url(); ?>akun/cetakneraca">Neraca</a></li>
-                            <li class="menu-border-bottom"><a class = "ul-divider" href="<?php echo base_url(); ?>akun/tutuptahun">Tutup Tahun</a></li>
-                        </ul>
+                                <li><label tabindex="-1" class = "head-ul" style=" font-weight: bold; text-align: center; ">Cetak</label></li>
+                                <li><a class = "" href="<?php echo base_url(); ?>akun/cetakjurnal">Transaksi Jurnal</a></li>
+                                <li><a class = "" href="<?php echo base_url(); ?>akun/cetakbukubesar">Buku Besar</a></li>
+                                <li><a class = "" href="<?php echo base_url(); ?>akun/cetaklabarugi">Rugi Laba</a></li>
+                                <li><a class = "" href="<?php echo base_url(); ?>akun/cetakneraca">Neraca</a></li>
+                                <li class="menu-border-bottom"><a class = "ul-divider" href="<?php echo base_url(); ?>akun/tutuptahun">Tutup Tahun</a></li>
+                            </ul>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </li>
@@ -184,14 +186,16 @@
             <?php if ($this->authorization->is_permitted( array('access_stock', 'retrieve_users', 'retrieve_roles', 'retrieve_permissions') )) : ?>
             <li class="dropdown-submenu"><a tabindex="-1" href="#"><i class="icon-wrench"></i>Maintenance</a>
                 <ul class="dropdown-menu" style=" ">
-                    <li class="dropdown-submenu"><a tabindex="-1">Setting Akuntansi</a>
-                        <ul class="dropdown-menu" style="">
-                            <li><a class = "" href="setting_neraca">Setting Neraca</a></li>
-                            <li><a class = "" href="setting_laba_rugi">Setting Laba Rugi</a></li>
-                            <li><a class = "" href="mappingperkiraan">Mapping Perkiraan</a></li>
-                            <li><a class = "" href="settingmapping">Setting Mapping</a></li>
-                        </ul>
-                    </li>
+                    <?php if ($this->authorization->is_permitted('access_settingAkuntansi')) : ?>
+                        <li class="dropdown-submenu"><a tabindex="-1">Setting Akuntansi</a>
+                            <ul class="dropdown-menu" style="">
+                                <li><a class = "" href="setting_neraca">Setting Neraca</a></li>
+                                <li><a class = "" href="setting_laba_rugi">Setting Laba Rugi</a></li>
+                                <li><a class = "" href="mappingperkiraan">Mapping Perkiraan</a></li>
+                                <li><a class = "" href="settingmapping">Setting Mapping</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                     
                     <?php if ($this->authorization->is_permitted('access_stock')) : ?>
                         <li><a class="ajax" href="saw">Stock Opname</a></li>

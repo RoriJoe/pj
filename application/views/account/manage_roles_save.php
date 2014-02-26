@@ -630,107 +630,10 @@
                 <?php endif; ?>
               <?php endforeach; ?>
             </tr>
-            <!--
-            <tr>
-              <td>Transaksi Jurnal</td>
-              <?php foreach( $permissions as $perm ) : ?>
-                <?php
-                  $check_it = FALSE;
-
-                  if( isset($role_permissions) )
-                  {
-                    foreach( $role_permissions as $rperm )
-                    {
-                      if( $rperm->id == $perm->id )
-                      {
-                        $check_it = TRUE; break;
-                      }
-                    }
-                  }
-                ?>
-                <?php if(strpos($perm->key, '_tr_jurnal') !== false): ?>
-                      <td class="center-um">
-                          <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
-                      </td>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </tr>
-            <tr>
-              <td>Buku Besar</td>
-              <?php foreach( $permissions as $perm ) : ?>
-                <?php
-                  $check_it = FALSE;
-
-                  if( isset($role_permissions) )
-                  {
-                    foreach( $role_permissions as $rperm )
-                    {
-                      if( $rperm->id == $perm->id )
-                      {
-                        $check_it = TRUE; break;
-                      }
-                    }
-                  }
-                ?>
-                <?php if(strpos($perm->key, '_buku_besar') !== false): ?>
-                      <td class="center-um">
-                          <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
-                      </td>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </tr>
-            <tr>
-              <td>Rugi Laba</td>
-              <?php foreach( $permissions as $perm ) : ?>
-                <?php
-                  $check_it = FALSE;
-
-                  if( isset($role_permissions) )
-                  {
-                    foreach( $role_permissions as $rperm )
-                    {
-                      if( $rperm->id == $perm->id )
-                      {
-                        $check_it = TRUE; break;
-                      }
-                    }
-                  }
-                ?>
-                <?php if(strpos($perm->key, '_rugi_laba') !== false): ?>
-                      <td class="center-um">
-                          <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
-                      </td>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </tr>
-            <tr>
-              <td>Neraca</td>
-              <?php foreach( $permissions as $perm ) : ?>
-                <?php
-                  $check_it = FALSE;
-
-                  if( isset($role_permissions) )
-                  {
-                    foreach( $role_permissions as $rperm )
-                    {
-                      if( $rperm->id == $perm->id )
-                      {
-                        $check_it = TRUE; break;
-                      }
-                    }
-                  }
-                ?>
-                <?php if(strpos($perm->key, '_neraca') !== false): ?>
-                      <td class="center-um">
-                          <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
-                      </td>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </tr>-->
           </tbody>
         </table>
         
-        <div style="width:50%;display: inline-block;vertical-align: top;margin-left:20px;">
+        <div style="width:50%;display: inline-block;vertical-align: top;margin-left:20px; margin-top:10px;">
           <table class="table table-bordered um" style="display: inline-block;vertical-align: top;">
             <thead>
               <tr>
@@ -766,7 +669,7 @@
             </tbody>
           </table>
 
-          <table class="table table-bordered um" style="display: inline-block;vertical-align: top;">
+          <table class="table table-bordered um" style="display: inline-block;vertical-align: top; margin-top:10px;">
             <thead>
               <tr>
                 <th colspan="6" style="text-align:center">User Management</th>
@@ -879,6 +782,92 @@
               </tr>
             </tbody>
           </table>  
+          
+
+          <table class="table table-bordered um" style="display: inline-block;vertical-align: top; margin-top:10px;">
+            <thead>
+              <tr>
+                <th style="width:125px;">Other</th><th>Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Dashboard
+                <?php foreach( $permissions as $perm ) : ?>
+                  <?php
+                    $check_it = FALSE;
+
+                    if( isset($role_permissions) )
+                    {
+                      foreach( $role_permissions as $rperm )
+                      {
+                        if( $rperm->id == $perm->id )
+                        {
+                          $check_it = TRUE; break;
+                        }
+                      }
+                    }
+                  ?>
+                  <?php if(strpos($perm->key, '_dashboard') !== false): ?>
+                        <td class="center-um">
+                            <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
+                        </td>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </tr>
+              <tr>
+                <td>
+                  Akuntansi
+                <?php foreach( $permissions as $perm ) : ?>
+                  <?php
+                    $check_it = FALSE;
+
+                    if( isset($role_permissions) )
+                    {
+                      foreach( $role_permissions as $rperm )
+                      {
+                        if( $rperm->id == $perm->id )
+                        {
+                          $check_it = TRUE; break;
+                        }
+                      }
+                    }
+                  ?>
+                  <?php if(strpos($perm->key, '_akuntansi') !== false): ?>
+                        <td class="center-um">
+                            <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
+                        </td>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </tr>
+              <tr>
+                <td>
+                  Setting Akuntansi
+                <?php foreach( $permissions as $perm ) : ?>
+                  <?php
+                    $check_it = FALSE;
+
+                    if( isset($role_permissions) )
+                    {
+                      foreach( $role_permissions as $rperm )
+                      {
+                        if( $rperm->id == $perm->id )
+                        {
+                          $check_it = TRUE; break;
+                        }
+                      }
+                    }
+                  ?>
+                  <?php if(strpos($perm->key, '_settingAkuntansi') !== false): ?>
+                        <td class="center-um">
+                            <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it, 'title="'.$perm->description.'"'); ?>
+                        </td>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </tr>
+            </tbody>
+          </table>
         </div>
         </div>
       </div>
